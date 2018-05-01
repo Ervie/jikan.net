@@ -3,9 +3,9 @@
 namespace JikanDotNet
 {
 	/// <summary>
-	/// Model class representing url link on MyAnimeList.
+	/// Author model class.
 	/// </summary>
-	public class MALUrl
+	public class Author
 	{
 		/// <summary>
 		/// Url to link.
@@ -14,7 +14,7 @@ namespace JikanDotNet
 		public string Url { get; set; }
 
 		/// <summary>
-		/// Text displayed on link.
+		/// Name of the author.
 		/// </summary>
 		[JsonProperty(PropertyName = "name")]
 		public string Name { get; set; }
