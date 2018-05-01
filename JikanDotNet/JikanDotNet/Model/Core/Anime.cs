@@ -66,7 +66,7 @@ namespace JikanDotNet
 		/// Anime's episode count.
 		/// </summary>
 		[JsonProperty(PropertyName = "episodes")]
-		public int Episodes { get; set; }
+		public string Episodes { get; set; }
 
 		/// <summary>
 		/// Anime's status (e. g. "Airing").

@@ -12,12 +12,12 @@ namespace JikanDotNet
 		/// Start date.
 		/// </summary>
 		[JsonProperty(PropertyName = "from")]
-		public DateTime From { get; set; }
+		public DateTime? From { get; set; }
 
 		/// <summary>
 		/// End date.
 		/// </summary>
 		[JsonProperty(PropertyName = "to")]
-		public DateTime To { get; set; }
+		public DateTime? To { get; set; }
 	}
 }

@@ -57,7 +57,7 @@ namespace JikanDotNet.Test
 		{
 			Anime cardcaptor = Task.Run(() => jikan.GetAnime(232)).Result;
 
-			Assert.Equal(70, cardcaptor.Episodes);
+			Assert.Equal("70", cardcaptor.Episodes);
 			Assert.Equal("TV", cardcaptor.Type);
 			Assert.Equal("Spring 1998", cardcaptor.Premiered);
 			Assert.Equal("25 min. per ep.", cardcaptor.Duration);
