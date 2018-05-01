@@ -10,11 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Model\" />
     <Folder Include="Exceptions\" />
-    <Folder Include="Const\" />
-    <Folder Include="Helpers\" />
+    <Folder Include="Model\Search\" />
     <Folder Include="Resources\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
 
 </Project>

@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27428.2043
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JikanDotNet", "JikanDotNet\JikanDotNet.csproj", "{B244140D-ED71-4F8B-822B-ED48C4C5D2B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JikanDotNet.Test", "JikanDotNet.Test\JikanDotNet.Test.csproj", "{4243D94A-C16F-45F6-B8D1-B4EE5272AF88}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JikanDotNet.Tests", "JikanDotNet.Test\JikanDotNet.Tests.csproj", "{4243D94A-C16F-45F6-B8D1-B4EE5272AF88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

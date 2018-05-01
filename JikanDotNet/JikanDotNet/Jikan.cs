@@ -1,7 +1,10 @@
-﻿using JikanDotNet.Helpers;
+﻿using JikanDotNet.Consts;
+using JikanDotNet.Helpers;
+using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 
 namespace JikanDotNet
 {
@@ -13,16 +16,6 @@ namespace JikanDotNet
 		#region Field
 
 		/// <summary>
-		/// Endpoint for not SSL encrypted requests.
-		/// </summary>
-		private const string httpEndpoint = "http://api.jikan.moe";
-
-		/// <summary>
-		/// Endpoint for SSL encrypted requests.
-		/// </summary>
-		private const string httpsEndpoint = "https://api.jikan.moe";
-
-		/// <summary>
 		/// Http client class to call REST request and receive REST response.
 		/// </summary>
 		private readonly HttpClient httpClient;
@@ -32,52 +25,87 @@ namespace JikanDotNet
 		/// </summary>
 		private readonly bool useHttps;
 
-		#endregion
+		#endregion Field
 
 		#region Properties
 
 		/// <summary>
-		/// Endpoint to which requests will be send;
+		/// End to which request will be send to.
 		/// </summary>
 		public string Endpoint
 		{
 			get
 			{
-				return useHttps ? httpsEndpoint : httpEndpoint;
+				return this.useHttps ? HttpProvider.httpsEndpoint : HttpProvider.httpEndpoint;
 			}
+		}
+
+		#endregion Properties
+
+		#region Constructors
+
+		/// <summary>
+		/// Constructor.
+		/// </summary>
+		/// <param name="useHttps">Should client send SSL encrypted requests.</param>
+		public Jikan(bool useHttps)
+		{
+			this.useHttps = useHttps;
+			httpClient = HttpProvider.GetHttpClient(useHttps);
 		}
 
 		#endregion
 
+		#region Private Methods
 
-		public Jikan(bool useHttps)
+		/// <summary>
+		/// Build while http request string from single components.
+		/// </summary>
+		/// <param name="jikanEndPoint">Endpoint category for Jikan API.</param>
+		/// <param name="malId">MAL id of searched element.</param>
+		/// <returns>Request URL.</returns>
+		private string BuildRequestUrl(string jikanEndPoint, long malId)
 		{
-			this.useHttps = useHttps;
-			httpClient = HttpProvider.GetHttpClient();
-			httpClient.BaseAddress = new Uri(Endpoint);
-			httpClient.DefaultRequestHeaders.Accept.Clear();
-			httpClient.DefaultRequestHeaders.Accept.Add(
-				new MediaTypeWithQualityHeaderValue("application/json"));
+			return $"{Endpoint}/{jikanEndPoint}/{malId}";
 		}
 
-		public void GetAnime(long id)
+		#endregion
+
+		#region Public Methods
+
+		/// <summary>
+		/// Return anime with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <returns>Anime with given MAL id.</returns>
+		public async Task<Anime> GetAnime(long id)
+		{
+			Anime anime = null;
+			string requestUrl = BuildRequestUrl(JikanEndPointCategories.Anime, id);
+			HttpResponseMessage response = await httpClient.GetAsync(requestUrl);
+			if (response.IsSuccessStatusCode)
+			{
+				string json = await response.Content.ReadAsStringAsync();
+				anime = JsonConvert.DeserializeObject<Anime>(json);
+			}
+			return anime;
+		}
+
+		public async Task<Character> GetCharacter(long id)
 		{
 			throw new NotImplementedException();
 		}
 
-		public void GetCharacter(long id)
+		public async Task<Manga> GetManga(long id)
 		{
 			throw new NotImplementedException();
 		}
 
-		public void GetManga(long id)
+		public async Task<Person> GetPerson(long id)
 		{
 			throw new NotImplementedException();
 		}
 
-		public void GetPerson(long id)
-		{
-			throw new NotImplementedException();
-		}
+		#endregion
 	}
 }

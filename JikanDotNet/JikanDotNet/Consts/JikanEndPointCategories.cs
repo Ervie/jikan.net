@@ -1,9 +1,9 @@
-﻿namespace JikanDotNet.Const
+﻿namespace JikanDotNet.Consts
 {
 	/// <summary>
 	/// Endpoints in Jikan REST API.
 	/// </summary>
-	internal class JikanEndPoints
+	internal class JikanEndPointCategories
 	{
 		/// <summary>
 		/// Anime endpoint.
