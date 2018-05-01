@@ -71,9 +71,9 @@ namespace JikanDotNet.Tests
 			Assert.Equal(1, onePieceManga.Authors.Count);
 			Assert.Equal(1, onePieceManga.Serializations.Count);
 			Assert.Equal(6, onePieceManga.Genres.Count);
-			Assert.Equal("Oda, Eiichiro", onePieceManga.Authors.First().Name);
-			Assert.Equal("Shounen Jump (Weekly)", onePieceManga.Serializations.First().Name);
-			Assert.Equal("Action", onePieceManga.Genres.First().Name);
+			Assert.Equal("Oda, Eiichiro", onePieceManga.Authors.First().ToString());
+			Assert.Equal("Shounen Jump (Weekly)", onePieceManga.Serializations.First().ToString());
+			Assert.Equal("Action", onePieceManga.Genres.First().ToString());
 		}
 	}
 }

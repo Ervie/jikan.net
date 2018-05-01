@@ -75,9 +75,9 @@ namespace JikanDotNet.Test
 			Assert.Equal(3, akiraAnime.Licensors.Count);
 			Assert.Equal(1, akiraAnime.Studios.Count);
 			Assert.Equal(6, akiraAnime.Genres.Count);
-			Assert.Equal("Funimation", akiraAnime.Licensors.First().Name);
-			Assert.Equal("Tokyo Movie Shinsha", akiraAnime.Studios.First().Name);
-			Assert.Equal("Action", akiraAnime.Genres.First().Name);
+			Assert.Equal("Funimation", akiraAnime.Licensors.First().ToString());
+			Assert.Equal("Tokyo Movie Shinsha", akiraAnime.Studios.First().ToString());
+			Assert.Equal("Action", akiraAnime.Genres.First().ToString());
 		}
 	}
 }
