@@ -3,7 +3,6 @@ using JikanDotNet.Helpers;
 using Newtonsoft.Json;
 using System;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace JikanDotNet
@@ -54,7 +53,7 @@ namespace JikanDotNet
 			httpClient = HttpProvider.GetHttpClient(useHttps);
 		}
 
-		#endregion
+		#endregion Constructors
 
 		#region Private Methods
 
@@ -69,7 +68,7 @@ namespace JikanDotNet
 			return $"{Endpoint}/{jikanEndPoint}/{malId}";
 		}
 
-		#endregion
+		#endregion Private Methods
 
 		#region Public Methods
 
@@ -106,6 +105,6 @@ namespace JikanDotNet
 			throw new NotImplementedException();
 		}
 
-		#endregion
+		#endregion Public Methods
 	}
 }
