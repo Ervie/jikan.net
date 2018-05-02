@@ -90,9 +90,22 @@ namespace JikanDotNet
 			return anime;
 		}
 
+		/// <summary>
+		/// Return character with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of character.</param>
+		/// <returns>Character with given MAL id.</returns>
 		public async Task<Character> GetCharacter(long id)
 		{
-			throw new NotImplementedException();
+			Character character = null;
+			string requestUrl = BuildRequestUrl(JikanEndPointCategories.Character, id);
+			HttpResponseMessage response = await httpClient.GetAsync(requestUrl);
+			if (response.IsSuccessStatusCode)
+			{
+				string json = await response.Content.ReadAsStringAsync();
+				character = JsonConvert.DeserializeObject<Character>(json);
+			}
+			return character;
 		}
 
 		/// <summary>

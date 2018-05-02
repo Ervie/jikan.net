@@ -3,9 +3,9 @@
 namespace JikanDotNet
 {
 	/// <summary>
-	/// Model class representing manga sub item on MyAnimeList.
+	/// Model class representing sub item on MyAnimeList without image.
 	/// </summary>
-	public class MangaSubItem
+	public class MALSubItem
 	{
 		/// <summary>
 		/// ID associated with MyAnimeList.
@@ -14,13 +14,13 @@ namespace JikanDotNet
 		public long MalId { get; set; }
 
 		/// <summary>
-		/// Item type (e. g. "anime").
+		/// Item type (e. g. "anime", "manga").
 		/// </summary>
 		[JsonProperty(PropertyName = "type")]
 		public string Type { get; set; }
 
 		/// <summary>
-		/// Url sub item main page.
+		/// Url to sub item main page.
 		/// </summary>
 		[JsonProperty(PropertyName = "url")]
 		public string Url { get; set; }
@@ -30,5 +30,14 @@ namespace JikanDotNet
 		/// </summary>
 		[JsonProperty(PropertyName = "title")]
 		public string Title { get; set; }
+
+		/// <summary>
+		/// Overriden ToString method.
+		/// </summary>
+		/// <returns>Title if not null, base method elsewhere.</returns>
+		public override string ToString()
+		{
+			return Title ?? base.ToString();
+		}
 	}
 }

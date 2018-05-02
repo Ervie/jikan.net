@@ -108,37 +108,37 @@ namespace JikanDotNet
 		/// Anime's score on MyAnimeList up to 2 decimal places.
 		/// </summary>
 		[JsonProperty(PropertyName = "score")]
-		public float Score { get; set; }
+		public float? Score { get; set; }
 
 		/// <summary>
 		/// Number of people the anime has been scored by.
 		/// </summary>
 		[JsonProperty(PropertyName = "scored_by")]
-		public int ScoredBy { get; set; }
+		public int? ScoredBy { get; set; }
 
 		/// <summary>
 		/// Anime rank on MyAnimeList (score).
 		/// </summary>
 		[JsonProperty(PropertyName = "rank")]
-		public int Rank { get; set; }
+		public int? Rank { get; set; }
 
 		/// <summary>
 		/// Anime popularity rank on MyAnimeList.
 		/// </summary>
 		[JsonProperty(PropertyName = "popularity")]
-		public int Popularity { get; set; }
+		public int? Popularity { get; set; }
 
 		/// <summary>
 		/// Anime members count on MyAnimeList.
 		/// </summary>
 		[JsonProperty(PropertyName = "members")]
-		public int Members { get; set; }
+		public int? Members { get; set; }
 
 		/// <summary>
 		/// Anime favourite count on MyAnimeList.
 		/// </summary>
 		[JsonProperty(PropertyName = "favorites")]
-		public int Favorites { get; set; }
+		public int? Favorites { get; set; }
 
 		/// <summary>
 		/// Anime's synopsis.

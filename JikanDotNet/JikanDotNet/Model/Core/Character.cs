@@ -50,12 +50,30 @@ namespace JikanDotNet
 		/// Character favourite count on MyAnimeList.
 		/// </summary>
 		[JsonProperty(PropertyName = "member_favorites")]
-		public int MemberFavorites { get; set; }
+		public int? MemberFavorites { get; set; }
 
 		/// <summary>
 		/// Character's image URL
 		/// </summary>
 		[JsonProperty(PropertyName = "image_url")]
 		public string ImageURL { get; set; }
+
+		/// <summary>
+		/// Character's animeography.
+		/// </summary>
+		[JsonProperty(PropertyName = "animeography")]
+		public ICollection<MALImageSubItem> Animeography { get; set; }
+
+		/// <summary>
+		/// Character's mangaography.
+		/// </summary>
+		[JsonProperty(PropertyName = "mangaography")]
+		public ICollection<MALImageSubItem> Mangaography { get; set; }
+
+		/// <summary>
+		/// Character's voice actors.
+		/// </summary>
+		[JsonProperty(PropertyName = "voice_actor")]
+		public ICollection<VoiceActorEntry> VoiceActors { get; set; }
 	}
 }
