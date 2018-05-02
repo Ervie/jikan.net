@@ -1,4 +1,5 @@
 ﻿using JikanDotNet.Consts;
+using JikanDotNet.Exceptions;
 using JikanDotNet.Helpers;
 using Newtonsoft.Json;
 using System;
@@ -24,6 +25,11 @@ namespace JikanDotNet
 		/// </summary>
 		private readonly bool useHttps;
 
+		/// <summary>
+		/// Should exception be thrown in case of failed request.
+		/// </summary>
+		private readonly bool surpressException;
+
 		#endregion Field
 
 		#region Properties
@@ -47,9 +53,11 @@ namespace JikanDotNet
 		/// Constructor.
 		/// </summary>
 		/// <param name="useHttps">Should client send SSL encrypted requests.</param>
-		public Jikan(bool useHttps)
+		/// <param name="surpressException">Should exception be thrown in case of failed request. If true, failed request return null.</param>
+		public Jikan(bool useHttps, bool surpressException = true)
 		{
 			this.useHttps = useHttps;
+			this.surpressException = surpressException;
 			httpClient = HttpProvider.GetHttpClient(useHttps);
 		}
 
@@ -68,6 +76,32 @@ namespace JikanDotNet
 			return $"{Endpoint}/{jikanEndPoint}/{malId}";
 		}
 
+		/// <summary>
+		/// Vasic method for handling requests and responses from endpoint.
+		/// </summary>
+		/// <typeparam name="T">Class type received from GET requests.</typeparam>
+		/// <param name="malId">Id of related item on MyAnimeList.</param>
+		/// <param name="endPoint">Endpoint target.</param>
+		/// <returns>Requested object if successfull, null otherwise.</returns>
+		private async Task<T> ExecuteGetRequest<T> (long malId, string endPoint) where T: class
+		{
+			T returnedObject = null;
+			string requestUrl = BuildRequestUrl(endPoint, malId);
+			using (HttpResponseMessage response = await httpClient.GetAsync(requestUrl))
+			{
+				if (response.IsSuccessStatusCode)
+				{
+					string json = await response.Content.ReadAsStringAsync();
+					returnedObject = JsonConvert.DeserializeObject<T>(json);
+				}
+				else if (!surpressException)
+				{
+					throw new JikanRequestException(string.Format(Resources.Errors.FailedRequest, response.Content), response.StatusCode);
+				}
+			}
+			return returnedObject;
+		}
+
 		#endregion Private Methods
 
 		#region Public Methods
@@ -79,15 +113,7 @@ namespace JikanDotNet
 		/// <returns>Anime with given MAL id.</returns>
 		public async Task<Anime> GetAnime(long id)
 		{
-			Anime anime = null;
-			string requestUrl = BuildRequestUrl(JikanEndPointCategories.Anime, id);
-			HttpResponseMessage response = await httpClient.GetAsync(requestUrl);
-			if (response.IsSuccessStatusCode)
-			{
-				string json = await response.Content.ReadAsStringAsync();
-				anime = JsonConvert.DeserializeObject<Anime>(json);
-			}
-			return anime;
+			return await ExecuteGetRequest<Anime>(id, JikanEndPointCategories.Anime);
 		}
 
 		/// <summary>
@@ -97,15 +123,7 @@ namespace JikanDotNet
 		/// <returns>Character with given MAL id.</returns>
 		public async Task<Character> GetCharacter(long id)
 		{
-			Character character = null;
-			string requestUrl = BuildRequestUrl(JikanEndPointCategories.Character, id);
-			HttpResponseMessage response = await httpClient.GetAsync(requestUrl);
-			if (response.IsSuccessStatusCode)
-			{
-				string json = await response.Content.ReadAsStringAsync();
-				character = JsonConvert.DeserializeObject<Character>(json);
-			}
-			return character;
+			return await ExecuteGetRequest<Character>(id, JikanEndPointCategories.Character);
 		}
 
 		/// <summary>
@@ -114,15 +132,7 @@ namespace JikanDotNet
 		/// <param name="id">MAL id of manga.</param>
 		public async Task<Manga> GetManga(long id)
 		{
-			Manga manga = null;
-			string requestUrl = BuildRequestUrl(JikanEndPointCategories.Manga, id);
-			HttpResponseMessage response = await httpClient.GetAsync(requestUrl);
-			if (response.IsSuccessStatusCode)
-			{
-				string json = await response.Content.ReadAsStringAsync();
-				manga = JsonConvert.DeserializeObject<Manga>(json);
-			}
-			return manga;
+			return await ExecuteGetRequest<Manga>(id, JikanEndPointCategories.Manga);
 		}
 
 		/// <summary>
@@ -132,15 +142,7 @@ namespace JikanDotNet
 		/// <returns>Person with given MAL id.</returns>
 		public async Task<Person> GetPerson(long id)
 		{
-			Person person = null;
-			string requestUrl = BuildRequestUrl(JikanEndPointCategories.Person, id);
-			HttpResponseMessage response = await httpClient.GetAsync(requestUrl);
-			if (response.IsSuccessStatusCode)
-			{
-				string json = await response.Content.ReadAsStringAsync();
-				person = JsonConvert.DeserializeObject<Person>(json);
-			}
-			return person;
+			return await ExecuteGetRequest<Person>(id, JikanEndPointCategories.Person);
 		}
 
 		#endregion Public Methods
