@@ -125,9 +125,22 @@ namespace JikanDotNet
 			return manga;
 		}
 
+		/// <summary>
+		/// Return person with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of person.</param>
+		/// <returns>Person with given MAL id.</returns>
 		public async Task<Person> GetPerson(long id)
 		{
-			throw new NotImplementedException();
+			Person person = null;
+			string requestUrl = BuildRequestUrl(JikanEndPointCategories.Person, id);
+			HttpResponseMessage response = await httpClient.GetAsync(requestUrl);
+			if (response.IsSuccessStatusCode)
+			{
+				string json = await response.Content.ReadAsStringAsync();
+				person = JsonConvert.DeserializeObject<Person>(json);
+			}
+			return person;
 		}
 
 		#endregion Public Methods

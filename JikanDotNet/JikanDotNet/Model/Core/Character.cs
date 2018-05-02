@@ -1,7 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace JikanDotNet
 {
@@ -9,7 +7,7 @@ namespace JikanDotNet
 	/// Character model class.
 	/// </summary>
 	public class Character
-    {
+	{
 		/// <summary>
 		/// ID associated with MyAnimeList.
 		/// </summary>

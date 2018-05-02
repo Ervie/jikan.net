@@ -23,6 +23,6 @@
 		/// <summary>
 		/// People endpoint.
 		/// </summary>
-		public const string Person = "people";
+		public const string Person = "person";
 	}
 }
