@@ -1,12 +1,12 @@
 # jikan.net
 
-Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsing data from [MyAnimeList](https://myanimelist.com). Main objective of the wrapper is to simplify utilization of Jikan API, as statically typed languages are not-so-easy to easy to use with elastic json (sure we can go use dynamics in .NET, but let's think about performance).
+Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsing data from [MyAnimeList](https://myanimelist.com). Main objective of the wrapper is to simplify utilization of Jikan API, as statically typed languages are not-so-easy to use with elastic json (sure we can go use dynamics in .NET, but let's think about performance).
 
 ### Main attributes
 
 * Written in .Net Standard, compatible with .Net Framework and .Net Core.
 * Fully asynchromous request fetching (can be forced to synchromous if needed).
-* Can handle both SSL encrypted and non-SLL encrypted requests.
+* Can handle both SSL encrypted and non-SSL encrypted requests.
 * Light on dependencies (require only Newtonsoft.Json for parsing).
 * Usable with Dependency Injection.
 
@@ -18,41 +18,54 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
     - [X] Character
     - [X] People
 - Anime extended requests
-    - [] Characters & Staff
-    - [] Episode
-    - [] News
-    - [] Videos/PV/Episodes
-    - [] Pictures
-    - [] Stats
-    - [] Forum Topics
-    - [] More Info
+    - [ ] Characters & Staff
+    - [ ] Episode
+    - [ ] News
+    - [ ] Videos/PV/Episodes
+    - [ ] Pictures
+    - [ ] Stats
+    - [ ] Forum Topics
+    - [ ] More Info
 - Manga extended requests
-    - [] Characters
-    - [] News
-    - [] Stats
-    - [] Pictures
-    - [] Forum Topics
-    - [] More Info
+    - [ ] Characters
+    - [ ] News
+    - [ ] Stats
+    - [ ] Pictures
+    - [ ] Forum Topics
+    - [ ] More Info
 - Character extended requests
-    - [] Pictures
+    - [ ] Pictures
 - People Parsing
-    - [] Pictures
+    - [ ] Pictures
 - Search (Anime/Manga/Character/Person)
-    - [] Filters (Advanced Search)
-    - [] Pagination Support
-    - [] No.# of pages
-- [] Seasonal Anime (Season + Year)
-- [] Anime Scheduling (for current season)
+    - [ ] Filters (Advanced Search)
+    - [ ] Pagination Support
+    - [ ] No.# of pages
+- [ ] Seasonal Anime (Season + Year)
+- [ ] Anime Scheduling (for current season)
 - Top
-    - [] Anime
-    - [] Manga
-    - [] Sub Types & Pagination Support
-
-
+    - [ ] Anime
+    - [ ] Manga
+    - [ ] Sub Types & Pagination Support
 
 # Installation
 
-Coming soon.
+### Package manager
+
+```
+PM> Install-Package JikanDotNet -Version 0.1.0
+```
+
+### .NET CLI
+
+```
+>dotnet add package JikanDotNet --version 0.1.0
+```
+
+Then restore dependencies:
+```
+>dotnet restore
+```
 
 # Documentation
 
