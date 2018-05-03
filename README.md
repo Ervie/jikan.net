@@ -1,6 +1,6 @@
 # jikan.net
 
-Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsing data from [MyAnimeList](https://myanimelist.com). Main objective of the wrapper is to simplify utilization of Jikan API, as statically typed languages are not-so-easy to use with elastic json (sure we can go use dynamics in .NET, but let's think about performance).
+Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsing data from [MyAnimeList](https://myanimelist.com). Main objective of the wrapper is to simplify utilization of Jikan API, as strongly typed languages are not-so-easy to use with elastic json (sure we can go use dynamics in .NET, but let's think about performance).
 
 ### Main attributes
 
@@ -66,6 +66,17 @@ Then restore dependencies:
 ```
 >dotnet restore
 ```
+
+# Changelog
+
+## Upcoming - Version 0.2.0
+
+- Extended request for Anime/Manga/Character/Person via extensions.
+
+## 02.05.2018 - Version 0.1.0 (latest)
+
+- First usable version.
+- Added basic requests for Anime/Manga/Person/Character.
 
 # Documentation
 
