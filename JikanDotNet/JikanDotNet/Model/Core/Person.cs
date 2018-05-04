@@ -1,7 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace JikanDotNet
 {
@@ -9,7 +7,9 @@ namespace JikanDotNet
 	/// Person model class.
 	/// </summary>
 	public class Person
-    {
+	{
+		#region Basic request props
+
 		/// <summary>
 		/// ID associated with MyAnimeList.
 		/// </summary>
@@ -93,5 +93,17 @@ namespace JikanDotNet
 		/// </summary>
 		[JsonProperty(PropertyName = "published_manga")]
 		public ICollection<PublishedManga> PublishedManga { get; set; }
+
+		#endregion Basic request props
+
+		#region Pictures request props
+
+		/// <summary>
+		/// Person's extra image URLs.
+		/// </summary>
+		[JsonProperty(PropertyName = "image")]
+		public ICollection<string> Images { get; set; }
+
+		#endregion Pictures request props
 	}
 }

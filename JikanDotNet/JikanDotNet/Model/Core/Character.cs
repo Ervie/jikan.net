@@ -8,6 +8,8 @@ namespace JikanDotNet
 	/// </summary>
 	public class Character
 	{
+		#region Basic request props
+
 		/// <summary>
 		/// ID associated with MyAnimeList.
 		/// </summary>
@@ -73,5 +75,17 @@ namespace JikanDotNet
 		/// </summary>
 		[JsonProperty(PropertyName = "voice_actor")]
 		public ICollection<VoiceActorEntry> VoiceActors { get; set; }
+
+		#endregion Basic request props
+
+		#region Pictures request props
+
+		/// <summary>
+		/// Person's extra image URLs.
+		/// </summary>
+		[JsonProperty(PropertyName = "image")]
+		public ICollection<string> Images { get; set; }
+
+		#endregion Pictures request props
 	}
 }

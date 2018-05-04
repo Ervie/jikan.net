@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace JikanDotNet.Enumerations
+namespace JikanDotNet
 {
 	public enum AnimeExtension
 	{

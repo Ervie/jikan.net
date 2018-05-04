@@ -1,5 +1,6 @@
 ﻿using JikanDotNet.Consts;
 using JikanDotNet.Exceptions;
+using JikanDotNet.Extensions;
 using JikanDotNet.Helpers;
 using Newtonsoft.Json;
 using System;
@@ -70,10 +71,11 @@ namespace JikanDotNet
 		/// </summary>
 		/// <param name="jikanEndPoint">Endpoint category for Jikan API.</param>
 		/// <param name="malId">MAL id of searched element.</param>
+		/// <param name="extensionEndpoint">Extension for extra data.</param>
 		/// <returns>Request URL.</returns>
-		private string BuildRequestUrl(string jikanEndPoint, long malId)
+		private string BuildRequestUrl(string jikanEndPoint, long malId, string extensionEndpoint = "")
 		{
-			return $"{Endpoint}/{jikanEndPoint}/{malId}";
+			return $"{Endpoint}/{jikanEndPoint}/{malId}" + (string.IsNullOrWhiteSpace(extensionEndpoint) ? string.Empty : $"/{extensionEndpoint}");
 		}
 
 		/// <summary>
@@ -82,11 +84,12 @@ namespace JikanDotNet
 		/// <typeparam name="T">Class type received from GET requests.</typeparam>
 		/// <param name="malId">Id of related item on MyAnimeList.</param>
 		/// <param name="endPoint">Endpoint target.</param>
+		/// <param name="extensionEndpoint">Extension for extra data.</param>
 		/// <returns>Requested object if successfull, null otherwise.</returns>
-		private async Task<T> ExecuteGetRequest<T> (long malId, string endPoint) where T: class
+		private async Task<T> ExecuteGetRequest<T> (long malId, string endPoint, string extensionEndpoint = "") where T: class
 		{
 			T returnedObject = null;
-			string requestUrl = BuildRequestUrl(endPoint, malId);
+			string requestUrl = BuildRequestUrl(endPoint, malId, extensionEndpoint);
 			using (HttpResponseMessage response = await httpClient.GetAsync(requestUrl))
 			{
 				if (response.IsSuccessStatusCode)
@@ -120,10 +123,11 @@ namespace JikanDotNet
 		/// Return character with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of character.</param>
+		/// <param name="extension">Extension for extra data.</param>
 		/// <returns>Character with given MAL id.</returns>
-		public async Task<Character> GetCharacter(long id)
+		public async Task<Character> GetCharacter(long id, CharacterExtension extension = CharacterExtension.None)
 		{
-			return await ExecuteGetRequest<Character>(id, JikanEndPointCategories.Character);
+			return await ExecuteGetRequest<Character>(id, JikanEndPointCategories.Character, extension.GetDescription());
 		}
 
 		/// <summary>
@@ -139,10 +143,11 @@ namespace JikanDotNet
 		/// Return person with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of person.</param>
+		/// <param name="extension">Extension for extra data.</param>
 		/// <returns>Person with given MAL id.</returns>
-		public async Task<Person> GetPerson(long id)
+		public async Task<Person> GetPerson(long id, PersonExtension extension = PersonExtension.None)
 		{
-			return await ExecuteGetRequest<Person>(id, JikanEndPointCategories.Person);
+			return await ExecuteGetRequest<Person>(id, JikanEndPointCategories.Person, extension.GetDescription());
 		}
 
 		#endregion Public Methods

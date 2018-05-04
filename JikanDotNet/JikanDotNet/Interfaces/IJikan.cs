@@ -25,14 +25,16 @@ namespace JikanDotNet
 		/// Return character with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of character.</param>
+		/// <param name="extension">Extension for extra data.</param>
 		/// <returns>Character with given MAL id.</returns>
-		Task<Character> GetCharacter(long id);
+		Task<Character> GetCharacter(long id, CharacterExtension extension = CharacterExtension.None);
 
 		/// <summary>
 		/// Return person with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of person.</param>
+		/// <param name="extension">Extension for extra data.</param>
 		/// <returns>Person with given MAL id.</returns>
-		Task<Person> GetPerson(long id);
+		Task<Person> GetPerson(long id, PersonExtension extension = PersonExtension.None);
 	}
 }
