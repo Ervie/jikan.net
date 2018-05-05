@@ -18,25 +18,29 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
     - [X] Character
     - [X] People
 - Anime extended requests
-    - [ ] Characters & Staff
-    - [ ] Episode
-    - [ ] News
-    - [ ] Videos/PV/Episodes
-    - [ ] Pictures
-    - [ ] Stats
-    - [ ] Forum Topics
-    - [ ] More Info
+    - [X] Characters & Staff
+    - [X] Episode
+    - [X] News
+    - [X] Videos/PV/Episodes
+    - [X] Pictures
+    - [X] Stats
+    - [X] Forum Topics
+    - [X] More Info
+    - [ ] Recommendation
+    - [ ] Reviews
 - Manga extended requests
-    - [ ] Characters
-    - [ ] News
-    - [ ] Stats
-    - [ ] Pictures
-    - [ ] Forum Topics
-    - [ ] More Info
+    - [X] Characters
+    - [X] News
+    - [X] Stats
+    - [X] Pictures
+    - [X] Forum Topics
+    - [X] More Info
+    - [ ] Recommendation
+    - [ ] Reviews
 - Character extended requests
-    - [ ] Pictures
+    - [X] Pictures
 - People Parsing
-    - [ ] Pictures
+    - [X] Pictures
 - Search (Anime/Manga/Character/Person)
     - [ ] Filters (Advanced Search)
     - [ ] Pagination Support
@@ -53,13 +57,13 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
 ### Package manager
 
 ```
-PM> Install-Package JikanDotNet -Version 0.1.0
+PM> Install-Package JikanDotNet -Version 0.2.0
 ```
 
 ### .NET CLI
 
 ```
->dotnet add package JikanDotNet --version 0.1.0
+>dotnet add package JikanDotNet --version 0.2.0
 ```
 
 Then restore dependencies:
@@ -69,7 +73,7 @@ Then restore dependencies:
 
 # Changelog
 
-## Upcoming - Version 0.2.0
+## 05.05.2018 - Version 0.2.0
 
 - Extended request for Anime/Manga/Character/Person via extensions.
 
