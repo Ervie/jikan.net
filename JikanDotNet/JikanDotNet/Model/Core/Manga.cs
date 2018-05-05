@@ -254,9 +254,8 @@ namespace JikanDotNet
 		/// Extra information stored in "more info" tab.
 		/// </summary>
 		[JsonProperty(PropertyName = "more_info")]
-		public string  MoreInfo { get; set; }
+		public string MoreInfo { get; set; }
 
 		#endregion More info request props
-
 	}
 }

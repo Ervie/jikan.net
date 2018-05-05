@@ -1,12 +1,11 @@
 ﻿using Newtonsoft.Json;
-using System.Collections.Generic;
 
 namespace JikanDotNet
 {
 	/// <summary>
-	/// Model class for anime/manga staff position.
+	/// Model class for anime staff position (anime request).
 	/// </summary>
-	public class CharacterEntry
+	public class StaffPositionEntry
 	{
 		/// <summary>
 		/// ID associated with MyAnimeList.
@@ -15,42 +14,27 @@ namespace JikanDotNet
 		public long MalId { get; set; }
 
 		/// <summary>
-		/// Character's name.
+		/// Staff's name.
 		/// </summary>
 		[JsonProperty(PropertyName = "name")]
 		public string Name { get; set; }
 
 		/// <summary>
-		/// Url to character's main page.
+		/// Url to staff  main page.
 		/// </summary>
 		[JsonProperty(PropertyName = "url")]
 		public string Url { get; set; }
 
 		/// <summary>
-		/// Character's image URL
+		/// Staff's image URL
 		/// </summary>
 		[JsonProperty(PropertyName = "image_url")]
 		public string ImageURL { get; set; }
 
 		/// <summary>
-		/// Character's role (e. g. "main", "supporting")
+		/// Role associated with staff position.
 		/// </summary>
 		[JsonProperty(PropertyName = "role")]
 		public string Role { get; set; }
-
-		/// <summary>
-		/// Character's list of voice actor in this entry (anime only).
-		/// </summary>
-		[JsonProperty(PropertyName = "voice_actor")]
-		public ICollection<VoiceActorEntry> VoiceActors { get; set; }
-
-		/// <summary>
-		/// Overriden ToString method.
-		/// </summary>
-		/// <returns>Name if not null, base method elsewhere.</returns>
-		public override string ToString()
-		{
-			return Name ?? base.ToString();
-		}
 	}
 }

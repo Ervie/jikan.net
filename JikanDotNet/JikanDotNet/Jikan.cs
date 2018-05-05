@@ -113,10 +113,11 @@ namespace JikanDotNet
 		/// Return anime with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
+		/// <param name="extension">Extension for extra data.</param>
 		/// <returns>Anime with given MAL id.</returns>
-		public async Task<Anime> GetAnime(long id)
+		public async Task<Anime> GetAnime(long id, AnimeExtension extension = AnimeExtension.None)
 		{
-			return await ExecuteGetRequest<Anime>(id, JikanEndPointCategories.Anime);
+			return await ExecuteGetRequest<Anime>(id, JikanEndPointCategories.Anime, extension.GetDescription());
 		}
 
 		/// <summary>

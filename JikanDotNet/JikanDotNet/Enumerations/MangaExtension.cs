@@ -14,7 +14,7 @@ namespace JikanDotNet
 		None,
 
 		/// <summary>
-		/// Characters extension, return list of basic information about characters appeearing in the manga.
+		/// Characters extension, return list of basic information about characters apeearing in the manga.
 		/// </summary>
 		[Description("characters")]
 		Characters,

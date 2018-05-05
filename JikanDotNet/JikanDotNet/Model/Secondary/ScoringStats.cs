@@ -1,7 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace JikanDotNet
 {
@@ -9,7 +6,7 @@ namespace JikanDotNet
 	/// Model class representing distribution of score on manga/anime.
 	/// </summary>
 	public class ScoringStats
-    {
+	{
 		/// <summary>
 		/// Statistics for "1" score.
 		/// </summary>

@@ -3,7 +3,7 @@
 namespace JikanDotNet
 {
 	/// <summary>
-	/// Model class for anime staff position.
+	/// Model class for anime staff position (person request).
 	/// </summary>
 	public class AnimeStaffPosition
 	{

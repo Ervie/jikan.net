@@ -87,5 +87,76 @@ namespace JikanDotNet.Tests
 
 			Assert.Contains("The Prototype (1988)", berserk.MoreInfo);
 		}
+
+		[Fact]
+		public void ShouldParseCowboyBebopEpisode()
+		{
+			Anime bebop = Task.Run(() => jikan.GetAnime(1, AnimeExtension.Episodes)).Result;
+
+			Assert.Equal(26, bebop.EpisodeCollection.Count);
+			Assert.Equal("Asteroid Blues", bebop.EpisodeCollection.First().Title);
+		}
+
+		[Fact]
+		public void ShouldParseCowboyBebopCharactersAndStaff()
+		{
+			Anime bebop = Task.Run(() => jikan.GetAnime(1, AnimeExtension.CharactersStaff)).Result;
+
+			Assert.Contains("Black, Jet", bebop.Characters.Select(x => x.Name));
+			Assert.Contains("Watanabe, Shinichiro", bebop.Staff.Where(x => x.Role.Equals("Director, Script, Storyboard")).Select(x => x.Name));
+		}
+
+		[Fact]
+		public void ShouldParseCowboyBebopImages()
+		{
+			Anime bebop = Task.Run(() => jikan.GetAnime(1, AnimeExtension.Pictures)).Result;
+
+			Assert.Equal(10, bebop.Images.Count);
+		}
+
+		[Fact]
+		public void ShouldParseCowboyBebopVideos()
+		{
+			Anime bebop = Task.Run(() => jikan.GetAnime(1, AnimeExtension.Videos)).Result;
+
+			Assert.Equal(26, bebop.EpisodeCollection.Count);
+			Assert.Equal(3, bebop.PromoVideos.Count);
+			Assert.Contains("PV 2", bebop.PromoVideos.Select(x => x.Title));
+		}
+
+		[Fact]
+		public void ShouldParseCowboyBebopStats()
+		{
+			Anime bebop = Task.Run(() => jikan.GetAnime(1, AnimeExtension.Stats)).Result;
+
+			Assert.NotNull(bebop.ScoreStats);
+		}
+
+		[Fact]
+		public void ShouldParseCowboyBebopNews()
+		{
+			Anime bebop = Task.Run(() => jikan.GetAnime(1, AnimeExtension.News)).Result;
+
+			Assert.Equal(5, bebop.News.Count);
+			Assert.Contains("Snow", bebop.News.Select(x => x.Author));
+		}
+
+		[Fact]
+		public void ShouldParseCowboyBebopTopics()
+		{
+			Anime bebop = Task.Run(() => jikan.GetAnime(1, AnimeExtension.Forum)).Result;
+
+			Assert.Contains(1726281, bebop.Topics.Select(x => x.TopicId));
+			Assert.Contains(24838, bebop.Topics.Select(x => x.TopicId));
+			Assert.Contains(85746, bebop.Topics.Select(x => x.TopicId));
+		}
+
+		[Fact]
+		public void ShouldParseCowboyBebopMoreInfo()
+		{
+			Anime bebop = Task.Run(() => jikan.GetAnime(1, AnimeExtension.MoreInfo)).Result;
+
+			Assert.Contains("Suggested Order of Viewing", bebop.MoreInfo);
+		}
 	}
 }

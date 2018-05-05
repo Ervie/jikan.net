@@ -11,8 +11,9 @@ namespace JikanDotNet
 		/// Return anime with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
+		/// <param name="extension">Extension for extra data.</param>
 		/// <returns>Anime with given MAL id.</returns>
-		Task<Anime> GetAnime(long id);
+		Task<Anime> GetAnime(long id, AnimeExtension extension = AnimeExtension.None);
 
 		/// <summary>
 		/// Return manga with given MAL id.
