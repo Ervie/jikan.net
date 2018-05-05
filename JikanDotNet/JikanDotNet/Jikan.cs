@@ -134,9 +134,10 @@ namespace JikanDotNet
 		/// Return manga with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of manga.</param>
-		public async Task<Manga> GetManga(long id)
+		/// <param name="extension">Extension for extra data.</param>
+		public async Task<Manga> GetManga(long id, MangaExtension extension = MangaExtension.None)
 		{
-			return await ExecuteGetRequest<Manga>(id, JikanEndPointCategories.Manga);
+			return await ExecuteGetRequest<Manga>(id, JikanEndPointCategories.Manga, extension.GetDescription());
 		}
 
 		/// <summary>

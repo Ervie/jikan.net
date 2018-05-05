@@ -18,8 +18,9 @@ namespace JikanDotNet
 		/// Return manga with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of manga.</param>
+		/// <param name="extension">Extension for extra data.</param>
 		/// <returns>Manga with given MAL id.</returns>
-		Task<Manga> GetManga(long id);
+		Task<Manga> GetManga(long id, MangaExtension extension = MangaExtension.None);
 
 		/// <summary>
 		/// Return character with given MAL id.

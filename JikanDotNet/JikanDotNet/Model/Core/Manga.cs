@@ -1,7 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace JikanDotNet
 {
@@ -9,7 +7,9 @@ namespace JikanDotNet
 	/// Manga model class.
 	/// </summary>
 	public class Manga
-    {
+	{
+		#region Basic request props
+
 		/// <summary>
 		/// ID associated with MyAnimeList.
 		/// </summary>
@@ -165,5 +165,98 @@ namespace JikanDotNet
 		/// </summary>
 		[JsonProperty(PropertyName = "serialization")]
 		public ICollection<Serialization> Serializations { get; set; }
+
+		#endregion Basic request props
+
+		#region Pictures request props
+
+		/// <summary>
+		/// Manga's extra image URLs.
+		/// </summary>
+		[JsonProperty(PropertyName = "image")]
+		public ICollection<string> Images { get; set; }
+
+		#endregion Pictures request props
+
+		#region Characters request props
+
+		/// <summary>
+		/// Manga's extra image URLs.
+		/// </summary>
+		[JsonProperty(PropertyName = "character")]
+		public ICollection<CharacterEntry> Characters { get; set; }
+
+		#endregion Characters request props
+
+		#region Stats request props
+
+		/// <summary>
+		/// Number of users who labeled manga status as "reading"
+		/// </summary>
+		[JsonProperty(PropertyName = "reading")]
+		public int? Reading { get; set; }
+
+		/// <summary>
+		/// Number of users who labeled manga status as "completed"
+		/// </summary>
+		[JsonProperty(PropertyName = "completed")]
+		public int? Completed { get; set; }
+
+		/// <summary>
+		/// Number of users who labeled manga status as "on hold"
+		/// </summary>
+		[JsonProperty(PropertyName = "on_hold")]
+		public int? OnHold { get; set; }
+
+		/// <summary>
+		/// Number of users who labeled manga status as "dropped"
+		/// </summary>
+		[JsonProperty(PropertyName = "dropped")]
+		public int? Dropped { get; set; }
+
+		/// <summary>
+		/// Number of users who labeled manga status as "plan to read"
+		/// </summary>
+		[JsonProperty(PropertyName = "plan_to_read")]
+		public int? PlanToRead { get; set; }
+
+		/// <summary>
+		/// Number of users who added manga to their lists.
+		/// </summary>
+		[JsonProperty(PropertyName = "score_stats")]
+		public ScoringStats ScoreStats { get; set; }
+
+		#endregion Stats request props
+
+		#region News request props
+
+		/// <summary>
+		/// News related to manga.
+		/// </summary>
+		[JsonProperty(PropertyName = "news")]
+		public ICollection<News> News { get; set; }
+
+		#endregion News request props
+
+		#region Forum topics request props
+
+		/// <summary>
+		/// Forum topics related to manga.
+		/// </summary>
+		[JsonProperty(PropertyName = "topic")]
+		public ICollection<ForumTopic> Topics { get; set; }
+
+		#endregion Forum topics request props
+
+		#region More info request props
+
+		/// <summary>
+		/// Extra information stored in "more info" tab.
+		/// </summary>
+		[JsonProperty(PropertyName = "more_info")]
+		public string  MoreInfo { get; set; }
+
+		#endregion More info request props
+
 	}
 }

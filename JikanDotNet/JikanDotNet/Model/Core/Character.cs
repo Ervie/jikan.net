@@ -81,7 +81,7 @@ namespace JikanDotNet
 		#region Pictures request props
 
 		/// <summary>
-		/// Person's extra image URLs.
+		/// Character's extra image URLs.
 		/// </summary>
 		[JsonProperty(PropertyName = "image")]
 		public ICollection<string> Images { get; set; }
