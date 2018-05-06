@@ -67,29 +67,15 @@ namespace JikanDotNet
 		#region Private Methods
 
 		/// <summary>
-		/// Build while http request string from single components.
-		/// </summary>
-		/// <param name="jikanEndPoint">Endpoint category for Jikan API.</param>
-		/// <param name="malId">MAL id of searched element.</param>
-		/// <param name="extensionEndpoint">Extension for extra data.</param>
-		/// <returns>Request URL.</returns>
-		private string BuildRequestUrl(string jikanEndPoint, long malId, string extensionEndpoint = "")
-		{
-			return $"{Endpoint}/{jikanEndPoint}/{malId}" + (string.IsNullOrWhiteSpace(extensionEndpoint) ? string.Empty : $"/{extensionEndpoint}");
-		}
-
-		/// <summary>
 		/// Vasic method for handling requests and responses from endpoint.
 		/// </summary>
 		/// <typeparam name="T">Class type received from GET requests.</typeparam>
-		/// <param name="malId">Id of related item on MyAnimeList.</param>
-		/// <param name="endPoint">Endpoint target.</param>
-		/// <param name="extensionEndpoint">Extension for extra data.</param>
+		/// <param name="args">Arguments building endpoint.</param>
 		/// <returns>Requested object if successfull, null otherwise.</returns>
-		private async Task<T> ExecuteGetRequest<T> (long malId, string endPoint, string extensionEndpoint = "") where T: class
+		private async Task<T> ExecuteGetRequest<T> (string[] args) where T: class
 		{
 			T returnedObject = null;
-			string requestUrl = BuildRequestUrl(endPoint, malId, extensionEndpoint);
+			string requestUrl = String.Join("/", args);
 			using (HttpResponseMessage response = await httpClient.GetAsync(requestUrl))
 			{
 				if (response.IsSuccessStatusCode)
@@ -117,7 +103,8 @@ namespace JikanDotNet
 		/// <returns>Anime with given MAL id.</returns>
 		public async Task<Anime> GetAnime(long id, AnimeExtension extension = AnimeExtension.None)
 		{
-			return await ExecuteGetRequest<Anime>(id, JikanEndPointCategories.Anime, extension.GetDescription());
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Anime, id.ToString(), extension.GetDescription() };
+			return await ExecuteGetRequest<Anime>(endpointParts);
 		}
 
 		/// <summary>
@@ -128,7 +115,8 @@ namespace JikanDotNet
 		/// <returns>Character with given MAL id.</returns>
 		public async Task<Character> GetCharacter(long id, CharacterExtension extension = CharacterExtension.None)
 		{
-			return await ExecuteGetRequest<Character>(id, JikanEndPointCategories.Character, extension.GetDescription());
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Character, id.ToString(), extension.GetDescription() };
+			return await ExecuteGetRequest<Character>(endpointParts);
 		}
 
 		/// <summary>
@@ -138,7 +126,8 @@ namespace JikanDotNet
 		/// <param name="extension">Extension for extra data.</param>
 		public async Task<Manga> GetManga(long id, MangaExtension extension = MangaExtension.None)
 		{
-			return await ExecuteGetRequest<Manga>(id, JikanEndPointCategories.Manga, extension.GetDescription());
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Manga, id.ToString(), extension.GetDescription() };
+			return await ExecuteGetRequest<Manga>(endpointParts);
 		}
 
 		/// <summary>
@@ -149,7 +138,30 @@ namespace JikanDotNet
 		/// <returns>Person with given MAL id.</returns>
 		public async Task<Person> GetPerson(long id, PersonExtension extension = PersonExtension.None)
 		{
-			return await ExecuteGetRequest<Person>(id, JikanEndPointCategories.Person, extension.GetDescription());
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Person, id.ToString(), extension.GetDescription() };
+			return await ExecuteGetRequest<Person>(endpointParts);
+		}
+
+		/// <summary>
+		/// Return current season preview.
+		/// </summary>
+		/// <returns>Current season preview.</returns>
+		public async Task<Season> GetSeason()
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Season };
+			return await ExecuteGetRequest<Season>(endpointParts);
+		}
+
+		/// <summary>
+		/// Return season preview.
+		/// </summary>
+		/// <param name="year">Year of selected season.</param>
+		/// <param name="season">Selected season.</param>
+		/// <returns>Season preview.</returns>
+		public async Task<Season> GetSeason(int year, Seasons season)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Season, year.ToString(), season.GetDescription() };
+			return await ExecuteGetRequest<Season>(endpointParts);
 		}
 
 		#endregion Public Methods

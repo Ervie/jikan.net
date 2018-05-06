@@ -38,5 +38,19 @@ namespace JikanDotNet
 		/// <param name="extension">Extension for extra data.</param>
 		/// <returns>Person with given MAL id.</returns>
 		Task<Person> GetPerson(long id, PersonExtension extension = PersonExtension.None);
+
+		/// <summary>
+		/// Return current season preview.
+		/// </summary>
+		/// <returns>Current season preview.</returns>
+		Task<Season> GetSeason();
+
+		/// <summary>
+		/// Return season preview.
+		/// </summary>
+		/// <param name="year">Year of selected season.</param>
+		/// <param name="season">Selected season.</param>
+		/// <returns>Season preview.</returns>
+		Task<Season> GetSeason(int year, Seasons season);
 	}
 }

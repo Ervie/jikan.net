@@ -24,5 +24,10 @@
 		/// People endpoint.
 		/// </summary>
 		public const string Person = "person";
+
+		/// <summary>
+		/// Season endpoint.
+		/// </summary>
+		public const string Season = "season";
 	}
 }
