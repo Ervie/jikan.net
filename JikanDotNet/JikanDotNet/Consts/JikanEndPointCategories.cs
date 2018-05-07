@@ -34,5 +34,10 @@
 		/// Schedule endpoint.
 		/// </summary>
 		public const string Schedule = "schedule";
+
+		/// <summary>
+		/// Top list endpoint.
+		/// </summary>
+		public const string TopList = "top";
 	}
 }

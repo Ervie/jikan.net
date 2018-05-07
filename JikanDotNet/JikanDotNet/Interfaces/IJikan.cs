@@ -80,11 +80,11 @@ namespace JikanDotNet
 		Task<MangaTop> GetMangaTop();
 
 		/// <summary>
-		/// Return list of top anime.
+		/// Return list of top manga.
 		/// </summary>
 		/// <param name="page">Page of 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
 		/// <param name="extension">Extension for specific type of ranking.</param>
-		/// <returns>List of top anime.</returns>
+		/// <returns>List of top manga.</returns>
 		Task<MangaTop> GetMangaTop(int page, TopMangaExtension extension = TopMangaExtension.None);
 	}
 }
