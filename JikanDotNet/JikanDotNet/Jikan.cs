@@ -174,6 +174,26 @@ namespace JikanDotNet
 			return await ExecuteGetRequest<Schedule>(endpointParts);
 		}
 
+		public Task<AnimeTop> GetAnimeTop()
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<AnimeTop> GetAnimeTop(int page, TopAnimeExtension extension = TopAnimeExtension.None)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<MangaTop> GetMangaTop()
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<MangaTop> GetMangaTop(int page, TopMangaExtension extension = TopMangaExtension.None)
+		{
+			throw new NotImplementedException();
+		}
+
 		#endregion Public Methods
 	}
 }
