@@ -164,6 +164,16 @@ namespace JikanDotNet
 			return await ExecuteGetRequest<Season>(endpointParts);
 		}
 
+		/// <summary>
+		/// Return current season schedule.
+		/// </summary>
+		/// <returns>Current season schedule.</returns>
+		public async Task<Schedule> GetSchedule()
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Schedule };
+			return await ExecuteGetRequest<Schedule>(endpointParts);
+		}
+
 		#endregion Public Methods
 	}
 }

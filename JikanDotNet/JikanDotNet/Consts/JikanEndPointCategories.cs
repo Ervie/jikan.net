@@ -29,5 +29,10 @@
 		/// Season endpoint.
 		/// </summary>
 		public const string Season = "season";
+
+		/// <summary>
+		/// Schedule endpoint.
+		/// </summary>
+		public const string Schedule = "schedule";
 	}
 }

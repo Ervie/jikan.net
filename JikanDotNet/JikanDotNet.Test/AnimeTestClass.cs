@@ -2,7 +2,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace JikanDotNet.Test
+namespace JikanDotNet.Tests
 {
     public class AnimeTestClass
     {

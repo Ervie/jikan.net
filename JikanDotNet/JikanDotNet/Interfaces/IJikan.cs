@@ -52,5 +52,11 @@ namespace JikanDotNet
 		/// <param name="season">Selected season.</param>
 		/// <returns>Season preview.</returns>
 		Task<Season> GetSeason(int year, Seasons season);
+
+		/// <summary>
+		/// Return current season schedule.
+		/// </summary>
+		/// <returns>Current season schedule.</returns>
+		Task<Schedule> GetSchedule();
 	}
 }
