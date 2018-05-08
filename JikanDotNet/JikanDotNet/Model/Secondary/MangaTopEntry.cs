@@ -3,9 +3,9 @@
 namespace JikanDotNet
 {
 	/// <summary>
-	/// Model class for entry on top anime list.
+	/// Model class for entry on top manga list.
 	/// </summary>
-	public class AnimeTopEntry
+	public class MangaTopEntry
 	{
 		/// <summary>
 		/// ID associated with MyAnimeList.
@@ -14,63 +14,63 @@ namespace JikanDotNet
 		public long MalId { get; set; }
 
 		/// <summary>
-		/// Rank of the anime on selected list.
+		/// Rank of the manga on selected list.
 		/// </summary>
 		[JsonProperty(PropertyName = "rank")]
 		public int Rank { get; set; }
 
 		/// <summary>
-		/// URL to anime page.
+		/// URL to manga page.
 		/// </summary>
 		[JsonProperty(PropertyName = "url")]
 		public string Url { get; set; }
 
 		/// <summary>
-		/// Anime's image URL
+		/// Manga's image URL
 		/// </summary>
 		[JsonProperty(PropertyName = "image_url")]
 		public string ImageURL { get; set; }
 
 		/// <summary>
-		/// Title of the anime.
+		/// Title of the manga.
 		/// </summary>
 		[JsonProperty(PropertyName = "title")]
 		public string Title { get; set; }
 
 		/// <summary>
-		/// Anime type (e. g. "TV", "Movie").
+		/// Manga type (e. g. "TV", "Movie").
 		/// </summary>
 		[JsonProperty(PropertyName = "type")]
 		public string Type { get; set; }
 
 		/// <summary>
-		/// Anime's score on MyAnimeList up to 2 decimal places.
+		/// Manga's score on MyAnimeList up to 2 decimal places.
 		/// </summary>
 		[JsonProperty(PropertyName = "score")]
 		public float? Score { get; set; }
 
 		/// <summary>
-		/// Anime members count on MyAnimeList.
+		/// Manga members count on MyAnimeList.
 		/// </summary>
 		[JsonProperty(PropertyName = "members")]
 		public int? Members { get; set; }
 
 		/// <summary>
-		/// Date of airing start.
+		/// Date of publishing start.
 		/// </summary>
-		[JsonProperty(PropertyName = "airing_start")]
-		public string AiringStart { get; set; }
+		[JsonProperty(PropertyName = "publishing_start")]
+		public string PublishingStart { get; set; }
 
 		/// <summary>
-		/// Date of airing end.
+		/// Date of publishing end.
 		/// </summary>
-		[JsonProperty(PropertyName = "airing_end")]
-		public string AiringEnd { get; set; }
+		[JsonProperty(PropertyName = "publishing_end")]
+		public string PublishingEnd { get; set; }
 
 		/// <summary>
-		/// Anime's episode count.
+		/// Manga's volumes count.
 		/// </summary>
-		[JsonProperty(PropertyName = "episodes")]
-		public int Episodes { get; set; }
+		[JsonProperty(PropertyName = "volumes")]
+		public int Volumes { get; set; }
 	}
 }

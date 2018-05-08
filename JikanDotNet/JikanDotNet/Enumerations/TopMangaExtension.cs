@@ -16,13 +16,13 @@ namespace JikanDotNet
 		/// <summary>
 		/// Top manga only.
 		/// </summary>
-		[Description("manga	")]
+		[Description("manga")]
 		TopManga,
 
 		/// <summary>
 		/// Top novels.
 		/// </summary>
-		[Description("novel")]
+		[Description("novels")]
 		TopNovel,
 
 		/// <summary>

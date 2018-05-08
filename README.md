@@ -48,9 +48,9 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
 - [X] Seasonal Anime (Season + Year)
 - [X] Anime Scheduling (for current season)
 - Top
-    - [ ] Anime
-    - [ ] Manga
-    - [ ] Sub Types & Pagination Support
+    - [X] Anime
+    - [X] Manga
+    - [X] Sub Types & Pagination Support
 
 # Installation
 
