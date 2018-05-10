@@ -218,6 +218,50 @@ namespace JikanDotNet
 			return await ExecuteGetRequest<MangaTop>(endpointParts);
 		}
 
+		/// <summary>
+		/// Return list of results related to search.
+		/// </summary>
+		/// <param name="query">Search query.</param>
+		/// <returns>List of result related to search query.</returns>
+		public async Task<AnimeSearchResult> SearchAnime(string query)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Search, JikanEndPointCategories.Anime, query };
+			return await ExecuteGetRequest<AnimeSearchResult>(endpointParts);
+		}
+
+		/// <summary>
+		/// Return list of results related to search.
+		/// </summary>
+		/// <param name="query">Search query.</param>
+		/// <returns>List of result related to search query.</returns>
+		public async Task<MangaSearchResult> SearchManga(string query)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Search, JikanEndPointCategories.Manga, query };
+			return await ExecuteGetRequest<MangaSearchResult>(endpointParts);
+		}
+
+		/// <summary>
+		/// Return list of results related to search.
+		/// </summary>
+		/// <param name="query">Search query.</param>
+		/// <returns>List of result related to search query.</returns>
+		public async Task<PersonSearchResult> SearchPerson(string query)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Search, JikanEndPointCategories.Person, query };
+			return await ExecuteGetRequest<PersonSearchResult>(endpointParts);
+		}
+
+		/// <summary>
+		/// Return list of results related to search.
+		/// </summary>
+		/// <param name="query">Search query.</param>
+		/// <returns>List of result related to search query.</returns>
+		public async Task<CharacterSearchResult> SearchCharacter(string query)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Search, JikanEndPointCategories.Character, query };
+			return await ExecuteGetRequest<CharacterSearchResult>(endpointParts);
+		}
+
 		#endregion Public Methods
 	}
 }

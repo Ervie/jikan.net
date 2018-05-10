@@ -86,5 +86,33 @@ namespace JikanDotNet
 		/// <param name="extension">Extension for specific type of ranking.</param>
 		/// <returns>List of top manga.</returns>
 		Task<MangaTop> GetMangaTop(int page, TopMangaExtension extension = TopMangaExtension.None);
+
+		/// <summary>
+		/// Return list of results related to search.
+		/// </summary>
+		/// <param name="query">Search query.</param>
+		/// <returns>List of result related to search query.</returns>
+		Task<AnimeSearchResult> SearchAnime(string query);
+
+		/// <summary>
+		/// Return list of results related to search.
+		/// </summary>
+		/// <param name="query">Search query.</param>
+		/// <returns>List of result related to search query.</returns>
+		Task<MangaSearchResult> SearchManga(string query);
+
+		/// <summary>
+		/// Return list of results related to search.
+		/// </summary>
+		/// <param name="query">Search query.</param>
+		/// <returns>List of result related to search query.</returns>
+		Task<PersonSearchResult> SearchPerson(string query);
+
+		/// <summary>
+		/// Return list of results related to search.
+		/// </summary>
+		/// <param name="query">Search query.</param>
+		/// <returns>List of result related to search query.</returns>
+		Task<CharacterSearchResult> SearchCharacter(string query);
 	}
 }

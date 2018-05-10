@@ -39,5 +39,10 @@
 		/// Top list endpoint.
 		/// </summary>
 		public const string TopList = "top";
+
+		/// <summary>
+		/// Search endpoint.
+		/// </summary>
+		public const string Search = "search";
 	}
 }

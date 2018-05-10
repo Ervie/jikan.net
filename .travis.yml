@@ -1,6 +1,6 @@
 language: csharp
 solution: ./JikanDotNet/JikanDotNet.sln
 mono: none
-dotnet: 2.0
+dotnet: 2.0.0
 script:
  - dotnet restore
