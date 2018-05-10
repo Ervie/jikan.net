@@ -83,7 +83,7 @@ Then restore dependencies:
 - Request for anime schedule of current season.
 - Request for Top Manga & Anime.
 
-## 05.05.2018 - Version 0.2.0 (latest)
+## 05.05.2018 - Version 0.2.0
 
 - Extended request for Anime/Manga/Character/Person via extensions.
 
