@@ -42,9 +42,10 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
 - People Parsing
     - [X] Pictures
 - Search (Anime/Manga/Character/Person)
+    - [X] Basic query
     - [ ] Filters (Advanced Search)
     - [ ] Pagination Support
-    - [ ] No.# of pages
+    - [X] No.# of pages
 - [X] Seasonal Anime (Season + Year)
 - [X] Anime Scheduling (for current season)
 - Top
