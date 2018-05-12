@@ -318,6 +318,52 @@ namespace JikanDotNet
 			return await ExecuteGetRequest<CharacterSearchResult>(endpointParts);
 		}
 
+		/// <summary>
+		/// Return list of results related to search.
+		/// </summary>
+		/// <param name="query">Search query.</param>
+		/// <param name="searchConfig">Additional configuration for advanced search.</param>
+		/// <returns>List of result related to search query.</returns>
+		public Task<AnimeSearchResult> SearchAnime(string query, AnimeSearchConfig searchConfig)
+		{
+			throw new NotImplementedException();
+		}
+
+		/// <summary>
+		/// Return list of results related to search.
+		/// </summary>
+		/// <param name="query">Search query.</param>
+		/// <param name="page">Indexx of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <param name="searchConfig">Additional configuration for advanced search.</param>
+		/// <returns>List of result related to search query.</returns>
+		public Task<AnimeSearchResult> SearchAnime(string query, int page, AnimeSearchConfig searchConfig)
+		{
+			throw new NotImplementedException();
+		}
+
+		/// <summary>
+		/// Return list of results related to search.
+		/// </summary>
+		/// <param name="query">Search query.</param>
+		/// <param name="searchConfig">Additional configuration for advanced search.</param>
+		/// <returns>List of result related to search query.</returns>
+		public Task<MangaSearchResult> SearchManga(string query, MangaSearchConfig searchConfig)
+		{
+			throw new NotImplementedException();
+		}
+
+		/// <summary>
+		/// Return list of results related to search.
+		/// </summary>
+		/// <param name="query">Search query.</param>
+		/// <param name="page">Indexx of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <param name="searchConfig">Additional configuration for advanced search.</param>
+		/// <returns>List of result related to search query.</returns>
+		public Task<MangaSearchResult> SearchManga(string query, int page, MangaSearchConfig searchConfig)
+		{
+			throw new NotImplementedException();
+		}
+
 		#endregion Public Methods
 	}
 }
