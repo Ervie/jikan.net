@@ -1,3 +1,5 @@
+![build status](https://travis-ci.org/Ervie/jikan.net.svg?branch=master) ![build status](https://img.shields.io/nuget/v/JikanDotNet.svg)
+
 # jikan.net
 
 Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsing data from [MyAnimeList](https://myanimelist.com). Main objective of the wrapper is to simplify utilization of Jikan API, as strongly typed languages are not-so-easy to use with elastic json (sure we can go use dynamics in .NET, but let's think about performance).
@@ -44,7 +46,7 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
 - Search (Anime/Manga/Character/Person)
     - [X] Basic query
     - [ ] Filters (Advanced Search)
-    - [ ] Pagination Support
+    - [X] Pagination Support
     - [X] No.# of pages
 - [X] Seasonal Anime (Season + Year)
 - [X] Anime Scheduling (for current season)

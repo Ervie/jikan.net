@@ -13,6 +13,20 @@ namespace JikanDotNet.Tests
 			jikan = new Jikan(true);
 		}
 
+		[Fact]
+		public void ShouldReturnNulls()
+		{
+			var nullAnime = Task.Run(() => jikan.SearchAnime("")).Result;
+			var nullManga = Task.Run(() => jikan.SearchManga("")).Result;
+			var nullPerson = Task.Run(() => jikan.SearchPerson("")).Result;
+			var nullCharacter = Task.Run(() => jikan.SearchCharacter("")).Result;
+			
+			Assert.Null(nullAnime);
+			Assert.Null(nullManga);
+			Assert.Null(nullPerson);
+			Assert.Null(nullCharacter);
+		}
+
 		[Theory]
 		[InlineData("berserk")]
 		[InlineData("danganronpa")]
@@ -41,6 +55,15 @@ namespace JikanDotNet.Tests
 			Assert.Equal("TV", haibaneRenmei.Results.First().Type);
 			Assert.Equal(13, haibaneRenmei.Results.First().Episodes);
 			Assert.Equal(387, haibaneRenmei.Results.First().MalId);
+		}
+
+		[Fact]
+		public void ShouldFindGirlAnime()
+		{
+			AnimeSearchResult returnedAnime = Task.Run(() => jikan.SearchAnime("girl", 2)).Result;
+
+			Assert.Contains("Sakurasou no Pet na Kanojo", returnedAnime.Results.Select(x => x.Title));
+			Assert.Contains("Saenai Heroine no Sodatekata", returnedAnime.Results.Select(x => x.Title));
 		}
 
 		[Theory]
@@ -73,6 +96,16 @@ namespace JikanDotNet.Tests
 			Assert.Equal(104, yotsubato.Results.First().MalId);
 		}
 
+		[Fact]
+		public void ShouldFindGirlManga()
+		{
+			MangaSearchResult returnedAnime = Task.Run(() => jikan.SearchManga("girl", 2)).Result;
+
+			Assert.Contains("Girl", returnedAnime.Results.Select(x => x.Title));
+			Assert.Contains("Girls Only", returnedAnime.Results.Select(x => x.Title));
+			Assert.Equal(20, returnedAnime.ResultLastPage);
+		}
+
 		[Theory]
 		[InlineData("araki")]
 		[InlineData("oda")]
@@ -89,7 +122,7 @@ namespace JikanDotNet.Tests
 		{
 			PersonSearchResult returnedPerson = Task.Run(() => jikan.SearchPerson("maaya sakamoto")).Result;
 
-			Assert.Equal(1, returnedPerson.Results.Count);
+			Assert.Single(returnedPerson.Results);
 		}
 
 		[Fact]
@@ -105,6 +138,15 @@ namespace JikanDotNet.Tests
 			PersonSearchResult returnedPerson = Task.Run(() => jikan.SearchPerson("maaya sakamoto")).Result;
 			
 			Assert.Equal(90, returnedPerson.Results.First().MalId);
+		}
+
+		[Fact]
+		public void ShouldReturnDaisuke()
+		{
+			PersonSearchResult returnedPerson = Task.Run(() => jikan.SearchPerson("daisuke", 2)).Result;
+
+			Assert.Equal(50, returnedPerson.Results.Count);
+			Assert.Equal("Nishio, Daisuke", returnedPerson.Results.First().Name);
 		}
 
 		[Theory]
@@ -150,7 +192,27 @@ namespace JikanDotNet.Tests
 			Assert.Equal(3, returnedCharacter.Results.Count());
 			Assert.Equal("Lambdadelta", returnedCharacter.Results.First().Name);
 			Assert.Equal("Umineko no Naku Koro ni", returnedCharacter.Results.First().Animeography.First().Title);
-			Assert.Equal(1, returnedCharacter.Results.First().Animeography.Count);
+			Assert.Single(returnedCharacter.Results.First().Animeography);
+		}
+
+		[Fact]
+		public void ShouldReturnKirumi()
+		{
+			CharacterSearchResult returnedCharacter = Task.Run(() => jikan.SearchCharacter("kirumi")).Result;
+
+			Assert.Single(returnedCharacter.Results);
+			Assert.Equal("Toujou, Kirumi", returnedCharacter.Results.First().Name);
+			Assert.Single(returnedCharacter.Results.First().Mangaography);
+		}
+
+		[Fact]
+		public void ShouldFindJessica()
+		{
+			CharacterSearchResult returnedCharacter = Task.Run(() => jikan.SearchCharacter("edward", 2)).Result;
+			
+			Assert.Equal("Edwards, Jessica", returnedCharacter.Results.First().Name);
+			Assert.Equal(50, returnedCharacter.Results.Count);
+			Assert.Null(returnedCharacter.Results.First().Nicknames);
 		}
 	}
 }
