@@ -11,9 +11,23 @@ namespace JikanDotNet
 		/// Return anime with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
+		/// <returns>Anime with given MAL id.</returns>
+		Task<Anime> GetAnime(long id);
+
+		/// <summary>
+		/// Return anime with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
 		/// <param name="extension">Extension for extra data.</param>
 		/// <returns>Anime with given MAL id.</returns>
-		Task<Anime> GetAnime(long id, AnimeExtension extension = AnimeExtension.None);
+		Task<Anime> GetAnime(long id, AnimeExtension extension);
+
+		/// <summary>
+		/// Return manga with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of manga.</param>
+		/// <returns>Manga with given MAL id.</returns>
+		Task<Manga> GetManga(long id);
 
 		/// <summary>
 		/// Return manga with given MAL id.
@@ -21,7 +35,14 @@ namespace JikanDotNet
 		/// <param name="id">MAL id of manga.</param>
 		/// <param name="extension">Extension for extra data.</param>
 		/// <returns>Manga with given MAL id.</returns>
-		Task<Manga> GetManga(long id, MangaExtension extension = MangaExtension.None);
+		Task<Manga> GetManga(long id, MangaExtension extension);
+
+		/// <summary>
+		/// Return character with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of character.</param>
+		/// <returns>Character with given MAL id.</returns>
+		Task<Character> GetCharacter(long id);
 
 		/// <summary>
 		/// Return character with given MAL id.
@@ -29,7 +50,14 @@ namespace JikanDotNet
 		/// <param name="id">MAL id of character.</param>
 		/// <param name="extension">Extension for extra data.</param>
 		/// <returns>Character with given MAL id.</returns>
-		Task<Character> GetCharacter(long id, CharacterExtension extension = CharacterExtension.None);
+		Task<Character> GetCharacter(long id, CharacterExtension extension);
+
+		/// <summary>
+		/// Return person with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of person.</param>
+		/// <returns>Person with given MAL id.</returns>
+		Task<Person> GetPerson(long id);
 
 		/// <summary>
 		/// Return person with given MAL id.
@@ -37,7 +65,7 @@ namespace JikanDotNet
 		/// <param name="id">MAL id of person.</param>
 		/// <param name="extension">Extension for extra data.</param>
 		/// <returns>Person with given MAL id.</returns>
-		Task<Person> GetPerson(long id, PersonExtension extension = PersonExtension.None);
+		Task<Person> GetPerson(long id, PersonExtension extension);
 
 		/// <summary>
 		/// Return current season preview.
@@ -69,9 +97,23 @@ namespace JikanDotNet
 		/// Return list of top anime.
 		/// </summary>
 		/// <param name="page">Indexx of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <returns>List of top anime.</returns>
+		Task<AnimeTop> GetAnimeTop(int page);
+
+		/// <summary>
+		/// Return list of top anime.
+		/// </summary>
 		/// <param name="extension">Extension for specific type of ranking.</param>
 		/// <returns>List of top anime.</returns>
-		Task<AnimeTop> GetAnimeTop(int page, TopAnimeExtension extension = TopAnimeExtension.None);
+		Task<AnimeTop> GetAnimeTop(TopAnimeExtension extension);
+
+		/// <summary>
+		/// Return list of top anime.
+		/// </summary>
+		/// <param name="page">Indexx of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <param name="extension">Extension for specific type of ranking.</param>
+		/// <returns>List of top anime.</returns>
+		Task<AnimeTop> GetAnimeTop(int page, TopAnimeExtension extension);
 
 		/// <summary>
 		/// Return list of top manga.
@@ -83,9 +125,23 @@ namespace JikanDotNet
 		/// Return list of top manga.
 		/// </summary>
 		/// <param name="page">Indexx of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <returns>List of top manga.</returns>
+		Task<MangaTop> GetMangaTop(int page);
+
+		/// <summary>
+		/// Return list of top manga.
+		/// </summary>
 		/// <param name="extension">Extension for specific type of ranking.</param>
 		/// <returns>List of top manga.</returns>
-		Task<MangaTop> GetMangaTop(int page, TopMangaExtension extension = TopMangaExtension.None);
+		Task<MangaTop> GetMangaTop(TopMangaExtension extension);
+
+		/// <summary>
+		/// Return list of top manga.
+		/// </summary>
+		/// <param name="page">Indexx of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <param name="extension">Extension for specific type of ranking.</param>
+		/// <returns>List of top manga.</returns>
+		Task<MangaTop> GetMangaTop(int page, TopMangaExtension extension);
 
 		/// <summary>
 		/// Return list of results related to search.

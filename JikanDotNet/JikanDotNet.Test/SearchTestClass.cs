@@ -146,7 +146,7 @@ namespace JikanDotNet.Tests
 			PersonSearchResult returnedPerson = Task.Run(() => jikan.SearchPerson("daisuke", 2)).Result;
 
 			Assert.Equal(50, returnedPerson.Results.Count);
-			Assert.Equal("Nishio, Daisuke", returnedPerson.Results.First().Name);
+			Assert.Contains("Nishio, Daisuke", returnedPerson.Results.Select(x => x.Name));
 		}
 
 		[Theory]

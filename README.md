@@ -76,9 +76,10 @@ Then restore dependencies:
 
 # Changelog
 
-## Upcoming - Version 0.4.0
+## Upcoming - Version 1.0.0
 
 - Requests for searching on MyAnimeList
+- More overload methods.
 
 ## 08.05.2018 - Version 0.3.0 (latest)
 
