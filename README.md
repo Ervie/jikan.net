@@ -45,7 +45,7 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
     - [X] Pictures
 - Search (Anime/Manga/Character/Person)
     - [X] Basic query
-    - [ ] Filters (Advanced Search)
+    - [X] Filters (Advanced Search)
     - [X] Pagination Support
     - [X] No.# of pages
 - [X] Seasonal Anime (Season + Year)
@@ -76,10 +76,11 @@ Then restore dependencies:
 
 # Changelog
 
-## Upcoming - Version 1.0.0
+## Upcoming - Version 1.0.0 
 
 - Requests for searching on MyAnimeList
 - More overload methods.
+- Up to date with Jikan API.
 
 ## 08.05.2018 - Version 0.3.0 (latest)
 

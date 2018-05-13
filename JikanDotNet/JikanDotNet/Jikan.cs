@@ -374,7 +374,7 @@ namespace JikanDotNet
 		public async Task<AnimeSearchResult> SearchAnime(string query, AnimeSearchConfig searchConfig)
 		{
 			query = query.Replace(' ', '_');
-			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Search, JikanEndPointCategories.Anime, query, searchConfig.GetQuery() };
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Search, JikanEndPointCategories.Anime, query, searchConfig.ConfigToString() };
 			return await ExecuteGetRequest<AnimeSearchResult>(endpointParts);
 		}
 
@@ -388,7 +388,7 @@ namespace JikanDotNet
 		public async Task<AnimeSearchResult> SearchAnime(string query, int page, AnimeSearchConfig searchConfig)
 		{
 			query = query.Replace(' ', '_');
-			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Search, JikanEndPointCategories.Anime, query, page.ToString(), searchConfig.GetQuery() };
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Search, JikanEndPointCategories.Anime, query, page.ToString(), searchConfig.ConfigToString() };
 			return await ExecuteGetRequest<AnimeSearchResult>(endpointParts);
 		}
 
@@ -430,7 +430,7 @@ namespace JikanDotNet
 		public async Task<MangaSearchResult> SearchManga(string query, MangaSearchConfig searchConfig)
 		{
 			query = query.Replace(' ', '_');
-			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Search, JikanEndPointCategories.Manga, query, searchConfig.GetQuery() };
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Search, JikanEndPointCategories.Manga, query, searchConfig.ConfigToString() };
 			return await ExecuteGetRequest<MangaSearchResult>(endpointParts);
 		}
 
@@ -444,7 +444,7 @@ namespace JikanDotNet
 		public async Task<MangaSearchResult> SearchManga(string query, int page, MangaSearchConfig searchConfig)
 		{
 			query = query.Replace(' ', '_');
-			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Search, JikanEndPointCategories.Manga, query, page.ToString(), searchConfig.GetQuery() };
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Search, JikanEndPointCategories.Manga, query, page.ToString(), searchConfig.ConfigToString() };
 			return await ExecuteGetRequest<MangaSearchResult>(endpointParts);
 		}
 

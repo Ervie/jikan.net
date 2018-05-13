@@ -9,6 +9,6 @@
 		/// Create query from current parameters for search request.
 		/// </summary>
 		/// <returns>Query from current parameters for search request</returns>
-		string GetQuery();
+		string ConfigToString();
 	}
 }

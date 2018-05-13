@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.3.0</Version>
+    <Version>1.0.0</Version>
     <Authors>Bartłomiej Buchała</Authors>
     <Description>A dotnet wrapper for Jikan REST API, fetching data from MyAnimeList.</Description>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
