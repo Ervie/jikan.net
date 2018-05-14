@@ -52,229 +52,229 @@ namespace JikanDotNet
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("7")]
+		[Description("8")]
 		Drama,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("8")]
+		[Description("9")]
 		Ecchi,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("9")]
+		[Description("10")]
 		Fantasy,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("10")]
+		[Description("11")]
 		Game,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("11")]
+		[Description("12")]
 		Hentai,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("12")]
+		[Description("13")]
 		Historical,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("13")]
+		[Description("14")]
 		Horror,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("14")]
+		[Description("15")]
 		Kids,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("15")]
+		[Description("16")]
 		Magic,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("16")]
+		[Description("17")]
 		MartialArts,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("17")]
+		[Description("18")]
 		Mecha,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("18")]
+		[Description("19")]
 		Music,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("19")]
+		[Description("20")]
 		Parody,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("20")]
+		[Description("21")]
 		Samurai,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("21")]
+		[Description("22")]
 		Romance,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("22")]
+		[Description("23")]
 		School,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("23")]
+		[Description("24")]
 		SciFi,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("24")]
+		[Description("25")]
 		Shoujo,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("25")]
+		[Description("26")]
 		ShoujoAi,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("26")]
+		[Description("27")]
 		Shounen,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("27")]
+		[Description("28")]
 		ShounenAi,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("28")]
+		[Description("29")]
 		Space,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("29")]
+		[Description("30")]
 		Sports,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("30")]
+		[Description("32")]
 		SuperPower,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("31")]
+		[Description("32")]
 		Vampire,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("32")]
+		[Description("33")]
 		Yaoi,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("33")]
+		[Description("34")]
 		Yuri,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("34")]
+		[Description("35")]
 		Harem,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("35")]
+		[Description("36")]
 		SliceOfLife,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("36")]
+		[Description("37")]
 		Supernatural,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("37")]
+		[Description("38")]
 		Military,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("38")]
+		[Description("39")]
 		Police,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("39")]
+		[Description("40")]
 		Psychological,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("40")]
+		[Description("41")]
 		Thriller,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("41")]
+		[Description("42")]
 		Seinen,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("42")]
+		[Description("43")]
 		Josei,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("43")]
+		[Description("44")]
 		Doujinshi,
 
 		/// <summary>
 		/// Action.
 		/// </summary>
-		[Description("44")]
+		[Description("45")]
 		GenderBender
 	}
 }

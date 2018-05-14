@@ -68,5 +68,14 @@ namespace JikanDotNet.Resources {
                 return ResourceManager.GetString("FailedRequest", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EnumerationValue must be of Enum type.
+        /// </summary>
+        internal static string NotEnum {
+            get {
+                return ResourceManager.GetString("NotEnum", resourceCulture);
+            }
+        }
     }
 }

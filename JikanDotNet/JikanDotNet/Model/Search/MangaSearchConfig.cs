@@ -83,24 +83,20 @@ namespace JikanDotNet
 
 			if (StartDate.HasValue)
 			{
-				builder.Append($"start_date={StartDate.Value.ToString("YYYY-MM-DD")}$");
+				builder.Append($"start_date={StartDate.Value.ToString("yyyy-MM-dd")}$");
 			}
 
 			if (EndDate.HasValue)
 			{
-				builder.Append($"end_date={EndDate.Value.ToString("YYYY-MM-DD")}$");
+				builder.Append($"end_date={EndDate.Value.ToString("yyyy-MM-dd")}$");
 			}
 
 			if (Genres.Count > 0)
 			{
-				builder.Append($"genre=");
 				foreach (var genre in Genres)
 				{
-					builder.Append($"{genre.GetDescription()},");
+					builder.Append($"genre[]={genre.GetDescription()}&");
 				}
-				builder.Remove(builder.Length - 1, 1);
-
-				builder.Append('&');
 			}
 
 			if (GenreIncluded)

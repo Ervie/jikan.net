@@ -57,6 +57,48 @@ namespace JikanDotNet.Tests
 			Assert.Equal("Fairy Tail", danganronpaAnime.Results.Skip(1).First().Title);
 		}
 
+		[Fact]
+		public void ShouldFilterBleachMecha()
+		{
+			var searchConfig = new AnimeSearchConfig();
+			searchConfig.Genres.Add(GenreSearch.Mecha);
+
+			AnimeSearchResult returnedAnime = Task.Run(() => jikan.SearchAnime("Bleach", searchConfig)).Result;
+
+			Assert.Equal(6, returnedAnime.Results.Count);
+			Assert.Contains("Blame! Movie", returnedAnime.Results.Select(x => x.Title));
+			Assert.Contains("Bubblegum Crisis", returnedAnime.Results.Select(x => x.Title));
+		}
+
+		[Fact]
+		public void ShouldFilterBleachMechaMovie()
+		{
+			var searchConfig = new AnimeSearchConfig
+			{
+				Type = AnimeType.Movie
+			};
+			searchConfig.Genres.Add(GenreSearch.Mecha);
+
+			AnimeSearchResult returnedAnime = Task.Run(() => jikan.SearchAnime("Bleach", searchConfig)).Result;
+
+			Assert.Equal("Blame! Movie", returnedAnime.Results.First().Title);
+		}
+
+		[Fact]
+		public void ShouldFilterBleachAfter2018()
+		{
+			System.DateTime configDate = new System.DateTime(2018, 1, 1);
+			var searchConfig = new AnimeSearchConfig
+			{
+				StartDate = configDate
+			};
+
+			AnimeSearchResult returnedAnime = Task.Run(() => jikan.SearchAnime("Bleach", searchConfig)).Result;
+
+			Assert.Contains("Full Metal Panic! Invisible Victory", returnedAnime.Results.Select(x => x.Title));
+			Assert.Contains("Beatless", returnedAnime.Results.Select(x => x.Title));
+		}
+
 		[Theory]
 		[InlineData("berserk")]
 		[InlineData("monster")]
@@ -79,7 +121,6 @@ namespace JikanDotNet.Tests
 			var searchConfig = new MangaSearchConfig
 			{
 				Type = MangaType.Manga
-
 			};
 			MangaSearchResult danganronpaManga = Task.Run(() => jikan.SearchManga("danganronpa", searchConfig)).Result;
 
@@ -93,11 +134,38 @@ namespace JikanDotNet.Tests
 			{
 				Type = MangaType.Manga,
 				Score = 8
-
 			};
 			MangaSearchResult danganronpaManga = Task.Run(() => jikan.SearchManga("danganronpa", searchConfig)).Result;
 
 			Assert.Equal("New Danganronpa V3: Minna no Koroshiai Shingakki Comic Anthology", danganronpaManga.Results.First().Title);
+		}
+
+		[Fact]
+		public void ShouldFilterMetalGame()
+		{
+			var searchConfig = new MangaSearchConfig
+			{
+				Type = MangaType.Manga,
+			};
+			searchConfig.Genres.Add(GenreSearch.Game);
+
+			MangaSearchResult returnedManga = Task.Run(() => jikan.SearchManga("metal", searchConfig)).Result;
+
+			Assert.Equal("Metal Fight Beyblade", returnedManga.Results.First().Title);
+		}
+
+		[Fact]
+		public void ShouldFilterMetalGameEndDate()
+		{
+			var searchConfig = new MangaSearchConfig
+			{
+				EndDate = new System.DateTime(2015, 1, 1)
+			};
+
+			MangaSearchResult returnedManga = Task.Run(() => jikan.SearchManga("metal", searchConfig)).Result;
+
+			Assert.Contains("Metallica Metalluca", returnedManga.Results.Select(x => x.Title));
+			Assert.Contains("Full Metal Panic! Another", returnedManga.Results.Select(x => x.Title));
 		}
 	}
 }

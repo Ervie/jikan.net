@@ -120,4 +120,7 @@
   <data name="FailedRequest" xml:space="preserve">
     <value>GET request failed. Inner message: {0}</value>
   </data>
+  <data name="NotEnum" xml:space="preserve">
+    <value>EnumerationValue must be of Enum type</value>
+  </data>
 </root>

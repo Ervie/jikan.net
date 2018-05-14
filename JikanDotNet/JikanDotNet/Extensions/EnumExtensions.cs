@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JikanDotNet.Resources;
+using System;
 using System.ComponentModel;
 using System.Reflection;
 
@@ -12,7 +13,7 @@ namespace JikanDotNet.Extensions
 			Type type = enumerationValue.GetType();
 			if (!type.IsEnum)
 			{
-				throw new ArgumentException("EnumerationValue must be of Enum type", "enumerationValue");
+				throw new ArgumentException(Errors.NotEnum, "enumerationValue");
 			}
 			
 			MemberInfo[] memberInfo = type.GetMember(enumerationValue.ToString());
