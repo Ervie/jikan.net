@@ -52,6 +52,16 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
+		public void ShouldParseCowboyBebopRelatedAnime()
+		{
+			Anime bebopAnime = Task.Run(() => jikan.GetAnime(1)).Result;
+
+			Assert.Equal(2, bebopAnime.Related.Adaptations.Count);
+			Assert.Equal(2, bebopAnime.Related.SideStories.Count);
+			Assert.Single(bebopAnime.Related.Summaries);
+		}
+
+		[Fact]
 		public void ShouldParseCardcaptorSakuraInformation()
 		{
 			Anime cardcaptor = Task.Run(() => jikan.GetAnime(232)).Result;
@@ -77,6 +87,14 @@ namespace JikanDotNet.Tests
 			Assert.Equal("Funimation", akiraAnime.Licensors.First().ToString());
 			Assert.Equal("Tokyo Movie Shinsha", akiraAnime.Studios.First().ToString());
 			Assert.Equal("Action", akiraAnime.Genres.First().ToString());
+		}
+
+		[Fact]
+		public void ShouldParseAnimeWithNoRelated()
+		{
+			Anime returnedAnime = Task.Run(() => jikan.GetAnime(1457)).Result;
+
+			Assert.Null(returnedAnime.Related);
 		}
 	}
 }

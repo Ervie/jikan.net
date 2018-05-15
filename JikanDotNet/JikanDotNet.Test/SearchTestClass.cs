@@ -206,13 +206,12 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldFindJessica()
+		public void ShouldFindEdwards()
 		{
 			CharacterSearchResult returnedCharacter = Task.Run(() => jikan.SearchCharacter("edward", 2)).Result;
 			
-			Assert.Equal("Edwards, Jessica", returnedCharacter.Results.First().Name);
+			Assert.Contains("Rutherford, Edward", returnedCharacter.Results.Select(x => x.Name));
 			Assert.Equal(50, returnedCharacter.Results.Count);
-			Assert.Null(returnedCharacter.Results.First().Nicknames);
 		}
 	}
 }

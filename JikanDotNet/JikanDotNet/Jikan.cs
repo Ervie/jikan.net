@@ -76,16 +76,30 @@ namespace JikanDotNet
 		{
 			T returnedObject = null;
 			string requestUrl = String.Join("/", args);
-			using (HttpResponseMessage response = await httpClient.GetAsync(requestUrl))
+			try
 			{
-				if (response.IsSuccessStatusCode)
+				using (HttpResponseMessage response = await httpClient.GetAsync(requestUrl))
 				{
-					string json = await response.Content.ReadAsStringAsync();
-					returnedObject = JsonConvert.DeserializeObject<T>(json);
+					if (response.IsSuccessStatusCode)
+					{
+						string json = await response.Content.ReadAsStringAsync();
+
+						// prevent deserializing "related" into empty array
+						// May change if endpoint implementation change
+						json = json.Replace("\"related\":[]", "\"related\":null");
+						returnedObject = JsonConvert.DeserializeObject<T>(json);
+					}
+					else if (!surpressException)
+					{
+						throw new JikanRequestException(string.Format(Resources.Errors.FailedRequest, response.Content), response.StatusCode);
+					}
 				}
-				else if (!surpressException)
+			}
+			catch (JsonSerializationException ex)
+			{
+				if (!surpressException)
 				{
-					throw new JikanRequestException(string.Format(Resources.Errors.FailedRequest, response.Content), response.StatusCode);
+					throw new JikanRequestException(Resources.Errors.SerializationFailed + Environment.NewLine + "Inner exception message: " + ex.Message);
 				}
 			}
 			return returnedObject;

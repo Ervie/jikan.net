@@ -60,13 +60,13 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
 ### Package manager
 
 ```
-PM> Install-Package JikanDotNet -Version 1.0.0
+PM> Install-Package JikanDotNet -Version 1.0.1
 ```
 
 ### .NET CLI
 
 ```
->dotnet add package JikanDotNet --version 1.0.0
+>dotnet add package JikanDotNet --version 1.0.1
 ```
 
 Then restore dependencies:
@@ -76,7 +76,11 @@ Then restore dependencies:
 
 # Changelog
 
-## 14.05.2018 - Version 1.0.0 (latest)
+## 15.05.2018 - Version 1.0.1 (latest)
+
+- Fixed issue [#1](https://github.com/Ervie/jikan.net/issues/1) - error during parsing anime/manga with no related entries.
+
+## 14.05.2018 - Version 1.0.0
 
 - Requests for searching on MyAnimeList
 - More overload methods.

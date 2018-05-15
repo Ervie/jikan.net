@@ -123,4 +123,7 @@
   <data name="NotEnum" xml:space="preserve">
     <value>EnumerationValue must be of Enum type</value>
   </data>
+  <data name="SerializationFailed" xml:space="preserve">
+    <value>Serialization failed.</value>
+  </data>
 </root>

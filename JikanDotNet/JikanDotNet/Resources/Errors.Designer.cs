@@ -77,5 +77,14 @@ namespace JikanDotNet.Resources {
                 return ResourceManager.GetString("NotEnum", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Serialization failed..
+        /// </summary>
+        internal static string SerializationFailed {
+            get {
+                return ResourceManager.GetString("SerializationFailed", resourceCulture);
+            }
+        }
     }
 }

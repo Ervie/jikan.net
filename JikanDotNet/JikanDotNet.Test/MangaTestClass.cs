@@ -52,6 +52,15 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
+		public void ShouldParseMonsterRelated()
+		{
+			Manga monsterManga = Task.Run(() => jikan.GetManga(1)).Result;
+
+			Assert.Single(monsterManga.Related.Adaptations);
+			Assert.Single(monsterManga.Related.SideStories);
+		}
+
+		[Fact]
 		public void ShouldParseYotsubatoInformation()
 		{
 			Manga yotsubatoManga = Task.Run(() => jikan.GetManga(104)).Result;
@@ -74,6 +83,14 @@ namespace JikanDotNet.Tests
 			Assert.Equal("Oda, Eiichiro", onePieceManga.Authors.First().ToString());
 			Assert.Equal("Shounen Jump (Weekly)", onePieceManga.Serializations.First().ToString());
 			Assert.Equal("Action", onePieceManga.Genres.First().ToString());
+		}
+
+		[Fact]
+		public void ShouldParseMangaWithNoRelated()
+		{
+			Manga returnedManga = Task.Run(() => jikan.GetManga(19983)).Result;
+
+			Assert.Null(returnedManga.Related);
 		}
 	}
 }
