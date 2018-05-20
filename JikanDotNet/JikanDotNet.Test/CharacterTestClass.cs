@@ -51,5 +51,17 @@ namespace JikanDotNet.Tests
 			Assert.Contains("Bleach", ichigo.Animeography.Select(x => x.Name));
 			Assert.Contains("Bleach", ichigo.Mangaography.Select(x => x.Name));
 		}
+
+		[Fact]
+		public void ShouldParseEin()
+		{
+			Character ein = Task.Run(() => jikan.GetCharacter(4)).Result;
+
+			Assert.Equal("Ein", ein.Name);
+
+			Assert.Equal("Supporting", ein.Animeography.First().Role);
+			Assert.Equal("Supporting", ein.Mangaography.First().Role);
+			Assert.Equal("Main", ein.Animeography.Last().Role);
+		}
 	}
 }

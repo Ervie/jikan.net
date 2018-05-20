@@ -65,7 +65,6 @@ namespace JikanDotNet.Tests
 
 			AnimeSearchResult returnedAnime = Task.Run(() => jikan.SearchAnime("Bleach", searchConfig)).Result;
 
-			Assert.Equal(7, returnedAnime.Results.Count);
 			Assert.Contains("Blame! Movie", returnedAnime.Results.Select(x => x.Title));
 			Assert.Contains("Bubblegum Crisis", returnedAnime.Results.Select(x => x.Title));
 		}

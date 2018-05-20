@@ -27,6 +27,12 @@ namespace JikanDotNet
 		public string ImageURL { get; set; }
 
 		/// <summary>
+		/// Anime type (e. g. "TV", "Movie").
+		/// </summary>
+		[JsonProperty(PropertyName = "type")]
+		public string Type { get; set; }
+
+		/// <summary>
 		/// Anime's URL
 		/// </summary>
 		[JsonProperty(PropertyName = "url")]
@@ -96,6 +102,12 @@ namespace JikanDotNet
 		/// Is anime marked as 18+.
 		/// </summary>
 		[JsonProperty(PropertyName = "r18_plus")]
-		public bool R18 { get; set; }
+		public bool? R18 { get; set; }
+
+		/// <summary>
+		/// Is anime continuing from last season.
+		/// </summary>
+		[JsonProperty(PropertyName = "continued")]
+		public bool? Continued { get; set; }
 	}
 }

@@ -53,7 +53,7 @@ namespace JikanDotNet
 		public string Birthday { get; set; }
 
 		/// <summary>
-		/// Person's birthday.
+		/// Person's website URL.
 		/// </summary>
 		[JsonProperty(PropertyName = "website_url")]
 		public string WebsiteUrl { get; set; }

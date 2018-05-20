@@ -83,7 +83,7 @@ namespace JikanDotNet.Tests
 			Assert.Equal(3, akiraAnime.Producers.Count);
 			Assert.Equal(3, akiraAnime.Licensors.Count);
 			Assert.Equal(1, akiraAnime.Studios.Count);
-			Assert.Equal(6, akiraAnime.Genres.Count);
+			Assert.Equal(7, akiraAnime.Genres.Count);
 			Assert.Equal("Funimation", akiraAnime.Licensors.First().ToString());
 			Assert.Equal("Tokyo Movie Shinsha", akiraAnime.Studios.First().ToString());
 			Assert.Equal("Action", akiraAnime.Genres.First().ToString());

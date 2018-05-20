@@ -30,6 +30,19 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
+		public void ShouldParseYoujoSenki()
+		{
+			Season winter2017 = Task.Run(() => jikan.GetSeason(2017, Seasons.Winter)).Result;
+
+			SeasonEntry youjoSenki = winter2017.SeasonEntries.FirstOrDefault(x => x.Title.Equals("Youjo Senki"));
+
+			Assert.Equal("TV", youjoSenki.Type);
+			Assert.False(youjoSenki.R18);
+			Assert.False(youjoSenki.Kids);
+			Assert.False(youjoSenki.Continued);
+		}
+
+		[Fact]
 		public void ShouldParseCurrentSeason()
 		{
 			Season currentSesaon = Task.Run(() => jikan.GetSeason()).Result;

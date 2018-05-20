@@ -60,13 +60,13 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
 ### Package manager
 
 ```
-PM> Install-Package JikanDotNet -Version 1.0.1
+PM> Install-Package JikanDotNet -Version 1.0.2
 ```
 
 ### .NET CLI
 
 ```
->dotnet add package JikanDotNet --version 1.0.1
+>dotnet add package JikanDotNet --version 1.0.2
 ```
 
 Then restore dependencies:
@@ -76,30 +76,12 @@ Then restore dependencies:
 
 # Changelog
 
-## 15.05.2018 - Version 1.0.1 (latest)
+## 20.05.2018 - Version 1.0.2 (latest)
 
-- Fixed issue [#1](https://github.com/Ervie/jikan.net/issues/1) - error during parsing anime/manga with no related entries.
+- <b>[Character|Person]</b> Added add role info in animeography and mangaography (Character) and voice acting roles (Person).
+- <b>[Season]</b> Added "type" and "continued" properties for season entry.
 
-## 14.05.2018 - Version 1.0.0
-
-- Requests for searching on MyAnimeList
-- More overload methods.
-- Initial version, up to date with Jikan API.
-
-## 08.05.2018 - Version 0.3.0 
-
-- Request for season preview.
-- Request for anime schedule of current season.
-- Request for Top Manga & Anime.
-
-## 05.05.2018 - Version 0.2.0
-
-- Extended request for Anime/Manga/Character/Person via extensions.
-
-## 02.05.2018 - Version 0.1.0 
-
-- First usable version.
-- Added basic requests for Anime/Manga/Person/Character.
+**[Read More](https://github.com/Ervie/jikan.net/master/Changelog.md)**
 
 # Documentation &  Usage example
 
