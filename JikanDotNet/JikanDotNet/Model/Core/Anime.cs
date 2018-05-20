@@ -213,7 +213,7 @@ namespace JikanDotNet
 		#region Episodes extension request props
 
 		/// <summary>
-		/// Anime's ending themes numerically indexed with array values.
+		/// Anime's episode collection with basic information.
 		/// </summary>
 		[JsonProperty(PropertyName = "episode")]
 		public ICollection<AnimeEpisode> EpisodeCollection { get; set; }
@@ -223,13 +223,13 @@ namespace JikanDotNet
 		#region Characters and staff extension request props
 
 		/// <summary>
-		/// Manga's extra image URLs.
+		/// Anime's characters collection with basic information.
 		/// </summary>
 		[JsonProperty(PropertyName = "character")]
 		public ICollection<CharacterEntry> Characters { get; set; }
 
 		/// <summary>
-		/// Manga's extra image URLs.
+		/// Anime's staff collection with basic information.
 		/// </summary>
 		[JsonProperty(PropertyName = "staff")]
 		public ICollection<StaffPositionEntry> Staff { get; set; }
@@ -239,7 +239,7 @@ namespace JikanDotNet
 		#region Pictures request props
 
 		/// <summary>
-		/// Manga's extra image URLs.
+		/// Anime's extra image URLs.
 		/// </summary>
 		[JsonProperty(PropertyName = "image")]
 		public ICollection<string> Images { get; set; }
@@ -249,7 +249,7 @@ namespace JikanDotNet
 		#region Videos request props
 
 		/// <summary>
-		/// Manga's extra image URLs.
+		/// Anime's related videos URLs.
 		/// </summary>
 		[JsonProperty(PropertyName = "promo")]
 		public ICollection<PromoVideo> PromoVideos { get; set; }

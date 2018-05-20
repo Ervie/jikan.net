@@ -181,7 +181,7 @@ namespace JikanDotNet
 		#region Characters request props
 
 		/// <summary>
-		/// Manga's extra image URLs.
+		/// Collection of manga's characters.
 		/// </summary>
 		[JsonProperty(PropertyName = "character")]
 		public ICollection<CharacterEntry> Characters { get; set; }
