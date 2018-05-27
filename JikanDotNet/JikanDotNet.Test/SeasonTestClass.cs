@@ -22,7 +22,7 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseSpring1980()
+		public void ShouldParseSpring1970()
 		{
 			Season spring1970 = Task.Run(() => jikan.GetSeason(1970, Seasons.Spring)).Result;
 
@@ -49,6 +49,15 @@ namespace JikanDotNet.Tests
 
 			Assert.NotNull(currentSesaon);
 			Assert.InRange(currentSesaon.SeasonEntries.Count, 20, 500);
+		}
+
+		[Fact]
+		public void ShouldParseSpring1970ExtraInfo()
+		{
+			Season spring1970 = Task.Run(() => jikan.GetSeason(1970, Seasons.Spring)).Result;
+
+			Assert.Equal("Spring", spring1970.SeasonName);
+			Assert.Equal(1970, spring1970.SeasonYear);
 		}
 	}
 }

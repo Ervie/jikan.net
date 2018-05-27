@@ -14,15 +14,15 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldReturnNulls()
+		public void ShouldReturnNoResult()
 		{
 			var nullAnime = Task.Run(() => jikan.SearchAnime("")).Result;
 			var nullManga = Task.Run(() => jikan.SearchManga("")).Result;
 			var nullPerson = Task.Run(() => jikan.SearchPerson("")).Result;
 			var nullCharacter = Task.Run(() => jikan.SearchCharacter("")).Result;
 			
-			Assert.Null(nullAnime);
-			Assert.Null(nullManga);
+			Assert.Empty(nullAnime.Results);
+			Assert.Empty(nullManga.Results);
 			Assert.Null(nullPerson);
 			Assert.Null(nullCharacter);
 		}
@@ -62,7 +62,6 @@ namespace JikanDotNet.Tests
 		{
 			AnimeSearchResult returnedAnime = Task.Run(() => jikan.SearchAnime("girl", 2)).Result;
 
-			Assert.Contains("Sakurasou no Pet na Kanojo", returnedAnime.Results.Select(x => x.Title));
 			Assert.Contains("Saenai Heroine no Sodatekata", returnedAnime.Results.Select(x => x.Title));
 		}
 

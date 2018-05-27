@@ -60,13 +60,13 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
 ### Package manager
 
 ```
-PM> Install-Package JikanDotNet -Version 1.0.2
+PM> Install-Package JikanDotNet -Version 1.0.3
 ```
 
 ### .NET CLI
 
 ```
->dotnet add package JikanDotNet --version 1.0.2
+>dotnet add package JikanDotNet --version 1.0.3
 ```
 
 Then restore dependencies:
@@ -76,12 +76,11 @@ Then restore dependencies:
 
 # Changelog
 
-## 20.05.2018 - Version 1.0.2 (latest)
+## 27.05.2018 - Version 1.0.3 (latest)
 
-- <b>[Character|Person]</b> Added add role info in animeography and mangaography (Character) and voice acting roles (Person).
-- <b>[Season]</b> Added "type" and "continued" properties for season entry.
+- <b>[Season]</b> Add `SeasonName` and `SeasonYear` data.
 
-**[Read More](https://github.com/Ervie/jikan.net/master/Changelog.md)**
+**[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**
 
 # Documentation &  Usage example
 

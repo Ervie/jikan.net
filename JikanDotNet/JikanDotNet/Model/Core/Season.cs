@@ -14,5 +14,17 @@ namespace JikanDotNet
 		/// </summary>
 		[JsonProperty(PropertyName = "season")]
 		public ICollection<SeasonEntry> SeasonEntries { get; set; }
+
+		/// <summary>
+		/// Year of the season.
+		/// </summary>
+		[JsonProperty(PropertyName = "season_year")]
+		public int SeasonYear { get; set; }
+
+		/// <summary>
+		/// Name of the season.
+		/// </summary>
+		[JsonProperty(PropertyName = "season_name")]
+		public string SeasonName { get; set; }
 	}
 }

@@ -1,4 +1,8 @@
-## 20.05.2018 - Version 1.0.2 (latest)
+## 27.05.2018 - Version 1.0.3 (latest)
+
+- <b>[Season]</b> Add `SeasonName` and `SeasonYear` data.
+
+## 20.05.2018 - Version 1.0.2 
 
 - <b>[Character|Person]</b> Added add role info in animeography and mangaography (Character) and voice acting roles (Person).
 - <b>[Season]</b> Added "type" and "continued" properties for season entry.
