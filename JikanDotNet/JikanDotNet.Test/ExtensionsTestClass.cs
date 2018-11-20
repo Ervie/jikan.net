@@ -32,15 +32,15 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public void ShouldParseMonsterImages()
 		{
-			Manga monster = Task.Run(() => jikan.GetManga(1, MangaExtension.Pictures)).Result;
+			MangaPictures monster = Task.Run(() => jikan.GetMangaPictures(1)).Result;
 
-			Assert.Equal(8, monster.Images.Count);
+			Assert.Equal(8, monster.Pictures.Count);
 		}
 
 		[Fact]
 		public void ShouldParseMonsterCharacters()
 		{
-			Manga monster = Task.Run(() => jikan.GetManga(1, MangaExtension.Characters)).Result;
+			MangaCharacters monster = Task.Run(() => jikan.GetMangaCharacters(1)).Result;
 
 			Assert.Equal(33, monster.Characters.Count);
 		}
@@ -48,7 +48,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public void ShouldParseMonsterCharactersJohan()
 		{
-			Manga monster = Task.Run(() => jikan.GetManga(1, MangaExtension.Characters)).Result;
+			MangaCharacters monster = Task.Run(() => jikan.GetMangaCharacters(1)).Result;
 
 			Assert.Contains("Liebert, Johan", monster.Characters.Select(x => x.Name));
 		}
@@ -56,15 +56,17 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public void ShouldParseMonsterStats()
 		{
-			Manga monster = Task.Run(() => jikan.GetManga(1, MangaExtension.Stats)).Result;
+			MangaStats monster = Task.Run(() => jikan.GetMangaStatistics(1)).Result;
 
 			Assert.NotNull(monster.ScoreStats);
+			Assert.True(monster.Completed > 25000);
+			Assert.True(monster.Dropped > 500);
 		}
 
 		[Fact]
 		public void ShouldParseMonsterNews()
 		{
-			Manga monster = Task.Run(() => jikan.GetManga(1, MangaExtension.News)).Result;
+			MangaNews monster = Task.Run(() => jikan.GetMangaNews(1)).Result;
 
 			Assert.Equal(11, monster.News.Count);
 			Assert.Contains("Xinil", monster.News.Select(x => x.Author));
@@ -73,7 +75,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public void ShouldParseMonsterTopics()
 		{
-			Manga monster = Task.Run(() => jikan.GetManga(1, MangaExtension.Forum)).Result;
+			ForumTopics monster = Task.Run(() => jikan.GetMangaForumTopics(1)).Result;
 
 			Assert.Contains(1672449, monster.Topics.Select(x => x.TopicId));
 			Assert.Contains(155394, monster.Topics.Select(x => x.TopicId));
@@ -83,10 +85,10 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public void ShouldParseBerserkMoreInfo()
 		{
-			Manga berserk = Task.Run(() => jikan.GetManga(2, MangaExtension.MoreInfo)).Result;
+			MoreInfo berserk = Task.Run(() => jikan.GetMangaMoreInfo(2)).Result;
 
-			Assert.Contains("The Prototype (1988)", berserk.MoreInfo);
-		}
+			Assert.Contains("The Prototype (1988)", berserk.Info);
+			}
 
 		[Fact]
 		public void ShouldParseCowboyBebopEpisode()

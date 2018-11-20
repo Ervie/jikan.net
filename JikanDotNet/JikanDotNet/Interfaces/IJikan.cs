@@ -55,35 +55,35 @@ namespace JikanDotNet
 		/// Return collections of news related to anime with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
-		/// <returns>Collections of news related to with given MAL id.</returns>
+		/// <returns>Collections of news related to anime with given MAL id.</returns>
 		Task<AnimeNews> GetAnimeNews(long id);
 
 		/// <summary>
 		/// Return collections of videos related to anime with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
-		/// <returns>Collections of videos related to with given MAL id.</returns>
+		/// <returns>Collections of videos related to anime with given MAL id.</returns>
 		Task<AnimeVideos> GetAnimeVideos(long id);
 
 		/// <summary>
 		/// Return statistics related to anime with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
-		/// <returns>Statistics related to with given MAL id.</returns>
+		/// <returns>Statistics related to anime with given MAL id.</returns>
 		Task<AnimeStats> GetAnimeStatistics(long id);
 
 		/// <summary>
 		/// Return collections of forum topics related to anime with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
-		/// <returns>Collections of forum topics related to with given MAL id.</returns>
+		/// <returns>Collections of forum topics related to anime with given MAL id.</returns>
 		Task<ForumTopics> GetAnimeForumTopics (long id);
 
 		/// <summary>
 		/// Return additional information related to anime with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
-		/// <returns>Collections of forum topics related to with given MAL id.</returns>
+		/// <returns>Additional information related to anime with given MAL id.</returns>
 		Task<MoreInfo> GetAnimeMoreInfo(long id);
 
 		/// <summary>
@@ -100,6 +100,48 @@ namespace JikanDotNet
 		/// <param name="extension">Extension for extra data.</param>
 		/// <returns>Manga with given MAL id.</returns>
 		Task<Manga> GetManga(long id, MangaExtension extension);
+
+		/// <summary>
+		/// Return collections of links to pictures related to manga with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of manga.</param>
+		/// <returns>Collections of links to pictures related to manga with given MAL id.</returns>
+		Task<MangaPictures> GetMangaPictures(long id);
+
+		/// <summary>
+		/// Return collections of characters appearing in manga with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of manga.</param>
+		/// <returns>Collections of characters appearing in manga with given MAL id.</returns>
+		Task<MangaCharacters> GetMangaCharacters(long id);
+
+		/// <summary>
+		/// Return collections of news related to manga with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of manga.</param>
+		/// <returns>Collections of news related to manga with given MAL id.</returns>
+		Task<MangaNews> GetMangaNews(long id);
+
+		/// <summary>
+		/// Return statistics related to manga with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of manga.</param>
+		/// <returns>Statistics related to manga with given MAL id.</returns>
+		Task<MangaStats> GetMangaStatistics(long id);
+
+		/// <summary>
+		/// Return collections of forum topics related to manga with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of manga.</param>
+		/// <returns>Collections of forum topics related to manga with given MAL id.</returns>
+		Task<ForumTopics> GetMangaForumTopics(long id);
+
+		/// <summary>
+		/// Return additional information related to manga with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of manga.</param>
+		/// <returns>Collections of forum topics related to manga with given MAL id.</returns>
+		Task<MoreInfo> GetMangaMoreInfo(long id);
 
 		/// <summary>
 		/// Return character with given MAL id.

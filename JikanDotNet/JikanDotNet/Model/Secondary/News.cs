@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace JikanDotNet
 {
@@ -41,7 +42,7 @@ namespace JikanDotNet
 		/// News' publication date.
 		/// </summary>
 		[JsonProperty(PropertyName = "date")]
-		public string Date { get; set; }
+		public DateTime? Date { get; set; }
 
 		/// <summary>
 		/// News' author username.

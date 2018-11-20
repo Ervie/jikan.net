@@ -66,9 +66,9 @@ namespace JikanDotNet.Tests
 			Manga yotsubatoManga = Task.Run(() => jikan.GetManga(104)).Result;
 
 			Assert.Equal("Publishing", yotsubatoManga.Status);
-			Assert.Equal("Mar  21, 2003 to ?", yotsubatoManga.PublishedString);
-			Assert.Equal("Unknown", yotsubatoManga.Chapters);
-			Assert.Equal("Unknown", yotsubatoManga.Volumes);
+			Assert.Equal(2003, yotsubatoManga.Published.From.Value.Year);
+			Assert.Null(yotsubatoManga.Chapters);
+			Assert.Null(yotsubatoManga.Volumes);
 			Assert.Equal("Manga", yotsubatoManga.Type);
 		}
 

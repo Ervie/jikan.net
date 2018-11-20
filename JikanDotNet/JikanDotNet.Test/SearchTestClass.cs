@@ -190,7 +190,7 @@ namespace JikanDotNet.Tests
 
 			Assert.Equal(3, returnedCharacter.Results.Count());
 			Assert.Equal("Lambdadelta", returnedCharacter.Results.First().Name);
-			Assert.Equal("Umineko no Naku Koro ni", returnedCharacter.Results.First().Animeography.First().Title);
+			Assert.Equal("Umineko no Naku Koro ni", returnedCharacter.Results.First().Animeography.First().Name);
 			Assert.Single(returnedCharacter.Results.First().Animeography);
 		}
 

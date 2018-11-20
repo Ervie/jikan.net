@@ -28,8 +28,8 @@ namespace JikanDotNet
 		/// <summary>
 		/// Title of the item
 		/// </summary>
-		[JsonProperty(PropertyName = "title")]
-		public string Title { get; set; }
+		[JsonProperty(PropertyName = "name")]
+		public string Name { get; set; }
 
 		/// <summary>
 		/// Overriden ToString method.
@@ -37,7 +37,7 @@ namespace JikanDotNet
 		/// <returns>Title if not null, base method elsewhere.</returns>
 		public override string ToString()
 		{
-			return Title ?? base.ToString();
+			return Name ?? base.ToString();
 		}
 	}
 }

@@ -8,6 +8,12 @@ namespace JikanDotNet
 	public class Author
 	{
 		/// <summary>
+		/// ID associated with MyAnimeList.
+		/// </summary>
+		[JsonProperty(PropertyName = "mal_id")]
+		public long MalId { get; set; }
+
+		/// <summary>
 		/// Url to link.
 		/// </summary>
 		[JsonProperty(PropertyName = "url")]
@@ -18,6 +24,12 @@ namespace JikanDotNet
 		/// </summary>
 		[JsonProperty(PropertyName = "name")]
 		public string Name { get; set; }
+
+		/// <summary>
+		/// Type.
+		/// </summary>
+		[JsonProperty(PropertyName = "type")]
+		public string Type { get; set; }
 
 		/// <summary>
 		/// Overriden ToString method.

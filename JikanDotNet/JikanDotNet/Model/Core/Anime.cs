@@ -39,7 +39,7 @@ namespace JikanDotNet
 		public string TitleJapanese { get; set; }
 
 		/// <summary>
-		/// Anime's multiple titles (if any) seperated by a comma. Return null if there is none.
+		/// Anime's multiple titles (if any). Return null if there is none.
 		/// </summary>
 		[JsonProperty(PropertyName = "title_synonyms")]
 		public ICollection<string> TitleSynonyms { get; set; }

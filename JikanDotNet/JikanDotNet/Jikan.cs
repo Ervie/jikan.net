@@ -199,7 +199,7 @@ namespace JikanDotNet
 		/// Return collections of news related to anime with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
-		/// <returns>Collections of news related to with given MAL id.</returns>
+		/// <returns>Collections of news related to anime with given MAL id.</returns>
 		public async Task<AnimeNews> GetAnimeNews(long id)
 		{
 			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Anime, id.ToString(), AnimeExtension.News.GetDescription() };
@@ -214,7 +214,7 @@ namespace JikanDotNet
 		/// Return collections of videos related to anime with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
-		/// <returns>Collections of videos related to with given MAL id.</returns>
+		/// <returns>Collections of videos related to anime with given MAL id.</returns>
 		public async Task<AnimeVideos> GetAnimeVideos(long id)
 		{
 			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Anime, id.ToString(), AnimeExtension.Videos.GetDescription() };
@@ -229,7 +229,7 @@ namespace JikanDotNet
 		/// Return statistics related to anime with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
-		/// <returns>Statistics related to with given MAL id.</returns>
+		/// <returns>Statistics related to anime with given MAL id.</returns>
 		public async Task<AnimeStats> GetAnimeStatistics(long id)
 		{
 			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Anime, id.ToString(), AnimeExtension.Stats.GetDescription() };
@@ -244,7 +244,7 @@ namespace JikanDotNet
 		/// Return collections of forum topics related to anime with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
-		/// <returns>Collections of forum topics related to with given MAL id.</returns>
+		/// <returns>Collections of forum topics related to anime with given MAL id.</returns>
 		public async Task<ForumTopics> GetAnimeForumTopics(long id)
 		{
 			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Anime, id.ToString(), AnimeExtension.Forum.GetDescription() };
@@ -259,7 +259,7 @@ namespace JikanDotNet
 		/// Return additional information related to anime with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
-		/// <returns>Collections of forum topics related to with given MAL id.</returns>
+		/// <returns>Additional information related to anime with given MAL id.</returns>
 		public async Task<MoreInfo> GetAnimeMoreInfo(long id)
 		{
 			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Anime, id.ToString(), AnimeExtension.MoreInfo.GetDescription() };
@@ -293,6 +293,96 @@ namespace JikanDotNet
 		}
 
 		#endregion GetManga
+
+		#region  GetMangaPictures
+
+		/// <summary>
+		/// Return collections of links to pictures related to manga with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of manga.</param>
+		/// <returns>Collections of links to pictures related to manga with given MAL id.</returns>
+		public async Task<MangaPictures> GetMangaPictures(long id)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Manga, id.ToString(), MangaExtension.Pictures.GetDescription() };
+			return await ExecuteGetRequest<MangaPictures>(endpointParts);
+		}
+
+		#endregion
+
+		#region GetMangaCharacters
+
+		/// <summary>
+		/// Return collections of characters appearing in manga with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of manga.</param>
+		/// <returns>Collections of characters appearing in manga with given MAL id.</returns>
+		public async Task<MangaCharacters> GetMangaCharacters(long id)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Manga, id.ToString(), MangaExtension.Characters.GetDescription() };
+			return await ExecuteGetRequest<MangaCharacters>(endpointParts);
+		}
+
+		#endregion
+
+		#region  GetMangaNews
+
+		/// <summary>
+		/// Return collections of news related to manga with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of manga.</param>
+		/// <returns>Collections of news related to manga with given MAL id.</returns>
+		public async Task<MangaNews> GetMangaNews(long id)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Manga, id.ToString(), MangaExtension.News.GetDescription() };
+			return await ExecuteGetRequest<MangaNews>(endpointParts);
+		}
+
+		#endregion
+
+		#region GetMangaStatistics
+
+		/// <summary>
+		/// Return statistics related to manga with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of manga.</param>
+		/// <returns>Statistics related to manga with given MAL id.</returns>
+		public async Task<MangaStats> GetMangaStatistics(long id)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Manga, id.ToString(), MangaExtension.Stats.GetDescription() };
+			return await ExecuteGetRequest<MangaStats>(endpointParts);
+		}
+
+		#endregion
+
+		#region GetMangaForumTopics
+
+		/// <summary>
+		/// Return collections of forum topics related to manga with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of manga.</param>
+		/// <returns>Collections of forum topics related to manga with given MAL id.</returns>
+		public async Task<ForumTopics> GetMangaForumTopics(long id)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Manga, id.ToString(), MangaExtension.Forum.GetDescription() };
+			return await ExecuteGetRequest<ForumTopics>(endpointParts);
+		}
+
+		#endregion
+
+		#region GetMangaMoreInfo
+
+		/// <summary>
+		/// Return additional information related to manga with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of manga.</param>
+		/// <returns>Additional information related to manga with given MAL id.</returns>
+		public async Task<MoreInfo> GetMangaMoreInfo(long id)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Manga, id.ToString(), AnimeExtension.MoreInfo.GetDescription() };
+			return await ExecuteGetRequest<MoreInfo>(endpointParts);
+		}
+
+		#endregion
 
 		#region GetCharacter
 
