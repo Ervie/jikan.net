@@ -159,6 +159,13 @@ namespace JikanDotNet
 		Task<Character> GetCharacter(long id, CharacterExtension extension);
 
 		/// <summary>
+		/// Return collections of links to pictures related to character with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of character.</param>
+		/// <returns>Collections of links to pictures related to character with given MAL id.</returns>
+		Task<CharacterPictures> GetCharacterPictures(long id);
+
+		/// <summary>
 		/// Return person with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of person.</param>
@@ -172,6 +179,13 @@ namespace JikanDotNet
 		/// <param name="extension">Extension for extra data.</param>
 		/// <returns>Person with given MAL id.</returns>
 		Task<Person> GetPerson(long id, PersonExtension extension);
+
+		/// <summary>
+		/// Return collections of links to pictures related to person with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of person.</param>
+		/// <returns>Collections of links to pictures related to person with given MAL id.</returns>
+		Task<PersonPictures> GetPersonPictures(long id);
 
 		/// <summary>
 		/// Return current season preview.

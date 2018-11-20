@@ -18,5 +18,11 @@ namespace JikanDotNet
 		/// </summary>
 		[JsonProperty(PropertyName = "character")]
 		public MALImageSubItem Character { get; set; }
+
+		/// <summary>
+		/// Status of the role: Main/Supporting.
+		/// </summary>
+		[JsonProperty(PropertyName = "role")]
+		public string Role { get; set; }
 	}
 }

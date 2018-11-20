@@ -41,7 +41,7 @@ namespace JikanDotNet.Tests
 			Person norioWakamoto = Task.Run(() => jikan.GetPerson(84)).Result;
 
 			Assert.Equal("Norio Wakamoto", norioWakamoto.Name);
-			Assert.Equal("Oct  18, 1945", norioWakamoto.Birthday);
+			Assert.Equal(1945, norioWakamoto.Birthday.Value.Year);
 		}
 
 		[Fact]

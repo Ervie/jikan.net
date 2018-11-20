@@ -28,11 +28,11 @@ namespace JikanDotNet.Tests
 		[InlineData(8)]
 		[InlineData(9)]
 		[InlineData(10)]
-		public void ShouldReturnNullNameCharacter(long malId)
+		public void ShouldReturnNullCharacter(long malId)
 		{
 			Character returnedCharacter = Task.Run(() => jikan.GetCharacter(malId)).Result;
 
-			Assert.Null(returnedCharacter.Name);
+			Assert.Null(returnedCharacter);
 		}
 
 		[Fact]

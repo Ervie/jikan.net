@@ -14,9 +14,9 @@ namespace JikanDotNet
 		public MALImageSubItem Anime { get; set; }
 
 		/// <summary>
-		/// Role associated with staff position.
+		/// Position associated with staff position.
 		/// </summary>
-		[JsonProperty(PropertyName = "role")]
-		public string Role { get; set; }
+		[JsonProperty(PropertyName = "position")]
+		public string Position { get; set; }
 	}
 }

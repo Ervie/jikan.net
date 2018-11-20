@@ -36,7 +36,7 @@ namespace Example.CSharp
 			// List Miyazaki anime on output
 			foreach (var staffPosition in hayaoMiyazaki.AnimeStaffPositions)
 			{
-				Console.WriteLine("Anime: " + staffPosition.Anime.Name + ", role: " + staffPosition.Role);
+				Console.WriteLine("Anime: " + staffPosition.Anime.Name + ", role: " + staffPosition.Position);
 			}
 
 

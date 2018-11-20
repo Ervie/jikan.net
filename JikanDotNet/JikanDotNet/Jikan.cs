@@ -411,6 +411,21 @@ namespace JikanDotNet
 
 		#endregion GetCharacter
 
+		#region GetCharacterPictures
+
+		/// <summary>
+		/// Return collections of links to pictures related to character with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of character.</param>
+		/// <returns>Collections of links to pictures related to character with given MAL id.</returns>
+		public async Task<CharacterPictures> GetCharacterPictures(long id)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Character, id.ToString(), CharacterExtension.Pictures.GetDescription() };
+			return await ExecuteGetRequest<CharacterPictures>(endpointParts);
+		}
+
+		#endregion
+
 		#region GetPerson
 
 		/// <summary>
@@ -437,6 +452,21 @@ namespace JikanDotNet
 		}
 
 		#endregion GetPerson
+
+		#region GetPersonPictures
+
+		/// <summary>
+		/// Return collections of links to pictures related to person with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of person.</param>
+		/// <returns>Collections of links to pictures related to person with given MAL id.</returns>
+		public async Task<PersonPictures> GetPersonPictures(long id)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Person, id.ToString(), CharacterExtension.Pictures.GetDescription() };
+			return await ExecuteGetRequest<PersonPictures>(endpointParts);
+		}
+
+		#endregion
 
 		#region GetSeason
 

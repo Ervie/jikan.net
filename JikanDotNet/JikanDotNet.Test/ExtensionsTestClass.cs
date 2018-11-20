@@ -16,17 +16,17 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public void ShouldParseNorioWakamotoImages()
 		{
-			Person norioWakamoto = Task.Run(() => jikan.GetPerson(84, PersonExtension.Pictures)).Result;
+			PersonPictures norioWakamoto = Task.Run(() => jikan.GetPersonPictures(84)).Result;
 
-			Assert.Equal(4, norioWakamoto.Images.Count);
+			Assert.Equal(4, norioWakamoto.Pictures.Count);
 		}
 
 		[Fact]
 		public void ShouldParseKirimaSharoImages()
 		{
-			Character kirimaSharo = Task.Run(() => jikan.GetCharacter(94947, CharacterExtension.Pictures)).Result;
+			CharacterPictures kirimaSharo = Task.Run(() => jikan.GetCharacterPictures(94947)).Result;
 
-			Assert.Equal(8, kirimaSharo.Images.Count);
+			Assert.Equal(8, kirimaSharo.Pictures.Count);
 		}
 
 		[Fact]

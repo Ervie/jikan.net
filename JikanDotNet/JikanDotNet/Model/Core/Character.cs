@@ -8,8 +8,6 @@ namespace JikanDotNet
 	/// </summary>
 	public class Character
 	{
-		#region Basic request props
-
 		/// <summary>
 		/// ID associated with MyAnimeList.
 		/// </summary>
@@ -19,7 +17,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Character's canonical link.
 		/// </summary>
-		[JsonProperty(PropertyName = "link_canonical")]
+		[JsonProperty(PropertyName = "url")]
 		public string LinkCanonical { get; set; }
 
 		/// <summary>
@@ -38,7 +36,7 @@ namespace JikanDotNet
 		/// Character's nicknames.
 		/// </summary>
 		[JsonProperty(PropertyName = "nicknames")]
-		public string Nicknames { get; set; }
+		public ICollection<string> Nicknames { get; set; }
 
 		/// <summary>
 		/// About character
@@ -73,19 +71,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Character's voice actors.
 		/// </summary>
-		[JsonProperty(PropertyName = "voice_actor")]
+		[JsonProperty(PropertyName = "voice_actors")]
 		public ICollection<VoiceActorEntry> VoiceActors { get; set; }
-
-		#endregion Basic request props
-
-		#region Pictures request props
-
-		/// <summary>
-		/// Character's extra image URLs.
-		/// </summary>
-		[JsonProperty(PropertyName = "image")]
-		public ICollection<string> Images { get; set; }
-
-		#endregion Pictures request props
 	}
 }

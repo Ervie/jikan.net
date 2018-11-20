@@ -32,7 +32,7 @@ Module Program
 
         ' List Miyazaki anime on output
         For Each staffPosition In hayaoMiyazaki.AnimeStaffPositions
-            Console.WriteLine("Anime: " + staffPosition.Anime.Name + ", role: " + staffPosition.Role)
+            Console.WriteLine("Anime: " + staffPosition.Anime.Name + ", role: " + staffPosition.Position)
         Next
 
 

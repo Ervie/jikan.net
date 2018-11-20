@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace JikanDotNet
@@ -8,8 +9,6 @@ namespace JikanDotNet
 	/// </summary>
 	public class Person
 	{
-		#region Basic request props
-
 		/// <summary>
 		/// ID associated with MyAnimeList.
 		/// </summary>
@@ -19,7 +18,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Person's canonical link.
 		/// </summary>
-		[JsonProperty(PropertyName = "link_canonical")]
+		[JsonProperty(PropertyName = "url")]
 		public string LinkCanonical { get; set; }
 
 		/// <summary>
@@ -50,7 +49,7 @@ namespace JikanDotNet
 		/// Person's birthday.
 		/// </summary>
 		[JsonProperty(PropertyName = "birthday")]
-		public string Birthday { get; set; }
+		public DateTime? Birthday { get; set; }
 
 		/// <summary>
 		/// Person's website URL.
@@ -67,7 +66,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// More information about person.
 		/// </summary>
-		[JsonProperty(PropertyName = "more")]
+		[JsonProperty(PropertyName = "about")]
 		public string More { get; set; }
 
 		/// <summary>
@@ -79,13 +78,13 @@ namespace JikanDotNet
 		/// <summary>
 		/// Person's voice acting roles.
 		/// </summary>
-		[JsonProperty(PropertyName = "voice_acting_role")]
+		[JsonProperty(PropertyName = "voice_acting_roles")]
 		public ICollection<VoiceActingRole> VoiceActingRoles { get; set; }
 
 		/// <summary>
 		/// Person's anime staff positions.
 		/// </summary>
-		[JsonProperty(PropertyName = "anime_staff_position")]
+		[JsonProperty(PropertyName = "anime_staff_positions")]
 		public ICollection<AnimeStaffPosition> AnimeStaffPositions { get; set; }
 
 		/// <summary>
@@ -93,17 +92,5 @@ namespace JikanDotNet
 		/// </summary>
 		[JsonProperty(PropertyName = "published_manga")]
 		public ICollection<PublishedManga> PublishedManga { get; set; }
-
-		#endregion Basic request props
-
-		#region Pictures request props
-
-		/// <summary>
-		/// Person's extra image URLs.
-		/// </summary>
-		[JsonProperty(PropertyName = "image")]
-		public ICollection<string> Images { get; set; }
-
-		#endregion Pictures request props
 	}
 }
