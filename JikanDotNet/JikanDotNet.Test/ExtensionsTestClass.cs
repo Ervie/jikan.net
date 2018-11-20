@@ -117,45 +117,50 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public void ShouldParseCowboyBebopVideos()
 		{
-			Anime bebop = Task.Run(() => jikan.GetAnime(1, AnimeExtension.Videos)).Result;
+			AnimeVideos bebop = Task.Run(() => jikan.GetAnimeVideos(1)).Result;
 			
 			Assert.Equal(3, bebop.PromoVideos.Count);
 			Assert.Contains("PV 2", bebop.PromoVideos.Select(x => x.Title));
+			Assert.Equal(26, bebop.EpisodeVideos.Count);
+			Assert.Contains("Pierrot Le Fou", bebop.EpisodeVideos.Select(x => x.Title));
 		}
 
 		[Fact]
 		public void ShouldParseCowboyBebopStats()
 		{
-			Anime bebop = Task.Run(() => jikan.GetAnime(1, AnimeExtension.Stats)).Result;
+			AnimeStats bebop = Task.Run(() => jikan.GetAnimeStatistics(1)).Result;
 
 			Assert.NotNull(bebop.ScoreStats);
+			Assert.True(bebop.Completed > 450000);
+			Assert.True(bebop.PlanToWatch > 50000);
+			Assert.True(bebop.ScoreStats._5.Votes > 5000);
 		}
 
 		[Fact]
 		public void ShouldParseCowboyBebopNews()
 		{
-			Anime bebop = Task.Run(() => jikan.GetAnime(1, AnimeExtension.News)).Result;
+			AnimeNews bebop = Task.Run(() => jikan.GetAnimeNews(1)).Result;
 
-			Assert.Equal(5, bebop.News.Count);
+			Assert.Equal(6, bebop.News.Count);
 			Assert.Contains("Snow", bebop.News.Select(x => x.Author));
 		}
 
 		[Fact]
 		public void ShouldParseCowboyBebopTopics()
 		{
-			Anime bebop = Task.Run(() => jikan.GetAnime(1, AnimeExtension.Forum)).Result;
+			ForumTopics bebop = Task.Run(() => jikan.GetAnimeForumTopics(1)).Result;
 
-			Assert.Contains(1726281, bebop.Topics.Select(x => x.TopicId));
-			Assert.Contains(24838, bebop.Topics.Select(x => x.TopicId));
-			Assert.Contains(85746, bebop.Topics.Select(x => x.TopicId));
+			Assert.Contains(1739374, bebop.Topics.Select(x => x.TopicId));
+			Assert.Contains(29334, bebop.Topics.Select(x => x.TopicId));
+			Assert.Contains(29323, bebop.Topics.Select(x => x.TopicId));
 		}
 
 		[Fact]
 		public void ShouldParseCowboyBebopMoreInfo()
 		{
-			Anime bebop = Task.Run(() => jikan.GetAnime(1, AnimeExtension.MoreInfo)).Result;
+			MoreInfo bebop = Task.Run(() => jikan.GetAnimeMoreInfo(1)).Result;
 
-			Assert.Contains("Suggested Order of Viewing", bebop.MoreInfo);
+			Assert.Contains("Suggested Order of Viewing", bebop.Info);
 		}
 	}
 }

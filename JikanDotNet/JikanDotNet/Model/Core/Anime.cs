@@ -8,8 +8,6 @@ namespace JikanDotNet
 	/// </summary>
 	public class Anime
 	{
-		#region Basic request props
-
 		/// <summary>
 		/// ID associated with MyAnimeList.
 		/// </summary>
@@ -201,93 +199,5 @@ namespace JikanDotNet
 		/// </summary>
 		[JsonProperty(PropertyName = "ending_themes")]
 		public ICollection<string> EndingTheme { get; set; }
-
-		#endregion Basic request props
-
-		#region Pictures request props
-
-
-
-		#endregion Pictures request props
-
-		#region Videos request props
-
-		/// <summary>
-		/// Anime's related videos URLs.
-		/// </summary>
-		[JsonProperty(PropertyName = "promo")]
-		public ICollection<PromoVideo> PromoVideos { get; set; }
-
-		#endregion
-
-		#region Stats request props
-
-		/// <summary>
-		/// Number of users who labeled anime status as "watching"
-		/// </summary>
-		[JsonProperty(PropertyName = "watching")]
-		public int? Watching { get; set; }
-
-		/// <summary>
-		/// Number of users who labeled anime status as "completed"
-		/// </summary>
-		[JsonProperty(PropertyName = "completed")]
-		public int? Completed { get; set; }
-
-		/// <summary>
-		/// Number of users who labeled anime status as "on hold"
-		/// </summary>
-		[JsonProperty(PropertyName = "on_hold")]
-		public int? OnHold { get; set; }
-
-		/// <summary>
-		/// Number of users who labeled anime status as "dropped"
-		/// </summary>
-		[JsonProperty(PropertyName = "dropped")]
-		public int? Dropped { get; set; }
-
-		/// <summary>
-		/// Number of users who labeled anime status as "plan to watch"
-		/// </summary>
-		[JsonProperty(PropertyName = "plan_to_read")]
-		public int? PlanToWatch { get; set; }
-
-		/// <summary>
-		/// Number of users who added anime to their lists.
-		/// </summary>
-		[JsonProperty(PropertyName = "score_stats")]
-		public ScoringStats ScoreStats { get; set; }
-
-		#endregion Stats request props
-
-		#region News request props
-
-		/// <summary>
-		/// News related to anime.
-		/// </summary>
-		[JsonProperty(PropertyName = "news")]
-		public ICollection<News> News { get; set; }
-
-		#endregion News request props
-
-		#region Forum topics request props
-
-		/// <summary>
-		/// Forum topics related to anime.
-		/// </summary>
-		[JsonProperty(PropertyName = "topic")]
-		public ICollection<ForumTopic> Topics { get; set; }
-
-		#endregion Forum topics request props
-
-		#region More info request props
-
-		/// <summary>
-		/// Extra information stored in "more info" tab.
-		/// </summary>
-		[JsonProperty(PropertyName = "more_info")]
-		public string MoreInfo { get; set; }
-
-		#endregion More info request props
 	}
 }

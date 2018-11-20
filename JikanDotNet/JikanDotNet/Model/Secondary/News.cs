@@ -26,7 +26,7 @@ namespace JikanDotNet
 		public string ForumUrl { get; set; }
 
 		/// <summary>
-		/// Amount of comments under news
+		/// Amount of comments under news.
 		/// </summary>
 		[JsonProperty(PropertyName = "comments")]
 		public int? Comments { get; set; }
@@ -46,7 +46,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// News' author username.
 		/// </summary>
-		[JsonProperty(PropertyName = "author")]
+		[JsonProperty(PropertyName = "author_name")]
 		public string Author { get; set; }
 
 		/// <summary>

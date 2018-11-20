@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace JikanDotNet
 {
@@ -28,7 +29,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Relative date of time when post was publicated.
 		/// </summary>
-		[JsonProperty(PropertyName = "date_relative")]
-		public string DateRelative { get; set; }
+		[JsonProperty(PropertyName = "date_posted")]
+		public DateTime? DateRelative { get; set; }
 	}
 }
