@@ -69,7 +69,7 @@ namespace JikanDotNet.Tests
 			Assert.Equal("70", cardcaptor.Episodes);
 			Assert.Equal("TV", cardcaptor.Type);
 			Assert.Equal("Spring 1998", cardcaptor.Premiered);
-			Assert.Equal("25 min. per ep.", cardcaptor.Duration);
+			Assert.Equal("25 min per ep", cardcaptor.Duration);
 			Assert.Equal("PG - Children", cardcaptor.Rating);
 			Assert.Equal("Tuesdays at 18:00 (JST)", cardcaptor.Broadcast);
 			Assert.Equal("Manga", cardcaptor.Source);

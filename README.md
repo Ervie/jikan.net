@@ -54,6 +54,11 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
     - [X] Anime
     - [X] Manga
     - [X] Sub Types & Pagination Support
+- [ ] Genre
+- [ ] Producer
+- [ ] Magazine
+- [ ] User
+- [ ] Meta
 
 # Installation
 
@@ -75,6 +80,11 @@ Then restore dependencies:
 ```
 
 # Changelog
+
+## Upcoming - Version 1.1.0
+
+- Integration with Jikan API v3
+- New endpoints: Genre, Producer, Magazine, User, Meta
 
 ## 27.05.2018 - Version 1.0.3 (latest)
 

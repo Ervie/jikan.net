@@ -19,7 +19,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Anime's canonical link.
 		/// </summary>
-		[JsonProperty(PropertyName = "link_canonical")]
+		[JsonProperty(PropertyName = "url")]
 		public string LinkCanonical { get; set; }
 
 		/// <summary>
@@ -44,7 +44,7 @@ namespace JikanDotNet
 		/// Anime's multiple titles (if any) seperated by a comma. Return null if there is none.
 		/// </summary>
 		[JsonProperty(PropertyName = "title_synonyms")]
-		public string TitleSynonyms { get; set; }
+		public ICollection<string> TitleSynonyms { get; set; }
 
 		/// <summary>
 		/// Anime's image URL
@@ -81,13 +81,7 @@ namespace JikanDotNet
 		/// </summary>
 		[JsonProperty(PropertyName = "airing")]
 		public bool Airing { get; set; }
-
-		/// <summary>
-		/// Airing string parsed from anime's page.
-		/// </summary>
-		[JsonProperty(PropertyName = "aired_string")]
-		public string AiredString { get; set; }
-
+		
 		/// <summary>
 		/// Assiociative keys "from" and "to" which are alternative version of AiredString in ISO8601 format.
 		/// </summary>
@@ -175,37 +169,37 @@ namespace JikanDotNet
 		/// <summary>
 		/// Anime's producers numerically indexed with array values.
 		/// </summary>
-		[JsonProperty(PropertyName = "producer")]
+		[JsonProperty(PropertyName = "producers")]
 		public ICollection<Producer> Producers { get; set; }
 
 		/// <summary>
 		/// Anime's licensors numerically indexed with array values.
 		/// </summary>
-		[JsonProperty(PropertyName = "licensor")]
+		[JsonProperty(PropertyName = "licensors")]
 		public ICollection<Licensor> Licensors { get; set; }
 
 		/// <summary>
 		/// Anime's studio(s) numerically indexed with array values.
 		/// </summary>
-		[JsonProperty(PropertyName = "studio")]
+		[JsonProperty(PropertyName = "studios")]
 		public ICollection<Studio> Studios { get; set; }
 
 		/// <summary>
 		/// Anime's genres numerically indexed with array values.
 		/// </summary>
-		[JsonProperty(PropertyName = "genre")]
+		[JsonProperty(PropertyName = "genres")]
 		public ICollection<Genre> Genres { get; set; }
 
 		/// <summary>
 		/// Anime's opening themes numerically indexed with array values.
 		/// </summary>
-		[JsonProperty(PropertyName = "opening_theme")]
+		[JsonProperty(PropertyName = "opening_themes")]
 		public ICollection<string> OpeningTheme { get; set; }
 
 		/// <summary>
 		/// Anime's ending themes numerically indexed with array values.
 		/// </summary>
-		[JsonProperty(PropertyName = "ending_theme")]
+		[JsonProperty(PropertyName = "ending_themes")]
 		public ICollection<string> EndingTheme { get; set; }
 
 		#endregion Basic request props
