@@ -204,39 +204,9 @@ namespace JikanDotNet
 
 		#endregion Basic request props
 
-		#region Episodes extension request props
-
-		/// <summary>
-		/// Anime's episode collection with basic information.
-		/// </summary>
-		[JsonProperty(PropertyName = "episode")]
-		public ICollection<AnimeEpisode> EpisodeCollection { get; set; }
-
-		#endregion Episodes extension request props
-
-		#region Characters and staff extension request props
-
-		/// <summary>
-		/// Anime's characters collection with basic information.
-		/// </summary>
-		[JsonProperty(PropertyName = "character")]
-		public ICollection<CharacterEntry> Characters { get; set; }
-
-		/// <summary>
-		/// Anime's staff collection with basic information.
-		/// </summary>
-		[JsonProperty(PropertyName = "staff")]
-		public ICollection<StaffPositionEntry> Staff { get; set; }
-
-		#endregion Characters and staff extension request props
-
 		#region Pictures request props
 
-		/// <summary>
-		/// Anime's extra image URLs.
-		/// </summary>
-		[JsonProperty(PropertyName = "image")]
-		public ICollection<string> Images { get; set; }
+
 
 		#endregion Pictures request props
 

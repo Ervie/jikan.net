@@ -136,6 +136,63 @@ namespace JikanDotNet
 
 		#endregion GetAnime
 
+		#region GetAnimeEpisodes
+
+		/// <summary>
+		/// Return list of episodes for anime with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <param name="page">Indexx of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <returns>List of episodes with details.</returns>
+		public async Task<AnimeEpisodes> GetAnimeEpisodes(long id, int page)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Anime, id.ToString(), AnimeExtension.Episodes.GetDescription(), page.ToString() };
+			return await ExecuteGetRequest<AnimeEpisodes>(endpointParts);
+		}
+
+		/// <summary>
+		/// Return list of episodes for anime with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <returns>List of episodes with details.</returns>
+		public async Task<AnimeEpisodes> GetAnimeEpisodes(long id)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Anime, id.ToString(), AnimeExtension.Episodes.GetDescription() };
+			return await ExecuteGetRequest<AnimeEpisodes>(endpointParts);
+		}
+
+		#endregion
+
+		#region  GetAnimeCharactersStaff
+
+		/// <summary>
+		/// Return collections of characters and staff of anime with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <returns>Collections of characters and staff of anime with given MAL id.</returns>
+		public async Task<AnimeCharactersStaff> GetAnimeCharactersStaff(long id)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Anime, id.ToString(), AnimeExtension.CharactersStaff.GetDescription() };
+			return await ExecuteGetRequest<AnimeCharactersStaff>(endpointParts);
+		}
+
+		#endregion
+
+		#region  GetAnimeCharactersStaff
+
+		/// <summary>
+		/// Return collections of links to pictures related to anime with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <returns>Collections of characters and staff of anime with given MAL id.</returns>
+		public async Task<AnimePictures> GetAnimePictures(long id)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Anime, id.ToString(), AnimeExtension.Pictures.GetDescription() };
+			return await ExecuteGetRequest<AnimePictures>(endpointParts);
+		}
+
+		#endregion
+
 		#region GetManga
 
 		/// <summary>
@@ -519,7 +576,6 @@ namespace JikanDotNet
 			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Search, JikanEndPointCategories.Character, query, page.ToString() };
 			return await ExecuteGetRequest<CharacterSearchResult>(endpointParts);
 		}
-
 		#endregion SearchCharacter
 
 		#endregion Public Methods

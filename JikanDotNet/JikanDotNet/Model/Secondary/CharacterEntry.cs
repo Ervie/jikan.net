@@ -41,7 +41,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Character's list of voice actor in this entry (anime only).
 		/// </summary>
-		[JsonProperty(PropertyName = "voice_actor")]
+		[JsonProperty(PropertyName = "voice_actors")]
 		public ICollection<VoiceActorEntry> VoiceActors { get; set; }
 
 		/// <summary>

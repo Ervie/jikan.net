@@ -10,7 +10,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// ID associated with MyAnimeList.
 		/// </summary>
-		[JsonProperty(PropertyName = "id")]
+		[JsonProperty(PropertyName = "episode_id")]
 		public long Id { get; set; }
 
 		/// <summary>
@@ -41,7 +41,7 @@ namespace JikanDotNet
 		/// Date when episode aired at first.
 		/// </summary>
 		[JsonProperty(PropertyName = "aired")]
-		public string Aired { get; set; }
+		public TimePeriod Aired { get; set; }
 
 		/// <summary>
 		/// Is the episode filler.

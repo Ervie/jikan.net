@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace JikanDotNet
 {
@@ -34,7 +35,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Role associated with staff position.
 		/// </summary>
-		[JsonProperty(PropertyName = "role")]
-		public string Role { get; set; }
+		[JsonProperty(PropertyName = "positions")]
+		public ICollection<string> Role { get; set; }
 	}
 }

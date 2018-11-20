@@ -23,6 +23,35 @@ namespace JikanDotNet
 		Task<Anime> GetAnime(long id, AnimeExtension extension);
 
 		/// <summary>
+		/// Return list of episodes for anime with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <returns>List of episodes with details.</returns>
+		Task<AnimeEpisodes> GetAnimeEpisodes(long id);
+
+		/// <summary>
+		/// Return list of episodes for anime with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <param name="page">Indexx of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <returns>List of episodes with details.</returns>
+		Task<AnimeEpisodes> GetAnimeEpisodes(long id, int page);
+
+		/// <summary>
+		/// Return collections of characters and staff of anime with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <returns>Collections of characters and staff of anime with given MAL id.</returns>
+		Task<AnimeCharactersStaff> GetAnimeCharactersStaff(long id);
+
+		/// <summary>
+		/// Return collections of links to pictures related to anime with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <returns>Collections of characters and staff of anime with given MAL id.</returns>
+		Task<AnimePictures> GetAnimePictures(long id);
+
+		/// <summary>
 		/// Return manga with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of manga.</param>

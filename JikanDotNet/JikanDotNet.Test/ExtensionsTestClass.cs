@@ -91,7 +91,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public void ShouldParseCowboyBebopEpisode()
 		{
-			Anime bebop = Task.Run(() => jikan.GetAnime(1, AnimeExtension.Episodes)).Result;
+			AnimeEpisodes bebop = Task.Run(() => jikan.GetAnimeEpisodes(1)).Result;
 
 			Assert.Equal(26, bebop.EpisodeCollection.Count);
 			Assert.Equal("Asteroid Blues", bebop.EpisodeCollection.First().Title);
@@ -100,26 +100,25 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public void ShouldParseCowboyBebopCharactersAndStaff()
 		{
-			Anime bebop = Task.Run(() => jikan.GetAnime(1, AnimeExtension.CharactersStaff)).Result;
+			AnimeCharactersStaff bebop = Task.Run(() => jikan.GetAnimeCharactersStaff(1)).Result;
 
 			Assert.Contains("Black, Jet", bebop.Characters.Select(x => x.Name));
-			Assert.Contains("Watanabe, Shinichiro", bebop.Staff.Where(x => x.Role.Equals("Director, Script, Storyboard")).Select(x => x.Name));
+			Assert.Contains("Watanabe, Shinichiro", bebop.Staff.Where(x => x.Role.Contains("Director") && x.Role.Contains("Script")).Select(x => x.Name));
 		}
 
 		[Fact]
 		public void ShouldParseCowboyBebopImages()
 		{
-			Anime bebop = Task.Run(() => jikan.GetAnime(1, AnimeExtension.Pictures)).Result;
+			AnimePictures bebop = Task.Run(() => jikan.GetAnimePictures(1)).Result;
 
-			Assert.Equal(10, bebop.Images.Count);
+			Assert.Equal(11, bebop.Pictures.Count);
 		}
 
 		[Fact]
 		public void ShouldParseCowboyBebopVideos()
 		{
 			Anime bebop = Task.Run(() => jikan.GetAnime(1, AnimeExtension.Videos)).Result;
-
-			Assert.Equal(26, bebop.EpisodeCollection.Count);
+			
 			Assert.Equal(3, bebop.PromoVideos.Count);
 			Assert.Contains("PV 2", bebop.PromoVideos.Select(x => x.Title));
 		}
