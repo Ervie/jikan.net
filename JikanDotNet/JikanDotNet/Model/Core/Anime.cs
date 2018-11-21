@@ -168,25 +168,25 @@ namespace JikanDotNet
 		/// Anime's producers numerically indexed with array values.
 		/// </summary>
 		[JsonProperty(PropertyName = "producers")]
-		public ICollection<Producer> Producers { get; set; }
+		public ICollection<MALSubItem> Producers { get; set; }
 
 		/// <summary>
 		/// Anime's licensors numerically indexed with array values.
 		/// </summary>
 		[JsonProperty(PropertyName = "licensors")]
-		public ICollection<Licensor> Licensors { get; set; }
+		public ICollection<MALSubItem> Licensors { get; set; }
 
 		/// <summary>
 		/// Anime's studio(s) numerically indexed with array values.
 		/// </summary>
 		[JsonProperty(PropertyName = "studios")]
-		public ICollection<Studio> Studios { get; set; }
+		public ICollection<MALSubItem> Studios { get; set; }
 
 		/// <summary>
 		/// Anime's genres numerically indexed with array values.
 		/// </summary>
 		[JsonProperty(PropertyName = "genres")]
-		public ICollection<Genre> Genres { get; set; }
+		public ICollection<MALSubItem> Genres { get; set; }
 
 		/// <summary>
 		/// Anime's opening themes numerically indexed with array values.

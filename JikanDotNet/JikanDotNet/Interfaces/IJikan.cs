@@ -271,7 +271,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Return list of top manga.
 		/// </summary>
-		/// <param name="page">Indexx of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
 		/// <param name="extension">Extension for specific type of ranking.</param>
 		/// <returns>List of top manga.</returns>
 		Task<MangaTop> GetMangaTop(int page, TopMangaExtension extension);
@@ -285,7 +285,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Return list of most popular people.
 		/// </summary>
-		/// <param name="page">Indexxof page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
 		/// <returns>List of most popular people.</returns>
 		Task<PeopleTop> GetPeopleTop(int page);
 
@@ -298,9 +298,69 @@ namespace JikanDotNet
 		/// <summary>
 		/// Return list of most popular characters.
 		/// </summary>
-		/// <param name="page">Indexx of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
 		/// <returns>List of most popular characters.</returns>
 		Task<CharactersTop> GetCharactersTop(int page);
+
+		/// <summary>
+		/// Return information about anime genre.
+		/// </summary>
+		/// <param name="genreId">Id of the searched genre.</param>
+		/// <returns>Information about anime genre</returns>
+		Task<AnimeGenre> GetAnimeGenre(long genreId);
+
+		/// <summary>
+		/// Return information about anime genre.
+		/// </summary>
+		/// <param name="genre">Searched genre.</param>
+		/// <returns>Information about anime genre</returns>
+		Task<AnimeGenre> GetAnimeGenre(GenreSearch genre);
+
+		/// <summary>
+		/// Return information about anime genre.
+		/// </summary>
+		/// <param name="genreId">Id of the searched genre.</param>
+		/// <param name="page">Index of page folding 100 records of top ranging (e.g. 1 will return first 100 records, 2 will return record from 101 to 200 etc.)</param>
+		/// <returns>Information about anime genre</returns>
+		Task<AnimeGenre> GetAnimeGenre(long genreId, int page);
+
+		/// <summary>
+		/// Return information about anime genre.
+		/// </summary>
+		/// <param name="genre">Searched genre.</param>
+		/// <param name="page">Index of page folding 100 records of top ranging (e.g. 1 will return first 100 records, 2 will return record from 101 to 200 etc.)</param>
+		/// <returns>Information about anime genre</returns>
+		Task<AnimeGenre> GetAnimeGenre(GenreSearch genre, int page);
+
+		/// <summary>
+		/// Return information about manga genre.
+		/// </summary>
+		/// <param name="genreId">Id of the searched genre.</param>
+		/// <returns>Information about manga genre</returns>
+		Task<MangaGenre> GetMangaGenre(long genreId);
+
+		/// <summary>
+		/// Return information about manga genre.
+		/// </summary>
+		/// <param name="genre">Searched genre.</param>
+		/// <returns>Information about manga genre</returns>
+		Task<MangaGenre> GetMangaGenre(GenreSearch genre);
+
+		/// <summary>
+		/// Return information about manga genre.
+		/// </summary>
+		/// <param name="genreId">Id of the searched genre.</param>
+		/// <param name="page">Index of page folding 100 records of top ranging (e.g. 1 will return first 100 records, 2 will return record from 101 to 200 etc.)</param>
+		/// <returns>Information about manga genre</returns>
+		Task<MangaGenre> GetMangaGenre(long genreId, int page);
+
+		/// <summary>
+		/// Return information about manga genre.
+		/// </summary>
+		/// <param name="genre">Searched genre.</param>
+		/// <param name="page">Index of page folding 100 records of top ranging (e.g. 1 will return first 100 records, 2 will return record from 101 to 200 etc.)</param>
+		/// <returns>Information about manga genre</returns>
+		Task<MangaGenre> GetMangaGenre(GenreSearch genre, int page);
 
 		/// <summary>
 		/// Return list of results related to search.
@@ -313,7 +373,7 @@ namespace JikanDotNet
 		/// Return list of results related to search.
 		/// </summary>
 		/// <param name="query">Search query.</param>
-		/// <param name="page">Indexx of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
 		/// <returns>List of result related to search query.</returns>
 		Task<AnimeSearchResult> SearchAnime(string query, int page);
 
@@ -329,7 +389,7 @@ namespace JikanDotNet
 		/// Return list of results related to search.
 		/// </summary>
 		/// <param name="query">Search query.</param>
-		/// <param name="page">Indexx of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
 		/// <param name="searchConfig">Additional configuration for advanced search.</param>
 		/// <returns>List of result related to search query.</returns>
 		Task<AnimeSearchResult> SearchAnime(string query, int page, AnimeSearchConfig searchConfig);
@@ -345,7 +405,7 @@ namespace JikanDotNet
 		/// Return list of results related to search.
 		/// </summary>
 		/// <param name="query">Search query.</param>
-		/// <param name="page">Indexx of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
 		/// <returns>List of result related to search query.</returns>
 		Task<MangaSearchResult> SearchManga(string query, int page);
 
@@ -361,7 +421,7 @@ namespace JikanDotNet
 		/// Return list of results related to search.
 		/// </summary>
 		/// <param name="query">Search query.</param>
-		/// <param name="page">Indexx of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
 		/// <param name="searchConfig">Additional configuration for advanced search.</param>
 		/// <returns>List of result related to search query.</returns>
 		Task<MangaSearchResult> SearchManga(string query, int page, MangaSearchConfig searchConfig);
@@ -377,7 +437,7 @@ namespace JikanDotNet
 		/// Return list of results related to search.
 		/// </summary>
 		/// <param name="query">Search query.</param>
-		/// <param name="page">Indexx of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
 		/// <returns>List of result related to search query.</returns>
 		Task<PersonSearchResult> SearchPerson(string query, int page);
 
@@ -392,7 +452,7 @@ namespace JikanDotNet
 		/// Return list of results related to search.
 		/// </summary>
 		/// <param name="query">Search query.</param>
-		/// <param name="page">Indexx of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
 		/// <returns>List of result related to search query.</returns>
 		Task<CharacterSearchResult> SearchCharacter(string query, int page);
 	}

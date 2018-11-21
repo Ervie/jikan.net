@@ -51,6 +51,11 @@
 		public const string TopList = "top";
 
 		/// <summary>
+		/// Genre endpoint.
+		/// </summary>
+		public const string Genre = "genre";
+
+		/// <summary>
 		/// Search endpoint.
 		/// </summary>
 		public const string Search = "search";
