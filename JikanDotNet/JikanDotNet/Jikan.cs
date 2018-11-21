@@ -520,6 +520,18 @@ namespace JikanDotNet
 			return await ExecuteGetRequest<Schedule>(endpointParts);
 		}
 
+
+		/// <summary>
+		/// Return current season schedule.
+		/// </summary>
+		/// <param name="scheduledDay">Scheduled day to filter by.</param>
+		/// <returns>Current season schedule.</returns>
+		public async Task<Schedule> GetSchedule(ScheduledDay scheduledDay)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Schedule, scheduledDay.GetDescription() };
+			return await ExecuteGetRequest<Schedule>(endpointParts);
+		}
+
 		#endregion GetSchedule
 
 		#region GetAnimeTop

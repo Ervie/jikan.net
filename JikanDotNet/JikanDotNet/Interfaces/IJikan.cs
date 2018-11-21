@@ -214,6 +214,13 @@ namespace JikanDotNet
 		Task<Schedule> GetSchedule();
 
 		/// <summary>
+		/// Return current season schedule.
+		/// </summary>
+		/// <param name="scheduledDay">Scheduled day to filter by.</param>
+		/// <returns>Current season schedule.</returns>
+		Task<Schedule> GetSchedule(ScheduledDay scheduledDay);
+
+		/// <summary>
 		/// Return list of top anime.
 		/// </summary>
 		/// <returns>List of top anime.</returns>

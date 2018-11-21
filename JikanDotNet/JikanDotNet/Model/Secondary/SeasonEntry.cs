@@ -55,7 +55,7 @@ namespace JikanDotNet
 		/// Anime's producers numerically indexed with array values.
 		/// </summary>
 		[JsonProperty(PropertyName = "producers")]
-		public ICollection<Producer> Producers { get; set; }
+		public ICollection<MALSubItem> Producers { get; set; }
 
 		/// <summary>
 		/// Anime's licensors as strings.
@@ -73,7 +73,7 @@ namespace JikanDotNet
 		/// Anime's genres numerically indexed with array values.
 		/// </summary>
 		[JsonProperty(PropertyName = "genres")]
-		public ICollection<Genre> Genres { get; set; }
+		public ICollection<MALSubItem> Genres { get; set; }
 
 		/// <summary>
 		/// Date when anime started/will start airing.

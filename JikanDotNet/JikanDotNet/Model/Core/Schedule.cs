@@ -49,5 +49,17 @@ namespace JikanDotNet
 		/// </summary>Sunday
 		[JsonProperty(PropertyName = "sunday")]
 		public ICollection<SeasonEntry> Sunday;
+
+		/// <summary>
+		/// All current season entries scheduled for other days (irregular airing).
+		/// </summary>Sunday
+		[JsonProperty(PropertyName = "other")]
+		public ICollection<SeasonEntry> Other;
+
+		/// <summary>
+		/// All current season entries scheduled for unknown airing.
+		/// </summary>Sunday
+		[JsonProperty(PropertyName = "unknown")]
+		public ICollection<SeasonEntry> Unknown;
 	}
 }

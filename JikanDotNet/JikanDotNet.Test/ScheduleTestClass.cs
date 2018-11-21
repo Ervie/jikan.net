@@ -24,19 +24,28 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public void ShouldParseMondaySchedule()
 		{
-			Schedule currentSeason = Task.Run(() => jikan.GetSchedule()).Result;
+			Schedule currentSeason = Task.Run(() => jikan.GetSchedule(ScheduledDay.Monday)).Result;
 
-			Assert.Contains("Shokugeki no Souma: San no Sara - Toutsuki Ressha-hen", currentSeason.Monday.Select(x => x.Title));
-			Assert.Contains("Golden Kamuy", currentSeason.Monday.Select(x => x.Title));
+			Assert.Contains("Ani ni Tsukeru Kusuri wa Nai! 2", currentSeason.Monday.Select(x => x.Title));
+			Assert.Contains("Golden Kamuy 2nd Season", currentSeason.Monday.Select(x => x.Title));
 		}
 
 		[Fact]
 		public void ShouldParseFridaySchedule()
 		{
-			Schedule currentSeason = Task.Run(() => jikan.GetSchedule()).Result;
+			Schedule currentSeason = Task.Run(() => jikan.GetSchedule(ScheduledDay.Friday)).Result;
 
-			Assert.Contains("Megalo Box", currentSeason.Friday.Select(x => x.Title));
-			Assert.Contains("Hinamatsuri", currentSeason.Friday.Select(x => x.Title));
+			Assert.Contains("Banana Fish", currentSeason.Friday.Select(x => x.Title));
+			Assert.Contains("Toaru Majutsu no Index III", currentSeason.Friday.Select(x => x.Title));
 		}
+		[Fact]
+		public void ShouldParseUnknownSchedule()
+		{
+			Schedule currentSeason = Task.Run(() => jikan.GetSchedule(ScheduledDay.Unknown)).Result;
+
+			Assert.Contains("Yodel no Onna", currentSeason.Unknown.Select(x => x.Title));
+			Assert.Contains("Jinxiu Shenzhou Zhi Qi You Ji", currentSeason.Unknown.Select(x => x.Title));
+		}
+
 	}
 }
