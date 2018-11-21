@@ -58,19 +58,19 @@ namespace JikanDotNet
 		/// <summary>
 		/// Date of airing start.
 		/// </summary>
-		[JsonProperty(PropertyName = "airing_start")]
+		[JsonProperty(PropertyName = "start_date")]
 		public string AiringStart { get; set; }
 
 		/// <summary>
 		/// Date of airing end.
 		/// </summary>
-		[JsonProperty(PropertyName = "airing_end")]
+		[JsonProperty(PropertyName = "end_date")]
 		public string AiringEnd { get; set; }
 
 		/// <summary>
 		/// Anime's episode count.
 		/// </summary>
 		[JsonProperty(PropertyName = "episodes")]
-		public int Episodes { get; set; }
+		public int? Episodes { get; set; }
 	}
 }
