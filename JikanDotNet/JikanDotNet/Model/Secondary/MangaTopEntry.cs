@@ -58,19 +58,19 @@ namespace JikanDotNet
 		/// <summary>
 		/// Date of publishing start.
 		/// </summary>
-		[JsonProperty(PropertyName = "publishing_start")]
+		[JsonProperty(PropertyName = "start_date")]
 		public string PublishingStart { get; set; }
 
 		/// <summary>
 		/// Date of publishing end.
 		/// </summary>
-		[JsonProperty(PropertyName = "publishing_end")]
+		[JsonProperty(PropertyName = "end_date")]
 		public string PublishingEnd { get; set; }
 
 		/// <summary>
 		/// Manga's volumes count.
 		/// </summary>
 		[JsonProperty(PropertyName = "volumes")]
-		public int Volumes { get; set; }
+		public int? Volumes { get; set; }
 	}
 }

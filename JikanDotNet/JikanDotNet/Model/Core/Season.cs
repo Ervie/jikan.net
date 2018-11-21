@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 
 namespace JikanDotNet
@@ -12,7 +11,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Season entry for season.
 		/// </summary>
-		[JsonProperty(PropertyName = "season")]
+		[JsonProperty(PropertyName = "anime")]
 		public ICollection<SeasonEntry> SeasonEntries { get; set; }
 
 		/// <summary>

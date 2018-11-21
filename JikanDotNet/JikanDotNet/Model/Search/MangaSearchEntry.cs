@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace JikanDotNet
 {
@@ -34,7 +35,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Manga's description.
 		/// </summary>
-		[JsonProperty(PropertyName = "description")]
+		[JsonProperty(PropertyName = "synopsis")]
 		public string Description { get; set; }
 
 		/// <summary>
@@ -60,5 +61,29 @@ namespace JikanDotNet
 		/// </summary>
 		[JsonProperty(PropertyName = "members")]
 		public int? Members { get; set; }
+
+		/// <summary>
+		/// Is manga currently publishing.
+		/// </summary>
+		[JsonProperty(PropertyName = "publishing")]
+		public bool Publishing { get; set; }
+
+		/// <summary>
+		/// Datetime when manga started publishing.
+		/// </summary>
+		[JsonProperty(PropertyName = "start_date")]
+		public DateTime? StartDate { get; set; }
+
+		/// <summary>
+		/// Datetime when manga ended publishing.
+		/// </summary>
+		[JsonProperty(PropertyName = "end_date")]
+		public DateTime? EndDate { get; set; }
+
+		/// <summary>
+		/// Number of published chapters.
+		/// </summary>
+		[JsonProperty(PropertyName = "chapters")]
+		public int Chapters { get; set; }
 	}
 }

@@ -58,44 +58,42 @@ namespace JikanDotNet
 		public string ConfigToString()
 		{
 			StringBuilder builder = new StringBuilder();
-
-			builder.Append("?");
-
+			
 			if (Type != MangaType.EveryType)
 			{
-				builder.Append($"type={Type.GetDescription()}&");
+				builder.Append($"&type={Type.GetDescription()}");
 			}
 
 			if (Score.HasValue)
 			{
-				builder.Append($"score={Score}$");
+				builder.Append($"&score={Score}");
 			}
 
 			if (Rating != AgeRating.EveryRating)
 			{
-				builder.Append($"rated={Rating.GetDescription()}&");
+				builder.Append($"&rated={Rating.GetDescription()}");
 			}
 
 			if (Status != Status.EveryStatus)
 			{
-				builder.Append($"status={Status.GetDescription()}&");
+				builder.Append($"&status={Status.GetDescription()}");
 			}
 
 			if (StartDate.HasValue)
 			{
-				builder.Append($"start_date={StartDate.Value.ToString("yyyy-MM-dd")}$");
+				builder.Append($"&start_date={StartDate.Value.ToString("yyyy-MM-dd")}");
 			}
 
 			if (EndDate.HasValue)
 			{
-				builder.Append($"end_date={EndDate.Value.ToString("yyyy-MM-dd")}$");
+				builder.Append($"&end_date={EndDate.Value.ToString("yyyy-MM-dd")}");
 			}
 
 			if (Genres.Count > 0)
 			{
 				foreach (var genre in Genres)
 				{
-					builder.Append($"genre[]={genre.GetDescription()}&");
+					builder.Append($"&genre[]={genre.GetDescription()}");
 				}
 			}
 

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace JikanDotNet
 {
@@ -34,7 +35,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Anime's description.
 		/// </summary>
-		[JsonProperty(PropertyName = "description")]
+		[JsonProperty(PropertyName = "synopsis")]
 		public string Description { get; set; }
 
 		/// <summary>
@@ -60,5 +61,29 @@ namespace JikanDotNet
 		/// </summary>
 		[JsonProperty(PropertyName = "members")]
 		public int? Members { get; set; }
+
+		/// <summary>
+		/// Is anime currently airing.
+		/// </summary>
+		[JsonProperty(PropertyName = "airing")]
+		public bool Airing { get; set; }
+
+		/// <summary>
+		/// Datetime when anime started airing.
+		/// </summary>
+		[JsonProperty(PropertyName = "start_date")]
+		public DateTime? StartDate { get; set; }
+
+		/// <summary>
+		/// Datetime when anime ended airing.
+		/// </summary>
+		[JsonProperty(PropertyName = "end_date")]
+		public DateTime? EndDate { get; set; }
+
+		/// <summary>
+		/// Anime rating (e. g. "PG-13", "R").
+		/// </summary>
+		[JsonProperty(PropertyName = "rated")]
+		public string Rated { get; set; }
 	}
 }

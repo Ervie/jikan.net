@@ -73,7 +73,7 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseLOGHOAiringStartvaList()
+		public void ShouldParseLOGHOAiringStartOvaList()
 		{
 			AnimeTop top = Task.Run(() => jikan.GetAnimeTop(1, TopAnimeExtension.TopOva)).Result;
 
@@ -85,7 +85,7 @@ namespace JikanDotNet.Tests
 		{
 			AnimeTop top = Task.Run(() => jikan.GetAnimeTop(2)).Result;
 
-			Assert.Contains("Ping Pong The Animation", top.Top.Select(x => x.Title));
+			Assert.Contains("Ping Pong the Animation", top.Top.Select(x => x.Title));
 			Assert.Contains("Yojouhan Shinwa Taikei", top.Top.Select(x => x.Title));
 		}
 

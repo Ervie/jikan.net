@@ -202,10 +202,23 @@ namespace JikanDotNet
 		Task<Season> GetSeason(int year, Seasons season);
 
 		/// <summary>
+		/// Return list of availaible season to query with <see cref="GetSeason(int, Seasons)"/>
+		/// </summary>
+		/// <returns></returns>
+		Task<SeasonArchives> GetSeasonArchive();
+
+		/// <summary>
 		/// Return current season schedule.
 		/// </summary>
 		/// <returns>Current season schedule.</returns>
 		Task<Schedule> GetSchedule();
+
+		/// <summary>
+		/// Return current season schedule.
+		/// </summary>
+		/// <param name="scheduledDay">Scheduled day to filter by.</param>
+		/// <returns>Current season schedule.</returns>
+		Task<Schedule> GetSchedule(ScheduledDay scheduledDay);
 
 		/// <summary>
 		/// Return list of top anime.

@@ -18,7 +18,8 @@ namespace JikanDotNet.Tests
 		{
 			Season winter2000 = Task.Run(() => jikan.GetSeason(2000, Seasons.Winter)).Result;
 
-			Assert.Contains("Boogiepop wa Warawanai: Boogiepop Phantom", winter2000.SeasonEntries.Select(x => x.Title));
+			Assert.Contains("Boogiepop wa Warawanai", winter2000.SeasonEntries.Select(x => x.Title));
+			Assert.Contains("Ojamajo Doremi Sharp", winter2000.SeasonEntries.Select(x => x.Title));
 		}
 
 		[Fact]
@@ -58,6 +59,24 @@ namespace JikanDotNet.Tests
 
 			Assert.Equal("Spring", spring1970.SeasonName);
 			Assert.Equal(1970, spring1970.SeasonYear);
+		}
+
+		[Fact]
+		public void ShouldParseFirstQueryableYear()
+		{
+			SeasonArchives seasonArchives = Task.Run(() => jikan.GetSeasonArchive()).Result;
+
+			Assert.Equal(1917, seasonArchives.Archives.Last().Year);
+			Assert.Equal(4,  seasonArchives.Archives.Last().Season.Count);
+		}
+
+		[Fact]
+		public void ShouldParseLatestQueryableYear()
+		{
+			SeasonArchives seasonArchives = Task.Run(() => jikan.GetSeasonArchive()).Result;
+
+			Assert.True(seasonArchives.Archives.First().Year > 2018);
+			Assert.InRange(seasonArchives.Archives.Last().Season.Count, 1, 4);
 		}
 	}
 }
