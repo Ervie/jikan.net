@@ -264,6 +264,19 @@ namespace JikanDotNet
 		Task<MangaTop> GetMangaTop(int page, TopMangaExtension extension);
 
 		/// <summary>
+		/// Return list of most popular people.
+		/// </summary>
+		/// <returns>List of most popular people.</returns>
+		Task<PeopleTop> GetPeopleTop();
+
+		/// <summary>
+		/// Return list of most popular people.
+		/// </summary>
+		/// <param name="page">Indexx of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <returns>List of most popular people.</returns>
+		Task<PeopleTop> GetPeopleTop(int page);
+
+		/// <summary>
 		/// Return list of results related to search.
 		/// </summary>
 		/// <param name="query">Search query.</param>

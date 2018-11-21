@@ -604,6 +604,31 @@ namespace JikanDotNet
 
 		#endregion GetMangaTop
 
+		#region GetTopPeople
+
+		/// <summary>
+		/// Return list of most popular people.
+		/// </summary>
+		/// <returns>List of most popular people.</returns>
+		public async Task<PeopleTop> GetPeopleTop()
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.TopList, JikanEndPointCategories.Person };
+			return await ExecuteGetRequest<PeopleTop>(endpointParts);
+		}
+
+		/// <summary>
+		/// Return list of most popular people.
+		/// </summary>
+		/// <param name="page">Indexx of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <returns>List of most popular people.</returns>
+		public async Task<PeopleTop> GetPeopleTop(int page)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.TopList, JikanEndPointCategories.Person, page.ToString() };
+			return await ExecuteGetRequest<PeopleTop>(endpointParts);
+		}
+
+		#endregion GetTopPeople
+
 		#region SearchAnime
 
 		/// <summary>

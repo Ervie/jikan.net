@@ -137,5 +137,38 @@ namespace JikanDotNet.Tests
 
 			Assert.Equal("Manga", top.Top.First().Type);
 		}
+
+		[Fact]
+		public void ShouldParseKanaHanazawa()
+		{
+			PeopleTop top = Task.Run(() => jikan.GetPeopleTop()).Result;
+
+			Assert.Equal("Hanazawa, Kana", top.Top.First().Name);
+			Assert.Equal("花澤 香菜", top.Top.First().Name);
+			Assert.Equal(185, top.Top.First().MalId);
+			Assert.Equal(1989, top.Top.First().Birthday.Value.Year);
+			Assert.True(top.Top.First().Favorites > 60000);
+		}
+
+		[Fact]
+		public void ShouldParseHiroshiKamiya()
+		{
+			PeopleTop top = Task.Run(() => jikan.GetPeopleTop()).Result;
+
+			Assert.Equal("Kamiya, Hiroshi", top.Top.Skip(1).First().Name);
+			Assert.Equal("神谷 浩史", top.Top.Skip(1).First().Name);
+			Assert.Equal(118, top.Top.Skip(1).First().MalId);
+			Assert.Equal(1975, top.Top.Skip(1).First().Birthday.Value.Year);
+			Assert.True(top.Top.Skip(1).First().Favorites > 50000);
+		}
+
+		[Fact]
+		public void ShouldPFindKentarouMiura()
+		{
+			PeopleTop top = Task.Run(() => jikan.GetPeopleTop(1)).Result;
+
+			Assert.Contains("Miura, Kentarou", top.Top.Select(x => x.Name));
+		}
+
 	}
 }
