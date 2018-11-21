@@ -51,10 +51,10 @@ namespace JikanDotNet.Tests
 				Score = 8
 			};
 
-			AnimeSearchResult danganronpaAnime = Task.Run(() => jikan.SearchAnime("Fairy Tail", searchConfig)).Result;
+			AnimeSearchResult fairyTailAnime = Task.Run(() => jikan.SearchAnime("Fairy Tail", searchConfig)).Result;
 
-			Assert.Equal("Fairy Tail (2014)", danganronpaAnime.Results.First().Title);
-			Assert.Equal("Fairy Tail", danganronpaAnime.Results.Skip(1).First().Title);
+			Assert.Equal("Fairy Tail (2014)", fairyTailAnime.Results.First().Title);
+			Assert.Equal("Fairy Tail: Final Series", fairyTailAnime.Results.Skip(1).First().Title);
 		}
 
 		[Fact]

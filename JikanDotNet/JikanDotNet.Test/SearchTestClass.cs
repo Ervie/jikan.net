@@ -21,8 +21,8 @@ namespace JikanDotNet.Tests
 			var nullPerson = Task.Run(() => jikan.SearchPerson("")).Result;
 			var nullCharacter = Task.Run(() => jikan.SearchCharacter("")).Result;
 			
-			Assert.Empty(nullAnime.Results);
-			Assert.Empty(nullManga.Results);
+			Assert.Null(nullAnime);
+			Assert.Null(nullManga);
 			Assert.Null(nullPerson);
 			Assert.Null(nullCharacter);
 		}
@@ -62,7 +62,7 @@ namespace JikanDotNet.Tests
 		{
 			AnimeSearchResult returnedAnime = Task.Run(() => jikan.SearchAnime("girl", 2)).Result;
 
-			Assert.Contains("Saenai Heroine no Sodatekata", returnedAnime.Results.Select(x => x.Title));
+			Assert.Contains("Jigoku Shoujo Futakomori", returnedAnime.Results.Select(x => x.Title));
 		}
 
 		[Theory]
@@ -100,8 +100,7 @@ namespace JikanDotNet.Tests
 		{
 			MangaSearchResult returnedAnime = Task.Run(() => jikan.SearchManga("girl", 2)).Result;
 
-			Assert.Contains("Girl", returnedAnime.Results.Select(x => x.Title));
-			Assert.Contains("Girls Only", returnedAnime.Results.Select(x => x.Title));
+			Assert.Contains("My Girl", returnedAnime.Results.Select(x => x.Title));
 			Assert.Equal(20, returnedAnime.ResultLastPage);
 		}
 
@@ -145,7 +144,7 @@ namespace JikanDotNet.Tests
 			PersonSearchResult returnedPerson = Task.Run(() => jikan.SearchPerson("daisuke", 2)).Result;
 
 			Assert.Equal(50, returnedPerson.Results.Count);
-			Assert.Contains("Nishio, Daisuke", returnedPerson.Results.Select(x => x.Name));
+			Assert.Contains("Daisuke", returnedPerson.Results.Select(x => x.Name));
 		}
 
 		[Theory]
@@ -209,7 +208,7 @@ namespace JikanDotNet.Tests
 		{
 			CharacterSearchResult returnedCharacter = Task.Run(() => jikan.SearchCharacter("edward", 2)).Result;
 			
-			Assert.Contains("Rutherford, Edward", returnedCharacter.Results.Select(x => x.Name));
+			Assert.Contains("Edward", returnedCharacter.Results.Select(x => x.Name));
 			Assert.Equal(50, returnedCharacter.Results.Count);
 		}
 	}

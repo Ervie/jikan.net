@@ -11,13 +11,13 @@ namespace JikanDotNet
 		/// <summary>
 		/// List of search results.
 		/// </summary>
-		[JsonProperty(PropertyName = "result")]
+		[JsonProperty(PropertyName = "results")]
 		public ICollection<PersonSearchEntry> Results { get; set; }
 
 		/// <summary>
 		/// Index of the last page.
 		/// </summary>
-		[JsonProperty(PropertyName = "result_last_page")]
+		[JsonProperty(PropertyName = "last_page")]
 		public int? ResultLastPage { get; set; }
 	}
 }

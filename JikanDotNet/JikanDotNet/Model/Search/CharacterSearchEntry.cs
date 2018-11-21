@@ -33,10 +33,10 @@ namespace JikanDotNet
 		public string Name { get; set; }
 
 		/// <summary>
-		/// Nicknames of the character separated by comma.
+		/// Nicknames/alternative names of the character separated by comma.
 		/// </summary>
-		[JsonProperty(PropertyName = "nicknames")]
-		public string Nicknames { get; set; }
+		[JsonProperty(PropertyName = "alternative_names")]
+		public ICollection<string> AlternativeNames { get; set; }
 
 		/// <summary>
 		/// Character's animeography (without anime type).

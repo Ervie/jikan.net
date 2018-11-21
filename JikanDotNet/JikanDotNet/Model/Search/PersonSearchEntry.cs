@@ -35,9 +35,9 @@ namespace JikanDotNet
 		public string Name { get; set; }
 
 		/// <summary>
-		/// Nicknames of the person separated by comma.
+		/// Nicknames/alternative names of the person separated by comma.
 		/// </summary>
-		[JsonProperty(PropertyName = "nicknames")]
-		public string Nicknames { get; set; }
+		[JsonProperty(PropertyName = "alternative_names")]
+		public ICollection<string> AlternativeNames { get; set; }
 	}
 }
