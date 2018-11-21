@@ -494,6 +494,20 @@ namespace JikanDotNet
 
 		#endregion GetSeason
 
+		#region GetSeasonArchive
+
+		/// <summary>
+		/// Return list of availaible season to query with <see cref="GetSeason(int, Seasons)"/>
+		/// </summary>
+		/// <returns></returns>
+		public async Task<SeasonArchives> GetSeasonArchive()
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Season, SeasonExtension.Archive.GetDescription() };
+			return await ExecuteGetRequest<SeasonArchives>(endpointParts);
+		}
+
+		#endregion
+
 		#region GetSchedule
 
 		/// <summary>

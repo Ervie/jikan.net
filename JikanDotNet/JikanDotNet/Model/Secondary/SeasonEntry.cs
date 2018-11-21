@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace JikanDotNet
@@ -53,13 +54,13 @@ namespace JikanDotNet
 		/// <summary>
 		/// Anime's producers numerically indexed with array values.
 		/// </summary>
-		[JsonProperty(PropertyName = "producer")]
+		[JsonProperty(PropertyName = "producers")]
 		public ICollection<Producer> Producers { get; set; }
 
 		/// <summary>
 		/// Anime's licensors as strings.
 		/// </summary>
-		[JsonProperty(PropertyName = "licensor")]
+		[JsonProperty(PropertyName = "licensors")]
 		public ICollection<string> Licensors { get; set; }
 
 		/// <summary>
@@ -71,14 +72,14 @@ namespace JikanDotNet
 		/// <summary>
 		/// Anime's genres numerically indexed with array values.
 		/// </summary>
-		[JsonProperty(PropertyName = "genre")]
+		[JsonProperty(PropertyName = "genres")]
 		public ICollection<Genre> Genres { get; set; }
 
 		/// <summary>
 		/// Date when anime started/will start airing.
 		/// </summary>
 		[JsonProperty(PropertyName = "airing_start")]
-		public string AiringStart { get; set; }
+		public DateTime? AiringStart { get; set; }
 
 		/// <summary>
 		/// Anime's score on MyAnimeList up to 2 decimal places.
@@ -101,13 +102,13 @@ namespace JikanDotNet
 		/// <summary>
 		/// Is anime marked as 18+.
 		/// </summary>
-		[JsonProperty(PropertyName = "r18_plus")]
+		[JsonProperty(PropertyName = "r18")]
 		public bool? R18 { get; set; }
 
 		/// <summary>
 		/// Is anime continuing from last season.
 		/// </summary>
-		[JsonProperty(PropertyName = "continued")]
+		[JsonProperty(PropertyName = "continuing")]
 		public bool? Continued { get; set; }
 	}
 }
