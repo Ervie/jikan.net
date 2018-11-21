@@ -15,12 +15,6 @@ namespace JikanDotNet
 		public long MalId { get; set; }
 
 		/// <summary>
-		/// Rank of the manga on selected list.
-		/// </summary>
-		[JsonProperty(PropertyName = "rank")]
-		public int Rank { get; set; }
-
-		/// <summary>
 		/// URL to manga page.
 		/// </summary>
 		[JsonProperty(PropertyName = "url")]
@@ -77,7 +71,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Manga's serialzations numerically indexed with array values.
 		/// </summary>
-		[JsonProperty(PropertyName = "serializations")]
+		[JsonProperty(PropertyName = "serialization")]
 		public ICollection<string> Serializations { get; set; }
 	}
 }

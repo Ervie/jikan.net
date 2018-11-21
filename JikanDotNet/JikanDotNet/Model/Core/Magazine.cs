@@ -4,20 +4,20 @@ using System.Collections.Generic;
 namespace JikanDotNet
 {
 	/// <summary>
-	/// Producer model class.
+	/// Magazine model class.
 	/// </summary>
-	public class Producer
+	public class Magazine
 	{
 		/// <summary>
-		/// Metadata about producer.
+		/// Metadata about magazine..
 		/// </summary>
 		[JsonProperty(PropertyName = "meta")]
 		public MALSubItem Metadata { get; set; }
 
 		/// <summary>
-		/// List of anime published by producer.
+		/// List of manga published in magazine.
 		/// </summary>
-		[JsonProperty(PropertyName = "anime")]
-		public ICollection<AnimeSubEntry> Anime { get; set; }
+		[JsonProperty(PropertyName = "manga")]
+		public ICollection<MangaSubEntry> Manga { get; set; }
 	}
 }

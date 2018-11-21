@@ -378,6 +378,21 @@ namespace JikanDotNet
 		Task<Producer> GetProducer(long id, int page);
 
 		/// <summary>
+		/// Returns information about magazine with given MAL id. 
+		/// </summary>
+		/// <param name="id">MAL id of the magazine.</param>
+		/// <returns>Information about magazine with given MAL id. </returns>
+		Task<Magazine> GetMagazine(long id);
+
+		/// <summary>
+		/// Returns information about magazine with given MAL id. 
+		/// </summary>
+		/// <param name="id">MAL id of the magazine.</param>
+		/// <param name="page">Index of page folding 100 records of top ranging (e.g. 1 will return first 100 records, 2 will return record from 101 to 200 etc.)</param>
+		/// <returns>Information about magazine with given MAL id. </returns>
+		Task<Magazine> GetMagazine(long id, int page);
+
+		/// <summary>
 		/// Returns list of results related to search.
 		/// </summary>
 		/// <param name="query">Search query.</param>

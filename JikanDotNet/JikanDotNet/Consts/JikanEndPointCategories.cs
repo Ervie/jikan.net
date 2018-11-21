@@ -61,6 +61,11 @@
 		public const string Producer = "producer";
 
 		/// <summary>
+		/// Magazine endpoint.
+		/// </summary>
+		public const string Magazine = "magazine";
+
+		/// <summary>
 		/// Search endpoint.
 		/// </summary>
 		public const string Search = "search";

@@ -807,6 +807,33 @@ namespace JikanDotNet
 
 		#endregion
 
+		#region GetMagazine
+
+		/// <summary>
+		/// Returns information about magazine with given MAL id. 
+		/// </summary>
+		/// <param name="id">MAL id of the magazine.</param>
+		/// <returns>Information about magazine with given MAL id. </returns>
+		public async Task<Magazine> GetMagazine(long id)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Magazine, id.ToString() };
+			return await ExecuteGetRequest<Magazine>(endpointParts);
+		}
+
+		/// <summary>
+		/// Returns information about magazine with given MAL id. 
+		/// </summary>
+		/// <param name="id">MAL id of the magazine.</param>
+		/// <param name="page">Index of page folding 100 records of top ranging (e.g. 1 will return first 100 records, 2 will return record from 101 to 200 etc.)</param>
+		/// <returns>Information about magazine with given MAL id. </returns>
+		public async Task<Magazine> GetMagazine(long id, int page)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Magazine, id.ToString(), page.ToString() };
+			return await ExecuteGetRequest<Magazine>(endpointParts);
+		}
+
+		#endregion
+
 		#region SearchAnime
 
 		/// <summary>
