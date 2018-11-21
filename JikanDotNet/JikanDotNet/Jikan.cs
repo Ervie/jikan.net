@@ -638,7 +638,7 @@ namespace JikanDotNet
 		/// <returns>List of most popular people.</returns>
 		public async Task<PeopleTop> GetPeopleTop()
 		{
-			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.TopList, JikanEndPointCategories.Person };
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.TopList, JikanEndPointCategories.People };
 			return await ExecuteGetRequest<PeopleTop>(endpointParts);
 		}
 
@@ -649,11 +649,36 @@ namespace JikanDotNet
 		/// <returns>List of most popular people.</returns>
 		public async Task<PeopleTop> GetPeopleTop(int page)
 		{
-			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.TopList, JikanEndPointCategories.Person, page.ToString() };
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.TopList, JikanEndPointCategories.People, page.ToString() };
 			return await ExecuteGetRequest<PeopleTop>(endpointParts);
 		}
 
 		#endregion GetTopPeople
+
+		#region GetTopCharacters
+
+		/// <summary>
+		/// Return list of most popular characters.
+		/// </summary>
+		/// <returns>List of most popular characters.</returns>
+		public async Task<CharactersTop> GetCharactersTop()
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.TopList, JikanEndPointCategories.Characters };
+			return await ExecuteGetRequest<CharactersTop>(endpointParts);
+		}
+
+		/// <summary>
+		/// Return list of most popular characters.
+		/// </summary>
+		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <returns>List of most popular characters.</returns>
+		public async Task<CharactersTop> GetCharactersTop(int page)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.TopList, JikanEndPointCategories.Characters, page.ToString() };
+			return await ExecuteGetRequest<CharactersTop>(endpointParts);
+		}
+
+		#endregion GetTopCharacters
 
 		#region SearchAnime
 

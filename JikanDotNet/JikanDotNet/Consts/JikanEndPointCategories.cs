@@ -21,9 +21,19 @@
 		public const string Character = "character";
 
 		/// <summary>
+		/// Characters endpoint.
+		/// </summary>
+		public const string Characters = "characters";
+
+		/// <summary>
 		/// People endpoint.
 		/// </summary>
 		public const string Person = "person";
+
+		/// <summary>
+		/// Alternative people endpoint.
+		/// </summary>
+		public const string People = "people";
 
 		/// <summary>
 		/// Season endpoint.

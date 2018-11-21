@@ -144,7 +144,7 @@ namespace JikanDotNet.Tests
 			PeopleTop top = Task.Run(() => jikan.GetPeopleTop()).Result;
 
 			Assert.Equal("Hanazawa, Kana", top.Top.First().Name);
-			Assert.Equal("花澤 香菜", top.Top.First().Name);
+			Assert.Equal("花澤 香菜", top.Top.First().NameKanji);
 			Assert.Equal(185, top.Top.First().MalId);
 			Assert.Equal(1989, top.Top.First().Birthday.Value.Year);
 			Assert.True(top.Top.First().Favorites > 60000);
@@ -156,18 +156,57 @@ namespace JikanDotNet.Tests
 			PeopleTop top = Task.Run(() => jikan.GetPeopleTop()).Result;
 
 			Assert.Equal("Kamiya, Hiroshi", top.Top.Skip(1).First().Name);
-			Assert.Equal("神谷 浩史", top.Top.Skip(1).First().Name);
+			Assert.Equal("神谷 浩史", top.Top.Skip(1).First().NameKanji);
 			Assert.Equal(118, top.Top.Skip(1).First().MalId);
 			Assert.Equal(1975, top.Top.Skip(1).First().Birthday.Value.Year);
 			Assert.True(top.Top.Skip(1).First().Favorites > 50000);
 		}
 
 		[Fact]
-		public void ShouldPFindKentarouMiura()
+		public void ShouldFindKentarouMiura()
 		{
-			PeopleTop top = Task.Run(() => jikan.GetPeopleTop(1)).Result;
+			PeopleTop top = Task.Run(() => jikan.GetPeopleTop(2)).Result;
 
 			Assert.Contains("Miura, Kentarou", top.Top.Select(x => x.Name));
+		}
+
+		[Fact]
+		public void ShouldParseLelouchLamperouge()
+		{
+			CharactersTop top = Task.Run(() => jikan.GetCharactersTop()).Result;
+
+			Assert.Equal("Lamperouge, Lelouch", top.Top.First().Name);
+			Assert.Equal("ルルーシュ・ランペルージ", top.Top.First().NameKanji);
+			Assert.Equal(417, top.Top.First().MalId);
+			Assert.True(top.Top.First().Favorites > 85000);
+		}
+
+		[Fact]
+		public void ShouldParseLLawliet()
+		{
+			CharactersTop top = Task.Run(() => jikan.GetCharactersTop()).Result;
+
+			Assert.Equal("Lawliet, L", top.Top.Skip(1).First().Name);
+			Assert.Equal("エル ローライト", top.Top.Skip(1).First().NameKanji);
+			Assert.Equal(71, top.Top.Skip(1).First().MalId);
+			Assert.True(top.Top.Skip(1).First().Favorites > 65000);
+		}
+
+		[Fact]
+		public void ShouldParseLuffyAnimeography()
+		{
+			CharactersTop top = Task.Run(() => jikan.GetCharactersTop()).Result;
+
+			Assert.Equal("Monkey D., Luffy", top.Top.Skip(2).First().Name);
+			Assert.Contains("One Piece", top.Top.Skip(2).First().Animeography.Select(x => x.Name));
+		}
+
+		[Fact]
+		public void ShouldFindTachibanaKanade()
+		{
+			CharactersTop top = Task.Run(() => jikan.GetCharactersTop(2)).Result;
+
+			Assert.Contains("Tachibana, Kanade", top.Top.Select(x => x.Name));
 		}
 
 	}

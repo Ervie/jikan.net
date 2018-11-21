@@ -229,7 +229,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Return list of top anime.
 		/// </summary>
-		/// <param name="page">Indexx of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
 		/// <returns>List of top anime.</returns>
 		Task<AnimeTop> GetAnimeTop(int page);
 
@@ -243,7 +243,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Return list of top anime.
 		/// </summary>
-		/// <param name="page">Indexx of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
 		/// <param name="extension">Extension for specific type of ranking.</param>
 		/// <returns>List of top anime.</returns>
 		Task<AnimeTop> GetAnimeTop(int page, TopAnimeExtension extension);
@@ -257,7 +257,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Return list of top manga.
 		/// </summary>
-		/// <param name="page">Indexx of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
 		/// <returns>List of top manga.</returns>
 		Task<MangaTop> GetMangaTop(int page);
 
@@ -285,9 +285,22 @@ namespace JikanDotNet
 		/// <summary>
 		/// Return list of most popular people.
 		/// </summary>
-		/// <param name="page">Indexx of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <param name="page">Indexxof page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
 		/// <returns>List of most popular people.</returns>
 		Task<PeopleTop> GetPeopleTop(int page);
+
+		/// <summary>
+		/// Return list of most popular characters.
+		/// </summary>
+		/// <returns>List of most popular characters.</returns>
+		Task<CharactersTop> GetCharactersTop();
+
+		/// <summary>
+		/// Return list of most popular characters.
+		/// </summary>
+		/// <param name="page">Indexx of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <returns>List of most popular characters.</returns>
+		Task<CharactersTop> GetCharactersTop(int page);
 
 		/// <summary>
 		/// Return list of results related to search.

@@ -4,14 +4,14 @@ using System.Collections.Generic;
 namespace JikanDotNet
 {
 	/// <summary>
-	/// Model class for people top.
+	/// Model class for most popular characters.
 	/// </summary>
-	public class PeopleTop
+	public class CharactersTop
 	{
 		/// <summary>
-		/// Collection of people entries on top list.
+		/// Collection of characters entries on top list.
 		/// </summary>
 		[JsonProperty(PropertyName = "top")]
-		public ICollection<PersonTopEntry> Top { get; set; }
+		public ICollection<CharacterTopEntry> Top { get; set; }
 	}
 }
