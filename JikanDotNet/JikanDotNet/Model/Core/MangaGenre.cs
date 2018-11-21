@@ -9,10 +9,10 @@ namespace JikanDotNet
 	public class MangaGenre
 	{
 		/// <summary>
-		/// Specific data about genre.
+		/// Metadata about genre.
 		/// </summary>
 		[JsonProperty(PropertyName = "mal_url")]
-		public MALSubItem MalUrl { get; set; }
+		public MALSubItem Metadata { get; set; }
 
 		/// <summary>
 		/// Total count of manga or manga with assigned

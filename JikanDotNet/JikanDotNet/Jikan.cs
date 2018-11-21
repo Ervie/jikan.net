@@ -780,6 +780,33 @@ namespace JikanDotNet
 
 		#endregion GetCharactersTop
 
+		#region GetProducer
+
+		/// <summary>
+		/// Returns information about producer with given MAL id. 
+		/// </summary>
+		/// <param name="id">MAL id of the producer.</param>
+		/// <returns>Information about producer with given MAL id. </returns>
+		public async Task<Producer> GetProducer(long id)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Producer, id.ToString() };
+			return await ExecuteGetRequest<Producer>(endpointParts);
+		}
+
+		/// <summary>
+		/// Returns information about producer with given MAL id. 
+		/// </summary>
+		/// <param name="id">MAL id of the producer.</param>
+		/// <param name="page">Index of page folding 100 records of top ranging (e.g. 1 will return first 100 records, 2 will return record from 101 to 200 etc.)</param>
+		/// <returns>Information about producer with given MAL id. </returns>
+		public async Task<Producer> GetProducer(long id, int page)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Producer, id.ToString(), page.ToString() };
+			return await ExecuteGetRequest<Producer>(endpointParts);
+		}
+
+		#endregion
+
 		#region SearchAnime
 
 		/// <summary>

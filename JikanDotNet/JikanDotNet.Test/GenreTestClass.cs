@@ -20,7 +20,7 @@ namespace JikanDotNet.Tests
 
 			Assert.NotNull(genre);
 			Assert.True(genre.TotalCount > 3300);
-			Assert.Equal("Action Anime", genre.MalUrl.Name);
+			Assert.Equal("Action Anime", genre.Metadata.Name);
 			Assert.Equal("Shingeki no Kyojin", genre.Anime.First().Title);
 		}
 
@@ -31,8 +31,8 @@ namespace JikanDotNet.Tests
 
 			Assert.NotNull(genre);
 			Assert.True(genre.TotalCount > 1000);
-			Assert.Equal("Mecha Anime", genre.MalUrl.Name);
-			Assert.Equal(18, genre.MalUrl.MalId);
+			Assert.Equal("Mecha Anime", genre.Metadata.Name);
+			Assert.Equal(18, genre.Metadata.MalId);
 			Assert.Equal("Code Geass: Hangyaku no Lelouch", genre.Anime.First().Title);
 		}
 
@@ -43,7 +43,7 @@ namespace JikanDotNet.Tests
 
 			Assert.NotNull(genre);
 			Assert.True(genre.TotalCount > 600);
-			Assert.Equal("Mystery Anime", genre.MalUrl.Name);
+			Assert.Equal("Mystery Anime", genre.Metadata.Name);
 			Assert.Equal(100, genre.Anime.Count);
 		}
 
@@ -54,7 +54,7 @@ namespace JikanDotNet.Tests
 
 			Assert.NotNull(genre);
 			Assert.True(genre.TotalCount > 6000);
-			Assert.Equal("Action Manga", genre.MalUrl.Name);
+			Assert.Equal("Action Manga", genre.Metadata.Name);
 			Assert.Equal("Naruto", genre.Manga.First().Title);
 		}
 
@@ -65,8 +65,8 @@ namespace JikanDotNet.Tests
 
 			Assert.NotNull(genre);
 			Assert.True(genre.TotalCount > 600);
-			Assert.Equal("Mecha Manga", genre.MalUrl.Name);
-			Assert.Equal(18, genre.MalUrl.MalId);
+			Assert.Equal("Mecha Manga", genre.Metadata.Name);
+			Assert.Equal(18, genre.Metadata.MalId);
 			Assert.Equal("Neon Genesis Evangelion", genre.Manga.First().Title);
 		}
 
@@ -77,7 +77,7 @@ namespace JikanDotNet.Tests
 
 			Assert.NotNull(genre);
 			Assert.True(genre.TotalCount > 600);
-			Assert.Equal("Drama Manga", genre.MalUrl.Name);
+			Assert.Equal("Drama Manga", genre.Metadata.Name);
 			Assert.Equal(100, genre.Manga.Count);
 		}
 

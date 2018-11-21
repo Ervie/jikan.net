@@ -4,24 +4,18 @@ using System.Collections.Generic;
 namespace JikanDotNet
 {
 	/// <summary>
-	/// Studio model class.
+	/// Producer model class.
 	/// </summary>
-	public class AnimeGenre
+	public class Producer
 	{
 		/// <summary>
-		/// Metadata about genre.
+		/// Metadata about producer.
 		/// </summary>
-		[JsonProperty(PropertyName = "mal_url")]
+		[JsonProperty(PropertyName = "meta")]
 		public MALSubItem Metadata { get; set; }
 
 		/// <summary>
-		/// Total count of anime with assigned
-		/// </summary>
-		[JsonProperty(PropertyName = "item_count")]
-		public int TotalCount { get; set; }
-
-		/// <summary>
-		/// List of anime with assigned genre.
+		/// Name of the producer.
 		/// </summary>
 		[JsonProperty(PropertyName = "anime")]
 		public ICollection<AnimeSubEntry> Anime { get; set; }

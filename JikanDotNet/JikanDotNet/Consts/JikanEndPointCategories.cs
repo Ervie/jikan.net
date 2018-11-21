@@ -56,6 +56,11 @@
 		public const string Genre = "genre";
 
 		/// <summary>
+		/// Producer endpoint.
+		/// </summary>
+		public const string Producer = "producer";
+
+		/// <summary>
 		/// Search endpoint.
 		/// </summary>
 		public const string Search = "search";
