@@ -24,6 +24,6 @@ namespace JikanDotNet
 		/// List of anime with assigned genre.
 		/// </summary>
 		[JsonProperty(PropertyName = "anime")]
-		public ICollection<SeasonEntry> Anime { get; set; }
+		public ICollection<AnimeSubEntry> Anime { get; set; }
 	}
 }

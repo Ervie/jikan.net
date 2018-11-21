@@ -25,6 +25,6 @@ namespace JikanDotNet
 		/// List of manga with assigned genre.
 		/// </summary>
 		[JsonProperty(PropertyName = "manga")]
-		public ICollection<MangaGenreEntry> Manga { get; set; }
+		public ICollection<MangaSubEntry> Manga { get; set; }
 	}
 }

@@ -4,9 +4,9 @@ using System.Collections.Generic;
 namespace JikanDotNet
 {
 	/// <summary>
-	/// Entry on manga genre model class.
+	/// Entry on manga model class (used in genres and magazines).
 	/// </summary>
-	public class MangaGenreEntry
+	public class MangaSubEntry
 	{
 		/// <summary>
 		/// ID associated with MyAnimeList.

@@ -5,9 +5,9 @@ using System.Collections.Generic;
 namespace JikanDotNet
 {
 	/// <summary>
-	/// Model class for single season entry.
+	/// Entry on manga model class (used in genres, schedules, seasons and producers).
 	/// </summary>
-	public class SeasonEntry
+	public class AnimeSubEntry
 	{
 		/// <summary>
 		/// ID associated with MyAnimeList.
