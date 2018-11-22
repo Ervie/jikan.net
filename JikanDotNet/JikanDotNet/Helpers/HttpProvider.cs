@@ -19,6 +19,12 @@ namespace JikanDotNet.Helpers
 		/// </summary>
 		public const string httpsEndpoint = "https://api.jikan.moe/v3";
 
+		//TODO: Remove in 2019
+		/// <summary>
+		/// Temporary Endpoint for SSL encrypted requests .
+		/// </summary>
+		public const string temporaryHttpsEndpoint = "https://api.jikan.moe/v3";
+
 		/// <summary>
 		/// Static HttpClient.
 		/// </summary>
@@ -40,7 +46,9 @@ namespace JikanDotNet.Helpers
 		{
 			if (Client == null)
 			{
-				string endpoint = useHttps ? httpsEndpoint : httpEndpoint;
+				string endpoint = DateTime.Now.Year < 2019 ?
+					temporaryHttpsEndpoint :
+					useHttps ? httpsEndpoint : httpEndpoint;
 				Client = new HttpClient
 				{
 					BaseAddress = new Uri(endpoint)
