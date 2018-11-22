@@ -130,6 +130,7 @@ namespace JikanDotNet.Tests
 			
 			Assert.Equal("Maaya Sakamoto", returnedPerson.Results.First().Name);
 		}
+
 		[Fact]
 		public void ShouldReturnSakamotoMalId()
 		{

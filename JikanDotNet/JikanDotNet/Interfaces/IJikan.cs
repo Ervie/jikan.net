@@ -410,9 +410,9 @@ namespace JikanDotNet
 		/// Returns information about user's history with given username.
 		/// </summary>
 		/// <param name="username">Username.</param>
-		/// <param name="historyExtension">Option to filter history.</param>
+		/// <param name="filter">Option to filter history.</param>
 		/// <returns>Information about user's profile with given username.</returns>
-		Task<UserHistory> GetUserHistory(string username, UserHistoryExtension historyExtension);
+		Task<UserHistory> GetUserHistory(string username, UserHistoryExtension filter);
 
 		/// <summary>
 		/// Returns information about user's friends with given username.
@@ -425,9 +425,73 @@ namespace JikanDotNet
 		/// Returns information about user's friends with given username.
 		/// </summary>
 		/// <param name="username">Username.</param>
-		/// <param name="page">Index of the page.
+		/// <param name="page">Index of the page.</param>
 		/// <returns>Information about user's friends with given username.</returns>
 		Task<UserFriends> GetUserFriends(string username, int page);
+
+		/// <summary>
+		/// Returns entries on user's anime list.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <returns>Entries on user's anime list.</returns>
+		Task<UserAnimeList> GetUserAnimeList(string username);
+
+		/// <summary>
+		/// Returns entries on user's anime list.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <param name="page">Index of page folding 300 records of top ranging (e.g. 1 will return first 300 records, 2 will return record from 301 to 600 etc.)</param>
+		/// <returns>Entries on user's anime list.</returns>
+		Task<UserAnimeList> GetUserAnimeList(string username, int page);
+	
+		/// <summary>
+		/// Returns entries on user's anime list.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <param name="filter">Option to filter list.</param>
+		/// <returns>Entries on user's anime list.</returns>
+		Task<UserAnimeList> GetUserAnimeList(string username, UserAnimeListExtension filter);
+
+		/// <summary>
+		/// Returns entries on user's anime list.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <param name="filter">Option to filter list.</param>
+		/// <param name="page">Index of page folding 300 records of top ranging (e.g. 1 will return first 300 records, 2 will return record from 301 to 600 etc.)</param>
+		/// <returns>Entries on user's anime list.</returns>
+		Task<UserAnimeList> GetUserAnimeList(string username, UserAnimeListExtension filter, int page);
+
+		/// <summary>
+		/// Returns entries on user's manga list.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <returns>Entries on user's manga list.</returns>
+		Task<UserMangaList> GetUserMangaList(string username);
+
+		/// <summary>
+		/// Returns entries on user's manga list.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <param name="page">Index of page folding 300 records of top ranging (e.g. 1 will return first 300 records, 2 will return record from 301 to 600 etc.)</param>
+		/// <returns>Entries on user's manga list.</returns>
+		Task<UserMangaList> GetUserMangaList(string username, int page);
+
+		/// <summary>
+		/// Returns entries on user's manga list.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <param name="filter">Option to filter list.</param>
+		/// <returns>Entries on user's manga list.</returns>
+		Task<UserMangaList> GetUserMangaList(string username, UserMangaListExtension filter);
+
+		/// <summary>
+		/// Returns entries on user's manga list.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <param name="filter">Option to filter list.</param>
+		/// <param name="page">Index of page folding 300 records of top ranging (e.g. 1 will return first 300 records, 2 will return record from 301 to 600 etc.)</param>
+		/// <returns>Entries on user's manga list.</returns>
+		Task<UserMangaList> GetUserMangaList(string username, UserMangaListExtension filter, int page);
 
 		/// <summary>
 		/// Returns list of results related to search.

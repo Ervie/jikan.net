@@ -70,11 +70,86 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldReturnNull()
+		public void ShouldReturnNullHistory()
 		{
 			UserFriends friends = Task.Run(() => jikan.GetUserFriends("Ervelan", 10)).Result;
 
 			Assert.Null(friends);
+		}
+
+		[Fact]
+		public void ShouldParseErvelanAnimeList()
+		{
+			UserAnimeList animeList = Task.Run(() => jikan.GetUserAnimeList("Ervelan")).Result;
+
+			Assert.NotNull(animeList);
+			Assert.Equal(300, animeList.Anime.Count);
+			Assert.Contains("Akira", animeList.Anime.Select(x => x.Title));
+		}
+
+		[Fact]
+		public void ShouldParseErvelanDroppedList()
+		{
+			UserAnimeList animeList = Task.Run(() => jikan.GetUserAnimeList("Ervelan", UserAnimeListExtension.Dropped)).Result;
+
+			Assert.NotNull(animeList);
+			Assert.True(animeList.Anime.Count > 5);
+			Assert.Contains("Coppelion", animeList.Anime.Select(x => x.Title));
+		}
+
+		[Fact]
+		public void ShouldParseErvelanAnimeListSecondPage()
+		{
+			UserAnimeList animeList = Task.Run(() => jikan.GetUserAnimeList("Ervelan", 2)).Result;
+
+			Assert.NotNull(animeList);
+			Assert.Equal(300, animeList.Anime.Count);
+		}
+
+		[Fact]
+		public void ShouldParseOnrixAnimeList()
+		{
+			UserAnimeList animeList = Task.Run(() => jikan.GetUserAnimeList("onrix")).Result;
+
+			Assert.NotNull(animeList);
+			Assert.Equal(122, animeList.Anime.Count);
+		}
+
+		[Fact]
+		public void ShouldParseErvelanMangaList()
+		{
+			UserMangaList mangaList = Task.Run(() => jikan.GetUserMangaList("Ervelan")).Result;
+
+			Assert.NotNull(mangaList);
+			Assert.True(mangaList.Manga.Count > 90);
+			Assert.Contains("Dr. Stone", mangaList.Manga.Select(x => x.Title));
+		}
+
+		[Fact]
+		public void ShouldParseErvelanMangaDroppedList()
+		{
+			UserMangaList mangaList = Task.Run(() => jikan.GetUserMangaList("Ervelan", UserMangaListExtension.Dropped)).Result;
+
+			Assert.NotNull(mangaList);
+			Assert.Equal(3, mangaList.Manga.Count);
+			Assert.Contains("D.Gray-man", mangaList.Manga.Select(x => x.Title));
+		}
+
+		[Fact]
+		public void ShouldParseOnrixMangaList()
+		{
+			UserMangaList mangaList = Task.Run(() => jikan.GetUserMangaList("onrix")).Result;
+
+			Assert.Null(mangaList);
+		}
+
+		[Fact]
+		public void ShouldParseMithogawaMangaList()
+		{
+			UserMangaList mangaList = Task.Run(() => jikan.GetUserMangaList("Mithogawa")).Result;
+
+			Assert.NotNull(mangaList);
+			Assert.Equal(300, mangaList.Manga.Count);
 		}
 	}
 }

@@ -876,6 +876,110 @@ namespace JikanDotNet
 
 		#endregion
 
+		#region GetUserAnimeList
+
+		/// <summary>
+		/// Returns entries on user's anime list.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <returns>Entries on user's anime list.</returns>
+		public async Task<UserAnimeList> GetUserAnimeList(string username)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.User, username, UserExtension.AnimeList.GetDescription() };
+			return await ExecuteGetRequest<UserAnimeList>(endpointParts);
+		}
+
+		/// <summary>
+		/// Returns entries on user's anime list.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <param name="page">Index of page folding 300 records of top ranging (e.g. 1 will return first 300 records, 2 will return record from 301 to 600 etc.)</param>
+		/// <returns>Entries on user's anime list.</returns>
+		public async Task<UserAnimeList> GetUserAnimeList(string username, int page)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.User, username, UserExtension.AnimeList.GetDescription(), UserAnimeListExtension.All.GetDescription(), page.ToString() };
+			return await ExecuteGetRequest<UserAnimeList>(endpointParts);
+		}
+
+		/// <summary>
+		/// Returns entries on user's anime list.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <param name="filter">Option to filter list.</param>
+		/// <returns>Entries on user's anime list.</returns>
+		public async Task<UserAnimeList> GetUserAnimeList(string username, UserAnimeListExtension filter)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.User, username, UserExtension.AnimeList.GetDescription(), filter.GetDescription() };
+			return await ExecuteGetRequest<UserAnimeList>(endpointParts);
+		}
+
+		/// <summary>
+		/// Returns entries on user's anime list.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <param name="filter">Option to filter list.</param>
+		/// <param name="page">Index of page folding 300 records of top ranging (e.g. 1 will return first 300 records, 2 will return record from 301 to 600 etc.)</param>
+		/// <returns>Entries on user's anime list.</returns>
+		public async Task<UserAnimeList> GetUserAnimeList(string username, UserAnimeListExtension filter, int page)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.User, username, UserExtension.AnimeList.GetDescription(), filter.GetDescription(), page.ToString() };
+			return await ExecuteGetRequest<UserAnimeList>(endpointParts);
+		}
+
+		#endregion
+
+		#region GetUserMangaList
+
+		/// <summary>
+		/// Returns entries on user's manga list.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <returns>Entries on user's manga list.</returns>
+		public async Task<UserMangaList> GetUserMangaList(string username)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.User, username, UserExtension.MangaList.GetDescription() };
+			return await ExecuteGetRequest<UserMangaList>(endpointParts);
+		}
+
+		/// <summary>
+		/// Returns entries on user's manga list.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <param name="page">Index of page folding 300 records of top ranging (e.g. 1 will return first 300 records, 2 will return record from 301 to 600 etc.)</param>
+		/// <returns>Entries on user's manga list.</returns>
+		public async Task<UserMangaList> GetUserMangaList(string username, int page)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.User, username, UserExtension.MangaList.GetDescription(), UserMangaListExtension.All.GetDescription(), page.ToString() };
+			return await ExecuteGetRequest<UserMangaList>(endpointParts);
+		}
+
+		/// <summary>
+		/// Returns entries on user's manga list.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <param name="filter">Option to filter list.</param>
+		/// <returns>Entries on user's manga list.</returns>
+		public async Task<UserMangaList> GetUserMangaList(string username, UserMangaListExtension filter)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.User, username, UserExtension.MangaList.GetDescription(), filter.GetDescription() };
+			return await ExecuteGetRequest<UserMangaList>(endpointParts);
+		}
+
+		/// <summary>
+		/// Returns entries on user's manga list.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <param name="filter">Option to filter list.</param>
+		/// <param name="page">Index of page folding 300 records of top ranging (e.g. 1 will return first 300 records, 2 will return record from 301 to 600 etc.)</param>
+		/// <returns>Entries on user's manga list.</returns>
+		public async Task<UserMangaList> GetUserMangaList(string username, UserMangaListExtension filter, int page)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.User, username, UserExtension.MangaList.GetDescription(), filter.GetDescription(), page.ToString() };
+			return await ExecuteGetRequest<UserMangaList>(endpointParts);
+		}
+
+		#endregion
+
 		#region GetUserFriend
 
 		/// <summary>
