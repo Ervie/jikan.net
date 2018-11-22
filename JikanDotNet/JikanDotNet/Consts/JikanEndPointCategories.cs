@@ -74,5 +74,10 @@
 		/// Search endpoint.
 		/// </summary>
 		public const string Search = "search";
+
+		/// <summary>
+		/// Metadata endpoint.
+		/// </summary>
+		public const string Meta = "meta";
 	}
 }

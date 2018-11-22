@@ -586,5 +586,11 @@ namespace JikanDotNet
 		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
 		/// <returns>List of result related to search query.</returns>
 		Task<CharacterSearchResult> SearchCharacter(string query, int page);
+
+		/// <summary>
+		/// Return Jikan REST API metadata - status.
+		/// </summary>
+		/// <returns>Jikan REST API metadata - status.</returns>
+		Task<StatusMetadata> GetStatusMetadata();
 	}
 }

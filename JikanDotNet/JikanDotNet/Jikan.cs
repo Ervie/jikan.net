@@ -1176,6 +1176,24 @@ namespace JikanDotNet
 		}
 		#endregion SearchCharacter
 
+		#region GetStatusMetadata
+
+		/// <summary>
+		/// Return Jikan REST API metadata - status.
+		/// </summary>
+		/// <returns>Jikan REST API metadata - status.</returns>
+		public async Task<StatusMetadata> GetStatusMetadata()
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Meta, "status"};
+			return await ExecuteGetRequest<StatusMetadata>(endpointParts);
+		}
+
+		#endregion
+
+		#region GetRequestsMetadata
+
+		#endregion
+
 		#endregion Public Methods
 	}
 }
