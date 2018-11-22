@@ -834,6 +834,75 @@ namespace JikanDotNet
 
 		#endregion
 
+		#region GetUserProfile
+
+		/// <summary>
+		/// Returns information about user's profile with given username.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <returns>Information about user's profile with given username.</returns>
+		public async Task<UserProfile> GetUserProfile(string username)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.User, username, UserExtension.Profile.GetDescription() };
+			return await ExecuteGetRequest<UserProfile>(endpointParts);
+		}
+
+		#endregion
+
+		#region GetUserHistory
+
+		/// <summary>
+		/// Returns information about user's history with given username.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <returns>Information about user's profile with given username.</returns>
+		public async Task<UserHistory> GetUserHistory(string username)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.User, username, UserExtension.History.GetDescription() };
+			return await ExecuteGetRequest<UserHistory>(endpointParts);
+		}
+
+		/// <summary>
+		/// Returns information about user's history with given username.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <param name="historyExtension">Option to filter history.</param>
+		/// <returns>Information about user's profile with given username.</returns>
+		public async Task<UserHistory> GetUserHistory(string username, UserHistoryExtension historyExtension)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.User, username, UserExtension.History.GetDescription(), historyExtension.GetDescription() };
+			return await ExecuteGetRequest<UserHistory>(endpointParts);
+		}
+
+		#endregion
+
+		#region GetUserFriend
+
+		/// <summary>
+		/// Returns information about user's friends with given username.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <returns>Information about user's friends with given username.</returns>
+		public async Task<UserFriends> GetUserFriends(string username)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.User, username, UserExtension.Friends.GetDescription() };
+			return await ExecuteGetRequest<UserFriends>(endpointParts);
+		}
+
+		/// <summary>
+		/// Returns information about user's friends with given username.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <param name="page">Index of the page.
+		/// <returns>Information about user's friends with given username.</returns>
+		public async Task<UserFriends> GetUserFriends(string username, int page)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.User, username, UserExtension.Friends.GetDescription(), page.ToString() };
+			return await ExecuteGetRequest<UserFriends>(endpointParts);
+		}
+
+		#endregion
+
 		#region SearchAnime
 
 		/// <summary>

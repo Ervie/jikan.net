@@ -66,6 +66,11 @@
 		public const string Magazine = "magazine";
 
 		/// <summary>
+		/// User endpoint.
+		/// </summary>
+		public const string User = "user";
+
+		/// <summary>
 		/// Search endpoint.
 		/// </summary>
 		public const string Search = "search";

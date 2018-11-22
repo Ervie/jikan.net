@@ -393,6 +393,43 @@ namespace JikanDotNet
 		Task<Magazine> GetMagazine(long id, int page);
 
 		/// <summary>
+		/// Returns information about user's profile with given username.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <returns>Information about user's profile with given username.</returns>
+		Task<UserProfile> GetUserProfile(string username);
+
+		/// <summary>
+		/// Returns information about user's history with given username.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <returns>Information about user's profile with given username.</returns>
+		Task<UserHistory> GetUserHistory(string username);
+
+		/// <summary>
+		/// Returns information about user's history with given username.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <param name="historyExtension">Option to filter history.</param>
+		/// <returns>Information about user's profile with given username.</returns>
+		Task<UserHistory> GetUserHistory(string username, UserHistoryExtension historyExtension);
+
+		/// <summary>
+		/// Returns information about user's friends with given username.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <returns>Information about user's friends with given username.</returns>
+		Task<UserFriends> GetUserFriends(string username);
+
+		/// <summary>
+		/// Returns information about user's friends with given username.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <param name="page">Index of the page.
+		/// <returns>Information about user's friends with given username.</returns>
+		Task<UserFriends> GetUserFriends(string username, int page);
+
+		/// <summary>
 		/// Returns list of results related to search.
 		/// </summary>
 		/// <param name="query">Search query.</param>
