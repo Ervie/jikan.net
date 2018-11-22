@@ -15,14 +15,6 @@ namespace JikanDotNet
 		Task<Anime> GetAnime(long id);
 
 		/// <summary>
-		/// Returns anime with given MAL id.
-		/// </summary>
-		/// <param name="id">MAL id of anime.</param>
-		/// <param name="extension">Extension for extra data.</param>
-		/// <returns>Anime with given MAL id.</returns>
-		Task<Anime> GetAnime(long id, AnimeExtension extension);
-
-		/// <summary>
 		/// Returns list of episodes for anime with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
@@ -94,14 +86,6 @@ namespace JikanDotNet
 		Task<Manga> GetManga(long id);
 
 		/// <summary>
-		/// Returns manga with given MAL id.
-		/// </summary>
-		/// <param name="id">MAL id of manga.</param>
-		/// <param name="extension">Extension for extra data.</param>
-		/// <returns>Manga with given MAL id.</returns>
-		Task<Manga> GetManga(long id, MangaExtension extension);
-
-		/// <summary>
 		/// Returns collections of links to pictures related to manga with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of manga.</param>
@@ -151,14 +135,6 @@ namespace JikanDotNet
 		Task<Character> GetCharacter(long id);
 
 		/// <summary>
-		/// Returns character with given MAL id.
-		/// </summary>
-		/// <param name="id">MAL id of character.</param>
-		/// <param name="extension">Extension for extra data.</param>
-		/// <returns>Character with given MAL id.</returns>
-		Task<Character> GetCharacter(long id, CharacterExtension extension);
-
-		/// <summary>
 		/// Returns collections of links to pictures related to character with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of character.</param>
@@ -171,14 +147,6 @@ namespace JikanDotNet
 		/// <param name="id">MAL id of person.</param>
 		/// <returns>Person with given MAL id.</returns>
 		Task<Person> GetPerson(long id);
-
-		/// <summary>
-		/// Returns person with given MAL id.
-		/// </summary>
-		/// <param name="id">MAL id of person.</param>
-		/// <param name="extension">Extension for extra data.</param>
-		/// <returns>Person with given MAL id.</returns>
-		Task<Person> GetPerson(long id, PersonExtension extension);
 
 		/// <summary>
 		/// Returns collections of links to pictures related to person with given MAL id.
