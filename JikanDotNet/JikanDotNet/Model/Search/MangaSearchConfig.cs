@@ -29,7 +29,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Current status.
 		/// </summary>
-		public Status Status { get; set; }
+		public AiringStatus Status { get; set; }
 
 		/// <summary>
 		/// Filter start date of results.
@@ -74,7 +74,7 @@ namespace JikanDotNet
 				builder.Append($"&rated={Rating.GetDescription()}");
 			}
 
-			if (Status != Status.EveryStatus)
+			if (Status != AiringStatus.EveryStatus)
 			{
 				builder.Append($"&status={Status.GetDescription()}");
 			}

@@ -5,7 +5,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Current status of anime or manga (search config).
 	/// </summary>
-	public enum Status
+	public enum AiringStatus
 	{
 		/// <summary>
 		/// Allow all statuses to be displayed in results.
