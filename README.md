@@ -6,7 +6,7 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
 
 ### Main attributes
 
-* Written in .Net Standard, compatible with .Net Framework and .Net Core.
+* Written in .Net Standard 2.0, compatible with .Net Framework (4.6.1 or newer) and .Net Core (2.0 or newer).
 * Fully asynchromous request fetching (can be forced to synchromous if needed).
 * Can handle both SSL encrypted and non-SSL encrypted requests.
 * Light on dependencies (require only Newtonsoft.Json for parsing).
