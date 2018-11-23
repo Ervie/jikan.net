@@ -14,64 +14,79 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
 
 # List of features
 
-- Basic requests
-    - [X] Anime
-    - [X] Manga
-    - [X] Character
-    - [X] People
-- Anime extended requests
-    - [X] Characters & Staff
-    - [X] Episode
-    - [X] News
-    - [X] Videos/PV/Episodes
-    - [X] Pictures
-    - [X] Stats
-    - [X] Forum Topics
-    - [X] More Info
-    - [ ] Recommendation
-    - [ ] Reviews
-- Manga extended requests
-    - [X] Characters
-    - [X] News
-    - [X] Stats
-    - [X] Pictures
-    - [X] Forum Topics
-    - [X] More Info
-    - [ ] Recommendation
-    - [ ] Reviews
-- Character extended requests
-    - [X] Pictures
-- People Parsing
-    - [X] Pictures
-- Search (Anime/Manga/Character/Person)
-    - [X] Basic query
-    - [X] Filters (Advanced Search)
-    - [X] Pagination Support
-    - [X] No.# of pages
-- [X] Seasonal Anime (Season + Year)
-- [X] Anime Scheduling (for current season)
-- Top
-    - [X] Anime
-    - [X] Manga
-    - [X] Sub Types & Pagination Support
-- [ ] Genre
-- [ ] Producer
-- [ ] Magazine
-- [ ] User
-- [ ] Meta
 
+- Anime
+    - Basic information
+    - Characters & Staff
+    - Episode
+    - News
+    - Videos/PV/Episodes
+    - Pictures
+    - Stats
+    - Forum Topics
+    - More Info
+- Manga
+    - Basic information
+    - Characters 
+    - News
+    - Pictures
+    - Stats
+    - Forum Topics
+    - More Info
+- People
+    - Basic information
+    - Pictures
+- Characters
+    - Basic information
+    - Pictures
+- Search (Anime/Manga/Character/Person)
+    - Basic query
+    - Filters (Advanced Search)
+    - Pagination Support
+    - No.# of pages
+- Seasonal Anime (Season + Year)
+- Season Archive
+- Anime Scheduling (for current season)
+    - Filtering by day of the week.
+- Top
+    - Anime
+    - Manga
+    - People
+    - Characters
+    - Sub Types & Pagination Support
+- Genre
+    - Anime genres
+    - Manga genres
+- Producer
+- Magazine
+- User
+    - Profile
+    - Friends
+    - History
+        - Filter by Anime/Manga.
+    - Anime list
+        - Filter by status (watching, completed, etc.)
+        - Paging support
+    - Manga list
+        - Filter by status (reading, completed, etc.)
+        - Paging support
+- Meta
+    - API status
+- Top
+    - People Top.
+    - Characters Top.
 # Installation
 
 ### Package manager
 
 ```
-PM> Install-Package JikanDotNet -Version 1.0.3
+PM> Install-Package JikanDotNet -Version 1.1.0
 ```
 
 ### .NET CLI
 
 ```
->dotnet add package JikanDotNet --version 1.0.3
+>dotnet add package JikanDotNet --version 1.1.0
 ```
 
 Then restore dependencies:
@@ -141,11 +156,6 @@ Then restore dependencies:
     - `Nicknames` got renamed to `AlternativeNames` and are now a collection.
 - <b>[Schedule]</b>
     - Filtering by day of the week is enabled now.
-
-
-## 27.05.2018 - Version 1.0.3 (latest)
-
-- <b>[Season]</b> Add `SeasonName` and `SeasonYear` data.
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**
 
