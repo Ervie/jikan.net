@@ -529,7 +529,7 @@ namespace JikanDotNet
 		/// <returns>Collections of links to pictures related to person with given MAL id.</returns>
 		public async Task<PersonPictures> GetPersonPictures(long id)
 		{
-			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Person, id.ToString(), CharacterExtension.Pictures.GetDescription() };
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Person, id.ToString(), PersonExtension.Pictures.GetDescription() };
 			return await ExecuteGetRequest<PersonPictures>(endpointParts);
 		}
 
