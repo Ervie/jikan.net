@@ -25,7 +25,7 @@ namespace JikanDotNet
 		/// Returns list of episodes for anime with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
-		/// <param name="page">Indexx of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
 		/// <returns>List of episodes with details.</returns>
 		Task<AnimeEpisodes> GetAnimeEpisodes(long id, int page);
 
