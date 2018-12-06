@@ -285,6 +285,114 @@ namespace Example.CSharp
 
 			// Send request for second page of most popular anime.
 			topAnimeList = jikan.GetAnimeTop(2, TopAnimeExtension.TopPopularity).Result;
+
+			// Send request for mecha genre (and first 100 mecha anime snippets)
+			AnimeGenre animeGenre = jikan.GetAnimeGenre(18).Result;
+
+			// Output -> "Mecha"
+			Console.WriteLine(animeGenre.Metadata.Name);
+
+			// Print title of each of the first 100 mecha anime
+			foreach (var anime in animeGenre.Anime)
+			{
+				Console.WriteLine(anime.Title);
+			}
+
+			// Send request for mecha genre (mecha anime snippets on positions 101-200)
+			animeGenre = jikan.GetAnimeGenre(18, 2).Result;
+
+			// Send request for samurai anime genre (and first 100 samurai anime snippets)
+			animeGenre = jikan.GetAnimeGenre(GenreSearch.Samurai).Result;
+
+			// Send request for sports genre (sports anime snippets on positions 201-300)
+			animeGenre = jikan.GetAnimeGenre(GenreSearch.Sports, 3).Result;
+
+			// Send request for mecha genre (and first 100 mecha manga snippets)
+			MangaGenre mangaGenre = jikan.GetMangaGenre(18).Result;
+
+			// Output -> "Mecha"
+			Console.WriteLine(mangaGenre.Metadata.Name);
+
+			// Print title of each of the first 100 mecha manga
+			foreach (var anime in mangaGenre.Manga)
+			{
+				Console.WriteLine(anime.Title);
+			}
+
+			// Send request for mecha genre (mecha manga snippets on positions 101-200)
+			mangaGenre = jikan.GetMangaGenre(18, 2).Result;
+
+			// Send request for samurai manga genre (and first 100 samurai manga snippets)
+			mangaGenre = jikan.GetMangaGenre(GenreSearch.Samurai).Result;
+
+			// Send request for sports genre (sports manga snippets on positions 201-300)
+			mangaGenre = jikan.GetMangaGenre(GenreSearch.Sports, 3).Result;
+
+			// Send request for KyotoAnimation
+			Producer producer = jikan.GetProducer(2).Result;
+
+			// Output -> "Kyoto Animation"
+			Console.WriteLine(producer.Metadata.Name);
+
+			// Print title of each anime of the first 100 anime made by Kyoto Animation
+			foreach (var anime in producer.Anime)
+			{
+				Console.WriteLine(anime.Title);
+			}
+			
+			// Send request for "Studio Pierrot" (and their anime listed on positions 101-200)
+			producer = jikan.GetProducer(1, 2).Result;
+
+			// Send request for "Young Animal" magazine.
+			Magazine magazine = jikan.GetMagazine(2).Result;
+
+			// Output -> "Young Animal"
+			Console.WriteLine(magazine.Metadata.Name);
+
+			// Print title of each manga of the first 100 mangas of "Young Animal"
+			foreach (var manga in magazine.Manga)
+			{
+				Console.WriteLine(manga.Title);
+			}
+
+			// Send request for "Shonen Jump" (and their manga listed on positions 101-200)
+			magazine = jikan.GetMagazine(83, 2).Result;
+
+			UserProfile profile = jikan.GetUserProfile("Ervelan").Result;
+
+			// Output -> "Male"
+			Console.WriteLine(profile.Gender);
+
+			// Print name of each favorite character
+			foreach (var favoriteCharacter in profile.Favorites.Characters)
+			{
+				Console.WriteLine(favoriteCharacter.Name);
+			}
+			
+			// Print information about completed and watching/reading anime/manga.
+			Console.WriteLine("Completed " + profile.AnimeStatistics.Completed + " anime and " + profile.MangaStatistics.Completed + " manga.");
+			Console.WriteLine("Currently watching " + profile.AnimeStatistics.Watching + " anime and reading " + profile.MangaStatistics.Reading + " manga.");
+
+			// Send request for history of user "Ervelan"
+			UserHistory userHistory = jikan.GetUserHistory("Ervelan").Result;
+
+			// Print title of each anime/manga and related incerement.
+			foreach (var historyEntry in userHistory.History)
+			{
+				Console.WriteLine(historyEntry.Metadata.Name + ": " + historyEntry.Increment);
+			}
+
+			// Send request for friend list of user "Ervelan"
+			UserFriends friends = jikan.GetUserFriends("Ervelan").Result;
+
+			// Print each friend username with their last online activity date.
+			foreach (var friend in friends.Friends)
+			{
+				Console.WriteLine(friend.Username + " last seen online " + friend.LastOnline);
+			}
+
+			// Send request for friend list of user "batsling1234" on positions 101-200 (sorted by most recent online activity).
+			friends = jikan.GetUserFriends("batsling1234", 2).Result;
 		}
 	}
 }
