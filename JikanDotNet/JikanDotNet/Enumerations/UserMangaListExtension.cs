@@ -14,7 +14,7 @@ namespace JikanDotNet
 		All,
 
 		/// <summary>
-		/// Anime extension, parses only manga with reading status.
+		/// Reading extension, parses only manga with reading status.
 		/// </summary>
 		[Description("reading")]
 		Reading,

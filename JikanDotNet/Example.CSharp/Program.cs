@@ -286,6 +286,49 @@ namespace Example.CSharp
 			// Send request for second page of most popular anime.
 			topAnimeList = jikan.GetAnimeTop(2, TopAnimeExtension.TopPopularity).Result;
 
+
+			// Send request for manga ranking (highest rating).
+			MangaTop topMangaList = jikan.GetMangaTop().Result;
+
+			// Print title of each manga in the top 50
+			foreach (var listEntry in topMangaList.Top)
+			{
+				Console.WriteLine(listEntry.Title);
+			}
+
+			// Send request for second page (positions 51-100) of manga with highest ratings.
+			topMangaList = jikan.GetMangaTop(2).Result;
+
+			// Send request for light novels with highest ratings.
+			topMangaList = jikan.GetMangaTop(TopMangaExtension.TopNovel).Result;
+
+			// Send request for second page of most popular manga.
+			topMangaList = jikan.GetMangaTop(2, TopMangaExtension.TopPopularity).Result;
+
+			// Send request for most popular people on MAL
+			PeopleTop topPeopleList = jikan.GetPeopleTop().Result;
+
+			// Print rank and name of each person in top 50.
+			foreach (var listEntry in topPeopleList.Top)
+			{
+				Console.WriteLine(listEntry.Rank + ". " + listEntry.Name);
+			}
+
+			// Send request for second page (positions 51 - 100) of most popular people
+			topPeopleList = jikan.GetPeopleTop(2).Result;
+
+			// Send request for most popular characters on MAL
+			CharactersTop topCharacterList = jikan.GetCharactersTop().Result;
+
+			// Print rank and name of each character in top 50.
+			foreach (var listEntry in topCharacterList.Top)
+			{
+				Console.WriteLine(listEntry.Rank + ". " + listEntry.Name);
+			}
+
+			// Send request for second page (positions 51 - 100) of most popular characters.
+			topCharacterList = jikan.GetCharactersTop(2).Result;
+
 			// Send request for mecha genre (and first 100 mecha anime snippets)
 			AnimeGenre animeGenre = jikan.GetAnimeGenre(18).Result;
 
@@ -393,6 +436,43 @@ namespace Example.CSharp
 
 			// Send request for friend list of user "batsling1234" on positions 101-200 (sorted by most recent online activity).
 			friends = jikan.GetUserFriends("batsling1234", 2).Result;
+
+			// Send request for anime list of user with "Ervelan" username (first 300 entries)
+			UserAnimeList animeList = jikan.GetUserAnimeList("Ervelan").Result;
+
+			// Print first 300 anime on requested list wiht scores assigned by user.
+			foreach (var anime in animeList.Anime)
+			{
+				Console.WriteLine("Title: " + anime.Title + ", " + anime.Score);
+			}
+
+			// Send request for anime list of user with "Ervelan" username (entries from position 301 to 600).
+			animeList = jikan.GetUserAnimeList("Ervelan", 2).Result;
+
+			// Send request for anime list of user with "Ervelan" username (dropped anime only).
+			animeList = jikan.GetUserAnimeList("Ervelan", UserAnimeListExtension.Dropped).Result;
+
+
+			// Send request for anime list of user with "Ervelan" username (completed anime only, from position 301 to 600).
+			animeList = jikan.GetUserAnimeList("Ervelan", UserAnimeListExtension.Completed, 2).Result;
+
+			// Send request for manga list of user with "SonMati" username (first 300 entries)
+			UserMangaList mangalist = jikan.GetUserMangaList("SonMati").Result;
+
+			// Print first 300 manga on requested list wiht scores assigned by user.
+			foreach (var manga in mangalist.Manga)
+			{
+				Console.WriteLine("Title: " + manga.Title + ", " + manga.Score);
+			}
+
+			// Send request for manga list of user with "SonMati" username (entries from position 301 to 600).
+			mangalist = jikan.GetUserMangaList("SonMati", 2).Result;
+
+			// Send request for manga list of user with "SonMati" username (reading manga only).
+			mangalist = jikan.GetUserMangaList("SonMati", UserMangaListExtension.Reading).Result;
+
+			// Send request for manga list of user with "SonMati" username (completed manga only, from position 301 to 600).
+			mangalist = jikan.GetUserMangaList("SonMati", UserMangaListExtension.Completed, 2).Result;
 		}
 	}
 }

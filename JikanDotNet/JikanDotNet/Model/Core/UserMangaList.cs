@@ -9,7 +9,7 @@ namespace JikanDotNet
 	public class UserMangaList
 	{
 		/// <summary>
-		/// Collection of user's manga on their anime list.
+		/// Collection of user's manga on their manga list.
 		/// </summary>
 		[JsonProperty(PropertyName = "manga")]
 		public ICollection<MangaListEntry> Manga { get; set; }
