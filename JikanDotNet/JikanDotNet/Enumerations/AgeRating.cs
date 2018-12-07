@@ -3,7 +3,7 @@
 namespace JikanDotNet
 {
 	/// <summary>
-	/// Age rating for anime (search config).
+	/// Age rating for anime/manga (search config).
 	/// </summary>
 	public enum AgeRating
 	{

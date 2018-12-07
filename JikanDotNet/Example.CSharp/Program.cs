@@ -473,6 +473,122 @@ namespace Example.CSharp
 
 			// Send request for manga list of user with "SonMati" username (completed manga only, from position 301 to 600).
 			mangalist = jikan.GetUserMangaList("SonMati", UserMangaListExtension.Completed, 2).Result;
+
+			// Send request to search anime with "haibane" key word
+			AnimeSearchResult animeSearchResult = jikan.SearchAnime("haibane").Result;
+
+			// Print title of the first result
+			// Output -> "Haibane Renmei"
+			Console.WriteLine(animeSearchResult.Results.First().Title);
+
+			// Send request to search anime with "gundam" key word, second page of results
+			animeSearchResult = jikan.SearchAnime("gundam", 2).Result;
+
+			AnimeSearchConfig animeSearchConfig = new AnimeSearchConfig()
+			{
+				Type = AnimeType.Movie,
+				Score = 7
+			};
+
+			// Send request to search anime with "gundam" key word, movies with score bigger than 7 only.
+			animeSearchResult = jikan.SearchAnime("gundam", animeSearchConfig).Result;
+
+			animeSearchConfig = new AnimeSearchConfig()
+			{
+				Genres = { GenreSearch.Action, GenreSearch.Adventure },
+				GenreIncluded = true
+			};
+
+			// Send request to search anime with "samurai" key word, with action and/or adventure genre.
+			animeSearchResult = jikan.SearchAnime("samurai", animeSearchConfig).Result;
+
+			animeSearchConfig = new AnimeSearchConfig()
+			{
+				Genres = { GenreSearch.Mecha, GenreSearch.Romance },
+				GenreIncluded = false
+			};
+
+			// Send request to search anime with "samurai" key word, without mecha and/or romance genre.
+			animeSearchResult = jikan.SearchAnime("samurai", animeSearchConfig).Result;
+
+			animeSearchConfig = new AnimeSearchConfig()
+			{
+				Rating = AgeRating.RX
+			};
+
+			// Send request to search anime with "xxx" key word, adult anime only, second page of results
+			animeSearchResult = jikan.SearchAnime("xxx", 2, animeSearchConfig).Result;
+
+			// Send request to search manga with "berserk" key word
+			MangaSearchResult mangaSearchResult = jikan.SearchManga("berserk").Result;
+
+			// Print title of the first result
+			// Output -> "Berserk"
+			Console.WriteLine(mangaSearchResult.Results.First().Title);
+
+			// Send request to search manga with "gundam" key word, second page of results
+			mangaSearchResult = jikan.SearchManga("gundam", 2).Result;
+
+			MangaSearchConfig mangaSearchConfig = new MangaSearchConfig()
+			{
+				Type = MangaType.Novel,
+				Score = 5
+			};
+
+			// Send request to search manga with "gundam" key word, novel/light novel with score bigger than 5 only.
+			mangaSearchResult = jikan.SearchManga("gundam", mangaSearchConfig).Result;
+
+			mangaSearchConfig = new MangaSearchConfig()
+			{
+				Genres = { GenreSearch.Mecha, GenreSearch.Adventure },
+				GenreIncluded = true
+			};
+
+			// Send request to search manga with "samurai" key word, with Mecha and/or adventure genre.
+			mangaSearchResult = jikan.SearchManga("samurai", mangaSearchConfig).Result;
+
+			mangaSearchConfig = new MangaSearchConfig()
+			{
+				Genres = { GenreSearch.Ecchi, GenreSearch.Game },
+				GenreIncluded = false
+			};
+
+			// Send request to search manga with "samurai" key word, without ecchi and/or game genre.
+			mangaSearchResult = jikan.SearchManga("samurai", mangaSearchConfig).Result;
+
+			mangaSearchConfig = new MangaSearchConfig()
+			{
+				Rating = AgeRating.RX
+			};
+
+			// Send request to search manga with "xxx" key word, adult anime only, second page of results
+			mangaSearchResult = jikan.SearchManga("xxx", 2, mangaSearchConfig).Result;
+
+			// Send request to search person with "sawashiro" key word
+			PersonSearchResult personSearchResult = jikan.SearchPerson("sawashiro").Result;
+
+			// Print name of the first result
+			// Output -> "Miyuki Sawashiro"
+			Console.WriteLine(personSearchResult.Results.First().Name);
+
+			// Send request to search person with "sawashiro" key word, second page (positions 51-100)
+			personSearchResult = jikan.SearchPerson("sawashiro", 2).Result;
+
+			// Send request to search character with "spiegel" key word
+			CharacterSearchResult characterSearchResult = jikan.SearchCharacter("spiegel").Result;
+
+			// Print name of the first result
+			// Output -> "Spike Spiegel"
+			Console.WriteLine(characterSearchResult.Results.First().Name);
+
+			// Send request to search character with "edward" key word, second page (positions 51-100)
+			characterSearchResult = jikan.SearchCharacter("edward", 2).Result;
+
+			// Send request for Jikan status metadata.
+			StatusMetadata statusMetadata = jikan.GetStatusMetadata().Result;
+
+			// Print amount of today's and weekly requests.
+			Console.WriteLine("Today requests:" + statusMetadata.RequestsToday + ", weekly: " + statusMetadata.RequestsThisWeek);
 		}
 	}
 }
