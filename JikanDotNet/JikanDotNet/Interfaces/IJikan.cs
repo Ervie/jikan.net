@@ -176,6 +176,12 @@ namespace JikanDotNet
 		Task<SeasonArchives> GetSeasonArchive();
 
 		/// <summary>
+		/// Return season preview for anime with undefined airing season (marked as "Later" on MAL).
+		/// </summary>
+		/// <returns>Season preview for anime with undefined airing date.</returns>
+		Task<Season> GetSeasonLater();
+
+		/// <summary>
 		/// Returns current season schedule.
 		/// </summary>
 		/// <returns>Current season schedule.</returns>

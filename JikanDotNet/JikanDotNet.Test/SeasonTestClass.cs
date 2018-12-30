@@ -78,5 +78,15 @@ namespace JikanDotNet.Tests
 			Assert.True(seasonArchives.Archives.First().Year > 2018);
 			Assert.InRange(seasonArchives.Archives.Last().Season.Count, 1, 4);
 		}
+
+		[Fact]
+		public void ShouldParseLaterSeason()
+		{
+			Season season = Task.Run(() => jikan.GetSeasonLater()).Result;
+
+			Assert.Null(season.SeasonYear);
+			Assert.Equal("Later", season.SeasonName);
+			Assert.Null(season.SeasonEntries.First().AiringStart);
+		}
 	}
 }

@@ -18,7 +18,7 @@ namespace JikanDotNet
 		/// Year of the season.
 		/// </summary>
 		[JsonProperty(PropertyName = "season_year")]
-		public int SeasonYear { get; set; }
+		public int? SeasonYear { get; set; }
 
 		/// <summary>
 		/// Name of the season.

@@ -605,6 +605,20 @@ namespace JikanDotNet
 
 		#endregion GetSeasonArchive
 
+		#region GetSeasonLater
+
+		/// <summary>
+		/// Return season preview for anime with undefined airing season (marked as "Later" on MAL).
+		/// </summary>
+		/// <returns>Season preview for anime with undefined airing date.</returns>
+		public async Task<Season> GetSeasonLater()
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Season, SeasonExtension.Later.GetDescription() };
+			return await ExecuteGetRequest<Season>(endpointParts);
+		}
+
+		#endregion GetSeasonLater
+
 		#endregion Season methods
 
 		#region Top methods
