@@ -86,11 +86,11 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseMangaWithNoRelated()
+		public void ShouldParseMangaWithNoRelatedAdaptations()
 		{
 			Manga returnedManga = Task.Run(() => jikan.GetManga(19983)).Result;
 
-			Assert.Null(returnedManga.Related);
+			Assert.Null(returnedManga.Related.Adaptations);
 		}
 	}
 }

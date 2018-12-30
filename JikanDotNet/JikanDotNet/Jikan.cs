@@ -83,10 +83,7 @@ namespace JikanDotNet
 					if (response.IsSuccessStatusCode)
 					{
 						string json = await response.Content.ReadAsStringAsync();
-
-						// prevent deserializing "related" into empty array
-						// May change if endpoint implementation change
-						json = json.Replace("\"related\":[]", "\"related\":null");
+						
 						returnedObject = JsonConvert.DeserializeObject<T>(json);
 					}
 					else if (!surpressException)

@@ -90,11 +90,11 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseAnimeWithNoRelated()
+		public void ShouldParseAnimeWithNoRelatedAdaptations()
 		{
 			Anime returnedAnime = Task.Run(() => jikan.GetAnime(1457)).Result;
 
-			Assert.Null(returnedAnime.Related);
+			Assert.Null(returnedAnime.Related.Adaptations);
 		}
 	}
 }
