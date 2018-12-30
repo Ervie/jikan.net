@@ -152,9 +152,7 @@ namespace JikanDotNet.Tests
 		{
 			ForumTopics bebop = Task.Run(() => jikan.GetAnimeForumTopics(1)).Result;
 
-			Assert.Contains(1739374, bebop.Topics.Select(x => x.TopicId));
-			Assert.Contains(29334, bebop.Topics.Select(x => x.TopicId));
-			Assert.Contains(29323, bebop.Topics.Select(x => x.TopicId));
+			Assert.Equal(15, bebop.Topics.Count);
 		}
 
 		[Fact]

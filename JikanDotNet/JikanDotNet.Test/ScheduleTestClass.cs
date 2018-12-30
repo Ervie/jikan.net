@@ -26,8 +26,8 @@ namespace JikanDotNet.Tests
 		{
 			Schedule currentSeason = Task.Run(() => jikan.GetSchedule(ScheduledDay.Monday)).Result;
 
-			Assert.Contains("Ani ni Tsukeru Kusuri wa Nai! 2", currentSeason.Monday.Select(x => x.Title));
-			Assert.Contains("Golden Kamuy 2nd Season", currentSeason.Monday.Select(x => x.Title));
+			Assert.Contains("Manaria Friends", currentSeason.Monday.Select(x => x.Title));
+			Assert.Contains("Puzzle & Dragon", currentSeason.Monday.Select(x => x.Title));
 		}
 
 		[Fact]
@@ -35,7 +35,7 @@ namespace JikanDotNet.Tests
 		{
 			Schedule currentSeason = Task.Run(() => jikan.GetSchedule(ScheduledDay.Friday)).Result;
 
-			Assert.Contains("Banana Fish", currentSeason.Friday.Select(x => x.Title));
+			Assert.Contains("Doraemon (2005)", currentSeason.Friday.Select(x => x.Title));
 			Assert.Contains("Toaru Majutsu no Index III", currentSeason.Friday.Select(x => x.Title));
 		}
 		[Fact]

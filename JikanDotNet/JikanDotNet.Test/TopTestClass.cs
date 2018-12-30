@@ -119,7 +119,7 @@ namespace JikanDotNet.Tests
 		{
 			MangaTop top = Task.Run(() => jikan.GetMangaTop(1, TopMangaExtension.TopNovel)).Result;
 
-			Assert.Equal("Utsuro no Hako to Zero no Maria", top.Top.First().Title);
+			Assert.Equal("Monogatari Series: First Season", top.Top.First().Title);
 		}
 
 		[Fact]

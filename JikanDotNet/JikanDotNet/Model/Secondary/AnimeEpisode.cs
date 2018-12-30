@@ -32,12 +32,6 @@ namespace JikanDotNet
 		public string TitleEnglish { get; set; }
 
 		/// <summary>
-		/// Episode number as a string.
-		/// </summary>
-		[JsonProperty(PropertyName = "episode")]
-		public string EpisodeNumber { get; set; }
-
-		/// <summary>
 		/// Date when episode aired at first.
 		/// </summary>
 		[JsonProperty(PropertyName = "aired")]
