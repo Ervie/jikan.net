@@ -47,6 +47,12 @@ namespace JikanDotNet
 		/// More info extension, return extra information stored in "more info" tab of manga.
 		/// </summary>
 		[Description("moreinfo")]
-		MoreInfo
+		MoreInfo,
+
+		/// <summary>
+		/// Recommendations extension, return extra information stored in "recommendation" tab of manga.
+		/// </summary>
+		[Description("recommendations")]
+		Recommendations
 	}
 }

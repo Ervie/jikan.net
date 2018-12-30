@@ -305,6 +305,21 @@ namespace JikanDotNet
 
 		#endregion GetAnimeMoreInfo
 
+		#region GetAnimeRecommendations
+
+		/// <summary>
+		/// Returns collection of anime recommendation.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <returns>Collection of anime recomendation.</returns>
+		public async Task<Recommendations> GetAnimeRecommendations(long id)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Anime, id.ToString(), AnimeExtension.Recommendations.GetDescription() };
+			return await ExecuteGetRequest<Recommendations>(endpointParts);
+		}
+
+		#endregion GetAnimeRecommendations
+
 		#endregion Anime methods
 
 		#region Character methods
@@ -497,6 +512,21 @@ namespace JikanDotNet
 		}
 
 		#endregion GetMangaMoreInfo
+
+		#region GetAnimeRecommendations
+
+		/// <summary>
+		/// Returns collection of manga recommendation.
+		/// </summary>
+		/// <param name="id">MAL id of manga.</param>
+		/// <returns>Collection of manga recomendation.</returns>
+		public async Task<Recommendations> GetMangaRecommendations(long id)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Manga, id.ToString(), MangaExtension.Recommendations.GetDescription() };
+			return await ExecuteGetRequest<Recommendations>(endpointParts);
+		}
+
+		#endregion GetAnimeRecommendations
 
 		#endregion Manga methods
 

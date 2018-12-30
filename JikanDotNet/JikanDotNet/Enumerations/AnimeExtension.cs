@@ -20,7 +20,7 @@ namespace JikanDotNet
 		Episodes,
 
 		/// <summary>
-		/// Characters and staff extension, return list of basic information about characters appearing in the manga.
+		/// Characters and staff extension, return list of basic information about characters appearing in the anime.
 		/// </summary>
 		[Description("characters_staff")]
 		CharactersStaff,
@@ -44,7 +44,7 @@ namespace JikanDotNet
 		Stats,
 
 		/// <summary>
-		/// News extension, return basic information about all news related to manga.
+		/// News extension, return basic information about all news related to anime.
 		/// </summary>
 		[Description("news")]
 		News,
@@ -56,9 +56,15 @@ namespace JikanDotNet
 		Forum,
 
 		/// <summary>
-		/// More info extension, return extra information stored in "more info" tab of manga.
+		/// More info extension, return extra information stored in "more info" tab of anime.
 		/// </summary>
 		[Description("moreinfo")]
-		MoreInfo
+		MoreInfo,
+
+		/// <summary>
+		/// Recommendations extension, return extra information stored in "recommendation" tab of anime.
+		/// </summary>
+		[Description("recommendations")]
+		Recommendations
 	}
 }

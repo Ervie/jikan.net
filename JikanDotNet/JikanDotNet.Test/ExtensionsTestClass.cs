@@ -88,7 +88,18 @@ namespace JikanDotNet.Tests
 			MoreInfo berserk = Task.Run(() => jikan.GetMangaMoreInfo(2)).Result;
 
 			Assert.Contains("The Prototype (1988)", berserk.Info);
-			}
+		}
+
+		[Fact]
+		public void ShouldParseBerserkRecommendations()
+		{
+			Recommendations berserk = Task.Run(() => jikan.GetMangaRecommendations(2)).Result;
+
+			//Claymore
+			Assert.Equal(583, berserk.RecommendationCollection.First().MalId);
+			Assert.True(berserk.RecommendationCollection.First().RecommendationCount > 25);
+			Assert.True(berserk.RecommendationCollection.Count > 90);
+		}
 
 		[Fact]
 		public void ShouldParseCowboyBebopEpisode()
@@ -161,6 +172,17 @@ namespace JikanDotNet.Tests
 			MoreInfo bebop = Task.Run(() => jikan.GetAnimeMoreInfo(1)).Result;
 
 			Assert.Contains("Suggested Order of Viewing", bebop.Info);
+		}
+
+		[Fact]
+		public void ShouldParseCowboyBebopRecommendations()
+		{
+			Recommendations bebop = Task.Run(() => jikan.GetAnimeRecommendations(1)).Result;
+
+			//Samurai Champloo
+			Assert.Equal(205, bebop.RecommendationCollection.First().MalId);
+			Assert.True(bebop.RecommendationCollection.First().RecommendationCount > 70);
+			Assert.True(bebop.RecommendationCollection.Count > 100);
 		}
 	}
 }

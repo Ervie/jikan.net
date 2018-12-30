@@ -79,6 +79,13 @@ namespace JikanDotNet
 		Task<MoreInfo> GetAnimeMoreInfo(long id);
 
 		/// <summary>
+		/// Returns collection of anime recommendation.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <returns>Collection of anime recomendation.</returns>
+		Task<Recommendations> GetAnimeRecommendations(long id);
+
+		/// <summary>
 		/// Returns manga with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of manga.</param>
@@ -126,6 +133,13 @@ namespace JikanDotNet
 		/// <param name="id">MAL id of manga.</param>
 		/// <returns>Collections of forum topics related to manga with given MAL id.</returns>
 		Task<MoreInfo> GetMangaMoreInfo(long id);
+
+		/// <summary>
+		/// Returns collection of manga recommendation.
+		/// </summary>
+		/// <param name="id">MAL id of manga.</param>
+		/// <returns>Collection of manga recomendation.</returns>
+		Task<Recommendations> GetMangaRecommendations(long id);
 
 		/// <summary>
 		/// Returns character with given MAL id.
