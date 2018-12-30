@@ -14,6 +14,17 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
+		public void ShouldParseAnimeActionGenreMetadata()
+		{
+			AnimeGenre genre = Task.Run(() => jikan.GetAnimeGenre(1)).Result;
+
+			Assert.NotNull(genre);
+			Assert.True(genre.TotalCount > 3300);
+			Assert.Equal("Action Anime", genre.Metadata.Name);
+			Assert.Equal(genre.Metadata.MalId, genre.MalId);
+		}
+
+		[Fact]
 		public void ShouldParseAnimeActionGenre()
 		{
 			AnimeGenre genre = Task.Run(() => jikan.GetAnimeGenre(1)).Result;
@@ -34,6 +45,17 @@ namespace JikanDotNet.Tests
 			Assert.Equal("Mecha Anime", genre.Metadata.Name);
 			Assert.Equal(18, genre.Metadata.MalId);
 			Assert.Equal("Code Geass: Hangyaku no Lelouch", genre.Anime.First().Title);
+		}
+
+		[Fact]
+		public void ShouldParseAnimeMysteryGenreMetadata()
+		{
+			AnimeGenre genre = Task.Run(() => jikan.GetAnimeGenre(GenreSearch.Mystery, 2)).Result;
+
+			Assert.NotNull(genre);
+			Assert.True(genre.TotalCount > 600);
+			Assert.Equal("Mystery Anime", genre.Metadata.Name);
+			Assert.Equal(genre.MalId, genre.Metadata.MalId);
 		}
 
 		[Fact]

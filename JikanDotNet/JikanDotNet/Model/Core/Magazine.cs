@@ -6,7 +6,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Magazine model class.
 	/// </summary>
-	public class Magazine
+	public class Magazine : IMalEntity
 	{
 		/// <summary>
 		/// Metadata about magazine..
@@ -19,5 +19,20 @@ namespace JikanDotNet
 		/// </summary>
 		[JsonProperty(PropertyName = "manga")]
 		public ICollection<MangaSubEntry> Manga { get; set; }
+
+		/// <summary>
+		/// ID associated with MyAnimeList.
+		/// </summary>
+		public long MalId
+		{
+			get
+			{
+				return Metadata.MalId;
+			}
+			set
+			{
+				Metadata.MalId = value;
+			}
+		}
 	}
 }

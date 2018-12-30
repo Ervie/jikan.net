@@ -25,5 +25,20 @@ namespace JikanDotNet
 		/// </summary>
 		[JsonProperty(PropertyName = "anime")]
 		public ICollection<AnimeSubEntry> Anime { get; set; }
+
+		/// <summary>
+		/// ID associated with MyAnimeList.
+		/// </summary>
+		public long MalId
+		{
+			get
+			{
+				return Metadata.MalId;
+			}
+			set
+			{
+				Metadata.MalId = value;
+			}
+		}
 	}
 }

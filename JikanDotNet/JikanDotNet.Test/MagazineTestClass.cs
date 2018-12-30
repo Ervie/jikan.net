@@ -20,6 +20,8 @@ namespace JikanDotNet.Tests
 
 			Assert.NotNull(magazine);
 			Assert.Equal("Big Comic Original", magazine.Metadata.Name);
+			Assert.Equal(1, magazine.Metadata.MalId);
+			Assert.Equal(1, magazine.MalId);
 			Assert.Equal("Monster", magazine.Manga.First().Title);
 			Assert.Contains("Pluto", magazine.Manga.Select(x => x.Title));
 		}

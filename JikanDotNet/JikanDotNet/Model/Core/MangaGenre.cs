@@ -20,11 +20,25 @@ namespace JikanDotNet
 		[JsonProperty(PropertyName = "item_count")]
 		public int TotalCount { get; set; }
 
-
 		/// <summary>
 		/// List of manga with assigned genre.
 		/// </summary>
 		[JsonProperty(PropertyName = "manga")]
 		public ICollection<MangaSubEntry> Manga { get; set; }
+
+		/// <summary>
+		/// ID associated with MyAnimeList.
+		/// </summary>
+		public long MalId
+		{
+			get
+			{
+				return Metadata.MalId;
+			}
+			set
+			{
+				Metadata.MalId = value;
+			}
+		}
 	}
 }

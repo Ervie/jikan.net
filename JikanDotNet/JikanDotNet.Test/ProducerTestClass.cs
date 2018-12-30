@@ -20,6 +20,8 @@ namespace JikanDotNet.Tests
 
 			Assert.NotNull(producer);
 			Assert.Equal("Studio Pierrot", producer.Metadata.Name);
+			Assert.Equal(1, producer.Metadata.MalId);
+			Assert.Equal(1, producer.MalId);
 			Assert.Equal("Tokyo Ghoul", producer.Anime.First().Title);
 			Assert.Contains("Black Clover", producer.Anime.Select(x => x.Title));
 		}
