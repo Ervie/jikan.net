@@ -329,7 +329,7 @@ namespace JikanDotNet
 		/// <returns>Collection of anime reviews.</returns>
 		public async Task<AnimeReviews> GetAnimeReviews(long id)
 		{
-			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Anime, id.ToString(), MangaExtension.Reviews.GetDescription() };
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Anime, id.ToString(), AnimeExtension.Reviews.GetDescription() };
 			return await ExecuteGetRequest<AnimeReviews>(endpointParts);
 		}
 
@@ -341,11 +341,38 @@ namespace JikanDotNet
 		/// <returns>Collection of anime reviews.</returns>
 		public async Task<AnimeReviews> GetAnimeReviews(long id, int page)
 		{
-			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Anime, id.ToString(), MangaExtension.Reviews.GetDescription(), page.ToString() };
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Anime, id.ToString(), AnimeExtension.Reviews.GetDescription(), page.ToString() };
 			return await ExecuteGetRequest<AnimeReviews>(endpointParts);
 		}
 
 		#endregion GetAnimeReviews
+
+		#region GetAnimeUserUpdates
+
+		/// <summary>
+		/// Returns collection of anime user updates.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <returns>Collection of anime user updates.</returns>
+		public async Task<AnimeUserUpdates> GetAnimeUserUpdates(long id)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Anime, id.ToString(), AnimeExtension.UserUpdates.GetDescription() };
+			return await ExecuteGetRequest<AnimeUserUpdates>(endpointParts);
+		}
+
+		/// <summary>
+		/// Returns collection of anime user updates.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <param name="page">Index of page folding 75 records of top ranging (e.g. 1 will return first 75 records, 2 will return record from 76 to 150 etc.)</param>
+		/// <returns>Collection of anime user updates.</returns>
+		public async Task<AnimeUserUpdates> GetAnimeUserUpdates(long id, int page)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Anime, id.ToString(), AnimeExtension.UserUpdates.GetDescription(), page.ToString() };
+			return await ExecuteGetRequest<AnimeUserUpdates>(endpointParts);
+		}
+
+		#endregion GetAnimeUserUpdates
 
 		#endregion Anime methods
 
@@ -581,6 +608,33 @@ namespace JikanDotNet
 		}
 
 		#endregion GetMangaReviews
+
+		#region GetMangaUserUpdates
+
+		/// <summary>
+		/// Returns collection of manga user updates.
+		/// </summary>
+		/// <param name="id">MAL id of manga.</param>
+		/// <returns>Collection of manga user updates.</returns>
+		public async Task<MangaUserUpdates> GetMangaUserUpdates(long id)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Manga, id.ToString(), MangaExtension.UserUpdates.GetDescription() };
+			return await ExecuteGetRequest<MangaUserUpdates>(endpointParts);
+		}
+
+		/// <summary>
+		/// Returns collection of manga user updates.
+		/// </summary>
+		/// <param name="id">MAL id of manga.</param>
+		/// <param name="page">Index of page folding 75 records of top ranging (e.g. 1 will return first 75 records, 2 will return record from 76 to 150 etc.)</param>
+		/// <returns>Collection of manga user updates.</returns>
+		public async Task<MangaUserUpdates> GetMangaUserUpdates(long id, int page)
+		{
+			string[] endpointParts = new string[] { Endpoint, JikanEndPointCategories.Manga, id.ToString(), MangaExtension.UserUpdates.GetDescription(), page.ToString() };
+			return await ExecuteGetRequest<MangaUserUpdates>(endpointParts);
+		}
+
+		#endregion GetMangaUserUpdates
 
 		#endregion Manga methods
 

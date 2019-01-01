@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -131,6 +132,29 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
+		public void ShouldParseMonsterUserUpdates()
+		{
+			MangaUserUpdates monster = Task.Run(() => jikan.GetMangaUserUpdates(1)).Result;
+
+			var firstUpdate = monster.Updates.First();
+
+			Assert.Equal(75, monster.Updates.Count);
+			Assert.Equal(DateTime.Now.Day, firstUpdate.Date.Value.Day);
+			Assert.True(!firstUpdate.ChaptersTotal.HasValue || firstUpdate.ChaptersTotal == 162);
+		}
+
+		[Fact]
+		public void ShouldParseMonsterUserUpdatesPaged()
+		{
+			MangaUserUpdates monster = Task.Run(() => jikan.GetMangaUserUpdates(1, 2)).Result;
+
+			var firstUpdate = monster.Updates.First();
+
+			Assert.Equal(75, monster.Updates.Count);
+			Assert.True(!firstUpdate.ChaptersTotal.HasValue || firstUpdate.ChaptersTotal == 162);
+		}
+
+		[Fact]
 		public void ShouldParseCowboyBebopEpisode()
 		{
 			AnimeEpisodes bebop = Task.Run(() => jikan.GetAnimeEpisodes(1)).Result;
@@ -241,6 +265,29 @@ namespace JikanDotNet.Tests
 
 			Assert.Equal(6, bebop.Reviews.First().Reviewer.Scores.Overall);
 			Assert.Equal(7, bebop.Reviews.First().Reviewer.Scores.Animation);
+		}
+
+		[Fact]
+		public void ShouldParseCowboyBebopUserUpdates()
+		{
+			AnimeUserUpdates bebop = Task.Run(() => jikan.GetAnimeUserUpdates(1)).Result;
+
+			var firstUpdate = bebop.Updates.First();
+
+			Assert.Equal(75, bebop.Updates.Count);
+			Assert.Equal(DateTime.Now.Day, firstUpdate.Date.Value.Day);
+			Assert.True(!firstUpdate.EpisodesTotal.HasValue || firstUpdate.EpisodesTotal == 26);
+		}
+
+		[Fact]
+		public void ShouldParseCowboyBebopUserUpdatesPaged()
+		{
+			AnimeUserUpdates bebop = Task.Run(() => jikan.GetAnimeUserUpdates(1, 2)).Result;
+
+			var firstUpdate = bebop.Updates.First();
+
+			Assert.Equal(75, bebop.Updates.Count);
+			Assert.True(!firstUpdate.EpisodesTotal.HasValue || firstUpdate.EpisodesTotal == 26);
 		}
 	}
 }
