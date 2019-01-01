@@ -25,6 +25,9 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
     - Stats
     - Forum Topics
     - More Info
+    - Reviews
+    - Recommendations
+    - User Updates
 - Manga
     - Basic information
     - Characters 
@@ -33,6 +36,9 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
     - Stats
     - Forum Topics
     - More Info
+    - Reviews
+    - Recommendations
+    - User Updates
 - People
     - Basic information
     - Pictures
@@ -44,7 +50,9 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
     - Filters (Advanced Search)
     - Pagination Support
     - No.# of pages
-- Seasonal Anime (Season + Year)
+- Seasonal Anime 
+    - Season + Year
+    - Undefined airing date
 - Season Archive
 - Anime Scheduling (for current season)
     - Filtering by day of the week.
@@ -66,27 +74,28 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
         - Filter by Anime/Manga.
     - Anime list
         - Filter by status (watching, completed, etc.)
-        - Paging support
+        - Pagination support
     - Manga list
         - Filter by status (reading, completed, etc.)
+        - Pagination support
+- Clubs
+    - Profile
+    - Member list
         - Paging support
 - Meta
     - API status
-- Top
-    - People Top.
-    - Characters Top.
 # Installation
 
 ### Package manager
 
 ```
-PM> Install-Package JikanDotNet -Version 1.1.0
+PM> Install-Package JikanDotNet -Version 1.2.0
 ```
 
 ### .NET CLI
 
 ```
->dotnet add package JikanDotNet --version 1.1.0
+>dotnet add package JikanDotNet --version 1.2.0
 ```
 
 Then restore dependencies:
@@ -96,66 +105,25 @@ Then restore dependencies:
 
 # Changelog
 
-## 23.11.2018 - Version 1.1.0
+## 01.01.2019 - Version 1.2.0
 
-- Integration with Jikan API v3
+- Integration with Jikan API v3.2.
 - New endpoints
-    - Genre
-        - Anime genres
-        - Manga genres
-    - Producer
-    - Magazine
-    - User
-        - Profile
-        - Friends
-        - History
-            - Filter by Anime/Manga.
-        - Anime list
-            - Filter by status (watching, completed, etc.)
-            - Paging support
-        - Manga list
-            - Filter by status (reading, completed, etc.)
-            - Paging support
-    - Meta
-        - API status
-    - Top
-        - People Top.
-        - Characters Top.
-    - Season Archive
-- Extensions are no longer supported due to changes in REST API. Each type of extension now has separate method. Example:
-    - Previously:
-        - GetAnime(id) -> returns basic information about anime.
-        - GetAnime(id, AnimeExtension.CharactersStaff) -> return basic information and characters/staff.
-    - Currently:
-        - GetAnime(id) -> returns basic information about anime.
-        - GetAnimeCharactersStaff(id) -> return characters/staff of anime.
-- <b>[Search]</b> Status enum renamed to AiringStatus
-- <b>[Anime]</b>
-    - Removed `AiredString`
-    - `Pictures` is now collection of `Picture` type.
-    - `StaffPositionEntry.Role` is now a collection.
-    - `ForumPostSnippet.DateRelatice` is now DateTime.
-- <b>[Manga]</b>
-    - Removed `PublishedString`
-    - `TitleSynonyms` are now a collection.
-    - `Pictures` is now collection of `Picture` type.
-    - `Authors`, `Genres` and `Serializations` are now `MALSubItem` collections.
-- <b>[Character]</b>
-    - `Nicknames` are now a collection.
-    - `Images` got renamed to `Pictures` and now are collection of `Picture` type.
-- <b>[Person]</b>
-    - `Birthday` is now DateTime.
-    - `Images` got renamed to `Pictures` and now are collection of `Picture` type.
-- <b>[AnimeSearch]</b>
-    - Add `Airing`, `StartDate`, `EndDate` and `Rated` data.
-- <b>[MangaSearch]</b>
-    - Add `Publishing`, `StartDate`, `EndDate` and `Chapters` data.
-- <b>[CharactersSearch]</b>
-    - `Nicknames` are now a collection.
-- <b>[PersonSearch]</b>
-    - `Nicknames` got renamed to `AlternativeNames` and are now a collection.
-- <b>[Schedule]</b>
-    - Filtering by day of the week is enabled now.
+    - Anime
+        - Reviews
+        - Recommendations
+        - User Updates
+    - Manga
+        - Reviews
+        - Recommendations
+        - User Updates
+    - Season schedule with undefined date, marked as "Later" on MAL.
+- Fixes
+    - <b>[Anime]</b> Removed obsolete `EpisodeNumber` from `AnimeEpisode` class.
+    - <b>[Anime]/[Manga]</b> `Related` field is deserialized properly when empty (fix in REST API).
+- Other
+    - All data from user related endpoints are now cached for 5 minutes only.
+    - MAL entities with their own MAL Id now share `IMalEntity` interface.
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**
 
