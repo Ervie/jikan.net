@@ -71,6 +71,11 @@
 		public const string User = "user";
 
 		/// <summary>
+		/// Club endpoint.
+		/// </summary>
+		public const string Club = "club";
+
+		/// <summary>
 		/// Search endpoint.
 		/// </summary>
 		public const string Search = "search";

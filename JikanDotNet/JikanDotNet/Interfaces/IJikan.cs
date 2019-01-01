@@ -542,6 +542,28 @@ namespace JikanDotNet
 		Task<UserMangaList> GetUserMangaList(string username, UserMangaListExtension filter, int page);
 
 		/// <summary>
+		/// Return club's profile information.
+		/// </summary>
+		/// <param name="id">MAL id of the club.</param>
+		/// <returns>Club's profile information.</returns>
+		Task<Club> GetClub(long id);
+
+		/// <summary>
+		/// Return club's member list.
+		/// </summary>
+		/// <param name="id">MAL id of the club.</param>
+		/// <returns>Club's member list.</returns>
+		Task<ClubMembers> GetClubMembers(long id);
+
+		/// <summary>
+		/// Return club's member list.
+		/// </summary>
+		/// <param name="id">MAL id of the club.</param>
+		/// <param name="page">Index of page folding 36 records of top ranging (e.g. 1 will return first 36 records, 2 will return record from 37 to 72 etc.)</param>
+		/// <returns>Club's member list.</returns>
+		Task<ClubMembers> GetClubMembers(long id, int page);
+
+		/// <summary>
 		/// Returns list of results related to search.
 		/// </summary>
 		/// <param name="query">Search query.</param>
