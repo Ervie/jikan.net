@@ -86,6 +86,21 @@ namespace JikanDotNet
 		Task<Recommendations> GetAnimeRecommendations(long id);
 
 		/// <summary>
+		/// Returns collection of anime reviews.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <returns>Collection of anime reviews.</returns>
+		Task<AnimeReviews> GetAnimeReviews(long id);
+
+		/// <summary>
+		/// Returns collection of anime reviews.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <param name="page">Index of page folding 20 records of top ranging (e.g. 1 will return first 20 records, 2 will return record from 21 to 40 etc.)</param>
+		/// <returns>Collection of anime reviews.</returns>
+		Task<AnimeReviews> GetAnimeReviews(long id, int page);
+
+		/// <summary>
 		/// Returns manga with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of manga.</param>
@@ -140,6 +155,21 @@ namespace JikanDotNet
 		/// <param name="id">MAL id of manga.</param>
 		/// <returns>Collection of manga recomendation.</returns>
 		Task<Recommendations> GetMangaRecommendations(long id);
+
+		/// <summary>
+		/// Returns collection of manga reviews.
+		/// </summary>
+		/// <param name="id">MAL id of manga.</param>
+		/// <returns>Collection of manga reviews.</returns>
+		Task<MangaReviews> GetMangaReviews(long id);
+
+		/// <summary>
+		/// Returns collection of manga reviews.
+		/// </summary>
+		/// <param name="id">MAL id of manga.</param>
+		/// <param name="page">Index of page folding 20 records of top ranging (e.g. 1 will return first 20 records, 2 will return record from 21 to 40 etc.)</param>
+		/// <returns>Collection of manga reviews.</returns>
+		Task<MangaReviews> GetMangaReviews(long id, int page);
 
 		/// <summary>
 		/// Returns character with given MAL id.

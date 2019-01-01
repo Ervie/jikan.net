@@ -102,6 +102,35 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
+		public void ShouldParseBerserkReviews()
+		{
+			MangaReviews berserk = Task.Run(() => jikan.GetMangaReviews(2)).Result;
+
+			Assert.Equal("TheCriticsClub", berserk.Reviews.First().Reviewer.Username);
+			Assert.Equal(4403, berserk.Reviews.First().MalId);
+			Assert.Equal(0, berserk.Reviews.First().Reviewer.ChaptersRead);
+			Assert.True(berserk.Reviews.First().HelpfulCount > 1200);
+
+			Assert.Equal(10, berserk.Reviews.First().Reviewer.Scores.Overall);
+			Assert.Equal(9, berserk.Reviews.First().Reviewer.Scores.Story);
+
+		}
+
+		[Fact]
+		public void ShouldParseBerserkReviewsPaged()
+		{
+			MangaReviews berserk = Task.Run(() => jikan.GetMangaReviews(2, 2)).Result;
+
+			Assert.Equal("ChickenSpoon", berserk.Reviews.First().Reviewer.Username);
+			Assert.Equal(80128, berserk.Reviews.First().MalId);
+			Assert.Equal(0, berserk.Reviews.First().Reviewer.ChaptersRead);
+			Assert.True(berserk.Reviews.First().HelpfulCount > 15);
+
+			Assert.Equal(9, berserk.Reviews.First().Reviewer.Scores.Overall);
+			Assert.Equal(8, berserk.Reviews.First().Reviewer.Scores.Story);
+		}
+
+		[Fact]
 		public void ShouldParseCowboyBebopEpisode()
 		{
 			AnimeEpisodes bebop = Task.Run(() => jikan.GetAnimeEpisodes(1)).Result;
@@ -183,6 +212,35 @@ namespace JikanDotNet.Tests
 			Assert.Equal(205, bebop.RecommendationCollection.First().MalId);
 			Assert.True(bebop.RecommendationCollection.First().RecommendationCount > 70);
 			Assert.True(bebop.RecommendationCollection.Count > 100);
+		}
+
+		[Fact]
+		public void ShouldParseCowboyBebopReviews()
+		{
+			AnimeReviews bebop = Task.Run(() => jikan.GetAnimeReviews(1)).Result;
+
+			Assert.Equal("TheLlama", bebop.Reviews.First().Reviewer.Username);
+			Assert.Equal(7406, bebop.Reviews.First().MalId);
+			Assert.Equal(26, bebop.Reviews.First().Reviewer.EpisodesSeen);
+			Assert.True(bebop.Reviews.First().HelpfulCount > 1400);
+
+			Assert.Equal(10, bebop.Reviews.First().Reviewer.Scores.Overall);
+			Assert.Equal(9, bebop.Reviews.First().Reviewer.Scores.Animation);
+
+		}
+
+		[Fact]
+		public void ShouldParseCowboyBebopReviewsPaged()
+		{
+			AnimeReviews bebop = Task.Run(() => jikan.GetAnimeReviews(1, 2)).Result;
+
+			Assert.Equal("ChouEritto", bebop.Reviews.First().Reviewer.Username);
+			Assert.Equal(289045, bebop.Reviews.First().MalId);
+			Assert.Equal(26, bebop.Reviews.First().Reviewer.EpisodesSeen);
+			Assert.True(bebop.Reviews.First().HelpfulCount > 5);
+
+			Assert.Equal(6, bebop.Reviews.First().Reviewer.Scores.Overall);
+			Assert.Equal(7, bebop.Reviews.First().Reviewer.Scores.Animation);
 		}
 	}
 }

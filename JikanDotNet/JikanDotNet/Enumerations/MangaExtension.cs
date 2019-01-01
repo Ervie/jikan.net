@@ -53,6 +53,18 @@ namespace JikanDotNet
 		/// Recommendations extension, return extra information stored in "recommendation" tab of manga.
 		/// </summary>
 		[Description("recommendations")]
-		Recommendations
+		Recommendations,
+
+		/// <summary>
+		/// Reviews extension, return extra information stored in "reviews" tab of anime.
+		/// </summary>
+		[Description("reviews")]
+		Reviews,
+
+		/// <summary>
+		/// User Updates extension, return extra information about user updates stored in "stats" tab of anime.
+		/// </summary>
+		[Description("userupdates")]
+		UserUpdates
 	}
 }
