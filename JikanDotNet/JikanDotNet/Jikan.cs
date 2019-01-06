@@ -53,6 +53,16 @@ namespace JikanDotNet
 		/// <summary>
 		/// Constructor.
 		/// </summary>
+		public Jikan()
+		{
+			this.useHttps = true;
+			this.surpressException = true;
+			httpClient = HttpProvider.GetHttpClient(useHttps);
+		}
+
+		/// <summary>
+		/// Constructor.
+		/// </summary>
 		/// <param name="useHttps">Should client send SSL encrypted requests.</param>
 		/// <param name="surpressException">Should exception be thrown in case of failed request. If true, failed request return null.</param>
 		public Jikan(bool useHttps, bool surpressException = true)

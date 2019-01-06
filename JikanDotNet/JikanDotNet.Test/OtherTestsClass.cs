@@ -12,7 +12,7 @@ namespace JikanDotNet.Tests
 
 		public OtherTestsClass()
 		{
-			jikan = new Jikan(true);
+			jikan = new Jikan();
 		}
 
 		[Fact]

@@ -257,14 +257,9 @@ namespace JikanDotNet.Tests
 		public void ShouldParseCowboyBebopReviewsPaged()
 		{
 			AnimeReviews bebop = Task.Run(() => jikan.GetAnimeReviews(1, 2)).Result;
-
-			Assert.Equal("ChouEritto", bebop.Reviews.First().Reviewer.Username);
-			Assert.Equal(289045, bebop.Reviews.First().MalId);
+			
 			Assert.Equal(26, bebop.Reviews.First().Reviewer.EpisodesSeen);
 			Assert.True(bebop.Reviews.First().HelpfulCount > 5);
-
-			Assert.Equal(6, bebop.Reviews.First().Reviewer.Scores.Overall);
-			Assert.Equal(7, bebop.Reviews.First().Reviewer.Scores.Animation);
 		}
 
 		[Fact]

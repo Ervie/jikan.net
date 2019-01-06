@@ -18,7 +18,7 @@ namespace JikanDotNet.Tests
 		{
 			Season winter2000 = Task.Run(() => jikan.GetSeason(2000, Seasons.Winter)).Result;
 
-			Assert.Contains("Boogiepop wa Warawanai", winter2000.SeasonEntries.Select(x => x.Title));
+			Assert.Contains("Boogiepop wa Warawanai: Boogiepop Phantom", winter2000.SeasonEntries.Select(x => x.Title));
 			Assert.Contains("Ojamajo Doremi Sharp", winter2000.SeasonEntries.Select(x => x.Title));
 		}
 
