@@ -89,13 +89,13 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
 ### Package manager
 
 ```
-PM> Install-Package JikanDotNet -Version 1.2.0
+PM> Install-Package JikanDotNet -Version 1.2.1
 ```
 
 ### .NET CLI
 
 ```
->dotnet add package JikanDotNet --version 1.2.0
+>dotnet add package JikanDotNet --version 1.2.1
 ```
 
 Then restore dependencies:
@@ -104,6 +104,12 @@ Then restore dependencies:
 ```
 
 # Changelog
+
+
+## 06.01.2019 - Version 1.2.1
+
+- `Jikan` class has parameterless contructor now, which makes requests over HTTPS by default.
+- New class `BaseJikanRequest` with cache related properties is now inherited by all main classes returned from wrapper methods.
 
 ## 01.01.2019 - Version 1.2.0
 

@@ -1,4 +1,9 @@
-## 01.01.2019 - Version 1.2.0 (latest)
+## 06.01.2019 - Version 1.2.1 (latest)
+
+- `Jikan` class has parameterless contructor now, which makes requests over HTTPS by default.
+- New class `BaseJikanRequest` with cache related properties is now inherited by all main classes returned from wrapper methods.
+
+## 01.01.2019 - Version 1.2.0 
 
 - Integration with Jikan API v3.2.
 - New endpoints
