@@ -89,13 +89,13 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
 ### Package manager
 
 ```
-PM> Install-Package JikanDotNet -Version 1.2.1
+PM> Install-Package JikanDotNet -Version 1.2.2
 ```
 
 ### .NET CLI
 
 ```
->dotnet add package JikanDotNet --version 1.2.1
+>dotnet add package JikanDotNet --version 1.2.2
 ```
 
 Then restore dependencies:
