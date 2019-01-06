@@ -8,7 +8,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Model class for anime top.
 	/// </summary>
-    public class AnimeTop
+    public class AnimeTop: BaseJikanRequest
 	{
 		/// <summary>
 		/// Collection of anime entries on top list.

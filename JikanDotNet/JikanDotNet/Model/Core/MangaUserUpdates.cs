@@ -6,7 +6,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Model class for manga user updates collection.
 	/// </summary>
-	public class MangaUserUpdates
+	public class MangaUserUpdates: BaseJikanRequest
 	{
 		/// <summary>
 		/// Collection of manga user updates.

@@ -27,5 +27,38 @@ namespace JikanDotNet.Tests
 
 			Assert.Contains(1, entities.Select(x => x.MalId));
 		}
+
+		[Fact]
+		public void ShouldParseBaseJikanRequest()
+		{
+			BaseJikanRequest request = Task.Run(() => jikan.GetAnime(1)).Result;
+
+			Assert.NotNull(request);
+		}
+
+		[Fact]
+		public void ShouldParseAnimeAsBaseJikanRequest()
+		{
+			Anime bebop = Task.Run(() => jikan.GetAnime(1)).Result;
+
+			Assert.True(bebop.RequestCacheExpiry < 43201);
+		}
+
+		[Fact]
+		public void ShouldParseCacheExpiration()
+		{
+			// Random id
+			int randomId = DateTime.Now.Second * DateTime.Now.Minute;
+			BaseJikanRequest request = Task.Run(() => jikan.GetAnime(randomId)).Result;
+
+			Assert.NotNull(request);
+
+			if (!request.RequestCached)
+			{
+				request = Task.Run(() => jikan.GetAnime(randomId)).Result;
+			}
+			
+			Assert.True(request.RequestCached);
+		}
 	}
 }

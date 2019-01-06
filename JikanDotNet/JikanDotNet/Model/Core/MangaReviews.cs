@@ -6,7 +6,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Model class for manga review collection.
 	/// </summary>
-	public class MangaReviews
+	public class MangaReviews: BaseJikanRequest
 	{
 		/// <summary>
 		/// Collection of manga reviews.

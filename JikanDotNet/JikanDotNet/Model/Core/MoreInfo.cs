@@ -5,7 +5,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Extra information stored in "more info" tab.
 	/// </summary>
-	public class MoreInfo
+	public class MoreInfo: BaseJikanRequest
 	{
 		/// <summary>
 		/// Extra information stored in "more info" tab.

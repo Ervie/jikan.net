@@ -5,7 +5,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Manga related statistics model class.
 	/// </summary>
-	public class MangaStats
+	public class MangaStats: BaseJikanRequest
 	{
 		/// <summary>
 		/// Number of users who labeled manga status as "reading"

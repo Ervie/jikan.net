@@ -6,7 +6,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Model class for people top.
 	/// </summary>
-	public class PeopleTop
+	public class PeopleTop: BaseJikanRequest
 	{
 		/// <summary>
 		/// Collection of people entries on top list.

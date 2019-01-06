@@ -6,7 +6,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// User's friends model class.
 	/// </summary>
-	public class UserFriends
+	public class UserFriends: BaseJikanRequest
 	{
 		/// <summary>
 		/// Collection of user's friends basic information

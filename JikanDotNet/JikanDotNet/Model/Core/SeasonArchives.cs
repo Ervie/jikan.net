@@ -7,7 +7,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Seasons archive collection model class
 	/// </summary>
-	public class SeasonArchives
+	public class SeasonArchives: BaseJikanRequest
 	{
 		/// <summary>
 		/// Season entry for season.

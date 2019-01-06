@@ -6,7 +6,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Anime news list model class.
 	/// </summary>
-	public class AnimeNews
+	public class AnimeNews: BaseJikanRequest
 	{
 		/// <summary>
 		/// News related to anime.

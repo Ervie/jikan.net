@@ -6,7 +6,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// User's profile model class.
 	/// </summary>
-	public class UserProfile
+	public class UserProfile: BaseJikanRequest
 	{
 		/// <summary>
 		/// Username.

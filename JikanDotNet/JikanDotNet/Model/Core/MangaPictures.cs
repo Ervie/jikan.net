@@ -6,7 +6,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Manga's picture model class.
 	/// </summary>
-	public class MangaPictures
+	public class MangaPictures: BaseJikanRequest
 	{
 		/// <summary>
 		/// Manga's extra image URLs.

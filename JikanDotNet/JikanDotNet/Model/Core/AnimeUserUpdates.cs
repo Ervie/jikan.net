@@ -6,7 +6,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Model class for anime user updates collection.
 	/// </summary>
-	public class AnimeUserUpdates
+	public class AnimeUserUpdates: BaseJikanRequest
 	{
 		/// <summary>
 		/// Collection of anime user updates.

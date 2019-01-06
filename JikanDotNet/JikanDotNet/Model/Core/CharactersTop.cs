@@ -6,7 +6,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Model class for most popular characters.
 	/// </summary>
-	public class CharactersTop
+	public class CharactersTop: BaseJikanRequest
 	{
 		/// <summary>
 		/// Collection of characters entries on top list.

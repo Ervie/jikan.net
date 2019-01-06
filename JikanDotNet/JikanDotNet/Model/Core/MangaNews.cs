@@ -6,7 +6,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Manga news list model class.
 	/// </summary>
-	public class MangaNews
+	public class MangaNews: BaseJikanRequest
 	{
 		/// <summary>
 		/// News related to manga.

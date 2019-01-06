@@ -6,7 +6,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Model class for club members collection.
 	/// </summary>
-	public class ClubMembers
+	public class ClubMembers: BaseJikanRequest
 	{
 		/// <summary>
 		/// Collection of club members.

@@ -9,7 +9,7 @@ namespace Example.CSharp
         static void Main(string[] args)
         {
 			// Initialize JikanWrapper
-			IJikan jikan = new Jikan(true);
+			IJikan jikan = new Jikan();
 
 			// Send request for "Cowboy Bebop" anime
 			Anime cowboyBebop = jikan.GetAnime(1).Result;

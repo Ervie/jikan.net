@@ -6,7 +6,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Season model class
 	/// </summary>
-	public class Season
+	public class Season: BaseJikanRequest
 	{
 		/// <summary>
 		/// Season entry for season.

@@ -6,7 +6,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Studio model class.
 	/// </summary>
-	public class AnimeGenre
+	public class AnimeGenre: BaseJikanRequest
 	{
 		/// <summary>
 		/// Metadata about genre.

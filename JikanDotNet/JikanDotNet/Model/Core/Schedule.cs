@@ -6,7 +6,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Model class for schedule of current season.
 	/// </summary>
-	public class Schedule
+	public class Schedule: BaseJikanRequest
 	{
 		/// <summary>
 		/// All current season entries scheduled for Monday.

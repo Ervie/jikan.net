@@ -6,7 +6,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// User's history model class.
 	/// </summary>
-	public class UserHistory
+	public class UserHistory: BaseJikanRequest
 	{
 		/// <summary>
 		/// Collection of user's history updates.

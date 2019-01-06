@@ -6,7 +6,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Anime's characters and staff model class.
 	/// </summary>
-	public class AnimeCharactersStaff
+	public class AnimeCharactersStaff: BaseJikanRequest
 	{
 		/// <summary>
 		/// Anime's characters collection with basic information.

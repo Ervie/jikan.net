@@ -8,7 +8,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Model class for collection of MyAnimeList forum topic.
 	/// </summary>
-	public class ForumTopics
+	public class ForumTopics: BaseJikanRequest
 	{
 		/// <summary>
 		/// Forum topics related to anime.

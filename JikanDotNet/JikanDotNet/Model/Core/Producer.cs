@@ -6,7 +6,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Producer model class.
 	/// </summary>
-	public class Producer
+	public class Producer: BaseJikanRequest
 	{
 		/// <summary>
 		/// Metadata about producer.

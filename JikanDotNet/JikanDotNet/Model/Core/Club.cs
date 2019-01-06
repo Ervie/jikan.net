@@ -8,7 +8,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Club profile model class.
 	/// </summary>
-	public class Club : IMalEntity
+	public class Club : BaseJikanRequest, IMalEntity
 	{
 		/// <summary>
 		/// ID associated with MyAnimeList.

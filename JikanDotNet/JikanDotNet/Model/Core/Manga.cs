@@ -6,7 +6,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Manga model class.
 	/// </summary>
-	public class Manga: IMalEntity
+	public class Manga: BaseJikanRequest, IMalEntity
 	{
 		/// <summary>
 		/// ID associated with MyAnimeList.

@@ -6,7 +6,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Person's picture model class.
 	/// </summary>
-	public class PersonPictures
+	public class PersonPictures: BaseJikanRequest
 	{
 		/// <summary>
 		/// Person's extra image URLs.

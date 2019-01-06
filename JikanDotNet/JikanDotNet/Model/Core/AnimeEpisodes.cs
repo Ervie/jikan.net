@@ -6,7 +6,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Anime episodes list model class.
 	/// </summary>
-	public class AnimeEpisodes
+	public class AnimeEpisodes: BaseJikanRequest
 	{
 		/// <summary>
 		/// Last page of episodes' list.
