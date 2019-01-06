@@ -1,7 +1,7 @@
-## 06.01.2019 - Version 1.2.1 (latest)
+## 06.01.2019 - Version 1.2.2 (latest)
 
 - `Jikan` class has parameterless contructor now, which makes requests over HTTPS by default.
-- New class `BaseJikanRequest` with cache related properties is now inherited by all main classes returned from wrapper methods.
+- New class `BaseJikanRequest` with cache related properties is now inherited by all main classes returned from wrapper methods (search request only in version 1.2.2).
 
 ## 01.01.2019 - Version 1.2.0 
 
