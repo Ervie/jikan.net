@@ -14,6 +14,12 @@ namespace JikanDotNet
 		public long MalId { get; set; }
 
 		/// <summary>
+		/// Title of recommended anime/manga.
+		/// </summary>
+		[JsonProperty(PropertyName = "title")]
+		public string Title { get; set; }
+
+		/// <summary>
 		/// Url to page of recommended anime/manga.
 		/// </summary>
 		[JsonProperty(PropertyName = "url")]
