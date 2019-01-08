@@ -263,10 +263,10 @@ namespace Example.CSharp
 			}
 
 			// Will throw Exception -> schedule.Monday is null!
-			foreach (var mondayAnime in schedule.Monday)
-			{
-				Console.WriteLine(mondayAnime.Title);
-			}
+			//foreach (var mondayAnime in schedule.Monday)
+			//{
+			//	Console.WriteLine(mondayAnime.Title);
+			//}
 
 			// Send request for anime ranking (highest rating).
 			AnimeTop topAnimeList = jikan.GetAnimeTop().Result;
@@ -589,6 +589,112 @@ namespace Example.CSharp
 
 			// Print amount of today's and weekly requests.
 			Console.WriteLine("Today requests:" + statusMetadata.RequestsToday + ", weekly: " + statusMetadata.RequestsThisWeek);
+
+			// Send request for "Later" season
+			Season seasonLater = jikan.GetSeasonLater().Result;
+
+			// Print season basic information
+			// Output -> "Season : Later" (season year is null!)
+			Console.WriteLine("Season : " + seasonLater.SeasonYear + " " + seasonLater.SeasonName);
+
+			// Print each anime title.
+			foreach (var seasonEntry in seasonLater.SeasonEntries)
+			{
+				Console.WriteLine(seasonEntry.Title);
+			}
+
+			// Send request for "Cowboy Bebop" club profile.
+			Club club = jikan.GetClub(1).Result;
+
+			// Output -> "Category: Anime"
+			Console.WriteLine("Category: " + club.Category);
+
+			// Output -> "Type: public"
+			Console.WriteLine("Type: " + club.Type);
+
+			// Print name of each staff member in this club
+			foreach (var staffMember in club.Staff)
+			{
+				Console.WriteLine(staffMember.Name);
+			}
+
+			// Send request for "Cowboy Bebop" club members.
+			ClubMembers members = jikan.GetClubMembers(1).Result;
+
+			// Print each member username.
+			foreach (var member in members.Members)
+			{
+				Console.WriteLine(member.Username);
+			}
+
+			// Send request for "Cowboy Bebop" club members -> second page.
+			members = jikan.GetClubMembers(1, 2).Result;
+
+			// Send request for "Cowboy Bebop" recommendations.
+			Recommendations bebopRecommedations = jikan.GetAnimeRecommendations(1).Result;
+
+			// Print title of each recommended anime
+			foreach (var recommendation in bebopRecommedations.RecommendationCollection)
+			{
+				Console.WriteLine(recommendation.Title);
+			}
+
+			// Send request for "Berserk"  manga recommendations.
+			Recommendations berserkRecommendations = jikan.GetMangaRecommendations(2).Result;
+
+			// Print title of each recommended manga
+			foreach (var recommendation in berserkRecommendations.RecommendationCollection)
+			{
+				Console.WriteLine(recommendation.Title);
+			}
+
+			// Send request for revies of "Cowboy Bebop" anime
+			AnimeReviews bebopReviews = jikan.GetAnimeReviews(1).Result;
+
+			// Print reviewer username, overall score and helpful count of each review
+			foreach (var review in bebopReviews.Reviews)
+			{
+				Console.WriteLine("Reviewer username: " + review.Reviewer.Username + ", overall score: " + review.Reviewer.Scores.Overall + ",helpful count: " + review.HelpfulCount);
+			}
+
+			// Send request for revies of "Cowboy Bebop" anime, second page
+			bebopReviews = jikan.GetAnimeReviews(1, 2).Result;
+
+			// Send request for revies of "Berserk" manga
+			MangaReviews berserkReviews = jikan.GetMangaReviews(2).Result;
+
+			// Print reviewer username, overall score and helpful count of each review
+			foreach (var review in berserkReviews.Reviews)
+			{
+				Console.WriteLine("Reviewer username: " + review.Reviewer.Username + ", overall score: " + review.Reviewer.Scores.Overall + ",helpful count: " + review.HelpfulCount);
+			}
+
+			// Send request for revies of "Berserk" manga, second page
+			berserkReviews = jikan.GetMangaReviews(2, 2).Result;
+
+			// Send request for user updates of "Cowboy Bebop" anime
+			AnimeUserUpdates bebopUpdates = jikan.GetAnimeUserUpdates(1).Result;
+
+			// Print username and number of seen episodes for each update
+			foreach (var update in bebopUpdates.Updates)
+			{
+				Console.WriteLine("User " + update.Username + " seen " + update.EpisodesSeen + " of " + update.EpisodesTotal + " episodes.");
+			}
+
+			// Send request for user updates of "Cowboy Bebop" anime, second page
+			bebopUpdates = jikan.GetAnimeUserUpdates(1, 2).Result;
+
+			// Send request for user updates of "Berserk" manga
+			MangaUserUpdates berserkUpdates = jikan.GetMangaUserUpdates(2).Result;
+
+			// Print username and number of read chapters for each update
+			foreach (var update in berserkUpdates.Updates)
+			{
+				Console.WriteLine("User " + update.Username + " read " + update.ChaptersRead + " of " + update.ChaptersTotal + " chapters.");
+			}
+
+			// Send request for user updates of "Berserk" manga, second page
+			berserkUpdates = jikan.GetMangaUserUpdates(2, 2).Result;
 		}
 	}
 }

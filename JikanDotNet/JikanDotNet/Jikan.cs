@@ -347,7 +347,7 @@ namespace JikanDotNet
 		/// Returns collection of anime reviews.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
-		/// <param name="page">Index of page folding 20 records of top ranging (e.g. 1 will return first 20 records, 2 will return record from 21 to 40 etc.)</param>
+		/// <param name="page">Index of page folding 20 records (e.g. 1 will return first 20 records, 2 will return record from 21 to 40 etc.)</param>
 		/// <returns>Collection of anime reviews.</returns>
 		public async Task<AnimeReviews> GetAnimeReviews(long id, int page)
 		{
@@ -374,7 +374,7 @@ namespace JikanDotNet
 		/// Returns collection of anime user updates.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
-		/// <param name="page">Index of page folding 75 records of top ranging (e.g. 1 will return first 75 records, 2 will return record from 76 to 150 etc.)</param>
+		/// <param name="page">Index of page folding 75 records (e.g. 1 will return first 75 records, 2 will return record from 76 to 150 etc.)</param>
 		/// <returns>Collection of anime user updates.</returns>
 		public async Task<AnimeUserUpdates> GetAnimeUserUpdates(long id, int page)
 		{
