@@ -1,6 +1,7 @@
 using JikanDotNet.Resources;
 using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Reflection;
 
 namespace JikanDotNet.Extensions
