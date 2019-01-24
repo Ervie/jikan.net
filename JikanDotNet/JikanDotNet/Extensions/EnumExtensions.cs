@@ -1,4 +1,3 @@
-using JikanDotNet.Resources;
 using System;
 using System.ComponentModel;
 using System.Linq;
@@ -8,7 +7,7 @@ namespace JikanDotNet.Extensions
 {
 	internal static class EnumExtensions
 	{
-		public static string GetDescription<T>(this Enum source)
+		public static string GetDescription(this Enum source)
 		{
 			return
 				source

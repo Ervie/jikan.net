@@ -1146,7 +1146,7 @@ namespace JikanDotNet
 		/// Returns information about user's friends with given username.
 		/// </summary>
 		/// <param name="username">Username.</param>
-		/// <param name="page">Index of the page.
+		/// <param name="page">Index of the page.</param>
 		/// <returns>Information about user's friends with given username.</returns>
 		public async Task<UserFriends> GetUserFriends(string username, int page)
 		{
