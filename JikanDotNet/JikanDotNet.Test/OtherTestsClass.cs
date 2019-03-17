@@ -55,10 +55,12 @@ namespace JikanDotNet.Tests
 
 			if (!request.RequestCached)
 			{
-				request = Task.Run(() => jikan.GetAnime(randomId)).Result;
+				Assert.Equal(43200, request.RequestCacheExpiry);
 			}
-			
-			Assert.True(request.RequestCached);
+			else
+			{
+				Assert.True(request.RequestCacheExpiry < 43200);
+			}
 		}
 	}
 }

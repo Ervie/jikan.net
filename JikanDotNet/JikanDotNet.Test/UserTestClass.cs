@@ -88,6 +88,16 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
+		public void ShouldParseErvelanMangaWatchingList()
+		{
+			UserAnimeList animeList = Task.Run(() => jikan.GetUserAnimeList("Ervelan", UserAnimeListExtension.Watching)).Result;
+
+			Assert.NotNull(animeList);
+			Assert.Equal(UserAnimeListExtension.Watching, animeList.Anime.First().WatchingStatus);
+			Assert.Equal(AiringStatus.Airing, animeList.Anime.First().AiringStatus);
+		}
+
+		[Fact]
 		public void ShouldParseErvelanDroppedList()
 		{
 			UserAnimeList animeList = Task.Run(() => jikan.GetUserAnimeList("Ervelan", UserAnimeListExtension.Dropped)).Result;
@@ -123,6 +133,17 @@ namespace JikanDotNet.Tests
 			Assert.NotNull(mangaList);
 			Assert.True(mangaList.Manga.Count > 90);
 			Assert.Contains("Dr. Stone", mangaList.Manga.Select(x => x.Title));
+		}
+
+		[Fact]
+		public void ShouldParseErvelanMangaReadingList()
+		{
+			UserMangaList mangaList = Task.Run(() => jikan.GetUserMangaList("Ervelan", UserMangaListExtension.Reading)).Result;
+
+			Assert.NotNull(mangaList);
+			Assert.Contains("One Piece", mangaList.Manga.Select(x => x.Title));
+			Assert.Equal(UserMangaListExtension.Reading, mangaList.Manga.First().ReadingStatus);
+			Assert.Equal(AiringStatus.Airing, mangaList.Manga.First().PublishingStatus);
 		}
 
 		[Fact]

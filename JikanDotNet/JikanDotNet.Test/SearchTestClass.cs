@@ -21,10 +21,10 @@ namespace JikanDotNet.Tests
 			var nullPerson = Task.Run(() => jikan.SearchPerson("")).Result;
 			var nullCharacter = Task.Run(() => jikan.SearchCharacter("")).Result;
 			
-			Assert.Null(nullAnime);
-			Assert.Null(nullManga);
-			Assert.Null(nullPerson);
-			Assert.Null(nullCharacter);
+			Assert.Empty(nullAnime.Results);
+			Assert.Empty(nullManga.Results);
+			Assert.Empty(nullPerson.Results);
+			Assert.Empty(nullCharacter.Results);
 		}
 
 		[Theory]
@@ -44,6 +44,19 @@ namespace JikanDotNet.Tests
 			AnimeSearchResult danganronpaAnime = Task.Run(() => jikan.SearchAnime("danganronpa")).Result;
 
 			Assert.Equal(20, danganronpaAnime.ResultLastPage);
+		}
+
+		[Fact]
+		public void ShouldReturnAiringOnePieceAnime()
+		{
+			AnimeSearchConfig searchConfig = new AnimeSearchConfig()
+			{
+				Status = AiringStatus.Airing
+			};
+
+			AnimeSearchResult onePieceAnime = Task.Run(() => jikan.SearchAnime("one", searchConfig)).Result;
+
+			Assert.Equal("One Piece", onePieceAnime.Results.First().Title);
 		}
 
 		[Fact]
@@ -88,6 +101,22 @@ namespace JikanDotNet.Tests
 		public void ShouldReturnYotsubatoManga()
 		{
 			MangaSearchResult yotsubato = Task.Run(() => jikan.SearchManga("yotsubato")).Result;
+
+			Assert.Equal("Yotsuba to!", yotsubato.Results.First().Title);
+			Assert.Equal("Manga", yotsubato.Results.First().Type);
+			Assert.Equal(0, yotsubato.Results.First().Volumes);
+			Assert.Equal(104, yotsubato.Results.First().MalId);
+		}
+
+		[Fact]
+		public void ShouldReturnPublishedYotsubatoManga()
+		{
+			MangaSearchConfig searchConfig = new MangaSearchConfig()
+			{
+				Status = AiringStatus.Airing
+			};
+
+			MangaSearchResult yotsubato = Task.Run(() => jikan.SearchManga("yotsubato", searchConfig)).Result;
 
 			Assert.Equal("Yotsuba to!", yotsubato.Results.First().Title);
 			Assert.Equal("Manga", yotsubato.Results.First().Type);
