@@ -127,5 +127,17 @@ namespace JikanDotNet
 		/// </summary>
 		[JsonProperty(PropertyName = "priority")]
 		public string Priority { get; set; }
+
+		/// <summary>
+		/// Current airing status of anime.
+		/// </summary>
+		[JsonProperty(PropertyName = "airing_status")]
+		public AiringStatus AiringStatus { get; set; }
+
+		/// <summary>
+		/// Current user's watching status of anime.
+		/// </summary>
+		[JsonProperty(PropertyName = "watching_status")]
+		public UserAnimeListExtension WatchingStatus { get; set; }
 	}
 }
