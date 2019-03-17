@@ -89,13 +89,13 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
 ### Package manager
 
 ```
-PM> Install-Package JikanDotNet -Version 1.2.2
+PM> Install-Package JikanDotNet -Version 1.2.3
 ```
 
 ### .NET CLI
 
 ```
->dotnet add package JikanDotNet --version 1.2.2
+>dotnet add package JikanDotNet --version 1.2.3
 ```
 
 Then restore dependencies:
@@ -105,31 +105,16 @@ Then restore dependencies:
 
 # Changelog
 
+## 17.03.2019 - Version 1.2.3
 
-## 06.01.2019 - Version 1.2.1/1.2.2
-
-- `Jikan` class has parameterless contructor now, which makes requests over HTTPS by default.
-- New class `BaseJikanRequest` with cache related properties is now inherited by all main classes returned from wrapper methods (search request only in version 1.2.2).
-
-## 01.01.2019 - Version 1.2.0
-
-- Integration with Jikan API v3.2.
-- New endpoints
-    - Anime
-        - Reviews
-        - Recommendations
-        - User Updates
-    - Manga
-        - Reviews
-        - Recommendations
-        - User Updates
-    - Season schedule with undefined date, marked as "Later" on MAL.
 - Fixes
-    - <b>[Anime]</b> Removed obsolete `EpisodeNumber` from `AnimeEpisode` class.
-    - <b>[Anime]/[Manga]</b> `Related` field is deserialized properly when empty (fix in REST API).
-- Other
-    - All data from user related endpoints are now cached for 5 minutes only.
-    - MAL entities with their own MAL Id now share `IMalEntity` interface.
+    - <b>[Recommendation]</b> Added missing `Title` field.
+- New fields
+    - AnimeList
+        - `AnimeListEntry` now has `AiringStatus` and `PublishingStatus` fields.
+    - MangaList
+        - `MangaListEntry` now has `ReadingStatus` and `WatchingStatus` fields.
+        
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**
 

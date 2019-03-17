@@ -1,4 +1,14 @@
-## 06.01.2019 - Version 1.2.2 (latest)
+## 17.03.2019 - Version 1.2.3 (newest)
+
+- Fixes
+    - <b>[Recommendation]</b> Added missing `Title` field.
+- New fields
+    - AnimeList
+        - `AnimeListEntry` now has `AiringStatus` and `PublishingStatus` fields.
+    - MangaList
+        - `MangaListEntry` now has `ReadingStatus` and `WatchingStatus` fields.
+
+## 06.01.2019 - Version 1.2.2
 
 - `Jikan` class has parameterless contructor now, which makes requests over HTTPS by default.
 - New class `BaseJikanRequest` with cache related properties is now inherited by all main classes returned from wrapper methods (search request only in version 1.2.2).
