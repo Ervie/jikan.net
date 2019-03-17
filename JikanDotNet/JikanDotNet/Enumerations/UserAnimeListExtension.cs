@@ -11,36 +11,36 @@ namespace JikanDotNet
 		/// Basic extension, parse data for all entries.
 		/// </summary>
 		[Description("all")]
-		All,
+		All = 0,
 
 		/// <summary>
 		/// Watching extension, parses only anime with watching status.
 		/// </summary>
 		[Description("watching")]
-		Watching,
+		Watching = 1,
 
 		/// <summary>
 		/// Completed extension, parses only anime with completed status.
 		/// </summary>
 		[Description("completed")]
-		Completed,
+		Completed = 2,
 
 		/// <summary>
 		/// On hold extension, parses only anime with on hold status.
 		/// </summary>
 		[Description("onhold")]
-		OnHold,
+		OnHold = 3,
 
 		/// <summary>
 		/// Dropped extension, parses only anime with dropped status.
 		/// </summary>
 		[Description("dropped")]
-		Dropped,
+		Dropped = 4,
 
 		/// <summary>
 		/// Plan to watch extension, parses only anime with plan to watch status.
 		/// </summary>
 		[Description("plantowatch")]
-		PlanToWatch
+		PlanToWatch = 6
 	}
 }

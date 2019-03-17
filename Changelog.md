@@ -1,7 +1,8 @@
-## 17.03.2019 - Version 1.2.3 (newest)
+## 17.03.2019 - Version 1.2.4 (newest)
 
 - Fixes
     - <b>[Recommendation]</b> Added missing `Title` field.
+    - <b>[AiringStatus]</b> Fixed PlanToWatch/PlanToRead values (in 1.2.4).
 - New fields
     - AnimeList
         - `AnimeListEntry` now has `AiringStatus` and `PublishingStatus` fields.
