@@ -54,7 +54,7 @@ namespace JikanDotNet.Tests
 				Status = AiringStatus.Airing
 			};
 
-			AnimeSearchResult onePieceAnime = Task.Run(() => jikan.SearchAnime("one", searchConfig)).Result;
+			AnimeSearchResult onePieceAnime = Task.Run(() => jikan.SearchAnime("one p", searchConfig)).Result;
 
 			Assert.Equal("One Piece", onePieceAnime.Results.First().Title);
 		}

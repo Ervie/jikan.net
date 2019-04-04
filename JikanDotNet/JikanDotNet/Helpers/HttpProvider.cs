@@ -12,12 +12,12 @@ namespace JikanDotNet.Helpers
 		/// <summary>
 		/// Endpoint for not SSL encrypted requests.
 		/// </summary>
-		public const string httpEndpoint = "http://api.jikan.moe/v3";
+		public const string httpEndpoint = "http://api.jikan.moe/v3/";
 
 		/// <summary>
 		/// Endpoint for SSL encrypted requests.
 		/// </summary>
-		public const string httpsEndpoint = "https://api.jikan.moe/v3";
+		public const string httpsEndpoint = "https://api.jikan.moe/v3/";
 		
 		/// <summary>
 		/// Static HttpClient.
@@ -29,7 +29,6 @@ namespace JikanDotNet.Helpers
 		/// </summary>
 		static HttpProvider()
 		{
-			Client = new HttpClient();
 		}
 
 		/// <summary>

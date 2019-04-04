@@ -32,7 +32,7 @@ namespace JikanDotNet.Tests
 			Producer producer = Task.Run(() => jikan.GetProducer(1, 2)).Result;
 
 			Assert.NotNull(producer);
-			Assert.Contains("Ura Tegamibachi", producer.Anime.Select(x => x.Title));
+			Assert.Contains("Super GALS! Kotobuki Ran", producer.Anime.Select(x => x.Title));
 		}
 
 		[Fact]

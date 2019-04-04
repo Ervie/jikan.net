@@ -88,7 +88,7 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseErvelanMangaWatchingList()
+		public void ShouldParseErvelanAnimeWatchingList()
 		{
 			UserAnimeList animeList = Task.Run(() => jikan.GetUserAnimeList("Ervelan", UserAnimeListExtension.Watching)).Result;
 

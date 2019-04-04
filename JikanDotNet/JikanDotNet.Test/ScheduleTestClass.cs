@@ -26,8 +26,8 @@ namespace JikanDotNet.Tests
 		{
 			Schedule currentSeason = Task.Run(() => jikan.GetSchedule(ScheduledDay.Monday)).Result;
 
-			Assert.Contains("Manaria Friends", currentSeason.Monday.Select(x => x.Title));
-			Assert.Contains("Puzzle & Dragon", currentSeason.Monday.Select(x => x.Title));
+			Assert.Contains("Dororo", currentSeason.Monday.Select(x => x.Title));
+			Assert.Contains("Mayonaka no Occult Koumuin", currentSeason.Monday.Select(x => x.Title));
 		}
 
 		[Fact]
@@ -36,7 +36,7 @@ namespace JikanDotNet.Tests
 			Schedule currentSeason = Task.Run(() => jikan.GetSchedule(ScheduledDay.Friday)).Result;
 
 			Assert.Contains("Doraemon (2005)", currentSeason.Friday.Select(x => x.Title));
-			Assert.Contains("Toaru Majutsu no Index III", currentSeason.Friday.Select(x => x.Title));
+			Assert.Contains("Crayon Shin-chan", currentSeason.Friday.Select(x => x.Title));
 		}
 		[Fact]
 		public void ShouldParseUnknownSchedule()
