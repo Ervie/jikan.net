@@ -72,6 +72,28 @@ namespace JikanDotNet
 			httpClient = HttpProvider.GetHttpClient(useHttps);
 		}
 
+		/// <summary>
+		/// Constructor.
+		/// </summary>
+		/// <param name="endpointUrl">Endpoint of the REST API.</param>
+		/// <param name="surpressException">Should exception be thrown in case of failed request. If true, failed request return null.</param>
+		public Jikan(string endpointUrl, bool surpressException = true)
+		{
+			this.surpressException = surpressException;
+			httpClient = HttpProvider.GetHttpClient(endpointUrl);
+		}
+
+		/// <summary>
+		/// Constructor.
+		/// </summary>
+		/// <param name="endpointUrl">Endpoint of the REST API.</param>
+		/// <param name="surpressException">Should exception be thrown in case of failed request. If true, failed request return null.</param>
+		public Jikan(Uri endpointUrl, bool surpressException = true)
+		{
+			this.surpressException = surpressException;
+			httpClient = HttpProvider.GetHttpClient(endpointUrl);
+		}
+
 		#endregion Constructors
 
 		#region Private Methods

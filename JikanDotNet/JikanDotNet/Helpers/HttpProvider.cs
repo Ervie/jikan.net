@@ -33,8 +33,9 @@ namespace JikanDotNet.Helpers
 		}
 
 		/// <summary>
-		/// Get static HttpClient.
+		/// Get static HttpClient. Using default Jikan REST endpoint.
 		/// </summary>
+		/// <param name="useHttps">Define if request should be send to SSL encrypted endpoint.</param>
 		/// <returns>Static HttpClient.</returns>
 		public static HttpClient GetHttpClient(bool useHttps)
 		{
@@ -44,6 +45,48 @@ namespace JikanDotNet.Helpers
 				Client = new HttpClient
 				{
 					BaseAddress = new Uri(endpoint)
+				};
+				Client.DefaultRequestHeaders.Accept.Clear();
+				Client.DefaultRequestHeaders.Accept.Add(
+					new MediaTypeWithQualityHeaderValue("application/json"));
+			}
+
+			return Client;
+		}
+
+		/// <summary>
+		/// Get static HttpClient. Using custom, user defined Jikan REST endpoint.
+		/// </summary>
+		/// <param name="endpoint">Endpoint of the REST API.</param>
+		/// <returns>Static HttpClient.</returns>
+		public static HttpClient GetHttpClient(string endpoint)
+		{
+			if (Client == null)
+			{
+				Client = new HttpClient
+				{
+					BaseAddress = new Uri(endpoint)
+				};
+				Client.DefaultRequestHeaders.Accept.Clear();
+				Client.DefaultRequestHeaders.Accept.Add(
+					new MediaTypeWithQualityHeaderValue("application/json"));
+			}
+
+			return Client;
+		}
+
+		/// <summary>
+		/// Get static HttpClient. Using custom, user defined Jikan REST endpoint.
+		/// </summary>
+		/// <param name="endpoint">Endpoint of the REST API.</param>
+		/// <returns>Static HttpClient.</returns>
+		public static HttpClient GetHttpClient(Uri endpoint)
+		{
+			if (Client == null)
+			{
+				Client = new HttpClient
+				{
+					BaseAddress = endpoint
 				};
 				Client.DefaultRequestHeaders.Accept.Clear();
 				Client.DefaultRequestHeaders.Accept.Add(
