@@ -14,9 +14,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseAnimeActionGenreMetadata()
+		public async Task GetAnimeGenre_ActionGenreId_ShouldParseAnimeActionGenreMetadata()
 		{
-			AnimeGenre genre = Task.Run(() => jikan.GetAnimeGenre(1)).Result;
+			AnimeGenre genre = await jikan.GetAnimeGenre(1);
 
 			Assert.NotNull(genre);
 			Assert.True(genre.TotalCount > 3300);
@@ -25,9 +25,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseAnimeActionGenre()
+		public async Task GetAnimeGenre_ActionGenreId_ShouldParseAnimeActionGenre()
 		{
-			AnimeGenre genre = Task.Run(() => jikan.GetAnimeGenre(1)).Result;
+			AnimeGenre genre = await jikan.GetAnimeGenre(1);
 
 			Assert.NotNull(genre);
 			Assert.True(genre.TotalCount > 3300);
@@ -36,9 +36,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseAnimeMechaGenre()
+		public async Task GetAnimeGenre_MechaGenreId_ShouldParseAnimeMechaGenre()
 		{
-			AnimeGenre genre = Task.Run(() => jikan.GetAnimeGenre(GenreSearch.Mecha)).Result;
+			AnimeGenre genre = await jikan.GetAnimeGenre(GenreSearch.Mecha);
 
 			Assert.NotNull(genre);
 			Assert.True(genre.TotalCount > 1000);
@@ -48,9 +48,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseAnimeMysteryGenreMetadata()
+		public async Task GetAnimeGenre_MysteryGenreIdSecondPage_ShouldParseAnimeMysteryGenreMetadata()
 		{
-			AnimeGenre genre = Task.Run(() => jikan.GetAnimeGenre(GenreSearch.Mystery, 2)).Result;
+			AnimeGenre genre = await jikan.GetAnimeGenre(GenreSearch.Mystery, 2);
 
 			Assert.NotNull(genre);
 			Assert.True(genre.TotalCount > 600);
@@ -59,9 +59,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseAnimeMysteryGenre()
+		public async Task GetAnimeGenre_ActionGenreIdSecondPage_ShouldParseAnimeMysteryGenre()
 		{
-			AnimeGenre genre = Task.Run(() => jikan.GetAnimeGenre(GenreSearch.Mystery, 2)).Result;
+			AnimeGenre genre = await jikan.GetAnimeGenre(GenreSearch.Mystery, 2);
 
 			Assert.NotNull(genre);
 			Assert.True(genre.TotalCount > 600);
@@ -70,9 +70,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseMangaActionGenre()
+		public async Task GetMangaGenre_ActionGenreId_ShouldParseMangaActionGenre()
 		{
-			MangaGenre genre = Task.Run(() => jikan.GetMangaGenre(1)).Result;
+			MangaGenre genre = await jikan.GetMangaGenre(1);
 
 			Assert.NotNull(genre);
 			Assert.True(genre.TotalCount > 6000);
@@ -81,9 +81,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseMangaMechaGenre()
+		public async Task GetMangaGenre_MechaGenreId_ShouldParseMangaMechaGenre()
 		{
-			MangaGenre genre = Task.Run(() => jikan.GetMangaGenre(GenreSearch.Mecha)).Result;
+			MangaGenre genre = await jikan.GetMangaGenre(GenreSearch.Mecha);
 
 			Assert.NotNull(genre);
 			Assert.True(genre.TotalCount > 600);
@@ -93,9 +93,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseMangaDramaGenre()
+		public async Task GetMangaGenre_DramaGenreId_ShouldParseMangaDramaGenre()
 		{
-			MangaGenre genre = Task.Run(() => jikan.GetMangaGenre(GenreSearch.Drama, 2)).Result;
+			MangaGenre genre = await jikan.GetMangaGenre(GenreSearch.Drama, 2);
 
 			Assert.NotNull(genre);
 			Assert.True(genre.TotalCount > 600);

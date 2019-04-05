@@ -15,49 +15,49 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseNorioWakamotoImages()
+		public async Task GetPersonPictures_WakamotoId_ShouldParseNorioWakamotoImages()
 		{
-			PersonPictures norioWakamoto = Task.Run(() => jikan.GetPersonPictures(84)).Result;
+			PersonPictures norioWakamoto = await jikan.GetPersonPictures(84);
 
 			Assert.Equal(4, norioWakamoto.Pictures.Count);
 		}
 
 		[Fact]
-		public void ShouldParseKirimaSharoImages()
+		public async Task GetCharacterPictures_SharoId_ShouldParseKirimaSharoImages()
 		{
-			CharacterPictures kirimaSharo = Task.Run(() => jikan.GetCharacterPictures(94947)).Result;
+			CharacterPictures kirimaSharo = await jikan.GetCharacterPictures(94947);
 
 			Assert.Equal(8, kirimaSharo.Pictures.Count);
 		}
 
 		[Fact]
-		public void ShouldParseMonsterImages()
+		public async Task GetMangaPictures_MonsterId_ShouldParseMonsterImages()
 		{
-			MangaPictures monster = Task.Run(() => jikan.GetMangaPictures(1)).Result;
+			MangaPictures monster = await jikan.GetMangaPictures(1);
 
 			Assert.Equal(8, monster.Pictures.Count);
 		}
 
 		[Fact]
-		public void ShouldParseMonsterCharacters()
+		public async Task GetMangaCharacters_MonsterId_ShouldParseMonsterCharacters()
 		{
-			MangaCharacters monster = Task.Run(() => jikan.GetMangaCharacters(1)).Result;
+			MangaCharacters monster = await jikan.GetMangaCharacters(1);
 
 			Assert.Equal(33, monster.Characters.Count);
 		}
 
 		[Fact]
-		public void ShouldParseMonsterCharactersJohan()
+		public async Task GetMangaPictures_MonsterId_ShouldParseMonsterCharactersJohan()
 		{
-			MangaCharacters monster = Task.Run(() => jikan.GetMangaCharacters(1)).Result;
+			MangaCharacters monster = await jikan.GetMangaCharacters(1);
 
 			Assert.Contains("Liebert, Johan", monster.Characters.Select(x => x.Name));
 		}
 
 		[Fact]
-		public void ShouldParseMonsterStats()
+		public async Task GetMangaStatistics_MonsterId_ShouldParseMonsterStats()
 		{
-			MangaStats monster = Task.Run(() => jikan.GetMangaStatistics(1)).Result;
+			MangaStats monster = await jikan.GetMangaStatistics(1);
 
 			Assert.NotNull(monster.ScoreStats);
 			Assert.True(monster.Completed > 25000);
@@ -65,18 +65,18 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseMonsterNews()
+		public async Task GetMangaNews_MonsterId_ShouldParseMonsterNews()
 		{
-			MangaNews monster = Task.Run(() => jikan.GetMangaNews(1)).Result;
+			MangaNews monster = await jikan.GetMangaNews(1);
 
 			Assert.Equal(11, monster.News.Count);
 			Assert.Contains("Xinil", monster.News.Select(x => x.Author));
 		}
 
 		[Fact]
-		public void ShouldParseMonsterTopics()
+		public async Task GetMangaForumTopics_MonsterId_ShouldParseMonsterTopics()
 		{
-			ForumTopics monster = Task.Run(() => jikan.GetMangaForumTopics(1)).Result;
+			ForumTopics monster = await jikan.GetMangaForumTopics(1);
 
 			Assert.Contains(1672449, monster.Topics.Select(x => x.TopicId));
 			Assert.Contains(155394, monster.Topics.Select(x => x.TopicId));
@@ -84,17 +84,17 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseBerserkMoreInfo()
+		public async Task GetMangaMoreInfo_BerserkId_ShouldParseBerserkMoreInfo()
 		{
-			MoreInfo berserk = Task.Run(() => jikan.GetMangaMoreInfo(2)).Result;
+			MoreInfo berserk = await jikan.GetMangaMoreInfo(2);
 
 			Assert.Contains("The Prototype (1988)", berserk.Info);
 		}
 
 		[Fact]
-		public void ShouldParseBerserkRecommendations()
+		public async Task GetMangaRecommendation_BerserkId_ShouldParseBerserkRecommendations()
 		{
-			Recommendations berserk = Task.Run(() => jikan.GetMangaRecommendations(2)).Result;
+			Recommendations berserk = await jikan.GetMangaRecommendations(2);
 
 			//Claymore
 			Assert.Equal(583, berserk.RecommendationCollection.First().MalId);
@@ -103,9 +103,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseBerserkReviews()
+		public async Task GetMangaReviews_BerserkId_ShouldParseBerserkReviews()
 		{
-			MangaReviews berserk = Task.Run(() => jikan.GetMangaReviews(2)).Result;
+			MangaReviews berserk = await jikan.GetMangaReviews(2);
 
 			Assert.Equal("TheCriticsClub", berserk.Reviews.First().Reviewer.Username);
 			Assert.Equal(4403, berserk.Reviews.First().MalId);
@@ -118,9 +118,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseBerserkReviewsPaged()
+		public async Task GetMangaReviews_BerserkIdSecondPage_ShouldParseBerserkReviewsPaged()
 		{
-			MangaReviews berserk = Task.Run(() => jikan.GetMangaReviews(2, 2)).Result;
+			MangaReviews berserk = await jikan.GetMangaReviews(2, 2);
 
 			Assert.Equal("ChickenSpoon", berserk.Reviews.First().Reviewer.Username);
 			Assert.Equal(80128, berserk.Reviews.First().MalId);
@@ -132,9 +132,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseMonsterUserUpdates()
+		public async Task GetMangaUserUpdates_MonsterId_ShouldParseMonsterUserUpdates()
 		{
-			MangaUserUpdates monster = Task.Run(() => jikan.GetMangaUserUpdates(1)).Result;
+			MangaUserUpdates monster = await jikan.GetMangaUserUpdates(1);
 
 			var firstUpdate = monster.Updates.First();
 
@@ -144,9 +144,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseMonsterUserUpdatesPaged()
+		public async Task GetMangaUserUpdates_MonsterIdSecondPage_ShouldParseMonsterUserUpdatesPaged()
 		{
-			MangaUserUpdates monster = Task.Run(() => jikan.GetMangaUserUpdates(1, 2)).Result;
+			MangaUserUpdates monster = await jikan.GetMangaUserUpdates(1, 2);
 
 			var firstUpdate = monster.Updates.First();
 
@@ -155,35 +155,35 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseCowboyBebopEpisode()
+		public async Task GetAnimeEpisodes_BebopId_ShouldParseCowboyBebopEpisode()
 		{
-			AnimeEpisodes bebop = Task.Run(() => jikan.GetAnimeEpisodes(1)).Result;
+			AnimeEpisodes bebop = await jikan.GetAnimeEpisodes(1);
 
 			Assert.Equal(26, bebop.EpisodeCollection.Count);
 			Assert.Equal("Asteroid Blues", bebop.EpisodeCollection.First().Title);
 		}
 
 		[Fact]
-		public void ShouldParseCowboyBebopCharactersAndStaff()
+		public async Task GetAnimeCharactersStaff_BebopId_ShouldParseCowboyBebopCharactersAndStaff()
 		{
-			AnimeCharactersStaff bebop = Task.Run(() => jikan.GetAnimeCharactersStaff(1)).Result;
+			AnimeCharactersStaff bebop = await jikan.GetAnimeCharactersStaff(1);
 
 			Assert.Contains("Black, Jet", bebop.Characters.Select(x => x.Name));
 			Assert.Contains("Watanabe, Shinichiro", bebop.Staff.Where(x => x.Role.Contains("Director") && x.Role.Contains("Script")).Select(x => x.Name));
 		}
 
 		[Fact]
-		public void ShouldParseCowboyBebopImages()
+		public async Task GetAnimePictures_BebopId_ShouldParseCowboyBebopImages()
 		{
-			AnimePictures bebop = Task.Run(() => jikan.GetAnimePictures(1)).Result;
+			AnimePictures bebop = await jikan.GetAnimePictures(1);
 
 			Assert.Equal(11, bebop.Pictures.Count);
 		}
 
 		[Fact]
-		public void ShouldParseCowboyBebopVideos()
+		public async Task GetAnimeVideos_BebopId_ShouldParseCowboyBebopVideos()
 		{
-			AnimeVideos bebop = Task.Run(() => jikan.GetAnimeVideos(1)).Result;
+			AnimeVideos bebop = await jikan.GetAnimeVideos(1);
 			
 			Assert.Equal(3, bebop.PromoVideos.Count);
 			Assert.Contains("PV 2", bebop.PromoVideos.Select(x => x.Title));
@@ -192,9 +192,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseCowboyBebopStats()
+		public async Task GetAnimeStatistics_BebopId_ShouldParseCowboyBebopStats()
 		{
-			AnimeStats bebop = Task.Run(() => jikan.GetAnimeStatistics(1)).Result;
+			AnimeStats bebop = await jikan.GetAnimeStatistics(1);
 
 			Assert.NotNull(bebop.ScoreStats);
 			Assert.True(bebop.Completed > 450000);
@@ -203,34 +203,34 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseCowboyBebopNews()
+		public async Task GetAnimeNews_BebopId_ShouldParseCowboyBebopNews()
 		{
-			AnimeNews bebop = Task.Run(() => jikan.GetAnimeNews(1)).Result;
+			AnimeNews bebop = await jikan.GetAnimeNews(1);
 
 			Assert.Equal(6, bebop.News.Count);
 			Assert.Contains("Snow", bebop.News.Select(x => x.Author));
 		}
 
 		[Fact]
-		public void ShouldParseCowboyBebopTopics()
+		public async Task GetAnimeForumTopics_BebopId_ShouldParseCowboyBebopTopics()
 		{
-			ForumTopics bebop = Task.Run(() => jikan.GetAnimeForumTopics(1)).Result;
+			ForumTopics bebop = await jikan.GetAnimeForumTopics(1);
 
 			Assert.Equal(15, bebop.Topics.Count);
 		}
 
 		[Fact]
-		public void ShouldParseCowboyBebopMoreInfo()
+		public async Task GetAnimeMoreInfo_BebopId_ShouldParseCowboyBebopMoreInfo()
 		{
-			MoreInfo bebop = Task.Run(() => jikan.GetAnimeMoreInfo(1)).Result;
+			MoreInfo bebop = await jikan.GetAnimeMoreInfo(1);
 
 			Assert.Contains("Suggested Order of Viewing", bebop.Info);
 		}
 
 		[Fact]
-		public void ShouldParseCowboyBebopRecommendations()
+		public async Task GetAnimeRecommendation_BebopId_ShouldParseCowboyBebopRecommendations()
 		{
-			Recommendations bebop = Task.Run(() => jikan.GetAnimeRecommendations(1)).Result;
+			Recommendations bebop = await jikan.GetAnimeRecommendations(1);
 
 			//Samurai Champloo
 			Assert.Equal(205, bebop.RecommendationCollection.First().MalId);
@@ -239,9 +239,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseCowboyBebopReviews()
+		public async Task GetAnimeReviews_BebopId_ShouldParseCowboyBebopReviews()
 		{
-			AnimeReviews bebop = Task.Run(() => jikan.GetAnimeReviews(1)).Result;
+			AnimeReviews bebop = await jikan.GetAnimeReviews(1);
 
 			Assert.Equal("TheLlama", bebop.Reviews.First().Reviewer.Username);
 			Assert.Equal(7406, bebop.Reviews.First().MalId);
@@ -254,18 +254,18 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseCowboyBebopReviewsPaged()
+		public async Task GetAnimeReviews_BebopIdSecondPage_ShouldParseCowboyBebopReviewsPaged()
 		{
-			AnimeReviews bebop = Task.Run(() => jikan.GetAnimeReviews(1, 2)).Result;
+			AnimeReviews bebop = await jikan.GetAnimeReviews(1, 2);
 			
 			Assert.Equal(26, bebop.Reviews.First().Reviewer.EpisodesSeen);
 			Assert.True(bebop.Reviews.First().HelpfulCount > 5);
 		}
 
 		[Fact]
-		public void ShouldParseCowboyBebopUserUpdates()
+		public async Task GetAnimeUserUpdates_BebopId_ShouldParseCowboyBebopUserUpdates()
 		{
-			AnimeUserUpdates bebop = Task.Run(() => jikan.GetAnimeUserUpdates(1)).Result;
+			AnimeUserUpdates bebop = await jikan.GetAnimeUserUpdates(1);
 
 			var firstUpdate = bebop.Updates.First();
 
@@ -275,9 +275,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseCowboyBebopUserUpdatesPaged()
+		public async Task GetAnimeUserUpdates_BebopIdSecondPage_ShouldParseCowboyBebopUserUpdatesPaged()
 		{
-			AnimeUserUpdates bebop = Task.Run(() => jikan.GetAnimeUserUpdates(1, 2)).Result;
+			AnimeUserUpdates bebop = await jikan.GetAnimeUserUpdates(1, 2);
 
 			var firstUpdate = bebop.Updates.First();
 

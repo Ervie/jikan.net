@@ -14,9 +14,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseErvelanProfile()
+		public async Task GetUserProfile_Ervelan_ShouldParseErvelanProfile()
 		{
-			UserProfile user = Task.Run(() => jikan.GetUserProfile("Ervelan")).Result;
+			UserProfile user = await jikan.GetUserProfile("Ervelan");
 
 			Assert.NotNull(user);
 			Assert.Equal("Ervelan", user.Username);
@@ -27,9 +27,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseNekomataProfile()
+		public async Task GetUserProfile_Nekomata1037_ShouldParseNekomataProfile()
 		{
-			UserProfile user = Task.Run(() => jikan.GetUserProfile("Nekomata1037")).Result;
+			UserProfile user = await jikan.GetUserProfile("Nekomata1037");
 
 			Assert.NotNull(user);
 			Assert.Equal("Nekomata1037", user.Username);
@@ -39,9 +39,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseErvelanHistory()
+		public async Task GetUserHistory_Ervelan_ShouldParseErvelanHistory()
 		{
-			UserHistory userHistory = Task.Run(() => jikan.GetUserHistory("Ervelan")).Result;
+			UserHistory userHistory = await jikan.GetUserHistory("Ervelan");
 
 			Assert.NotNull(userHistory);
 			Assert.True(userHistory.History.Count > 10);
@@ -49,9 +49,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseErvelanMangaHistory()
+		public async Task GetUserHistory_ErvelanMangaHistory_ShouldParseErvelanMangaHistory()
 		{
-			UserHistory userHistory = Task.Run(() => jikan.GetUserHistory("Ervelan", UserHistoryExtension.Manga)).Result;
+			UserHistory userHistory = await jikan.GetUserHistory("Ervelan", UserHistoryExtension.Manga);
 
 			Assert.NotNull(userHistory);
 			Assert.True(userHistory.History.Count > 5);
@@ -59,9 +59,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseErvelanFriends()
+		public async Task GetUserFriends_Ervelan_ShouldParseErvelanFriends()
 		{
-			UserFriends friends = Task.Run(() => jikan.GetUserFriends("Ervelan")).Result;
+			UserFriends friends = await jikan.GetUserFriends("Ervelan");
 
 			Assert.NotNull(friends);
 			Assert.True(friends.Friends.Count > 20);
@@ -70,17 +70,17 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldReturnNullHistory()
+		public async Task GetUserFriends_ErvelanTenthPage_ShouldReturnNoFriends()
 		{
-			UserFriends friends = Task.Run(() => jikan.GetUserFriends("Ervelan", 10)).Result;
+			UserFriends friends = await jikan.GetUserFriends("Ervelan", 10);
 
 			Assert.Null(friends);
 		}
 
 		[Fact]
-		public void ShouldParseErvelanAnimeList()
+		public async Task GetUserAnimeList_Ervelan_ShouldParseErvelanAnimeList()
 		{
-			UserAnimeList animeList = Task.Run(() => jikan.GetUserAnimeList("Ervelan")).Result;
+			UserAnimeList animeList = await jikan.GetUserAnimeList("Ervelan");
 
 			Assert.NotNull(animeList);
 			Assert.Equal(300, animeList.Anime.Count);
@@ -88,9 +88,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseErvelanAnimeWatchingList()
+		public async Task GetUserAnimeList_ErvelanWatching_ShouldParseErvelanAnimeWatchingList()
 		{
-			UserAnimeList animeList = Task.Run(() => jikan.GetUserAnimeList("Ervelan", UserAnimeListExtension.Watching)).Result;
+			UserAnimeList animeList = await jikan.GetUserAnimeList("Ervelan", UserAnimeListExtension.Watching);
 
 			Assert.NotNull(animeList);
 			Assert.Equal(UserAnimeListExtension.Watching, animeList.Anime.First().WatchingStatus);
@@ -98,9 +98,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseErvelanDroppedList()
+		public async Task GetUserAnimeList_ErvelanDropped_ShouldParseErvelanDroppedList()
 		{
-			UserAnimeList animeList = Task.Run(() => jikan.GetUserAnimeList("Ervelan", UserAnimeListExtension.Dropped)).Result;
+			UserAnimeList animeList = await jikan.GetUserAnimeList("Ervelan", UserAnimeListExtension.Dropped);
 
 			Assert.NotNull(animeList);
 			Assert.True(animeList.Anime.Count > 5);
@@ -108,27 +108,27 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseErvelanAnimeListSecondPage()
+		public async Task GetUserAnimeList_ErvelanSecondPage_ShouldParseErvelanAnimeListSecondPage()
 		{
-			UserAnimeList animeList = Task.Run(() => jikan.GetUserAnimeList("Ervelan", 2)).Result;
+			UserAnimeList animeList = await jikan.GetUserAnimeList("Ervelan", 2);
 
 			Assert.NotNull(animeList);
 			Assert.Equal(300, animeList.Anime.Count);
 		}
 
 		[Fact]
-		public void ShouldParseOnrixAnimeList()
+		public async Task GetUserAnimeList_onrix_ShouldParseOnrixAnimeList()
 		{
-			UserAnimeList animeList = Task.Run(() => jikan.GetUserAnimeList("onrix")).Result;
+			UserAnimeList animeList = await jikan.GetUserAnimeList("onrix");
 
 			Assert.NotNull(animeList);
 			Assert.Equal(122, animeList.Anime.Count);
 		}
 
 		[Fact]
-		public void ShouldParseErvelanMangaList()
+		public async Task GetUserMangaList_Ervelan_ShouldParseErvelanMangaList()
 		{
-			UserMangaList mangaList = Task.Run(() => jikan.GetUserMangaList("Ervelan")).Result;
+			UserMangaList mangaList = await jikan.GetUserMangaList("Ervelan");
 
 			Assert.NotNull(mangaList);
 			Assert.True(mangaList.Manga.Count > 90);
@@ -136,9 +136,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseErvelanMangaReadingList()
+		public async Task GetUserMangaList_ErvelanReading_ShouldParseErvelanMangaReadingList()
 		{
-			UserMangaList mangaList = Task.Run(() => jikan.GetUserMangaList("Ervelan", UserMangaListExtension.Reading)).Result;
+			UserMangaList mangaList = await jikan.GetUserMangaList("Ervelan", UserMangaListExtension.Reading);
 
 			Assert.NotNull(mangaList);
 			Assert.Contains("One Piece", mangaList.Manga.Select(x => x.Title));
@@ -147,9 +147,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseErvelanMangaDroppedList()
+		public async Task GetUserMangaList_ErvelanDropped_ShouldParseErvelanMangaDroppedList()
 		{
-			UserMangaList mangaList = Task.Run(() => jikan.GetUserMangaList("Ervelan", UserMangaListExtension.Dropped)).Result;
+			UserMangaList mangaList = await jikan.GetUserMangaList("Ervelan", UserMangaListExtension.Dropped);
 
 			Assert.NotNull(mangaList);
 			Assert.Equal(3, mangaList.Manga.Count);
@@ -157,17 +157,17 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseOnrixMangaList()
+		public async Task GetUserMangaList_onrix_ShouldParseOnrixMangaList()
 		{
-			UserMangaList mangaList = Task.Run(() => jikan.GetUserMangaList("onrix")).Result;
+			UserMangaList mangaList = await jikan.GetUserMangaList("onrix");
 
 			Assert.Null(mangaList);
 		}
 
 		[Fact]
-		public void ShouldParseMithogawaMangaList()
+		public async Task GetUserMangaList_Mithogawa_ShouldParseMithogawaMangaList()
 		{
-			UserMangaList mangaList = Task.Run(() => jikan.GetUserMangaList("Mithogawa")).Result;
+			UserMangaList mangaList = await jikan.GetUserMangaList("Mithogawa");
 
 			Assert.NotNull(mangaList);
 			Assert.Equal(300, mangaList.Manga.Count);

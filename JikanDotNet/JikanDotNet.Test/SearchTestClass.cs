@@ -14,12 +14,12 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldReturnNoResult()
+		public async Task SearchMethods_EmptyQuery_ShouldReturnNoResult()
 		{
-			var nullAnime = Task.Run(() => jikan.SearchAnime("")).Result;
-			var nullManga = Task.Run(() => jikan.SearchManga("")).Result;
-			var nullPerson = Task.Run(() => jikan.SearchPerson("")).Result;
-			var nullCharacter = Task.Run(() => jikan.SearchCharacter("")).Result;
+			var nullAnime = await jikan.SearchAnime("");
+			var nullManga = await jikan.SearchManga("");
+			var nullPerson = await jikan.SearchPerson("");
+			var nullCharacter = await jikan.SearchCharacter("");
 			
 			Assert.Empty(nullAnime.Results);
 			Assert.Empty(nullManga.Results);
@@ -31,38 +31,38 @@ namespace JikanDotNet.Tests
 		[InlineData("berserk")]
 		[InlineData("danganronpa")]
 		[InlineData("death")]
-		public void ShouldReturnNotNullSearchAnime(string query)
+		public async Task SearchAnime_NonEmptyQuery_ShouldReturnNotNullSearchAnime(string query)
 		{
-			AnimeSearchResult returnedAnime = Task.Run(() => jikan.SearchAnime(query)).Result;
+			AnimeSearchResult returnedAnime = await jikan.SearchAnime(query);
 
 			Assert.NotNull(returnedAnime);
 		}
 
 		[Fact]
-		public void ShouldReturnDanganronpaAnime()
+		public async Task SearchAnime_DanganronpaQuery_ShouldReturnDanganronpaAnime()
 		{
-			AnimeSearchResult danganronpaAnime = Task.Run(() => jikan.SearchAnime("danganronpa")).Result;
+			AnimeSearchResult danganronpaAnime = await jikan.SearchAnime("danganronpa");
 
 			Assert.Equal(20, danganronpaAnime.ResultLastPage);
 		}
 
 		[Fact]
-		public void ShouldReturnAiringOnePieceAnime()
+		public async Task SearchAnime_OnePieceAiringQuery_ShouldReturnAiringOnePieceAnime()
 		{
 			AnimeSearchConfig searchConfig = new AnimeSearchConfig()
 			{
 				Status = AiringStatus.Airing
 			};
 
-			AnimeSearchResult onePieceAnime = Task.Run(() => jikan.SearchAnime("one p", searchConfig)).Result;
+			AnimeSearchResult onePieceAnime = await jikan.SearchAnime("one p", searchConfig);
 
 			Assert.Equal("One Piece", onePieceAnime.Results.First().Title);
 		}
 
 		[Fact]
-		public void ShouldReturnHaibaneRenmeiAnime()
+		public async Task SearchAnime_HaibaneQuery_ShouldReturnHaibaneRenmeiAnime()
 		{
-			AnimeSearchResult haibaneRenmei = Task.Run(() => jikan.SearchAnime("haibane")).Result;
+			AnimeSearchResult haibaneRenmei = await jikan.SearchAnime("haibane");
 
 			Assert.Equal("Haibane Renmei", haibaneRenmei.Results.First().Title);
 			Assert.Equal("TV", haibaneRenmei.Results.First().Type);
@@ -71,9 +71,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldFindGirlAnime()
+		public async Task SearchAnime_GirlQuerySecondPage_ShouldFindGirlAnime()
 		{
-			AnimeSearchResult returnedAnime = Task.Run(() => jikan.SearchAnime("girl", 2)).Result;
+			AnimeSearchResult returnedAnime = await jikan.SearchAnime("girl", 2);
 
 			Assert.Contains("Jigoku Shoujo Futakomori", returnedAnime.Results.Select(x => x.Title));
 		}
@@ -82,25 +82,25 @@ namespace JikanDotNet.Tests
 		[InlineData("berserk")]
 		[InlineData("monster")]
 		[InlineData("death")]
-		public void ShouldReturnNotNullSearchManga(string query)
+		public async Task SearchManga_NonEmptyQuery_ShouldReturnNotNullSearchManga(string query)
 		{
-			MangaSearchResult returnedManga = Task.Run(() => jikan.SearchManga(query)).Result;
+			MangaSearchResult returnedManga = await jikan.SearchManga(query);
 
 			Assert.NotNull(returnedManga);
 		}
 
 		[Fact]
-		public void ShouldReturnDanganronpaManga()
+		public async Task SearchManga_DanganronpaQuery_ShouldReturnDanganronpaManga()
 		{
-			MangaSearchResult danganronpaManga = Task.Run(() => jikan.SearchManga("danganronpa")).Result;
+			MangaSearchResult danganronpaManga = await jikan.SearchManga("danganronpa");
 
 			Assert.Equal(20, danganronpaManga.ResultLastPage);
 		}
 
 		[Fact]
-		public void ShouldReturnYotsubatoManga()
+		public async Task SearchManga_YotsubatoQuery_ShouldReturnYotsubatoManga()
 		{
-			MangaSearchResult yotsubato = Task.Run(() => jikan.SearchManga("yotsubato")).Result;
+			MangaSearchResult yotsubato = await jikan.SearchManga("yotsubato");
 
 			Assert.Equal("Yotsuba to!", yotsubato.Results.First().Title);
 			Assert.Equal("Manga", yotsubato.Results.First().Type);
@@ -109,14 +109,14 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldReturnPublishedYotsubatoManga()
+		public async Task SearchManga_YotsubatoPublishingQuery_ShouldReturnPublishedYotsubatoManga()
 		{
 			MangaSearchConfig searchConfig = new MangaSearchConfig()
 			{
 				Status = AiringStatus.Airing
 			};
 
-			MangaSearchResult yotsubato = Task.Run(() => jikan.SearchManga("yotsubato", searchConfig)).Result;
+			MangaSearchResult yotsubato = await jikan.SearchManga("yotsubato", searchConfig);
 
 			Assert.Equal("Yotsuba to!", yotsubato.Results.First().Title);
 			Assert.Equal("Manga", yotsubato.Results.First().Type);
@@ -125,9 +125,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldFindGirlManga()
+		public async Task SearchManga_GirlQuerySecondPage_ShouldFindGirlManga()
 		{
-			MangaSearchResult returnedAnime = Task.Run(() => jikan.SearchManga("girl", 2)).Result;
+			MangaSearchResult returnedAnime = await jikan.SearchManga("girl", 2);
 
 			Assert.Contains("My Girl", returnedAnime.Results.Select(x => x.Title));
 			Assert.Equal(20, returnedAnime.ResultLastPage);
@@ -137,41 +137,41 @@ namespace JikanDotNet.Tests
 		[InlineData("araki")]
 		[InlineData("oda")]
 		[InlineData("sawashiro")]
-		public void ShouldReturnNotNullSearchPerson(string query)
+		public async Task SearchPerson_NonEmptyQuery_ShouldReturnNotNullSearchPerson(string query)
 		{
-			PersonSearchResult returnedPerson = Task.Run(() => jikan.SearchPerson(query)).Result;
+			PersonSearchResult returnedPerson = await jikan.SearchPerson(query);
 
 			Assert.NotNull(returnedPerson);
 		}
 
 		[Fact]
-		public void ShouldReturnSakamoto()
+		public async Task SearchPerson_MaayaSakamotoQuery_ShouldReturnSakamoto()
 		{
-			PersonSearchResult returnedPerson = Task.Run(() => jikan.SearchPerson("maaya sakamoto")).Result;
+			PersonSearchResult returnedPerson = await jikan.SearchPerson("maaya sakamoto");
 
 			Assert.Single(returnedPerson.Results);
 		}
 
 		[Fact]
-		public void ShouldReturnSakamotoName()
+		public async Task SearchPerson_MaayaSakamotoQuery_ShouldReturnSakamotoName()
 		{
-			PersonSearchResult returnedPerson = Task.Run(() => jikan.SearchPerson("maaya sakamoto")).Result;
+			PersonSearchResult returnedPerson = await jikan.SearchPerson("maaya sakamoto");
 			
 			Assert.Equal("Maaya Sakamoto", returnedPerson.Results.First().Name);
 		}
 
 		[Fact]
-		public void ShouldReturnSakamotoMalId()
+		public async Task SearchPerson_MaayaSakamotoQuery_ShouldReturnSakamotoMalId()
 		{
-			PersonSearchResult returnedPerson = Task.Run(() => jikan.SearchPerson("maaya sakamoto")).Result;
+			PersonSearchResult returnedPerson = await jikan.SearchPerson("maaya sakamoto");
 			
 			Assert.Equal(90, returnedPerson.Results.First().MalId);
 		}
 
 		[Fact]
-		public void ShouldReturnDaisuke()
+		public async Task SearchPerson_DaisukeQuerySecondPage_ShouldReturnDaisuke()
 		{
-			PersonSearchResult returnedPerson = Task.Run(() => jikan.SearchPerson("daisuke", 2)).Result;
+			PersonSearchResult returnedPerson = await jikan.SearchPerson("daisuke", 2);
 
 			Assert.Equal(50, returnedPerson.Results.Count);
 			Assert.Contains("Daisuke", returnedPerson.Results.Select(x => x.Name));
@@ -181,41 +181,41 @@ namespace JikanDotNet.Tests
 		[InlineData("edward")]
 		[InlineData("mai")]
 		[InlineData("takeshi")]
-		public void ShouldReturnNotNullSearchCharacter(string query)
+		public async Task SearchCharacter_NonEmptyQuery_ShouldReturnNotNullSearchCharacter(string query)
 		{
-			CharacterSearchResult returnedCharacter = Task.Run(() => jikan.SearchCharacter(query)).Result;
+			CharacterSearchResult returnedCharacter = await jikan.SearchCharacter(query);
 
 			Assert.NotNull(returnedCharacter);
 		}
 
 		[Fact]
-		public void ShouldReturnLupin()
+		public async Task SearchCharacter_LupinQuery_ShouldReturnLupin()
 		{
-			CharacterSearchResult returnedCharacter = Task.Run(() => jikan.SearchCharacter("lupin")).Result;
+			CharacterSearchResult returnedCharacter = await jikan.SearchCharacter("lupin");
 
 			Assert.Equal(2, returnedCharacter.ResultLastPage);
 		}
 
 		[Fact]
-		public void ShouldReturnLupinName()
+		public async Task SearchCharacter_LupinQuery_ShouldReturnLupinName()
 		{
-			CharacterSearchResult returnedCharacter = Task.Run(() => jikan.SearchCharacter("lupin iii")).Result;
+			CharacterSearchResult returnedCharacter = await jikan.SearchCharacter("lupin iii");
 
 			Assert.Equal("Lupin III, Arsene", returnedCharacter.Results.First().Name);
 		}
 
 		[Fact]
-		public void ShouldReturnLupinMalId()
+		public async Task SearchCharacter_LupinQuery_ShouldReturnLupinMalId()
 		{
-			CharacterSearchResult returnedCharacter = Task.Run(() => jikan.SearchCharacter("lupin iii")).Result;
+			CharacterSearchResult returnedCharacter = await jikan.SearchCharacter("lupin iii");
 
 			Assert.Equal(1044, returnedCharacter.Results.First().MalId);
 		}
 
 		[Fact]
-		public void ShouldReturnLambdadetla()
+		public async Task SearchCharacter_LambdadeltaQuery_ShouldReturnLambdadetla()
 		{
-			CharacterSearchResult returnedCharacter = Task.Run(() => jikan.SearchCharacter("lambdadelta")).Result;
+			CharacterSearchResult returnedCharacter = await jikan.SearchCharacter("lambdadelta");
 
 			Assert.Equal(3, returnedCharacter.Results.Count());
 			Assert.Equal("Lambdadelta", returnedCharacter.Results.First().Name);
@@ -224,9 +224,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldReturnKirumi()
+		public async Task SearchCharacter_KirumiQuery_ShouldReturnKirumi()
 		{
-			CharacterSearchResult returnedCharacter = Task.Run(() => jikan.SearchCharacter("kirumi")).Result;
+			CharacterSearchResult returnedCharacter = await jikan.SearchCharacter("kirumi");
 
 			Assert.Single(returnedCharacter.Results);
 			Assert.Equal("Toujou, Kirumi", returnedCharacter.Results.First().Name);
@@ -234,9 +234,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldFindEdwards()
+		public async Task SearchCharacter_EdwardQuerySecondPage_ShouldFindEdwards()
 		{
-			CharacterSearchResult returnedCharacter = Task.Run(() => jikan.SearchCharacter("edward", 2)).Result;
+			CharacterSearchResult returnedCharacter = await jikan.SearchCharacter("edward", 2);
 			
 			Assert.Contains("Edward", returnedCharacter.Results.Select(x => x.Name));
 			Assert.Equal(50, returnedCharacter.Results.Count);

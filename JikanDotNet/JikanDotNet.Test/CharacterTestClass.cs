@@ -17,9 +17,9 @@ namespace JikanDotNet.Tests
 		[InlineData(1)]
 		[InlineData(2)]
 		[InlineData(3)]
-		public void ShouldReturnNotNullCharacter(long malId)
+		public async Task GetCharacter_CorrectId_ShouldReturnNotNullCharacter(long malId)
 		{
-			Character returnedCharacter = Task.Run(() => jikan.GetCharacter(malId)).Result;
+			Character returnedCharacter = await jikan.GetCharacter(malId);
 
 			Assert.NotNull(returnedCharacter);
 		}
@@ -28,34 +28,34 @@ namespace JikanDotNet.Tests
 		[InlineData(8)]
 		[InlineData(9)]
 		[InlineData(10)]
-		public void ShouldReturnNullCharacter(long malId)
+		public async Task GetCharacter_WrongId_ShouldReturnNullCharacter(long malId)
 		{
-			Character returnedCharacter = Task.Run(() => jikan.GetCharacter(malId)).Result;
+			Character returnedCharacter = await jikan.GetCharacter(malId);
 
 			Assert.Null(returnedCharacter);
 		}
 
 		[Fact]
-		public void ShouldParseIchigoKurosaki()
+		public async Task GetCharacter_IchigoKurosakiId_ShouldParseIchigoKurosaki()
 		{
-			Character ichigo = Task.Run(() => jikan.GetCharacter(5)).Result;
+			Character ichigo = await jikan.GetCharacter(5);
 
 			Assert.Equal("Ichigo Kurosaki", ichigo.Name);
 		}
 
 		[Fact]
-		public void ShouldParseIchigoKurosakiBleach()
+		public async Task GetCharacter_IchigoKurosakiId_ShouldParseIchigoKurosakiBleach()
 		{
-			Character ichigo = Task.Run(() => jikan.GetCharacter(5)).Result;
+			Character ichigo = await jikan.GetCharacter(5);
 
 			Assert.Contains("Bleach", ichigo.Animeography.Select(x => x.Name));
 			Assert.Contains("Bleach", ichigo.Mangaography.Select(x => x.Name));
 		}
 
 		[Fact]
-		public void ShouldParseEin()
+		public async Task GetCharacter_EinId_ShouldParseEin()
 		{
-			Character ein = Task.Run(() => jikan.GetCharacter(4)).Result;
+			Character ein = await jikan.GetCharacter(4);
 
 			Assert.Equal("Ein", ein.Name);
 

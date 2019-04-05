@@ -14,26 +14,26 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseWinter2000()
+		public async Task GetSeason_Winter2000_ShouldParseWinter2000()
 		{
-			Season winter2000 = Task.Run(() => jikan.GetSeason(2000, Seasons.Winter)).Result;
+			Season winter2000 = await jikan.GetSeason(2000, Seasons.Winter);
 
 			Assert.Contains("Boogiepop wa Warawanai", winter2000.SeasonEntries.Select(x => x.Title));
 			Assert.Contains("Ojamajo Doremi Sharp", winter2000.SeasonEntries.Select(x => x.Title));
 		}
 
 		[Fact]
-		public void ShouldParseSpring1970()
+		public async Task GetSeason_Spring1970_ShouldParseSpring1970()
 		{
-			Season spring1970 = Task.Run(() => jikan.GetSeason(1970, Seasons.Spring)).Result;
+			Season spring1970 = await jikan.GetSeason(1970, Seasons.Spring);
 
 			Assert.Equal(17, spring1970.SeasonEntries.Count);
 		}
 
 		[Fact]
-		public void ShouldParseYoujoSenki()
+		public async Task GetSeason_Winter2017_ShouldParseYoujoSenki()
 		{
-			Season winter2017 = Task.Run(() => jikan.GetSeason(2017, Seasons.Winter)).Result;
+			Season winter2017 = await jikan.GetSeason(2017, Seasons.Winter);
 
 			AnimeSubEntry youjoSenki = winter2017.SeasonEntries.FirstOrDefault(x => x.Title.Equals("Youjo Senki"));
 
@@ -44,45 +44,45 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseCurrentSeason()
+		public async Task GetSeason_NoParameter_ShouldParseCurrentSeason()
 		{
-			Season currentSesaon = Task.Run(() => jikan.GetSeason()).Result;
+			Season currentSesaon = await jikan.GetSeason();
 
 			Assert.NotNull(currentSesaon);
 			Assert.InRange(currentSesaon.SeasonEntries.Count, 20, 500);
 		}
 
 		[Fact]
-		public void ShouldParseSpring1970ExtraInfo()
+		public async Task GetSeason_Spring1970_ShouldParseSpring1970ExtraInfo()
 		{
-			Season spring1970 = Task.Run(() => jikan.GetSeason(1970, Seasons.Spring)).Result;
+			Season spring1970 = await jikan.GetSeason(1970, Seasons.Spring);
 
 			Assert.Equal("Spring", spring1970.SeasonName);
 			Assert.Equal(1970, spring1970.SeasonYear);
 		}
 
 		[Fact]
-		public void ShouldParseFirstQueryableYear()
+		public async Task GetSeasonArchive_NoParameter_ShouldParseFirstQueryableYear()
 		{
-			SeasonArchives seasonArchives = Task.Run(() => jikan.GetSeasonArchive()).Result;
+			SeasonArchives seasonArchives = await jikan.GetSeasonArchive();
 
 			Assert.Equal(1917, seasonArchives.Archives.Last().Year);
 			Assert.Equal(4,  seasonArchives.Archives.Last().Season.Count);
 		}
 
 		[Fact]
-		public void ShouldParseLatestQueryableYear()
+		public async Task GetSeasonArchive_NoParameter_ShouldParseLatestQueryableYear()
 		{
-			SeasonArchives seasonArchives = Task.Run(() => jikan.GetSeasonArchive()).Result;
+			SeasonArchives seasonArchives = await jikan.GetSeasonArchive();
 
 			Assert.True(seasonArchives.Archives.First().Year > 2018);
 			Assert.InRange(seasonArchives.Archives.Last().Season.Count, 1, 4);
 		}
 
 		[Fact]
-		public void ShouldParseLaterSeason()
+		public async Task GetSeasonLater_NoParameter_ShouldParseLaterSeason()
 		{
-			Season season = Task.Run(() => jikan.GetSeasonLater()).Result;
+			Season season = await jikan.GetSeasonLater();
 
 			Assert.Null(season.SeasonYear);
 			Assert.Equal("Later", season.SeasonName);

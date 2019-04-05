@@ -14,34 +14,34 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseCurrentSchedule()
+		public async Task GetSchedule_AllSchedule_ShouldParseCurrentSchedule()
 		{
-			Schedule currentSeason = Task.Run(() => jikan.GetSchedule()).Result;
+			Schedule currentSeason = await jikan.GetSchedule();
 
 			Assert.NotNull(currentSeason);
 		}
 
 		[Fact]
-		public void ShouldParseMondaySchedule()
+		public async Task GetSchedule_Monday_ShouldParseMondaySchedule()
 		{
-			Schedule currentSeason = Task.Run(() => jikan.GetSchedule(ScheduledDay.Monday)).Result;
+			Schedule currentSeason = await jikan.GetSchedule(ScheduledDay.Monday);
 
 			Assert.Contains("Dororo", currentSeason.Monday.Select(x => x.Title));
 			Assert.Contains("Mayonaka no Occult Koumuin", currentSeason.Monday.Select(x => x.Title));
 		}
 
 		[Fact]
-		public void ShouldParseFridaySchedule()
+		public async Task GetSchedule_Friday_ShouldParseFridaySchedule()
 		{
-			Schedule currentSeason = Task.Run(() => jikan.GetSchedule(ScheduledDay.Friday)).Result;
+			Schedule currentSeason = await jikan.GetSchedule(ScheduledDay.Friday);
 
 			Assert.Contains("Doraemon (2005)", currentSeason.Friday.Select(x => x.Title));
 			Assert.Contains("Crayon Shin-chan", currentSeason.Friday.Select(x => x.Title));
 		}
 		[Fact]
-		public void ShouldParseUnknownSchedule()
+		public async Task GetSchedule_UnknownSchedule_ShouldParseUnknownSchedule()
 		{
-			Schedule currentSeason = Task.Run(() => jikan.GetSchedule(ScheduledDay.Unknown)).Result;
+			Schedule currentSeason = await jikan.GetSchedule(ScheduledDay.Unknown);
 
 			Assert.Contains("Yodel no Onna", currentSeason.Unknown.Select(x => x.Title));
 			Assert.Contains("Jinxiu Shenzhou Zhi Qi You Ji", currentSeason.Unknown.Select(x => x.Title));

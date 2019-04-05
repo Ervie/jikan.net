@@ -14,9 +14,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseCowboyBebopClub()
+		public async Task GetClub_BebopId_ShouldParseCowboyBebopClub()
 		{
-			Club club = Task.Run(() => jikan.GetClub(1)).Result;
+			Club club = await jikan.GetClub(1);
 
 			Assert.NotNull(club);
 			Assert.Equal("Anime", club.Category);
@@ -27,9 +27,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseAnimeCafeClub()
+		public async Task GetClub_AnimeCafeId_ShouldParseAnimeCafeClub()
 		{
-			Club club = Task.Run(() => jikan.GetClub(73113)).Result;
+			Club club = await jikan.GetClub(73113);
 
 			Assert.NotNull(club);
 			Assert.Equal("Anime", club.Category);
@@ -39,9 +39,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseCowboyBebopClubMemberList()
+		public async Task GetClubMembers_BebopId_ShouldParseCowboyBebopClubMemberList()
 		{
-			ClubMembers club = Task.Run(() => jikan.GetClubMembers(1)).Result;
+			ClubMembers club = await jikan.GetClubMembers(1);
 
 			Assert.NotEmpty(club.Members);
 
@@ -51,9 +51,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseCowboyBebopClubMemberListPaged()
+		public async Task GetClubMembers_BebopIdSecondPage_ShouldParseCowboyBebopClubMemberListPaged()
 		{
-			ClubMembers club = Task.Run(() => jikan.GetClubMembers(1, 2)).Result;
+			ClubMembers club = await jikan.GetClubMembers(1, 2);
 
 			Assert.NotEmpty(club.Members);
 			Assert.Equal(36, club.Members.Count);

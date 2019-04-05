@@ -17,73 +17,73 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseTopAnime()
+		public async Task GetAnimeTop_NoParameter_ShouldParseTopAnime()
 		{
-			AnimeTop top = Task.Run(() => jikan.GetAnimeTop()).Result;
+			AnimeTop top = await jikan.GetAnimeTop();
 
 			Assert.NotNull(top);
 		}
 
 		[Fact]
-		public void ShouldParseFMA()
+		public async Task GetAnimeTop_NoParameter_ShouldParseFMA()
 		{
-			AnimeTop top = Task.Run(() => jikan.GetAnimeTop()).Result;
+			AnimeTop top = await jikan.GetAnimeTop();
 
 			Assert.Equal("Fullmetal Alchemist: Brotherhood", top.Top.First().Title);
 		}
 
 		[Fact]
-		public void ShouldParseFMAEpisodes()
+		public async Task GetAnimeTop_NoParameter_ShouldParseFMAEpisodes()
 		{
-			AnimeTop top = Task.Run(() => jikan.GetAnimeTop()).Result;
+			AnimeTop top = await jikan.GetAnimeTop();
 
 			Assert.Equal(64, top.Top.First().Episodes);
 		}
 
 		[Fact]
-		public void ShouldParseKimiNoNaWaType()
+		public async Task GetAnimeTop_NoParameter_ShouldParseKimiNoNaWaType()
 		{
-			AnimeTop top = Task.Run(() => jikan.GetAnimeTop()).Result;
+			AnimeTop top = await jikan.GetAnimeTop();
 
 			Assert.Equal("Movie", top.Top.Skip(1).First().Type);
 		}
 
 		[Fact]
-		public void ShouldParseKimiNoNaWaMovieList()
+		public async Task GetAnimeTop_FirstPageMovies_ShouldParseKimiNoNaWaMovieList()
 		{
-			AnimeTop top = Task.Run(() => jikan.GetAnimeTop(1, TopAnimeExtension.TopMovies)).Result;
+			AnimeTop top = await jikan.GetAnimeTop(1, TopAnimeExtension.TopMovies);
 
 			Assert.Equal("Kimi no Na wa.", top.Top.First().Title);
 		}
 
 		[Fact]
-		public void ShouldParseDeathNotePopularityList()
+		public async Task GetAnimeTop_FirstPagePopularity_ShouldParseDeathNotePopularityList()
 		{
-			AnimeTop top = Task.Run(() => jikan.GetAnimeTop(1, TopAnimeExtension.TopPopularity)).Result;
+			AnimeTop top = await jikan.GetAnimeTop(1, TopAnimeExtension.TopPopularity);
 
 			Assert.Equal("Death Note", top.Top.First().Title);
 		}
 
 		[Fact]
-		public void ShouldParseLOGHOvaList()
+		public async Task GetAnimeTop_FirstPageOva_ShouldParseLOGHOvaList()
 		{
-			AnimeTop top = Task.Run(() => jikan.GetAnimeTop(1, TopAnimeExtension.TopOva)).Result;
+			AnimeTop top = await jikan.GetAnimeTop(1, TopAnimeExtension.TopOva);
 
 			Assert.Equal("Ginga Eiyuu Densetsu", top.Top.First().Title);
 		}
 
 		[Fact]
-		public void ShouldParseLOGHOAiringStartOvaList()
+		public async Task GetAnimeTop_FirstPageMovies_ShouldParseLOGHOAiringStartOvaList()
 		{
-			AnimeTop top = Task.Run(() => jikan.GetAnimeTop(1, TopAnimeExtension.TopOva)).Result;
+			AnimeTop top = await jikan.GetAnimeTop(1, TopAnimeExtension.TopOva);
 
 			Assert.Equal("Jan 1988", top.Top.First().AiringStart);
 		}
 
 		[Fact]
-		public void ShouldParseAnimeSecondPage()
+		public async Task GetAnimeTop_SecondPage_ShouldParseAnimeSecondPage()
 		{
-			AnimeTop top = Task.Run(() => jikan.GetAnimeTop(2)).Result;
+			AnimeTop top = await jikan.GetAnimeTop(2);
 
 			Assert.Contains("Ping Pong the Animation", top.Top.Select(x => x.Title));
 			Assert.Contains("Yojouhan Shinwa Taikei", top.Top.Select(x => x.Title));
@@ -91,57 +91,57 @@ namespace JikanDotNet.Tests
 
 
 		[Fact]
-		public void ShouldParseTopManga()
+		public async Task GetMangaTop_NoParameter_ShouldParseTopManga()
 		{
-			MangaTop top = Task.Run(() => jikan.GetMangaTop()).Result;
+			MangaTop top = await jikan.GetMangaTop();
 
 			Assert.NotNull(top);
 		}
 
 		[Fact]
-		public void ShouldParseBerserk()
+		public async Task GetMangaTop_NoParameter_ShouldParseBerserk()
 		{
-			MangaTop top = Task.Run(() => jikan.GetMangaTop()).Result;
+			MangaTop top = await jikan.GetMangaTop();
 
 			Assert.Equal("Berserk", top.Top.First().Title);
 		}
 
 		[Fact]
-		public void ShouldParseBerserkStartDate()
+		public async Task GetMangaTop_NoParameter_ShouldParseBerserkStartDate()
 		{
-			MangaTop top = Task.Run(() => jikan.GetMangaTop()).Result;
+			MangaTop top = await jikan.GetMangaTop();
 
 			Assert.Equal("Aug 1989", top.Top.First().PublishingStart);
 		}
 
 		[Fact]
-		public void ShouldParseHakoMari()
+		public async Task GetMangaTop_FirstPageNovels_ShouldParseHakoMari()
 		{
-			MangaTop top = Task.Run(() => jikan.GetMangaTop(1, TopMangaExtension.TopNovel)).Result;
+			MangaTop top = await jikan.GetMangaTop(1, TopMangaExtension.TopNovel);
 
 			Assert.Equal("Monogatari Series: First Season", top.Top.First().Title);
 		}
 
 		[Fact]
-		public void ShouldParseNarutoPopularity()
+		public async Task GetMangaTop_FirstPagePopularity_ShouldParseNarutoPopularity()
 		{
-			MangaTop top = Task.Run(() => jikan.GetMangaTop(1, TopMangaExtension.TopPopularity)).Result;
+			MangaTop top = await jikan.GetMangaTop(1, TopMangaExtension.TopPopularity);
 
 			Assert.Equal("Naruto", top.Top.First().Title);
 		}
 
 		[Fact]
-		public void ShouldParseNarutoTypePopularity()
+		public async Task GetMangaTop_FirstPagePopularity_ShouldParseNarutoTypePopularity()
 		{
-			MangaTop top = Task.Run(() => jikan.GetMangaTop(1, TopMangaExtension.TopPopularity)).Result;
+			MangaTop top = await jikan.GetMangaTop(1, TopMangaExtension.TopPopularity);
 
 			Assert.Equal("Manga", top.Top.First().Type);
 		}
 
 		[Fact]
-		public void ShouldParseKanaHanazawa()
+		public async Task GetPeopleTop_NoParameters_ShouldParseKanaHanazawa()
 		{
-			PeopleTop top = Task.Run(() => jikan.GetPeopleTop()).Result;
+			PeopleTop top = await jikan.GetPeopleTop();
 
 			Assert.Equal("Hanazawa, Kana", top.Top.First().Name);
 			Assert.Equal("花澤 香菜", top.Top.First().NameKanji);
@@ -151,9 +151,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseHiroshiKamiya()
+		public async Task GetPeopleTop_NoParameters_ShouldParseHiroshiKamiya()
 		{
-			PeopleTop top = Task.Run(() => jikan.GetPeopleTop()).Result;
+			PeopleTop top = await jikan.GetPeopleTop();
 
 			Assert.Equal("Kamiya, Hiroshi", top.Top.Skip(1).First().Name);
 			Assert.Equal("神谷 浩史", top.Top.Skip(1).First().NameKanji);
@@ -163,17 +163,17 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldFindKentarouMiura()
+		public async Task GetPeopleTop_SecondPage_ShouldFindKentarouMiura()
 		{
-			PeopleTop top = Task.Run(() => jikan.GetPeopleTop(2)).Result;
+			PeopleTop top = await jikan.GetPeopleTop(2);
 
 			Assert.Contains("Miura, Kentarou", top.Top.Select(x => x.Name));
 		}
 
 		[Fact]
-		public void ShouldParseLelouchLamperouge()
+		public async Task GetCharactersTop_NoParameters_ShouldParseLelouchLamperouge()
 		{
-			CharactersTop top = Task.Run(() => jikan.GetCharactersTop()).Result;
+			CharactersTop top = await jikan.GetCharactersTop();
 
 			Assert.Equal("Lamperouge, Lelouch", top.Top.First().Name);
 			Assert.Equal("ルルーシュ・ランペルージ", top.Top.First().NameKanji);
@@ -182,9 +182,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseLLawliet()
+		public async Task GetCharactersTop_NoParameters_ShouldParseLLawliet()
 		{
-			CharactersTop top = Task.Run(() => jikan.GetCharactersTop()).Result;
+			CharactersTop top = await jikan.GetCharactersTop();
 
 			Assert.Equal("Lawliet, L", top.Top.Skip(1).First().Name);
 			Assert.Equal("エル ローライト", top.Top.Skip(1).First().NameKanji);
@@ -193,18 +193,18 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseLuffyAnimeography()
+		public async Task GetCharactersTop_NoParameters_ShouldParseLuffyAnimeography()
 		{
-			CharactersTop top = Task.Run(() => jikan.GetCharactersTop()).Result;
+			CharactersTop top = await jikan.GetCharactersTop();
 
 			Assert.Equal("Monkey D., Luffy", top.Top.Skip(2).First().Name);
 			Assert.Contains("One Piece", top.Top.Skip(2).First().Animeography.Select(x => x.Name));
 		}
 
 		[Fact]
-		public void ShouldFindTachibanaKanade()
+		public async Task GetCharactersTop_SecondPage_ShouldFindTachibanaKanade()
 		{
-			CharactersTop top = Task.Run(() => jikan.GetCharactersTop(2)).Result;
+			CharactersTop top = await jikan.GetCharactersTop(2);
 
 			Assert.Contains("Tachibana, Kanade", top.Top.Select(x => x.Name));
 		}

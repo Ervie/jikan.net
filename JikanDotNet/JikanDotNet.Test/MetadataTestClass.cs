@@ -15,9 +15,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseStatusMetadata()
+		public async Task GetStatusMetadata_NoParameter_ShouldParseStatusMetadata()
 		{
-			StatusMetadata statusMetadata = Task.Run(() => jikan.GetStatusMetadata()).Result;
+			StatusMetadata statusMetadata = await jikan.GetStatusMetadata();
 
 			Assert.NotNull(statusMetadata);
 			Assert.True(Int32.Parse(statusMetadata.TotalConnectionsReceived) > 10000000);

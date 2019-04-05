@@ -17,9 +17,9 @@ namespace JikanDotNet.Tests
 		[InlineData(1)]
 		[InlineData(5)]
 		[InlineData(6)]
-		public void ShouldReturnNotNullAnime(long malId)
+		public async Task GetAnime_CorrectId_ShouldReturnNotNullAnime(long malId)
         {
-			Anime returnedAnime = Task.Run(() => jikan.GetAnime(malId)).Result;
+			Anime returnedAnime = await jikan.GetAnime(malId);
 
 			Assert.NotNull(returnedAnime);
         }
@@ -28,33 +28,33 @@ namespace JikanDotNet.Tests
 		[InlineData(2)]
 		[InlineData(3)]
 		[InlineData(4)]
-		public void ShouldReturnNullAnime(long malId)
+		public async Task GetAnime_WrongId_ShouldReturnNullAnime(long malId)
 		{
-			Anime returnedAnime = Task.Run(() => jikan.GetAnime(malId)).Result;
+			Anime returnedAnime = await jikan.GetAnime(malId);
 
 			Assert.Null(returnedAnime);
 		}
 
 		[Fact]
-		public void ShouldParseGundam()
+		public async Task GetAnime_MSGundamId_ShouldParseGundam()
 		{
-			Anime gundamAnime = Task.Run(() => jikan.GetAnime(80)).Result;
+			Anime gundamAnime = await jikan.GetAnime(80);
 
 			Assert.Equal("Mobile Suit Gundam", gundamAnime.Title);
 		}
 
 		[Fact]
-		public void ShouldParseCowboyBebop()
+		public async Task GetAnime_BebopId_ShouldParseCowboyBebop()
 		{
-			Anime bebopAnime = Task.Run(() => jikan.GetAnime(1)).Result;
+			Anime bebopAnime = await jikan.GetAnime(1);
 
 			Assert.Equal("Cowboy Bebop", bebopAnime.Title);
 		}
 
 		[Fact]
-		public void ShouldParseCowboyBebopRelatedAnime()
+		public async Task GetAnime_BebopId_ShouldParseCowboyBebopRelatedAnime()
 		{
-			Anime bebopAnime = Task.Run(() => jikan.GetAnime(1)).Result;
+			Anime bebopAnime = await jikan.GetAnime(1);
 
 			Assert.Equal(2, bebopAnime.Related.Adaptations.Count);
 			Assert.Equal(2, bebopAnime.Related.SideStories.Count);
@@ -62,9 +62,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseCardcaptorSakuraInformation()
+		public async Task GetAnime_CardcaptorId_ShouldParseCardcaptorSakuraInformation()
 		{
-			Anime cardcaptor = Task.Run(() => jikan.GetAnime(232)).Result;
+			Anime cardcaptor = await jikan.GetAnime(232);
 
 			Assert.Equal("70", cardcaptor.Episodes);
 			Assert.Equal("TV", cardcaptor.Type);
@@ -76,9 +76,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseAkiraCollections()
+		public async Task GetAnime_AkiraId_ShouldParseAkiraCollections()
 		{
-			Anime akiraAnime = Task.Run(() => jikan.GetAnime(47)).Result;
+			Anime akiraAnime = await jikan.GetAnime(47);
 
 			Assert.Equal(3, akiraAnime.Producers.Count);
 			Assert.Equal(3, akiraAnime.Licensors.Count);
@@ -90,9 +90,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseAnimeWithNoRelatedAdaptations()
+		public async Task GetAnime_KeyTheMetalIdolId_ShouldParseAnimeWithNoRelatedAdaptations()
 		{
-			Anime returnedAnime = Task.Run(() => jikan.GetAnime(1457)).Result;
+			Anime returnedAnime = await jikan.GetAnime(1457);
 
 			Assert.Null(returnedAnime.Related.Adaptations);
 		}

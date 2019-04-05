@@ -14,9 +14,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseBigComicOriginal()
+		public async Task GetMagazine_BigComicOriginalId_ShouldParseBigComicOriginal()
 		{
-			Magazine magazine = Task.Run(() => jikan.GetMagazine(1)).Result;
+			Magazine magazine = await jikan.GetMagazine(1);
 
 			Assert.NotNull(magazine);
 			Assert.Equal("Big Comic Original", magazine.Metadata.Name);
@@ -27,9 +27,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseYoungAnimal()
+		public async Task GetMagazine_YoungAnimalId_ShouldParseYoungAnimal()
 		{
-			Magazine magazine = Task.Run(() => jikan.GetMagazine(2)).Result;
+			Magazine magazine = await jikan.GetMagazine(2);
 
 			Assert.NotNull(magazine);
 			Assert.Equal("Young Animal", magazine.Metadata.Name);
@@ -39,18 +39,18 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseYoungAnimalSecondPage()
+		public async Task GetMagazine_YoungAnimalIdSecondPage_ShouldParseYoungAnimalSecondPage()
 		{
-			Magazine magazine = Task.Run(() => jikan.GetMagazine(2, 2)).Result;
+			Magazine magazine = await jikan.GetMagazine(2, 2);
 
 			Assert.NotNull(magazine);
 			Assert.True(magazine.Manga.Count > 10);
 		}
 
 		[Fact]
-		public void ShouldParseShonenJump()
+		public async Task GetMagazine_ShonenJumpId_ShouldParseShonenJump()
 		{
-			Magazine magazine = Task.Run(() => jikan.GetMagazine(83)).Result;
+			Magazine magazine = await jikan.GetMagazine(83);
 
 			Assert.NotNull(magazine);
 			Assert.Equal("Shounen Jump (Weekly)", magazine.Metadata.Name);

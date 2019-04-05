@@ -17,9 +17,9 @@ namespace JikanDotNet.Tests
 		[InlineData(1)]
 		[InlineData(2)]
 		[InlineData(3)]
-		public void ShouldReturnNotNullManga(long malId)
+		public async Task GetManga_CorrectId_ShouldReturnNotNullManga(long malId)
 		{
-			Manga returedManga = Task.Run(() => jikan.GetManga(malId)).Result;
+			Manga returedManga = await jikan.GetManga(malId);
 
 			Assert.NotNull(returedManga);
 		}
@@ -28,42 +28,42 @@ namespace JikanDotNet.Tests
 		[InlineData(-1)]
 		[InlineData(5)]
 		[InlineData(6)]
-		public void ShouldReturnNullMana(long malId)
+		public async Task GetManga_WrongId_ShouldReturnNullMana(long malId)
 		{
-			Manga returedManga = Task.Run(() => jikan.GetManga(malId)).Result;
+			Manga returedManga = await jikan.GetManga(malId);
 
 			Assert.Null(returedManga);
 		}
 
 		[Fact]
-		public void ShouldParseBerserk()
+		public async Task GetManga_BerserkId_ShouldParseBerserk()
 		{
-			Manga berserkManga = Task.Run(() => jikan.GetManga(2)).Result;
+			Manga berserkManga = await jikan.GetManga(2);
 
 			Assert.Equal("Berserk", berserkManga.Title);
 		}
 
 		[Fact]
-		public void ShouldParseMonster()
+		public async Task GetManga_MonsterId_ShouldParseMonster()
 		{
-			Manga monsterManga = Task.Run(() => jikan.GetManga(1)).Result;
+			Manga monsterManga = await jikan.GetManga(1);
 
 			Assert.Equal("Monster", monsterManga.Title);
 		}
 
 		[Fact]
-		public void ShouldParseMonsterRelated()
+		public async Task GetManga_MonsterId_ShouldParseMonsterRelated()
 		{
-			Manga monsterManga = Task.Run(() => jikan.GetManga(1)).Result;
+			Manga monsterManga = await jikan.GetManga(1);
 
 			Assert.Single(monsterManga.Related.Adaptations);
 			Assert.Single(monsterManga.Related.SideStories);
 		}
 
 		[Fact]
-		public void ShouldParseYotsubatoInformation()
+		public async Task GetManga_YotsubatoId_ShouldParseYotsubatoInformation()
 		{
-			Manga yotsubatoManga = Task.Run(() => jikan.GetManga(104)).Result;
+			Manga yotsubatoManga = await jikan.GetManga(104);
 
 			Assert.Equal("Publishing", yotsubatoManga.Status);
 			Assert.Equal(2003, yotsubatoManga.Published.From.Value.Year);
@@ -73,9 +73,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseOnePieceCollections()
+		public async Task GetManga_OnePieceId_ShouldParseOnePieceCollections()
 		{
-			Manga onePieceManga = Task.Run(() => jikan.GetManga(13)).Result;
+			Manga onePieceManga = await jikan.GetManga(13);
 
 			Assert.Equal(1, onePieceManga.Authors.Count);
 			Assert.Equal(1, onePieceManga.Serializations.Count);
@@ -86,9 +86,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void ShouldParseMangaWithNoRelatedAdaptations()
+		public async Task GetManga_MetallicaMetallucaId_ShouldParseMangaWithNoRelatedAdaptations()
 		{
-			Manga returnedManga = Task.Run(() => jikan.GetManga(19983)).Result;
+			Manga returnedManga = await jikan.GetManga(19983);
 
 			Assert.Null(returnedManga.Related.Adaptations);
 		}
