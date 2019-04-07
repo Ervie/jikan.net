@@ -66,5 +66,29 @@ namespace JikanDotNet.Tests
 
 			Assert.Throws<UriFormatException>(() => jikan = new Jikan(string.Empty));
 		}
+
+		[Fact]
+		public async Task JikanConstructorUri_WrongUrlNoSurpress_ShouldThrowJikanException()
+		{
+			IJikan jikan = new Jikan(new Uri("http://google.com"), false);
+
+			await Assert.ThrowsAsync<JikanRequestException>(() => jikan.GetAnime(1));
+		}
+
+		[Fact]
+		public void JikanConstructorUri_NotAnUrl_ShouldNotParseCorrectly()
+		{
+			IJikan jikan;
+
+			Assert.Throws<UriFormatException>(() => jikan = new Jikan(new Uri("Simple String")));
+		}
+
+		[Fact]
+		public void JikanConstructorUri_Empty_ShouldNotParseCorrectly()
+		{
+			IJikan jikan;
+
+			Assert.Throws<UriFormatException>(() => jikan = new Jikan(new Uri(string.Empty)));
+		}
 	}
 }
