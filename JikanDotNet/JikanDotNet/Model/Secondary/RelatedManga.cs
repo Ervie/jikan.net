@@ -15,6 +15,12 @@ namespace JikanDotNet
 		public ICollection<MALSubItem> AlternativeVersions { get; set; }
 
 		/// <summary>
+		/// Collection of alternative settings.
+		/// </summary>
+		[JsonProperty(PropertyName = "Alternative Setting")]
+		public ICollection<MALSubItem> AlternativeSettings { get; set; }
+
+		/// <summary>
 		/// Collection of adaptations.
 		/// </summary>
 		[JsonProperty(PropertyName = "Adaptation")]
@@ -25,6 +31,18 @@ namespace JikanDotNet
 		/// </summary>
 		[JsonProperty(PropertyName = "Character")]
 		public ICollection<MALSubItem> Characters { get; set; }
+
+		/// <summary>
+		/// Collection of full stories.
+		/// </summary>
+		[JsonProperty(PropertyName = "Full story")]
+		public ICollection<MALSubItem> FullStories { get; set; }
+
+		/// <summary>
+		/// Collection of parent stories.
+		/// </summary>
+		[JsonProperty(PropertyName = "Parent story")]
+		public ICollection<MALSubItem> ParentStories { get; set; }
 
 		/// <summary>
 		/// Collection of prequels.

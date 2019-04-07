@@ -62,6 +62,30 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
+		public async Task GetAnime_FSNId_ShouldParseFateStayNightRelatedAnime()
+		{
+			Anime fsnAnime = await jikan.GetAnime(356);
+
+			Assert.True(fsnAnime.Related.AlternativeVersions.Count > 3);
+		}
+
+		[Fact]
+		public async Task GetAnime_FSNReproductionId_ShouldParseFateStayNightReproductionRelatedAnime()
+		{
+			Anime fsnAnime = await jikan.GetAnime(7559);
+
+			Assert.Equal("Fate/stay night", fsnAnime.Related.FullStories.First().Name);
+		}
+
+		[Fact]
+		public async Task GetAnime_KamiNomiId_ShouldParseKamiNomiRelatedAnime()
+		{
+			Anime fsnAnime = await jikan.GetAnime(17725);
+
+			Assert.Equal("Kami nomi zo Shiru Sekai", fsnAnime.Related.ParentStories.First().Name);
+		}
+
+		[Fact]
 		public async Task GetAnime_CardcaptorId_ShouldParseCardcaptorSakuraInformation()
 		{
 			Anime cardcaptor = await jikan.GetAnime(232);
