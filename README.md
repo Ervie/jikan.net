@@ -89,13 +89,13 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
 ### Package manager
 
 ```
-PM> Install-Package JikanDotNet -Version 1.2.4
+PM> Install-Package JikanDotNet
 ```
 
 ### .NET CLI
 
 ```
->dotnet add package JikanDotNet --version 1.2.4
+>dotnet add package JikanDotNet
 ```
 
 Then restore dependencies:
@@ -105,15 +105,14 @@ Then restore dependencies:
 
 # Changelog
 
-## 17.03.2019 - Version 1.2.3/1.2.4
+## 07.04.2019 - Version 1.2.5
 
-- Fixes
-    - <b>[Recommendation]</b> Added missing `Title` field.
+- Jikan.net now can be used with own instance of Jikan REST API. Read more [here](https://github.com/Ervie/jikan.net/wiki/Using-own-instance-of-Jikan).
 - New fields
-    - AnimeList
-        - `AnimeListEntry` now has `AiringStatus` and `PublishingStatus` fields.
-    - MangaList
-        - `MangaListEntry` now has `ReadingStatus` and `WatchingStatus` fields.
+    - RelatedAnime
+        - `RelatedAnime` now has `AlternativeVersions`, `ParentStories` and `FullStories` fields.
+    - RelatedManga
+        - `RelatedManga` now has `AlternativeVersions`, `ParentStories` and `FullStories` fields.
         
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**

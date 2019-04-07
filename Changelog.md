@@ -1,4 +1,13 @@
-## 17.03.2019 - Version 1.2.4 (newest)
+## 07.04.2019 - Version 1.2.5 (newest)
+
+- Jikan.net now can be used with own instance of Jikan REST API. Read more [here](https://github.com/Ervie/jikan.net/wiki/Using-own-instance-of-Jikan).
+- New fields
+    - RelatedAnime
+        - `RelatedAnime` now has `AlternativeVersions`, `ParentStories` and `FullStories` fields.
+    - RelatedManga
+        - `RelatedManga` now has `AlternativeVersions`, `ParentStories` and `FullStories` fields.
+
+## 17.03.2019 - Version 1.2.4
 
 - Fixes
     - <b>[Recommendation]</b> Added missing `Title` field.
