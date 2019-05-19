@@ -2,6 +2,7 @@
 using JikanDotNet.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace JikanDotNet
@@ -40,6 +41,16 @@ namespace JikanDotNet
 		/// Filter end date of results.
 		/// </summary>
 		public DateTime? EndDate { get; set; }
+
+		/// <summary>
+		/// Select order property.
+		/// </summary>
+		public AnimeSearchSortable OrderBy { get; set; }
+
+		/// <summary>
+		/// Define sort direction for <see cref="OrderBy">OrderBy</see> property.
+		/// </summary>
+		public SortDirection SortDirection{ get; set; }
 
 		/// <summary>
 		/// Genres to seach/exclude.
@@ -92,15 +103,24 @@ namespace JikanDotNet
 
 			if (Genres.Count > 0 )
 			{
-				foreach (var genre in Genres)
-				{
-					builder.Append($"&genre[]={genre.GetDescription()}");
-				}
+				var genresId = Genres.Select(x => x.GetDescription()).ToArray();
+
+				builder.Append($"&genre={string.Join(",", genresId)}");
 			}
 
 			if (GenreIncluded)
 			{
-				builder.Append($"genre_exclude=0$");
+				builder.Append($"$genre_exclude=0");
+			}
+
+			if (OrderBy != AnimeSearchSortable.NoSorting)
+			{
+				builder.Append($"&order_by={OrderBy.GetDescription()}");
+
+				if (SortDirection != SortDirection.Default)
+				{
+					builder.Append($"&sort={SortDirection.GetDescription()}");
+				}
 			}
 
 			return builder.ToString().TrimEnd('&');

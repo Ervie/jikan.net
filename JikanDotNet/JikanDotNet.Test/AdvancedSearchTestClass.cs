@@ -98,6 +98,35 @@ namespace JikanDotNet.Tests
 			Assert.Contains("Beatless", returnedAnime.Results.Select(x => x.Title));
 		}
 
+		[Fact]
+		public async Task SearchAnime_OneSortByMembersConfig_ShouldSortByPopularityOPMFirst()
+		{
+			var searchConfig = new AnimeSearchConfig
+			{
+				OrderBy = AnimeSearchSortable.Members
+			};
+
+			AnimeSearchResult returnedAnime = await jikan.SearchAnime("one", searchConfig);
+
+			Assert.Contains("One Piece", returnedAnime.Results.Select(x => x.Title));
+			Assert.Contains("One Punch Man", returnedAnime.Results.Select(x => x.Title));
+			Assert.Equal("One Punch Man", returnedAnime.Results.First().Title);
+		}
+
+		[Fact]
+		public async Task SearchAnime_OneSortByIdConfig_ShouldSortByIdHachimitsuFirst()
+		{
+			var searchConfig = new AnimeSearchConfig
+			{
+				OrderBy = AnimeSearchSortable.Id,
+				SortDirection = SortDirection.Ascending
+			};
+
+			AnimeSearchResult returnedAnime = await jikan.SearchAnime("one", searchConfig);
+
+			Assert.Equal("Hachimitsu to Clover", returnedAnime.Results.First().Title);
+		}
+
 		[Theory]
 		[InlineData("berserk")]
 		[InlineData("monster")]
@@ -165,6 +194,35 @@ namespace JikanDotNet.Tests
 
 			Assert.Contains("Metallica Metalluca", returnedManga.Results.Select(x => x.Title));
 			Assert.Contains("Full Metal Panic! Another", returnedManga.Results.Select(x => x.Title));
+		}
+
+		[Fact]
+		public async Task SearchManga_MetalSortByMembersConfig_ShouldSortByPopularityFairyTailFirst()
+		{
+			var searchConfig = new MangaSearchConfig
+			{
+				OrderBy = MangaSearchSortable.Members
+			};
+
+			MangaSearchResult returnedAnime = await jikan.SearchManga("metal", searchConfig);
+
+			Assert.Contains("Fairy Tail", returnedAnime.Results.Select(x => x.Title));
+			Assert.Contains("Fullmetal Alchemist", returnedAnime.Results.Select(x => x.Title));
+			Assert.Equal("Fairy Tail", returnedAnime.Results.First().Title);
+		}
+
+		[Fact]
+		public async Task SearchManga_OneSortByIdConfig_ShouldSortByIdOnePieceFirst()
+		{
+			var searchConfig = new MangaSearchConfig
+			{
+				OrderBy = MangaSearchSortable.Id,
+				SortDirection = SortDirection.Ascending
+			};
+
+			MangaSearchResult returnedAnime = await jikan.SearchManga("one", searchConfig);
+
+			Assert.Equal("One Piece", returnedAnime.Results.First().Title);
 		}
 	}
 }
