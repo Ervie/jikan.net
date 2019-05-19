@@ -58,6 +58,11 @@ namespace JikanDotNet
 		public ICollection<GenreSearch> Genres { get; set; } = new List<GenreSearch>();
 
 		/// <summary>
+		/// Filter by producer id.
+		/// </summary>
+		public long ProducerId { get; set; }
+
+		/// <summary>
 		/// If true, search anime of genres included in <see cref="Genres">Genres</see>. If false, exlude genres included from <see cref="Genres">Genres</see> from search result. />
 		/// </summary>
 		public bool GenreIncluded { get; set; } = false;
@@ -121,6 +126,11 @@ namespace JikanDotNet
 				{
 					builder.Append($"&sort={SortDirection.GetDescription()}");
 				}
+			}
+
+			if (ProducerId > 0)
+			{
+				builder.Append($"&producer={ProducerId}");
 			}
 
 			return builder.ToString().TrimEnd('&');

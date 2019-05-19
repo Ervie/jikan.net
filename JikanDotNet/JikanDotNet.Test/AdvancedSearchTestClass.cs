@@ -127,6 +127,35 @@ namespace JikanDotNet.Tests
 			Assert.Equal("Hachimitsu to Clover", returnedAnime.Results.First().Title);
 		}
 
+		[Fact]
+		public async Task SearchAnime_VioletProducerKyotoAnimationConfig_ShouldReturnVEGAsTop3()
+		{
+			var searchConfig = new AnimeSearchConfig
+			{
+				ProducerId = 2
+			};
+
+			AnimeSearchResult returnedAnime = await jikan.SearchAnime("violet", searchConfig);
+
+			Assert.Contains("Evergarden", returnedAnime.Results.First().Title);
+			Assert.Contains("Evergarden", returnedAnime.Results.Skip(1).First().Title);
+			Assert.Contains("Evergarden", returnedAnime.Results.Skip(2).First().Title);
+		}
+
+		[Fact]
+		public async Task SearchAnime_VioletIncorrectProducerConfig_ShouldNotFilter()
+		{
+			var searchConfig = new AnimeSearchConfig
+			{
+				ProducerId = -1
+			};
+
+			AnimeSearchResult returnedAnime = await jikan.SearchAnime("violet", searchConfig);
+
+			Assert.Contains("Violence Jack: Jigoku Gai-hen", returnedAnime.Results.Select(x => x.Title));
+			Assert.Contains("Violet Evergarden", returnedAnime.Results.Select(x => x.Title));
+		}
+
 		[Theory]
 		[InlineData("berserk")]
 		[InlineData("monster")]
@@ -204,11 +233,11 @@ namespace JikanDotNet.Tests
 				OrderBy = MangaSearchSortable.Members
 			};
 
-			MangaSearchResult returnedAnime = await jikan.SearchManga("metal", searchConfig);
+			MangaSearchResult returnedManga = await jikan.SearchManga("metal", searchConfig);
 
-			Assert.Contains("Fairy Tail", returnedAnime.Results.Select(x => x.Title));
-			Assert.Contains("Fullmetal Alchemist", returnedAnime.Results.Select(x => x.Title));
-			Assert.Equal("Fairy Tail", returnedAnime.Results.First().Title);
+			Assert.Contains("Fairy Tail", returnedManga.Results.Select(x => x.Title));
+			Assert.Contains("Fullmetal Alchemist", returnedManga.Results.Select(x => x.Title));
+			Assert.Equal("Fairy Tail", returnedManga.Results.First().Title);
 		}
 
 		[Fact]
@@ -220,9 +249,37 @@ namespace JikanDotNet.Tests
 				SortDirection = SortDirection.Ascending
 			};
 
-			MangaSearchResult returnedAnime = await jikan.SearchManga("one", searchConfig);
+			MangaSearchResult returnedManga = await jikan.SearchManga("one", searchConfig);
 
-			Assert.Equal("One Piece", returnedAnime.Results.First().Title);
+			Assert.Equal("One Piece", returnedManga.Results.First().Title);
+		}
+
+		[Fact]
+		public async Task SearchManga_TorikoShonenJumpMagazineConfig_ShouldReturnTwoEntries()
+		{
+			var searchConfig = new MangaSearchConfig
+			{
+				MagazineId = 83
+			};
+
+			MangaSearchResult returnedManga = await jikan.SearchManga("toriko", searchConfig);
+
+			Assert.Contains("Toriko", returnedManga.Results.First().Title);
+			Assert.Equal(2, returnedManga.Results.Count);
+		}
+
+		[Fact]
+		public async Task SearchManga_TorikoIncorrectMagazineConfig_ShouldNotFilter()
+		{
+			var searchConfig = new MangaSearchConfig
+			{
+				MagazineId = -1
+			};
+
+			MangaSearchResult returnedManga = await jikan.SearchManga("toriko", searchConfig);
+
+			Assert.Contains("Toriko", returnedManga.Results.First().Title);
+			Assert.True(returnedManga.Results.Count > 30);
 		}
 	}
 }

@@ -58,6 +58,11 @@ namespace JikanDotNet
 		public ICollection<GenreSearch> Genres { get; set; } = new List<GenreSearch>();
 
 		/// <summary>
+		/// Filter by magazine id.
+		/// </summary>
+		public long MagazineId { get; set; }
+
+		/// <summary>
 		/// If true, search manga of genres included in <see cref="Genres">Genres</see>. If false, exlude genres included from <see cref="Genres">Genres</see> from search result. />
 		/// </summary>
 		public bool GenreIncluded { get; set; } = false;
@@ -120,6 +125,11 @@ namespace JikanDotNet
 				{
 					builder.Append($"&sort={SortDirection.GetDescription()}");
 				}
+			}
+
+			if (MagazineId > 0)
+			{
+				builder.Append($"&magazine={MagazineId}");
 			}
 
 			return builder.ToString().TrimEnd('&');
