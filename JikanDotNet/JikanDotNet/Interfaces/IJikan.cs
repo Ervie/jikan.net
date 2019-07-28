@@ -7,12 +7,20 @@ namespace JikanDotNet
 	/// </summary>
 	public interface IJikan
 	{
+		#region Anime requests
+
+		#region GetAnime
+
 		/// <summary>
 		/// Returns anime with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
 		/// <returns>Anime with given MAL id.</returns>
 		Task<Anime> GetAnime(long id);
+
+		#endregion
+
+		#region GetAnimeEpisodes
 
 		/// <summary>
 		/// Returns list of episodes for anime with given MAL id.
@@ -29,12 +37,20 @@ namespace JikanDotNet
 		/// <returns>List of episodes with details.</returns>
 		Task<AnimeEpisodes> GetAnimeEpisodes(long id, int page);
 
+		#endregion
+
+		#region GetAnimeCharactersStaff
+
 		/// <summary>
 		/// Returns collections of characters and staff of anime with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
 		/// <returns>Collections of characters and staff of anime with given MAL id.</returns>
 		Task<AnimeCharactersStaff> GetAnimeCharactersStaff(long id);
+
+		#endregion
+
+		#region GetAnimePictures
 
 		/// <summary>
 		/// Returns collections of links to pictures related to anime with given MAL id.
@@ -43,12 +59,20 @@ namespace JikanDotNet
 		/// <returns>Collections of links to pictures related to anime with given MAL id.</returns>
 		Task<AnimePictures> GetAnimePictures(long id);
 
+		#endregion
+
+		#region GetAnimeNews
+
 		/// <summary>
 		/// Returns collections of news related to anime with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
 		/// <returns>Collections of news related to anime with given MAL id.</returns>
 		Task<AnimeNews> GetAnimeNews(long id);
+
+		#endregion
+
+		#region GetAnimeVideos
 
 		/// <summary>
 		/// Returns collections of videos related to anime with given MAL id.
@@ -57,12 +81,20 @@ namespace JikanDotNet
 		/// <returns>Collections of videos related to anime with given MAL id.</returns>
 		Task<AnimeVideos> GetAnimeVideos(long id);
 
+		#endregion
+
+		#region GetAnimeStatistics
+
 		/// <summary>
 		/// Returns statistics related to anime with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
 		/// <returns>Statistics related to anime with given MAL id.</returns>
 		Task<AnimeStats> GetAnimeStatistics(long id);
+
+		#endregion
+
+		#region GetAnimeForumTopics
 
 		/// <summary>
 		/// Returns collections of forum topics related to anime with given MAL id.
@@ -71,6 +103,10 @@ namespace JikanDotNet
 		/// <returns>Collections of forum topics related to anime with given MAL id.</returns>
 		Task<ForumTopics> GetAnimeForumTopics (long id);
 
+		#endregion
+
+		#region GetAnimeMoreInfo
+
 		/// <summary>
 		/// Returns additional information related to anime with given MAL id.
 		/// </summary>
@@ -78,12 +114,20 @@ namespace JikanDotNet
 		/// <returns>Additional information related to anime with given MAL id.</returns>
 		Task<MoreInfo> GetAnimeMoreInfo(long id);
 
+		#endregion
+
+		#region GetAnimeRecommendations
+
 		/// <summary>
 		/// Returns collection of anime recommendation.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
 		/// <returns>Collection of anime recomendation.</returns>
 		Task<Recommendations> GetAnimeRecommendations(long id);
+
+		#endregion
+
+		#region GetAnimeReviews
 
 		/// <summary>
 		/// Returns collection of anime reviews.
@@ -100,6 +144,10 @@ namespace JikanDotNet
 		/// <returns>Collection of anime reviews.</returns>
 		Task<AnimeReviews> GetAnimeReviews(long id, int page);
 
+		#endregion
+
+		#region GetAnimeUserUpdates
+
 		/// <summary>
 		/// Returns collection of anime user updates.
 		/// </summary>
@@ -115,12 +163,24 @@ namespace JikanDotNet
 		/// <returns>Collection of anime user updates.</returns>
 		Task<AnimeUserUpdates> GetAnimeUserUpdates(long id, int page);
 
+		#endregion
+
+		#endregion Anime requests
+
+		#region Manga requests
+
+		#region GetManga
+
 		/// <summary>
 		/// Returns manga with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of manga.</param>
 		/// <returns>Manga with given MAL id.</returns>
 		Task<Manga> GetManga(long id);
+
+		#endregion
+
+		#region GetMangaPictures
 
 		/// <summary>
 		/// Returns collections of links to pictures related to manga with given MAL id.
@@ -129,12 +189,20 @@ namespace JikanDotNet
 		/// <returns>Collections of links to pictures related to manga with given MAL id.</returns>
 		Task<MangaPictures> GetMangaPictures(long id);
 
+		#endregion
+
+		#region GetMangaCharacters
+
 		/// <summary>
 		/// Returns collections of characters appearing in manga with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of manga.</param>
 		/// <returns>Collections of characters appearing in manga with given MAL id.</returns>
 		Task<MangaCharacters> GetMangaCharacters(long id);
+
+		#endregion
+
+		#region GetMangaNews
 
 		/// <summary>
 		/// Returns collections of news related to manga with given MAL id.
@@ -143,12 +211,20 @@ namespace JikanDotNet
 		/// <returns>Collections of news related to manga with given MAL id.</returns>
 		Task<MangaNews> GetMangaNews(long id);
 
+		#endregion
+
+		#region GetMangaStatistics
+
 		/// <summary>
 		/// Returns statistics related to manga with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of manga.</param>
 		/// <returns>Statistics related to manga with given MAL id.</returns>
 		Task<MangaStats> GetMangaStatistics(long id);
+
+		#endregion
+
+		#region GetMangaForumTopics
 
 		/// <summary>
 		/// Returns collections of forum topics related to manga with given MAL id.
@@ -157,6 +233,10 @@ namespace JikanDotNet
 		/// <returns>Collections of forum topics related to manga with given MAL id.</returns>
 		Task<ForumTopics> GetMangaForumTopics(long id);
 
+		#endregion
+
+		#region GetMangaMoreInfo
+
 		/// <summary>
 		/// Returns additional information related to manga with given MAL id.
 		/// </summary>
@@ -164,12 +244,20 @@ namespace JikanDotNet
 		/// <returns>Collections of forum topics related to manga with given MAL id.</returns>
 		Task<MoreInfo> GetMangaMoreInfo(long id);
 
+		#endregion
+
+		#region GetMangaRecommendations
+
 		/// <summary>
 		/// Returns collection of manga recommendation.
 		/// </summary>
 		/// <param name="id">MAL id of manga.</param>
 		/// <returns>Collection of manga recomendation.</returns>
 		Task<Recommendations> GetMangaRecommendations(long id);
+
+		#endregion
+
+		#region GetMangaReviews
 
 		/// <summary>
 		/// Returns collection of manga reviews.
@@ -186,6 +274,10 @@ namespace JikanDotNet
 		/// <returns>Collection of manga reviews.</returns>
 		Task<MangaReviews> GetMangaReviews(long id, int page);
 
+		#endregion
+
+		#region GetMangaUserUpdates
+
 		/// <summary>
 		/// Returns collection of manga user updates.
 		/// </summary>
@@ -201,12 +293,24 @@ namespace JikanDotNet
 		/// <returns>Collection of manga user updates.</returns>
 		Task<MangaUserUpdates> GetMangaUserUpdates(long id, int page);
 
+		#endregion
+
+		#endregion Manga requests
+
+		#region Character requests
+
+		#region GetCharacter
+
 		/// <summary>
 		/// Returns character with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of character.</param>
 		/// <returns>Character with given MAL id.</returns>
 		Task<Character> GetCharacter(long id);
+
+		#endregion
+
+		#region GetCharacterPictures
 
 		/// <summary>
 		/// Returns collections of links to pictures related to character with given MAL id.
@@ -215,6 +319,14 @@ namespace JikanDotNet
 		/// <returns>Collections of links to pictures related to character with given MAL id.</returns>
 		Task<CharacterPictures> GetCharacterPictures(long id);
 
+		#endregion
+
+		#endregion Character requests
+
+		#region Person requests
+
+		#region GetPerson
+
 		/// <summary>
 		/// Returns person with given MAL id.
 		/// </summary>
@@ -222,12 +334,24 @@ namespace JikanDotNet
 		/// <returns>Person with given MAL id.</returns>
 		Task<Person> GetPerson(long id);
 
+		#endregion
+
+		#region GetPersonPictures
+
 		/// <summary>
 		/// Returns collections of links to pictures related to person with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of person.</param>
 		/// <returns>Collections of links to pictures related to person with given MAL id.</returns>
 		Task<PersonPictures> GetPersonPictures(long id);
+
+		#endregion
+
+		#endregion Person requests
+
+		#region Season requests
+
+		#region GetSeason
 
 		/// <summary>
 		/// Returns current season preview.
@@ -243,17 +367,33 @@ namespace JikanDotNet
 		/// <returns>Season preview.</returns>
 		Task<Season> GetSeason(int year, Seasons season);
 
+		#endregion
+
+		#region GetSeasonArchive
+
 		/// <summary>
 		/// Returns list of availaible season to query with <see cref="GetSeason(int, Seasons)"/>
 		/// </summary>
 		/// <returns></returns>
 		Task<SeasonArchives> GetSeasonArchive();
 
+		#endregion
+
+		#region GetSeasonLater
+
 		/// <summary>
 		/// Return season preview for anime with undefined airing season (marked as "Later" on MAL).
 		/// </summary>
 		/// <returns>Season preview for anime with undefined airing date.</returns>
 		Task<Season> GetSeasonLater();
+
+		#endregion
+
+		#endregion Season requests
+
+		#region Schedule requests
+
+		#region GetSchedule
 
 		/// <summary>
 		/// Returns current season schedule.
@@ -267,6 +407,14 @@ namespace JikanDotNet
 		/// <param name="scheduledDay">Scheduled day to filter by.</param>
 		/// <returns>Current season schedule.</returns>
 		Task<Schedule> GetSchedule(ScheduledDay scheduledDay);
+
+		#endregion
+
+		#endregion Schedule requests
+
+		#region Top requests
+
+		#region GetAnimeTop
 
 		/// <summary>
 		/// Returns list of top anime.
@@ -296,6 +444,10 @@ namespace JikanDotNet
 		/// <returns>List of top anime.</returns>
 		Task<AnimeTop> GetAnimeTop(int page, TopAnimeExtension extension);
 
+		#endregion 
+
+		#region GetMangaTop
+
 		/// <summary>
 		/// Returns list of top manga.
 		/// </summary>
@@ -324,6 +476,10 @@ namespace JikanDotNet
 		/// <returns>List of top manga.</returns>
 		Task<MangaTop> GetMangaTop(int page, TopMangaExtension extension);
 
+		#endregion
+
+		#region GetPeopleTop
+
 		/// <summary>
 		/// Returns list of most popular people.
 		/// </summary>
@@ -337,6 +493,10 @@ namespace JikanDotNet
 		/// <returns>List of most popular people.</returns>
 		Task<PeopleTop> GetPeopleTop(int page);
 
+		#endregion
+
+		#region GetCharactersTop
+
 		/// <summary>
 		/// Returns list of most popular characters.
 		/// </summary>
@@ -349,6 +509,14 @@ namespace JikanDotNet
 		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
 		/// <returns>List of most popular characters.</returns>
 		Task<CharactersTop> GetCharactersTop(int page);
+
+		#endregion
+
+		#endregion Top Requests
+
+		#region Genre requests
+
+		#region GetAnimeGenre
 
 		/// <summary>
 		/// Returns information about anime genre.
@@ -380,6 +548,10 @@ namespace JikanDotNet
 		/// <returns>Information about anime genre</returns>
 		Task<AnimeGenre> GetAnimeGenre(GenreSearch genre, int page);
 
+		#endregion
+
+		#region GetMangaGenre
+
 		/// <summary>
 		/// Returns information about manga genre.
 		/// </summary>
@@ -410,6 +582,14 @@ namespace JikanDotNet
 		/// <returns>Information about manga genre</returns>
 		Task<MangaGenre> GetMangaGenre(GenreSearch genre, int page);
 
+		#endregion
+
+		#endregion Genre requests
+
+		#region Producer requests
+
+		#region GetProducer
+
 		/// <summary>
 		/// Returns information about producer with given MAL id. 
 		/// </summary>
@@ -424,6 +604,14 @@ namespace JikanDotNet
 		/// <param name="page">Index of page folding 100 records of top ranging (e.g. 1 will return first 100 records, 2 will return record from 101 to 200 etc.)</param>
 		/// <returns>Information about producer with given MAL id. </returns>
 		Task<Producer> GetProducer(long id, int page);
+
+		#endregion
+
+		#endregion Producer requests
+
+		#region Magazine requests
+
+		#region GetMagazine
 
 		/// <summary>
 		/// Returns information about magazine with given MAL id. 
@@ -440,12 +628,24 @@ namespace JikanDotNet
 		/// <returns>Information about magazine with given MAL id. </returns>
 		Task<Magazine> GetMagazine(long id, int page);
 
+		#endregion
+
+		#endregion Magazine requests
+
+		#region User requests
+
+		#region GetUserProfile
+
 		/// <summary>
 		/// Returns information about user's profile with given username.
 		/// </summary>
 		/// <param name="username">Username.</param>
 		/// <returns>Information about user's profile with given username.</returns>
 		Task<UserProfile> GetUserProfile(string username);
+
+		#endregion
+
+		#region GetUserHistory
 
 		/// <summary>
 		/// Returns information about user's history with given username.
@@ -462,6 +662,10 @@ namespace JikanDotNet
 		/// <returns>Information about user's profile with given username.</returns>
 		Task<UserHistory> GetUserHistory(string username, UserHistoryExtension filter);
 
+		#endregion
+
+		#region GetUserFriends
+
 		/// <summary>
 		/// Returns information about user's friends with given username.
 		/// </summary>
@@ -476,6 +680,10 @@ namespace JikanDotNet
 		/// <param name="page">Index of the page.</param>
 		/// <returns>Information about user's friends with given username.</returns>
 		Task<UserFriends> GetUserFriends(string username, int page);
+
+		#endregion
+
+		#region GetUserAnimeList
 
 		/// <summary>
 		/// Returns entries on user's anime list.
@@ -509,6 +717,10 @@ namespace JikanDotNet
 		/// <returns>Entries on user's anime list.</returns>
 		Task<UserAnimeList> GetUserAnimeList(string username, UserAnimeListExtension filter, int page);
 
+		#endregion
+
+		#region GetUserMangaList
+
 		/// <summary>
 		/// Returns entries on user's manga list.
 		/// </summary>
@@ -541,12 +753,24 @@ namespace JikanDotNet
 		/// <returns>Entries on user's manga list.</returns>
 		Task<UserMangaList> GetUserMangaList(string username, UserMangaListExtension filter, int page);
 
+		#endregion
+
+		#endregion User requests
+
+		#region Club requests
+
+		#region GetClub
+
 		/// <summary>
 		/// Return club's profile information.
 		/// </summary>
 		/// <param name="id">MAL id of the club.</param>
 		/// <returns>Club's profile information.</returns>
 		Task<Club> GetClub(long id);
+
+		#endregion
+
+		#region GetClubMembers
 
 		/// <summary>
 		/// Return club's member list.
@@ -562,6 +786,14 @@ namespace JikanDotNet
 		/// <param name="page">Index of page folding 36 records of top ranging (e.g. 1 will return first 36 records, 2 will return record from 37 to 72 etc.)</param>
 		/// <returns>Club's member list.</returns>
 		Task<ClubMembers> GetClubMembers(long id, int page);
+
+		#endregion
+
+		#endregion Club requests
+
+		#region Search requests
+
+		#region SearchAnime
 
 		/// <summary>
 		/// Returns list of results related to search.
@@ -595,6 +827,10 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		Task<AnimeSearchResult> SearchAnime(string query, int page, AnimeSearchConfig searchConfig);
 
+		#endregion
+
+		#region SearchManga
+
 		/// <summary>
 		/// Returns list of results related to search.
 		/// </summary>
@@ -627,6 +863,10 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		Task<MangaSearchResult> SearchManga(string query, int page, MangaSearchConfig searchConfig);
 
+		#endregion
+
+		#region SearchPerson
+
 		/// <summary>
 		/// Returns list of results related to search.
 		/// </summary>
@@ -641,6 +881,10 @@ namespace JikanDotNet
 		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
 		/// <returns>List of result related to search query.</returns>
 		Task<PersonSearchResult> SearchPerson(string query, int page);
+
+		#endregion
+
+		#region SearchCharacter
 
 		/// <summary>
 		/// Returns list of results related to search.
@@ -657,10 +901,22 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		Task<CharacterSearchResult> SearchCharacter(string query, int page);
 
+		#endregion
+
+		#endregion Search requests
+
+		#region Metadata requests
+
+		#region GetStatusMetadata
+
 		/// <summary>
 		/// Return Jikan REST API metadata - status.
 		/// </summary>
 		/// <returns>Jikan REST API metadata - status.</returns>
 		Task<StatusMetadata> GetStatusMetadata();
+
+		#endregion
+
+		#endregion Metadata requests
 	}
 }
