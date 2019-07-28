@@ -26,16 +26,6 @@ namespace JikanDotNet
 		public SortDirection SortDirection { get; set; }
 
 		/// <summary>
-		/// Filter Anime that have aired from this date.
-		/// </summary>
-		public DateTime? AiredFrom { get; set; }
-
-		/// <summary>
-		/// Filter Anime that have aired till this date.
-		/// </summary>
-		public DateTime? AiredTo { get; set; }
-
-		/// <summary>
 		/// Filter Anime by this Producer ID.
 		/// </summary>
 		public long ProducerId { get; set; }
@@ -44,11 +34,6 @@ namespace JikanDotNet
 		/// Filter anime from a year.
 		/// </summary>
 		public int Year { get; set; }
-
-		/// <summary>
-		/// Should filter by season?
-		/// </summary>
-		public bool IncludeSeasonFilter { get; set; }
 
 		/// <summary>
 		/// Filter anime from a season (require year).
@@ -71,26 +56,13 @@ namespace JikanDotNet
 			if (OrderBy != UserListAnimeSearchSortable.NoSorting)
 			{
 				builder.Append($"&order_by={OrderBy.GetDescription()}");
+				builder.Append($"&sort={SortDirection.GetDescription()}");
 
 				if (OrderBy2 != UserListAnimeSearchSortable.NoSorting)
 				{
 					builder.Append($"&order_by2={OrderBy2.GetDescription()}");
 				}
 
-				if(SortDirection != SortDirection.Default)
-				{
-					builder.Append($"&sort={SortDirection.GetDescription()}");
-				}
-			}
-
-			if (AiredFrom.HasValue)
-			{
-				builder.Append($"&aired_from={AiredFrom.Value.ToString("yyyy-MM-dd")}");
-			}
-
-			if (AiredTo.HasValue)
-			{
-				builder.Append($"&aired_to={AiredTo.Value.ToString("yyyy-MM-dd")}");
 			}
 
 			if (ProducerId > 0)
@@ -101,11 +73,12 @@ namespace JikanDotNet
 			if (Year > 0)
 			{
 				builder.Append($"&year={Year}");
+				builder.Append($"&season={Season.GetDescription()}");
+			}
 
-				if (IncludeSeasonFilter)
-				{
-					builder.Append($"&season={Season.GetDescription()}");
-				}
+			if (AiringStatus != UserListAnimeAiringStatus.NoFilter)
+			{
+				builder.Append($"&airing_status={AiringStatus.GetDescription()}");
 			}
 
 			return builder.ToString().TrimEnd('&');
