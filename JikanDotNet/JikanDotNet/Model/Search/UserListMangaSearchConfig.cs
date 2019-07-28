@@ -10,6 +10,11 @@ namespace JikanDotNet
 	public class UserListMangaSearchConfig : ISearchConfig
 	{
 		/// <summary>
+		/// Query to filter by.
+		/// </summary>
+		public string Query { get; set; }
+
+		/// <summary>
 		/// Order items with respect to a property
 		/// </summary>
 		public UserListMangaSearchSortable OrderBy { get; set; }
@@ -47,6 +52,11 @@ namespace JikanDotNet
 		{
 			StringBuilder builder = new StringBuilder();
 
+			if (!string.IsNullOrWhiteSpace(Query))
+			{
+				builder.Append($"q={Query}");
+			}
+
 			if (Page > 0)
 			{
 				builder.Append($"&page={Page}");
@@ -73,7 +83,8 @@ namespace JikanDotNet
 				builder.Append($"&publishing_status={PublishingStatus.GetDescription()}");
 			}
 
-			return builder.ToString().TrimEnd('&');
+			// change first ampersand into question mark
+			return string.Concat("?", builder.ToString().TrimEnd('&').TrimStart('&'));
 		}
 	}
 }

@@ -1,6 +1,5 @@
 ﻿using JikanDotNet.Extensions;
 using JikanDotNet.Interfaces;
-using System;
 using System.Text;
 
 namespace JikanDotNet
@@ -10,6 +9,11 @@ namespace JikanDotNet
 	/// </summary>
 	public class UserListAnimeSearchConfig : ISearchConfig
 	{
+		/// <summary>
+		/// Query to filter by.
+		/// </summary>
+		public string Query { get; set; }
+
 		/// <summary>
 		/// Order items with respect to a property
 		/// </summary>
@@ -58,6 +62,11 @@ namespace JikanDotNet
 		{
 			StringBuilder builder = new StringBuilder();
 
+			if (!string.IsNullOrWhiteSpace(Query))
+			{
+				builder.Append($"q={Query}");
+			}
+
 			if (Page > 0)
 			{
 				builder.Append($"&page={Page}");
@@ -72,7 +81,6 @@ namespace JikanDotNet
 				{
 					builder.Append($"&order_by2={OrderBy2.GetDescription()}");
 				}
-
 			}
 
 			if (ProducerId > 0)
@@ -91,7 +99,8 @@ namespace JikanDotNet
 				builder.Append($"&airing_status={AiringStatus.GetDescription()}");
 			}
 
-			return builder.ToString().TrimEnd('&');
+			// change first ampersand into question mark
+			return string.Concat("?", builder.ToString().TrimEnd('&').TrimStart('&'));
 		}
 	}
 }
