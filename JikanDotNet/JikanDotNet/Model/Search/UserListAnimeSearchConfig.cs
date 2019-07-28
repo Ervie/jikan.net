@@ -36,6 +36,11 @@ namespace JikanDotNet
 		public int Year { get; set; }
 
 		/// <summary>
+		/// Index of page (page size = 300).
+		/// </summary>
+		public int Page { get; set; }
+
+		/// <summary>
 		/// Filter anime from a season (require year).
 		/// </summary>
 		public Seasons Season { get; set; }
@@ -52,6 +57,11 @@ namespace JikanDotNet
 		public string ConfigToString()
 		{
 			StringBuilder builder = new StringBuilder();
+
+			if (Page > 0)
+			{
+				builder.Append($"&page={Page}");
+			}
 
 			if (OrderBy != UserListAnimeSearchSortable.NoSorting)
 			{

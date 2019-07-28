@@ -1082,6 +1082,18 @@ namespace JikanDotNet
 			return await ExecuteGetRequest<UserAnimeList>(endpointParts);
 		}
 
+		/// <summary>
+		/// Returns entries on user's anime list.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <param name="searchConfig">Config to modify request input parameters.</param>
+		/// <returns>Entries on user's anime list.</returns>
+		public async Task<UserAnimeList> GetUserAnimeList(string username, UserListAnimeSearchConfig searchConfig)
+		{
+			string[] endpointParts = new string[] { JikanEndPointCategories.User, username, UserExtension.AnimeList.GetDescription(), searchConfig.ConfigToString() };
+			return await ExecuteGetRequest<UserAnimeList>(endpointParts);
+		}
+
 		#endregion GetUserAnimeList
 
 		#region GetUserMangaList
@@ -1131,6 +1143,18 @@ namespace JikanDotNet
 		public async Task<UserMangaList> GetUserMangaList(string username, UserMangaListExtension filter, int page)
 		{
 			string[] endpointParts = new string[] { JikanEndPointCategories.User, username, UserExtension.MangaList.GetDescription(), filter.GetDescription(), page.ToString() };
+			return await ExecuteGetRequest<UserMangaList>(endpointParts);
+		}
+
+		/// <summary>
+		/// Returns entries on user's manga list.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <param name="searchConfig">Config to modify request input parameters.</param>
+		/// <returns>Entries on user's manga list.</returns>
+		public async Task<UserMangaList> GetUserMangaList(string username, UserListAnimeSearchConfig searchConfig)
+		{
+			string[] endpointParts = new string[] { JikanEndPointCategories.User, username, UserExtension.MangaList.GetDescription(), searchConfig.ConfigToString() };
 			return await ExecuteGetRequest<UserMangaList>(endpointParts);
 		}
 
@@ -1398,7 +1422,6 @@ namespace JikanDotNet
 			string[] endpointParts = new string[] { JikanEndPointCategories.Meta, "status" };
 			return await ExecuteGetRequest<StatusMetadata>(endpointParts);
 		}
-
 		#endregion GetStatusMetadata
 
 		#endregion Metadata methods

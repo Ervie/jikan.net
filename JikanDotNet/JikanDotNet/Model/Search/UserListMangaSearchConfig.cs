@@ -25,6 +25,11 @@ namespace JikanDotNet
 		public SortDirection SortDirection { get; set; }
 
 		/// <summary>
+		/// Index of page (page size = 300).
+		/// </summary>
+		public int Page { get; set; }
+
+		/// <summary>
 		/// Filter manga by this Magazine ID.
 		/// </summary>
 		public long MagazineId { get; set; }
@@ -41,6 +46,11 @@ namespace JikanDotNet
 		public string ConfigToString()
 		{
 			StringBuilder builder = new StringBuilder();
+
+			if (Page > 0)
+			{
+				builder.Append($"&page={Page}");
+			}
 
 			if (OrderBy != UserListMangaSearchSortable.NoSorting)
 			{
