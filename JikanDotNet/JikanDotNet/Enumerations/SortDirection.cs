@@ -8,12 +8,6 @@ namespace JikanDotNet
 	public enum SortDirection
 	{
 		/// <summary>
-		/// Use default sort direction.
-		/// </summary>
-		[Description("")]
-		Default,
-
-		/// <summary>
 		/// Sort ascending.
 		/// </summary>
 		[Description("ascending")]

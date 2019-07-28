@@ -122,10 +122,7 @@ namespace JikanDotNet
 			{
 				builder.Append($"&order_by={OrderBy.GetDescription()}");
 
-				if (SortDirection != SortDirection.Default)
-				{
-					builder.Append($"&sort={SortDirection.GetDescription()}");
-				}
+				builder.Append($"&sort={SortDirection.GetDescription()}");
 			}
 
 			if (ProducerId > 0)
