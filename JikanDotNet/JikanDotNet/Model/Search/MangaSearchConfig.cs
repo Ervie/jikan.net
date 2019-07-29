@@ -120,11 +120,7 @@ namespace JikanDotNet
 			if (OrderBy != MangaSearchSortable.NoSorting)
 			{
 				builder.Append($"&order_by={OrderBy.GetDescription()}");
-
-				if (SortDirection != SortDirection.Default)
-				{
-					builder.Append($"&sort={SortDirection.GetDescription()}");
-				}
+				builder.Append($"&sort={SortDirection.GetDescription()}");
 			}
 
 			if (MagazineId > 0)

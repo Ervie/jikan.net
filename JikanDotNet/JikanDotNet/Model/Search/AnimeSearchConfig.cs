@@ -121,7 +121,6 @@ namespace JikanDotNet
 			if (OrderBy != AnimeSearchSortable.NoSorting)
 			{
 				builder.Append($"&order_by={OrderBy.GetDescription()}");
-
 				builder.Append($"&sort={SortDirection.GetDescription()}");
 			}
 
