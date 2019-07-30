@@ -132,7 +132,7 @@ namespace JikanDotNet.Tests
 			var firstUpdate = bebop.Updates.First();
 
 			Assert.Equal(75, bebop.Updates.Count);
-			Assert.Equal(DateTime.Now.Day, firstUpdate.Date.Value.Day);
+			Assert.True(DateTime.Now >= firstUpdate.Date.Value);
 			Assert.True(!firstUpdate.EpisodesTotal.HasValue || firstUpdate.EpisodesTotal == 26);
 		}
 

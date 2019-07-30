@@ -145,7 +145,8 @@ namespace JikanDotNet.Tests
 		{
 			var searchConfig = new MangaSearchConfig
 			{
-				OrderBy = MangaSearchSortable.Members
+				OrderBy = MangaSearchSortable.Members,
+				SortDirection = SortDirection.Descending
 			};
 
 			MangaSearchResult returnedManga = await jikan.SearchManga("metal", searchConfig);

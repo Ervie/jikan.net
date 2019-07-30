@@ -26,8 +26,8 @@ namespace JikanDotNet.Tests
 		{
 			Schedule currentSeason = await jikan.GetSchedule(ScheduledDay.Monday);
 
-			Assert.Contains("Dororo", currentSeason.Monday.Select(x => x.Title));
-			Assert.Contains("Mayonaka no Occult Koumuin", currentSeason.Monday.Select(x => x.Title));
+			Assert.Contains("Otoppe", currentSeason.Monday.Select(x => x.Title));
+			Assert.Contains("Yasamura Yasashi no Yasashii Sekai", currentSeason.Monday.Select(x => x.Title));
 		}
 
 		[Fact]

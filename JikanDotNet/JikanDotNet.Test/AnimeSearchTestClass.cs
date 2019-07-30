@@ -109,19 +109,18 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public async Task SearchAnime_BleachMechaConfig_ShouldFilterBleachMecha()
+		public async Task SearchAnime_BlameMechaConfig_ShouldFilterBleachMecha()
 		{
 			var searchConfig = new AnimeSearchConfig();
 			searchConfig.Genres.Add(GenreSearch.Mecha);
 
-			AnimeSearchResult returnedAnime = await jikan.SearchAnime("Bleach", searchConfig);
+			AnimeSearchResult returnedAnime = await jikan.SearchAnime("Blame", searchConfig);
 
 			Assert.Contains("Blame! Movie", returnedAnime.Results.Select(x => x.Title));
-			Assert.Contains("Bubblegum Crisis", returnedAnime.Results.Select(x => x.Title));
 		}
 
 		[Fact]
-		public async Task SearchAnime_BleachMechaMovieConfig_ShouldFilterBleachMechaMovie()
+		public async Task SearchAnime_BlameMechaMovieConfig_ShouldFilterBleachMechaMovie()
 		{
 			var searchConfig = new AnimeSearchConfig
 			{
@@ -129,7 +128,7 @@ namespace JikanDotNet.Tests
 			};
 			searchConfig.Genres.Add(GenreSearch.Mecha);
 
-			AnimeSearchResult returnedAnime = await jikan.SearchAnime("Bleach", searchConfig);
+			AnimeSearchResult returnedAnime = await jikan.SearchAnime("Blame", searchConfig);
 
 			Assert.Equal("Blame! Movie", returnedAnime.Results.First().Title);
 		}
@@ -154,7 +153,8 @@ namespace JikanDotNet.Tests
 		{
 			var searchConfig = new AnimeSearchConfig
 			{
-				OrderBy = AnimeSearchSortable.Members
+				OrderBy = AnimeSearchSortable.Members,
+				SortDirection = SortDirection.Descending
 			};
 
 			AnimeSearchResult returnedAnime = await jikan.SearchAnime("one", searchConfig);

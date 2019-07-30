@@ -41,11 +41,11 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public async Task GetAnimeTop_NoParameter_ShouldParseKimiNoNaWaType()
+		public async Task GetAnimeTop_NoParameter_ShouldParseShingekiType()
 		{
 			AnimeTop top = await jikan.GetAnimeTop();
 
-			Assert.Equal("Movie", top.Top.Skip(1).First().Type);
+			Assert.Equal("TV", top.Top.Skip(4).First().Type);
 		}
 
 		[Fact]

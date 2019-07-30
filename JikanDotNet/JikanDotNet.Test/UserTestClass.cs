@@ -39,23 +39,21 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public async Task GetUserHistory_Ervelan_ShouldParseErvelanHistory()
+		public async Task GetUserHistory_Nekomata_ShouldParseNekomataHistory()
 		{
-			UserHistory userHistory = await jikan.GetUserHistory("Ervelan");
+			UserHistory userHistory = await jikan.GetUserHistory("Nekomata1037");
 
 			Assert.NotNull(userHistory);
-			Assert.True(userHistory.History.Count > 10);
-			Assert.True(userHistory.History.First().Date.Value.Year > 2017);
+			Assert.True(userHistory.History.Count >= 0);
 		}
 
 		[Fact]
-		public async Task GetUserHistory_ErvelanMangaHistory_ShouldParseErvelanMangaHistory()
+		public async Task GetUserHistory_NekomataMangaHistory_ShouldParseNekomataMangaHistory()
 		{
-			UserHistory userHistory = await jikan.GetUserHistory("Ervelan", UserHistoryExtension.Manga);
+			UserHistory userHistory = await jikan.GetUserHistory("Nekomata1037", UserHistoryExtension.Manga);
 
 			Assert.NotNull(userHistory);
-			Assert.True(userHistory.History.Count > 5);
-			Assert.True(userHistory.History.First().Date.Value.Year > 2017);
+			Assert.True(userHistory.History.Count >= 0);
 		}
 
 		[Fact]

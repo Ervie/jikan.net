@@ -64,7 +64,6 @@ namespace JikanDotNet.Tests
 
 			Assert.Contains(1672449, monster.Topics.Select(x => x.TopicId));
 			Assert.Contains(155394, monster.Topics.Select(x => x.TopicId));
-			Assert.Contains(395621, monster.Topics.Select(x => x.TopicId));
 		}
 
 		[Fact]

@@ -20,7 +20,7 @@ namespace JikanDotNet.Tests
 			StatusMetadata statusMetadata = await jikan.GetStatusMetadata();
 
 			Assert.NotNull(statusMetadata);
-			Assert.True(Int32.Parse(statusMetadata.TotalConnectionsReceived) > 10000000);
+			Assert.True(Int32.Parse(statusMetadata.TotalConnectionsReceived) > 1000000);
 		}
 	}
 }
