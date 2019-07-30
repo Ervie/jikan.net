@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace JikanDotNet
 {
@@ -35,7 +36,7 @@ namespace JikanDotNet
 		/// Date when episode aired at first.
 		/// </summary>
 		[JsonProperty(PropertyName = "aired")]
-		public TimePeriod Aired { get; set; }
+		public DateTime? Aired { get; set; }
 
 		/// <summary>
 		/// Is the episode filler.
