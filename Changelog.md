@@ -1,3 +1,22 @@
+## 31.07.2019 - Version 1.3.0 (newest)
+
+- Integration with Jikan API v3.3.
+- Features
+    - <b>[Search]</b> Improved searching for manga and anime
+        - Order by data (Title, score, etc.)
+        - Filter Producer (anime) or Magazine (manga)
+        - Improved multiple genre query.
+    - <b>[UserList]</b> Advanced User Lists (Anime/Manga) queries
+        - Usable by passing `UserListAnimeSearchConfig` to `GetUserAnimeList` and `UserListMangaSearchConfig`to `GetUserMangaList` methods
+            - Order by data: `OrderBy`, `OrderBy2` (Title, score, etc.)
+            - Sort by ascending/descending - `SortBy`
+            - Search user list: `Query` property
+            - New Anime filters: `Producer`, `Season`, `Year`, `AiringStatus`
+            - New Manga filters: `Magazine`, `PublishingStatus`
+            - Paging support: `Page` property
+- Fixes
+    - <b>[AnimeEpisoded]</b> changed `Aired` property from `TimeSpan` (a pair of `DateTime`) to single `DateTime`
+
 ## 07.04.2019 - Version 1.2.5 (newest)
 
 - Jikan.net now can be used with own instance of Jikan REST API. Read more [here](https://github.com/Ervie/jikan.net/wiki/Using-own-instance-of-Jikan).
