@@ -80,7 +80,7 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public async Task GetUserAnimeList_ErvelanFilterWithAkira_ShouldFindSingleRecord()
+		public async Task GetUserAnimeList_ErvelanFilterWithAkira_ShouldFindSingleResult()
 		{
 			UserListAnimeSearchConfig searchConfig = new UserListAnimeSearchConfig()
 			{
@@ -91,6 +91,34 @@ namespace JikanDotNet.Tests
 
 			Assert.NotNull(animeList);
 			Assert.Single(animeList.Anime);
+		}
+
+		[Fact]
+		public async Task GetUserAnimeList_ErvelanFilterWithQwerty_ShouldNotFindResults()
+		{
+			UserListAnimeSearchConfig searchConfig = new UserListAnimeSearchConfig()
+			{
+				Query = "qwerty"
+			};
+
+			UserAnimeList animeList = await jikan.GetUserAnimeList("Ervelan", searchConfig);
+
+			Assert.NotNull(animeList);
+			Assert.Empty(animeList.Anime);
+		}
+
+		[Fact]
+		public async Task GetUserAnimeList_ErvelanFilterWithEmptyString_ShouldReturnAllResults()
+		{
+			UserListAnimeSearchConfig searchConfig = new UserListAnimeSearchConfig()
+			{
+				Query = ""
+			};
+
+			UserAnimeList animeList = await jikan.GetUserAnimeList("Ervelan", searchConfig);
+
+			Assert.NotNull(animeList);
+			Assert.True(animeList.Anime.Count == 300);
 		}
 
 		[Fact]
@@ -155,6 +183,20 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
+		public async Task GetUserAnimeList_ErvelanFilterByWrongProducerId_ShouldReturnAllResults()
+		{
+			UserListAnimeSearchConfig searchConfig = new UserListAnimeSearchConfig()
+			{
+				ProducerId = -1
+			};
+
+			UserAnimeList animeList = await jikan.GetUserAnimeList("Ervelan", searchConfig);
+
+			Assert.NotNull(animeList);
+			Assert.True(animeList.Anime.Count == 300);
+		}
+
+		[Fact]
 		public async Task GetUserAnimeList_ErvelanFilterBySummer2010_ShouldFindFairyTailAndMaidSama()
 		{
 			UserListAnimeSearchConfig searchConfig = new UserListAnimeSearchConfig()
@@ -198,6 +240,22 @@ namespace JikanDotNet.Tests
 
 			Assert.NotNull(animeList);
 			Assert.Contains("Angel Beats!", animeList.Anime.First().Title);
+		}
+
+		[Fact]
+		public async Task GetUserAnimeList_ErvelanFilterWithOneWithAiringStatus_ShouldFindOPAndNotOPM()
+		{
+			UserListAnimeSearchConfig searchConfig = new UserListAnimeSearchConfig()
+			{
+				AiringStatus = UserListAnimeAiringStatus.Airing,
+				Query = "one"
+			};
+
+			UserAnimeList animeList = await jikan.GetUserAnimeList("Ervelan", searchConfig);
+
+			Assert.NotNull(animeList);
+			Assert.Contains("One Piece", animeList.Anime.Select(x => x.Title));
+			Assert.DoesNotContain("One Punch-Man", animeList.Anime.Select(x => x.Title));
 		}
 	}
 }

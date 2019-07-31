@@ -767,7 +767,7 @@ namespace JikanDotNet
 		/// <param name="username">Username.</param>
 		/// <param name="searchConfig">Config to modify request input parameters.</param>
 		/// <returns>Entries on user's manga list.</returns>
-		Task<UserMangaList> GetUserMangaList(string username, UserListAnimeSearchConfig searchConfig);
+		Task<UserMangaList> GetUserMangaList(string username, UserListMangaSearchConfig searchConfig);
 
 		#endregion
 

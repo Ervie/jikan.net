@@ -1152,7 +1152,7 @@ namespace JikanDotNet
 		/// <param name="username">Username.</param>
 		/// <param name="searchConfig">Config to modify request input parameters.</param>
 		/// <returns>Entries on user's manga list.</returns>
-		public async Task<UserMangaList> GetUserMangaList(string username, UserListAnimeSearchConfig searchConfig)
+		public async Task<UserMangaList> GetUserMangaList(string username, UserListMangaSearchConfig searchConfig)
 		{
 			string[] endpointParts = new string[] { JikanEndPointCategories.User, username, UserExtension.MangaList.GetDescription(), searchConfig.ConfigToString() };
 			return await ExecuteGetRequest<UserMangaList>(endpointParts);

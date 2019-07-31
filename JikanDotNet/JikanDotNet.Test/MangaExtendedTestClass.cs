@@ -121,7 +121,7 @@ namespace JikanDotNet.Tests
 			var firstUpdate = monster.Updates.First();
 
 			Assert.Equal(75, monster.Updates.Count);
-			Assert.Equal(DateTime.Now.Day, firstUpdate.Date.Value.Day);
+			Assert.True(DateTime.Now >= firstUpdate.Date.Value);
 			Assert.True(!firstUpdate.ChaptersTotal.HasValue || firstUpdate.ChaptersTotal == 162);
 		}
 
