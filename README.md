@@ -74,9 +74,11 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
         - Filter by Anime/Manga.
     - Anime list
         - Filter by status (watching, completed, etc.)
+        - Advanced filters
         - Pagination support
     - Manga list
         - Filter by status (reading, completed, etc.)
+        - Advanced filters
         - Pagination support
 - Clubs
     - Profile
