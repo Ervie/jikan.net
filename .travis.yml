@@ -3,6 +3,5 @@ solution: ./JikanDotNet/JikanDotNet.sln
 mono: none
 dotnet: 2.0.0
 script:
-  - cd JikanDotNet
   - dotnet restore
   - dotnet build -c Release
