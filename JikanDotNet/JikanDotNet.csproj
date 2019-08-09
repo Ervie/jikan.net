@@ -8,6 +8,7 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <RepositoryType>Git</RepositoryType>
     <RepositoryUrl>https://github.com/Ervie/jikan.net</RepositoryUrl>
+    <PackageId>JikanDotNet</PackageId>
     <PackageTags>anime, MAL, myanimelist.net, myanimelist, Jikan, REST, manga, API, wrapper, JikanDotNet, Jikan.net</PackageTags>
     <PackageLicenseUrl>https://github.com/Ervie/jikan.net/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/Ervie/jikan.net</PackageProjectUrl>

@@ -16,7 +16,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task JikanConstructor_DefaultUrl_ShouldParseCorrectly()
 		{
-			IJikan jikan = new Jikan("https://api.jikan.moe/");
+			IJikan jikan = new Jikan("https://api.jikan.moe/v3/");
 
 			Anime bebop = await jikan.GetAnime(1);
 

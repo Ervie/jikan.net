@@ -65,7 +65,7 @@ namespace JikanDotNet
 		public Jikan(string endpointUrl, bool surpressException = true)
 		{
 			this.surpressException = surpressException;
-			httpClient = HttpProvider.GetHttpClient(endpointUrl);
+			httpClient = HttpProvider.GetHttpClient(new Uri(endpointUrl));
 		}
 
 		/// <summary>
