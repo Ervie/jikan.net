@@ -1,4 +1,4 @@
-![build status](https://travis-ci.org/Ervie/jikan.net.svg?branch=master) ![build status](https://img.shields.io/nuget/v/JikanDotNet.svg) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) [![GitHub issues open](https://img.shields.io/github/issues/Ervie/jikan.net.svg?maxAge=2592000)]() 
+[![Build status](https://dev.azure.com/bartlomiejbuchala-github/jikan.net/_apis/build/status/jikan.net-.NET%20Desktop-CI)](https://dev.azure.com/bartlomiejbuchala-github/jikan.net/_build/latest?definitionId=1) ![build status](https://travis-ci.org/Ervie/jikan.net.svg?branch=master) ![build status](https://img.shields.io/nuget/v/JikanDotNet.svg) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) [![GitHub issues open](https://img.shields.io/github/issues/Ervie/jikan.net.svg?maxAge=2592000)]() 
 
 # jikan.net
 
@@ -83,7 +83,7 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
 - Clubs
     - Profile
     - Member list
-        - Paging support
+        - Pagination support
 - Meta
     - API status
 # Installation
