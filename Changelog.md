@@ -1,4 +1,10 @@
-## 31.07.2019 - Version 1.3.0 (newest)
+## 29.09.2019 - Version 1.3.1 (newest)
+
+- Fixes
+    - <b>[General]</b> Removed null check during creation http client in order to avoid multiple `Jikan` objects holding same url.
+    - <b>[Search]</b> Fixed incorrect parameters listing in search queries, which leaded to returning null.
+    
+## 31.07.2019 - Version 1.3.0
 
 - Integration with Jikan API v3.3.
 - Features
@@ -17,7 +23,7 @@
 - Fixes
     - <b>[AnimeEpisoded]</b> changed `Aired` property from `TimeSpan` (a pair of `DateTime`) to single `DateTime`
 
-## 07.04.2019 - Version 1.2.5 (newest)
+## 07.04.2019 - Version 1.2.5
 
 - Jikan.net now can be used with own instance of Jikan REST API. Read more [here](https://github.com/Ervie/jikan.net/wiki/Using-own-instance-of-Jikan).
 - New fields
