@@ -62,8 +62,8 @@ namespace JikanDotNet.Tests
 		{
 			ForumTopics monster = await jikan.GetMangaForumTopics(1);
 
-			Assert.Contains(1672449, monster.Topics.Select(x => x.TopicId));
-			Assert.Contains(155394, monster.Topics.Select(x => x.TopicId));
+			Assert.Contains(396153, monster.Topics.Select(x => x.TopicId));
+			Assert.Contains(396151, monster.Topics.Select(x => x.TopicId));
 		}
 
 		[Fact]

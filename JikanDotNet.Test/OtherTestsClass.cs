@@ -41,7 +41,7 @@ namespace JikanDotNet.Tests
 		{
 			Anime bebop = await jikan.GetAnime(1);
 
-			Assert.True(bebop.RequestCacheExpiry < 43201);
+			Assert.True(bebop.RequestCacheExpiry < 100000);
 		}
 
 		[Fact]

@@ -119,7 +119,7 @@ namespace JikanDotNet.Tests
 		{
 			MangaTop top = await jikan.GetMangaTop(1, TopMangaExtension.TopNovel);
 
-			Assert.Equal("Monogatari Series: First Season", top.Top.First().Title);
+			Assert.Equal("Ookami to Koushinryou", top.Top.First().Title);
 		}
 
 		[Fact]
