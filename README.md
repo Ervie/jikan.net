@@ -107,11 +107,11 @@ Then restore dependencies:
 
 # Changelog
 
-## 29.09.2019 - Version 1.3.1
+## 20.11.2019 - Version 1.3.2
 
-- Fixes
-    - <b>[General]</b> Removed null check during creation http client in order to avoid multiple `Jikan` objects holding same url.
-    - <b>[Search]</b> Fixed incorrect parameters listing in search queries, which leaded to returning null.
+- Integration with Jikan API v3.4.
+- Features
+    - <b>[User]</b> `UserId` added to `UserProfile`
         
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**

@@ -1,4 +1,10 @@
-## 29.09.2019 - Version 1.3.1 (newest)
+## 20.11.2019 - Version 1.3.2 (newest)
+
+- Integration with Jikan API v3.4.
+- Features
+    - <b>[User]</b> `UserId` added to `UserProfile`
+
+## 29.09.2019 - Version 1.3.1
 
 - Fixes
     - <b>[General]</b> Removed null check during creation http client in order to avoid multiple `Jikan` objects holding same url.
