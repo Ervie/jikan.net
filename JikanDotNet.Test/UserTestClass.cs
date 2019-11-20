@@ -20,6 +20,7 @@ namespace JikanDotNet.Tests
 
 			Assert.NotNull(user);
 			Assert.Equal("Ervelan", user.Username);
+			Assert.Equal(289183, user.UserId);
 			Assert.Equal(2010, user.Joined.Value.Year);
 			Assert.True(user.AnimeStatistics.Completed > 500);
 			Assert.Contains("Haibane Renmei", user.Favorites.Anime.Select(x => x.Name));
@@ -33,6 +34,7 @@ namespace JikanDotNet.Tests
 
 			Assert.NotNull(user);
 			Assert.Equal("Nekomata1037", user.Username);
+			Assert.Equal(4901676, user.UserId);
 			Assert.Equal(2015, user.Joined.Value.Year);
 			Assert.True(user.AnimeStatistics.TotalEntries > 700);
 			Assert.Contains("Steins;Gate", user.Favorites.Anime.Select(x => x.Name));

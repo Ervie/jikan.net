@@ -94,12 +94,12 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public async Task SearchAnime_FairyTailTVAbove8Config_ShouldFilterFairyTailAnimeScore()
+		public async Task SearchAnime_FairyTailTVAbove7Config_ShouldFilterFairyTailAnimeScore()
 		{
 			var searchConfig = new AnimeSearchConfig
 			{
 				Type = AnimeType.TV,
-				Score = 8
+				Score = 7
 			};
 
 			AnimeSearchResult fairyTailAnime = await jikan.SearchAnime("Fairy Tail", searchConfig);

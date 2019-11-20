@@ -21,9 +21,11 @@ namespace JikanDotNet.Tests
 			IMalEntity berserk = await jikan.GetManga(2);
 			IMalEntity bebop = await jikan.GetAnime(1);
 
-			List<IMalEntity> entities = new List<IMalEntity>();
-			entities.Add(berserk);
-			entities.Add(bebop);
+			List<IMalEntity> entities = new List<IMalEntity>
+			{
+				berserk,
+				bebop
+			};
 
 			Assert.Contains(1, entities.Select(x => x.MalId));
 		}

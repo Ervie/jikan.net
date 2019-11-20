@@ -33,7 +33,6 @@ namespace JikanDotNet.Tests
 
 			Assert.NotNull(animeList);
 			Assert.Equal(UserAnimeListExtension.Watching, animeList.Anime.First().WatchingStatus);
-			Assert.Equal(AiringStatus.Airing, animeList.Anime.First().AiringStatus);
 		}
 
 		[Fact]

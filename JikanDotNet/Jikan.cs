@@ -1347,7 +1347,7 @@ namespace JikanDotNet
 		public async Task<MangaSearchResult> SearchManga(string query, int page, MangaSearchConfig searchConfig)
 		{
 			query = string.Concat(JikanEndPointCategories.Manga, query, "?q=", query.Replace(' ', '_'), searchConfig.ConfigToString());
-			string[] endpointParts = new string[] { JikanEndPointCategories.Search, page.ToString() };
+			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query, page.ToString() };
 			return await ExecuteGetRequest<MangaSearchResult>(endpointParts);
 		}
 

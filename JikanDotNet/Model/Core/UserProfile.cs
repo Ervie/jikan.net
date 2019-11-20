@@ -27,6 +27,12 @@ namespace JikanDotNet
 		public string URL { get; set; }
 
 		/// <summary>
+		/// User's id.
+		/// </summary>
+		[JsonProperty(PropertyName = "user_id")]
+		public long UserId { get; set; }
+
+		/// <summary>
 		/// User's gender.
 		/// </summary>
 		[JsonProperty(PropertyName = "gender")]
