@@ -107,11 +107,15 @@ Then restore dependencies:
 
 # Changelog
 
-## 20.11.2019 - Version 1.3.2
+## 10.04.2020 - Version 1.3.3
 
-- Integration with Jikan API v3.4.
-- Features
-    - <b>[User]</b> `UserId` added to `UserProfile`
+- Fixes
+    - <b>[Search]</b> Fix pagination.
+- Fixes Features
+    - <b>[AnimeSearch]</b> Remove `SearchAnime(string query, int page AnimeSearchConfig searchConfig)` method - MAL does not support pagination for search phrase with advanced filter.
+    - <b>[AnimeSearch]</b> Add `SearchAnime(AnimeSearchConfig searchConfig)` and `SearchAnime(AnimeSearchConfig searchConfig, int page)` - it does support pagination for advanced filters without search phrase.
+    - <b>[MangaSearch]</b> Remove `SearchManga(string query, int page MangaSearchConfig searchConfig)` method - MAL does not support pagination for search phrase with advanced filter.
+    - <b>[MangaSearch]</b> Add `SearchManga(MangaSearchConfig searchConfig)` and `SearchManga(MangaSearchConfig searchConfig, int page)` - it does support pagination for advanced filters without search phrase.
         
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**
