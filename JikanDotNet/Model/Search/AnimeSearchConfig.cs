@@ -98,12 +98,12 @@ namespace JikanDotNet
 
 			if (StartDate.HasValue)
 			{
-				builder.Append($"&start_date={StartDate.Value.ToString("yyyy-MM-dd")}");
+				builder.Append($"&start_date={StartDate.Value:yyyy-MM-dd}");
 			}
 
 			if (EndDate.HasValue)
 			{
-				builder.Append($"&end_date={EndDate.Value.ToString("yyyy-MM-dd")}");
+				builder.Append($"&end_date={EndDate.Value:yyyy-MM-dd}");
 			}
 
 			if (Genres.Count > 0 )
@@ -129,7 +129,7 @@ namespace JikanDotNet
 				builder.Append($"&producer={ProducerId}");
 			}
 
-			return builder.ToString().TrimEnd('&');
+			return builder.ToString().Trim('&');
 		}
 	}
 }

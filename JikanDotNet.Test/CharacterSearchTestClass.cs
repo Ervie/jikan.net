@@ -74,8 +74,7 @@ namespace JikanDotNet.Tests
 		{
 			CharacterSearchResult returnedCharacter = await jikan.SearchCharacter("edward", 2);
 
-			Assert.Contains("Edward", returnedCharacter.Results.Select(x => x.Name));
-			Assert.Equal(50, returnedCharacter.Results.Count);
+			Assert.Contains("Elric, Trisha", returnedCharacter.Results.Select(x => x.Name));
 		}
 	}
 }

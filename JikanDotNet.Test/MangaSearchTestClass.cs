@@ -67,7 +67,7 @@ namespace JikanDotNet.Tests
 		{
 			MangaSearchResult returnedAnime = await jikan.SearchManga("girl", 2);
 
-			Assert.Contains("My Girl", returnedAnime.Results.Select(x => x.Title));
+			Assert.Contains("Neo Girl", returnedAnime.Results.Select(x => x.Title));
 			Assert.Equal(20, returnedAnime.ResultLastPage);
 		}
 
@@ -109,7 +109,7 @@ namespace JikanDotNet.Tests
 			};
 			MangaSearchResult danganronpaManga = await jikan.SearchManga("danganronpa", searchConfig);
 
-			Assert.Equal("New Danganronpa V3: Minna no Koroshiai Shingakki Comic Anthology", danganronpaManga.Results.First().Title);
+			Assert.Contains("Dangan", danganronpaManga.Results.First().Title);
 		}
 
 		[Fact]
@@ -195,6 +195,54 @@ namespace JikanDotNet.Tests
 			MangaSearchResult returnedManga = await jikan.SearchManga("toriko", searchConfig);
 
 			Assert.Contains("Toriko", returnedManga.Results.First().Title);
+			Assert.True(returnedManga.Results.Count > 30);
+		}
+
+		[Fact]
+		public async Task SearchManga_EmptyQueryActionManga_ShouldFindCrowAnd007()
+		{
+			var searchConfig = new MangaSearchConfig
+			{
+				Genres = new List<GenreSearch> { GenreSearch.Action },
+				Type = MangaType.Manga
+			};
+
+			MangaSearchResult returnedManga = await jikan.SearchManga(searchConfig);
+
+			Assert.Contains("-Crow-", returnedManga.Results.Select(x => x.Title));
+			Assert.Contains("007 Series", returnedManga.Results.Select(x => x.Title));
+			Assert.True(returnedManga.Results.Count > 30);
+		}
+
+		[Fact]
+		public async Task SearchManga_EmptyQueryActionMangaFirstPage_ShouldFindCrowAnd007()
+		{
+			var searchConfig = new MangaSearchConfig
+			{
+				Genres = new List<GenreSearch> { GenreSearch.Action },
+				Type = MangaType.Manga
+			};
+
+			MangaSearchResult returnedManga = await jikan.SearchManga(searchConfig, 1);
+
+			Assert.Contains("-Crow-", returnedManga.Results.Select(x => x.Title));
+			Assert.Contains("007 Series", returnedManga.Results.Select(x => x.Title));
+			Assert.True(returnedManga.Results.Count > 30);
+		}
+
+		[Fact]
+		public async Task SearchManga_EmptyQueryActionMangaSecondPage_ShouldFind888AndAccelWorld()
+		{
+			var searchConfig = new MangaSearchConfig
+			{
+				Genres = new List<GenreSearch> { GenreSearch.Action },
+				Type = MangaType.Manga
+			};
+
+			MangaSearchResult returnedManga = await jikan.SearchManga(searchConfig, 2);
+
+			Assert.Contains("888", returnedManga.Results.Select(x => x.Title));
+			Assert.Contains("Accel World", returnedManga.Results.Select(x => x.Title));
 			Assert.True(returnedManga.Results.Count > 30);
 		}
 	}

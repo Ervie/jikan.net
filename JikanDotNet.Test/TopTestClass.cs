@@ -41,11 +41,11 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public async Task GetAnimeTop_NoParameter_ShouldParseShingekiType()
+		public async Task GetAnimeTop_NoParameter_ShouldParseLOGHType()
 		{
 			AnimeTop top = await jikan.GetAnimeTop();
 
-			Assert.Equal("TV", top.Top.Skip(4).First().Type);
+			Assert.Equal("OVA", top.Top.Skip(4).First().Type);
 		}
 
 		[Fact]
@@ -115,11 +115,11 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public async Task GetMangaTop_FirstPageNovels_ShouldParseHakoMari()
+		public async Task GetMangaTop_FirstPageNovels_ShouldParseMonogatariTitle()
 		{
 			MangaTop top = await jikan.GetMangaTop(1, TopMangaExtension.TopNovel);
 
-			Assert.Equal("Ookami to Koushinryou", top.Top.First().Title);
+			Assert.Equal("Monogatari Series: First Season", top.Top.First().Title);
 		}
 
 		[Fact]

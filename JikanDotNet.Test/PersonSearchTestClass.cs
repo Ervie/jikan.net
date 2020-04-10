@@ -53,8 +53,7 @@ namespace JikanDotNet.Tests
 		{
 			PersonSearchResult returnedPerson = await jikan.SearchPerson("daisuke", 2);
 
-			Assert.Equal(50, returnedPerson.Results.Count);
-			Assert.Contains("Daisuke", returnedPerson.Results.Select(x => x.Name));
+			Assert.Contains("Ishikawa, Daisuke", returnedPerson.Results.Select(x => x.Name));
 		}
 	}
 }

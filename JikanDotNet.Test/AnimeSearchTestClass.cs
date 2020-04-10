@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -61,7 +62,7 @@ namespace JikanDotNet.Tests
 		{
 			AnimeSearchResult returnedAnime = await jikan.SearchAnime("girl", 2);
 
-			Assert.Contains("Jigoku Shoujo Futakomori", returnedAnime.Results.Select(x => x.Title));
+			Assert.Contains("Frame Arms Girl", returnedAnime.Results.Select(x => x.Title));
 		}
 
 		[Theory]
@@ -205,6 +206,51 @@ namespace JikanDotNet.Tests
 
 			Assert.Contains("Violence Jack: Jigoku Gai-hen", returnedAnime.Results.Select(x => x.Title));
 			Assert.Contains("Violet Evergarden", returnedAnime.Results.Select(x => x.Title));
+		}
+
+		[Fact]
+		public async Task SearchAnime_EmptyQueryActionTvAnime_ShouldFindAfroSamuraiAndAjin()
+		{
+			var searchConfig = new AnimeSearchConfig
+			{
+				Type = AnimeType.TV,
+				Genres = new List<GenreSearch> { GenreSearch.Action }
+			};
+
+			AnimeSearchResult returnedAnime = await jikan.SearchAnime(searchConfig);
+
+			Assert.Contains("Ajin", returnedAnime.Results.Select(x => x.Title));
+			Assert.Contains("Afro Samurai", returnedAnime.Results.Select(x => x.Title));
+		}
+
+		[Fact]
+		public async Task SearchAnime_EmptyQueryActionTvAnimeFirstPage_ShouldFindAfroSamuraiAndAjin()
+		{
+			var searchConfig = new AnimeSearchConfig
+			{
+				Type = AnimeType.TV,
+				Genres = new List<GenreSearch> { GenreSearch.Action }
+			};
+
+			AnimeSearchResult returnedAnime = await jikan.SearchAnime(searchConfig, 1);
+
+			Assert.Contains("Ajin", returnedAnime.Results.Select(x => x.Title));
+			Assert.Contains("Afro Samurai", returnedAnime.Results.Select(x => x.Title));
+		}
+
+		[Fact]
+		public async Task SearchAnime_EmptyQueryActionTvAnimeSecondPage_ShouldFindAzurLaneAndBaccano()
+		{
+			var searchConfig = new AnimeSearchConfig
+			{
+				Type = AnimeType.TV,
+				Genres = new List<GenreSearch> { GenreSearch.Action }
+			};
+
+			AnimeSearchResult returnedAnime = await jikan.SearchAnime(searchConfig, 2);
+
+			Assert.Contains("Azur Lane", returnedAnime.Results.Select(x => x.Title));
+			Assert.Contains("Baccano!", returnedAnime.Results.Select(x => x.Title));
 		}
 	}
 }

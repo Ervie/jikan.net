@@ -13,16 +13,34 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public async Task SearchMethods_EmptyQuery_ShouldReturnNoResult()
+		public async Task SearchAnime_EmptyQuery_ShouldReturnNoResult()
 		{
 			var nullAnime = await jikan.SearchAnime("");
-			var nullManga = await jikan.SearchManga("");
-			var nullPerson = await jikan.SearchPerson("");
-			var nullCharacter = await jikan.SearchCharacter("");
 
 			Assert.Empty(nullAnime.Results);
+		}
+
+		[Fact]
+		public async Task SearchMaga_EmptyQuery_ShouldReturnNoResult()
+		{
+			var nullManga = await jikan.SearchManga("");
+
 			Assert.Empty(nullManga.Results);
+		}
+
+		[Fact]
+		public async Task SearchPerson_EmptyQuery_ShouldReturnNoResult()
+		{
+			var nullPerson = await jikan.SearchPerson("");
+
 			Assert.Empty(nullPerson.Results);
+		}
+
+		[Fact]
+		public async Task SearchCharacter_EmptyQuery_ShouldReturnNoResult()
+		{
+			var nullCharacter = await jikan.SearchCharacter("");
+
 			Assert.Empty(nullCharacter.Results);
 		}
 	}

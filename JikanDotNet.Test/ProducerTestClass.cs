@@ -32,7 +32,7 @@ namespace JikanDotNet.Tests
 			Producer producer = await jikan.GetProducer(1, 2);
 
 			Assert.NotNull(producer);
-			Assert.Contains("Akachan to Boku", producer.Anime.Select(x => x.Title));
+			Assert.Contains("Yuu☆Yuu☆Hakusho: Eizou Hakusho II", producer.Anime.Select(x => x.Title));
 		}
 
 		[Fact]

@@ -39,7 +39,7 @@ namespace JikanDotNet.Tests
 		{
 			AnimePictures bebop = await jikan.GetAnimePictures(1);
 
-			Assert.Equal(11, bebop.Pictures.Count);
+			Assert.Equal(12, bebop.Pictures.Count);
 		}
 
 		[Fact]

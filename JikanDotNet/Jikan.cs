@@ -1263,8 +1263,8 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		public async Task<AnimeSearchResult> SearchAnime(string query, int page)
 		{
-			query = string.Concat(JikanEndPointCategories.Anime, "?q=", query.Replace(' ', '_'));
-			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query, page.ToString() };
+			query = string.Concat(JikanEndPointCategories.Anime, "/", page.ToString(), "?q=", query.Replace(' ', '_'));
+			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query };
 			return await ExecuteGetRequest<AnimeSearchResult>(endpointParts);
 		}
 
@@ -1276,22 +1276,33 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		public async Task<AnimeSearchResult> SearchAnime(string query, AnimeSearchConfig searchConfig)
 		{
-			query = string.Concat(JikanEndPointCategories.Anime, "?q=", query.Replace(' ', '_'), searchConfig.ConfigToString());
+			query = string.Concat(JikanEndPointCategories.Anime, "?q=", query.Replace(' ', '_'), "&", searchConfig.ConfigToString());
 			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query };
 			return await ExecuteGetRequest<AnimeSearchResult>(endpointParts);
 		}
 
 		/// <summary>
-		/// Return list of results related to search.
+		/// Returns list of results related to search.
 		/// </summary>
-		/// <param name="query">Search query.</param>
-		/// <param name="page">Indexx of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
 		/// <param name="searchConfig">Additional configuration for advanced search.</param>
 		/// <returns>List of result related to search query.</returns>
-		public async Task<AnimeSearchResult> SearchAnime(string query, int page, AnimeSearchConfig searchConfig)
+		public async Task<AnimeSearchResult> SearchAnime(AnimeSearchConfig searchConfig)
 		{
-			query = string.Concat(JikanEndPointCategories.Anime, "?q=", query.Replace(' ', '_'), searchConfig.ConfigToString());
-			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query, page.ToString() };
+			var query = string.Concat(JikanEndPointCategories.Anime, "?", searchConfig.ConfigToString());
+			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query };
+			return await ExecuteGetRequest<AnimeSearchResult>(endpointParts);
+		}
+
+		/// <summary>
+		/// Returns list of results related to search.
+		/// </summary>
+		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <param name="searchConfig">Additional configuration for advanced search.</param>
+		/// <returns>List of result related to search query.</returns>
+		public async Task<AnimeSearchResult> SearchAnime(AnimeSearchConfig searchConfig, int page)
+		{
+			var query = string.Concat(JikanEndPointCategories.Anime, "/", page.ToString(), "?", searchConfig.ConfigToString());
+			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query };
 			return await ExecuteGetRequest<AnimeSearchResult>(endpointParts);
 		}
 
@@ -1319,8 +1330,8 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		public async Task<MangaSearchResult> SearchManga(string query, int page)
 		{
-			query = string.Concat(JikanEndPointCategories.Manga, "?q=", query.Replace(' ', '_'));
-			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query, page.ToString() };
+			query = string.Concat(JikanEndPointCategories.Manga, "/", page.ToString(), "?q=", query.Replace(' ', '_'));
+			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query};
 			return await ExecuteGetRequest<MangaSearchResult>(endpointParts);
 		}
 
@@ -1332,22 +1343,33 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		public async Task<MangaSearchResult> SearchManga(string query, MangaSearchConfig searchConfig)
 		{
-			query = string.Concat(JikanEndPointCategories.Manga, "?q=", query.Replace(' ', '_'), searchConfig.ConfigToString());
+			query = string.Concat(JikanEndPointCategories.Manga, "?q=", query.Replace(' ', '_'), "&", searchConfig.ConfigToString());
 			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query };
 			return await ExecuteGetRequest<MangaSearchResult>(endpointParts);
 		}
 
 		/// <summary>
-		/// Return list of results related to search.
+		/// Returns list of results related to search.
 		/// </summary>
-		/// <param name="query">Search query.</param>
-		/// <param name="page">Indexx of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
 		/// <param name="searchConfig">Additional configuration for advanced search.</param>
 		/// <returns>List of result related to search query.</returns>
-		public async Task<MangaSearchResult> SearchManga(string query, int page, MangaSearchConfig searchConfig)
+		public async Task<MangaSearchResult> SearchManga(MangaSearchConfig searchConfig)
 		{
-			query = string.Concat(JikanEndPointCategories.Manga, query, "?q=", query.Replace(' ', '_'), searchConfig.ConfigToString());
-			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query, page.ToString() };
+			var query = string.Concat(JikanEndPointCategories.Manga, "?", searchConfig.ConfigToString());
+			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query };
+			return await ExecuteGetRequest<MangaSearchResult>(endpointParts);
+		}
+
+		/// <summary>
+		/// Returns list of results related to search.
+		/// </summary>
+		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <param name="searchConfig">Additional configuration for advanced search.</param>
+		/// <returns>List of result related to search query.</returns>
+		public async Task<MangaSearchResult> SearchManga(MangaSearchConfig searchConfig, int page)
+		{
+			var query = string.Concat(JikanEndPointCategories.Manga, "/", page.ToString(), "?", searchConfig.ConfigToString());
+			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query };
 			return await ExecuteGetRequest<MangaSearchResult>(endpointParts);
 		}
 
@@ -1375,8 +1397,8 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		public async Task<PersonSearchResult> SearchPerson(string query, int page)
 		{
-			query = string.Concat(JikanEndPointCategories.Person, "?q=", query.Replace(' ', '_'));
-			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query, page.ToString() };
+			query = string.Concat(JikanEndPointCategories.Person, "/", page.ToString(), "?q=",  query.Replace(' ', '_'));
+			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query};
 			return await ExecuteGetRequest<PersonSearchResult>(endpointParts);
 		}
 
@@ -1404,8 +1426,8 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		public async Task<CharacterSearchResult> SearchCharacter(string query, int page)
 		{
-			query = string.Concat(JikanEndPointCategories.Character, "?q=", query.Replace(' ', '_'));
-			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query, page.ToString() };
+			query = string.Concat(JikanEndPointCategories.Character, "/", page.ToString(), "?q=", query.Replace(' ', '_'));
+			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query};
 			return await ExecuteGetRequest<CharacterSearchResult>(endpointParts);
 		}
 

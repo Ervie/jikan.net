@@ -62,8 +62,8 @@ namespace JikanDotNet.Tests
 		{
 			ForumTopics monster = await jikan.GetMangaForumTopics(1);
 
-			Assert.Contains(396153, monster.Topics.Select(x => x.TopicId));
-			Assert.Contains(396151, monster.Topics.Select(x => x.TopicId));
+			Assert.Contains(1793909, monster.Topics.Select(x => x.TopicId));
+			Assert.Contains(267036, monster.Topics.Select(x => x.TopicId));
 		}
 
 		[Fact]
@@ -92,7 +92,6 @@ namespace JikanDotNet.Tests
 
 			Assert.Equal("TheCriticsClub", berserk.Reviews.First().Reviewer.Username);
 			Assert.Equal(4403, berserk.Reviews.First().MalId);
-			Assert.Equal(0, berserk.Reviews.First().Reviewer.ChaptersRead);
 			Assert.True(berserk.Reviews.First().HelpfulCount > 1200);
 
 			Assert.Equal(10, berserk.Reviews.First().Reviewer.Scores.Overall);
