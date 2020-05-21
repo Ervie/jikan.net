@@ -29,7 +29,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Should exception be thrown in case of failed request.
 		/// </summary>
-		private readonly bool surpressException;
+		private readonly bool suppressException;
 
 		#endregion Field
 		
@@ -41,7 +41,7 @@ namespace JikanDotNet
 		public Jikan()
 		{
 			this.useHttps = true;
-			this.surpressException = false;
+			this.suppressException = false;
 			httpClient = HttpProvider.GetHttpClient(useHttps);
 		}
 
@@ -49,11 +49,11 @@ namespace JikanDotNet
 		/// Constructor.
 		/// </summary>
 		/// <param name="useHttps">Should client send SSL encrypted requests.</param>
-		/// <param name="surpressException">Should exception be thrown in case of failed request. If true, failed request return null.</param>
-		public Jikan(bool useHttps, bool surpressException = false)
+		/// <param name="suppressException">Should exception be thrown in case of failed request. If true, failed request return null.</param>
+		public Jikan(bool useHttps, bool suppressException = false)
 		{
 			this.useHttps = useHttps;
-			this.surpressException = surpressException;
+			this.suppressException = suppressException;
 			httpClient = HttpProvider.GetHttpClient(useHttps);
 		}
 
@@ -61,10 +61,10 @@ namespace JikanDotNet
 		/// Constructor.
 		/// </summary>
 		/// <param name="endpointUrl">Endpoint of the REST API.</param>
-		/// <param name="surpressException">Should exception be thrown in case of failed request. If true, failed request return null.</param>
-		public Jikan(string endpointUrl, bool surpressException = true)
+		/// <param name="suppressException">Should exception be thrown in case of failed request. If true, failed request return null.</param>
+		public Jikan(string endpointUrl, bool suppressException = true)
 		{
-			this.surpressException = surpressException;
+			this.suppressException = suppressException;
 			httpClient = HttpProvider.GetHttpClient(new Uri(endpointUrl));
 		}
 
@@ -72,10 +72,10 @@ namespace JikanDotNet
 		/// Constructor.
 		/// </summary>
 		/// <param name="endpointUrl">Endpoint of the REST API.</param>
-		/// <param name="surpressException">Should exception be thrown in case of failed request. If true, failed request return null.</param>
-		public Jikan(Uri endpointUrl, bool surpressException = true)
+		/// <param name="suppressException">Should exception be thrown in case of failed request. If true, failed request return null.</param>
+		public Jikan(Uri endpointUrl, bool suppressException = true)
 		{
-			this.surpressException = surpressException;
+			this.suppressException = suppressException;
 			httpClient = HttpProvider.GetHttpClient(endpointUrl);
 		}
 
@@ -103,7 +103,7 @@ namespace JikanDotNet
 
 						returnedObject = JsonConvert.DeserializeObject<T>(json);
 					}
-					else if (!surpressException)
+					else if (!suppressException)
 					{
 						throw new JikanRequestException(string.Format(Resources.Errors.FailedRequest, response.Content), response.StatusCode);
 					}
@@ -111,7 +111,7 @@ namespace JikanDotNet
 			}
 			catch (JsonSerializationException ex)
 			{
-				if (!surpressException)
+				if (!suppressException)
 				{
 					throw new JikanRequestException(Resources.Errors.SerializationFailed + Environment.NewLine + "Inner exception message: " + ex.Message);
 				}
