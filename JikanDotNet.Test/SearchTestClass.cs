@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using JikanDotNet.Exceptions;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace JikanDotNet.Tests
@@ -37,11 +38,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public async Task SearchCharacter_EmptyQuery_ShouldReturnNoResult()
+		public void SearchCharacter_EmptyQuery_ShouldThrowException()
 		{
-			var nullCharacter = await jikan.SearchCharacter("");
-
-			Assert.Empty(nullCharacter.Results);
+			Assert.ThrowsAnyAsync<JikanRequestException>(() => jikan.SearchCharacter(""));
 		}
 	}
 }

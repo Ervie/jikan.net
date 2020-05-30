@@ -849,6 +849,15 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		Task<AnimeSearchResult> SearchAnime(AnimeSearchConfig searchConfig, int page);
 
+		/// <summary>
+		/// Returns list of results related to search.
+		/// </summary>
+		/// <param name="query">Search query.</param>
+		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <param name="searchConfig">Additional configuration for advanced search.</param>
+		/// <returns>List of result related to search query.</returns>
+		Task<AnimeSearchResult> SearchAnime(string query, int page, AnimeSearchConfig searchConfig);
+
 		#endregion
 
 		#region SearchManga
@@ -890,6 +899,15 @@ namespace JikanDotNet
 		/// <param name="searchConfig">Additional configuration for advanced search.</param>
 		/// <returns>List of result related to search query.</returns>
 		Task<MangaSearchResult> SearchManga(MangaSearchConfig searchConfig, int page);
+
+		/// <summary>
+		/// Returns list of results related to search.
+		/// </summary>
+		/// <param name="query">Search query.</param>
+		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <param name="searchConfig">Additional configuration for advanced search.</param>
+		/// <returns>List of result related to search query.</returns>
+		Task<MangaSearchResult> SearchManga(string query, int page, MangaSearchConfig searchConfig);
 
 		#endregion
 

@@ -1,3 +1,4 @@
+using JikanDotNet.Exceptions;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -28,11 +29,9 @@ namespace JikanDotNet.Tests
 		[InlineData(2)]
 		[InlineData(3)]
 		[InlineData(4)]
-		public async Task GetAnime_WrongId_ShouldReturnNullAnime(long malId)
+		public void GetAnime_WrongId_ShouldThrowException(long malId)
 		{
-			Anime returnedAnime = await jikan.GetAnime(malId);
-
-			Assert.Null(returnedAnime);
+			Assert.ThrowsAnyAsync<JikanRequestException>(() => jikan.GetAnime(malId));
 		}
 
 		[Fact]

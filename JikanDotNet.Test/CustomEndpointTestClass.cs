@@ -33,13 +33,11 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public async Task JikanConstructor_WrongUrl_ShouldNotParseCorrectly()
+		public void JikanConstructor_WrongUrl_ShouldNotParseCorrectly()
 		{
 			IJikan jikan = new Jikan("http://google.com");
 
-			Anime bebop = await jikan.GetAnime(1);
-
-			Assert.Null(bebop);
+			Assert.ThrowsAnyAsync<JikanRequestException>(() => jikan.GetAnime(1));
 		}
 
 		[Fact]

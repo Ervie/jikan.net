@@ -67,7 +67,7 @@ namespace JikanDotNet.Tests
 		{
 			MangaSearchResult returnedAnime = await jikan.SearchManga("girl", 2);
 
-			Assert.Contains("Neo Girl", returnedAnime.Results.Select(x => x.Title));
+			Assert.Contains("Tokyo Boys & Girls", returnedAnime.Results.Select(x => x.Title));
 			Assert.Equal(20, returnedAnime.ResultLastPage);
 		}
 
@@ -96,7 +96,7 @@ namespace JikanDotNet.Tests
 			};
 			MangaSearchResult danganronpaManga = await jikan.SearchManga("danganronpa", searchConfig);
 
-			Assert.Equal(1, danganronpaManga.ResultLastPage);
+			Assert.Equal(4, danganronpaManga.ResultLastPage);
 		}
 
 		[Fact]
@@ -127,7 +127,7 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public async Task SearchManga_MetalAfter2014Config_ShouldFilterMetallicaMettallucaAndFMPEndDate()
+		public async Task SearchManga_MetalAfter2014Config_ShouldFilterFMPEndDate()
 		{
 			var searchConfig = new MangaSearchConfig
 			{
@@ -136,8 +136,8 @@ namespace JikanDotNet.Tests
 
 			MangaSearchResult returnedManga = await jikan.SearchManga("metal", searchConfig);
 
-			Assert.Contains("Metallica Metalluca", returnedManga.Results.Select(x => x.Title));
-			Assert.Contains("Full Metal Panic! Another", returnedManga.Results.Select(x => x.Title));
+			Assert.Contains("Fullmetal Alchemist", returnedManga.Results.Select(x => x.Title));
+			Assert.Contains("Full Metal Panic!", returnedManga.Results.Select(x => x.Title));
 		}
 
 		[Fact]
@@ -181,7 +181,7 @@ namespace JikanDotNet.Tests
 			MangaSearchResult returnedManga = await jikan.SearchManga("toriko", searchConfig);
 
 			Assert.Contains("Toriko", returnedManga.Results.First().Title);
-			Assert.Equal(2, returnedManga.Results.Count);
+			Assert.Equal(3, returnedManga.Results.Count);
 		}
 
 		[Fact]
@@ -244,6 +244,21 @@ namespace JikanDotNet.Tests
 			Assert.Contains("888", returnedManga.Results.Select(x => x.Title));
 			Assert.Contains("Accel World", returnedManga.Results.Select(x => x.Title));
 			Assert.True(returnedManga.Results.Count > 30);
+		}
+
+		[Fact]
+		public async Task SearchManga_OreQueryComedyMangaSecondPage_ShouldReturnNotEmptyCollection()
+		{
+			var searchConfig = new MangaSearchConfig
+			{
+				Genres = new List<GenreSearch> { GenreSearch.Comedy },
+				Type = MangaType.Manga
+			};
+
+			MangaSearchResult returnedManga = await jikan.SearchManga("ore", 2, searchConfig);
+
+			Assert.NotNull(returnedManga);
+			Assert.NotEmpty(returnedManga.Results);
 		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using JikanDotNet.Exceptions;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -45,11 +46,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public async Task GetUserMangaList_onrix_ShouldParseOnrixMangaList()
+		public void GetUserMangaList_onrix_ShouldParseOnrixMangaList()
 		{
-			UserMangaList mangaList = await jikan.GetUserMangaList("onrix");
-
-			Assert.Null(mangaList);
+			Assert.ThrowsAnyAsync<JikanRequestException>(() => jikan.GetUserMangaList("onrix"));
 		}
 
 		[Fact]

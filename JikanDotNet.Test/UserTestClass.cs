@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using JikanDotNet.Exceptions;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -70,11 +71,9 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public async Task GetUserFriends_ErvelanTenthPage_ShouldReturnNoFriends()
+		public void GetUserFriends_ErvelanTenthPage_ShouldReturnNoFriends()
 		{
-			UserFriends friends = await jikan.GetUserFriends("Ervelan", 10);
-
-			Assert.Null(friends);
+			Assert.ThrowsAnyAsync<JikanRequestException>(() => jikan.GetUserFriends("Ervelan", 10));
 		}
 	}
 }

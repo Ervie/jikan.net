@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using JikanDotNet.Exceptions;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -28,11 +29,9 @@ namespace JikanDotNet.Tests
 		[InlineData(8)]
 		[InlineData(9)]
 		[InlineData(10)]
-		public async Task GetCharacter_WrongId_ShouldReturnNullCharacter(long malId)
+		public void GetCharacter_WrongId_ShouldReturnNullCharacter(long malId)
 		{
-			Character returnedCharacter = await jikan.GetCharacter(malId);
-
-			Assert.Null(returnedCharacter);
+			Assert.ThrowsAnyAsync<JikanRequestException>(() => jikan.GetCharacter(malId));
 		}
 
 		[Fact]

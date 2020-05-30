@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using JikanDotNet.Exceptions;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -28,11 +29,9 @@ namespace JikanDotNet.Tests
 		[InlineData(13308)]
 		[InlineData(13310)]
 		[InlineData(13312)]
-		public async Task GetPerson_WrongId_ShouldReturnNullPerson(long malId)
+		public void GetPerson_WrongId_ShouldReturnNullPerson(long malId)
 		{
-			Person returnedPerson = await jikan.GetPerson(malId);
-
-			Assert.Null(returnedPerson);
+			Assert.ThrowsAnyAsync<JikanRequestException>(() => jikan.GetPerson(malId));
 		}
 
 		[Fact]

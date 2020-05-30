@@ -91,7 +91,7 @@ namespace JikanDotNet.Tests
 
 			AnimeSearchResult danganronpaAnime = await jikan.SearchAnime("danganronpa", searchConfig);
 
-			Assert.Equal(1, danganronpaAnime.ResultLastPage);
+			Assert.Equal(2, danganronpaAnime.ResultLastPage);
 		}
 
 		[Fact]
@@ -251,6 +251,21 @@ namespace JikanDotNet.Tests
 
 			Assert.Contains("Azur Lane", returnedAnime.Results.Select(x => x.Title));
 			Assert.Contains("Baccano!", returnedAnime.Results.Select(x => x.Title));
+		}
+
+		[Fact]
+		public async Task SearchAnime_OneQueryActionCompletedAnimeSecondPage_ShouldReturnNotEmptyCollection()
+		{
+			var searchConfig = new AnimeSearchConfig
+			{
+				Status = AiringStatus.Completed,
+				Genres = new List<GenreSearch> { GenreSearch.Action }
+			};
+
+			AnimeSearchResult returnedAnime = await jikan.SearchAnime("one", 2, searchConfig);
+
+			Assert.NotNull(returnedAnime);
+			Assert.NotEmpty(returnedAnime.Results);
 		}
 	}
 }

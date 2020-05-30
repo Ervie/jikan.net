@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using JikanDotNet.Exceptions;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -28,11 +29,9 @@ namespace JikanDotNet.Tests
 		[InlineData(-1)]
 		[InlineData(5)]
 		[InlineData(6)]
-		public async Task GetManga_WrongId_ShouldReturnNullMana(long malId)
+		public void GetManga_WrongId_ShouldReturnNullMana(long malId)
 		{
-			Manga returedManga = await jikan.GetManga(malId);
-
-			Assert.Null(returedManga);
+			Assert.ThrowsAnyAsync<JikanRequestException>(() => jikan.GetManga(malId));
 		}
 
 		[Fact]

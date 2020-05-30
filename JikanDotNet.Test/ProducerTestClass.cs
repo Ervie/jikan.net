@@ -43,7 +43,7 @@ namespace JikanDotNet.Tests
 			Assert.NotNull(producer);
 			Assert.Equal("Kyoto Animation", producer.Metadata.Name);
 			Assert.Equal(2, producer.Metadata.MalId);
-			Assert.Equal("Clannad", producer.Anime.First().Title);
+			Assert.Contains("Clannad", producer.Anime.Select(x => x.Title));
 			Assert.Contains("Violet Evergarden", producer.Anime.Select(x => x.Title));
 		}
 
