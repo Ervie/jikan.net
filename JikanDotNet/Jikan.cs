@@ -62,7 +62,7 @@ namespace JikanDotNet
 		/// </summary>
 		/// <param name="endpointUrl">Endpoint of the REST API.</param>
 		/// <param name="suppressException">Should exception be thrown in case of failed request. If true, failed request return null.</param>
-		public Jikan(string endpointUrl, bool suppressException = true)
+		public Jikan(string endpointUrl, bool suppressException = false)
 		{
 			this.suppressException = suppressException;
 			httpClient = HttpProvider.GetHttpClient(new Uri(endpointUrl));

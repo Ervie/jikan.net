@@ -107,15 +107,13 @@ Then restore dependencies:
 
 # Changelog
 
-## 10.04.2020 - Version 1.3.3
+## 31.05.2020 - Version 1.4.0 (newest)
 
-- Fixes
-    - <b>[Search]</b> Fix pagination.
-- Fixes Features
-    - <b>[AnimeSearch]</b> Remove `SearchAnime(string query, int page AnimeSearchConfig searchConfig)` method - MAL does not support pagination for search phrase with advanced filter.
-    - <b>[AnimeSearch]</b> Add `SearchAnime(AnimeSearchConfig searchConfig)` and `SearchAnime(AnimeSearchConfig searchConfig, int page)` - it does support pagination for advanced filters without search phrase.
-    - <b>[MangaSearch]</b> Remove `SearchManga(string query, int page MangaSearchConfig searchConfig)` method - MAL does not support pagination for search phrase with advanced filter.
-    - <b>[MangaSearch]</b> Add `SearchManga(MangaSearchConfig searchConfig)` and `SearchManga(MangaSearchConfig searchConfig, int page)` - it does support pagination for advanced filters without search phrase.
+- Feature
+    - suppressException is now turned off by default. This should give usert better insight on any exception occuring during call to Jikan API providing failed call code and/or exception message. User of wrapper can change it by passing `true` as a second parameter in the constructor - failed request will return `null`s as before.
+- Fixed feature
+    - <b>[AnimeSearch]</b> Add `SearchAnime(string query, int page AnimeSearchConfig searchConfig)` method removed in version 1.3.3 after MAL fix it on their end.
+    - <b>[MangaSearch]</b> Add `SearchManga(string query, int page MangaSearchConfig searchConfig)` method method removed in version 1.3.3 after MAL fix it on their end.
         
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**
