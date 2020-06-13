@@ -1250,7 +1250,7 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		public async Task<AnimeSearchResult> SearchAnime(string query)
 		{
-			query = string.Concat(JikanEndPointCategories.Anime, "?q=", query.Replace(' ', '_'));
+			query = string.Concat(JikanEndPointCategories.Anime, "?q=", query.Replace(' ', '+'));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query };
 			return await ExecuteGetRequest<AnimeSearchResult>(endpointParts);
 		}
@@ -1263,7 +1263,7 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		public async Task<AnimeSearchResult> SearchAnime(string query, int page)
 		{
-			query = string.Concat(JikanEndPointCategories.Anime, "/", page.ToString(), "?q=", query.Replace(' ', '_'));
+			query = string.Concat(JikanEndPointCategories.Anime, "/", page.ToString(), "?q=", query.Replace(' ', '+'));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query };
 			return await ExecuteGetRequest<AnimeSearchResult>(endpointParts);
 		}
@@ -1276,7 +1276,7 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		public async Task<AnimeSearchResult> SearchAnime(string query, AnimeSearchConfig searchConfig)
 		{
-			query = string.Concat(JikanEndPointCategories.Anime, "?q=", query.Replace(' ', '_'), "&", searchConfig.ConfigToString());
+			query = string.Concat(JikanEndPointCategories.Anime, "?q=", query.Replace(' ', '+'), "&", searchConfig.ConfigToString());
 			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query };
 			return await ExecuteGetRequest<AnimeSearchResult>(endpointParts);
 		}
@@ -1315,7 +1315,7 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		public async Task<AnimeSearchResult> SearchAnime(string query, int page, AnimeSearchConfig searchConfig)
 		{
-			query = string.Concat(JikanEndPointCategories.Anime, "/", page.ToString(), "?q=", query.Replace(' ', '_'), "&", searchConfig.ConfigToString());
+			query = string.Concat(JikanEndPointCategories.Anime, "/", page.ToString(), "?q=", query.Replace(' ', '+'), "&", searchConfig.ConfigToString());
 			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query };
 			return await ExecuteGetRequest<AnimeSearchResult>(endpointParts);
 		}
@@ -1331,7 +1331,7 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		public async Task<MangaSearchResult> SearchManga(string query)
 		{
-			query = string.Concat(JikanEndPointCategories.Manga, "?q=", query.Replace(' ', '_'));
+			query = string.Concat(JikanEndPointCategories.Manga, "?q=", query.Replace(' ', '+'));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query };
 			return await ExecuteGetRequest<MangaSearchResult>(endpointParts);
 		}
@@ -1344,7 +1344,7 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		public async Task<MangaSearchResult> SearchManga(string query, int page)
 		{
-			query = string.Concat(JikanEndPointCategories.Manga, "/", page.ToString(), "?q=", query.Replace(' ', '_'));
+			query = string.Concat(JikanEndPointCategories.Manga, "/", page.ToString(), "?q=", query.Replace(' ', '+'));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query};
 			return await ExecuteGetRequest<MangaSearchResult>(endpointParts);
 		}
@@ -1357,7 +1357,7 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		public async Task<MangaSearchResult> SearchManga(string query, MangaSearchConfig searchConfig)
 		{
-			query = string.Concat(JikanEndPointCategories.Manga, "?q=", query.Replace(' ', '_'), "&", searchConfig.ConfigToString());
+			query = string.Concat(JikanEndPointCategories.Manga, "?q=", query.Replace(' ', '+'), "&", searchConfig.ConfigToString());
 			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query };
 			return await ExecuteGetRequest<MangaSearchResult>(endpointParts);
 		}
@@ -1396,7 +1396,7 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		public async Task<MangaSearchResult> SearchManga(string query, int page, MangaSearchConfig searchConfig)
 		{
-			query = string.Concat(JikanEndPointCategories.Manga, "/", page.ToString(), "?q=", query.Replace(' ', '_'), "&", searchConfig.ConfigToString());
+			query = string.Concat(JikanEndPointCategories.Manga, "/", page.ToString(), "?q=", query.Replace(' ', '+'), "&", searchConfig.ConfigToString());
 			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query, page.ToString() };
 			return await ExecuteGetRequest<MangaSearchResult>(endpointParts);
 		}
@@ -1412,7 +1412,7 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		public async Task<PersonSearchResult> SearchPerson(string query)
 		{
-			query = string.Concat(JikanEndPointCategories.Person, "?q=", query.Replace(' ', '_'));
+			query = string.Concat(JikanEndPointCategories.Person, "?q=", query.Replace(' ', '+'));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query };
 			return await ExecuteGetRequest<PersonSearchResult>(endpointParts);
 		}
@@ -1425,7 +1425,7 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		public async Task<PersonSearchResult> SearchPerson(string query, int page)
 		{
-			query = string.Concat(JikanEndPointCategories.Person, "/", page.ToString(), "?q=",  query.Replace(' ', '_'));
+			query = string.Concat(JikanEndPointCategories.Person, "/", page.ToString(), "?q=",  query.Replace(' ', '+'));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query};
 			return await ExecuteGetRequest<PersonSearchResult>(endpointParts);
 		}
@@ -1441,7 +1441,7 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		public async Task<CharacterSearchResult> SearchCharacter(string query)
 		{
-			query = string.Concat(JikanEndPointCategories.Character, "?q=", query.Replace(' ', '_'));
+			query = string.Concat(JikanEndPointCategories.Character, "?q=", query.Replace(' ', '+'));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query };
 			return await ExecuteGetRequest<CharacterSearchResult>(endpointParts);
 		}
@@ -1454,7 +1454,7 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		public async Task<CharacterSearchResult> SearchCharacter(string query, int page)
 		{
-			query = string.Concat(JikanEndPointCategories.Character, "/", page.ToString(), "?q=", query.Replace(' ', '_'));
+			query = string.Concat(JikanEndPointCategories.Character, "/", page.ToString(), "?q=", query.Replace(' ', '+'));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query};
 			return await ExecuteGetRequest<CharacterSearchResult>(endpointParts);
 		}

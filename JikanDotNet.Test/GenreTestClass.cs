@@ -77,7 +77,7 @@ namespace JikanDotNet.Tests
 			Assert.NotNull(genre);
 			Assert.True(genre.TotalCount > 6000);
 			Assert.Equal("Action Manga", genre.Metadata.Name);
-			Assert.Equal("Naruto", genre.Manga.First().Title);
+			Assert.Equal("Shingeki no Kyojin", genre.Manga.First().Title);
 		}
 
 		[Fact]

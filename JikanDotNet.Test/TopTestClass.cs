@@ -123,11 +123,11 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public async Task GetMangaTop_FirstPagePopularity_ShouldParseNarutoPopularity()
+		public async Task GetMangaTop_FirstPagePopularity_ShouldParseShingekiPopularity()
 		{
 			MangaTop top = await jikan.GetMangaTop(1, TopMangaExtension.TopPopularity);
 
-			Assert.Equal("Naruto", top.Top.First().Title);
+			Assert.Equal("Shingeki no Kyojin", top.Top.First().Title);
 		}
 
 		[Fact]
