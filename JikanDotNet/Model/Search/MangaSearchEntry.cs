@@ -84,6 +84,6 @@ namespace JikanDotNet
 		/// Number of published chapters.
 		/// </summary>
 		[JsonProperty(PropertyName = "chapters")]
-		public int Chapters { get; set; }
+		public int? Chapters { get; set; }
 	}
 }
