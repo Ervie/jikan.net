@@ -107,13 +107,11 @@ Then restore dependencies:
 
 # Changelog
 
-## 31.05.2020 - Version 1.4.0 (newest)
+## 13.06.2020 - Version 1.4.1 (newest)
 
-- Feature
-    - suppressException is now turned off by default. This should give usert better insight on any exception occuring during call to Jikan API providing failed call code and/or exception message. User of wrapper can change it by passing `true` as a second parameter in the constructor - failed request will return `null`s as before.
-- Fixed feature
-    - <b>[AnimeSearch]</b> Add `SearchAnime(string query, int page AnimeSearchConfig searchConfig)` method removed in version 1.3.3 after MAL fix it on their end.
-    - <b>[MangaSearch]</b> Add `SearchManga(string query, int page MangaSearchConfig searchConfig)` method method removed in version 1.3.3 after MAL fix it on their end.
+- Fixes 
+    - <b>[MangaSearch]</b> `Chapters` property of `MangaSearchEntry` class changes to nullable (`int?`) due to occasional null returned.
+    - <b>Search</b> Improved encoding queries with spaces (changed from underscore to plus sign).
         
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**
