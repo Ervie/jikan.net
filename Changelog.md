@@ -1,4 +1,9 @@
-## 13.06.2020 - Version 1.4.1 (newest)
+## 08.07.2020 - Version 1.4.2 (newest)
+
+- Fixes 
+    - <b>[MangaSearch/AnimeSearch]</b> Fix incorrect url building for different `GenreInclusion` values in `AnimeSearchConfig` and `MangaSearchConfig`.
+        
+## 13.06.2020 - Version 1.4.1
 
 - Fixes 
     - <b>[MangaSearch]</b> `Chapters` property of `MangaSearchEntry` class changes to nullable (`int?`) due to occasional null returned.

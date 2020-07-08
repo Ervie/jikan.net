@@ -107,11 +107,10 @@ Then restore dependencies:
 
 # Changelog
 
-## 13.06.2020 - Version 1.4.1 (newest)
+## 08.07.2020 - Version 1.4.2 (newest)
 
 - Fixes 
-    - <b>[MangaSearch]</b> `Chapters` property of `MangaSearchEntry` class changes to nullable (`int?`) due to occasional null returned.
-    - <b>Search</b> Improved encoding queries with spaces (changed from underscore to plus sign).
+    - <b>[MangaSearch/AnimeSearch]</b> Fix incorrect url building for different `GenreInclusion` values in `AnimeSearchConfig` and `MangaSearchConfig`.
         
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**

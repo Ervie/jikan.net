@@ -63,9 +63,9 @@ namespace JikanDotNet
 		public long MagazineId { get; set; }
 
 		/// <summary>
-		/// If true, search manga of genres included in <see cref="Genres">Genres</see>. If false, exlude genres included from <see cref="Genres">Genres</see> from search result. />
+		/// If true, search manga of genres included in <see cref="Genres">Genres</see>. If false, exclude genres included from <see cref="Genres">Genres</see> from search result. />
 		/// </summary>
-		public bool GenreIncluded { get; set; } = false;
+		public bool GenreIncluded { get; set; } = true;
 
 		/// <summary>
 		/// Create query from current parameters for search request.
@@ -112,9 +112,9 @@ namespace JikanDotNet
 				builder.Append($"&genre={string.Join(",", genresId)}");
 			}
 
-			if (GenreIncluded)
+			if (!GenreIncluded)
 			{
-				builder.Append($"genre_exclude=0$");
+				builder.Append($"&genre_exclude=0$");
 			}
 
 			if (OrderBy != MangaSearchSortable.NoSorting)

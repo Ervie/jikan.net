@@ -131,7 +131,7 @@ namespace JikanDotNet.Tests
 		{
 			var searchConfig = new MangaSearchConfig
 			{
-				EndDate = new System.DateTime(2015, 1, 1)
+				EndDate = new DateTime(2015, 1, 1)
 			};
 
 			MangaSearchResult returnedManga = await jikan.SearchManga("metal", searchConfig);
@@ -256,6 +256,38 @@ namespace JikanDotNet.Tests
 			};
 
 			MangaSearchResult returnedManga = await jikan.SearchManga("ore", 2, searchConfig);
+
+			Assert.NotNull(returnedManga);
+			Assert.NotEmpty(returnedManga.Results);
+		}
+
+		[Fact]
+		public async Task SearchManga_GenreInclusion_ShouldReturnNotEmptyCollection()
+		{
+			var searchConfig = new MangaSearchConfig
+			{
+				Genres = new List<GenreSearch> { GenreSearch.Comedy },
+				GenreIncluded = true,
+				Type = MangaType.Manga
+			};
+
+			MangaSearchResult returnedManga = await jikan.SearchManga(searchConfig);
+
+			Assert.NotNull(returnedManga);
+			Assert.NotEmpty(returnedManga.Results);
+		}
+
+		[Fact]
+		public async Task SearchManga_GenreExclusion_ShouldReturnNotEmptyCollection()
+		{
+			var searchConfig = new MangaSearchConfig
+			{
+				Genres = new List<GenreSearch> { GenreSearch.Comedy },
+				GenreIncluded = false,
+				Type = MangaType.Manga
+			};
+
+			MangaSearchResult returnedManga = await jikan.SearchManga(searchConfig);
 
 			Assert.NotNull(returnedManga);
 			Assert.NotEmpty(returnedManga.Results);

@@ -267,5 +267,39 @@ namespace JikanDotNet.Tests
 			Assert.NotNull(returnedAnime);
 			Assert.NotEmpty(returnedAnime.Results);
 		}
+
+		[Fact]
+		public async Task SearchAnime_GenreInclusion_ShouldReturnNotEmptyCollection()
+		{
+			var searchConfig = new AnimeSearchConfig
+			{
+				Genres = new List<GenreSearch> { GenreSearch.Action, GenreSearch.Comedy },
+				GenreIncluded = true,
+				OrderBy = AnimeSearchSortable.Score,
+				SortDirection = SortDirection.Descending
+			};
+
+			AnimeSearchResult returnedAnime = await jikan.SearchAnime(searchConfig);
+
+			Assert.NotNull(returnedAnime);
+			Assert.NotEmpty(returnedAnime.Results);
+		}
+
+		[Fact]
+		public async Task SearchAnime_GenreExclusion_ShouldReturnNotEmptyCollection()
+		{
+			var searchConfig = new AnimeSearchConfig
+			{
+				Genres = new List<GenreSearch> { GenreSearch.Action, GenreSearch.Adventure },
+				GenreIncluded = false,
+				OrderBy = AnimeSearchSortable.Score,
+				SortDirection = SortDirection.Descending
+			};
+
+			AnimeSearchResult returnedAnime = await jikan.SearchAnime(searchConfig);
+
+			Assert.NotNull(returnedAnime);
+			Assert.NotEmpty(returnedAnime.Results);
+		}
 	}
 }
