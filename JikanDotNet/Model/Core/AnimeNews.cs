@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System.Collections.Generic;
 
 namespace JikanDotNet
@@ -11,7 +11,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// News related to anime.
 		/// </summary>
-		[JsonProperty(PropertyName = "articles")]
+		[JsonPropertyName("articles")]
 		public ICollection<News> News { get; set; }
 	}
 }

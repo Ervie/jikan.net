@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System.Collections.Generic;
 
 namespace JikanDotNet
@@ -11,13 +11,13 @@ namespace JikanDotNet
 		/// <summary>
 		/// List of search results.
 		/// </summary>
-		[JsonProperty(PropertyName = "results")]
+		[JsonPropertyName("results")]
 		public ICollection<PersonSearchEntry> Results { get; set; }
 
 		/// <summary>
 		/// Index of the last page.
 		/// </summary>
-		[JsonProperty(PropertyName = "last_page")]
+		[JsonPropertyName("last_page")]
 		public int? ResultLastPage { get; set; }
 	}
 }

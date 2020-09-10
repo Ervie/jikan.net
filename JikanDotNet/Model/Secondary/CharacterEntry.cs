@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System.Collections.Generic;
 
 namespace JikanDotNet
@@ -11,37 +11,37 @@ namespace JikanDotNet
 		/// <summary>
 		/// ID associated with MyAnimeList.
 		/// </summary>
-		[JsonProperty(PropertyName = "mal_id")]
+		[JsonPropertyName("mal_id")]
 		public long MalId { get; set; }
 
 		/// <summary>
 		/// Character's name.
 		/// </summary>
-		[JsonProperty(PropertyName = "name")]
+		[JsonPropertyName("name")]
 		public string Name { get; set; }
 
 		/// <summary>
 		/// Url to character's main page.
 		/// </summary>
-		[JsonProperty(PropertyName = "url")]
+		[JsonPropertyName("url")]
 		public string Url { get; set; }
 
 		/// <summary>
 		/// Character's image URL
 		/// </summary>
-		[JsonProperty(PropertyName = "image_url")]
+		[JsonPropertyName("image_url")]
 		public string ImageURL { get; set; }
 
 		/// <summary>
 		/// Character's role (e. g. "main", "supporting")
 		/// </summary>
-		[JsonProperty(PropertyName = "role")]
+		[JsonPropertyName("role")]
 		public string Role { get; set; }
 
 		/// <summary>
 		/// Character's list of voice actor in this entry (anime only).
 		/// </summary>
-		[JsonProperty(PropertyName = "voice_actors")]
+		[JsonPropertyName("voice_actors")]
 		public ICollection<VoiceActorEntry> VoiceActors { get; set; }
 
 		/// <summary>

@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 
 namespace JikanDotNet
@@ -11,37 +11,37 @@ namespace JikanDotNet
 		/// <summary>
 		/// Username.
 		/// </summary>
-		[JsonProperty(PropertyName = "username")]
+		[JsonPropertyName("username")]
 		public string Username { get; set; }
 
 		/// <summary>
 		/// User's image URL
 		/// </summary>
-		[JsonProperty(PropertyName = "image_url")]
+		[JsonPropertyName("image_url")]
 		public string ImageURL { get; set; }
 
 		/// <summary>
 		/// User's URL
 		/// </summary>
-		[JsonProperty(PropertyName = "url")]
+		[JsonPropertyName("url")]
 		public string URL { get; set; }
 
 		/// <summary>
 		/// User's score.
 		/// </summary>
-		[JsonProperty(PropertyName = "score")]
+		[JsonPropertyName("score")]
 		public int? Score { get; set; }
 
 		/// <summary>
 		/// Date ofd the update.
 		/// </summary>
-		[JsonProperty(PropertyName = "date")]
+		[JsonPropertyName("date")]
 		public DateTime? Date { get; set; }
 
 		/// <summary>
 		/// Status (reading, watching, completed, etc.)
 		/// </summary>
-		[JsonProperty(PropertyName = "status")]
+		[JsonPropertyName("status")]
 		public string Status { get; set; }
 	}
 }

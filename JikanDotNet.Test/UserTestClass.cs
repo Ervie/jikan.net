@@ -7,17 +7,17 @@ namespace JikanDotNet.Tests
 {
 	public class UserTestClass
 	{
-		private readonly IJikan jikan;
+		private readonly IJikan _jikan;
 
 		public UserTestClass()
 		{
-			jikan = new Jikan(true);
+			_jikan = new Jikan(true);
 		}
 
 		[Fact]
 		public async Task GetUserProfile_Ervelan_ShouldParseErvelanProfile()
 		{
-			UserProfile user = await jikan.GetUserProfile("Ervelan");
+			UserProfile user = await _jikan.GetUserProfile("Ervelan");
 
 			Assert.NotNull(user);
 			Assert.Equal("Ervelan", user.Username);
@@ -31,7 +31,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task GetUserProfile_Nekomata1037_ShouldParseNekomataProfile()
 		{
-			UserProfile user = await jikan.GetUserProfile("Nekomata1037");
+			UserProfile user = await _jikan.GetUserProfile("Nekomata1037");
 
 			Assert.NotNull(user);
 			Assert.Equal("Nekomata1037", user.Username);
@@ -44,16 +44,16 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task GetUserHistory_Nekomata_ShouldParseNekomataHistory()
 		{
-			UserHistory userHistory = await jikan.GetUserHistory("Nekomata1037");
+			UserHistory userHistory = await _jikan.GetUserHistory("Nekomata1037");
 
 			Assert.NotNull(userHistory);
 			Assert.True(userHistory.History.Count >= 0);
 		}
 
 		[Fact]
-		public async Task GetUserHistory_NekomataMangaHistory_ShouldParseNekomataMangaHistory()
+		public async Task GetUserHistory_ErvelanMangaHistory_ShouldParseErvelanMangaHistory()
 		{
-			UserHistory userHistory = await jikan.GetUserHistory("Nekomata1037", UserHistoryExtension.Manga);
+			UserHistory userHistory = await _jikan.GetUserHistory("Ervelan", UserHistoryExtension.Manga);
 
 			Assert.NotNull(userHistory);
 			Assert.True(userHistory.History.Count >= 0);
@@ -62,7 +62,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task GetUserFriends_Ervelan_ShouldParseErvelanFriends()
 		{
-			UserFriends friends = await jikan.GetUserFriends("Ervelan");
+			UserFriends friends = await _jikan.GetUserFriends("Ervelan");
 
 			Assert.NotNull(friends);
 			Assert.True(friends.Friends.Count > 20);
@@ -73,7 +73,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public void GetUserFriends_ErvelanTenthPage_ShouldReturnNoFriends()
 		{
-			Assert.ThrowsAnyAsync<JikanRequestException>(() => jikan.GetUserFriends("Ervelan", 10));
+			Assert.ThrowsAnyAsync<JikanRequestException>(() => _jikan.GetUserFriends("Ervelan", 10));
 		}
 	}
 }

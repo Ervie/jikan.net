@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 
 namespace JikanDotNet
@@ -11,31 +11,31 @@ namespace JikanDotNet
 		/// <summary>
 		/// ID associated with MyAnimeList.
 		/// </summary>
-		[JsonProperty(PropertyName = "mal_id")]
+		[JsonPropertyName("mal_id")]
 		public long MalId { get; set; }
 
 		/// <summary>
 		/// Review's URL.
 		/// </summary>
-		[JsonProperty(PropertyName = "url")]
+		[JsonPropertyName("url")]
 		public string URL { get; set; }
 
 		/// <summary>
 		/// Date of review creation.
 		/// </summary>
-		[JsonProperty(PropertyName = "date")]
+		[JsonPropertyName("date")]
 		public DateTime? Date { get; set; }
 
 		/// <summary>
 		/// Review's content.
 		/// </summary>
-		[JsonProperty(PropertyName = "content")]
+		[JsonPropertyName("content")]
 		public string Content { get; set; }
 
 		/// <summary>
 		/// Number of times the review was marked as helpful.
 		/// </summary>
-		[JsonProperty(PropertyName = "helpful_count")]
+		[JsonPropertyName("helpful_count")]
 		public int? HelpfulCount { get; set; }
 	}
 }

@@ -7,11 +7,11 @@ namespace JikanDotNet.Tests
 {
     public class AnimeTestClass
     {
-		private readonly IJikan jikan;
+		private readonly IJikan _jikan;
 
 		public AnimeTestClass()
 		{
-			jikan = new Jikan(true);
+			_jikan = new Jikan(true);
 		}
 
 		[Theory]
@@ -20,7 +20,7 @@ namespace JikanDotNet.Tests
 		[InlineData(6)]
 		public async Task GetAnime_CorrectId_ShouldReturnNotNullAnime(long malId)
         {
-			Anime returnedAnime = await jikan.GetAnime(malId);
+			Anime returnedAnime = await _jikan.GetAnime(malId);
 
 			Assert.NotNull(returnedAnime);
         }
@@ -31,13 +31,13 @@ namespace JikanDotNet.Tests
 		[InlineData(4)]
 		public void GetAnime_WrongId_ShouldThrowException(long malId)
 		{
-			Assert.ThrowsAnyAsync<JikanRequestException>(() => jikan.GetAnime(malId));
+			Assert.ThrowsAnyAsync<JikanRequestException>(() => _jikan.GetAnime(malId));
 		}
 
 		[Fact]
 		public async Task GetAnime_MSGundamId_ShouldParseGundam()
 		{
-			Anime gundamAnime = await jikan.GetAnime(80);
+			Anime gundamAnime = await _jikan.GetAnime(80);
 
 			Assert.Equal("Mobile Suit Gundam", gundamAnime.Title);
 		}
@@ -45,7 +45,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task GetAnime_BebopId_ShouldParseCowboyBebop()
 		{
-			Anime bebopAnime = await jikan.GetAnime(1);
+			Anime bebopAnime = await _jikan.GetAnime(1);
 
 			Assert.Equal("Cowboy Bebop", bebopAnime.Title);
 		}
@@ -53,7 +53,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task GetAnime_BebopId_ShouldParseCowboyBebopRelatedAnime()
 		{
-			Anime bebopAnime = await jikan.GetAnime(1);
+			Anime bebopAnime = await _jikan.GetAnime(1);
 
 			Assert.Equal(2, bebopAnime.Related.Adaptations.Count);
 			Assert.Equal(2, bebopAnime.Related.SideStories.Count);
@@ -63,7 +63,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task GetAnime_FSNId_ShouldParseFateStayNightRelatedAnime()
 		{
-			Anime fsnAnime = await jikan.GetAnime(356);
+			Anime fsnAnime = await _jikan.GetAnime(356);
 
 			Assert.True(fsnAnime.Related.AlternativeVersions.Count > 3);
 		}
@@ -71,7 +71,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task GetAnime_FSNReproductionId_ShouldParseFateStayNightReproductionRelatedAnime()
 		{
-			Anime fsnAnime = await jikan.GetAnime(7559);
+			Anime fsnAnime = await _jikan.GetAnime(7559);
 
 			Assert.Equal("Fate/stay night", fsnAnime.Related.FullStories.First().Name);
 		}
@@ -79,7 +79,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task GetAnime_KamiNomiId_ShouldParseKamiNomiRelatedAnime()
 		{
-			Anime fsnAnime = await jikan.GetAnime(17725);
+			Anime fsnAnime = await _jikan.GetAnime(17725);
 
 			Assert.Equal("Kami nomi zo Shiru Sekai", fsnAnime.Related.ParentStories.First().Name);
 		}
@@ -87,9 +87,9 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task GetAnime_CardcaptorId_ShouldParseCardcaptorSakuraInformation()
 		{
-			Anime cardcaptor = await jikan.GetAnime(232);
+			Anime cardcaptor = await _jikan.GetAnime(232);
 
-			Assert.Equal("70", cardcaptor.Episodes);
+			Assert.Equal(70, cardcaptor.Episodes);
 			Assert.Equal("TV", cardcaptor.Type);
 			Assert.Equal("Spring 1998", cardcaptor.Premiered);
 			Assert.Equal("25 min per ep", cardcaptor.Duration);
@@ -101,7 +101,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task GetAnime_AkiraId_ShouldParseAkiraCollections()
 		{
-			Anime akiraAnime = await jikan.GetAnime(47);
+			Anime akiraAnime = await _jikan.GetAnime(47);
 
 			Assert.Equal(3, akiraAnime.Producers.Count);
 			Assert.Equal(3, akiraAnime.Licensors.Count);
@@ -115,7 +115,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task GetAnime_KeyTheMetalIdolId_ShouldParseAnimeWithNoRelatedAdaptations()
 		{
-			Anime returnedAnime = await jikan.GetAnime(1457);
+			Anime returnedAnime = await _jikan.GetAnime(1457);
 
 			Assert.Null(returnedAnime.Related.Adaptations);
 		}

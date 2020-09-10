@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System.Collections.Generic;
 
 namespace JikanDotNet
@@ -11,7 +11,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Collection of club members.
 		/// </summary>
-		[JsonProperty(PropertyName = "members")]
+		[JsonPropertyName("members")]
 		public ICollection<ClubMember> Members { get; set; }
 	}
 }

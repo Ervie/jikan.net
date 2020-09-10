@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System.Collections.Generic;
 
 namespace JikanDotNet
@@ -11,13 +11,13 @@ namespace JikanDotNet
 		/// <summary>
 		/// Last page of episodes' list.
 		/// </summary>
-		[JsonProperty(PropertyName = "episodes_last_page")]
+		[JsonPropertyName("episodes_last_page")]
 		public int EpisodesLastPage { get; set; }
 
 		/// <summary>
 		/// Anime's episode collection with basic information.
 		/// </summary>
-		[JsonProperty(PropertyName = "episodes")]
+		[JsonPropertyName("episodes")]
 		public ICollection<AnimeEpisode> EpisodeCollection { get; set; }
 	}
 }

@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System.Collections.Generic;
 
 namespace JikanDotNet
@@ -11,13 +11,13 @@ namespace JikanDotNet
 		/// <summary>
 		/// Metadata about magazine..
 		/// </summary>
-		[JsonProperty(PropertyName = "meta")]
+		[JsonPropertyName("meta")]
 		public MALSubItem Metadata { get; set; }
 
 		/// <summary>
 		/// List of manga published in magazine.
 		/// </summary>
-		[JsonProperty(PropertyName = "manga")]
+		[JsonPropertyName("manga")]
 		public ICollection<MangaSubEntry> Manga { get; set; }
 
 		/// <summary>

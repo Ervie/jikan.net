@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace JikanDotNet
 {
@@ -10,25 +10,25 @@ namespace JikanDotNet
 		/// <summary>
 		/// Title of the episode video.
 		/// </summary>
-		[JsonProperty(PropertyName = "title")]
+		[JsonPropertyName("title")]
 		public string Title { get; set; }
 
 		/// <summary>
 		/// Numbered title of the episode video.
 		/// </summary>
-		[JsonProperty(PropertyName = "episode")]
+		[JsonPropertyName("episode")]
 		public string NumberedTitle { get; set; }
 
 		/// <summary>
 		/// Url to episode video.
 		/// </summary>
-		[JsonProperty(PropertyName = "url")]
+		[JsonPropertyName("url")]
 		public string Url { get; set; }
 
 		/// <summary>
 		/// Episode's image URL.
 		/// </summary>
-		[JsonProperty(PropertyName = "image_url")]
+		[JsonPropertyName("image_url")]
 		public string ImageURL { get; set; }
 	}
 }

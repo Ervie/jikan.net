@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 
@@ -12,61 +12,61 @@ namespace JikanDotNet
 		/// <summary>
 		/// Number of days user has been watching anime.
 		/// </summary>
-		[JsonProperty(PropertyName = "days_watched")]
+		[JsonPropertyName("days_watched")]
 		public decimal? DaysWatched { get; set; }
 
 		/// <summary>
 		/// User's mean score for anime.
 		/// </summary>
-		[JsonProperty(PropertyName = "mean_score")]
+		[JsonPropertyName("mean_score")]
 		public decimal? MeanScore { get; set; }
 
 		/// <summary>
 		/// User's amount of anime currently watching.
 		/// </summary>
-		[JsonProperty(PropertyName = "watching")]
+		[JsonPropertyName("watching")]
 		public int? Watching { get; set; }
 
 		/// <summary>
 		/// User's amount of completed anime.
 		/// </summary>
-		[JsonProperty(PropertyName = "completed")]
+		[JsonPropertyName("completed")]
 		public int? Completed { get; set; }
 
 		/// <summary>
 		/// User's amount of anime on hold.
 		/// </summary>
-		[JsonProperty(PropertyName = "on_hold")]
+		[JsonPropertyName("on_hold")]
 		public int? OnHold { get; set; }
 
 		/// <summary>
 		/// User's amount of dropped anime.
 		/// </summary>
-		[JsonProperty(PropertyName = "dropped")]
+		[JsonPropertyName("dropped")]
 		public int? Dropped { get; set; }
 
 		/// <summary>
 		/// User's amount of plan to watch anime.
 		/// </summary>
-		[JsonProperty(PropertyName = "plan_to_watch")]
+		[JsonPropertyName("plan_to_watch")]
 		public int? PlanToWatch { get; set; }
 
 		/// <summary>
 		/// User's total amount of anime.
 		/// </summary>
-		[JsonProperty(PropertyName = "total_entries")]
+		[JsonPropertyName("total_entries")]
 		public int? TotalEntries { get; set; }
 
 		/// <summary>
 		/// Total times user rewatched anime.
 		/// </summary>
-		[JsonProperty(PropertyName = "rewatched")]
+		[JsonPropertyName("rewatched")]
 		public int? Rewatched { get; set; }
 
 		/// <summary>
 		/// User's total amount of watched episodes.
 		/// </summary>
-		[JsonProperty(PropertyName = "episodes_watched")]
+		[JsonPropertyName("episodes_watched")]
 		public int? EpisodesWatched { get; set; }
 	}
 }

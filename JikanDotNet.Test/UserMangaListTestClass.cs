@@ -7,17 +7,17 @@ namespace JikanDotNet.Tests
 {
 	public class UserMangaListTestClass
 	{
-		private readonly IJikan jikan;
+		private readonly IJikan _jikan;
 
 		public UserMangaListTestClass()
 		{
-			jikan = new Jikan();
+			_jikan = new Jikan();
 		}
 
 		[Fact]
 		public async Task GetUserMangaList_Ervelan_ShouldParseErvelanMangaList()
 		{
-			UserMangaList mangaList = await jikan.GetUserMangaList("Ervelan");
+			UserMangaList mangaList = await _jikan.GetUserMangaList("Ervelan");
 
 			Assert.NotNull(mangaList);
 			Assert.True(mangaList.Manga.Count > 90);
@@ -27,7 +27,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task GetUserMangaList_ErvelanReading_ShouldParseErvelanMangaReadingList()
 		{
-			UserMangaList mangaList = await jikan.GetUserMangaList("Ervelan", UserMangaListExtension.Reading);
+			UserMangaList mangaList = await _jikan.GetUserMangaList("Ervelan", UserMangaListExtension.Reading);
 
 			Assert.NotNull(mangaList);
 			Assert.Contains("One Piece", mangaList.Manga.Select(x => x.Title));
@@ -38,7 +38,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task GetUserMangaList_ErvelanDropped_ShouldParseErvelanMangaDroppedList()
 		{
-			UserMangaList mangaList = await jikan.GetUserMangaList("Ervelan", UserMangaListExtension.Dropped);
+			UserMangaList mangaList = await _jikan.GetUserMangaList("Ervelan", UserMangaListExtension.Dropped);
 
 			Assert.NotNull(mangaList);
 			Assert.Equal(3, mangaList.Manga.Count);
@@ -48,13 +48,13 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public void GetUserMangaList_onrix_ShouldParseOnrixMangaList()
 		{
-			Assert.ThrowsAnyAsync<JikanRequestException>(() => jikan.GetUserMangaList("onrix"));
+			Assert.ThrowsAnyAsync<JikanRequestException>(() => _jikan.GetUserMangaList("onrix"));
 		}
 
 		[Fact]
 		public async Task GetUserMangaList_Mithogawa_ShouldParseMithogawaMangaList()
 		{
-			UserMangaList mangaList = await jikan.GetUserMangaList("Mithogawa");
+			UserMangaList mangaList = await _jikan.GetUserMangaList("Mithogawa");
 
 			Assert.NotNull(mangaList);
 			Assert.Equal(300, mangaList.Manga.Count);
@@ -68,7 +68,7 @@ namespace JikanDotNet.Tests
 				Query = "death"
 			};
 
-			UserMangaList mangaList = await jikan.GetUserMangaList("Ervelan", searchConfig);
+			UserMangaList mangaList = await _jikan.GetUserMangaList("Ervelan", searchConfig);
 
 			Assert.NotNull(mangaList);
 			Assert.Contains("Death Note", mangaList.Manga.Select(x => x.Title));
@@ -83,7 +83,7 @@ namespace JikanDotNet.Tests
 				Query = "stone"
 			};
 
-			UserMangaList mangaList = await jikan.GetUserMangaList("Ervelan", searchConfig);
+			UserMangaList mangaList = await _jikan.GetUserMangaList("Ervelan", searchConfig);
 
 			Assert.NotNull(mangaList);
 			Assert.Contains("Dr. Stone", mangaList.Manga.Select(x => x.Title));
@@ -98,7 +98,7 @@ namespace JikanDotNet.Tests
 				Query = "hunter"
 			};
 
-			UserMangaList mangaList = await jikan.GetUserMangaList("Ervelan", searchConfig);
+			UserMangaList mangaList = await _jikan.GetUserMangaList("Ervelan", searchConfig);
 
 			Assert.NotNull(mangaList);
 			Assert.Single(mangaList.Manga);
@@ -112,7 +112,7 @@ namespace JikanDotNet.Tests
 				Query = "qwerty"
 			};
 
-			UserMangaList mangaList = await jikan.GetUserMangaList("Ervelan", searchConfig);
+			UserMangaList mangaList = await _jikan.GetUserMangaList("Ervelan", searchConfig);
 
 			Assert.NotNull(mangaList);
 			Assert.Empty(mangaList.Manga);
@@ -126,7 +126,7 @@ namespace JikanDotNet.Tests
 				Query = ""
 			};
 
-			UserMangaList mangaList = await jikan.GetUserMangaList("Ervelan", searchConfig);
+			UserMangaList mangaList = await _jikan.GetUserMangaList("Ervelan", searchConfig);
 
 			Assert.NotNull(mangaList);
 			Assert.True(mangaList.Manga.Count > 90);
@@ -141,7 +141,7 @@ namespace JikanDotNet.Tests
 				SortDirection = SortDirection.Ascending
 			};
 
-			UserMangaList mangaList = await jikan.GetUserMangaList("Ervelan", searchConfig);
+			UserMangaList mangaList = await _jikan.GetUserMangaList("Ervelan", searchConfig);
 
 			Assert.NotNull(mangaList);
 			Assert.Equal("Yuu☆Yuu☆Hakusho", mangaList.Manga.First().Title);
@@ -156,7 +156,7 @@ namespace JikanDotNet.Tests
 				SortDirection = SortDirection.Descending
 			};
 
-			UserMangaList mangaList = await jikan.GetUserMangaList("Ervelan", searchConfig);
+			UserMangaList mangaList = await _jikan.GetUserMangaList("Ervelan", searchConfig);
 
 			Assert.NotNull(mangaList);
 			Assert.Equal("Berserk", mangaList.Manga.First().Title);
@@ -172,7 +172,7 @@ namespace JikanDotNet.Tests
 				SortDirection = SortDirection.Descending
 			};
 
-			UserMangaList mangaList = await jikan.GetUserMangaList("Ervelan", searchConfig);
+			UserMangaList mangaList = await _jikan.GetUserMangaList("Ervelan", searchConfig);
 
 			Assert.NotNull(mangaList);
 			Assert.Equal("Berserk", mangaList.Manga.First().Title);
@@ -186,7 +186,7 @@ namespace JikanDotNet.Tests
 				MagazineId = 2
 			};
 
-			UserMangaList mangaList = await jikan.GetUserMangaList("Ervelan", searchConfig);
+			UserMangaList mangaList = await _jikan.GetUserMangaList("Ervelan", searchConfig);
 
 			Assert.NotNull(mangaList);
 			Assert.Single(mangaList.Manga);
@@ -201,7 +201,7 @@ namespace JikanDotNet.Tests
 				MagazineId = -1,
 			};
 
-			UserMangaList mangaList = await jikan.GetUserMangaList("Ervelan", searchConfig);
+			UserMangaList mangaList = await _jikan.GetUserMangaList("Ervelan", searchConfig);
 
 			Assert.NotNull(mangaList);
 			Assert.True(mangaList.Manga.Count > 90);
@@ -216,7 +216,7 @@ namespace JikanDotNet.Tests
 				PublishingStatus = UserListMangaPublishingStatus.Publishing
 			};
 
-			UserMangaList mangaList = await jikan.GetUserMangaList("Ervelan", searchConfig);
+			UserMangaList mangaList = await _jikan.GetUserMangaList("Ervelan", searchConfig);
 
 			Assert.NotNull(mangaList);
 			Assert.Contains("One Piece", mangaList.Manga.Select(x => x.Title));

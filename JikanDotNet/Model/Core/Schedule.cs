@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System.Collections.Generic;
 
 namespace JikanDotNet
@@ -11,55 +11,55 @@ namespace JikanDotNet
 		/// <summary>
 		/// All current season entries scheduled for Monday.
 		/// </summary>
-		[JsonProperty(PropertyName = "monday")]
-		public ICollection<AnimeSubEntry> Monday;
+		[JsonPropertyName("monday")]
+		public ICollection<AnimeSubEntry> Monday { get; set; }
 
 		/// <summary>
 		/// All current season entries scheduled for Tuesday.
 		/// </summary>
-		[JsonProperty(PropertyName = "tuesday")]
-		public ICollection<AnimeSubEntry> Tuesday;
+		[JsonPropertyName("tuesday")]
+		public ICollection<AnimeSubEntry> Tuesday { get; set; }
 
 		/// <summary>
 		/// All current season entries scheduled for Wednesday.
 		/// </summary>
-		[JsonProperty(PropertyName = "wednesday")]
-		public ICollection<AnimeSubEntry> Wednesday;
+		[JsonPropertyName("wednesday")]
+		public ICollection<AnimeSubEntry> Wednesday { get; set; }
 
 		/// <summary>
 		/// All current season entries scheduled for Thursday.
 		/// </summary>
-		[JsonProperty(PropertyName = "thursday")]
-		public ICollection<AnimeSubEntry> Thursday;
+		[JsonPropertyName("thursday")]
+		public ICollection<AnimeSubEntry> Thursday { get; set; }
 
 		/// <summary>
 		/// All current season entries scheduled for Friday.
 		/// </summary>
-		[JsonProperty(PropertyName = "friday")]
-		public ICollection<AnimeSubEntry> Friday;
+		[JsonPropertyName("friday")]
+		public ICollection<AnimeSubEntry> Friday { get; set; }
 
 		/// <summary>
 		/// All current season entries scheduled for Saturday.
 		/// </summary>
-		[JsonProperty(PropertyName = "saturday")]
-		public ICollection<AnimeSubEntry> Saturday;
+		[JsonPropertyName("saturday")]
+		public ICollection<AnimeSubEntry> Saturday { get; set; }
 
 		/// <summary>
 		/// All current season entries scheduled for Sunday.
 		/// </summary>Sunday
-		[JsonProperty(PropertyName = "sunday")]
-		public ICollection<AnimeSubEntry> Sunday;
+		[JsonPropertyName("sunday")]
+		public ICollection<AnimeSubEntry> Sunday { get; set; }
 
 		/// <summary>
 		/// All current season entries scheduled for other days (irregular airing).
 		/// </summary>Sunday
-		[JsonProperty(PropertyName = "other")]
-		public ICollection<AnimeSubEntry> Other;
+		[JsonPropertyName("other")]
+		public ICollection<AnimeSubEntry> Other { get; set; }
 
 		/// <summary>
 		/// All current season entries scheduled for unknown airing.
 		/// </summary>Sunday
-		[JsonProperty(PropertyName = "unknown")]
-		public ICollection<AnimeSubEntry> Unknown;
+		[JsonPropertyName("unknown")]
+		public ICollection<AnimeSubEntry> Unknown { get; set; }
 	}
 }

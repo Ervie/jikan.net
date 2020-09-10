@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System.Collections.Generic;
 
 namespace JikanDotNet
@@ -11,7 +11,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// A collection of recommendations for anime.
 		/// </summary>
-		[JsonProperty(PropertyName = "recommendations")]
+		[JsonPropertyName("recommendations")]
 		public ICollection<Recommendation> RecommendationCollection { get; set; }
 	}
 }

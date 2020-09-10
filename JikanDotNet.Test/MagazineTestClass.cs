@@ -6,17 +6,17 @@ namespace JikanDotNet.Tests
 {
 	public class MagazineTestClass
 	{
-		private readonly IJikan jikan;
+		private readonly IJikan _jikan;
 
 		public MagazineTestClass()
 		{
-			jikan = new Jikan(true);
+			_jikan = new Jikan(true);
 		}
 
 		[Fact]
 		public async Task GetMagazine_BigComicOriginalId_ShouldParseBigComicOriginal()
 		{
-			Magazine magazine = await jikan.GetMagazine(1);
+			Magazine magazine = await _jikan.GetMagazine(1);
 
 			Assert.NotNull(magazine);
 			Assert.Equal("Big Comic Original", magazine.Metadata.Name);
@@ -29,7 +29,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task GetMagazine_YoungAnimalId_ShouldParseYoungAnimal()
 		{
-			Magazine magazine = await jikan.GetMagazine(2);
+			Magazine magazine = await _jikan.GetMagazine(2);
 
 			Assert.NotNull(magazine);
 			Assert.Equal("Young Animal", magazine.Metadata.Name);
@@ -41,7 +41,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task GetMagazine_YoungAnimalIdSecondPage_ShouldParseYoungAnimalSecondPage()
 		{
-			Magazine magazine = await jikan.GetMagazine(2, 2);
+			Magazine magazine = await _jikan.GetMagazine(2, 2);
 
 			Assert.NotNull(magazine);
 			Assert.True(magazine.Manga.Count > 10);
@@ -50,14 +50,14 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task GetMagazine_ShonenJumpId_ShouldParseShonenJump()
 		{
-			Magazine magazine = await jikan.GetMagazine(83);
+			Magazine magazine = await _jikan.GetMagazine(83);
 
 			Assert.NotNull(magazine);
 			Assert.Equal("Shounen Jump (Weekly)", magazine.Metadata.Name);
 			Assert.Equal(83, magazine.Metadata.MalId);
-			Assert.Equal("Naruto", magazine.Manga.First().Title);
+			Assert.Equal("One Piece", magazine.Manga.First().Title);
 			Assert.True(magazine.Manga.First().Members > 200000);
-			Assert.Equal("One Piece", magazine.Manga.Skip(1).First().Title);
+			Assert.Equal("Naruto", magazine.Manga.Skip(1).First().Title);
 			Assert.Contains("Shaman King", magazine.Manga.Select(x => x.Title));
 		}
 	}

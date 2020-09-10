@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace JikanDotNet
 {
@@ -10,67 +10,67 @@ namespace JikanDotNet
 		/// <summary>
 		/// ID associated with MyAnimeList.
 		/// </summary>
-		[JsonProperty(PropertyName = "mal_id")]
+		[JsonPropertyName("mal_id")]
 		public long MalId { get; set; }
 
 		/// <summary>
 		/// Rank of the manga on selected list.
 		/// </summary>
-		[JsonProperty(PropertyName = "rank")]
+		[JsonPropertyName("rank")]
 		public int Rank { get; set; }
 
 		/// <summary>
 		/// URL to manga page.
 		/// </summary>
-		[JsonProperty(PropertyName = "url")]
+		[JsonPropertyName("url")]
 		public string Url { get; set; }
 
 		/// <summary>
 		/// Manga's image URL
 		/// </summary>
-		[JsonProperty(PropertyName = "image_url")]
+		[JsonPropertyName("image_url")]
 		public string ImageURL { get; set; }
 
 		/// <summary>
 		/// Title of the manga.
 		/// </summary>
-		[JsonProperty(PropertyName = "title")]
+		[JsonPropertyName("title")]
 		public string Title { get; set; }
 
 		/// <summary>
 		/// Manga type (e. g. "TV", "Movie").
 		/// </summary>
-		[JsonProperty(PropertyName = "type")]
+		[JsonPropertyName("type")]
 		public string Type { get; set; }
 
 		/// <summary>
 		/// Manga's score on MyAnimeList up to 2 decimal places.
 		/// </summary>
-		[JsonProperty(PropertyName = "score")]
+		[JsonPropertyName("score")]
 		public float? Score { get; set; }
 
 		/// <summary>
 		/// Manga members count on MyAnimeList.
 		/// </summary>
-		[JsonProperty(PropertyName = "members")]
+		[JsonPropertyName("members")]
 		public int? Members { get; set; }
 
 		/// <summary>
 		/// Date of publishing start.
 		/// </summary>
-		[JsonProperty(PropertyName = "start_date")]
+		[JsonPropertyName("start_date")]
 		public string PublishingStart { get; set; }
 
 		/// <summary>
 		/// Date of publishing end.
 		/// </summary>
-		[JsonProperty(PropertyName = "end_date")]
+		[JsonPropertyName("end_date")]
 		public string PublishingEnd { get; set; }
 
 		/// <summary>
 		/// Manga's volumes count.
 		/// </summary>
-		[JsonProperty(PropertyName = "volumes")]
+		[JsonPropertyName("volumes")]
 		public int? Volumes { get; set; }
 	}
 }

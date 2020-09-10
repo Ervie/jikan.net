@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace JikanDotNet
 {
@@ -10,7 +10,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Extra information stored in "more info" tab.
 		/// </summary>
-		[JsonProperty(PropertyName = "moreinfo")]
+		[JsonPropertyName("moreinfo")]
 		public string Info { get; set; }
 	}
 }

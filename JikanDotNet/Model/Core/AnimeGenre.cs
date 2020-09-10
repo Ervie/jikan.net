@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System.Collections.Generic;
 
 namespace JikanDotNet
@@ -11,19 +11,19 @@ namespace JikanDotNet
 		/// <summary>
 		/// Metadata about genre.
 		/// </summary>
-		[JsonProperty(PropertyName = "mal_url")]
+		[JsonPropertyName("mal_url")]
 		public MALSubItem Metadata { get; set; }
 
 		/// <summary>
 		/// Total count of anime with assigned
 		/// </summary>
-		[JsonProperty(PropertyName = "item_count")]
+		[JsonPropertyName("item_count")]
 		public int TotalCount { get; set; }
 
 		/// <summary>
 		/// List of anime with assigned genre.
 		/// </summary>
-		[JsonProperty(PropertyName = "anime")]
+		[JsonPropertyName("anime")]
 		public ICollection<AnimeSubEntry> Anime { get; set; }
 
 		/// <summary>

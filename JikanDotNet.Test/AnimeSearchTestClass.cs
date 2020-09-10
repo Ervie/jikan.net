@@ -7,11 +7,11 @@ namespace JikanDotNet.Tests
 {
 	public class AnimeSearchTestClass
 	{
-		private readonly IJikan jikan;
+		private readonly IJikan _jikan;
 
 		public AnimeSearchTestClass()
 		{
-			jikan = new Jikan();
+			_jikan = new Jikan();
 		}
 
 		[Theory]
@@ -20,7 +20,7 @@ namespace JikanDotNet.Tests
 		[InlineData("death")]
 		public async Task SearchAnime_NonEmptyQuery_ShouldReturnNotNullSearchAnime(string query)
 		{
-			AnimeSearchResult returnedAnime = await jikan.SearchAnime(query);
+			AnimeSearchResult returnedAnime = await _jikan.SearchAnime(query);
 
 			Assert.NotNull(returnedAnime);
 		}
@@ -28,7 +28,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task SearchAnime_DanganronpaQuery_ShouldReturnDanganronpaAnime()
 		{
-			AnimeSearchResult danganronpaAnime = await jikan.SearchAnime("danganronpa");
+			AnimeSearchResult danganronpaAnime = await _jikan.SearchAnime("danganronpa");
 
 			Assert.Equal(20, danganronpaAnime.ResultLastPage);
 		}
@@ -41,7 +41,7 @@ namespace JikanDotNet.Tests
 				Status = AiringStatus.Airing
 			};
 
-			AnimeSearchResult onePieceAnime = await jikan.SearchAnime("one p", searchConfig);
+			AnimeSearchResult onePieceAnime = await _jikan.SearchAnime("one p", searchConfig);
 
 			Assert.Equal("One Piece", onePieceAnime.Results.First().Title);
 		}
@@ -49,7 +49,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task SearchAnime_HaibaneQuery_ShouldReturnHaibaneRenmeiAnime()
 		{
-			AnimeSearchResult haibaneRenmei = await jikan.SearchAnime("haibane");
+			AnimeSearchResult haibaneRenmei = await _jikan.SearchAnime("haibane");
 
 			Assert.Equal("Haibane Renmei", haibaneRenmei.Results.First().Title);
 			Assert.Equal("TV", haibaneRenmei.Results.First().Type);
@@ -60,7 +60,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task SearchAnime_GirlQuerySecondPage_ShouldFindGirlAnime()
 		{
-			AnimeSearchResult returnedAnime = await jikan.SearchAnime("girl", 2);
+			AnimeSearchResult returnedAnime = await _jikan.SearchAnime("girl", 2);
 
 			Assert.Contains("Frame Arms Girl", returnedAnime.Results.Select(x => x.Title));
 		}
@@ -76,7 +76,7 @@ namespace JikanDotNet.Tests
 				Type = AnimeType.TV
 			};
 
-			AnimeSearchResult returnedAnime = await jikan.SearchAnime(query, searchConfig);
+			AnimeSearchResult returnedAnime = await _jikan.SearchAnime(query, searchConfig);
 
 			Assert.NotNull(returnedAnime);
 		}
@@ -89,7 +89,7 @@ namespace JikanDotNet.Tests
 				Type = AnimeType.TV
 			};
 
-			AnimeSearchResult danganronpaAnime = await jikan.SearchAnime("danganronpa", searchConfig);
+			AnimeSearchResult danganronpaAnime = await _jikan.SearchAnime("danganronpa", searchConfig);
 
 			Assert.Equal(2, danganronpaAnime.ResultLastPage);
 		}
@@ -103,7 +103,7 @@ namespace JikanDotNet.Tests
 				Score = 7
 			};
 
-			AnimeSearchResult fairyTailAnime = await jikan.SearchAnime("Fairy Tail", searchConfig);
+			AnimeSearchResult fairyTailAnime = await _jikan.SearchAnime("Fairy Tail", searchConfig);
 
 			Assert.Equal("Fairy Tail (2014)", fairyTailAnime.Results.First().Title);
 			Assert.Equal("Fairy Tail: Final Series", fairyTailAnime.Results.Skip(1).First().Title);
@@ -115,7 +115,7 @@ namespace JikanDotNet.Tests
 			var searchConfig = new AnimeSearchConfig();
 			searchConfig.Genres.Add(GenreSearch.Mecha);
 
-			AnimeSearchResult returnedAnime = await jikan.SearchAnime("Blame", searchConfig);
+			AnimeSearchResult returnedAnime = await _jikan.SearchAnime("Blame", searchConfig);
 
 			Assert.Contains("Blame! Movie", returnedAnime.Results.Select(x => x.Title));
 		}
@@ -129,7 +129,7 @@ namespace JikanDotNet.Tests
 			};
 			searchConfig.Genres.Add(GenreSearch.Mecha);
 
-			AnimeSearchResult returnedAnime = await jikan.SearchAnime("Blame", searchConfig);
+			AnimeSearchResult returnedAnime = await _jikan.SearchAnime("Blame", searchConfig);
 
 			Assert.Equal("Blame! Movie", returnedAnime.Results.First().Title);
 		}
@@ -143,7 +143,7 @@ namespace JikanDotNet.Tests
 				StartDate = configDate
 			};
 
-			AnimeSearchResult returnedAnime = await jikan.SearchAnime("Bleach", searchConfig);
+			AnimeSearchResult returnedAnime = await _jikan.SearchAnime("Bleach", searchConfig);
 
 			Assert.Contains("Full Metal Panic! Invisible Victory", returnedAnime.Results.Select(x => x.Title));
 			Assert.Contains("Beatless", returnedAnime.Results.Select(x => x.Title));
@@ -158,7 +158,7 @@ namespace JikanDotNet.Tests
 				SortDirection = SortDirection.Descending
 			};
 
-			AnimeSearchResult returnedAnime = await jikan.SearchAnime("one", searchConfig);
+			AnimeSearchResult returnedAnime = await _jikan.SearchAnime("one", searchConfig);
 
 			Assert.Contains("One Piece", returnedAnime.Results.Select(x => x.Title));
 			Assert.Contains("One Punch Man", returnedAnime.Results.Select(x => x.Title));
@@ -174,7 +174,7 @@ namespace JikanDotNet.Tests
 				SortDirection = SortDirection.Ascending
 			};
 
-			AnimeSearchResult returnedAnime = await jikan.SearchAnime("one", searchConfig);
+			AnimeSearchResult returnedAnime = await _jikan.SearchAnime("one", searchConfig);
 
 			Assert.Equal("Hachimitsu to Clover", returnedAnime.Results.First().Title);
 		}
@@ -187,7 +187,7 @@ namespace JikanDotNet.Tests
 				ProducerId = 2
 			};
 
-			AnimeSearchResult returnedAnime = await jikan.SearchAnime("violet", searchConfig);
+			AnimeSearchResult returnedAnime = await _jikan.SearchAnime("violet", searchConfig);
 
 			Assert.Contains("Evergarden", returnedAnime.Results.First().Title);
 			Assert.Contains("Evergarden", returnedAnime.Results.Skip(1).First().Title);
@@ -202,7 +202,7 @@ namespace JikanDotNet.Tests
 				ProducerId = -1
 			};
 
-			AnimeSearchResult returnedAnime = await jikan.SearchAnime("violet", searchConfig);
+			AnimeSearchResult returnedAnime = await _jikan.SearchAnime("violet", searchConfig);
 
 			Assert.Contains("Violence Jack: Jigoku Gai-hen", returnedAnime.Results.Select(x => x.Title));
 			Assert.Contains("Violet Evergarden", returnedAnime.Results.Select(x => x.Title));
@@ -217,7 +217,7 @@ namespace JikanDotNet.Tests
 				Genres = new List<GenreSearch> { GenreSearch.Action }
 			};
 
-			AnimeSearchResult returnedAnime = await jikan.SearchAnime(searchConfig);
+			AnimeSearchResult returnedAnime = await _jikan.SearchAnime(searchConfig);
 
 			Assert.Contains("Ajin", returnedAnime.Results.Select(x => x.Title));
 			Assert.Contains("Afro Samurai", returnedAnime.Results.Select(x => x.Title));
@@ -232,7 +232,7 @@ namespace JikanDotNet.Tests
 				Genres = new List<GenreSearch> { GenreSearch.Action }
 			};
 
-			AnimeSearchResult returnedAnime = await jikan.SearchAnime(searchConfig, 1);
+			AnimeSearchResult returnedAnime = await _jikan.SearchAnime(searchConfig, 1);
 
 			Assert.Contains("Ajin", returnedAnime.Results.Select(x => x.Title));
 			Assert.Contains("Afro Samurai", returnedAnime.Results.Select(x => x.Title));
@@ -247,7 +247,7 @@ namespace JikanDotNet.Tests
 				Genres = new List<GenreSearch> { GenreSearch.Action }
 			};
 
-			AnimeSearchResult returnedAnime = await jikan.SearchAnime(searchConfig, 2);
+			AnimeSearchResult returnedAnime = await _jikan.SearchAnime(searchConfig, 2);
 
 			Assert.Contains("Azur Lane", returnedAnime.Results.Select(x => x.Title));
 			Assert.Contains("Baccano!", returnedAnime.Results.Select(x => x.Title));
@@ -262,7 +262,7 @@ namespace JikanDotNet.Tests
 				Genres = new List<GenreSearch> { GenreSearch.Action }
 			};
 
-			AnimeSearchResult returnedAnime = await jikan.SearchAnime("one", 2, searchConfig);
+			AnimeSearchResult returnedAnime = await _jikan.SearchAnime("one", 2, searchConfig);
 
 			Assert.NotNull(returnedAnime);
 			Assert.NotEmpty(returnedAnime.Results);
@@ -279,7 +279,7 @@ namespace JikanDotNet.Tests
 				SortDirection = SortDirection.Descending
 			};
 
-			AnimeSearchResult returnedAnime = await jikan.SearchAnime(searchConfig);
+			AnimeSearchResult returnedAnime = await _jikan.SearchAnime(searchConfig);
 
 			Assert.NotNull(returnedAnime);
 			Assert.NotEmpty(returnedAnime.Results);
@@ -296,7 +296,7 @@ namespace JikanDotNet.Tests
 				SortDirection = SortDirection.Descending
 			};
 
-			AnimeSearchResult returnedAnime = await jikan.SearchAnime(searchConfig);
+			AnimeSearchResult returnedAnime = await _jikan.SearchAnime(searchConfig);
 
 			Assert.NotNull(returnedAnime);
 			Assert.NotEmpty(returnedAnime.Results);

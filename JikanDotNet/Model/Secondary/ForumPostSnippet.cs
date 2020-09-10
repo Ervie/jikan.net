@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 
 namespace JikanDotNet
@@ -11,25 +11,25 @@ namespace JikanDotNet
 		/// <summary>
 		/// Url to post.
 		/// </summary>
-		[JsonProperty(PropertyName = "url")]
+		[JsonPropertyName("url")]
 		public string Url { get; set; }
 
 		/// <summary>
 		/// Post's author username.
 		/// </summary>
-		[JsonProperty(PropertyName = "author_name")]
+		[JsonPropertyName("author_name")]
 		public string AuthorName { get; set; }
 
 		/// <summary>
 		/// URL to profile of post author.
 		/// </summary>
-		[JsonProperty(PropertyName = "author_url")]
+		[JsonPropertyName("author_url")]
 		public string AuthorURL { get; set; }
 
 		/// <summary>
 		/// Relative date of time when post was publicated.
 		/// </summary>
-		[JsonProperty(PropertyName = "date_posted")]
+		[JsonPropertyName("date_posted")]
 		public DateTime? DateRelative { get; set; }
 	}
 }

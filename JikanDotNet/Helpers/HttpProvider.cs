@@ -43,7 +43,6 @@ namespace JikanDotNet.Helpers
 			Client.DefaultRequestHeaders.Accept.Add(
 				new MediaTypeWithQualityHeaderValue("application/json"));
 			
-
 			return Client;
 		}
 

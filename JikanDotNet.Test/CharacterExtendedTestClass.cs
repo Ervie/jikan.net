@@ -5,17 +5,17 @@ namespace JikanDotNet.Tests
 {
 	public class CharacterExtendedTestClass
 	{
-		private readonly IJikan jikan;
+		private readonly IJikan _jikan;
 
 		public CharacterExtendedTestClass()
 		{
-			jikan = new Jikan();
+			_jikan = new Jikan();
 		}
 
 		[Fact]
 		public async Task GetCharacterPictures_SharoId_ShouldParseKirimaSharoImages()
 		{
-			CharacterPictures kirimaSharo = await jikan.GetCharacterPictures(94947);
+			CharacterPictures kirimaSharo = await _jikan.GetCharacterPictures(94947);
 
 			Assert.Equal(8, kirimaSharo.Pictures.Count);
 		}

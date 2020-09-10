@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace JikanDotNet
 {
@@ -10,13 +10,13 @@ namespace JikanDotNet
 		/// <summary>
 		/// Published manga.
 		/// </summary>
-		[JsonProperty(PropertyName = "manga")]
+		[JsonPropertyName("manga")]
 		public MALImageSubItem Manga { get; set; }
 
 		/// <summary>
 		/// Position associated with published manga.
 		/// </summary>
-		[JsonProperty(PropertyName = "position")]
+		[JsonPropertyName("position")]
 		public string Position { get; set; }
 	}
 }

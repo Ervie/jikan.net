@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace JikanDotNet
 {
@@ -10,13 +10,13 @@ namespace JikanDotNet
 		/// <summary>
 		/// Amount of episodes seen by the user.
 		/// </summary>
-		[JsonProperty(PropertyName = "episodes_seen")]
+		[JsonPropertyName("episodes_seen")]
 		public int? EpisodesSeen { get; set; }
 
 		/// <summary>
 		/// Total amount of the episodes.
 		/// </summary>
-		[JsonProperty(PropertyName = "episodes_total")]
+		[JsonPropertyName("episodes_total")]
 		public int? EpisodesTotal { get; set; }
 	}
 }

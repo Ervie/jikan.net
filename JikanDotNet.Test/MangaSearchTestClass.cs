@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -9,11 +8,11 @@ namespace JikanDotNet.Tests
 {
 	public class MangaSearchTestClass
 	{
-		private readonly IJikan jikan;
+		private readonly IJikan _jikan;
 
 		public MangaSearchTestClass()
 		{
-			jikan = new Jikan();
+			_jikan = new Jikan();
 		}
 
 		[Theory]
@@ -22,7 +21,7 @@ namespace JikanDotNet.Tests
 		[InlineData("death")]
 		public async Task SearchManga_NonEmptyQuery_ShouldReturnNotNullSearchManga(string query)
 		{
-			MangaSearchResult returnedManga = await jikan.SearchManga(query);
+			MangaSearchResult returnedManga = await _jikan.SearchManga(query);
 
 			Assert.NotNull(returnedManga);
 		}
@@ -30,7 +29,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task SearchManga_DanganronpaQuery_ShouldReturnDanganronpaManga()
 		{
-			MangaSearchResult danganronpaManga = await jikan.SearchManga("danganronpa");
+			MangaSearchResult danganronpaManga = await _jikan.SearchManga("danganronpa");
 
 			Assert.Equal(20, danganronpaManga.ResultLastPage);
 		}
@@ -38,7 +37,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task SearchManga_YotsubatoQuery_ShouldReturnYotsubatoManga()
 		{
-			MangaSearchResult yotsubato = await jikan.SearchManga("yotsubato");
+			MangaSearchResult yotsubato = await _jikan.SearchManga("yotsubato");
 
 			Assert.Equal("Yotsuba to!", yotsubato.Results.First().Title);
 			Assert.Equal("Manga", yotsubato.Results.First().Type);
@@ -54,7 +53,7 @@ namespace JikanDotNet.Tests
 				Status = AiringStatus.Airing
 			};
 
-			MangaSearchResult yotsubato = await jikan.SearchManga("yotsubato", searchConfig);
+			MangaSearchResult yotsubato = await _jikan.SearchManga("yotsubato", searchConfig);
 
 			Assert.Equal("Yotsuba to!", yotsubato.Results.First().Title);
 			Assert.Equal("Manga", yotsubato.Results.First().Type);
@@ -65,7 +64,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task SearchManga_GirlQuerySecondPage_ShouldFindGirlManga()
 		{
-			MangaSearchResult returnedAnime = await jikan.SearchManga("girl", 2);
+			MangaSearchResult returnedAnime = await _jikan.SearchManga("girl", 2);
 
 			Assert.Contains("Tokyo Boys & Girls", returnedAnime.Results.Select(x => x.Title));
 			Assert.Equal(20, returnedAnime.ResultLastPage);
@@ -82,7 +81,7 @@ namespace JikanDotNet.Tests
 				Type = MangaType.Manga
 			};
 
-			MangaSearchResult returnedManga = await jikan.SearchManga(query, searchConfig);
+			MangaSearchResult returnedManga = await _jikan.SearchManga(query, searchConfig);
 
 			Assert.NotNull(returnedManga);
 		}
@@ -94,7 +93,7 @@ namespace JikanDotNet.Tests
 			{
 				Type = MangaType.Manga
 			};
-			MangaSearchResult danganronpaManga = await jikan.SearchManga("danganronpa", searchConfig);
+			MangaSearchResult danganronpaManga = await _jikan.SearchManga("danganronpa", searchConfig);
 
 			Assert.Equal(4, danganronpaManga.ResultLastPage);
 		}
@@ -107,7 +106,7 @@ namespace JikanDotNet.Tests
 				Type = MangaType.Manga,
 				Score = 8
 			};
-			MangaSearchResult danganronpaManga = await jikan.SearchManga("danganronpa", searchConfig);
+			MangaSearchResult danganronpaManga = await _jikan.SearchManga("danganronpa", searchConfig);
 
 			Assert.Contains("Dangan", danganronpaManga.Results.First().Title);
 		}
@@ -121,7 +120,7 @@ namespace JikanDotNet.Tests
 			};
 			searchConfig.Genres.Add(GenreSearch.Game);
 
-			MangaSearchResult returnedManga = await jikan.SearchManga("metal", searchConfig);
+			MangaSearchResult returnedManga = await _jikan.SearchManga("metal", searchConfig);
 
 			Assert.Equal("Metal Fight Beyblade", returnedManga.Results.First().Title);
 		}
@@ -134,7 +133,7 @@ namespace JikanDotNet.Tests
 				EndDate = new DateTime(2015, 1, 1)
 			};
 
-			MangaSearchResult returnedManga = await jikan.SearchManga("metal", searchConfig);
+			MangaSearchResult returnedManga = await _jikan.SearchManga("metal", searchConfig);
 
 			Assert.Contains("Fullmetal Alchemist", returnedManga.Results.Select(x => x.Title));
 			Assert.Contains("Full Metal Panic!", returnedManga.Results.Select(x => x.Title));
@@ -149,7 +148,7 @@ namespace JikanDotNet.Tests
 				SortDirection = SortDirection.Descending
 			};
 
-			MangaSearchResult returnedManga = await jikan.SearchManga("metal", searchConfig);
+			MangaSearchResult returnedManga = await _jikan.SearchManga("metal", searchConfig);
 
 			Assert.Contains("Fairy Tail", returnedManga.Results.Select(x => x.Title));
 			Assert.Contains("Fullmetal Alchemist", returnedManga.Results.Select(x => x.Title));
@@ -165,7 +164,7 @@ namespace JikanDotNet.Tests
 				SortDirection = SortDirection.Ascending
 			};
 
-			MangaSearchResult returnedManga = await jikan.SearchManga("one", searchConfig);
+			MangaSearchResult returnedManga = await _jikan.SearchManga("one", searchConfig);
 
 			Assert.Equal("One Piece", returnedManga.Results.First().Title);
 		}
@@ -178,7 +177,7 @@ namespace JikanDotNet.Tests
 				MagazineId = 83
 			};
 
-			MangaSearchResult returnedManga = await jikan.SearchManga("toriko", searchConfig);
+			MangaSearchResult returnedManga = await _jikan.SearchManga("toriko", searchConfig);
 
 			Assert.Contains("Toriko", returnedManga.Results.First().Title);
 			Assert.Equal(3, returnedManga.Results.Count);
@@ -192,7 +191,7 @@ namespace JikanDotNet.Tests
 				MagazineId = -1
 			};
 
-			MangaSearchResult returnedManga = await jikan.SearchManga("toriko", searchConfig);
+			MangaSearchResult returnedManga = await _jikan.SearchManga("toriko", searchConfig);
 
 			Assert.Contains("Toriko", returnedManga.Results.First().Title);
 			Assert.True(returnedManga.Results.Count > 30);
@@ -207,7 +206,7 @@ namespace JikanDotNet.Tests
 				Type = MangaType.Manga
 			};
 
-			MangaSearchResult returnedManga = await jikan.SearchManga(searchConfig);
+			MangaSearchResult returnedManga = await _jikan.SearchManga(searchConfig);
 
 			Assert.Contains("-Crow-", returnedManga.Results.Select(x => x.Title));
 			Assert.Contains("007 Series", returnedManga.Results.Select(x => x.Title));
@@ -223,7 +222,7 @@ namespace JikanDotNet.Tests
 				Type = MangaType.Manga
 			};
 
-			MangaSearchResult returnedManga = await jikan.SearchManga(searchConfig, 1);
+			MangaSearchResult returnedManga = await _jikan.SearchManga(searchConfig, 1);
 
 			Assert.Contains("-Crow-", returnedManga.Results.Select(x => x.Title));
 			Assert.Contains("007 Series", returnedManga.Results.Select(x => x.Title));
@@ -239,7 +238,7 @@ namespace JikanDotNet.Tests
 				Type = MangaType.Manga
 			};
 
-			MangaSearchResult returnedManga = await jikan.SearchManga(searchConfig, 2);
+			MangaSearchResult returnedManga = await _jikan.SearchManga(searchConfig, 2);
 
 			Assert.Contains("888", returnedManga.Results.Select(x => x.Title));
 			Assert.Contains("Accel World", returnedManga.Results.Select(x => x.Title));
@@ -255,7 +254,7 @@ namespace JikanDotNet.Tests
 				Type = MangaType.Manga
 			};
 
-			MangaSearchResult returnedManga = await jikan.SearchManga("ore", 2, searchConfig);
+			MangaSearchResult returnedManga = await _jikan.SearchManga("ore", 2, searchConfig);
 
 			Assert.NotNull(returnedManga);
 			Assert.NotEmpty(returnedManga.Results);
@@ -271,7 +270,7 @@ namespace JikanDotNet.Tests
 				Type = MangaType.Manga
 			};
 
-			MangaSearchResult returnedManga = await jikan.SearchManga(searchConfig);
+			MangaSearchResult returnedManga = await _jikan.SearchManga(searchConfig);
 
 			Assert.NotNull(returnedManga);
 			Assert.NotEmpty(returnedManga.Results);
@@ -287,7 +286,7 @@ namespace JikanDotNet.Tests
 				Type = MangaType.Manga
 			};
 
-			MangaSearchResult returnedManga = await jikan.SearchManga(searchConfig);
+			MangaSearchResult returnedManga = await _jikan.SearchManga(searchConfig);
 
 			Assert.NotNull(returnedManga);
 			Assert.NotEmpty(returnedManga.Results);

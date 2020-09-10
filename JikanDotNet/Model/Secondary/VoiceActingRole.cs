@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace JikanDotNet
 {
@@ -10,19 +10,19 @@ namespace JikanDotNet
 		/// <summary>
 		/// Anime associated with voice acting role.
 		/// </summary>
-		[JsonProperty(PropertyName = "anime")]
+		[JsonPropertyName("anime")]
 		public MALImageSubItem Anime { get; set; }
 
 		/// <summary>
 		/// Character associated with voice acting role.
 		/// </summary>
-		[JsonProperty(PropertyName = "character")]
+		[JsonPropertyName("character")]
 		public MALImageSubItem Character { get; set; }
 
 		/// <summary>
 		/// Status of the role: Main/Supporting.
 		/// </summary>
-		[JsonProperty(PropertyName = "role")]
+		[JsonPropertyName("role")]
 		public string Role { get; set; }
 	}
 }

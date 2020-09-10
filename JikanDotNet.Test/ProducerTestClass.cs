@@ -6,17 +6,17 @@ namespace JikanDotNet.Tests
 {
 	public class ProducerTestClass
 	{
-		private readonly IJikan jikan;
+		private readonly IJikan _jikan;
 
 		public ProducerTestClass()
 		{
-			jikan = new Jikan(true);
+			_jikan = new Jikan(true);
 		}
 
 		[Fact]
 		public async Task GetProducer_PierrotId_ShouldParseStudioPierrot()
 		{
-			Producer producer = await jikan.GetProducer(1);
+			Producer producer = await _jikan.GetProducer(1);
 
 			Assert.NotNull(producer);
 			Assert.Equal("Studio Pierrot", producer.Metadata.Name);
@@ -29,7 +29,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task GetProducer_PierrotIdSecondPage_ShouldParseStudioPierrotSecondPage()
 		{
-			Producer producer = await jikan.GetProducer(1, 2);
+			Producer producer = await _jikan.GetProducer(1, 2);
 
 			Assert.NotNull(producer);
 			Assert.Contains("Yuu☆Yuu☆Hakusho: Eizou Hakusho II", producer.Anime.Select(x => x.Title));
@@ -38,7 +38,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task GetProducer_KyoAniId_ShouldParseKyotoAnimation()
 		{
-			Producer producer = await jikan.GetProducer(2);
+			Producer producer = await _jikan.GetProducer(2);
 
 			Assert.NotNull(producer);
 			Assert.Equal("Kyoto Animation", producer.Metadata.Name);
@@ -50,7 +50,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task GetProducer_BonesId_ShouldParseBones()
 		{
-			Producer producer = await jikan.GetProducer(4);
+			Producer producer = await _jikan.GetProducer(4);
 
 			Assert.NotNull(producer);
 			Assert.Equal("Bones", producer.Metadata.Name);

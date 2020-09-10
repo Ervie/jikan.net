@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 
 namespace JikanDotNet
@@ -11,115 +11,115 @@ namespace JikanDotNet
 		/// <summary>
 		/// ID associated with MyAnimeList.
 		/// </summary>
-		[JsonProperty(PropertyName = "mal_id")]
+		[JsonPropertyName("mal_id")]
 		public long MalId { get; set; }
 
 		/// <summary>
 		/// Title of the manga.
 		/// </summary>
-		[JsonProperty(PropertyName = "title")]
+		[JsonPropertyName("title")]
 		public string Title { get; set; }
 
 		/// <summary>
 		/// Manga's image URL
 		/// </summary>
-		[JsonProperty(PropertyName = "image_url")]
+		[JsonPropertyName("image_url")]
 		public string ImageURL { get; set; }
 
 		/// <summary>
 		/// Manga's URL
 		/// </summary>
-		[JsonProperty(PropertyName = "url")]
+		[JsonPropertyName("url")]
 		public string URL { get; set; }
 
 		/// <summary>
 		/// Manga type (e. g. "Manga", "Light novel").
 		/// </summary>
-		[JsonProperty(PropertyName = "type")]
+		[JsonPropertyName("type")]
 		public string Type { get; set; }
 
 		/// <summary>
 		/// Manga's chapters count read by the user.
 		/// </summary>
-		[JsonProperty(PropertyName = "read_chapters")]
+		[JsonPropertyName("read_chapters")]
 		public int? ReadChapters { get; set; }
 
 		/// <summary>
 		/// Manga's volumes count read by the user.
 		/// </summary>
-		[JsonProperty(PropertyName = "read_volumes")]
+		[JsonPropertyName("read_volumes")]
 		public int? ReadVolumes { get; set; }
 
 		/// <summary>
 		/// Manga's chapters total count. 0 if not finished.
 		/// </summary>
-		[JsonProperty(PropertyName = "total_chapters")]
+		[JsonPropertyName("total_chapters")]
 		public int? TotalChapters { get; set; }
 
 		/// <summary>
 		/// Manga's volumes total count. 0 if not finished.
 		/// </summary>
-		[JsonProperty(PropertyName = "total_volumes")]
+		[JsonPropertyName("total_volumes")]
 		public int? TotalVolumes { get; set; }
 
 		/// <summary>
 		/// User's score for the manga. 0 if not assigned yet.
 		/// </summary>
-		[JsonProperty(PropertyName = "score")]
+		[JsonPropertyName("score")]
 		public int Score { get; set; }
 
 		/// <summary>
 		/// Does user reread manga.
 		/// </summary>
-		[JsonProperty(PropertyName = "is_rereading")]
+		[JsonPropertyName("is_rereading")]
 		public bool? IsRereading { get; set; }
 		
 		/// <summary>
 		/// Start date of manga publishing.
 		/// </summary>
-		[JsonProperty(PropertyName = "start_date")]
+		[JsonPropertyName("start_date")]
 		public DateTime? StartDate { get; set; }
 
 		/// <summary>
 		/// End date of manga publishing.
 		/// </summary>
-		[JsonProperty(PropertyName = "end_date")]
+		[JsonPropertyName("end_date")]
 		public DateTime? EndDate { get; set; }
 
 		/// <summary>
 		/// Start date of user reading.
 		/// </summary>
-		[JsonProperty(PropertyName = "read_start_date")]
+		[JsonPropertyName("read_start_date")]
 		public DateTime? ReadStartDate { get; set; }
 
 		/// <summary>
 		/// End date of user reading.
 		/// </summary>
-		[JsonProperty(PropertyName = "read_end_date")]
+		[JsonPropertyName("read_end_date")]
 		public DateTime? ReadEndDate { get; set; }
 
 		/// <summary>
 		/// Time user has been reading manga.
 		/// </summary>
-		[JsonProperty(PropertyName = "days")]
+		[JsonPropertyName("days")]
 		public int? Days { get; set; }
 
 		/// <summary>
 		/// Priority of manga on user's list.
 		/// </summary>
-		[JsonProperty(PropertyName = "priority")]
+		[JsonPropertyName("priority")]
 		public string Priority { get; set; }
 
 		/// <summary>
 		/// Current publishing status of manga.
 		/// </summary>
-		[JsonProperty(PropertyName = "publishing_status")]
+		[JsonPropertyName("publishing_status")]
 		public AiringStatus PublishingStatus { get; set; }
 
 		/// <summary>
 		/// Current user's reading status of manga.
 		/// </summary>
-		[JsonProperty(PropertyName = "reading_status")]
+		[JsonPropertyName("reading_status")]
 		public UserMangaListExtension ReadingStatus { get; set; }
 	}
 }

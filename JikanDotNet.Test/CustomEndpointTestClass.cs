@@ -24,12 +24,11 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task JikanConstructor_CustomUrl_ShouldParseCorrectly()
 		{
-			// TODO: fix endpoint
-			//IJikan jikan = new Jikan("https://seiyuu.moe:8000/v3/");
+			IJikan jikan = new Jikan("https://seiyuu.moe:8000/v3/");
 
-			//Anime bebop = await jikan.GetAnime(1);
+			Anime bebop = await jikan.GetAnime(1);
 
-			//Assert.Equal(1, bebop.MalId);
+			Assert.Equal(1, bebop.MalId);
 		}
 
 		[Fact]

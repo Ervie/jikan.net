@@ -7,15 +7,11 @@ namespace JikanDotNet.Extensions
 {
 	internal static class EnumExtensions
 	{
-		public static string GetDescription(this Enum source)
-		{
-			return
-				source
+		public static string GetDescription(this Enum source) => source
 					.GetType()
 					.GetMember(source.ToString())
 					.FirstOrDefault()
 					?.GetCustomAttribute<DescriptionAttribute>()
 					?.Description;
-		}
 	}
 }

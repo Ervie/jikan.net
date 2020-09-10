@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 
 namespace JikanDotNet
@@ -11,49 +11,49 @@ namespace JikanDotNet
 		/// <summary>
 		/// Topic's MyAnimeList Id.
 		/// </summary>
-		[JsonProperty(PropertyName = "topic_id")]
+		[JsonPropertyName("topic_id")]
 		public long? TopicId { get; set; }
 
 		/// <summary>
 		/// Topic's URL.
 		/// </summary>
-		[JsonProperty(PropertyName = "url")]
+		[JsonPropertyName("url")]
 		public string Url { get; set; }
 
 		/// <summary>
 		/// Topic's title.
 		/// </summary>
-		[JsonProperty(PropertyName = "Title")]
+		[JsonPropertyName("Title")]
 		public string Title { get; set; }
 
 		/// <summary>
 		/// Date of topic start.
 		/// </summary>
-		[JsonProperty(PropertyName = "date_posted")]
+		[JsonPropertyName("date_posted")]
 		public DateTime? DatePosted { get; set; }
 
 		/// <summary>
 		/// Topic's author username.
 		/// </summary>
-		[JsonProperty(PropertyName = "author_name")]
+		[JsonPropertyName("author_name")]
 		public string AuthorName { get; set; }
 
 		/// <summary>
 		/// URL to profile of topic author.
 		/// </summary>
-		[JsonProperty(PropertyName = "author_url")]
+		[JsonPropertyName("author_url")]
 		public string AuthorURL { get; set; }
 
 		/// <summary>
 		/// Number of replies.
 		/// </summary>
-		[JsonProperty(PropertyName = "replies")]
+		[JsonPropertyName("replies")]
 		public int? Replies { get; set; }
 
 		/// <summary>
 		/// Basic information about last post in the topic.
 		/// </summary>
-		[JsonProperty(PropertyName = "last_post")]
+		[JsonPropertyName("last_post")]
 		public ForumPostSnippet LastPost { get; set; }
 	}
 }

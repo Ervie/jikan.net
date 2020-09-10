@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 
 namespace JikanDotNet
@@ -11,19 +11,19 @@ namespace JikanDotNet
 		/// <summary>
 		/// Metadata about updated manga/anime.
 		/// </summary>
-		[JsonProperty(PropertyName = "meta")]
+		[JsonPropertyName("meta")]
 		public MALSubItem Metadata { get; set; }
 
 		/// <summary>
 		/// New value for watched episodes/read chapters.
 		/// </summary>
-		[JsonProperty(PropertyName = "increment")]
+		[JsonPropertyName("increment")]
 		public int Increment { get; set; }
 
 		/// <summary>
 		/// Date of the update.
 		/// </summary>
-		[JsonProperty(PropertyName = "date")]
+		[JsonPropertyName("date")]
 		public DateTime? Date { get; set; }
 	}
 }

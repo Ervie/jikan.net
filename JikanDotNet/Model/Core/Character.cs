@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System.Collections.Generic;
 
 namespace JikanDotNet
@@ -11,67 +11,67 @@ namespace JikanDotNet
 		/// <summary>
 		/// ID associated with MyAnimeList.
 		/// </summary>
-		[JsonProperty(PropertyName = "mal_id")]
+		[JsonPropertyName("mal_id")]
 		public long MalId { get; set; }
 
 		/// <summary>
 		/// Character's canonical link.
 		/// </summary>
-		[JsonProperty(PropertyName = "url")]
+		[JsonPropertyName("url")]
 		public string LinkCanonical { get; set; }
 
 		/// <summary>
 		/// Character's name.
 		/// </summary>
-		[JsonProperty(PropertyName = "name")]
+		[JsonPropertyName("name")]
 		public string Name { get; set; }
 
 		/// <summary>
 		/// Character's name in kanji.
 		/// </summary>
-		[JsonProperty(PropertyName = "name_kanji")]
+		[JsonPropertyName("name_kanji")]
 		public string NameKanji { get; set; }
 
 		/// <summary>
 		/// Character's nicknames.
 		/// </summary>
-		[JsonProperty(PropertyName = "nicknames")]
+		[JsonPropertyName("nicknames")]
 		public ICollection<string> Nicknames { get; set; }
 
 		/// <summary>
 		/// About character
 		/// </summary>
-		[JsonProperty(PropertyName = "About")]
+		[JsonPropertyName("About")]
 		public string About { get; set; }
 
 		/// <summary>
 		/// Character favourite count on MyAnimeList.
 		/// </summary>
-		[JsonProperty(PropertyName = "member_favorites")]
+		[JsonPropertyName("member_favorites")]
 		public int? MemberFavorites { get; set; }
 
 		/// <summary>
 		/// Character's image URL
 		/// </summary>
-		[JsonProperty(PropertyName = "image_url")]
+		[JsonPropertyName("image_url")]
 		public string ImageURL { get; set; }
 
 		/// <summary>
 		/// Character's animeography.
 		/// </summary>
-		[JsonProperty(PropertyName = "animeography")]
+		[JsonPropertyName("animeography")]
 		public ICollection<MALImageSubItem> Animeography { get; set; }
 
 		/// <summary>
 		/// Character's mangaography.
 		/// </summary>
-		[JsonProperty(PropertyName = "mangaography")]
+		[JsonPropertyName("mangaography")]
 		public ICollection<MALImageSubItem> Mangaography { get; set; }
 
 		/// <summary>
 		/// Character's voice actors.
 		/// </summary>
-		[JsonProperty(PropertyName = "voice_actors")]
+		[JsonPropertyName("voice_actors")]
 		public ICollection<VoiceActorEntry> VoiceActors { get; set; }
 	}
 }

@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 
@@ -12,85 +12,85 @@ namespace JikanDotNet
 		/// <summary>
 		/// ID associated with MyAnimeList.
 		/// </summary>
-		[JsonProperty(PropertyName = "mal_id")]
+		[JsonPropertyName("mal_id")]
 		public long MalId { get; set; }
 
 		/// <summary>
 		/// Person's canonical link.
 		/// </summary>
-		[JsonProperty(PropertyName = "url")]
+		[JsonPropertyName("url")]
 		public string LinkCanonical { get; set; }
 
 		/// <summary>
 		/// Person's name.
 		/// </summary>
-		[JsonProperty(PropertyName = "name")]
+		[JsonPropertyName("name")]
 		public string Name { get; set; }
 
 		/// <summary>
 		/// Person's given name..
 		/// </summary>
-		[JsonProperty(PropertyName = "given_name")]
+		[JsonPropertyName("given_name")]
 		public string GivenName { get; set; }
 
 		/// <summary>
 		/// Person's family name.
 		/// </summary>
-		[JsonProperty(PropertyName = "family_name")]
+		[JsonPropertyName("family_name")]
 		public string FamilyName { get; set; }
 
 		/// <summary>
 		/// Person's alternate names.
 		/// </summary>
-		[JsonProperty(PropertyName = "alternate_name")]
+		[JsonPropertyName("alternate_name")]
 		public ICollection<string> AlternativeName { get; set; }
 
 		/// <summary>
 		/// Person's birthday.
 		/// </summary>
-		[JsonProperty(PropertyName = "birthday")]
+		[JsonPropertyName("birthday")]
 		public DateTime? Birthday { get; set; }
 
 		/// <summary>
 		/// Person's website URL.
 		/// </summary>
-		[JsonProperty(PropertyName = "website_url")]
+		[JsonPropertyName("website_url")]
 		public string WebsiteUrl { get; set; }
 
 		/// <summary>
 		/// Person's favourite count on MyAnimeList.
 		/// </summary>
-		[JsonProperty(PropertyName = "member_favorites")]
+		[JsonPropertyName("member_favorites")]
 		public int? MemberFavorites { get; set; }
 
 		/// <summary>
 		/// More information about person.
 		/// </summary>
-		[JsonProperty(PropertyName = "about")]
+		[JsonPropertyName("about")]
 		public string More { get; set; }
 
 		/// <summary>
 		/// Person's image URL
 		/// </summary>
-		[JsonProperty(PropertyName = "image_url")]
+		[JsonPropertyName("image_url")]
 		public string ImageURL { get; set; }
 
 		/// <summary>
 		/// Person's voice acting roles.
 		/// </summary>
-		[JsonProperty(PropertyName = "voice_acting_roles")]
+		[JsonPropertyName("voice_acting_roles")]
 		public ICollection<VoiceActingRole> VoiceActingRoles { get; set; }
 
 		/// <summary>
 		/// Person's anime staff positions.
 		/// </summary>
-		[JsonProperty(PropertyName = "anime_staff_positions")]
+		[JsonPropertyName("anime_staff_positions")]
 		public ICollection<AnimeStaffPosition> AnimeStaffPositions { get; set; }
 
 		/// <summary>
 		/// Person's published manga.
 		/// </summary>
-		[JsonProperty(PropertyName = "published_manga")]
+		[JsonPropertyName("published_manga")]
 		public ICollection<PublishedManga> PublishedManga { get; set; }
 	}
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -9,17 +6,17 @@ namespace JikanDotNet.Tests
 {
 	public class UserAnimeListTestClass
 	{
-		private readonly IJikan jikan;
+		private readonly IJikan _jikan;
 
 		public UserAnimeListTestClass()
 		{
-			jikan = new Jikan();
+			_jikan = new Jikan();
 		}
 
 		[Fact]
 		public async Task GetUserAnimeList_Ervelan_ShouldParseErvelanAnimeList()
 		{
-			UserAnimeList animeList = await jikan.GetUserAnimeList("Ervelan");
+			UserAnimeList animeList = await _jikan.GetUserAnimeList("Ervelan");
 
 			Assert.NotNull(animeList);
 			Assert.Equal(300, animeList.Anime.Count);
@@ -29,7 +26,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task GetUserAnimeList_ErvelanWatching_ShouldParseErvelanAnimeWatchingList()
 		{
-			UserAnimeList animeList = await jikan.GetUserAnimeList("Ervelan", UserAnimeListExtension.Watching);
+			UserAnimeList animeList = await _jikan.GetUserAnimeList("Ervelan", UserAnimeListExtension.Watching);
 
 			Assert.NotNull(animeList);
 			Assert.Equal(UserAnimeListExtension.Watching, animeList.Anime.First().WatchingStatus);
@@ -38,7 +35,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task GetUserAnimeList_ErvelanDropped_ShouldParseErvelanDroppedList()
 		{
-			UserAnimeList animeList = await jikan.GetUserAnimeList("Ervelan", UserAnimeListExtension.Dropped);
+			UserAnimeList animeList = await _jikan.GetUserAnimeList("Ervelan", UserAnimeListExtension.Dropped);
 
 			Assert.NotNull(animeList);
 			Assert.True(animeList.Anime.Count > 5);
@@ -48,7 +45,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task GetUserAnimeList_ErvelanSecondPage_ShouldParseErvelanAnimeListSecondPage()
 		{
-			UserAnimeList animeList = await jikan.GetUserAnimeList("Ervelan", 2);
+			UserAnimeList animeList = await _jikan.GetUserAnimeList("Ervelan", 2);
 
 			Assert.NotNull(animeList);
 			Assert.Equal(300, animeList.Anime.Count);
@@ -57,7 +54,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task GetUserAnimeList_onrix_ShouldParseOnrixAnimeList()
 		{
-			UserAnimeList animeList = await jikan.GetUserAnimeList("onrix");
+			UserAnimeList animeList = await _jikan.GetUserAnimeList("onrix");
 
 			Assert.NotNull(animeList);
 			Assert.Equal(122, animeList.Anime.Count);
@@ -71,7 +68,7 @@ namespace JikanDotNet.Tests
 				Query = "death"
 			};
 
-			UserAnimeList animeList = await jikan.GetUserAnimeList("Ervelan", searchConfig);
+			UserAnimeList animeList = await _jikan.GetUserAnimeList("Ervelan", searchConfig);
 
 			Assert.NotNull(animeList);
 			Assert.Contains("Death Note", animeList.Anime.Select(x => x.Title));
@@ -86,7 +83,7 @@ namespace JikanDotNet.Tests
 				Query = "Akira"
 			};
 
-			UserAnimeList animeList = await jikan.GetUserAnimeList("Ervelan", searchConfig);
+			UserAnimeList animeList = await _jikan.GetUserAnimeList("Ervelan", searchConfig);
 
 			Assert.NotNull(animeList);
 			Assert.Single(animeList.Anime);
@@ -100,7 +97,7 @@ namespace JikanDotNet.Tests
 				Query = "qwerty"
 			};
 
-			UserAnimeList animeList = await jikan.GetUserAnimeList("Ervelan", searchConfig);
+			UserAnimeList animeList = await _jikan.GetUserAnimeList("Ervelan", searchConfig);
 
 			Assert.NotNull(animeList);
 			Assert.Empty(animeList.Anime);
@@ -114,7 +111,7 @@ namespace JikanDotNet.Tests
 				Query = ""
 			};
 
-			UserAnimeList animeList = await jikan.GetUserAnimeList("Ervelan", searchConfig);
+			UserAnimeList animeList = await _jikan.GetUserAnimeList("Ervelan", searchConfig);
 
 			Assert.NotNull(animeList);
 			Assert.True(animeList.Anime.Count == 300);
@@ -129,7 +126,7 @@ namespace JikanDotNet.Tests
 				SortDirection = SortDirection.Ascending
 			};
 
-			UserAnimeList animeList = await jikan.GetUserAnimeList("Ervelan", searchConfig);
+			UserAnimeList animeList = await _jikan.GetUserAnimeList("Ervelan", searchConfig);
 
 			Assert.NotNull(animeList);
 			Assert.Equal("Zoku Owarimonogatari", animeList.Anime.First().Title);
@@ -144,7 +141,7 @@ namespace JikanDotNet.Tests
 				SortDirection = SortDirection.Descending
 			};
 
-			UserAnimeList animeList = await jikan.GetUserAnimeList("Ervelan", searchConfig);
+			UserAnimeList animeList = await _jikan.GetUserAnimeList("Ervelan", searchConfig);
 
 			Assert.NotNull(animeList);
 			Assert.Contains("Ginga", animeList.Anime.First().Title);
@@ -160,7 +157,7 @@ namespace JikanDotNet.Tests
 				SortDirection = SortDirection.Descending
 			};
 
-			UserAnimeList animeList = await jikan.GetUserAnimeList("Ervelan", searchConfig);
+			UserAnimeList animeList = await _jikan.GetUserAnimeList("Ervelan", searchConfig);
 
 			Assert.NotNull(animeList);
 			Assert.Equal("Baccano!", animeList.Anime.Skip(2).First().Title);
@@ -174,7 +171,7 @@ namespace JikanDotNet.Tests
 				ProducerId = 2
 			};
 
-			UserAnimeList animeList = await jikan.GetUserAnimeList("Ervelan", searchConfig);
+			UserAnimeList animeList = await _jikan.GetUserAnimeList("Ervelan", searchConfig);
 
 			Assert.NotNull(animeList);
 			Assert.Contains("Clannad", animeList.Anime.Select(x => x.Title));
@@ -189,7 +186,7 @@ namespace JikanDotNet.Tests
 				ProducerId = -1
 			};
 
-			UserAnimeList animeList = await jikan.GetUserAnimeList("Ervelan", searchConfig);
+			UserAnimeList animeList = await _jikan.GetUserAnimeList("Ervelan", searchConfig);
 
 			Assert.NotNull(animeList);
 			Assert.True(animeList.Anime.Count == 300);
@@ -204,7 +201,7 @@ namespace JikanDotNet.Tests
 				Season = Seasons.Summer
 			};
 
-			UserAnimeList animeList = await jikan.GetUserAnimeList("Ervelan", searchConfig);
+			UserAnimeList animeList = await _jikan.GetUserAnimeList("Ervelan", searchConfig);
 
 			Assert.NotNull(animeList);
 			Assert.Contains("Kaichou wa Maid-sama!", animeList.Anime.Select(x => x.Title));
@@ -219,7 +216,7 @@ namespace JikanDotNet.Tests
 				Year = 2010
 			};
 
-			UserAnimeList animeList = await jikan.GetUserAnimeList("Ervelan", searchConfig);
+			UserAnimeList animeList = await _jikan.GetUserAnimeList("Ervelan", searchConfig);
 
 			Assert.NotNull(animeList);
 			Assert.Contains("Angel Beats!", animeList.Anime.Select(x => x.Title));
@@ -235,7 +232,7 @@ namespace JikanDotNet.Tests
 				Query = "angel"
 			};
 
-			UserAnimeList animeList = await jikan.GetUserAnimeList("Ervelan", searchConfig);
+			UserAnimeList animeList = await _jikan.GetUserAnimeList("Ervelan", searchConfig);
 
 			Assert.NotNull(animeList);
 			Assert.Contains("Angel Beats!", animeList.Anime.First().Title);
@@ -250,7 +247,7 @@ namespace JikanDotNet.Tests
 				Query = "one"
 			};
 
-			UserAnimeList animeList = await jikan.GetUserAnimeList("Ervelan", searchConfig);
+			UserAnimeList animeList = await _jikan.GetUserAnimeList("Ervelan", searchConfig);
 
 			Assert.NotNull(animeList);
 			Assert.Contains("One Piece", animeList.Anime.Select(x => x.Title));

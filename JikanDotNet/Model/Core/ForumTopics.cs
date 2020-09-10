@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,7 +13,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Forum topics related to anime.
 		/// </summary>
-		[JsonProperty(PropertyName = "topics")]
+		[JsonPropertyName("topics")]
 		public ICollection<ForumTopic> Topics { get; set; }
 	}
 }

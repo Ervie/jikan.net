@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System.Collections.Generic;
 
 namespace JikanDotNet
@@ -11,73 +11,73 @@ namespace JikanDotNet
 		/// <summary>
 		/// Collection of alternative versions.
 		/// </summary>
-		[JsonProperty(PropertyName = "Alternative Version")]
+		[JsonPropertyName("Alternative version")]
 		public ICollection<MALSubItem> AlternativeVersions { get; set; }
 
 		/// <summary>
 		/// Collection of alternative settings.
 		/// </summary>
-		[JsonProperty(PropertyName = "Alternative Setting")]
+		[JsonPropertyName("Alternative setting")]
 		public ICollection<MALSubItem> AlternativeSettings { get; set; }
 
 		/// <summary>
 		/// Collection of adaptations.
 		/// </summary>
-		[JsonProperty(PropertyName = "Adaptation")]
+		[JsonPropertyName("Adaptation")]
 		public ICollection<MALSubItem> Adaptations { get; set; }
 
 		/// <summary>
 		/// Collection of character related entries.
 		/// </summary>
-		[JsonProperty(PropertyName = "Character")]
+		[JsonPropertyName("Character")]
 		public ICollection<MALSubItem> Characters { get; set; }
 
 		/// <summary>
 		/// Collection of full stories.
 		/// </summary>
-		[JsonProperty(PropertyName = "Full story")]
+		[JsonPropertyName("Full story")]
 		public ICollection<MALSubItem> FullStories { get; set; }
 
 		/// <summary>
 		/// Collection of parent stories.
 		/// </summary>
-		[JsonProperty(PropertyName = "Parent story")]
+		[JsonPropertyName("Parent story")]
 		public ICollection<MALSubItem> ParentStories { get; set; }
 
 		/// <summary>
 		/// Collection of prequels.
 		/// </summary>
-		[JsonProperty(PropertyName = "Prequel")]
+		[JsonPropertyName("Prequel")]
 		public ICollection<MALSubItem> Prequels { get; set; }
 
 		/// <summary>
 		/// Collection of other entries.
 		/// </summary>
-		[JsonProperty(PropertyName = "Other")]
+		[JsonPropertyName("Other")]
 		public ICollection<MALSubItem> Others { get; set; }
 
 		/// <summary>
 		/// Collection of sequels.
 		/// </summary>
-		[JsonProperty(PropertyName = "Sequel")]
+		[JsonPropertyName("Sequel")]
 		public ICollection<MALSubItem> Sequels { get; set; }
 
 		/// <summary>
 		/// Collection of side stories.
 		/// </summary>
-		[JsonProperty(PropertyName = "Side Story")]
+		[JsonPropertyName("Side story")]
 		public ICollection<MALSubItem> SideStories { get; set; }
 
 		/// <summary>
 		/// Collection of spin-off.
 		/// </summary>
-		[JsonProperty(PropertyName = "Spin-off")]
+		[JsonPropertyName("Spin-off")]
 		public ICollection<MALSubItem> SpinOffs { get; set; }
 
 		/// <summary>
 		/// Collection of summaries.
 		/// </summary>
-		[JsonProperty(PropertyName = "Summary")]
+		[JsonPropertyName("Summary")]
 		public ICollection<MALSubItem> Summaries { get; set; }
 	}
 }

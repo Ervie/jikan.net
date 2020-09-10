@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 
@@ -12,13 +12,13 @@ namespace JikanDotNet
 		/// <summary>
 		/// Available year to query.
 		/// </summary>
-		[JsonProperty(PropertyName = "year")]
+		[JsonPropertyName("year")]
 		public int Year { get; set; }
 
 		/// <summary>
 		/// Collection of available seasons in year to query.
 		/// </summary>
-		[JsonProperty(PropertyName = "seasons")]
+		[JsonPropertyName("seasons")]
 		public ICollection<Seasons> Season { get; set; }
 	}
 }

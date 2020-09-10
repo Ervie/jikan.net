@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace JikanDotNet
 {
@@ -10,13 +10,13 @@ namespace JikanDotNet
 		/// <summary>
 		/// Number of chapters read by reviewer.
 		/// </summary>
-		[JsonProperty(PropertyName = "chapters_read")]
+		[JsonPropertyName("chapters_read")]
 		public int? ChaptersRead { get; set; }
 
 		/// <summary>
 		/// Scores from the review.
 		/// </summary>
-		[JsonProperty(PropertyName = "scores")]
+		[JsonPropertyName("scores")]
 		public MangaReviewScores Scores { get; set; }
 	}
 }

@@ -2,10 +2,10 @@
 using JikanDotNet.Exceptions;
 using JikanDotNet.Extensions;
 using JikanDotNet.Helpers;
-using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace JikanDotNet
 {
@@ -19,17 +19,17 @@ namespace JikanDotNet
 		/// <summary>
 		/// Http client class to call REST request and receive REST response.
 		/// </summary>
-		private readonly HttpClient httpClient;
+		private readonly HttpClient _httpClient;
 
 		/// <summary>
 		/// Should library use HTTPS protocol instead of HTTP.
 		/// </summary>
-		private readonly bool useHttps;
+		private readonly bool _useHttps;
 
 		/// <summary>
 		/// Should exception be thrown in case of failed request.
 		/// </summary>
-		private readonly bool suppressException;
+		private readonly bool _suppressException;
 
 		#endregion Field
 		
@@ -40,9 +40,9 @@ namespace JikanDotNet
 		/// </summary>
 		public Jikan()
 		{
-			this.useHttps = true;
-			this.suppressException = false;
-			httpClient = HttpProvider.GetHttpClient(useHttps);
+			_useHttps = true;
+			_suppressException = false;
+			_httpClient = HttpProvider.GetHttpClient(_useHttps);
 		}
 
 		/// <summary>
@@ -52,9 +52,9 @@ namespace JikanDotNet
 		/// <param name="suppressException">Should exception be thrown in case of failed request. If true, failed request return null.</param>
 		public Jikan(bool useHttps, bool suppressException = false)
 		{
-			this.useHttps = useHttps;
-			this.suppressException = suppressException;
-			httpClient = HttpProvider.GetHttpClient(useHttps);
+			_useHttps = useHttps;
+			_suppressException = suppressException;
+			_httpClient = HttpProvider.GetHttpClient(useHttps);
 		}
 
 		/// <summary>
@@ -64,8 +64,8 @@ namespace JikanDotNet
 		/// <param name="suppressException">Should exception be thrown in case of failed request. If true, failed request return null.</param>
 		public Jikan(string endpointUrl, bool suppressException = false)
 		{
-			this.suppressException = suppressException;
-			httpClient = HttpProvider.GetHttpClient(new Uri(endpointUrl));
+			_suppressException = suppressException;
+			_httpClient = HttpProvider.GetHttpClient(new Uri(endpointUrl));
 		}
 
 		/// <summary>
@@ -75,8 +75,8 @@ namespace JikanDotNet
 		/// <param name="suppressException">Should exception be thrown in case of failed request. If true, failed request return null.</param>
 		public Jikan(Uri endpointUrl, bool suppressException = true)
 		{
-			this.suppressException = suppressException;
-			httpClient = HttpProvider.GetHttpClient(endpointUrl);
+			_suppressException = suppressException;
+			_httpClient = HttpProvider.GetHttpClient(endpointUrl);
 		}
 
 		#endregion Constructors
@@ -92,26 +92,24 @@ namespace JikanDotNet
 		private async Task<T> ExecuteGetRequest<T>(string[] args) where T : class
 		{
 			T returnedObject = null;
-			string requestUrl = String.Join("/", args);
+			var requestUrl = string.Join("/", args);
 			try
 			{
-				using (HttpResponseMessage response = await httpClient.GetAsync(requestUrl))
+				using HttpResponseMessage response = await _httpClient.GetAsync(requestUrl);
+				if (response.IsSuccessStatusCode)
 				{
-					if (response.IsSuccessStatusCode)
-					{
-						string json = await response.Content.ReadAsStringAsync();
+					string json = await response.Content.ReadAsStringAsync();
 
-						returnedObject = JsonConvert.DeserializeObject<T>(json);
-					}
-					else if (!suppressException)
-					{
-						throw new JikanRequestException(string.Format(Resources.Errors.FailedRequest, response.StatusCode, response.Content), response.StatusCode);
-					}
+					returnedObject = JsonSerializer.Deserialize<T>(json);
+				}
+				else if (!_suppressException)
+				{
+					throw new JikanRequestException(string.Format(Resources.Errors.FailedRequest, response.StatusCode, response.Content), response.StatusCode);
 				}
 			}
-			catch (JsonSerializationException ex)
+			catch (JsonException ex)
 			{
-				if (!suppressException)
+				if (!_suppressException)
 				{
 					throw new JikanRequestException(Resources.Errors.SerializationFailed + Environment.NewLine + "Inner exception message: " + ex.Message, ex);
 				}

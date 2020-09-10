@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,79 +13,79 @@ namespace JikanDotNet
 		/// <summary>
 		/// ID associated with MyAnimeList.
 		/// </summary>
-		[JsonProperty(PropertyName = "mal_id")]
+		[JsonPropertyName("mal_id")]
 		public long MalId { get; set; }
 
 		/// <summary>
 		/// Club's image URL.
 		/// </summary>
-		[JsonProperty(PropertyName = "image_url")]
+		[JsonPropertyName("image_url")]
 		public string ImageURL { get; set; }
 
 		/// <summary>
 		/// Club's URL.
 		/// </summary>
-		[JsonProperty(PropertyName = "url")]
+		[JsonPropertyName("url")]
 		public string URL { get; set; }
 
 		/// <summary>
 		/// Title of the club.
 		/// </summary>
-		[JsonProperty(PropertyName = "title")]
+		[JsonPropertyName("title")]
 		public string Title { get; set; }
 
 		/// <summary>
 		/// Club's members count.
 		/// </summary>
-		[JsonProperty(PropertyName = "members_count")]
+		[JsonPropertyName("members_count")]
 		public int? MembersCount { get; set; }
 
 		/// <summary>
 		/// Club's pictures count.
 		/// </summary>
-		[JsonProperty(PropertyName = "pictures_count")]
+		[JsonPropertyName("pictures_count")]
 		public int? PicturesCount { get; set; }
 
 		/// <summary>
 		/// Club's category (Anime/Manga/Japan etc.)
 		/// </summary>
-		[JsonProperty(PropertyName = "category")]
+		[JsonPropertyName("category")]
 		public string Category { get; set; }
 
 		/// <summary>
 		/// Club's type (public/private).
 		/// </summary>
-		[JsonProperty(PropertyName = "type")]
+		[JsonPropertyName("type")]
 		public string Type { get; set; }
 
 		/// <summary>
 		/// Club's date of creation.
 		/// </summary>
-		[JsonProperty(PropertyName = "created")]
+		[JsonPropertyName("created")]
 		public DateTime? Created { get; set; }
 
 		/// <summary>
 		/// Club's staff.
 		/// </summary>
-		[JsonProperty(PropertyName = "staff")]
+		[JsonPropertyName("staff")]
 		public ICollection<MALSubItem> Staff { get; set; }
 
 		/// <summary>
 		/// Club's anime relations.
 		/// </summary>
-		[JsonProperty(PropertyName = "anime_relations")]
+		[JsonPropertyName("anime_relations")]
 		public ICollection<MALSubItem> AnimeRelations { get; set; }
 
 		/// <summary>
 		/// Club's manga relations.
 		/// </summary>
-		[JsonProperty(PropertyName = "manga_relations")]
+		[JsonPropertyName("manga_relations")]
 		public ICollection<MALSubItem> MangaRelations { get; set; }
 
 		/// <summary>
 		/// Club's character relations.
 		/// </summary>
-		[JsonProperty(PropertyName = "character_relations")]
+		[JsonPropertyName("character_relations")]
 		public ICollection<MALSubItem> CharacterRelations { get; set; }
 	}
 }

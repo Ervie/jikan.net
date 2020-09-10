@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 
@@ -12,103 +12,103 @@ namespace JikanDotNet
 		/// <summary>
 		/// ID associated with MyAnimeList.
 		/// </summary>
-		[JsonProperty(PropertyName = "mal_id")]
+		[JsonPropertyName("mal_id")]
 		public long MalId { get; set; }
 
 		/// <summary>
 		/// Title of the anime.
 		/// </summary>
-		[JsonProperty(PropertyName = "title")]
+		[JsonPropertyName("title")]
 		public string Title { get; set; }
 
 		/// <summary>
 		/// Anime's image URL
 		/// </summary>
-		[JsonProperty(PropertyName = "image_url")]
+		[JsonPropertyName("image_url")]
 		public string ImageURL { get; set; }
 
 		/// <summary>
 		/// Anime type (e. g. "TV", "Movie").
 		/// </summary>
-		[JsonProperty(PropertyName = "type")]
+		[JsonPropertyName("type")]
 		public string Type { get; set; }
 
 		/// <summary>
 		/// Anime's URL
 		/// </summary>
-		[JsonProperty(PropertyName = "url")]
+		[JsonPropertyName("url")]
 		public string URL { get; set; }
 
 		/// <summary>
 		/// Anime's episode count.
 		/// </summary>
-		[JsonProperty(PropertyName = "episodes")]
-		public string Episodes { get; set; }
+		[JsonPropertyName("episodes")]
+		public int? Episodes { get; set; }
 
 		/// <summary>
 		/// Anime's synopsis.
 		/// </summary>
-		[JsonProperty(PropertyName = "synopsis")]
+		[JsonPropertyName("synopsis")]
 		public string Synopsis { get; set; }
 
 		/// <summary>
 		/// Anime's producers numerically indexed with array values.
 		/// </summary>
-		[JsonProperty(PropertyName = "producers")]
+		[JsonPropertyName("producers")]
 		public ICollection<MALSubItem> Producers { get; set; }
 
 		/// <summary>
 		/// Anime's licensors as strings.
 		/// </summary>
-		[JsonProperty(PropertyName = "licensors")]
+		[JsonPropertyName("licensors")]
 		public ICollection<string> Licensors { get; set; }
 
 		/// <summary>
 		/// Anime source (e .g. "Manga" or "Original").
 		/// </summary>
-		[JsonProperty(PropertyName = "source")]
+		[JsonPropertyName("source")]
 		public string Source { get; set; }
 
 		/// <summary>
 		/// Anime's genres numerically indexed with array values.
 		/// </summary>
-		[JsonProperty(PropertyName = "genres")]
+		[JsonPropertyName("genres")]
 		public ICollection<MALSubItem> Genres { get; set; }
 
 		/// <summary>
 		/// Date when anime started/will start airing.
 		/// </summary>
-		[JsonProperty(PropertyName = "airing_start")]
+		[JsonPropertyName("airing_start")]
 		public DateTime? AiringStart { get; set; }
 
 		/// <summary>
 		/// Anime's score on MyAnimeList up to 2 decimal places.
 		/// </summary>
-		[JsonProperty(PropertyName = "score")]
+		[JsonPropertyName("score")]
 		public float? Score { get; set; }
 
 		/// <summary>
 		/// Anime members count on MyAnimeList.
 		/// </summary>
-		[JsonProperty(PropertyName = "members")]
+		[JsonPropertyName("members")]
 		public int? Members { get; set; }
 
 		/// <summary>
 		/// Is anime suitable for kids.
 		/// </summary>
-		[JsonProperty(PropertyName = "kids")]
+		[JsonPropertyName("kids")]
 		public bool? Kids { get; set; }
 
 		/// <summary>
 		/// Is anime marked as 18+.
 		/// </summary>
-		[JsonProperty(PropertyName = "r18")]
+		[JsonPropertyName("r18")]
 		public bool? R18 { get; set; }
 
 		/// <summary>
 		/// Is anime continuing from last season.
 		/// </summary>
-		[JsonProperty(PropertyName = "continuing")]
+		[JsonPropertyName("continuing")]
 		public bool? Continued { get; set; }
 	}
 }

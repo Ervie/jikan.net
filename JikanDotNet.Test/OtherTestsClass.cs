@@ -8,18 +8,18 @@ namespace JikanDotNet.Tests
 {
 	public class OtherTestsClass
 	{
-		private readonly IJikan jikan;
+		private readonly IJikan _jikan;
 
 		public OtherTestsClass()
 		{
-			jikan = new Jikan();
+			_jikan = new Jikan();
 		}
 
 		[Fact]
 		public async Task GetAnimeGetManga_CorrectId_ShouldUseIMalEntityInterface()
 		{
-			IMalEntity berserk = await jikan.GetManga(2);
-			IMalEntity bebop = await jikan.GetAnime(1);
+			IMalEntity berserk = await _jikan.GetManga(2);
+			IMalEntity bebop = await _jikan.GetAnime(1);
 
 			List<IMalEntity> entities = new List<IMalEntity>
 			{
@@ -33,7 +33,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task GetAnime_CorrectId_ShouldParseBaseJikanRequest()
 		{
-			BaseJikanRequest request = await jikan.GetAnime(1);
+			BaseJikanRequest request = await _jikan.GetAnime(1);
 
 			Assert.NotNull(request);
 		}
@@ -41,9 +41,9 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task GetAnime_CorrectId_ShouldParseAnimeAsBaseJikanRequest()
 		{
-			Anime bebop = await jikan.GetAnime(1);
+			Anime bebop = await _jikan.GetAnime(1);
 
-			Assert.True(bebop.RequestCacheExpiry < 100000);
+			Assert.True(bebop.RequestCacheExpiry < 1000000);
 		}
 
 		[Fact]
@@ -51,7 +51,7 @@ namespace JikanDotNet.Tests
 		{
 			// Random id
 			int randomId = DateTime.Now.Second * DateTime.Now.Minute;
-			BaseJikanRequest request = await jikan.GetAnime(randomId);
+			BaseJikanRequest request = await _jikan.GetAnime(randomId);
 
 			Assert.NotNull(request);
 

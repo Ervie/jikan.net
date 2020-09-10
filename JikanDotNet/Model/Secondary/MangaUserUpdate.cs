@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace JikanDotNet
 {
@@ -10,25 +10,25 @@ namespace JikanDotNet
 		/// <summary>
 		/// Amount of volumes read by the user.
 		/// </summary>
-		[JsonProperty(PropertyName = "volumes_read")]
+		[JsonPropertyName("volumes_read")]
 		public int? VolumesRead { get; set; }
 
 		/// <summary>
 		/// Total amount of the volumes.
 		/// </summary>
-		[JsonProperty(PropertyName = "volumes_total")]
+		[JsonPropertyName("volumes_total")]
 		public int? VolumesTotal { get; set; }
 
 		/// <summary>
 		/// Amount of chapters read by the user.
 		/// </summary>
-		[JsonProperty(PropertyName = "chapters_read")]
+		[JsonPropertyName("chapters_read")]
 		public int? ChaptersRead { get; set; }
 
 		/// <summary>
 		/// Total amount of the chapters.
 		/// </summary>
-		[JsonProperty(PropertyName = "chapters_total")]
+		[JsonPropertyName("chapters_total")]
 		public int? ChaptersTotal { get; set; }
 	}
 }

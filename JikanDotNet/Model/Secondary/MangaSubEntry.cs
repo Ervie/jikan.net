@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System.Collections.Generic;
 
 namespace JikanDotNet
@@ -11,67 +11,67 @@ namespace JikanDotNet
 		/// <summary>
 		/// ID associated with MyAnimeList.
 		/// </summary>
-		[JsonProperty(PropertyName = "mal_id")]
+		[JsonPropertyName("mal_id")]
 		public long MalId { get; set; }
 
 		/// <summary>
 		/// URL to manga page.
 		/// </summary>
-		[JsonProperty(PropertyName = "url")]
+		[JsonPropertyName("url")]
 		public string Url { get; set; }
 
 		/// <summary>
 		/// Manga's image URL
 		/// </summary>
-		[JsonProperty(PropertyName = "image_url")]
+		[JsonPropertyName("image_url")]
 		public string ImageURL { get; set; }
 
 		/// <summary>
 		/// Title of the manga.
 		/// </summary>
-		[JsonProperty(PropertyName = "title")]
+		[JsonPropertyName("title")]
 		public string Title { get; set; }
 
 		/// <summary>
 		/// Manga type (e. g. "TV", "Movie").
 		/// </summary>
-		[JsonProperty(PropertyName = "type")]
+		[JsonPropertyName("type")]
 		public string Type { get; set; }
 
 		/// <summary>
 		/// Manga members count on MyAnimeList.
 		/// </summary>
-		[JsonProperty(PropertyName = "members")]
+		[JsonPropertyName("members")]
 		public int? Members { get; set; }
 
 		/// <summary>
 		/// Manga's volume count.
 		/// </summary>
-		[JsonProperty(PropertyName = "volumes")]
-		public string Volumes { get; set; }
+		[JsonPropertyName("volumes")]
+		public int? Volumes { get; set; }
 
 		/// <summary>
 		/// Manga's synopsis.
 		/// </summary>
-		[JsonProperty(PropertyName = "synopsis")]
+		[JsonPropertyName("synopsis")]
 		public string Synopsis { get; set; }
 
 		/// <summary>
 		/// Manga's genres numerically indexed with array values.
 		/// </summary>
-		[JsonProperty(PropertyName = "genres")]
+		[JsonPropertyName("genres")]
 		public ICollection<MALSubItem> Genres { get; set; }
 
 		/// <summary>
 		/// Manga's authors numerically indexed with array values.
 		/// </summary>
-		[JsonProperty(PropertyName = "authors")]
+		[JsonPropertyName("authors")]
 		public ICollection<MALSubItem> Authors { get; set; }
 
 		/// <summary>
 		/// Manga's serialzations numerically indexed with array values.
 		/// </summary>
-		[JsonProperty(PropertyName = "serialization")]
+		[JsonPropertyName("serialization")]
 		public ICollection<string> Serializations { get; set; }
 	}
 }

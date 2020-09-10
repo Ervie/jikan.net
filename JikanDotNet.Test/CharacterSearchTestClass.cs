@@ -6,11 +6,11 @@ namespace JikanDotNet.Tests
 {
 	public class CharacterSearchTestClass
 	{
-		private readonly IJikan jikan;
+		private readonly IJikan _jikan;
 
 		public CharacterSearchTestClass()
 		{
-			jikan = new Jikan();
+			_jikan = new Jikan();
 		}
 
 		[Theory]
@@ -19,7 +19,7 @@ namespace JikanDotNet.Tests
 		[InlineData("takeshi")]
 		public async Task SearchCharacter_NonEmptyQuery_ShouldReturnNotNullSearchCharacter(string query)
 		{
-			CharacterSearchResult returnedCharacter = await jikan.SearchCharacter(query);
+			CharacterSearchResult returnedCharacter = await _jikan.SearchCharacter(query);
 
 			Assert.NotNull(returnedCharacter);
 		}
@@ -27,7 +27,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task SearchCharacter_LupinQuery_ShouldReturnLupin()
 		{
-			CharacterSearchResult returnedCharacter = await jikan.SearchCharacter("lupin");
+			CharacterSearchResult returnedCharacter = await _jikan.SearchCharacter("lupin");
 
 			Assert.Equal(2, returnedCharacter.ResultLastPage);
 		}
@@ -35,7 +35,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task SearchCharacter_LupinQuery_ShouldReturnLupinName()
 		{
-			CharacterSearchResult returnedCharacter = await jikan.SearchCharacter("lupin iii");
+			CharacterSearchResult returnedCharacter = await _jikan.SearchCharacter("lupin iii");
 
 			Assert.Equal("Lupin III, Arsene", returnedCharacter.Results.First().Name);
 		}
@@ -43,7 +43,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task SearchCharacter_LupinQuery_ShouldReturnLupinMalId()
 		{
-			CharacterSearchResult returnedCharacter = await jikan.SearchCharacter("lupin iii");
+			CharacterSearchResult returnedCharacter = await _jikan.SearchCharacter("lupin iii");
 
 			Assert.Equal(1044, returnedCharacter.Results.First().MalId);
 		}
@@ -51,7 +51,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task SearchCharacter_LambdadeltaQuery_ShouldReturnLambdadetla()
 		{
-			CharacterSearchResult returnedCharacter = await jikan.SearchCharacter("lambdadelta");
+			CharacterSearchResult returnedCharacter = await _jikan.SearchCharacter("lambdadelta");
 
 			Assert.Equal(3, returnedCharacter.Results.Count());
 			Assert.Equal("Lambdadelta", returnedCharacter.Results.First().Name);
@@ -62,7 +62,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task SearchCharacter_KirumiQuery_ShouldReturnKirumi()
 		{
-			CharacterSearchResult returnedCharacter = await jikan.SearchCharacter("kirumi");
+			CharacterSearchResult returnedCharacter = await _jikan.SearchCharacter("kirumi");
 
 			Assert.Single(returnedCharacter.Results);
 			Assert.Equal("Toujou, Kirumi", returnedCharacter.Results.First().Name);
@@ -72,7 +72,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task SearchCharacter_EdwardQuerySecondPage_ShouldFindEdwards()
 		{
-			CharacterSearchResult returnedCharacter = await jikan.SearchCharacter("edward", 2);
+			CharacterSearchResult returnedCharacter = await _jikan.SearchCharacter("edward", 2);
 
 			Assert.Contains("Elric, Trisha", returnedCharacter.Results.Select(x => x.Name));
 		}

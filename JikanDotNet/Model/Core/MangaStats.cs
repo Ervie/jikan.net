@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace JikanDotNet
 {
@@ -10,37 +10,37 @@ namespace JikanDotNet
 		/// <summary>
 		/// Number of users who labeled manga status as "reading"
 		/// </summary>
-		[JsonProperty(PropertyName = "reading")]
+		[JsonPropertyName("reading")]
 		public int? Reading { get; set; }
 
 		/// <summary>
 		/// Number of users who labeled manga status as "completed"
 		/// </summary>
-		[JsonProperty(PropertyName = "completed")]
+		[JsonPropertyName("completed")]
 		public int? Completed { get; set; }
 
 		/// <summary>
 		/// Number of users who labeled manga status as "on hold"
 		/// </summary>
-		[JsonProperty(PropertyName = "on_hold")]
+		[JsonPropertyName("on_hold")]
 		public int? OnHold { get; set; }
 
 		/// <summary>
 		/// Number of users who labeled manga status as "dropped"
 		/// </summary>
-		[JsonProperty(PropertyName = "dropped")]
+		[JsonPropertyName("dropped")]
 		public int? Dropped { get; set; }
 
 		/// <summary>
 		/// Number of users who labeled manga status as "plan to read"
 		/// </summary>
-		[JsonProperty(PropertyName = "plan_to_read")]
+		[JsonPropertyName("plan_to_read")]
 		public int? PlanToRead { get; set; }
 
 		/// <summary>
 		/// Number of users who added manga to their lists.
 		/// </summary>
-		[JsonProperty(PropertyName = "scores")]
+		[JsonPropertyName("scores")]
 		public ScoringStats ScoreStats { get; set; }
 	}
 }

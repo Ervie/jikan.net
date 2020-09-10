@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 
 namespace JikanDotNet
@@ -11,133 +11,133 @@ namespace JikanDotNet
 		/// <summary>
 		/// ID associated with MyAnimeList.
 		/// </summary>
-		[JsonProperty(PropertyName = "mal_id")]
+		[JsonPropertyName("mal_id")]
 		public long MalId { get; set; }
 
 		/// <summary>
 		/// Title of the anime.
 		/// </summary>
-		[JsonProperty(PropertyName = "title")]
+		[JsonPropertyName("title")]
 		public string Title { get; set; }
 
 		/// <summary>
 		/// Anime's image URL
 		/// </summary>
-		[JsonProperty(PropertyName = "image_url")]
+		[JsonPropertyName("image_url")]
 		public string ImageURL { get; set; }
 
 		/// <summary>
 		/// Anime's URL
 		/// </summary>
-		[JsonProperty(PropertyName = "url")]
+		[JsonPropertyName("url")]
 		public string URL { get; set; }
 
 		/// <summary>
 		/// Anime's video URL.
 		/// </summary>
-		[JsonProperty(PropertyName = "video_url")]
+		[JsonPropertyName("video_url")]
 		public string VideoUrl { get; set; }
 
 		/// <summary>
 		/// Anime type (e. g. "TV", "Movie").
 		/// </summary>
-		[JsonProperty(PropertyName = "type")]
+		[JsonPropertyName("type")]
 		public string Type { get; set; }
 
 		/// <summary>
 		/// Anime's episodes count watched by the user.
 		/// </summary>
-		[JsonProperty(PropertyName = "watched_episodes")]
+		[JsonPropertyName("watched_episodes")]
 		public int? WatchedEpisodes { get; set; }
 
 		/// <summary>
 		/// Anime's episodes total count. 0 if not finished.
 		/// </summary>
-		[JsonProperty(PropertyName = "total_episodes")]
+		[JsonPropertyName("total_episodes")]
 		public int? TotalEpisodes { get; set; }
 
 		/// <summary>
 		/// User's score for the anime. 0 if not assigned yet.
 		/// </summary>
-		[JsonProperty(PropertyName = "score")]
+		[JsonPropertyName("score")]
 		public int Score { get; set; }
 
 		/// <summary>
 		/// Does anime have episode video.
 		/// </summary>
-		[JsonProperty(PropertyName = "has_episode_video")]
+		[JsonPropertyName("has_episode_video")]
 		public bool? HasEpisodeVideo { get; set; }
 
 		/// <summary>
 		/// Does anime have promo video.
 		/// </summary>
-		[JsonProperty(PropertyName = "has_promo_video")]
+		[JsonPropertyName("has_promo_video")]
 		public bool? HasPromoVideo { get; set; }
 
 		/// <summary>
 		/// Does anime have video.
 		/// </summary>
-		[JsonProperty(PropertyName = "has_video")]
+		[JsonPropertyName("has_video")]
 		public bool? HasVideo { get; set; }
 
 		/// <summary>
 		/// Does user rewatch anime.
 		/// </summary>
-		[JsonProperty(PropertyName = "is_rewatching")]
+		[JsonPropertyName("is_rewatching")]
 		public bool? IsRewatching { get; set; }
 
 		/// <summary>
 		/// Anime's age rating.
 		/// </summary>
-		[JsonProperty(PropertyName = "rating")]
+		[JsonPropertyName("rating")]
 		public string Rating { get; set; }
 
 		/// <summary>
 		/// Start date of anime airing.
 		/// </summary>
-		[JsonProperty(PropertyName = "start_date")]
+		[JsonPropertyName("start_date")]
 		public DateTime? StartDate { get; set; }
 
 		/// <summary>
 		/// End date of anime airing.
 		/// </summary>
-		[JsonProperty(PropertyName = "end_date")]
+		[JsonPropertyName("end_date")]
 		public DateTime? EndDate { get; set; }
 
 		/// <summary>
 		/// Start date of user watching.
 		/// </summary>
-		[JsonProperty(PropertyName = "watch_start_date")]
+		[JsonPropertyName("watch_start_date")]
 		public DateTime? WatchStartDate { get; set; }
 
 		/// <summary>
 		/// End date of user watching.
 		/// </summary>
-		[JsonProperty(PropertyName = "watch_end_date")]
+		[JsonPropertyName("watch_end_date")]
 		public DateTime? WatchEndDate { get; set; }
 
 		/// <summary>
 		/// Time user has been watching anime.
 		/// </summary>
-		[JsonProperty(PropertyName = "days")]
+		[JsonPropertyName("days")]
 		public int? Days { get; set; }
 
 		/// <summary>
 		/// Priority of anime on user's list.
 		/// </summary>
-		[JsonProperty(PropertyName = "priority")]
+		[JsonPropertyName("priority")]
 		public string Priority { get; set; }
 
 		/// <summary>
 		/// Current airing status of anime.
 		/// </summary>
-		[JsonProperty(PropertyName = "airing_status")]
+		[JsonPropertyName("airing_status")]
 		public AiringStatus AiringStatus { get; set; }
 
 		/// <summary>
 		/// Current user's watching status of anime.
 		/// </summary>
-		[JsonProperty(PropertyName = "watching_status")]
+		[JsonPropertyName("watching_status")]
 		public UserAnimeListExtension WatchingStatus { get; set; }
 	}
 }

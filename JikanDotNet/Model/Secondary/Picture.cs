@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace JikanDotNet
 {
@@ -10,13 +10,13 @@ namespace JikanDotNet
 		/// <summary>
 		/// Url to small version of the picture.
 		/// </summary>
-		[JsonProperty(PropertyName = "small")]
+		[JsonPropertyName("small")]
 		public string Small { get; set; }
 
 		/// <summary>
 		/// Url to large version of the picture.
 		/// </summary>
-		[JsonProperty(PropertyName = "large")]
+		[JsonPropertyName("large")]
 		public string Large { get; set; }
 	}
 }

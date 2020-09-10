@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,7 +13,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Collection of anime entries on top list.
 		/// </summary>
-		[JsonProperty(PropertyName = "top")]
+		[JsonPropertyName("top")]
 		public ICollection<AnimeTopEntry> Top { get; set; }
     }
 }

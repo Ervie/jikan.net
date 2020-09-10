@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System.Collections.Generic;
 
 namespace JikanDotNet
@@ -11,7 +11,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Collection of characters entries on top list.
 		/// </summary>
-		[JsonProperty(PropertyName = "top")]
+		[JsonPropertyName("top")]
 		public ICollection<CharacterTopEntry> Top { get; set; }
 	}
 }

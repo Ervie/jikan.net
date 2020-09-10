@@ -6,14 +6,15 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
 
 ### Main attributes
 
-* Written in .Net Standard 2.0, compatible with .Net Framework (4.6.1 or newer) and .Net Core (2.0 or newer).
+* Written in to work with .Net Standard 2.0, compatible with .Net Framework (4.6.1 or newer) and .Net Core (2.0 or newer).
 * Fully asynchromous request fetching (can be forced to synchromous if needed).
 * Can handle both SSL encrypted and non-SSL encrypted requests.
-* Light on dependencies (require only Newtonsoft.Json for parsing).
+* Light on dependencies 
+    * No dependencies if you are using .Net Core 3.x.
+    * Single dependancy for .Net Framework and .Net Core 2.x (System.Text.Json).
 * Usable with Dependency Injection.
 
 # List of features
-
 
 - Anime
     - Basic information
@@ -107,10 +108,26 @@ Then restore dependencies:
 
 # Changelog
 
-## 08.07.2020 - Version 1.4.2 (newest)
+## Future - Version 2.0.0
 
+- Compataible with Jikan REST API v4.0
+
+## 10.09.2020 - Version 1.5.0 (newest)
+
+- Targetting multiple frameworks in order to decrease number of dependancies
+    - System.Text.Json also is smaller library (30 KB vs Newtonsoft.Json's ~640 KB).
+- Change from Newtonsoft.Json to System.Text.Json (bundled in basic library as for .NET Core 3.0)
+    - No dependencies for .Net Core 3.0 and 3.1.
+    - Single nuget dependancy (System.Text.Json) for .NET Standard 2.0 and compatible frameworks (.Net Core 2.0/2.1, .NET Framework 4.6.1 and newer).
 - Fixes 
-    - <b>[MangaSearch/AnimeSearch]</b> Fix incorrect url building for different `GenreInclusion` values in `AnimeSearchConfig` and `MangaSearchConfig`.
+    - <b>[Manga/Anime]</b> `RelatedAnime`/`RelatedManga` had some incorrect mappings, which could led to null collections.
+    - Minor code cleanups.
+- Changes
+    - <b>[Anime]</b> `Episodes` are now `int?` instead of `string`.
+    - <b>[Manga]</b> `Chapters` are now `int?` instead of `string`.
+    - <b>[Manga]</b> `Volumes` are now `int?` instead of `string`.
+    - <b>[AnimeSubEntry]</b> `Episodes` are now `int?` instead of `string`.
+    - <b>[MangasubEntry]</b> `Volumes` are now `int?` instead of `string`.
         
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**

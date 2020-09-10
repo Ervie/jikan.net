@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace JikanDotNet
 {
@@ -10,7 +10,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Reviewer.
 		/// </summary>
-		[JsonProperty(PropertyName = "reviewer")]
+		[JsonPropertyName("reviewer")]
 		public MangaReviewer Reviewer { get; set; }
 	}
 }

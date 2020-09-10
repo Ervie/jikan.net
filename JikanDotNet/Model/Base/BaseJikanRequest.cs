@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace JikanDotNet
 {
@@ -10,19 +10,19 @@ namespace JikanDotNet
 		/// <summary>
 		/// Hash of the request.
 		/// </summary>
-		[JsonProperty(PropertyName = "request_hash")]
+		[JsonPropertyName("request_hash")]
 		public string RequestHash { get; set; }
 
 		/// <summary>
 		/// Is request cached.
 		/// </summary>
-		[JsonProperty(PropertyName = "request_cached")]
+		[JsonPropertyName("request_cached")]
 		public bool RequestCached { get; set; }
 
 		/// <summary>
 		/// Time till cache expiration (in seconds).
 		/// </summary>
-		[JsonProperty(PropertyName = "request_cache_expiry")]
+		[JsonPropertyName("request_cache_expiry")]
 		public int RequestCacheExpiry { get; set; }
 	}
 }

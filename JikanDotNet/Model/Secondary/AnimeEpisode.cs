@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 
 namespace JikanDotNet
@@ -11,55 +11,55 @@ namespace JikanDotNet
 		/// <summary>
 		/// ID associated with MyAnimeList.
 		/// </summary>
-		[JsonProperty(PropertyName = "episode_id")]
+		[JsonPropertyName("episode_id")]
 		public long Id { get; set; }
 
 		/// <summary>
 		/// Title of the episode.
 		/// </summary>
-		[JsonProperty(PropertyName = "title")]
+		[JsonPropertyName("title")]
 		public string Title { get; set; }
 
 		/// <summary>
 		/// Title of the anime in Japanese.
 		/// </summary>
-		[JsonProperty(PropertyName = "title_japanese")]
+		[JsonPropertyName("title_japanese")]
 		public string TitleJapanese { get; set; }
 
 		/// <summary>
 		/// Title of the anime in romanji.
 		/// </summary>
-		[JsonProperty(PropertyName = "title_romanji")]
+		[JsonPropertyName("title_romanji")]
 		public string TitleEnglish { get; set; }
 
 		/// <summary>
 		/// Date when episode aired at first.
 		/// </summary>
-		[JsonProperty(PropertyName = "aired")]
+		[JsonPropertyName("aired")]
 		public DateTime? Aired { get; set; }
 
 		/// <summary>
 		/// Is the episode filler.
 		/// </summary>
-		[JsonProperty(PropertyName = "filler")]
+		[JsonPropertyName("filler")]
 		public bool? Filler { get; set; }
 
 		/// <summary>
 		/// Is the episode recap.
 		/// </summary>
-		[JsonProperty(PropertyName = "recap")]
+		[JsonPropertyName("recap")]
 		public bool? Recap { get; set; }
 
 		/// <summary>
 		/// URL to the video of the episode.
 		/// </summary>
-		[JsonProperty(PropertyName = "video_url")]
+		[JsonPropertyName("video_url")]
 		public string VideoUrl { get; set; }
 
 		/// <summary>
 		/// URL to the forum topic of the episode.
 		/// </summary>
-		[JsonProperty(PropertyName = "forum_url")]
+		[JsonPropertyName("forum_url")]
 		public string ForumUrl { get; set; }
 	}
 }

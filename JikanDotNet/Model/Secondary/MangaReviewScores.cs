@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace JikanDotNet
 {
@@ -10,31 +10,31 @@ namespace JikanDotNet
 		/// <summary>
 		/// Overall score.
 		/// </summary>
-		[JsonProperty(PropertyName = "overall")]
+		[JsonPropertyName("overall")]
 		public int? Overall { get; set; }
 
 		/// <summary>
 		/// Score for story.
 		/// </summary>
-		[JsonProperty(PropertyName = "story")]
+		[JsonPropertyName("story")]
 		public int? Story { get; set; }
 
 		/// <summary>
 		/// Score for art.
 		/// </summary>
-		[JsonProperty(PropertyName = "art")]
+		[JsonPropertyName("art")]
 		public int? Art { get; set; }
 		
 		/// <summary>
 		/// Score for characters.
 		/// </summary>
-		[JsonProperty(PropertyName = "character")]
+		[JsonPropertyName("character")]
 		public int? Character { get; set; }
 
 		/// <summary>
 		/// Score for enjoyment.
 		/// </summary>
-		[JsonProperty(PropertyName = "enjoyment")]
+		[JsonPropertyName("enjoyment")]
 		public int? Enjoyment { get; set; }
 	}
 }

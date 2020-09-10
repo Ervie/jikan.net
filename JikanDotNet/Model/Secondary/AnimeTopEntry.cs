@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace JikanDotNet
 {
@@ -10,67 +10,67 @@ namespace JikanDotNet
 		/// <summary>
 		/// ID associated with MyAnimeList.
 		/// </summary>
-		[JsonProperty(PropertyName = "mal_id")]
+		[JsonPropertyName("mal_id")]
 		public long MalId { get; set; }
 
 		/// <summary>
 		/// Rank of the anime on selected list.
 		/// </summary>
-		[JsonProperty(PropertyName = "rank")]
+		[JsonPropertyName("rank")]
 		public int Rank { get; set; }
 
 		/// <summary>
 		/// URL to anime page.
 		/// </summary>
-		[JsonProperty(PropertyName = "url")]
+		[JsonPropertyName("url")]
 		public string Url { get; set; }
 
 		/// <summary>
 		/// Anime's image URL
 		/// </summary>
-		[JsonProperty(PropertyName = "image_url")]
+		[JsonPropertyName("image_url")]
 		public string ImageURL { get; set; }
 
 		/// <summary>
 		/// Title of the anime.
 		/// </summary>
-		[JsonProperty(PropertyName = "title")]
+		[JsonPropertyName("title")]
 		public string Title { get; set; }
 
 		/// <summary>
 		/// Anime type (e. g. "TV", "Movie").
 		/// </summary>
-		[JsonProperty(PropertyName = "type")]
+		[JsonPropertyName("type")]
 		public string Type { get; set; }
 
 		/// <summary>
 		/// Anime's score on MyAnimeList up to 2 decimal places.
 		/// </summary>
-		[JsonProperty(PropertyName = "score")]
+		[JsonPropertyName("score")]
 		public float? Score { get; set; }
 
 		/// <summary>
 		/// Anime members count on MyAnimeList.
 		/// </summary>
-		[JsonProperty(PropertyName = "members")]
+		[JsonPropertyName("members")]
 		public int? Members { get; set; }
 
 		/// <summary>
 		/// Date of airing start.
 		/// </summary>
-		[JsonProperty(PropertyName = "start_date")]
+		[JsonPropertyName("start_date")]
 		public string AiringStart { get; set; }
 
 		/// <summary>
 		/// Date of airing end.
 		/// </summary>
-		[JsonProperty(PropertyName = "end_date")]
+		[JsonPropertyName("end_date")]
 		public string AiringEnd { get; set; }
 
 		/// <summary>
 		/// Anime's episode count.
 		/// </summary>
-		[JsonProperty(PropertyName = "episodes")]
+		[JsonPropertyName("episodes")]
 		public int? Episodes { get; set; }
 	}
 }

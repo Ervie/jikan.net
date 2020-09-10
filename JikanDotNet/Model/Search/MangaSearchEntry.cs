@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 
 namespace JikanDotNet
@@ -11,79 +11,79 @@ namespace JikanDotNet
 		/// <summary>
 		/// ID associated with MyAnimeList.
 		/// </summary>
-		[JsonProperty(PropertyName = "mal_id")]
+		[JsonPropertyName("mal_id")]
 		public long MalId { get; set; }
 
 		/// <summary>
 		/// URL to manga's page.
 		/// </summary>
-		[JsonProperty(PropertyName = "url")]
+		[JsonPropertyName("url")]
 		public string URL { get; set; }
 
 		/// <summary>
 		/// Manga's image URL
 		/// </summary>
-		[JsonProperty(PropertyName = "image_url")]
+		[JsonPropertyName("image_url")]
 		public string ImageURL { get; set; }
 
 		/// <summary>
 		/// Title of the manga.
 		/// </summary>
-		[JsonProperty(PropertyName = "title")]
+		[JsonPropertyName("title")]
 		public string Title { get; set; }
 
 		/// <summary>
 		/// Manga's description.
 		/// </summary>
-		[JsonProperty(PropertyName = "synopsis")]
+		[JsonPropertyName("synopsis")]
 		public string Description { get; set; }
 
 		/// <summary>
 		/// Manga type (e. g. "TV", "Movie").
 		/// </summary>
-		[JsonProperty(PropertyName = "type")]
+		[JsonPropertyName("type")]
 		public string Type { get; set; }
 
 		/// <summary>
 		/// Manga's score on MyAnimeList up to 2 decimal places.
 		/// </summary>
-		[JsonProperty(PropertyName = "score")]
+		[JsonPropertyName("score")]
 		public float? Score { get; set; }
 
 		/// <summary>
 		/// Manga's episode count.
 		/// </summary>
-		[JsonProperty(PropertyName = "volumes")]
+		[JsonPropertyName("volumes")]
 		public int? Volumes { get; set; }
 
 		/// <summary>
 		/// Manga members count on MyAnimeList.
 		/// </summary>
-		[JsonProperty(PropertyName = "members")]
+		[JsonPropertyName("members")]
 		public int? Members { get; set; }
 
 		/// <summary>
 		/// Is manga currently publishing.
 		/// </summary>
-		[JsonProperty(PropertyName = "publishing")]
+		[JsonPropertyName("publishing")]
 		public bool Publishing { get; set; }
 
 		/// <summary>
 		/// Datetime when manga started publishing.
 		/// </summary>
-		[JsonProperty(PropertyName = "start_date")]
+		[JsonPropertyName("start_date")]
 		public DateTime? StartDate { get; set; }
 
 		/// <summary>
 		/// Datetime when manga ended publishing.
 		/// </summary>
-		[JsonProperty(PropertyName = "end_date")]
+		[JsonPropertyName("end_date")]
 		public DateTime? EndDate { get; set; }
 
 		/// <summary>
 		/// Number of published chapters.
 		/// </summary>
-		[JsonProperty(PropertyName = "chapters")]
+		[JsonPropertyName("chapters")]
 		public int? Chapters { get; set; }
 	}
 }

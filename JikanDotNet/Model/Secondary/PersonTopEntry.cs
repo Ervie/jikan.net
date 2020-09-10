@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 
 namespace JikanDotNet
@@ -11,49 +11,49 @@ namespace JikanDotNet
 		/// <summary>
 		/// ID associated with MyAnimeList.
 		/// </summary>
-		[JsonProperty(PropertyName = "mal_id")]
+		[JsonPropertyName("mal_id")]
 		public long MalId { get; set; }
 
 		/// <summary>
 		/// Rank of the person on most popular list.
 		/// </summary>
-		[JsonProperty(PropertyName = "rank")]
+		[JsonPropertyName("rank")]
 		public int Rank { get; set; }
 
 		/// <summary>
 		/// URL to person page.
 		/// </summary>
-		[JsonProperty(PropertyName = "url")]
+		[JsonPropertyName("url")]
 		public string Url { get; set; }
 
 		/// <summary>
 		/// Person's image URL
 		/// </summary>
-		[JsonProperty(PropertyName = "image_url")]
+		[JsonPropertyName("image_url")]
 		public string ImageURL { get; set; }
 
 		/// <summary>
 		/// Person's name.
 		/// </summary>
-		[JsonProperty(PropertyName = "title")]
+		[JsonPropertyName("title")]
 		public string Name { get; set; }
 
 		/// <summary>
 		/// Person's name written in kanji.
 		/// </summary>
-		[JsonProperty(PropertyName = "name_kanji")]
+		[JsonPropertyName("name_kanji")]
 		public string NameKanji { get; set; }
 
 		/// <summary>
 		/// Number of users who favorited person.
 		/// </summary>
-		[JsonProperty(PropertyName = "favorites")]
+		[JsonPropertyName("favorites")]
 		public int? Favorites { get; set; }
 
 		/// <summary>
 		/// Date of airing start.
 		/// </summary>
-		[JsonProperty(PropertyName = "birthday")]
+		[JsonPropertyName("birthday")]
 		public DateTime? Birthday { get; set; }
 	}
 }

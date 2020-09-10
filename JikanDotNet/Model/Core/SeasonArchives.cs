@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 
@@ -12,7 +12,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Season entry for season.
 		/// </summary>
-		[JsonProperty(PropertyName = "archive")]
+		[JsonPropertyName("archive")]
 		public ICollection<SeasonArchive> Archives { get; set; }
 	}
 }

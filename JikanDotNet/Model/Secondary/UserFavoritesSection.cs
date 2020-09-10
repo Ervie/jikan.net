@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System.Collections.Generic;
 
 namespace JikanDotNet
@@ -11,25 +11,25 @@ namespace JikanDotNet
 		/// <summary>
 		/// User's favorite anime.
 		/// </summary>
-		[JsonProperty(PropertyName = "anime")]
+		[JsonPropertyName("anime")]
 		public ICollection<MALImageSubItem> Anime { get; set; }
 
 		/// <summary>
 		/// User's favorite manga.
 		/// </summary>
-		[JsonProperty(PropertyName = "manga")]
+		[JsonPropertyName("manga")]
 		public ICollection<MALImageSubItem> Manga { get; set; }
 
 		/// <summary>
 		/// User's favorite characters.
 		/// </summary>
-		[JsonProperty(PropertyName = "characters")]
+		[JsonPropertyName("characters")]
 		public ICollection<MALImageSubItem> Characters { get; set; }
 
 		/// <summary>
 		/// User's favorite people.
 		/// </summary>
-		[JsonProperty(PropertyName = "people")]
+		[JsonPropertyName("people")]
 		public ICollection<MALImageSubItem> People { get; set; }
 	}
 }

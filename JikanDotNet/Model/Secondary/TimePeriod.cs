@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 
 namespace JikanDotNet
@@ -11,13 +11,13 @@ namespace JikanDotNet
 		/// <summary>
 		/// Start date.
 		/// </summary>
-		[JsonProperty(PropertyName = "from")]
+		[JsonPropertyName("from")]
 		public DateTime? From { get; set; }
 
 		/// <summary>
 		/// End date.
 		/// </summary>
-		[JsonProperty(PropertyName = "to")]
+		[JsonPropertyName("to")]
 		public DateTime? To { get; set; }
 	}
 }

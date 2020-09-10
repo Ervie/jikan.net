@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace JikanDotNet
 {
@@ -10,13 +10,13 @@ namespace JikanDotNet
 		/// <summary>
 		/// Percentage share of overall votes poll.
 		/// </summary>
-		[JsonProperty(PropertyName = "percentage")]
+		[JsonPropertyName("percentage")]
 		public float? Percentage { get; set; }
 
 		/// <summary>
 		/// Number of votes casted for score.
 		/// </summary>
-		[JsonProperty(PropertyName = "votes")]
+		[JsonPropertyName("votes")]
 		public int? Votes { get; set; }
 
 		/// <summary>

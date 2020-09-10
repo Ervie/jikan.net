@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System.Collections.Generic;
 
 namespace JikanDotNet
@@ -11,7 +11,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Character's extra image URLs.
 		/// </summary>
-		[JsonProperty(PropertyName = "pictures")]
+		[JsonPropertyName("pictures")]
 		public ICollection<Picture> Pictures { get; set; }
 	}
 }

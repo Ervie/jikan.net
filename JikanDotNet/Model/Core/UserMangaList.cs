@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System.Collections.Generic;
 
 namespace JikanDotNet
@@ -11,7 +11,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Collection of user's manga on their manga list.
 		/// </summary>
-		[JsonProperty(PropertyName = "manga")]
+		[JsonPropertyName("manga")]
 		public ICollection<MangaListEntry> Manga { get; set; }
 	}
 }

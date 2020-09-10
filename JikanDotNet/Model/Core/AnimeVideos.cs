@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System.Collections.Generic;
 
 namespace JikanDotNet
@@ -11,13 +11,13 @@ namespace JikanDotNet
 		/// <summary>
 		/// Anime's related promo videos URLs.
 		/// </summary>
-		[JsonProperty(PropertyName = "promo")]
+		[JsonPropertyName("promo")]
 		public ICollection<PromoVideo> PromoVideos { get; set; }
 
 		/// <summary>
 		/// Anime's related episode videos URLs.
 		/// </summary>
-		[JsonProperty(PropertyName = "episodes")]
+		[JsonPropertyName("episodes")]
 		public ICollection<EpisodeVideo> EpisodeVideos { get; set; }
 	}
 }
