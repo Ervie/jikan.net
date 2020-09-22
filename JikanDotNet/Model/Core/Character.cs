@@ -41,7 +41,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// About character
 		/// </summary>
-		[JsonPropertyName("About")]
+		[JsonPropertyName("about")]
 		public string About { get; set; }
 
 		/// <summary>

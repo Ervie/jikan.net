@@ -112,23 +112,9 @@ Then restore dependencies:
 
 - Compataible with Jikan REST API v4.0
 
-## 10.09.2020 - Version 1.5.0 (newest)
-
-- Targetting multiple frameworks in order to decrease number of dependancies
-    - System.Text.Json also is smaller library (30 KB vs Newtonsoft.Json's ~640 KB).
-- Change from Newtonsoft.Json to System.Text.Json (bundled in basic library as for .NET Core 3.0)
-    - No dependencies for .Net Core 3.0 and 3.1.
-    - Single nuget dependancy (System.Text.Json) for .NET Standard 2.0 and compatible frameworks (.Net Core 2.0/2.1, .NET Framework 4.6.1 and newer).
+## 22.09.2020 - Version 1.5.1 (newest)
 - Fixes 
-    - <b>[Manga/Anime]</b> `RelatedAnime`/`RelatedManga` had some incorrect mappings, which could led to null collections.
-    - Minor code cleanups.
-- Changes
-    - <b>[Anime]</b> `Episodes` are now `int?` instead of `string`.
-    - <b>[Manga]</b> `Chapters` are now `int?` instead of `string`.
-    - <b>[Manga]</b> `Volumes` are now `int?` instead of `string`.
-    - <b>[AnimeSubEntry]</b> `Episodes` are now `int?` instead of `string`.
-    - <b>[MangasubEntry]</b> `Volumes` are now `int?` instead of `string`.
-        
+    - <b>[Character]</b> Fix incorrect mapping for `About` property, which could led to null result.
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**
 

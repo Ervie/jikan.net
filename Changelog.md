@@ -1,4 +1,8 @@
-## 10.09.2020 - Version 1.5.0 (newest)
+## 22.09.2020 - Version 1.5.1 (newest)
+- Fixes 
+    - <b>[Character]</b> Fix incorrect mapping for `About` property, which could led to null result.
+
+## 10.09.2020 - Version 1.5.0
 
 - Targetting multiple frameworks in order to decrease number of dependancies
     - System.Text.Json also is smaller library (30 KB vs Newtonsoft.Json's ~640 KB).

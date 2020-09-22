@@ -11,7 +11,7 @@ namespace JikanDotNet.Tests
 
 		public CharacterTestClass()
 		{
-			_jikan = new Jikan(true);
+			_jikan = new Jikan();
 		}
 
 		[Theory]
@@ -40,6 +40,15 @@ namespace JikanDotNet.Tests
 			Character ichigo = await _jikan.GetCharacter(5);
 
 			Assert.Equal("Ichigo Kurosaki", ichigo.Name);
+		}
+
+		[Fact]
+		public async Task GetCharacter_IchigoKurosakiId_ShouldParseIchigoKurosakiAboutNotNull()
+		{
+			Character ichigo = await _jikan.GetCharacter(5);
+
+			Assert.NotNull(ichigo.About);
+			Assert.NotEmpty(ichigo.About);
 		}
 
 		[Fact]

@@ -4,8 +4,8 @@ using JikanDotNet.Extensions;
 using JikanDotNet.Helpers;
 using System;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace JikanDotNet
 {
@@ -32,18 +32,13 @@ namespace JikanDotNet
 		private readonly bool _suppressException;
 
 		#endregion Field
-		
+
 		#region Constructors
 
 		/// <summary>
 		/// Constructor.
 		/// </summary>
-		public Jikan()
-		{
-			_useHttps = true;
-			_suppressException = false;
-			_httpClient = HttpProvider.GetHttpClient(_useHttps);
-		}
+		public Jikan(): this(true, false) { }
 
 		/// <summary>
 		/// Constructor.
@@ -73,7 +68,7 @@ namespace JikanDotNet
 		/// </summary>
 		/// <param name="endpointUrl">Endpoint of the REST API.</param>
 		/// <param name="suppressException">Should exception be thrown in case of failed request. If true, failed request return null.</param>
-		public Jikan(Uri endpointUrl, bool suppressException = true)
+		public Jikan(Uri endpointUrl, bool suppressException = false)
 		{
 			_suppressException = suppressException;
 			_httpClient = HttpProvider.GetHttpClient(endpointUrl);
@@ -1206,7 +1201,7 @@ namespace JikanDotNet
 			return await ExecuteGetRequest<Club>(endpointParts);
 		}
 
-		#endregion
+		#endregion GetClub
 
 		#region GetClubMembers
 
@@ -1233,9 +1228,9 @@ namespace JikanDotNet
 			return await ExecuteGetRequest<ClubMembers>(endpointParts);
 		}
 
-		#endregion
+		#endregion GetClubMembers
 
-		#endregion
+		#endregion Club Methods
 
 		#region Search methods
 
@@ -1343,7 +1338,7 @@ namespace JikanDotNet
 		public async Task<MangaSearchResult> SearchManga(string query, int page)
 		{
 			query = string.Concat(JikanEndPointCategories.Manga, "/", page.ToString(), "?q=", query.Replace(' ', '+'));
-			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query};
+			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query };
 			return await ExecuteGetRequest<MangaSearchResult>(endpointParts);
 		}
 
@@ -1423,8 +1418,8 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		public async Task<PersonSearchResult> SearchPerson(string query, int page)
 		{
-			query = string.Concat(JikanEndPointCategories.Person, "/", page.ToString(), "?q=",  query.Replace(' ', '+'));
-			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query};
+			query = string.Concat(JikanEndPointCategories.Person, "/", page.ToString(), "?q=", query.Replace(' ', '+'));
+			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query };
 			return await ExecuteGetRequest<PersonSearchResult>(endpointParts);
 		}
 
@@ -1453,7 +1448,7 @@ namespace JikanDotNet
 		public async Task<CharacterSearchResult> SearchCharacter(string query, int page)
 		{
 			query = string.Concat(JikanEndPointCategories.Character, "/", page.ToString(), "?q=", query.Replace(' ', '+'));
-			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query};
+			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query };
 			return await ExecuteGetRequest<CharacterSearchResult>(endpointParts);
 		}
 
@@ -1474,6 +1469,7 @@ namespace JikanDotNet
 			string[] endpointParts = new string[] { JikanEndPointCategories.Meta, "status" };
 			return await ExecuteGetRequest<StatusMetadata>(endpointParts);
 		}
+
 		#endregion GetStatusMetadata
 
 		#endregion Metadata methods
