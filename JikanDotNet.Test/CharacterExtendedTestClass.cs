@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using FluentAssertions;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace JikanDotNet.Tests
@@ -15,9 +16,11 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task GetCharacterPictures_SharoId_ShouldParseKirimaSharoImages()
 		{
+			// When
 			CharacterPictures kirimaSharo = await _jikan.GetCharacterPictures(94947);
 
-			Assert.Equal(8, kirimaSharo.Pictures.Count);
+			// Then
+			kirimaSharo.Pictures.Should().HaveCount(8);
 		}
 	}
 }

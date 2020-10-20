@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using FluentAssertions;
+using FluentAssertions.Execution;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -19,62 +21,84 @@ namespace JikanDotNet.Tests
 		[InlineData("takeshi")]
 		public async Task SearchCharacter_NonEmptyQuery_ShouldReturnNotNullSearchCharacter(string query)
 		{
+			// When
 			CharacterSearchResult returnedCharacter = await _jikan.SearchCharacter(query);
 
-			Assert.NotNull(returnedCharacter);
+			// Then
+			returnedCharacter.Should().NotBeNull();
 		}
 
 		[Fact]
 		public async Task SearchCharacter_LupinQuery_ShouldReturnLupin()
 		{
+			// When
 			CharacterSearchResult returnedCharacter = await _jikan.SearchCharacter("lupin");
 
-			Assert.Equal(2, returnedCharacter.ResultLastPage);
+			// Then
+			returnedCharacter.ResultLastPage.Should().Be(2);
 		}
 
 		[Fact]
 		public async Task SearchCharacter_LupinQuery_ShouldReturnLupinName()
 		{
+			// When
 			CharacterSearchResult returnedCharacter = await _jikan.SearchCharacter("lupin iii");
 
-			Assert.Equal("Lupin III, Arsene", returnedCharacter.Results.First().Name);
+			// Then
+			returnedCharacter.Results.First().Name.Should().Be("Lupin III, Arsene");
 		}
 
 		[Fact]
 		public async Task SearchCharacter_LupinQuery_ShouldReturnLupinMalId()
 		{
+			// When
 			CharacterSearchResult returnedCharacter = await _jikan.SearchCharacter("lupin iii");
 
-			Assert.Equal(1044, returnedCharacter.Results.First().MalId);
+			// Then
+			returnedCharacter.Results.First().MalId.Should().Be(1044);
 		}
 
 		[Fact]
 		public async Task SearchCharacter_LambdadeltaQuery_ShouldReturnLambdadetla()
 		{
+			// When
 			CharacterSearchResult returnedCharacter = await _jikan.SearchCharacter("lambdadelta");
 
-			Assert.Equal(3, returnedCharacter.Results.Count());
-			Assert.Equal("Lambdadelta", returnedCharacter.Results.First().Name);
-			Assert.Equal("Umineko no Naku Koro ni", returnedCharacter.Results.First().Animeography.First().Name);
-			Assert.Single(returnedCharacter.Results.First().Animeography);
+			// Then
+			var firstCharacter = returnedCharacter.Results.First();
+			using (new AssertionScope())
+			{
+				returnedCharacter.Results.Should().HaveCount(3);
+				firstCharacter.Name.Should().Be("Lambdadelta");
+				firstCharacter.Animeography.First().Name.Should().Be("Umineko no Naku Koro ni");
+				firstCharacter.Animeography.Should().ContainSingle();
+			}
 		}
 
 		[Fact]
 		public async Task SearchCharacter_KirumiQuery_ShouldReturnKirumi()
 		{
+			// When
 			CharacterSearchResult returnedCharacter = await _jikan.SearchCharacter("kirumi");
 
-			Assert.Single(returnedCharacter.Results);
-			Assert.Equal("Toujou, Kirumi", returnedCharacter.Results.First().Name);
-			Assert.Single(returnedCharacter.Results.First().Mangaography);
+			// Then
+			var firstCharacter = returnedCharacter.Results.First();
+			using (new AssertionScope())
+			{
+				returnedCharacter.Results.Should().ContainSingle();
+				firstCharacter.Name.Should().Be("Toujou, Kirumi");
+				firstCharacter.Mangaography.Should().ContainSingle();
+			}
 		}
 
 		[Fact]
 		public async Task SearchCharacter_EdwardQuerySecondPage_ShouldFindEdwards()
 		{
+			// When
 			CharacterSearchResult returnedCharacter = await _jikan.SearchCharacter("edward", 2);
 
-			Assert.Contains("Elric, Trisha", returnedCharacter.Results.Select(x => x.Name));
+			// Then
+			returnedCharacter.Results.Select(x => x.Name).Should().Contain("Elric, Trisha");
 		}
 	}
 }

@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using FluentAssertions;
+using FluentAssertions.Execution;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -16,47 +18,64 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task GetClub_BebopId_ShouldParseCowboyBebopClub()
 		{
-			Club club = await _jikan.GetClub(1);
+			// When
+			var club = await _jikan.GetClub(1);
 
-			Assert.NotNull(club);
-			Assert.Equal("Anime", club.Category);
-			Assert.Equal("public", club.Type);
-			Assert.Equal(25, club.PicturesCount);
-			Assert.Equal(2, club.MangaRelations.Count);
-			Assert.Equal("Cowboy Bebop", club.AnimeRelations.First().Name);
+			// Then
+			using (new AssertionScope())
+			{
+				club.Should().NotBeNull();
+				club.Category.Should().Be("Anime");
+				club.Type.Should().Be("public");
+				club.PicturesCount.Should().Be(25);
+				club.MangaRelations.Should().HaveCount(2);
+				club.AnimeRelations.First().Name.Should().Be("Cowboy Bebop");
+			}
 		}
 
 		[Fact]
 		public async Task GetClub_AnimeCafeId_ShouldParseAnimeCafeClub()
 		{
-			Club club = await _jikan.GetClub(73113);
+			// When
+			var club = await _jikan.GetClub(73113);
 
-			Assert.NotNull(club);
-			Assert.Equal("Anime", club.Category);
-			Assert.Equal("public", club.Type);
-			Assert.Empty(club.CharacterRelations);
-			Assert.Equal("Fehr", club.Staff.First().Name);
+			// Then
+			using (new AssertionScope())
+			{
+				club.Should().NotBeNull();
+				club.Category.Should().Be("Anime");
+				club.Type.Should().Be("public");
+				club.CharacterRelations.Should().BeEmpty();
+				club.Staff.First().Name.Should().Be("Fehr");
+			}
 		}
 
 		[Fact]
 		public async Task GetClubMembers_BebopId_ShouldParseCowboyBebopClubMemberList()
 		{
-			ClubMembers club = await _jikan.GetClubMembers(1);
+			// When
+			var club = await _jikan.GetClubMembers(1);
 
-			Assert.NotEmpty(club.Members);
-
-			ClubMember firstMember = club.Members.First();
-
-			Assert.Equal("-alquimista-", firstMember.Username);
+			// Then
+			using (new AssertionScope())
+			{
+				club.Members.Should().NotBeEmpty();
+				club.Members.First().Username.Should().Be("-alquimista-");
+			}
 		}
 
 		[Fact]
 		public async Task GetClubMembers_BebopIdSecondPage_ShouldParseCowboyBebopClubMemberListPaged()
 		{
+			// When
 			ClubMembers club = await _jikan.GetClubMembers(1, 2);
 
-			Assert.NotEmpty(club.Members);
-			Assert.Equal(36, club.Members.Count);
+			// Then
+			using (new AssertionScope())
+			{
+				club.Members.Should().NotBeEmpty();
+				club.Members.Should().HaveCount(36);
+			}
 		}
 	}
 }

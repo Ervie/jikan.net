@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using FluentAssertions;
+using FluentAssertions.Execution;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -20,49 +22,64 @@ namespace JikanDotNet.Tests
 		[InlineData("death")]
 		public async Task SearchAnime_NonEmptyQuery_ShouldReturnNotNullSearchAnime(string query)
 		{
+			// When
 			AnimeSearchResult returnedAnime = await _jikan.SearchAnime(query);
 
-			Assert.NotNull(returnedAnime);
+			// Then
+			returnedAnime.Should().NotBeNull();
 		}
 
 		[Fact]
 		public async Task SearchAnime_DanganronpaQuery_ShouldReturnDanganronpaAnime()
 		{
+			// When
 			AnimeSearchResult danganronpaAnime = await _jikan.SearchAnime("danganronpa");
 
-			Assert.Equal(20, danganronpaAnime.ResultLastPage);
+			// Then
+			danganronpaAnime.ResultLastPage.Should().Be(20);
 		}
 
 		[Fact]
 		public async Task SearchAnime_OnePieceAiringQuery_ShouldReturnAiringOnePieceAnime()
 		{
+			// Given
 			AnimeSearchConfig searchConfig = new AnimeSearchConfig()
 			{
 				Status = AiringStatus.Airing
 			};
 
+			// When
 			AnimeSearchResult onePieceAnime = await _jikan.SearchAnime("one p", searchConfig);
 
-			Assert.Equal("One Piece", onePieceAnime.Results.First().Title);
+			// Then
+			onePieceAnime.Results.First().Title.Should().Be("One Piece");
 		}
 
 		[Fact]
 		public async Task SearchAnime_HaibaneQuery_ShouldReturnHaibaneRenmeiAnime()
 		{
-			AnimeSearchResult haibaneRenmei = await _jikan.SearchAnime("haibane");
+			// When
+			AnimeSearchResult result = await _jikan.SearchAnime("haibane");
 
-			Assert.Equal("Haibane Renmei", haibaneRenmei.Results.First().Title);
-			Assert.Equal("TV", haibaneRenmei.Results.First().Type);
-			Assert.Equal(13, haibaneRenmei.Results.First().Episodes);
-			Assert.Equal(387, haibaneRenmei.Results.First().MalId);
+			// Then
+			var firstResult = result.Results.First();
+			using (new AssertionScope())
+			{
+				firstResult.Title.Should().Be("Haibane Renmei");
+				firstResult.Type.Should().Be("TV");
+				firstResult.Episodes.Should().Be(13);
+				firstResult.MalId.Should().Be(387);
+			}
 		}
 
 		[Fact]
 		public async Task SearchAnime_GirlQuerySecondPage_ShouldFindGirlAnime()
 		{
+			// When
 			AnimeSearchResult returnedAnime = await _jikan.SearchAnime("girl", 2);
 
-			Assert.Contains("Frame Arms Girl", returnedAnime.Results.Select(x => x.Title));
+			// Then
+			returnedAnime.Results.Select(x => x.Title).Should().Contain("Sakura-sou no Pet na Kanojo");
 		}
 
 		[Theory]
@@ -71,206 +88,282 @@ namespace JikanDotNet.Tests
 		[InlineData("death")]
 		public async Task SearchAnime_TVConfig_ShouldReturnNotNullSearchAnime(string query)
 		{
+			// Given
 			var searchConfig = new AnimeSearchConfig
 			{
 				Type = AnimeType.TV
 			};
 
+			// When
 			AnimeSearchResult returnedAnime = await _jikan.SearchAnime(query, searchConfig);
 
-			Assert.NotNull(returnedAnime);
+			// Then
+			returnedAnime.Should().Be(returnedAnime);
 		}
 
 		[Fact]
 		public async Task SearchAnime_DanganronpaTVConfig_ShouldReturnDanganronpaAnime()
 		{
+			// Given
 			var searchConfig = new AnimeSearchConfig
 			{
 				Type = AnimeType.TV
 			};
 
+			// When
 			AnimeSearchResult danganronpaAnime = await _jikan.SearchAnime("danganronpa", searchConfig);
 
-			Assert.Equal(2, danganronpaAnime.ResultLastPage);
+			// Then
+			danganronpaAnime.ResultLastPage.Should().Be(2);
 		}
 
 		[Fact]
 		public async Task SearchAnime_FairyTailTVAbove7Config_ShouldFilterFairyTailAnimeScore()
 		{
+			// Given
 			var searchConfig = new AnimeSearchConfig
 			{
 				Type = AnimeType.TV,
 				Score = 7
 			};
 
+			// When
 			AnimeSearchResult fairyTailAnime = await _jikan.SearchAnime("Fairy Tail", searchConfig);
 
-			Assert.Equal("Fairy Tail (2014)", fairyTailAnime.Results.First().Title);
-			Assert.Equal("Fairy Tail: Final Series", fairyTailAnime.Results.Skip(1).First().Title);
+			// Then
+			using (new AssertionScope())
+			{
+				fairyTailAnime.Results.First().Title.Should().Be("Fairy Tail (2014)");
+				fairyTailAnime.Results.Skip(1).First().Title.Should().Be("Fairy Tail: Final Series");
+			}
 		}
 
 		[Fact]
 		public async Task SearchAnime_BlameMechaConfig_ShouldFilterBleachMecha()
 		{
+			// Given
 			var searchConfig = new AnimeSearchConfig();
 			searchConfig.Genres.Add(GenreSearch.Mecha);
 
+			// When
 			AnimeSearchResult returnedAnime = await _jikan.SearchAnime("Blame", searchConfig);
 
-			Assert.Contains("Blame! Movie", returnedAnime.Results.Select(x => x.Title));
+			// Then
+			returnedAnime.Results.Select(x => x.Title).Should().Contain("Blame! Movie");
 		}
 
 		[Fact]
 		public async Task SearchAnime_BlameMechaMovieConfig_ShouldFilterBleachMechaMovie()
 		{
+			// Given
 			var searchConfig = new AnimeSearchConfig
 			{
 				Type = AnimeType.Movie
 			};
 			searchConfig.Genres.Add(GenreSearch.Mecha);
 
+			// When
 			AnimeSearchResult returnedAnime = await _jikan.SearchAnime("Blame", searchConfig);
 
-			Assert.Equal("Blame! Movie", returnedAnime.Results.First().Title);
+			// Then
+			returnedAnime.Results.First().Title.Should().Be("Blame! Movie");
 		}
 
 		[Fact]
 		public async Task SearchAnime_BleachAfter2017Config_ShouldFilterBleachAfter2017()
 		{
+			// Given
 			System.DateTime configDate = new System.DateTime(2018, 1, 1);
 			var searchConfig = new AnimeSearchConfig
 			{
 				StartDate = configDate
 			};
 
+			// When
 			AnimeSearchResult returnedAnime = await _jikan.SearchAnime("Bleach", searchConfig);
 
-			Assert.Contains("Full Metal Panic! Invisible Victory", returnedAnime.Results.Select(x => x.Title));
-			Assert.Contains("Beatless", returnedAnime.Results.Select(x => x.Title));
+			// Then
+			var titles = returnedAnime.Results.Select(x => x.Title);
+			using (new AssertionScope())
+			{
+				titles.Should().Contain("Full Metal Panic! Invisible Victory");
+				titles.Should().Contain("Beatless");
+			}
 		}
 
 		[Fact]
 		public async Task SearchAnime_OneSortByMembersConfig_ShouldSortByPopularityOPMFirst()
 		{
+			// Given
 			var searchConfig = new AnimeSearchConfig
 			{
 				OrderBy = AnimeSearchSortable.Members,
 				SortDirection = SortDirection.Descending
 			};
 
+			// When
 			AnimeSearchResult returnedAnime = await _jikan.SearchAnime("one", searchConfig);
 
-			Assert.Contains("One Piece", returnedAnime.Results.Select(x => x.Title));
-			Assert.Contains("One Punch Man", returnedAnime.Results.Select(x => x.Title));
-			Assert.Equal("One Punch Man", returnedAnime.Results.First().Title);
+			// Then
+			var titles = returnedAnime.Results.Select(x => x.Title);
+			using (new AssertionScope())
+			{
+				titles.Should().Contain("One Piece");
+				titles.Should().Contain("One Punch Man");
+				titles.First().Should().Be("One Punch Man");
+			}
 		}
 
 		[Fact]
 		public async Task SearchAnime_OneSortByIdConfig_ShouldSortByIdHachimitsuFirst()
 		{
+			// Given
 			var searchConfig = new AnimeSearchConfig
 			{
 				OrderBy = AnimeSearchSortable.Id,
 				SortDirection = SortDirection.Ascending
 			};
 
+			// When
 			AnimeSearchResult returnedAnime = await _jikan.SearchAnime("one", searchConfig);
 
-			Assert.Equal("Hachimitsu to Clover", returnedAnime.Results.First().Title);
+			// Then
+			returnedAnime.Results.First().Title.Should().Be("Hachimitsu to Clover");
 		}
 
 		[Fact]
 		public async Task SearchAnime_VioletProducerKyotoAnimationConfig_ShouldReturnVEGAsTop3()
 		{
+			// Given
 			var searchConfig = new AnimeSearchConfig
 			{
 				ProducerId = 2
 			};
 
+			// When
 			AnimeSearchResult returnedAnime = await _jikan.SearchAnime("violet", searchConfig);
 
-			Assert.Contains("Evergarden", returnedAnime.Results.First().Title);
-			Assert.Contains("Evergarden", returnedAnime.Results.Skip(1).First().Title);
-			Assert.Contains("Evergarden", returnedAnime.Results.Skip(2).First().Title);
+			// Then
+			using (new AssertionScope())
+			{
+				returnedAnime.Results.First().Title.Should().Contain("Evergarden");
+				returnedAnime.Results.Skip(1).First().Title.Should().Contain("Evergarden");
+				returnedAnime.Results.Skip(2).First().Title.Should().Contain("Evergarden");
+			}
 		}
 
 		[Fact]
 		public async Task SearchAnime_VioletIncorrectProducerConfig_ShouldNotFilter()
 		{
+			// Given
 			var searchConfig = new AnimeSearchConfig
 			{
 				ProducerId = -1
 			};
 
+			// When
 			AnimeSearchResult returnedAnime = await _jikan.SearchAnime("violet", searchConfig);
 
-			Assert.Contains("Violence Jack: Jigoku Gai-hen", returnedAnime.Results.Select(x => x.Title));
-			Assert.Contains("Violet Evergarden", returnedAnime.Results.Select(x => x.Title));
+			// Then
+			var titles = returnedAnime.Results.Select(x => x.Title);
+			using (new AssertionScope())
+			{
+				titles.Should().Contain("Violence Jack: Jigoku Gai-hen");
+				titles.Should().Contain("Violet Evergarden");
+			}
 		}
 
 		[Fact]
 		public async Task SearchAnime_EmptyQueryActionTvAnime_ShouldFindAfroSamuraiAndAjin()
 		{
+			// Given
 			var searchConfig = new AnimeSearchConfig
 			{
 				Type = AnimeType.TV,
 				Genres = new List<GenreSearch> { GenreSearch.Action }
 			};
 
+			// When
 			AnimeSearchResult returnedAnime = await _jikan.SearchAnime(searchConfig);
 
-			Assert.Contains("Ajin", returnedAnime.Results.Select(x => x.Title));
-			Assert.Contains("Afro Samurai", returnedAnime.Results.Select(x => x.Title));
+			// Then
+			var titles = returnedAnime.Results.Select(x => x.Title);
+			using (new AssertionScope())
+			{
+				titles.Should().Contain("Ajin");
+				titles.Should().Contain("Afro Samurai");
+			}
 		}
 
 		[Fact]
 		public async Task SearchAnime_EmptyQueryActionTvAnimeFirstPage_ShouldFindAfroSamuraiAndAjin()
 		{
+			// Given
 			var searchConfig = new AnimeSearchConfig
 			{
 				Type = AnimeType.TV,
 				Genres = new List<GenreSearch> { GenreSearch.Action }
 			};
 
+			// When
 			AnimeSearchResult returnedAnime = await _jikan.SearchAnime(searchConfig, 1);
 
-			Assert.Contains("Ajin", returnedAnime.Results.Select(x => x.Title));
-			Assert.Contains("Afro Samurai", returnedAnime.Results.Select(x => x.Title));
+			// Then
+			var titles = returnedAnime.Results.Select(x => x.Title);
+			using (new AssertionScope())
+			{
+				titles.Should().Contain("Ajin");
+				titles.Should().Contain("Afro Samurai");
+			}
 		}
 
 		[Fact]
 		public async Task SearchAnime_EmptyQueryActionTvAnimeSecondPage_ShouldFindAzurLaneAndBaccano()
 		{
+			// Given
 			var searchConfig = new AnimeSearchConfig
 			{
 				Type = AnimeType.TV,
 				Genres = new List<GenreSearch> { GenreSearch.Action }
 			};
 
+			// When
 			AnimeSearchResult returnedAnime = await _jikan.SearchAnime(searchConfig, 2);
 
-			Assert.Contains("Azur Lane", returnedAnime.Results.Select(x => x.Title));
-			Assert.Contains("Baccano!", returnedAnime.Results.Select(x => x.Title));
+			// Then
+			var titles = returnedAnime.Results.Select(x => x.Title);
+			using (new AssertionScope())
+			{
+				titles.Should().Contain("Azur Lane");
+				titles.Should().Contain("Baccano!");
+			}
 		}
 
 		[Fact]
 		public async Task SearchAnime_OneQueryActionCompletedAnimeSecondPage_ShouldReturnNotEmptyCollection()
 		{
+			// Given
 			var searchConfig = new AnimeSearchConfig
 			{
 				Status = AiringStatus.Completed,
 				Genres = new List<GenreSearch> { GenreSearch.Action }
 			};
 
+			// When
 			AnimeSearchResult returnedAnime = await _jikan.SearchAnime("one", 2, searchConfig);
 
-			Assert.NotNull(returnedAnime);
-			Assert.NotEmpty(returnedAnime.Results);
+			// Then
+			using (new AssertionScope())
+			{
+				returnedAnime.Should().NotBeNull();
+				returnedAnime.Results.Should().NotBeEmpty();
+			}
 		}
 
 		[Fact]
 		public async Task SearchAnime_GenreInclusion_ShouldReturnNotEmptyCollection()
 		{
+			// Given
 			var searchConfig = new AnimeSearchConfig
 			{
 				Genres = new List<GenreSearch> { GenreSearch.Action, GenreSearch.Comedy },
@@ -279,15 +372,21 @@ namespace JikanDotNet.Tests
 				SortDirection = SortDirection.Descending
 			};
 
+			// When
 			AnimeSearchResult returnedAnime = await _jikan.SearchAnime(searchConfig);
 
-			Assert.NotNull(returnedAnime);
-			Assert.NotEmpty(returnedAnime.Results);
+			// Then
+			using (new AssertionScope())
+			{
+				returnedAnime.Should().NotBeNull();
+				returnedAnime.Results.Should().NotBeEmpty();
+			}
 		}
 
 		[Fact]
 		public async Task SearchAnime_GenreExclusion_ShouldReturnNotEmptyCollection()
 		{
+			// Given
 			var searchConfig = new AnimeSearchConfig
 			{
 				Genres = new List<GenreSearch> { GenreSearch.Action, GenreSearch.Adventure },
@@ -296,10 +395,15 @@ namespace JikanDotNet.Tests
 				SortDirection = SortDirection.Descending
 			};
 
+			// When
 			AnimeSearchResult returnedAnime = await _jikan.SearchAnime(searchConfig);
 
-			Assert.NotNull(returnedAnime);
-			Assert.NotEmpty(returnedAnime.Results);
+			// Then
+			using (new AssertionScope())
+			{
+				returnedAnime.Should().NotBeNull();
+				returnedAnime.Results.Should().NotBeEmpty();
+			}
 		}
 	}
 }

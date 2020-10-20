@@ -1,3 +1,5 @@
+using FluentAssertions;
+using FluentAssertions.Execution;
 using JikanDotNet.Exceptions;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,9 +22,11 @@ namespace JikanDotNet.Tests
 		[InlineData(6)]
 		public async Task GetAnime_CorrectId_ShouldReturnNotNullAnime(long malId)
         {
+			// When
 			Anime returnedAnime = await _jikan.GetAnime(malId);
 
-			Assert.NotNull(returnedAnime);
+			// Then
+			returnedAnime.Should().NotBeNull();
         }
 
 		[Theory]
@@ -31,93 +35,120 @@ namespace JikanDotNet.Tests
 		[InlineData(4)]
 		public void GetAnime_WrongId_ShouldThrowException(long malId)
 		{
+			// When & Then
 			Assert.ThrowsAnyAsync<JikanRequestException>(() => _jikan.GetAnime(malId));
 		}
 
 		[Fact]
 		public async Task GetAnime_MSGundamId_ShouldParseGundam()
 		{
+			// When
 			Anime gundamAnime = await _jikan.GetAnime(80);
 
-			Assert.Equal("Mobile Suit Gundam", gundamAnime.Title);
+			// Then
+			gundamAnime.Title.Should().Be("Mobile Suit Gundam");
 		}
 
 		[Fact]
 		public async Task GetAnime_BebopId_ShouldParseCowboyBebop()
 		{
+			// When
 			Anime bebopAnime = await _jikan.GetAnime(1);
 
-			Assert.Equal("Cowboy Bebop", bebopAnime.Title);
+			// Then
+			bebopAnime.Title.Should().Be("Cowboy Bebop");
 		}
 
 		[Fact]
 		public async Task GetAnime_BebopId_ShouldParseCowboyBebopRelatedAnime()
 		{
+			// When
 			Anime bebopAnime = await _jikan.GetAnime(1);
 
-			Assert.Equal(2, bebopAnime.Related.Adaptations.Count);
-			Assert.Equal(2, bebopAnime.Related.SideStories.Count);
-			Assert.Single(bebopAnime.Related.Summaries);
+			// Then
+			using (new AssertionScope())
+			{
+				bebopAnime.Related.Adaptations.Should().HaveCount(2);
+				bebopAnime.Related.Summaries.Should().ContainSingle();
+			}
 		}
 
 		[Fact]
 		public async Task GetAnime_FSNId_ShouldParseFateStayNightRelatedAnime()
 		{
+			// When
 			Anime fsnAnime = await _jikan.GetAnime(356);
 
-			Assert.True(fsnAnime.Related.AlternativeVersions.Count > 3);
+			// Then
+			fsnAnime.Related.AlternativeVersions.Count.Should().BeGreaterThan(3);
 		}
 
 		[Fact]
 		public async Task GetAnime_FSNReproductionId_ShouldParseFateStayNightReproductionRelatedAnime()
 		{
+			// When
 			Anime fsnAnime = await _jikan.GetAnime(7559);
 
-			Assert.Equal("Fate/stay night", fsnAnime.Related.FullStories.First().Name);
+			// Then
+			fsnAnime.Related.FullStories.First().Name.Should().Be("Fate/stay night");
 		}
 
 		[Fact]
 		public async Task GetAnime_KamiNomiId_ShouldParseKamiNomiRelatedAnime()
 		{
-			Anime fsnAnime = await _jikan.GetAnime(17725);
+			// When
+			Anime kamiNomi = await _jikan.GetAnime(17725);
 
-			Assert.Equal("Kami nomi zo Shiru Sekai", fsnAnime.Related.ParentStories.First().Name);
+			// Then
+			kamiNomi.Related.ParentStories.First().Name.Should().Be("Kami nomi zo Shiru Sekai");
 		}
 
 		[Fact]
 		public async Task GetAnime_CardcaptorId_ShouldParseCardcaptorSakuraInformation()
 		{
+			// When
 			Anime cardcaptor = await _jikan.GetAnime(232);
 
-			Assert.Equal(70, cardcaptor.Episodes);
-			Assert.Equal("TV", cardcaptor.Type);
-			Assert.Equal("Spring 1998", cardcaptor.Premiered);
-			Assert.Equal("25 min per ep", cardcaptor.Duration);
-			Assert.Equal("PG - Children", cardcaptor.Rating);
-			Assert.Equal("Tuesdays at 18:00 (JST)", cardcaptor.Broadcast);
-			Assert.Equal("Manga", cardcaptor.Source);
+			// Then
+			using (new AssertionScope())
+			{
+				cardcaptor.Episodes.Should().Be(70);
+				cardcaptor.Type.Should().Be("TV");
+				cardcaptor.Premiered.Should().Be("Spring 1998");
+				cardcaptor.Duration.Should().Be("25 min per ep");
+				cardcaptor.Rating.Should().Be("PG - Children");
+				cardcaptor.Broadcast.Should().Be("Tuesdays at 18:00 (JST)");
+				cardcaptor.Source.Should().Be("Manga");
+			}
 		}
 
 		[Fact]
 		public async Task GetAnime_AkiraId_ShouldParseAkiraCollections()
 		{
+			// When
 			Anime akiraAnime = await _jikan.GetAnime(47);
 
-			Assert.Equal(3, akiraAnime.Producers.Count);
-			Assert.Equal(3, akiraAnime.Licensors.Count);
-			Assert.Equal(1, akiraAnime.Studios.Count);
-			Assert.Equal(7, akiraAnime.Genres.Count);
-			Assert.Equal("Funimation", akiraAnime.Licensors.First().ToString());
-			Assert.Equal("Tokyo Movie Shinsha", akiraAnime.Studios.First().ToString());
-			Assert.Equal("Action", akiraAnime.Genres.First().ToString());
+			// Then
+			using (new AssertionScope())
+			{
+				akiraAnime.Producers.Should().HaveCount(3);
+				akiraAnime.Licensors.Should().HaveCount(3);
+				akiraAnime.Studios.Should().ContainSingle();
+				akiraAnime.Genres.Should().HaveCount(7);
+				akiraAnime.Licensors.First().ToString().Should().Be("Funimation");
+				akiraAnime.Studios.First().ToString().Should().Be("Tokyo Movie Shinsha");
+				akiraAnime.Genres.First().ToString().Should().Be("Action");
+			}
 		}
 
 		[Fact]
 		public async Task GetAnime_KeyTheMetalIdolId_ShouldParseAnimeWithNoRelatedAdaptations()
 		{
+			// Given
 			Anime returnedAnime = await _jikan.GetAnime(1457);
 
-			Assert.Null(returnedAnime.Related.Adaptations);
+			// When
+			returnedAnime.Related.Adaptations.Should().BeNull();
 		}
 	}
 }

@@ -1,4 +1,6 @@
-﻿using JikanDotNet.Exceptions;
+﻿using FluentAssertions;
+using FluentAssertions.Execution;
+using JikanDotNet.Exceptions;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -20,9 +22,11 @@ namespace JikanDotNet.Tests
 		[InlineData(3)]
 		public async Task GetCharacter_CorrectId_ShouldReturnNotNullCharacter(long malId)
 		{
+			// When
 			Character returnedCharacter = await _jikan.GetCharacter(malId);
 
-			Assert.NotNull(returnedCharacter);
+			// Then
+			returnedCharacter.Should().NotBeNull();
 		}
 
 		[Theory]
@@ -31,45 +35,58 @@ namespace JikanDotNet.Tests
 		[InlineData(10)]
 		public void GetCharacter_WrongId_ShouldReturnNullCharacter(long malId)
 		{
+			// When & Then
 			Assert.ThrowsAnyAsync<JikanRequestException>(() => _jikan.GetCharacter(malId));
 		}
 
 		[Fact]
 		public async Task GetCharacter_IchigoKurosakiId_ShouldParseIchigoKurosaki()
 		{
+			// When
 			Character ichigo = await _jikan.GetCharacter(5);
 
-			Assert.Equal("Ichigo Kurosaki", ichigo.Name);
+			// Then
+			ichigo.Name.Should().Be("Ichigo Kurosaki");
 		}
 
 		[Fact]
 		public async Task GetCharacter_IchigoKurosakiId_ShouldParseIchigoKurosakiAboutNotNull()
 		{
+			// When
 			Character ichigo = await _jikan.GetCharacter(5);
 
-			Assert.NotNull(ichigo.About);
-			Assert.NotEmpty(ichigo.About);
+			// Then
+			ichigo.About.Should().NotBeNullOrEmpty();
 		}
 
 		[Fact]
 		public async Task GetCharacter_IchigoKurosakiId_ShouldParseIchigoKurosakiBleach()
 		{
+			// When
 			Character ichigo = await _jikan.GetCharacter(5);
 
-			Assert.Contains("Bleach", ichigo.Animeography.Select(x => x.Name));
-			Assert.Contains("Bleach", ichigo.Mangaography.Select(x => x.Name));
+			// Then
+			using (new AssertionScope())
+			{
+				ichigo.Animeography.Select(x => x.Name).Should().Contain("Bleach");
+				ichigo.Mangaography.Select(x => x.Name).Should().Contain("Bleach");
+			}
 		}
 
 		[Fact]
 		public async Task GetCharacter_EinId_ShouldParseEin()
 		{
+			// When
 			Character ein = await _jikan.GetCharacter(4);
 
-			Assert.Equal("Ein", ein.Name);
-
-			Assert.Equal("Supporting", ein.Animeography.First().Role);
-			Assert.Equal("Supporting", ein.Mangaography.First().Role);
-			Assert.Equal("Main", ein.Animeography.Last().Role);
+			// Then
+			using (new AssertionScope())
+			{
+				ein.Name.Should().Be("Ein");
+				ein.Animeography.First().Role.Should().Be("Supporting");
+				ein.Mangaography.First().Role.Should().Be("Supporting");
+				ein.Animeography.Last().Role.Should().Be("Main");
+			}
 		}
 	}
 }
