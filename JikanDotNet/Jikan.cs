@@ -22,11 +22,6 @@ namespace JikanDotNet
 		private readonly HttpClient _httpClient;
 
 		/// <summary>
-		/// Should library use HTTPS protocol instead of HTTP.
-		/// </summary>
-		private readonly bool _useHttps;
-
-		/// <summary>
 		/// Should exception be thrown in case of failed request.
 		/// </summary>
 		private readonly bool _suppressException;
@@ -47,7 +42,6 @@ namespace JikanDotNet
 		/// <param name="suppressException">Should exception be thrown in case of failed request. If true, failed request return null.</param>
 		public Jikan(bool useHttps, bool suppressException = false)
 		{
-			_useHttps = useHttps;
 			_suppressException = suppressException;
 			_httpClient = HttpProvider.GetHttpClient(useHttps);
 		}
