@@ -4,7 +4,7 @@ using System.Net;
 namespace JikanDotNet.Exceptions
 {
 	/// <summary>
-	/// Exception class thrown when request is not handled properly/
+	/// Exception class thrown when request is not handled properly.
 	/// </summary>
 	public class JikanRequestException : Exception
 	{
