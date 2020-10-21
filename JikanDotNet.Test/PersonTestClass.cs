@@ -1,4 +1,7 @@
-﻿using JikanDotNet.Exceptions;
+﻿using FluentAssertions;
+using FluentAssertions.Execution;
+using JikanDotNet.Exceptions;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -20,9 +23,11 @@ namespace JikanDotNet.Tests
 		[InlineData(3)]
 		public async Task GetPerson_CorrectId_ShouldReturnNotNullPerson(long malId)
 		{
-			Person returnedPerson = await _jikan.GetPerson(malId);
+			// Given
+			var returnedPerson = await _jikan.GetPerson(malId);
 
-			Assert.NotNull(returnedPerson);
+			// Then
+			returnedPerson.Should().NotBeNull();
 		}
 
 		[Theory]
@@ -31,25 +36,39 @@ namespace JikanDotNet.Tests
 		[InlineData(13312)]
 		public void GetPerson_WrongId_ShouldReturnNullPerson(long malId)
 		{
-			Assert.ThrowsAnyAsync<JikanRequestException>(() => _jikan.GetPerson(malId));
+			// When
+			Func<Task<Person>> func = _jikan.Awaiting(x => x.GetPerson(malId));
+
+			// Then
+			func.Should().ThrowExactlyAsync<JikanRequestException>();
 		}
 
 		[Fact]
 		public async Task GetPerson_WakamotoId_ShouldParseNorioWakamoto()
 		{
-			Person norioWakamoto = await _jikan.GetPerson(84);
+			// Given
+			var norioWakamoto = await _jikan.GetPerson(84);
 
-			Assert.Equal("Norio Wakamoto", norioWakamoto.Name);
-			Assert.Equal(1945, norioWakamoto.Birthday.Value.Year);
+			// Then
+			using (new AssertionScope())
+			{
+				norioWakamoto.Name.Should().Be("Norio Wakamoto");
+				norioWakamoto.Birthday.Value.Year.Should().Be(1945);
+			}
 		}
 
 		[Fact]
 		public async Task GetPerson_MinoriSuzukiId_ShouldParseMinoriSuzukiRoles()
 		{
-			Person minoriSuzuki = await _jikan.GetPerson(39460);
+			// Given
+			var minoriSuzuki = await _jikan.GetPerson(39460);
 
-			Assert.Contains("Wion, Freyja", minoriSuzuki.VoiceActingRoles.Select(x => x.Character.Name));
-			Assert.Contains("Cardcaptor Sakura: Clear Card-hen", minoriSuzuki.VoiceActingRoles.Select(x => x.Anime.Name));
+			// Then
+			using (new AssertionScope())
+			{
+				minoriSuzuki.VoiceActingRoles.Select(x => x.Character.Name).Should().Contain("Wion, Freyja");
+				minoriSuzuki.VoiceActingRoles.Select(x => x.Anime.Name).Should().Contain("Cardcaptor Sakura: Clear Card-hen");
+			}
 		}
 	}
 }

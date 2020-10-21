@@ -1,4 +1,5 @@
-﻿using JikanDotNet.Exceptions;
+﻿using FluentAssertions;
+using JikanDotNet.Exceptions;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -16,25 +17,31 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task SearchAnime_EmptyQuery_ShouldReturnNoResult()
 		{
+			// When
 			var nullAnime = await _jikan.SearchAnime("");
 
-			Assert.Empty(nullAnime.Results);
+			// Then
+			nullAnime.Results.Should().BeEmpty();
 		}
 
 		[Fact]
 		public async Task SearchMaga_EmptyQuery_ShouldReturnNoResult()
 		{
+			// When
 			var nullManga = await _jikan.SearchManga("");
 
-			Assert.Empty(nullManga.Results);
+			// Then
+			nullManga.Results.Should().BeEmpty();
 		}
 
 		[Fact]
 		public async Task SearchPerson_EmptyQuery_ShouldReturnNoResult()
 		{
+			// When
 			var nullPerson = await _jikan.SearchPerson("");
 
-			Assert.Empty(nullPerson.Results);
+			// Then
+			nullPerson.Results.Should().BeEmpty();
 		}
 
 		[Fact]

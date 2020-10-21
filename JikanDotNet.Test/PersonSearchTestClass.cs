@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using FluentAssertions;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -19,41 +20,51 @@ namespace JikanDotNet.Tests
 		[InlineData("sawashiro")]
 		public async Task SearchPerson_NonEmptyQuery_ShouldReturnNotNullSearchPerson(string query)
 		{
-			PersonSearchResult returnedPerson = await _jikan.SearchPerson(query);
+			// When
+			var returnedPerson = await _jikan.SearchPerson(query);
 
-			Assert.NotNull(returnedPerson);
+			// Then
+			returnedPerson.Should().NotBeNull();
 		}
 
 		[Fact]
 		public async Task SearchPerson_MaayaQuery_ShouldReturnSakamoto()
 		{
-			PersonSearchResult returnedPerson = await _jikan.SearchPerson("maaya");
+			// When
+			var returnedPerson = await _jikan.SearchPerson("maaya");
 
-			Assert.NotEmpty(returnedPerson.Results);
+			// Then
+			returnedPerson.Results.Should().NotBeNullOrEmpty();
 		}
 
 		[Fact]
 		public async Task SearchPerson_MaayaQuery_ShouldReturnMaayaName()
 		{
-			PersonSearchResult returnedPerson = await _jikan.SearchPerson("maaya");
+			// When
+			var returnedPerson = await _jikan.SearchPerson("maaya");
 
-			Assert.Equal("Maaya", returnedPerson.Results.First().Name);
+			// Then
+			returnedPerson.Results.First().Name.Should().Be("Maaya");
 		}
 
 		[Fact]
 		public async Task SearchPerson_MaayaQuery_ShouldReturnMaayaMalId()
 		{
-			PersonSearchResult returnedPerson = await _jikan.SearchPerson("maaya");
+			// When
+			var returnedPerson = await _jikan.SearchPerson("maaya");
 
-			Assert.Equal(39860, returnedPerson.Results.First().MalId);
+			// Then
+			returnedPerson.Results.First().MalId.Should().Be(39860);
 		}
 
 		[Fact]
 		public async Task SearchPerson_DaisukeQuerySecondPage_ShouldReturnDaisuke()
 		{
-			PersonSearchResult returnedPerson = await _jikan.SearchPerson("daisuke", 2);
+			// When
+			var returnedPerson = await _jikan.SearchPerson("daisuke", 2);
 
-			Assert.Contains("Ishikawa, Daisuke", returnedPerson.Results.Select(x => x.Name));
+			// Then
+			returnedPerson.Results.Select(x => x.Name).Should().Contain("Ishikawa, Daisuke");
 		}
 	}
 }

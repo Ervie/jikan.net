@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using FluentAssertions;
+using FluentAssertions.Execution;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -16,47 +18,67 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task GetProducer_PierrotId_ShouldParseStudioPierrot()
 		{
-			Producer producer = await _jikan.GetProducer(1);
+			// When
+			var producer = await _jikan.GetProducer(1);
 
-			Assert.NotNull(producer);
-			Assert.Equal("Studio Pierrot", producer.Metadata.Name);
-			Assert.Equal(1, producer.Metadata.MalId);
-			Assert.Equal(1, producer.MalId);
-			Assert.Equal("Tokyo Ghoul", producer.Anime.First().Title);
-			Assert.Contains("Black Clover", producer.Anime.Select(x => x.Title));
+			// Then
+			using (new AssertionScope())
+			{
+				producer.Should().NotBeNull();
+				producer.Metadata.Name.Should().Be("Studio Pierrot");
+				producer.MalId.Should().Be(1);
+				producer.Metadata.MalId.Should().Be(1);
+				producer.Anime.First().Title.Should().Be("Tokyo Ghoul");
+				producer.Anime.Select(x => x.Title).Should().Contain("Black Clover");
+			}
 		}
 
 		[Fact]
 		public async Task GetProducer_PierrotIdSecondPage_ShouldParseStudioPierrotSecondPage()
 		{
-			Producer producer = await _jikan.GetProducer(1, 2);
+			// When
+			var producer = await _jikan.GetProducer(1, 2);
 
-			Assert.NotNull(producer);
-			Assert.Contains("Yuu☆Yuu☆Hakusho: Eizou Hakusho II", producer.Anime.Select(x => x.Title));
+			// Then
+			using (new AssertionScope())
+			{
+				producer.Should().NotBeNull();
+				producer.Anime.Select(x => x.Title).Should().Contain("Yuu☆Yuu☆Hakusho: Eizou Hakusho II");
+			}
 		}
 
 		[Fact]
 		public async Task GetProducer_KyoAniId_ShouldParseKyotoAnimation()
 		{
-			Producer producer = await _jikan.GetProducer(2);
+			// When
+			var producer = await _jikan.GetProducer(2);
 
-			Assert.NotNull(producer);
-			Assert.Equal("Kyoto Animation", producer.Metadata.Name);
-			Assert.Equal(2, producer.Metadata.MalId);
-			Assert.Contains("Clannad", producer.Anime.Select(x => x.Title));
-			Assert.Contains("Violet Evergarden", producer.Anime.Select(x => x.Title));
+			// Then
+			using (new AssertionScope())
+			{
+				producer.Should().NotBeNull();
+				producer.Metadata.Name.Should().Be("Kyoto Animation");
+				producer.Metadata.MalId.Should().Be(2);
+				producer.Anime.Select(x => x.Title).Should().Contain("Clannad");
+				producer.Anime.Select(x => x.Title).Should().Contain("Violet Evergarden");
+			}
 		}
 
 		[Fact]
 		public async Task GetProducer_BonesId_ShouldParseBones()
 		{
-			Producer producer = await _jikan.GetProducer(4);
+			// When
+			var producer = await _jikan.GetProducer(4);
 
-			Assert.NotNull(producer);
-			Assert.Equal("Bones", producer.Metadata.Name);
-			Assert.Equal(4, producer.Metadata.MalId);
-			Assert.Equal("Fullmetal Alchemist: Brotherhood", producer.Anime.First().Title);
-			Assert.Contains("Soul Eater", producer.Anime.Select(x => x.Title));
+			// Then
+			using (new AssertionScope())
+			{
+				producer.Should().NotBeNull();
+				producer.Metadata.Name.Should().Be("Bones");
+				producer.Metadata.MalId.Should().Be(4);
+				producer.Anime.First().Title.Should().Be("Fullmetal Alchemist: Brotherhood");
+				producer.Anime.Select(x => x.Title).Should().Contain("Soul Eater");
+			}
 		}
 	}
 }

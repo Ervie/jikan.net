@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using FluentAssertions;
+using FluentAssertions.Execution;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -16,36 +18,56 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task GetSchedule_AllSchedule_ShouldParseCurrentSchedule()
 		{
-			Schedule currentSeason = await _jikan.GetSchedule();
+			// When
+			var currentSeason = await _jikan.GetSchedule();
 
-			Assert.NotNull(currentSeason);
+			// Then
+			currentSeason.Should().NotBeNull();
 		}
 
 		[Fact]
 		public async Task GetSchedule_Monday_ShouldParseMondaySchedule()
 		{
-			Schedule currentSeason = await _jikan.GetSchedule(ScheduledDay.Monday);
+			// When
+			var currentSeason = await _jikan.GetSchedule(ScheduledDay.Monday);
 
-			Assert.Contains("The God of High School", currentSeason.Monday.Select(x => x.Title));
-			Assert.Contains("Kingdom 3rd Season", currentSeason.Monday.Select(x => x.Title));
+			// Then
+			var mondayScheduleTitles = currentSeason.Monday.Select(x => x.Title);
+			using (new AssertionScope())
+			{
+				mondayScheduleTitles.Should().Contain("Golden Kamuy 3rd Season");
+				mondayScheduleTitles.Should().Contain("Kingdom 3rd Season");
+			}
 		}
 
 		[Fact]
 		public async Task GetSchedule_Friday_ShouldParseFridaySchedule()
 		{
-			Schedule currentSeason = await _jikan.GetSchedule(ScheduledDay.Friday);
+			// When
+			var currentSeason = await _jikan.GetSchedule(ScheduledDay.Friday);
 
-			Assert.Contains("Zoids Wild Zero", currentSeason.Friday.Select(x => x.Title));
-			Assert.Contains("Crayon Shin-chan", currentSeason.Friday.Select(x => x.Title));
+			// Then
+			var fridayScheduleTitles = currentSeason.Friday.Select(x => x.Title);
+			using (new AssertionScope())
+			{
+				fridayScheduleTitles.Should().Contain("Adachi to Shimamura");
+				fridayScheduleTitles.Should().Contain("Crayon Shin-chan");
+			}
 		}
+
 		[Fact]
 		public async Task GetSchedule_UnknownSchedule_ShouldParseUnknownSchedule()
 		{
-			Schedule currentSeason = await _jikan.GetSchedule(ScheduledDay.Unknown);
+			// When
+			var currentSeason = await _jikan.GetSchedule(ScheduledDay.Unknown);
 
-			Assert.Contains("Yodel no Onna", currentSeason.Unknown.Select(x => x.Title));
-			Assert.Contains("Jinxiu Shenzhou Zhi Qi You Ji", currentSeason.Unknown.Select(x => x.Title));
+			// Then
+			var unknownScheduleTitles = currentSeason.Unknown.Select(x => x.Title);
+			using (new AssertionScope())
+			{
+				unknownScheduleTitles.Should().Contain("Yodel no Onna");
+				unknownScheduleTitles.Should().Contain("Jinxiu Shenzhou Zhi Qi You Ji");
+			}
 		}
-
 	}
 }
