@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using FluentAssertions;
+using FluentAssertions.Execution;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -16,49 +18,69 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task GetMagazine_BigComicOriginalId_ShouldParseBigComicOriginal()
 		{
-			Magazine magazine = await _jikan.GetMagazine(1);
+			// When
+			var magazine = await _jikan.GetMagazine(1);
 
-			Assert.NotNull(magazine);
-			Assert.Equal("Big Comic Original", magazine.Metadata.Name);
-			Assert.Equal(1, magazine.Metadata.MalId);
-			Assert.Equal(1, magazine.MalId);
-			Assert.Equal("Monster", magazine.Manga.First().Title);
-			Assert.Contains("Pluto", magazine.Manga.Select(x => x.Title));
+			// Then
+			using (new AssertionScope())
+			{
+				magazine.Should().NotBeNull();
+				magazine.Metadata.Name.Should().Be("Big Comic Original");
+				magazine.Metadata.MalId.Should().Be(1);
+				magazine.MalId.Should().Be(1);
+				magazine.Manga.First().Title.Should().Be("Monster");
+				magazine.Manga.Select(x => x.Title).Should().Contain("Pluto");
+			}
 		}
 
 		[Fact]
 		public async Task GetMagazine_YoungAnimalId_ShouldParseYoungAnimal()
 		{
-			Magazine magazine = await _jikan.GetMagazine(2);
+			// When
+			var magazine = await _jikan.GetMagazine(2);
 
-			Assert.NotNull(magazine);
-			Assert.Equal("Young Animal", magazine.Metadata.Name);
-			Assert.Equal("Berserk", magazine.Manga.First().Title);
-			Assert.True(magazine.Manga.First().Members > 200000);
-			Assert.Contains("3-gatsu no Lion", magazine.Manga.Select(x => x.Title));
+			// Then
+			using (new AssertionScope())
+			{
+				magazine.Should().NotBeNull();
+				magazine.Metadata.Name.Should().Be("Young Animal");
+				magazine.Manga.First().Title.Should().Be("Berserk");
+				magazine.Manga.First().Members.Should().BeGreaterThan(200000);
+				magazine.Manga.Select(x => x.Title).Should().Contain("3-gatsu no Lion");
+			}
 		}
 
 		[Fact]
 		public async Task GetMagazine_YoungAnimalIdSecondPage_ShouldParseYoungAnimalSecondPage()
 		{
-			Magazine magazine = await _jikan.GetMagazine(2, 2);
+			// When
+			var magazine = await _jikan.GetMagazine(2, 2);
 
-			Assert.NotNull(magazine);
-			Assert.True(magazine.Manga.Count > 10);
+			// Then
+			using (new AssertionScope())
+			{
+				magazine.Should().NotBeNull();
+				magazine.Manga.Count.Should().BeGreaterThan(10);
+			}
 		}
 
 		[Fact]
 		public async Task GetMagazine_ShonenJumpId_ShouldParseShonenJump()
 		{
-			Magazine magazine = await _jikan.GetMagazine(83);
+			// When
+			var magazine = await _jikan.GetMagazine(83);
 
-			Assert.NotNull(magazine);
-			Assert.Equal("Shounen Jump (Weekly)", magazine.Metadata.Name);
-			Assert.Equal(83, magazine.Metadata.MalId);
-			Assert.Equal("One Piece", magazine.Manga.First().Title);
-			Assert.True(magazine.Manga.First().Members > 200000);
-			Assert.Equal("Naruto", magazine.Manga.Skip(1).First().Title);
-			Assert.Contains("Shaman King", magazine.Manga.Select(x => x.Title));
+			// Then
+			using (new AssertionScope())
+			{
+				magazine.Should().NotBeNull();
+				magazine.Metadata.Name.Should().Be("Shounen Jump (Weekly)");
+				magazine.Metadata.MalId.Should().Be(83);
+				magazine.Manga.First().Title.Should().Be("One Piece");
+				magazine.Manga.First().Members.Should().BeGreaterThan(200000);
+				magazine.Manga.Skip(1).First().Title.Should().Be("Naruto");
+				magazine.Manga.Select(x => x.Title).Should().Contain("Shaman King");
+			}
 		}
 	}
 }

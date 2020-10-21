@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FluentAssertions;
+using FluentAssertions.Execution;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -17,122 +19,169 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task GetMangaPictures_MonsterId_ShouldParseMonsterImages()
 		{
-			MangaPictures monster = await _jikan.GetMangaPictures(1);
+			// When
+			var monster = await _jikan.GetMangaPictures(1);
 
-			Assert.Equal(8, monster.Pictures.Count);
+			// Then
+			monster.Pictures.Should().HaveCount(8);
 		}
 
 		[Fact]
 		public async Task GetMangaCharacters_MonsterId_ShouldParseMonsterCharacters()
 		{
-			MangaCharacters monster = await _jikan.GetMangaCharacters(1);
+			// When
+			var monster = await _jikan.GetMangaCharacters(1);
 
-			Assert.Equal(33, monster.Characters.Count);
+			// Then
+			monster.Characters.Should().HaveCount(33);
 		}
 
 		[Fact]
 		public async Task GetMangaPictures_MonsterId_ShouldParseMonsterCharactersJohan()
 		{
-			MangaCharacters monster = await _jikan.GetMangaCharacters(1);
+			// When
+			var monster = await _jikan.GetMangaCharacters(1);
 
-			Assert.Contains("Liebert, Johan", monster.Characters.Select(x => x.Name));
+			// Then
+			monster.Characters.Select(x => x.Name).Should().Contain("Liebert, Johan");
 		}
 
 		[Fact]
 		public async Task GetMangaStatistics_MonsterId_ShouldParseMonsterStats()
 		{
-			MangaStats monster = await _jikan.GetMangaStatistics(1);
+			// When
+			var monster = await _jikan.GetMangaStatistics(1);
 
-			Assert.NotNull(monster.ScoreStats);
-			Assert.True(monster.Completed > 25000);
-			Assert.True(monster.Dropped > 500);
+			// Then
+			using (new AssertionScope())
+			{
+				monster.ScoreStats.Should().NotBeNull();
+				monster.Completed.Should().BeGreaterThan(25000);
+				monster.Dropped.Should().BeGreaterThan(500);
+			}
 		}
 
 		[Fact]
 		public async Task GetMangaNews_MonsterId_ShouldParseMonsterNews()
 		{
-			MangaNews monster = await _jikan.GetMangaNews(1);
+			// When
+			var monster = await _jikan.GetMangaNews(1);
 
-			Assert.Equal(11, monster.News.Count);
-			Assert.Contains("Xinil", monster.News.Select(x => x.Author));
+			// Then
+			using (new AssertionScope())
+			{
+				monster.News.Should().HaveCount(11);
+				monster.News.Select(x => x.Author).Should().Contain("Xinil");
+			}
 		}
 
 		[Fact]
 		public async Task GetMangaForumTopics_MonsterId_ShouldParseMonsterTopics()
 		{
-			ForumTopics monster = await _jikan.GetMangaForumTopics(1);
+			// When
+			var monster = await _jikan.GetMangaForumTopics(1);
 
-			Assert.Contains(395611, monster.Topics.Select(x => x.TopicId));
-			Assert.Contains(57668, monster.Topics.Select(x => x.TopicId));
+			// Then
+			var topics = monster.Topics.Select(x => x.TopicId);
+			using (new AssertionScope())
+			{
+				topics.Should().Contain(395611);
+				topics.Should().Contain(57668);
+			}
 		}
 
 		[Fact]
 		public async Task GetMangaMoreInfo_BerserkId_ShouldParseBerserkMoreInfo()
 		{
-			MoreInfo berserk = await _jikan.GetMangaMoreInfo(2);
+			// When
+			var berserk = await _jikan.GetMangaMoreInfo(2);
 
-			Assert.Contains("The Prototype (1988)", berserk.Info);
+			berserk.Info.Should().Contain("The Prototype (1988)");
 		}
 
 		[Fact]
 		public async Task GetMangaRecommendation_BerserkId_ShouldParseBerserkRecommendations()
 		{
-			Recommendations berserk = await _jikan.GetMangaRecommendations(2);
+			// When
+			var berserk = await _jikan.GetMangaRecommendations(2);
 
-			//Claymore
-			Assert.Equal(583, berserk.RecommendationCollection.First().MalId);
-			Assert.True(berserk.RecommendationCollection.First().RecommendationCount > 25);
-			Assert.True(berserk.RecommendationCollection.Count > 90);
+			// Then
+			using (new AssertionScope())
+			{
+				//Claymore
+				berserk.RecommendationCollection.First().MalId.Should().Be(583);
+				berserk.RecommendationCollection.First().RecommendationCount.Should().BeGreaterThan(25);
+				berserk.RecommendationCollection.Count.Should().BeGreaterThan(90);
+			}
 		}
 
 		[Fact]
 		public async Task GetMangaReviews_BerserkId_ShouldParseBerserkReviews()
 		{
-			MangaReviews berserk = await _jikan.GetMangaReviews(2);
+			// When
+			var berserk = await _jikan.GetMangaReviews(2);
 
-			Assert.Equal("TheCriticsClub", berserk.Reviews.First().Reviewer.Username);
-			Assert.Equal(4403, berserk.Reviews.First().MalId);
-			Assert.True(berserk.Reviews.First().HelpfulCount > 1200);
+			// Then
+			using (new AssertionScope())
+			{
+				berserk.Reviews.First().Reviewer.Username.Should().Be("TheCriticsClub");
+				berserk.Reviews.First().MalId.Should().Be(4403);
+				berserk.Reviews.First().HelpfulCount.Should().BeGreaterThan(1200);
 
-			Assert.Equal(10, berserk.Reviews.First().Reviewer.Scores.Overall);
-			Assert.Equal(9, berserk.Reviews.First().Reviewer.Scores.Story);
+				berserk.Reviews.First().Reviewer.Scores.Overall.Should().Be(10);
+				berserk.Reviews.First().Reviewer.Scores.Story.Should().Be(9);
+			}
 		}
 
 		[Fact]
 		public async Task GetMangaReviews_BerserkIdSecondPage_ShouldParseBerserkReviewsPaged()
 		{
-			MangaReviews berserk = await _jikan.GetMangaReviews(2, 2);
+			// When
+			var berserk = await _jikan.GetMangaReviews(2, 2);
 
-			Assert.Equal("Sibi_Gowtham", berserk.Reviews.First().Reviewer.Username);
-			Assert.Equal(261738, berserk.Reviews.First().MalId);
-			Assert.Equal(351, berserk.Reviews.First().Reviewer.ChaptersRead);
-			Assert.True(berserk.Reviews.First().HelpfulCount > 15);
+			// Then
+			using (new AssertionScope())
+			{
+				berserk.Reviews.First().Reviewer.Username.Should().Be("Sibi_Gowtham");
+				berserk.Reviews.First().MalId.Should().Be(261738);
+				berserk.Reviews.First().Reviewer.ChaptersRead.Should().Be(351);
+				berserk.Reviews.First().HelpfulCount.Should().BeGreaterThan(15);
 
-			Assert.Equal(4, berserk.Reviews.First().Reviewer.Scores.Overall);
-			Assert.Equal(5, berserk.Reviews.First().Reviewer.Scores.Story);
+				berserk.Reviews.First().Reviewer.Scores.Overall.Should().Be(4);
+				berserk.Reviews.First().Reviewer.Scores.Story.Should().Be(5);
+			}
 		}
 
 		[Fact]
 		public async Task GetMangaUserUpdates_MonsterId_ShouldParseMonsterUserUpdates()
 		{
-			MangaUserUpdates monster = await _jikan.GetMangaUserUpdates(1);
+			// When
+			var monster = await _jikan.GetMangaUserUpdates(1);
 
+			// Then
 			var firstUpdate = monster.Updates.First();
-
-			Assert.Equal(75, monster.Updates.Count);
-			Assert.True(DateTime.Now >= firstUpdate.Date.Value);
-			Assert.True(!firstUpdate.ChaptersTotal.HasValue || firstUpdate.ChaptersTotal == 162);
+			using (new AssertionScope())
+			{
+				monster.Updates.Should().HaveCount(75);
+				firstUpdate.Date.Value.Should().BeBefore(DateTime.Now);
+				firstUpdate.ChaptersTotal.Should().Be(162);
+			}
 		}
 
 		[Fact]
 		public async Task GetMangaUserUpdates_MonsterIdSecondPage_ShouldParseMonsterUserUpdatesPaged()
 		{
-			MangaUserUpdates monster = await _jikan.GetMangaUserUpdates(1, 2);
+			// When
+			var monster = await _jikan.GetMangaUserUpdates(1, 2);
 
+			// Then
 			var firstUpdate = monster.Updates.First();
-
-			Assert.Equal(75, monster.Updates.Count);
-			Assert.True(!firstUpdate.ChaptersTotal.HasValue || firstUpdate.ChaptersTotal == 162);
+			using (new AssertionScope())
+			{
+				monster.Updates.Should().HaveCount(75);
+				firstUpdate.Date.Value.Should().BeBefore(DateTime.Now);
+				firstUpdate.ChaptersTotal.Should().Be(162);
+			}
 		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using FluentAssertions;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace JikanDotNet.Tests
@@ -15,9 +16,11 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task GetPersonPictures_WakamotoId_ShouldParseNorioWakamotoImages()
 		{
-			PersonPictures norioWakamoto = await _jikan.GetPersonPictures(84);
+			// Given
+			var norioWakamoto = await _jikan.GetPersonPictures(84);
 
-			Assert.Equal(4, norioWakamoto.Pictures.Count);
+			// Then
+			norioWakamoto.Pictures.Should().HaveCount(4);
 		}
 	}
 }

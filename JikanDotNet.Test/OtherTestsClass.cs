@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FluentAssertions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task GetAnimeGetManga_CorrectId_ShouldUseIMalEntityInterface()
 		{
+			// Given
 			IMalEntity berserk = await _jikan.GetManga(2);
 			IMalEntity bebop = await _jikan.GetAnime(1);
 
@@ -27,41 +29,51 @@ namespace JikanDotNet.Tests
 				bebop
 			};
 
-			Assert.Contains(1, entities.Select(x => x.MalId));
+			// When
+			var ids = entities.Select(x => x.MalId);
+
+			// Then
+			ids.Should().Contain(1);
 		}
 
 		[Fact]
 		public async Task GetAnime_CorrectId_ShouldParseBaseJikanRequest()
 		{
+			// When
 			BaseJikanRequest request = await _jikan.GetAnime(1);
 
-			Assert.NotNull(request);
+			// Then
+			request.Should().NotBeNull();
 		}
 
 		[Fact]
 		public async Task GetAnime_CorrectId_ShouldParseAnimeAsBaseJikanRequest()
 		{
+			// When
 			Anime bebop = await _jikan.GetAnime(1);
 
-			Assert.True(bebop.RequestCacheExpiry < 1000000);
+			// Then
+			bebop.RequestCacheExpiry.Should().BeLessThan(1000000);
 		}
 
 		[Fact]
 		public async Task GetAnime_CorrectId_ShouldParseCacheExpiration()
 		{
+			// When
 			// Random id
 			int randomId = DateTime.Now.Second * DateTime.Now.Minute;
 			BaseJikanRequest request = await _jikan.GetAnime(randomId);
 
-			Assert.NotNull(request);
+			// Then
+			request.Should().NotBeNull();
 
 			if (!request.RequestCached)
 			{
-				Assert.Equal(43200, request.RequestCacheExpiry);
+				request.RequestCacheExpiry.Should().Be(43200);
 			}
 			else
 			{
-				Assert.True(request.RequestCacheExpiry < 43200);
+				request.RequestCacheExpiry.Should().BeLessThan(43200);
 			}
 		}
 	}

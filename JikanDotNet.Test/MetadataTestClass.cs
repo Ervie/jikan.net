@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FluentAssertions;
+using FluentAssertions.Execution;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -16,10 +17,15 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task GetStatusMetadata_NoParameter_ShouldParseStatusMetadata()
 		{
-			StatusMetadata statusMetadata = await _jikan.GetStatusMetadata();
+			// When
+			var statusMetadata = await _jikan.GetStatusMetadata();
 
-			Assert.NotNull(statusMetadata);
-			Assert.True(int.Parse(statusMetadata.TotalConnectionsReceived) > 1000000);
+			// Then
+			using (new AssertionScope())
+			{
+				statusMetadata.Should().NotBeNull();
+				int.Parse(statusMetadata.TotalConnectionsReceived).Should().BeGreaterThan(1000000);
+			}
 		}
 	}
 }

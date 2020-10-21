@@ -1,4 +1,7 @@
-﻿using JikanDotNet.Exceptions;
+﻿using FluentAssertions;
+using FluentAssertions.Execution;
+using JikanDotNet.Exceptions;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -20,9 +23,11 @@ namespace JikanDotNet.Tests
 		[InlineData(3)]
 		public async Task GetManga_CorrectId_ShouldReturnNotNullManga(long malId)
 		{
-			Manga returedManga = await _jikan.GetManga(malId);
+			// When
+			var returedManga = await _jikan.GetManga(malId);
 
-			Assert.NotNull(returedManga);
+			// Then
+			returedManga.Should().NotBeNull();
 		}
 
 		[Theory]
@@ -31,65 +36,90 @@ namespace JikanDotNet.Tests
 		[InlineData(6)]
 		public void GetManga_WrongId_ShouldReturnNullMana(long malId)
 		{
-			Assert.ThrowsAnyAsync<JikanRequestException>(() => _jikan.GetManga(malId));
+			// When
+			Func<Task<Manga>> func = _jikan.Awaiting(x => x.GetManga(malId));
+
+			// Then
+			func.Should().ThrowExactlyAsync<JikanRequestException>();
 		}
 
 		[Fact]
 		public async Task GetManga_BerserkId_ShouldParseBerserk()
 		{
-			Manga berserkManga = await _jikan.GetManga(2);
+			// When
+			var berserkManga = await _jikan.GetManga(2);
 
-			Assert.Equal("Berserk", berserkManga.Title);
+			// Then
+			berserkManga.Title.Should().Be("Berserk");
 		}
 
 		[Fact]
 		public async Task GetManga_MonsterId_ShouldParseMonster()
 		{
-			Manga monsterManga = await _jikan.GetManga(1);
+			// When
+			var monsterManga = await _jikan.GetManga(1);
 
-			Assert.Equal("Monster", monsterManga.Title);
+			// Then
+			monsterManga.Title.Should().Be("Monster");
 		}
 
 		[Fact]
 		public async Task GetManga_MonsterId_ShouldParseMonsterRelated()
 		{
-			Manga monsterManga = await _jikan.GetManga(1);
+			// When
+			var monsterManga = await _jikan.GetManga(1);
 
-			Assert.Single(monsterManga.Related.Adaptations);
-			Assert.Single(monsterManga.Related.SideStories);
+			// Then
+			using (new AssertionScope())
+			{
+				monsterManga.Related.Adaptations.Should().ContainSingle();
+				monsterManga.Related.SideStories.Should().ContainSingle();
+			}
 		}
 
 		[Fact]
 		public async Task GetManga_YotsubatoId_ShouldParseYotsubatoInformation()
 		{
-			Manga yotsubatoManga = await _jikan.GetManga(104);
+			// When
+			var yotsubatoManga = await _jikan.GetManga(104);
 
-			Assert.Equal("Publishing", yotsubatoManga.Status);
-			Assert.Equal(2003, yotsubatoManga.Published.From.Value.Year);
-			Assert.Null(yotsubatoManga.Chapters);
-			Assert.Null(yotsubatoManga.Volumes);
-			Assert.Equal("Manga", yotsubatoManga.Type);
+			// Then
+			using (new AssertionScope())
+			{
+				yotsubatoManga.Status.Should().Be("Publishing");
+				yotsubatoManga.Published.From.Value.Year.Should().Be(2003);
+				yotsubatoManga.Chapters.Should().BeNull();
+				yotsubatoManga.Volumes.Should().BeNull();
+				yotsubatoManga.Type.Should().Be("Manga");
+			}
 		}
 
 		[Fact]
 		public async Task GetManga_OnePieceId_ShouldParseOnePieceCollections()
 		{
-			Manga onePieceManga = await _jikan.GetManga(13);
+			// When
+			var onePieceManga = await _jikan.GetManga(13);
 
-			Assert.Equal(1, onePieceManga.Authors.Count);
-			Assert.Equal(1, onePieceManga.Serializations.Count);
-			Assert.Equal(6, onePieceManga.Genres.Count);
-			Assert.Equal("Oda, Eiichiro", onePieceManga.Authors.First().ToString());
-			Assert.Equal("Shounen Jump (Weekly)", onePieceManga.Serializations.First().ToString());
-			Assert.Equal("Action", onePieceManga.Genres.First().ToString());
+			// Then
+			using (new AssertionScope())
+			{
+				onePieceManga.Authors.Should().ContainSingle();
+				onePieceManga.Serializations.Should().ContainSingle();
+				onePieceManga.Genres.Should().HaveCount(6);
+				onePieceManga.Authors.First().ToString().Should().Be("Oda, Eiichiro");
+				onePieceManga.Serializations.First().ToString().Should().Be("Shounen Jump (Weekly)");
+				onePieceManga.Genres.First().ToString().Should().Be("Action");
+			}
 		}
 
 		[Fact]
 		public async Task GetManga_MetallicaMetallucaId_ShouldParseMangaWithNoRelatedAdaptations()
 		{
-			Manga returnedManga = await _jikan.GetManga(19983);
+			// When
+			var returnedManga = await _jikan.GetManga(19983);
 
-			Assert.Null(returnedManga.Related.Adaptations);
+			// Then
+			returnedManga.Related.Adaptations.Should().BeNull();
 		}
 	}
 }
