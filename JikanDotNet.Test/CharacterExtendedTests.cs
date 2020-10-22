@@ -4,11 +4,11 @@ using Xunit;
 
 namespace JikanDotNet.Tests
 {
-	public class CharacterExtendedTestClass
+	public class CharacterExtendedTests
 	{
 		private readonly IJikan _jikan;
 
-		public CharacterExtendedTestClass()
+		public CharacterExtendedTests()
 		{
 			_jikan = new Jikan();
 		}

@@ -6,7 +6,7 @@ using Xunit;
 
 namespace JikanDotNet.Tests
 {
-	public class CustomEndpointTestClass
+	public class CustomEndpointTests
 	{
 		[Fact]
 		public async Task JikanConstructor_DefaultUrl_ShouldParseCorrectly()

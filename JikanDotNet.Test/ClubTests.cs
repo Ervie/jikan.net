@@ -6,11 +6,11 @@ using Xunit;
 
 namespace JikanDotNet.Tests
 {
-	public class ClubTestClass
+	public class ClubTests
 	{
 		private readonly IJikan _jikan;
 
-		public ClubTestClass()
+		public ClubTests()
 		{
 			_jikan = new Jikan(true);
 		}

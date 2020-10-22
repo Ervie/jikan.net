@@ -5,11 +5,11 @@ using Xunit;
 
 namespace JikanDotNet.Tests
 {
-	public class SearchTestClass
+	public class SearchTests
 	{
 		private readonly IJikan _jikan;
 
-		public SearchTestClass()
+		public SearchTests()
 		{
 			_jikan = new Jikan(true);
 		}

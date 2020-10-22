@@ -6,11 +6,11 @@ using Xunit;
 
 namespace JikanDotNet.Tests
 {
-	public class ProducerTestClass
+	public class ProducerTests
 	{
 		private readonly IJikan _jikan;
 
-		public ProducerTestClass()
+		public ProducerTests()
 		{
 			_jikan = new Jikan(true);
 		}

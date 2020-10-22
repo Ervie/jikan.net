@@ -7,11 +7,11 @@ using Xunit;
 
 namespace JikanDotNet.Tests
 {
-	public class AnimeSearchTestClass
+	public class AnimeSearchTests
 	{
 		private readonly IJikan _jikan;
 
-		public AnimeSearchTestClass()
+		public AnimeSearchTests()
 		{
 			_jikan = new Jikan();
 		}
