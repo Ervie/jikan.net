@@ -1,4 +1,6 @@
-﻿using JikanDotNet.Exceptions;
+﻿using FluentAssertions;
+using FluentAssertions.Execution;
+using JikanDotNet.Exceptions;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -17,63 +19,92 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task GetUserProfile_Ervelan_ShouldParseErvelanProfile()
 		{
-			UserProfile user = await _jikan.GetUserProfile("Ervelan");
+			// When
+			var user = await _jikan.GetUserProfile("Ervelan");
 
-			Assert.NotNull(user);
-			Assert.Equal("Ervelan", user.Username);
-			Assert.Equal(289183, user.UserId);
-			Assert.Equal(2010, user.Joined.Value.Year);
-			Assert.True(user.AnimeStatistics.Completed > 500);
-			Assert.Contains("Haibane Renmei", user.Favorites.Anime.Select(x => x.Name));
-			Assert.Contains("Oshino, Shinobu", user.Favorites.Characters.Select(x => x.Name));
+			// Then
+			using (new AssertionScope())
+			{
+				user.Should().NotBeNull();
+				user.Username.Should().Be("Ervelan");
+				user.UserId.Should().Be(289183);
+				user.Joined.Value.Year.Should().Be(2010);
+				user.AnimeStatistics.Completed.Should().BeGreaterThan(500);
+				user.Favorites.Anime.Select(x => x.Name).Should().Contain("Haibane Renmei");
+				user.Favorites.Characters.Select(x => x.Name).Should().Contain("Oshino, Shinobu");
+			}
 		}
 
 		[Fact]
 		public async Task GetUserProfile_Nekomata1037_ShouldParseNekomataProfile()
 		{
-			UserProfile user = await _jikan.GetUserProfile("Nekomata1037");
+			// When
+			var user = await _jikan.GetUserProfile("Nekomata1037");
 
-			Assert.NotNull(user);
-			Assert.Equal("Nekomata1037", user.Username);
-			Assert.Equal(4901676, user.UserId);
-			Assert.Equal(2015, user.Joined.Value.Year);
-			Assert.True(user.AnimeStatistics.TotalEntries > 700);
-			Assert.Contains("Steins;Gate", user.Favorites.Anime.Select(x => x.Name));
+			// Then
+			using (new AssertionScope())
+			{
+				user.Should().NotBeNull();
+				user.Username.Should().Be("Nekomata1037");
+				user.UserId.Should().Be(4901676);
+				user.Joined.Value.Year.Should().Be(2015);
+				user.AnimeStatistics.TotalEntries.Should().BeGreaterThan(700);
+				user.Favorites.Anime.Select(x => x.Name).Should().Contain("Steins;Gate");
+			}
 		}
 
 		[Fact]
 		public async Task GetUserHistory_Nekomata_ShouldParseNekomataHistory()
 		{
-			UserHistory userHistory = await _jikan.GetUserHistory("Nekomata1037");
+			// When
+			var userHistory = await _jikan.GetUserHistory("Nekomata1037");
 
-			Assert.NotNull(userHistory);
-			Assert.True(userHistory.History.Count >= 0);
+			// Then
+			using (new AssertionScope())
+			{
+				userHistory.Should().NotBeNull();
+				userHistory.History.Count.Should().BeGreaterOrEqualTo(0);
+			}
 		}
 
 		[Fact]
 		public async Task GetUserHistory_ErvelanMangaHistory_ShouldParseErvelanMangaHistory()
 		{
-			UserHistory userHistory = await _jikan.GetUserHistory("Ervelan", UserHistoryExtension.Manga);
+			// When
+			var userHistory = await _jikan.GetUserHistory("Ervelan", UserHistoryExtension.Manga);
 
-			Assert.NotNull(userHistory);
-			Assert.True(userHistory.History.Count >= 0);
+			// Then
+			using (new AssertionScope())
+			{
+				userHistory.Should().NotBeNull();
+				userHistory.History.Count.Should().BeGreaterOrEqualTo(0);
+			}
 		}
 
 		[Fact]
 		public async Task GetUserFriends_Ervelan_ShouldParseErvelanFriends()
 		{
-			UserFriends friends = await _jikan.GetUserFriends("Ervelan");
+			// When
+			var friends = await _jikan.GetUserFriends("Ervelan");
 
-			Assert.NotNull(friends);
-			Assert.True(friends.Friends.Count > 20);
-			Assert.Contains("SonMati", friends.Friends.Select(x => x.Username));
-			Assert.Contains("Progeusz", friends.Friends.Select(x => x.Username));
+			// Then
+			var friendUsernames = friends.Friends.Select(x => x.Username);
+			using (new AssertionScope())
+			{
+				friends.Should().NotBeNull();
+				friends.Friends.Count.Should().BeGreaterThan(20);
+				friendUsernames.Should().Contain("SonMati");
+				friendUsernames.Should().Contain("Progeusz");
+			}
 		}
 
 		[Fact]
 		public void GetUserFriends_ErvelanTenthPage_ShouldReturnNoFriends()
 		{
-			Assert.ThrowsAnyAsync<JikanRequestException>(() => _jikan.GetUserFriends("Ervelan", 10));
+			// When
+			var action = _jikan.Awaiting(x => x.GetUserFriends("Ervelan", 10));
+
+			action.Should().ThrowAsync<JikanRequestException>();
 		}
 	}
 }
