@@ -1,49 +1,55 @@
 ﻿using JikanDotNet.Exceptions;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace JikanDotNet.Helpers
 {
-    internal static class Guard
-    {
-        internal static void IsNotNullOrWhiteSpace(string arg, string argumentName)
-        {
-            if (string.IsNullOrWhiteSpace(arg))
-            {
-                throw new JikanValidationException("Can't be null or whitespace.", argumentName);
-            }
-        }
+	internal static class Guard
+	{
+		internal static void IsNotNullOrWhiteSpace(string arg, string argumentName)
+		{
+			if (string.IsNullOrWhiteSpace(arg))
+			{
+				throw new JikanValidationException("Argument can't be null or whitespace.", argumentName);
+			}
+		}
 
-        internal static void IsNotEmpty(Guid arg, string argumentName)
-        {
-            if (Guid.Empty.Equals(arg))
-            {
-                throw new JikanValidationException("GUID cannot be empty.", argumentName);
-            }
-        }
+		internal static void IsNotNull(object arg, string argumentName)
+		{
+			if (arg == null)
+			{
+				throw new JikanValidationException("Argument can't be a null.", argumentName);
+			}
+		}
 
-        internal static void IsNaturalNumber(int arg, string argumentName)
-        {
-            if (arg < 0)
-            {
-                throw new JikanValidationException("Argument must be a natural number.", argumentName);
-            }
-        }
+		internal static void IsLongerThan2Characters(string arg, string argumentName)
+		{
+			if (string.IsNullOrWhiteSpace(arg) || arg.Length < 3)
+			{
+				throw new JikanValidationException("Argument must be at least 3 characters long", argumentName);
+			}
+		}
 
-        internal static void IsValid<T>(Func<T, bool> isValidFunc, T arg, string argumentName, string? message = null)
-        {
-            if (isValidFunc(arg))
-            {
-                return;
-            }
+		internal static void IsGreaterThanZero(long arg, string argumentName)
+		{
+			if (arg < 1)
+			{
+				throw new JikanValidationException("Argument must be a natural number greater than 0.", argumentName);
+			}
+		}
 
-            if (String.IsNullOrWhiteSpace(message))
-            {
-                message = "Argument is not valid.";
-            }
+		internal static void IsValid<T>(Func<T, bool> isValidFunc, T arg, string argumentName, string? message = null)
+		{
+			if (isValidFunc(arg))
+			{
+				return;
+			}
 
-            throw new JikanValidationException(message, argumentName);
-        }
-    }
+			if (string.IsNullOrWhiteSpace(message))
+			{
+				message = "Argument is not valid.";
+			}
+
+			throw new JikanValidationException(message, argumentName);
+		}
+	}
 }

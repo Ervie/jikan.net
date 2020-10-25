@@ -121,6 +121,7 @@ namespace JikanDotNet
 		/// <returns>Anime with given MAL id.</returns>
 		public async Task<Anime> GetAnime(long id)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Anime, id.ToString() };
 			return await ExecuteGetRequest<Anime>(endpointParts);
 		}
@@ -137,6 +138,8 @@ namespace JikanDotNet
 		/// <returns>List of episodes with details.</returns>
 		public async Task<AnimeEpisodes> GetAnimeEpisodes(long id, int page)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			Guard.IsGreaterThanZero(page, nameof(page));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Anime, id.ToString(), AnimeExtension.Episodes.GetDescription(), page.ToString() };
 			return await ExecuteGetRequest<AnimeEpisodes>(endpointParts);
 		}
@@ -148,6 +151,7 @@ namespace JikanDotNet
 		/// <returns>List of episodes with details.</returns>
 		public async Task<AnimeEpisodes> GetAnimeEpisodes(long id)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Anime, id.ToString(), AnimeExtension.Episodes.GetDescription() };
 			return await ExecuteGetRequest<AnimeEpisodes>(endpointParts);
 		}
@@ -163,6 +167,7 @@ namespace JikanDotNet
 		/// <returns>Collections of characters and staff of anime with given MAL id.</returns>
 		public async Task<AnimeCharactersStaff> GetAnimeCharactersStaff(long id)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Anime, id.ToString(), AnimeExtension.CharactersStaff.GetDescription() };
 			return await ExecuteGetRequest<AnimeCharactersStaff>(endpointParts);
 		}
@@ -178,6 +183,7 @@ namespace JikanDotNet
 		/// <returns>Information about anime genre</returns>
 		public async Task<AnimeGenre> GetAnimeGenre(long genreId)
 		{
+			Guard.IsGreaterThanZero(genreId, nameof(genreId));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Genre, JikanEndPointCategories.Anime, genreId.ToString() };
 			return await ExecuteGetRequest<AnimeGenre>(endpointParts);
 		}
@@ -201,6 +207,8 @@ namespace JikanDotNet
 		/// <returns>Information about anime genre</returns>
 		public async Task<AnimeGenre> GetAnimeGenre(long genreId, int page)
 		{
+			Guard.IsGreaterThanZero(genreId, nameof(genreId));
+			Guard.IsGreaterThanZero(page, nameof(page));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Genre, JikanEndPointCategories.Anime, genreId.ToString(), page.ToString() };
 			return await ExecuteGetRequest<AnimeGenre>(endpointParts);
 		}
@@ -213,6 +221,7 @@ namespace JikanDotNet
 		/// <returns>Information about anime genre</returns>
 		public async Task<AnimeGenre> GetAnimeGenre(GenreSearch genre, int page)
 		{
+			Guard.IsGreaterThanZero(page, nameof(page));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Genre, JikanEndPointCategories.Anime, genre.GetDescription(), page.ToString() };
 			return await ExecuteGetRequest<AnimeGenre>(endpointParts);
 		}
@@ -228,6 +237,7 @@ namespace JikanDotNet
 		/// <returns>Collections of links to pictures related to anime with given MAL id.</returns>
 		public async Task<AnimePictures> GetAnimePictures(long id)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Anime, id.ToString(), AnimeExtension.Pictures.GetDescription() };
 			return await ExecuteGetRequest<AnimePictures>(endpointParts);
 		}
@@ -243,6 +253,7 @@ namespace JikanDotNet
 		/// <returns>Collections of news related to anime with given MAL id.</returns>
 		public async Task<AnimeNews> GetAnimeNews(long id)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Anime, id.ToString(), AnimeExtension.News.GetDescription() };
 			return await ExecuteGetRequest<AnimeNews>(endpointParts);
 		}
@@ -258,6 +269,7 @@ namespace JikanDotNet
 		/// <returns>Collections of videos related to anime with given MAL id.</returns>
 		public async Task<AnimeVideos> GetAnimeVideos(long id)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Anime, id.ToString(), AnimeExtension.Videos.GetDescription() };
 			return await ExecuteGetRequest<AnimeVideos>(endpointParts);
 		}
@@ -273,6 +285,7 @@ namespace JikanDotNet
 		/// <returns>Statistics related to anime with given MAL id.</returns>
 		public async Task<AnimeStats> GetAnimeStatistics(long id)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Anime, id.ToString(), AnimeExtension.Stats.GetDescription() };
 			return await ExecuteGetRequest<AnimeStats>(endpointParts);
 		}
@@ -288,6 +301,7 @@ namespace JikanDotNet
 		/// <returns>Collections of forum topics related to anime with given MAL id.</returns>
 		public async Task<ForumTopics> GetAnimeForumTopics(long id)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Anime, id.ToString(), AnimeExtension.Forum.GetDescription() };
 			return await ExecuteGetRequest<ForumTopics>(endpointParts);
 		}
@@ -303,6 +317,7 @@ namespace JikanDotNet
 		/// <returns>Additional information related to anime with given MAL id.</returns>
 		public async Task<MoreInfo> GetAnimeMoreInfo(long id)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Anime, id.ToString(), AnimeExtension.MoreInfo.GetDescription() };
 			return await ExecuteGetRequest<MoreInfo>(endpointParts);
 		}
@@ -318,6 +333,7 @@ namespace JikanDotNet
 		/// <returns>Collection of anime recomendation.</returns>
 		public async Task<Recommendations> GetAnimeRecommendations(long id)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Anime, id.ToString(), AnimeExtension.Recommendations.GetDescription() };
 			return await ExecuteGetRequest<Recommendations>(endpointParts);
 		}
@@ -333,6 +349,7 @@ namespace JikanDotNet
 		/// <returns>Collection of anime reviews.</returns>
 		public async Task<AnimeReviews> GetAnimeReviews(long id)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Anime, id.ToString(), AnimeExtension.Reviews.GetDescription() };
 			return await ExecuteGetRequest<AnimeReviews>(endpointParts);
 		}
@@ -345,6 +362,8 @@ namespace JikanDotNet
 		/// <returns>Collection of anime reviews.</returns>
 		public async Task<AnimeReviews> GetAnimeReviews(long id, int page)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			Guard.IsGreaterThanZero(page, nameof(page));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Anime, id.ToString(), AnimeExtension.Reviews.GetDescription(), page.ToString() };
 			return await ExecuteGetRequest<AnimeReviews>(endpointParts);
 		}
@@ -360,6 +379,7 @@ namespace JikanDotNet
 		/// <returns>Collection of anime user updates.</returns>
 		public async Task<AnimeUserUpdates> GetAnimeUserUpdates(long id)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Anime, id.ToString(), AnimeExtension.UserUpdates.GetDescription() };
 			return await ExecuteGetRequest<AnimeUserUpdates>(endpointParts);
 		}
@@ -372,6 +392,8 @@ namespace JikanDotNet
 		/// <returns>Collection of anime user updates.</returns>
 		public async Task<AnimeUserUpdates> GetAnimeUserUpdates(long id, int page)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			Guard.IsGreaterThanZero(page, nameof(page));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Anime, id.ToString(), AnimeExtension.UserUpdates.GetDescription(), page.ToString() };
 			return await ExecuteGetRequest<AnimeUserUpdates>(endpointParts);
 		}
@@ -391,6 +413,7 @@ namespace JikanDotNet
 		/// <returns>Character with given MAL id.</returns>
 		public async Task<Character> GetCharacter(long id)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Character, id.ToString() };
 			return await ExecuteGetRequest<Character>(endpointParts);
 		}
@@ -406,6 +429,7 @@ namespace JikanDotNet
 		/// <returns>Collections of links to pictures related to character with given MAL id.</returns>
 		public async Task<CharacterPictures> GetCharacterPictures(long id)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Character, id.ToString(), CharacterExtension.Pictures.GetDescription() };
 			return await ExecuteGetRequest<CharacterPictures>(endpointParts);
 		}
@@ -425,6 +449,7 @@ namespace JikanDotNet
 		/// <returns>Manga with given MAL id.</returns>
 		public async Task<Manga> GetManga(long id)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Manga, id.ToString() };
 			return await ExecuteGetRequest<Manga>(endpointParts);
 		}
@@ -440,6 +465,7 @@ namespace JikanDotNet
 		/// <returns>Collections of links to pictures related to manga with given MAL id.</returns>
 		public async Task<MangaPictures> GetMangaPictures(long id)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Manga, id.ToString(), MangaExtension.Pictures.GetDescription() };
 			return await ExecuteGetRequest<MangaPictures>(endpointParts);
 		}
@@ -455,6 +481,7 @@ namespace JikanDotNet
 		/// <returns>Collections of characters appearing in manga with given MAL id.</returns>
 		public async Task<MangaCharacters> GetMangaCharacters(long id)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Manga, id.ToString(), MangaExtension.Characters.GetDescription() };
 			return await ExecuteGetRequest<MangaCharacters>(endpointParts);
 		}
@@ -470,6 +497,7 @@ namespace JikanDotNet
 		/// <returns>Information about manga genre</returns>
 		public async Task<MangaGenre> GetMangaGenre(long genreId)
 		{
+			Guard.IsGreaterThanZero(genreId, nameof(genreId));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Genre, JikanEndPointCategories.Manga, genreId.ToString() };
 			return await ExecuteGetRequest<MangaGenre>(endpointParts);
 		}
@@ -493,6 +521,8 @@ namespace JikanDotNet
 		/// <returns>Information about manga genre</returns>
 		public async Task<MangaGenre> GetMangaGenre(long genreId, int page)
 		{
+			Guard.IsGreaterThanZero(genreId, nameof(genreId));
+			Guard.IsGreaterThanZero(page, nameof(page));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Genre, JikanEndPointCategories.Manga, genreId.ToString(), page.ToString() };
 			return await ExecuteGetRequest<MangaGenre>(endpointParts);
 		}
@@ -505,6 +535,7 @@ namespace JikanDotNet
 		/// <returns>Information about manga genre</returns>
 		public async Task<MangaGenre> GetMangaGenre(GenreSearch genre, int page)
 		{
+			Guard.IsGreaterThanZero(page, nameof(page));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Genre, JikanEndPointCategories.Manga, genre.GetDescription(), page.ToString() };
 			return await ExecuteGetRequest<MangaGenre>(endpointParts);
 		}
@@ -520,6 +551,7 @@ namespace JikanDotNet
 		/// <returns>Collections of news related to manga with given MAL id.</returns>
 		public async Task<MangaNews> GetMangaNews(long id)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Manga, id.ToString(), MangaExtension.News.GetDescription() };
 			return await ExecuteGetRequest<MangaNews>(endpointParts);
 		}
@@ -535,6 +567,7 @@ namespace JikanDotNet
 		/// <returns>Statistics related to manga with given MAL id.</returns>
 		public async Task<MangaStats> GetMangaStatistics(long id)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Manga, id.ToString(), MangaExtension.Stats.GetDescription() };
 			return await ExecuteGetRequest<MangaStats>(endpointParts);
 		}
@@ -550,6 +583,7 @@ namespace JikanDotNet
 		/// <returns>Collections of forum topics related to manga with given MAL id.</returns>
 		public async Task<ForumTopics> GetMangaForumTopics(long id)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Manga, id.ToString(), MangaExtension.Forum.GetDescription() };
 			return await ExecuteGetRequest<ForumTopics>(endpointParts);
 		}
@@ -565,6 +599,7 @@ namespace JikanDotNet
 		/// <returns>Additional information related to manga with given MAL id.</returns>
 		public async Task<MoreInfo> GetMangaMoreInfo(long id)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Manga, id.ToString(), AnimeExtension.MoreInfo.GetDescription() };
 			return await ExecuteGetRequest<MoreInfo>(endpointParts);
 		}
@@ -580,6 +615,7 @@ namespace JikanDotNet
 		/// <returns>Collection of manga recomendation.</returns>
 		public async Task<Recommendations> GetMangaRecommendations(long id)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Manga, id.ToString(), MangaExtension.Recommendations.GetDescription() };
 			return await ExecuteGetRequest<Recommendations>(endpointParts);
 		}
@@ -595,6 +631,7 @@ namespace JikanDotNet
 		/// <returns>Collection of manga reviews.</returns>
 		public async Task<MangaReviews> GetMangaReviews(long id)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Manga, id.ToString(), MangaExtension.Reviews.GetDescription() };
 			return await ExecuteGetRequest<MangaReviews>(endpointParts);
 		}
@@ -607,6 +644,8 @@ namespace JikanDotNet
 		/// <returns>Collection of manga reviews.</returns>
 		public async Task<MangaReviews> GetMangaReviews(long id, int page)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			Guard.IsGreaterThanZero(page, nameof(page));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Manga, id.ToString(), MangaExtension.Reviews.GetDescription(), page.ToString() };
 			return await ExecuteGetRequest<MangaReviews>(endpointParts);
 		}
@@ -622,6 +661,7 @@ namespace JikanDotNet
 		/// <returns>Collection of manga user updates.</returns>
 		public async Task<MangaUserUpdates> GetMangaUserUpdates(long id)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Manga, id.ToString(), MangaExtension.UserUpdates.GetDescription() };
 			return await ExecuteGetRequest<MangaUserUpdates>(endpointParts);
 		}
@@ -634,6 +674,8 @@ namespace JikanDotNet
 		/// <returns>Collection of manga user updates.</returns>
 		public async Task<MangaUserUpdates> GetMangaUserUpdates(long id, int page)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			Guard.IsGreaterThanZero(page, nameof(page));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Manga, id.ToString(), MangaExtension.UserUpdates.GetDescription(), page.ToString() };
 			return await ExecuteGetRequest<MangaUserUpdates>(endpointParts);
 		}
@@ -653,6 +695,7 @@ namespace JikanDotNet
 		/// <returns>Person with given MAL id.</returns>
 		public async Task<Person> GetPerson(long id)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Person, id.ToString() };
 			return await ExecuteGetRequest<Person>(endpointParts);
 		}
@@ -668,6 +711,7 @@ namespace JikanDotNet
 		/// <returns>Collections of links to pictures related to person with given MAL id.</returns>
 		public async Task<PersonPictures> GetPersonPictures(long id)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Person, id.ToString(), PersonExtension.Pictures.GetDescription() };
 			return await ExecuteGetRequest<PersonPictures>(endpointParts);
 		}
@@ -727,6 +771,7 @@ namespace JikanDotNet
 		/// <returns>Season preview.</returns>
 		public async Task<Season> GetSeason(int year, Seasons season)
 		{
+			Guard.IsValid(year => year >= 1916 && year < DateTime.UtcNow.AddYears(1).Year, year, nameof(year));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Season, year.ToString(), season.GetDescription() };
 			return await ExecuteGetRequest<Season>(endpointParts);
 		}
@@ -784,6 +829,7 @@ namespace JikanDotNet
 		/// <returns>List of top anime.</returns>
 		public async Task<AnimeTop> GetAnimeTop(int page)
 		{
+			Guard.IsGreaterThanZero(page, nameof(page));
 			string[] endpointParts = new string[] { JikanEndPointCategories.TopList, JikanEndPointCategories.Anime, page.ToString() };
 			return await ExecuteGetRequest<AnimeTop>(endpointParts);
 		}
@@ -807,6 +853,7 @@ namespace JikanDotNet
 		/// <returns>List of top anime.</returns>
 		public async Task<AnimeTop> GetAnimeTop(int page, TopAnimeExtension extension = TopAnimeExtension.None)
 		{
+			Guard.IsGreaterThanZero(page, nameof(page));
 			string[] endpointParts = new string[] { JikanEndPointCategories.TopList, JikanEndPointCategories.Anime, page.ToString(), extension.GetDescription() };
 			return await ExecuteGetRequest<AnimeTop>(endpointParts);
 		}
@@ -832,6 +879,7 @@ namespace JikanDotNet
 		/// <returns>List of top manga.</returns>
 		public async Task<MangaTop> GetMangaTop(int page)
 		{
+			Guard.IsGreaterThanZero(page, nameof(page));
 			string[] endpointParts = new string[] { JikanEndPointCategories.TopList, JikanEndPointCategories.Manga, page.ToString() };
 			return await ExecuteGetRequest<MangaTop>(endpointParts);
 		}
@@ -855,6 +903,7 @@ namespace JikanDotNet
 		/// <returns>List of top manga.</returns>
 		public async Task<MangaTop> GetMangaTop(int page, TopMangaExtension extension = TopMangaExtension.None)
 		{
+			Guard.IsGreaterThanZero(page, nameof(page));
 			string[] endpointParts = new string[] { JikanEndPointCategories.TopList, JikanEndPointCategories.Manga, page.ToString(), extension.GetDescription() };
 			return await ExecuteGetRequest<MangaTop>(endpointParts);
 		}
@@ -880,6 +929,7 @@ namespace JikanDotNet
 		/// <returns>List of most popular people.</returns>
 		public async Task<PeopleTop> GetPeopleTop(int page)
 		{
+			Guard.IsGreaterThanZero(page, nameof(page));
 			string[] endpointParts = new string[] { JikanEndPointCategories.TopList, JikanEndPointCategories.People, page.ToString() };
 			return await ExecuteGetRequest<PeopleTop>(endpointParts);
 		}
@@ -905,6 +955,7 @@ namespace JikanDotNet
 		/// <returns>List of most popular characters.</returns>
 		public async Task<CharactersTop> GetCharactersTop(int page)
 		{
+			Guard.IsGreaterThanZero(page, nameof(page));
 			string[] endpointParts = new string[] { JikanEndPointCategories.TopList, JikanEndPointCategories.Characters, page.ToString() };
 			return await ExecuteGetRequest<CharactersTop>(endpointParts);
 		}
@@ -924,6 +975,7 @@ namespace JikanDotNet
 		/// <returns>Information about producer with given MAL id. </returns>
 		public async Task<Producer> GetProducer(long id)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Producer, id.ToString() };
 			return await ExecuteGetRequest<Producer>(endpointParts);
 		}
@@ -936,6 +988,8 @@ namespace JikanDotNet
 		/// <returns>Information about producer with given MAL id. </returns>
 		public async Task<Producer> GetProducer(long id, int page)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			Guard.IsGreaterThanZero(page, nameof(page));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Producer, id.ToString(), page.ToString() };
 			return await ExecuteGetRequest<Producer>(endpointParts);
 		}
@@ -955,6 +1009,7 @@ namespace JikanDotNet
 		/// <returns>Information about magazine with given MAL id. </returns>
 		public async Task<Magazine> GetMagazine(long id)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Magazine, id.ToString() };
 			return await ExecuteGetRequest<Magazine>(endpointParts);
 		}
@@ -967,6 +1022,8 @@ namespace JikanDotNet
 		/// <returns>Information about magazine with given MAL id. </returns>
 		public async Task<Magazine> GetMagazine(long id, int page)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			Guard.IsGreaterThanZero(page, nameof(page));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Magazine, id.ToString(), page.ToString() };
 			return await ExecuteGetRequest<Magazine>(endpointParts);
 		}
@@ -986,6 +1043,7 @@ namespace JikanDotNet
 		/// <returns>Information about user's profile with given username.</returns>
 		public async Task<UserProfile> GetUserProfile(string username)
 		{
+			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
 			string[] endpointParts = new string[] { JikanEndPointCategories.User, username, UserExtension.Profile.GetDescription() };
 			return await ExecuteGetRequest<UserProfile>(endpointParts);
 		}
@@ -1001,6 +1059,7 @@ namespace JikanDotNet
 		/// <returns>Information about user's profile with given username.</returns>
 		public async Task<UserHistory> GetUserHistory(string username)
 		{
+			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
 			string[] endpointParts = new string[] { JikanEndPointCategories.User, username, UserExtension.History.GetDescription() };
 			return await ExecuteGetRequest<UserHistory>(endpointParts);
 		}
@@ -1013,6 +1072,7 @@ namespace JikanDotNet
 		/// <returns>Information about user's profile with given username.</returns>
 		public async Task<UserHistory> GetUserHistory(string username, UserHistoryExtension historyExtension)
 		{
+			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
 			string[] endpointParts = new string[] { JikanEndPointCategories.User, username, UserExtension.History.GetDescription(), historyExtension.GetDescription() };
 			return await ExecuteGetRequest<UserHistory>(endpointParts);
 		}
@@ -1028,6 +1088,7 @@ namespace JikanDotNet
 		/// <returns>Entries on user's anime list.</returns>
 		public async Task<UserAnimeList> GetUserAnimeList(string username)
 		{
+			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
 			string[] endpointParts = new string[] { JikanEndPointCategories.User, username, UserExtension.AnimeList.GetDescription() };
 			return await ExecuteGetRequest<UserAnimeList>(endpointParts);
 		}
@@ -1040,6 +1101,8 @@ namespace JikanDotNet
 		/// <returns>Entries on user's anime list.</returns>
 		public async Task<UserAnimeList> GetUserAnimeList(string username, int page)
 		{
+			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
+			Guard.IsGreaterThanZero(page, nameof(page));
 			string[] endpointParts = new string[] { JikanEndPointCategories.User, username, UserExtension.AnimeList.GetDescription(), UserAnimeListExtension.All.GetDescription(), page.ToString() };
 			return await ExecuteGetRequest<UserAnimeList>(endpointParts);
 		}
@@ -1052,6 +1115,7 @@ namespace JikanDotNet
 		/// <returns>Entries on user's anime list.</returns>
 		public async Task<UserAnimeList> GetUserAnimeList(string username, UserAnimeListExtension filter)
 		{
+			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
 			string[] endpointParts = new string[] { JikanEndPointCategories.User, username, UserExtension.AnimeList.GetDescription(), filter.GetDescription() };
 			return await ExecuteGetRequest<UserAnimeList>(endpointParts);
 		}
@@ -1065,6 +1129,8 @@ namespace JikanDotNet
 		/// <returns>Entries on user's anime list.</returns>
 		public async Task<UserAnimeList> GetUserAnimeList(string username, UserAnimeListExtension filter, int page)
 		{
+			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
+			Guard.IsGreaterThanZero(page, nameof(page));
 			var query = string.Concat(UserExtension.AnimeList.GetDescription(), filter.GetDescription());
 			string[] endpointParts = new string[] { JikanEndPointCategories.User, username, query, page.ToString() };
 			return await ExecuteGetRequest<UserAnimeList>(endpointParts);
@@ -1078,6 +1144,8 @@ namespace JikanDotNet
 		/// <returns>Entries on user's anime list.</returns>
 		public async Task<UserAnimeList> GetUserAnimeList(string username, UserListAnimeSearchConfig searchConfig)
 		{
+			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
+			Guard.IsNotNull(searchConfig, nameof(searchConfig));
 			var query = string.Concat(UserExtension.AnimeList.GetDescription(), searchConfig.ConfigToString());
 			string[] endpointParts = new string[] { JikanEndPointCategories.User, username, query };
 			return await ExecuteGetRequest<UserAnimeList>(endpointParts);
@@ -1094,6 +1162,7 @@ namespace JikanDotNet
 		/// <returns>Entries on user's manga list.</returns>
 		public async Task<UserMangaList> GetUserMangaList(string username)
 		{
+			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
 			string[] endpointParts = new string[] { JikanEndPointCategories.User, username, UserExtension.MangaList.GetDescription() };
 			return await ExecuteGetRequest<UserMangaList>(endpointParts);
 		}
@@ -1106,6 +1175,8 @@ namespace JikanDotNet
 		/// <returns>Entries on user's manga list.</returns>
 		public async Task<UserMangaList> GetUserMangaList(string username, int page)
 		{
+			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
+			Guard.IsGreaterThanZero(page, nameof(page));
 			string[] endpointParts = new string[] { JikanEndPointCategories.User, username, UserExtension.MangaList.GetDescription(), UserMangaListExtension.All.GetDescription(), page.ToString() };
 			return await ExecuteGetRequest<UserMangaList>(endpointParts);
 		}
@@ -1118,6 +1189,7 @@ namespace JikanDotNet
 		/// <returns>Entries on user's manga list.</returns>
 		public async Task<UserMangaList> GetUserMangaList(string username, UserMangaListExtension filter)
 		{
+			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
 			string[] endpointParts = new string[] { JikanEndPointCategories.User, username, UserExtension.MangaList.GetDescription(), filter.GetDescription() };
 			return await ExecuteGetRequest<UserMangaList>(endpointParts);
 		}
@@ -1131,6 +1203,8 @@ namespace JikanDotNet
 		/// <returns>Entries on user's manga list.</returns>
 		public async Task<UserMangaList> GetUserMangaList(string username, UserMangaListExtension filter, int page)
 		{
+			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
+			Guard.IsGreaterThanZero(page, nameof(page));
 			var query = string.Concat(UserExtension.MangaList.GetDescription(), filter.GetDescription());
 			string[] endpointParts = new string[] { JikanEndPointCategories.User, username, query, page.ToString() };
 			return await ExecuteGetRequest<UserMangaList>(endpointParts);
@@ -1144,6 +1218,8 @@ namespace JikanDotNet
 		/// <returns>Entries on user's manga list.</returns>
 		public async Task<UserMangaList> GetUserMangaList(string username, UserListMangaSearchConfig searchConfig)
 		{
+			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
+			Guard.IsNotNull(searchConfig, nameof(searchConfig));
 			var query = string.Concat(UserExtension.MangaList.GetDescription(), searchConfig.ConfigToString());
 			string[] endpointParts = new string[] { JikanEndPointCategories.User, username, query };
 			return await ExecuteGetRequest<UserMangaList>(endpointParts);
@@ -1160,6 +1236,7 @@ namespace JikanDotNet
 		/// <returns>Information about user's friends with given username.</returns>
 		public async Task<UserFriends> GetUserFriends(string username)
 		{
+			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
 			string[] endpointParts = new string[] { JikanEndPointCategories.User, username, UserExtension.Friends.GetDescription() };
 			return await ExecuteGetRequest<UserFriends>(endpointParts);
 		}
@@ -1172,6 +1249,8 @@ namespace JikanDotNet
 		/// <returns>Information about user's friends with given username.</returns>
 		public async Task<UserFriends> GetUserFriends(string username, int page)
 		{
+			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
+			Guard.IsGreaterThanZero(page, nameof(page));
 			string[] endpointParts = new string[] { JikanEndPointCategories.User, username, UserExtension.Friends.GetDescription(), page.ToString() };
 			return await ExecuteGetRequest<UserFriends>(endpointParts);
 		}
@@ -1191,6 +1270,7 @@ namespace JikanDotNet
 		/// <returns>Club's profile information.</returns>
 		public async Task<Club> GetClub(long id)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Club, id.ToString() };
 			return await ExecuteGetRequest<Club>(endpointParts);
 		}
@@ -1206,6 +1286,7 @@ namespace JikanDotNet
 		/// <returns>Club's member list.</returns>
 		public async Task<ClubMembers> GetClubMembers(long id)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Club, id.ToString(), ClubExtensions.Members.GetDescription() };
 			return await ExecuteGetRequest<ClubMembers>(endpointParts);
 		}
@@ -1218,6 +1299,8 @@ namespace JikanDotNet
 		/// <returns>Club's member list.</returns>
 		public async Task<ClubMembers> GetClubMembers(long id, int page)
 		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			Guard.IsGreaterThanZero(page, nameof(page));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Club, id.ToString(), ClubExtensions.Members.GetDescription(), page.ToString() };
 			return await ExecuteGetRequest<ClubMembers>(endpointParts);
 		}
@@ -1237,6 +1320,7 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		public async Task<AnimeSearchResult> SearchAnime(string query)
 		{
+			Guard.IsLongerThan2Characters(query, nameof(query));
 			query = string.Concat(JikanEndPointCategories.Anime, "?q=", query.Replace(' ', '+'));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query };
 			return await ExecuteGetRequest<AnimeSearchResult>(endpointParts);
@@ -1250,6 +1334,8 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		public async Task<AnimeSearchResult> SearchAnime(string query, int page)
 		{
+			Guard.IsLongerThan2Characters(query, nameof(query));
+			Guard.IsGreaterThanZero(page, nameof(page));
 			query = string.Concat(JikanEndPointCategories.Anime, "/", page.ToString(), "?q=", query.Replace(' ', '+'));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query };
 			return await ExecuteGetRequest<AnimeSearchResult>(endpointParts);
@@ -1263,6 +1349,8 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		public async Task<AnimeSearchResult> SearchAnime(string query, AnimeSearchConfig searchConfig)
 		{
+			Guard.IsLongerThan2Characters(query, nameof(query));
+			Guard.IsNotNull(searchConfig, nameof(searchConfig));
 			query = string.Concat(JikanEndPointCategories.Anime, "?q=", query.Replace(' ', '+'), "&", searchConfig.ConfigToString());
 			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query };
 			return await ExecuteGetRequest<AnimeSearchResult>(endpointParts);
@@ -1275,6 +1363,7 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		public async Task<AnimeSearchResult> SearchAnime(AnimeSearchConfig searchConfig)
 		{
+			Guard.IsNotNull(searchConfig, nameof(searchConfig));
 			var query = string.Concat(JikanEndPointCategories.Anime, "?", searchConfig.ConfigToString());
 			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query };
 			return await ExecuteGetRequest<AnimeSearchResult>(endpointParts);
@@ -1288,6 +1377,8 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		public async Task<AnimeSearchResult> SearchAnime(AnimeSearchConfig searchConfig, int page)
 		{
+			Guard.IsNotNull(searchConfig, nameof(searchConfig));
+			Guard.IsGreaterThanZero(page, nameof(page));
 			var query = string.Concat(JikanEndPointCategories.Anime, "/", page.ToString(), "?", searchConfig.ConfigToString());
 			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query };
 			return await ExecuteGetRequest<AnimeSearchResult>(endpointParts);
@@ -1302,6 +1393,9 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		public async Task<AnimeSearchResult> SearchAnime(string query, int page, AnimeSearchConfig searchConfig)
 		{
+			Guard.IsLongerThan2Characters(query, nameof(query));
+			Guard.IsGreaterThanZero(page, nameof(page));
+			Guard.IsNotNull(searchConfig, nameof(searchConfig));
 			query = string.Concat(JikanEndPointCategories.Anime, "/", page.ToString(), "?q=", query.Replace(' ', '+'), "&", searchConfig.ConfigToString());
 			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query };
 			return await ExecuteGetRequest<AnimeSearchResult>(endpointParts);
@@ -1318,6 +1412,7 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		public async Task<MangaSearchResult> SearchManga(string query)
 		{
+			Guard.IsLongerThan2Characters(query, nameof(query));
 			query = string.Concat(JikanEndPointCategories.Manga, "?q=", query.Replace(' ', '+'));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query };
 			return await ExecuteGetRequest<MangaSearchResult>(endpointParts);
@@ -1331,6 +1426,8 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		public async Task<MangaSearchResult> SearchManga(string query, int page)
 		{
+			Guard.IsLongerThan2Characters(query, nameof(query));
+			Guard.IsGreaterThanZero(page, nameof(page));
 			query = string.Concat(JikanEndPointCategories.Manga, "/", page.ToString(), "?q=", query.Replace(' ', '+'));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query };
 			return await ExecuteGetRequest<MangaSearchResult>(endpointParts);
@@ -1344,6 +1441,8 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		public async Task<MangaSearchResult> SearchManga(string query, MangaSearchConfig searchConfig)
 		{
+			Guard.IsLongerThan2Characters(query, nameof(query));
+			Guard.IsNotNull(searchConfig, nameof(searchConfig));
 			query = string.Concat(JikanEndPointCategories.Manga, "?q=", query.Replace(' ', '+'), "&", searchConfig.ConfigToString());
 			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query };
 			return await ExecuteGetRequest<MangaSearchResult>(endpointParts);
@@ -1356,6 +1455,7 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		public async Task<MangaSearchResult> SearchManga(MangaSearchConfig searchConfig)
 		{
+			Guard.IsNotNull(searchConfig, nameof(searchConfig));
 			var query = string.Concat(JikanEndPointCategories.Manga, "?", searchConfig.ConfigToString());
 			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query };
 			return await ExecuteGetRequest<MangaSearchResult>(endpointParts);
@@ -1369,6 +1469,8 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		public async Task<MangaSearchResult> SearchManga(MangaSearchConfig searchConfig, int page)
 		{
+			Guard.IsNotNull(searchConfig, nameof(searchConfig));
+			Guard.IsGreaterThanZero(page, nameof(page));
 			var query = string.Concat(JikanEndPointCategories.Manga, "/", page.ToString(), "?", searchConfig.ConfigToString());
 			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query };
 			return await ExecuteGetRequest<MangaSearchResult>(endpointParts);
@@ -1383,6 +1485,9 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		public async Task<MangaSearchResult> SearchManga(string query, int page, MangaSearchConfig searchConfig)
 		{
+			Guard.IsLongerThan2Characters(query, nameof(query));
+			Guard.IsGreaterThanZero(page, nameof(page));
+			Guard.IsNotNull(searchConfig, nameof(searchConfig));
 			query = string.Concat(JikanEndPointCategories.Manga, "/", page.ToString(), "?q=", query.Replace(' ', '+'), "&", searchConfig.ConfigToString());
 			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query, page.ToString() };
 			return await ExecuteGetRequest<MangaSearchResult>(endpointParts);
@@ -1399,6 +1504,7 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		public async Task<PersonSearchResult> SearchPerson(string query)
 		{
+			Guard.IsLongerThan2Characters(query, nameof(query));
 			query = string.Concat(JikanEndPointCategories.Person, "?q=", query.Replace(' ', '+'));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query };
 			return await ExecuteGetRequest<PersonSearchResult>(endpointParts);
@@ -1412,6 +1518,8 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		public async Task<PersonSearchResult> SearchPerson(string query, int page)
 		{
+			Guard.IsLongerThan2Characters(query, nameof(query));
+			Guard.IsGreaterThanZero(page, nameof(page));
 			query = string.Concat(JikanEndPointCategories.Person, "/", page.ToString(), "?q=", query.Replace(' ', '+'));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query };
 			return await ExecuteGetRequest<PersonSearchResult>(endpointParts);
@@ -1428,6 +1536,7 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		public async Task<CharacterSearchResult> SearchCharacter(string query)
 		{
+			Guard.IsLongerThan2Characters(query, nameof(query));
 			query = string.Concat(JikanEndPointCategories.Character, "?q=", query.Replace(' ', '+'));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query };
 			return await ExecuteGetRequest<CharacterSearchResult>(endpointParts);
@@ -1441,6 +1550,8 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		public async Task<CharacterSearchResult> SearchCharacter(string query, int page)
 		{
+			Guard.IsLongerThan2Characters(query, nameof(query));
+			Guard.IsGreaterThanZero(page, nameof(page));
 			query = string.Concat(JikanEndPointCategories.Character, "/", page.ToString(), "?q=", query.Replace(' ', '+'));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query };
 			return await ExecuteGetRequest<CharacterSearchResult>(endpointParts);
