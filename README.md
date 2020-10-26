@@ -110,11 +110,15 @@ Then restore dependencies:
 
 ## Future - Version 2.0.0
 
-- Compataible with Jikan REST API v4.0
+- Compatible with Jikan REST API v4.0
 
-## 22.09.2020 - Version 1.5.1 (newest)
-- Fixes 
-    - <b>[Character]</b> Fix incorrect mapping for `About` property, which could led to null result.
+## 26.10.2020 - Version 1.5.2 (newest)
+- Features
+    - <b>[Validation]</b> Validation of input parameters for most method are added for fail fast approach. General rules
+        - Methods using mal Id (e.g. `GetAnime()`) accept only number larger than 0.
+        - Search query for searcg methods (e.g. `SearchAnime()`) must not be null or whitespace and at least 3 characters long.
+        - Methods with page number as a parameter (e.g. `SearchAnime()`) only accepts page when it's larger than 0.
+        - Search configs for search methods (e.g. `SearchAnime()`) must not `null`.
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**
 
