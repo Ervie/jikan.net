@@ -12,7 +12,7 @@ namespace JikanDotNet.Helpers
 		/// <summary>
 		/// Endpoint for SSL encrypted requests.
 		/// </summary>
-		public const string defaultEndpoint = "https://api.jikan.moe/v4-alpha";
+		public const string defaultEndpoint = "https://api.jikan.moe/v4-alpha/";
 		
 		/// <summary>
 		/// Constructor.
@@ -33,7 +33,7 @@ namespace JikanDotNet.Helpers
 			};
 			Client.DefaultRequestHeaders.Accept.Clear();
 			Client.DefaultRequestHeaders.Accept.Add(
-				new MediaTypeWithQualityHeaderValue("application/json"));
+				new MediaTypeWithQualityHeaderValue("text/html"));
 			
 			return Client;
 		}
@@ -51,7 +51,7 @@ namespace JikanDotNet.Helpers
 			};
 			Client.DefaultRequestHeaders.Accept.Clear();
 			Client.DefaultRequestHeaders.Accept.Add(
-				new MediaTypeWithQualityHeaderValue("application/json"));
+				new MediaTypeWithQualityHeaderValue("text/html"));
 			
 			return Client;
 		}

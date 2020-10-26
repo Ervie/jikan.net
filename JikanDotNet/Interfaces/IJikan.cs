@@ -16,7 +16,7 @@ namespace JikanDotNet
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
 		/// <returns>Anime with given MAL id.</returns>
-		Task<Anime> GetAnime(long id);
+		Task<Anime> GetAnimeAsync(long id);
 
 		#endregion
 

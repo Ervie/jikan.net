@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using JikanDotNet.Model.Secondary;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace JikanDotNet
@@ -6,19 +7,19 @@ namespace JikanDotNet
 	/// <summary>
 	/// Anime model class.
 	/// </summary>
-	public class Anime : BaseJikanRequest, IMalEntity
+	public class Anime : BaseJikanRequest
 	{
 		/// <summary>
 		/// ID associated with MyAnimeList.
 		/// </summary>
 		[JsonPropertyName("mal_id")]
-		public long MalId { get; set; }
+		public long? MalId { get; set; }
 
 		/// <summary>
 		/// Anime's canonical link.
 		/// </summary>
 		[JsonPropertyName("url")]
-		public string LinkCanonical { get; set; }
+		public string Url { get; set; }
 
 		/// <summary>
 		/// Title of the anime.
@@ -73,6 +74,12 @@ namespace JikanDotNet
 		/// </summary>
 		[JsonPropertyName("status")]
 		public string Status { get; set; }
+
+		/// <summary>
+		/// Anime's images in various formats.
+		/// </summary>
+		[JsonPropertyName("images")]
+		public PictureSet Images { get; set; }
 
 		/// <summary>
 		/// Is anime currently airing.
@@ -141,7 +148,7 @@ namespace JikanDotNet
 		public string Synopsis { get; set; }
 
 		/// <summary>
-		/// Anime's background info. Return null if don't have any.
+		/// Anime's background info.
 		/// </summary>
 		[JsonPropertyName("background")]
 		public string Background { get; set; }
@@ -162,7 +169,7 @@ namespace JikanDotNet
 		/// Anime's related items (anime, manga, spin offs, etc.)
 		/// </summary>
 		[JsonPropertyName("related")]
-		public RelatedAnime Related { get; set; }
+		public ICollection<RelatedAnime> Related { get; set; }
 
 		/// <summary>
 		/// Anime's producers numerically indexed with array values.

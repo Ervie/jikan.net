@@ -24,7 +24,7 @@ namespace JikanDotNet.Tests
 		public async Task GetAnime_InvalidId_ShouldThrowValidationException(long malId)
 		{
 			// When
-			Func<Task<Anime>> func = _jikan.Awaiting(x => x.GetAnime(malId));
+			Func<Task<Anime>> func = _jikan.Awaiting(x => x.GetAnimeAsync(malId));
 
 			// Then
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();
@@ -37,7 +37,7 @@ namespace JikanDotNet.Tests
 		public async Task GetAnime_CorrectId_ShouldReturnNotNullAnime(long malId)
         {
 			// When
-			Anime returnedAnime = await _jikan.GetAnime(malId);
+			Anime returnedAnime = await _jikan.GetAnimeAsync(malId);
 
 			// Then
 			returnedAnime.Should().NotBeNull();
@@ -50,14 +50,14 @@ namespace JikanDotNet.Tests
 		public void GetAnime_WrongId_ShouldThrowException(long malId)
 		{
 			// When & Then
-			Assert.ThrowsAnyAsync<JikanRequestException>(() => _jikan.GetAnime(malId));
+			Assert.ThrowsAnyAsync<JikanRequestException>(() => _jikan.GetAnimeAsync(malId));
 		}
 
 		[Fact]
 		public async Task GetAnime_MSGundamId_ShouldParseGundam()
 		{
 			// When
-			Anime gundamAnime = await _jikan.GetAnime(80);
+			Anime gundamAnime = await _jikan.GetAnimeAsync(80);
 
 			// Then
 			gundamAnime.Title.Should().Be("Mobile Suit Gundam");
@@ -67,7 +67,7 @@ namespace JikanDotNet.Tests
 		public async Task GetAnime_BebopId_ShouldParseCowboyBebop()
 		{
 			// When
-			Anime bebopAnime = await _jikan.GetAnime(1);
+			Anime bebopAnime = await _jikan.GetAnimeAsync(1);
 
 			// Then
 			bebopAnime.Title.Should().Be("Cowboy Bebop");
@@ -77,7 +77,7 @@ namespace JikanDotNet.Tests
 		public async Task GetAnime_BebopId_ShouldParseCowboyBebopRelatedAnime()
 		{
 			// When
-			Anime bebopAnime = await _jikan.GetAnime(1);
+			Anime bebopAnime = await _jikan.GetAnimeAsync(1);
 
 			// Then
 			using (new AssertionScope())
@@ -91,7 +91,7 @@ namespace JikanDotNet.Tests
 		public async Task GetAnime_FSNId_ShouldParseFateStayNightRelatedAnime()
 		{
 			// When
-			Anime fsnAnime = await _jikan.GetAnime(356);
+			Anime fsnAnime = await _jikan.GetAnimeAsync(356);
 
 			// Then
 			fsnAnime.Related.AlternativeVersions.Count.Should().BeGreaterThan(3);
@@ -101,7 +101,7 @@ namespace JikanDotNet.Tests
 		public async Task GetAnime_FSNReproductionId_ShouldParseFateStayNightReproductionRelatedAnime()
 		{
 			// When
-			Anime fsnAnime = await _jikan.GetAnime(7559);
+			Anime fsnAnime = await _jikan.GetAnimeAsync(7559);
 
 			// Then
 			fsnAnime.Related.FullStories.First().Name.Should().Be("Fate/stay night");
@@ -111,7 +111,7 @@ namespace JikanDotNet.Tests
 		public async Task GetAnime_KamiNomiId_ShouldParseKamiNomiRelatedAnime()
 		{
 			// When
-			Anime kamiNomi = await _jikan.GetAnime(17725);
+			Anime kamiNomi = await _jikan.GetAnimeAsync(17725);
 
 			// Then
 			kamiNomi.Related.ParentStories.First().Name.Should().Be("Kami nomi zo Shiru Sekai");
@@ -121,7 +121,7 @@ namespace JikanDotNet.Tests
 		public async Task GetAnime_CardcaptorId_ShouldParseCardcaptorSakuraInformation()
 		{
 			// When
-			Anime cardcaptor = await _jikan.GetAnime(232);
+			Anime cardcaptor = await _jikan.GetAnimeAsync(232);
 
 			// Then
 			using (new AssertionScope())
@@ -140,7 +140,7 @@ namespace JikanDotNet.Tests
 		public async Task GetAnime_AkiraId_ShouldParseAkiraCollections()
 		{
 			// When
-			Anime akiraAnime = await _jikan.GetAnime(47);
+			Anime akiraAnime = await _jikan.GetAnimeAsync(47);
 
 			// Then
 			using (new AssertionScope())
@@ -159,7 +159,7 @@ namespace JikanDotNet.Tests
 		public async Task GetAnime_KeyTheMetalIdolId_ShouldParseAnimeWithNoRelatedAdaptations()
 		{
 			// Given
-			Anime returnedAnime = await _jikan.GetAnime(1457);
+			Anime returnedAnime = await _jikan.GetAnimeAsync(1457);
 
 			// When
 			returnedAnime.Related.Adaptations.Should().BeNull();

@@ -6,7 +6,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Magazine model class.
 	/// </summary>
-	public class Magazine : BaseJikanRequest, IMalEntity
+	public class Magazine : BaseJikanRequest
 	{
 		/// <summary>
 		/// Metadata about magazine..

@@ -1,5 +1,5 @@
-﻿using System;
-using System.Net;
+﻿using JikanDotNet.Model;
+using System;
 
 namespace JikanDotNet.Exceptions
 {
@@ -9,9 +9,9 @@ namespace JikanDotNet.Exceptions
 	public class JikanRequestException : Exception
 	{
 		/// <summary>
-		/// Response code received from HttpResponseMessage.
+		/// Details of error returned from Jikan Api.
 		/// </summary>
-		public HttpStatusCode ResponseCode { get; private set; }
+		public JikanApiError ApiError { get; private set; }
 
 		/// <summary>
 		/// Parameterless constructor.
@@ -30,9 +30,9 @@ namespace JikanDotNet.Exceptions
 		/// <summary>
 		/// Constructor with exception message and code.
 		/// </summary>
-		public JikanRequestException(string message, HttpStatusCode responseCode) : base(message)
+		public JikanRequestException(string message, JikanApiError apiError) : base(message)
 		{
-			ResponseCode = responseCode;
+			ApiError = apiError;
 		}
 
 		/// <summary>

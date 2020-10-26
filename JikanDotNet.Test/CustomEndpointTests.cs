@@ -16,10 +16,10 @@ namespace JikanDotNet.Tests
 		{
 			Skip.IfNot(_isV4CustomeEndpointReady);
 			// Given
-			var jikan = new Jikan(new JikanClientOptions { Endpoint = "https://api.jikan.moe/v4-alpha" } );
+			var jikan = new Jikan(new JikanClientOptions { Endpoint = "https://api.jikan.moe/v4-alpha/" } );
 
 			// When
-			var bebop = await jikan.GetAnime(1);
+			var bebop = await jikan.GetAnimeAsync(1);
 
 			// Then
 			bebop.MalId.Should().Be(1);
@@ -33,7 +33,7 @@ namespace JikanDotNet.Tests
 			var jikan = new Jikan(new JikanClientOptions { Endpoint = "https://seiyuu.moe:8000/v4-alpha/" });
 
 			// When
-			Anime bebop = await jikan.GetAnime(1);
+			Anime bebop = await jikan.GetAnimeAsync(1);
 
 			// Then
 			bebop.MalId.Should().Be(1);
@@ -46,7 +46,7 @@ namespace JikanDotNet.Tests
 			var jikan = new Jikan(new JikanClientOptions { Endpoint = "http://google.com" });
 
 			// When
-			Func<Task<Anime>> func = jikan.Awaiting(x => x.GetAnime(1));
+			Func<Task<Anime>> func = jikan.Awaiting(x => x.GetAnimeAsync(1));
 
 			// Then
 			func.Should().ThrowExactlyAsync<JikanRequestException>();
@@ -59,7 +59,7 @@ namespace JikanDotNet.Tests
 			var jikan = new Jikan(new JikanClientOptions { Endpoint = "http://google.com", SuppressException = false });
 
 			// When
-			Func<Task<Anime>> func = jikan.Awaiting(x => x.GetAnime(1));
+			Func<Task<Anime>> func = jikan.Awaiting(x => x.GetAnimeAsync(1));
 
 			// Then
 			func.Should().ThrowExactlyAsync<JikanRequestException>();

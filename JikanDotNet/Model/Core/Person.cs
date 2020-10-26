@@ -7,7 +7,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Person model class.
 	/// </summary>
-	public class Person: BaseJikanRequest,  IMalEntity
+	public class Person: BaseJikanRequest
 	{
 		/// <summary>
 		/// ID associated with MyAnimeList.
