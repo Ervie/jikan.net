@@ -1,5 +1,7 @@
 ﻿using FluentAssertions;
 using FluentAssertions.Execution;
+using JikanDotNet.Exceptions;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -13,6 +15,19 @@ namespace JikanDotNet.Tests
 		public MagazineTests()
 		{
 			_jikan = new Jikan(true);
+		}
+
+		[Theory]
+		[InlineData(long.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetMagazine_InvalidId_ShouldThrowValidationException(long id)
+		{
+			// When
+			Func<Task<Magazine>> func = _jikan.Awaiting(x => x.GetMagazine(id));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Fact]

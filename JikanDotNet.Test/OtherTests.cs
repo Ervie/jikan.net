@@ -69,11 +69,11 @@ namespace JikanDotNet.Tests
 
 			if (!request.RequestCached)
 			{
-				request.RequestCacheExpiry.Should().Be(43200);
+				request.RequestCacheExpiry.Should().Be(86400);
 			}
 			else
 			{
-				request.RequestCacheExpiry.Should().BeLessThan(43200);
+				request.RequestCacheExpiry.Should().BeLessThan(86400);
 			}
 		}
 	}

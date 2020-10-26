@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using FluentAssertions.Execution;
 using JikanDotNet.Exceptions;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -16,6 +17,19 @@ namespace JikanDotNet.Tests
 			_jikan = new Jikan();
 		}
 
+		[Theory]
+		[InlineData(null)]
+		[InlineData("")]
+		[InlineData("\n\n\t    \t")]
+		public async Task GetUserMangaList_InvalidUsername_ShouldThrowValidationException(string username)
+		{
+			// When
+			Func<Task<UserMangaList>> func = _jikan.Awaiting(x => x.GetUserMangaList(username));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
 		[Fact]
 		public async Task GetUserMangaList_Ervelan_ShouldParseErvelanMangaList()
 		{
@@ -29,6 +43,19 @@ namespace JikanDotNet.Tests
 				mangaList.Manga.Count.Should().BeGreaterThan(90);
 				mangaList.Manga.Select(x => x.Title).Should().Contain("Dr. Stone");
 			}
+		}
+
+		[Theory]
+		[InlineData(null)]
+		[InlineData("")]
+		[InlineData("\n\n\t    \t")]
+		public async Task GetUserMangaList_InvalidUsernameWithExtension_ShouldThrowValidationException(string username)
+		{
+			// When
+			Func<Task<UserMangaList>> func = _jikan.Awaiting(x => x.GetUserMangaList(username, UserMangaListExtension.Reading));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Fact]
@@ -84,6 +111,36 @@ namespace JikanDotNet.Tests
 				mangaList.Should().NotBeNull();
 				mangaList.Manga.Should().HaveCount(300);
 			}
+		}
+
+
+		[Theory]
+		[InlineData(null)]
+		[InlineData("")]
+		[InlineData("\n\n\t    \t")]
+		public async Task GetUserMangaList_InvalidUsernameWithConfig_ShouldThrowValidationException(string username)
+		{
+			// Given
+			var searchConfig = new UserListMangaSearchConfig()
+			{
+				Query = "death"
+			};
+
+			// When
+			Func<Task<UserMangaList>> func = _jikan.Awaiting(x => x.GetUserMangaList(username, searchConfig));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Fact]
+		public async Task GetUserMangaList_ValidUsernameNullConfig_ShouldThrowValidationException()
+		{
+			// When
+			Func<Task<UserMangaList>> func = _jikan.Awaiting(x => x.GetUserMangaList("Ervelan", null));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Fact]
@@ -191,7 +248,7 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public async Task GetUserAnimeList_ErvelanSortByTitle_ShouldFindYuuyuuHakusho()
+		public async Task GetUserMangaList_ErvelanSortByTitle_ShouldFindYuuyuuHakusho()
 		{
 			// Given
 			var searchConfig = new UserListMangaSearchConfig()
@@ -212,7 +269,7 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public async Task GetUserAnimeList_ErvelanSortByScore_ShouldFindBerserk()
+		public async Task GetUserMangaList_ErvelanSortByScore_ShouldFindBerserk()
 		{
 			// Given
 			var searchConfig = new UserListMangaSearchConfig()
@@ -233,7 +290,7 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public async Task GetUserAnimeList_ErvelanSortByScoreThenTitle_ShouldFindFMAOn4thPlace()
+		public async Task GetUserMangaList_ErvelanSortByScoreThenTitle_ShouldFindFMAOn4thPlace()
 		{
 			// Given
 			var searchConfig = new UserListMangaSearchConfig()
@@ -255,7 +312,7 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public async Task GetUserAnimeList_ErvelanSortYoungAnimal_ShouldFindBerserk()
+		public async Task GetUserMangaList_ErvelanSortYoungAnimal_ShouldFindBerserk()
 		{
 			// Given
 			var searchConfig = new UserListMangaSearchConfig()
@@ -276,7 +333,7 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public async Task GetUserAnimeList_ErvelanSortByWrongMagazineId_ShouldReturnAllResults()
+		public async Task GetUserMangaList_ErvelanSortByWrongMagazineId_ShouldReturnAllResults()
 		{
 			// Given
 			var searchConfig = new UserListMangaSearchConfig()
@@ -296,7 +353,7 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public async Task GetUserAnimeList_ErvelanSortByOneWithPublishingStatus_ShouldFindOPMAndOPNotCrossover()
+		public async Task GetUserMangaList_ErvelanSortByOneWithPublishingStatus_ShouldFindOPMAndOPNotCrossover()
 		{
 			// Given
 			var searchConfig = new UserListMangaSearchConfig()

@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using FluentAssertions.Execution;
 using JikanDotNet.Exceptions;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -17,13 +18,26 @@ namespace JikanDotNet.Tests
 		}
 
 		[Theory]
+		[InlineData(long.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetCharacter_InvalidId_ShouldThrowValidationException(long malId)
+		{
+			// When
+			Func<Task<Character>> func = _jikan.Awaiting(x => x.GetCharacter(malId));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Theory]
 		[InlineData(1)]
 		[InlineData(2)]
 		[InlineData(3)]
 		public async Task GetCharacter_CorrectId_ShouldReturnNotNullCharacter(long malId)
 		{
 			// When
-			Character returnedCharacter = await _jikan.GetCharacter(malId);
+			var returnedCharacter = await _jikan.GetCharacter(malId);
 
 			// Then
 			returnedCharacter.Should().NotBeNull();
@@ -43,7 +57,7 @@ namespace JikanDotNet.Tests
 		public async Task GetCharacter_IchigoKurosakiId_ShouldParseIchigoKurosaki()
 		{
 			// When
-			Character ichigo = await _jikan.GetCharacter(5);
+			var ichigo = await _jikan.GetCharacter(5);
 
 			// Then
 			ichigo.Name.Should().Be("Ichigo Kurosaki");
@@ -53,7 +67,7 @@ namespace JikanDotNet.Tests
 		public async Task GetCharacter_IchigoKurosakiId_ShouldParseIchigoKurosakiAboutNotNull()
 		{
 			// When
-			Character ichigo = await _jikan.GetCharacter(5);
+			var ichigo = await _jikan.GetCharacter(5);
 
 			// Then
 			ichigo.About.Should().NotBeNullOrEmpty();
@@ -63,7 +77,7 @@ namespace JikanDotNet.Tests
 		public async Task GetCharacter_IchigoKurosakiId_ShouldParseIchigoKurosakiBleach()
 		{
 			// When
-			Character ichigo = await _jikan.GetCharacter(5);
+			var ichigo = await _jikan.GetCharacter(5);
 
 			// Then
 			using (new AssertionScope())
@@ -77,7 +91,7 @@ namespace JikanDotNet.Tests
 		public async Task GetCharacter_EinId_ShouldParseEin()
 		{
 			// When
-			Character ein = await _jikan.GetCharacter(4);
+			var ein = await _jikan.GetCharacter(4);
 
 			// Then
 			using (new AssertionScope())

@@ -1,4 +1,6 @@
 ﻿using FluentAssertions;
+using JikanDotNet.Exceptions;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -12,6 +14,21 @@ namespace JikanDotNet.Tests
 		public PersonSearchTests()
 		{
 			_jikan = new Jikan();
+		}
+
+		[Theory]
+		[InlineData(null)]
+		[InlineData("")]
+		[InlineData("\n\n\t    \t")]
+		[InlineData("a")]
+		[InlineData("bb")]
+		public async Task SearchPerson_InvalidQuery_ShouldThrowValidationException(string query)
+		{
+			// When
+			Func<Task<PersonSearchResult>> func = _jikan.Awaiting(x => x.SearchPerson(query));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Theory]
@@ -55,6 +72,34 @@ namespace JikanDotNet.Tests
 
 			// Then
 			returnedPerson.Results.First().MalId.Should().Be(39860);
+		}
+
+		[Theory]
+		[InlineData(null)]
+		[InlineData("")]
+		[InlineData("\n\n\t    \t")]
+		[InlineData("a")]
+		[InlineData("bb")]
+		public async Task SearchPerson_InvalidQuerySecondPage_ShouldThrowValidationException(string query)
+		{
+			// When
+			Func<Task<PersonSearchResult>> func = _jikan.Awaiting(x => x.SearchPerson(query));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Theory]
+		[InlineData(int.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task SearchPerson_DaisukeQueryInvalidPage_ShouldThrowValidationException(int page)
+		{
+			// When
+			Func<Task<PersonSearchResult>> func = _jikan.Awaiting(x => x.SearchPerson("daisuke", page));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Fact]

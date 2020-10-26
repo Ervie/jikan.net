@@ -1,5 +1,7 @@
 ﻿using FluentAssertions;
 using FluentAssertions.Execution;
+using JikanDotNet.Exceptions;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -15,6 +17,19 @@ namespace JikanDotNet.Tests
 			_jikan = new Jikan();
 		}
 
+		[Theory]
+		[InlineData(null)]
+		[InlineData("")]
+		[InlineData("\n\n\t    \t")]
+		public async Task GetUserAnimeList_InvalidUsername_ShouldThrowValidationException(string username)
+		{
+			// When
+			Func<Task<UserAnimeList>> func = _jikan.Awaiting(x => x.GetUserAnimeList(username));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
 		[Fact]
 		public async Task GetUserAnimeList_Ervelan_ShouldParseErvelanAnimeList()
 		{
@@ -28,6 +43,19 @@ namespace JikanDotNet.Tests
 				animeList.Anime.Count.Should().Be(300);
 				animeList.Anime.Select(x => x.Title).Should().Contain("Akira");
 			}
+		}
+
+		[Theory]
+		[InlineData(null)]
+		[InlineData("")]
+		[InlineData("\n\n\t    \t")]
+		public async Task GetUserAnimeList_InvalidUsernameWithExtension_ShouldThrowValidationException(string username)
+		{
+			// When
+			Func<Task<UserAnimeList>> func = _jikan.Awaiting(x => x.GetUserAnimeList(username, UserAnimeListExtension.Watching));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Fact]
@@ -59,6 +87,33 @@ namespace JikanDotNet.Tests
 			}
 		}
 
+		[Theory]
+		[InlineData(null)]
+		[InlineData("")]
+		[InlineData("\n\n\t    \t")]
+		public async Task GetUserAnimeList_InvalidUsernameSecondPage_ShouldThrowValidationException(string username)
+		{
+			// When
+			Func<Task<UserAnimeList>> func = _jikan.Awaiting(x => x.GetUserAnimeList(username, 2));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+
+		[Theory]
+		[InlineData(int.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetUserAnimeList_ValidUsernameInvalidPage_ShouldThrowValidationException(int page)
+		{
+			// When
+			Func<Task<UserAnimeList>> func = _jikan.Awaiting(x => x.GetUserAnimeList("Ervelan", page));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
 		[Fact]
 		public async Task GetUserAnimeList_ErvelanSecondPage_ShouldParseErvelanAnimeListSecondPage()
 		{
@@ -85,6 +140,35 @@ namespace JikanDotNet.Tests
 				animeList.Should().NotBeNull();
 				animeList.Anime.Count.Should().Be(122);
 			}
+		}
+
+		[Theory]
+		[InlineData(null)]
+		[InlineData("")]
+		[InlineData("\n\n\t    \t")]
+		public async Task GetUserAnimeList_InvalidUsernameWithConfig_ShouldThrowValidationException(string username)
+		{
+			// Given
+			var searchConfig = new UserListAnimeSearchConfig()
+			{
+				Query = "death"
+			};
+
+			// When
+			Func<Task<UserAnimeList>> func = _jikan.Awaiting(x => x.GetUserAnimeList(username, searchConfig));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Fact]
+		public async Task GetUserAnimeList_NullSearchConfig_ShouldFindDNandDP()
+		{
+			// When
+			Func<Task<UserAnimeList>> func = _jikan.Awaiting(x => x.GetUserAnimeList("Ervelan", null));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Fact]

@@ -1,5 +1,7 @@
 ﻿using FluentAssertions;
 using FluentAssertions.Execution;
+using JikanDotNet.Exceptions;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -13,6 +15,21 @@ namespace JikanDotNet.Tests
 		public CharacterSearchTests()
 		{
 			_jikan = new Jikan();
+		}
+
+		[Theory]
+		[InlineData(null)]
+		[InlineData("")]
+		[InlineData("\n\n\t    \t")]
+		[InlineData("a")]
+		[InlineData("bb")]
+		public async Task SearchCharacter_InvalidQuery_ShouldThrowValidationException(string query)
+		{
+			// When
+			Func<Task<CharacterSearchResult>> func = _jikan.Awaiting(x => x.SearchCharacter(query));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Theory]
@@ -89,6 +106,34 @@ namespace JikanDotNet.Tests
 				firstCharacter.Name.Should().Be("Toujou, Kirumi");
 				firstCharacter.Mangaography.Should().ContainSingle();
 			}
+		}
+
+		[Theory]
+		[InlineData(null)]
+		[InlineData("")]
+		[InlineData("\n\n\t    \t")]
+		[InlineData("a")]
+		[InlineData("bb")]
+		public async Task SearchCharacter_InvalidQuerySecondPage_ShouldThrowValidationException(string query)
+		{
+			// When
+			Func<Task<CharacterSearchResult>> func = _jikan.Awaiting(x => x.SearchCharacter(query, 2));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Theory]
+		[InlineData(int.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task SearchCharacter_EdwardQueryInvalidPage_ShouldThrowValidationException(int page)
+		{
+			// When
+			Func<Task<CharacterSearchResult>> func = _jikan.Awaiting(x => x.SearchCharacter("edward", page));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Fact]

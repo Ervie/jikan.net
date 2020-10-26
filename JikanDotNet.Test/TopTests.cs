@@ -1,6 +1,8 @@
 ﻿using FluentAssertions;
 using FluentAssertions.Common;
 using FluentAssertions.Execution;
+using JikanDotNet.Exceptions;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -53,6 +55,32 @@ namespace JikanDotNet.Tests
 
 			// Then
 			top.Top.Skip(4).First().Type.Should().Be("OVA");
+		}
+
+		[Theory]
+		[InlineData(int.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetAnimeTop_InvalidPage_ShouldThrowValidationException(int page)
+		{
+			// When
+			Func<Task<AnimeTop>> func = _jikan.Awaiting(x => x.GetAnimeTop(page));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Theory]
+		[InlineData(int.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetAnimeTop_ValidTypeInvalidPage_ShouldThrowValidationException(int page)
+		{
+			// When
+			Func<Task<AnimeTop>> func = _jikan.Awaiting(x => x.GetAnimeTop(page, TopAnimeExtension.TopAiring));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Fact]
@@ -140,6 +168,32 @@ namespace JikanDotNet.Tests
 			top.Top.First().PublishingStart.Should().Be("Aug 1989");
 		}
 
+		[Theory]
+		[InlineData(int.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetMangaTop_InvalidPage_ShouldThrowValidationException(int page)
+		{
+			// When
+			Func<Task<MangaTop>> func = _jikan.Awaiting(x => x.GetMangaTop(page));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Theory]
+		[InlineData(int.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetMangaTop_ValidTypeInvalidPage_ShouldThrowValidationException(int page)
+		{
+			// When
+			Func<Task<MangaTop>> func = _jikan.Awaiting(x => x.GetMangaTop(page, TopMangaExtension.TopPopularity));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
 		[Fact]
 		public async Task GetMangaTop_FirstPageNovels_ShouldParseMonogatariTitle()
 		{
@@ -206,6 +260,19 @@ namespace JikanDotNet.Tests
 			}
 		}
 
+		[Theory]
+		[InlineData(int.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetPeopleTop_InvalidPage_ShouldThrowValidationException(int page)
+		{
+			// When
+			Func<Task<PeopleTop>> func = _jikan.Awaiting(x => x.GetPeopleTop(page));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
 		[Fact]
 		public async Task GetPeopleTop_SecondPage_ShouldFindKentarouMiura()
 		{
@@ -262,6 +329,19 @@ namespace JikanDotNet.Tests
 				top.Top.Skip(2).First().Name.Should().Be("Monkey D., Luffy");
 				top.Top.Skip(2).First().Animeography.Select(x => x.Name).Should().Contain("One Piece");
 			}
+		}
+
+		[Theory]
+		[InlineData(int.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetCharactersTop_InvalidPage_ShouldThrowValidationException(int page)
+		{
+			// When
+			Func<Task<CharactersTop>> func = _jikan.Awaiting(x => x.GetCharactersTop(page));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Fact]

@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using FluentAssertions.Execution;
+using JikanDotNet.Exceptions;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,6 +17,19 @@ namespace JikanDotNet.Tests
 			_jikan = new Jikan();
 		}
 
+		[Theory]
+		[InlineData(long.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetMangaPictures_InvalidId_ShouldThrowValidationException(long id)
+		{
+			// When
+			Func<Task<MangaPictures>> func = _jikan.Awaiting(x => x.GetMangaPictures(id));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
 		[Fact]
 		public async Task GetMangaPictures_MonsterId_ShouldParseMonsterImages()
 		{
@@ -24,6 +38,19 @@ namespace JikanDotNet.Tests
 
 			// Then
 			monster.Pictures.Should().HaveCount(8);
+		}
+
+		[Theory]
+		[InlineData(long.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetMangaCharacters_InvalidId_ShouldThrowValidationException(long id)
+		{
+			// When
+			Func<Task<MangaCharacters>> func = _jikan.Awaiting(x => x.GetMangaCharacters(id));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Fact]
@@ -46,6 +73,19 @@ namespace JikanDotNet.Tests
 			monster.Characters.Select(x => x.Name).Should().Contain("Liebert, Johan");
 		}
 
+		[Theory]
+		[InlineData(long.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetMangaStatistics_InvalidId_ShouldThrowValidationException(long id)
+		{
+			// When
+			Func<Task<MangaStats>> func = _jikan.Awaiting(x => x.GetMangaStatistics(id));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
 		[Fact]
 		public async Task GetMangaStatistics_MonsterId_ShouldParseMonsterStats()
 		{
@@ -61,6 +101,19 @@ namespace JikanDotNet.Tests
 			}
 		}
 
+		[Theory]
+		[InlineData(long.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetMangaNews_InvalidId_ShouldThrowValidationException(long id)
+		{
+			// When
+			Func<Task<MangaNews>> func = _jikan.Awaiting(x => x.GetMangaNews(id));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
 		[Fact]
 		public async Task GetMangaNews_MonsterId_ShouldParseMonsterNews()
 		{
@@ -73,6 +126,19 @@ namespace JikanDotNet.Tests
 				monster.News.Should().HaveCount(11);
 				monster.News.Select(x => x.Author).Should().Contain("Xinil");
 			}
+		}
+
+		[Theory]
+		[InlineData(long.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetMangaForumTopics_InvalidId_ShouldThrowValidationException(long id)
+		{
+			// When
+			Func<Task<ForumTopics>> func = _jikan.Awaiting(x => x.GetMangaForumTopics(id));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Fact]
@@ -90,6 +156,19 @@ namespace JikanDotNet.Tests
 			}
 		}
 
+		[Theory]
+		[InlineData(long.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetMangaMoreInfo_InvalidId_ShouldThrowValidationException(long id)
+		{
+			// When
+			Func<Task<MoreInfo>> func = _jikan.Awaiting(x => x.GetMangaMoreInfo(id));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
 		[Fact]
 		public async Task GetMangaMoreInfo_BerserkId_ShouldParseBerserkMoreInfo()
 		{
@@ -97,6 +176,19 @@ namespace JikanDotNet.Tests
 			var berserk = await _jikan.GetMangaMoreInfo(2);
 
 			berserk.Info.Should().Contain("The Prototype (1988)");
+		}
+
+		[Theory]
+		[InlineData(long.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetMangaRecommendations_InvalidId_ShouldThrowValidationException(long id)
+		{
+			// When
+			Func<Task<Recommendations>> func = _jikan.Awaiting(x => x.GetMangaRecommendations(id));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Fact]
@@ -115,6 +207,19 @@ namespace JikanDotNet.Tests
 			}
 		}
 
+		[Theory]
+		[InlineData(long.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetMangaReviews_InvalidId_ShouldThrowValidationException(long id)
+		{
+			// When
+			Func<Task<MangaReviews>> func = _jikan.Awaiting(x => x.GetMangaReviews(id));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
 		[Fact]
 		public async Task GetMangaReviews_BerserkId_ShouldParseBerserkReviews()
 		{
@@ -131,6 +236,32 @@ namespace JikanDotNet.Tests
 				berserk.Reviews.First().Reviewer.Scores.Overall.Should().Be(10);
 				berserk.Reviews.First().Reviewer.Scores.Story.Should().Be(9);
 			}
+		}
+
+		[Theory]
+		[InlineData(long.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetMangaReviews_SecondPageInvalidId_ShouldThrowValidationException(long id)
+		{
+			// When
+			Func<Task<MangaReviews>> func = _jikan.Awaiting(x => x.GetMangaReviews(id, 2));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Theory]
+		[InlineData(int.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetMangaReviews_VvalidIdIndalidPage_ShouldThrowValidationException(int page)
+		{
+			// When
+			Func<Task<MangaReviews>> func = _jikan.Awaiting(x => x.GetMangaReviews(1, page));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Fact]

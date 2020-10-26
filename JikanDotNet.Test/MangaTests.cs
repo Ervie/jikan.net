@@ -18,6 +18,19 @@ namespace JikanDotNet.Tests
 		}
 
 		[Theory]
+		[InlineData(long.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetManga_InvalidId_ShouldThrowValidationException(long id)
+		{
+			// When
+			Func<Task<Manga>> func = _jikan.Awaiting(x => x.GetManga(id));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Theory]
 		[InlineData(1)]
 		[InlineData(2)]
 		[InlineData(3)]

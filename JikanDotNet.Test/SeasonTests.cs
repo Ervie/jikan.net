@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using FluentAssertions.Execution;
 using FluentAssertions.Extensions;
+using JikanDotNet.Exceptions;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,6 +16,23 @@ namespace JikanDotNet.Tests
 		public SeasonTests()
 		{
 			_jikan = new Jikan();
+		}
+
+		[Theory]
+		[InlineData(int.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		[InlineData(1)]
+		[InlineData(1900)]
+		[InlineData(2030)]
+		[InlineData(int.MaxValue)]
+		public async Task GetSeason_InvalidYear_ShouldThrowValidationException(int year)
+		{
+			// When
+			Func<Task<Season>> func = _jikan.Awaiting(x => x.GetSeason(year, Seasons.Fall));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Fact]

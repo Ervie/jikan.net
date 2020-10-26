@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using FluentAssertions.Execution;
+using JikanDotNet.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,21 @@ namespace JikanDotNet.Tests
 		public MangaSearchTests()
 		{
 			_jikan = new Jikan();
+		}
+
+		[Theory]
+		[InlineData(null)]
+		[InlineData("")]
+		[InlineData("\n\n\t    \t")]
+		[InlineData("a")]
+		[InlineData("bb")]
+		public async Task SearchManga_InvalidQuery_ShouldThrowValidationException(string query)
+		{
+			// When
+			Func<Task<MangaSearchResult>> func = _jikan.Awaiting(x => x.SearchManga(query));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Theory]
@@ -56,6 +72,37 @@ namespace JikanDotNet.Tests
 			}
 		}
 
+		[Theory]
+		[InlineData(null)]
+		[InlineData("")]
+		[InlineData("\n\n\t    \t")]
+		[InlineData("a")]
+		[InlineData("bb")]
+		public async Task SearchManga_InvalidQueryWithConfig_ShouldThrowValidationException(string query)
+		{
+			// Given
+			var searchConfig = new MangaSearchConfig()
+			{
+				Status = AiringStatus.Airing
+			};
+
+			// When
+			Func<Task<MangaSearchResult>> func = _jikan.Awaiting(x => x.SearchManga(query, searchConfig));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Fact]
+		public async Task SearchManga_YotsubatoQueryNullConfig_ShouldThrowValidationException()
+		{
+			// When
+			Func<Task<MangaSearchResult>> func = _jikan.Awaiting(x => x.SearchManga("Yotsubato", null));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
 		[Fact]
 		public async Task SearchManga_YotsubatoPublishingQuery_ShouldReturnPublishedYotsubatoManga()
 		{
@@ -77,6 +124,40 @@ namespace JikanDotNet.Tests
 				firstResult.Volumes.Should().Be(0);
 				firstResult.MalId.Should().Be(104);
 			}
+		}
+
+		[Theory]
+		[InlineData(null)]
+		[InlineData("")]
+		[InlineData("\n\n\t    \t")]
+		[InlineData("a")]
+		[InlineData("bb")]
+		public async Task SearchManga_InvalidQuerySecondPage_ShouldThrowValidationException(string query)
+		{
+			// Given
+			var searchConfig = new MangaSearchConfig()
+			{
+				Status = AiringStatus.Airing
+			};
+
+			// When
+			Func<Task<MangaSearchResult>> func = _jikan.Awaiting(x => x.SearchManga(query, searchConfig));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Theory]
+		[InlineData(int.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task SearchManga_YotsubatoQueryInvalidPage_ShouldThrowValidationException(int page)
+		{
+			// When
+			Func<Task<MangaSearchResult>> func = _jikan.Awaiting(x => x.SearchManga("yotsubato", page));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Fact]
@@ -329,6 +410,47 @@ namespace JikanDotNet.Tests
 				returnedManga.Results.Count.Should().BeGreaterThan(30);
 			}
 		}
+
+		[Theory]
+		[InlineData(null)]
+		[InlineData("")]
+		[InlineData("\n\n\t    \t")]
+		[InlineData("a")]
+		[InlineData("bb")]
+		public async Task SearchManga_InvalidQueryWithConfigSecondPage_ShouldThrowValidationException(string query)
+		{
+			// Given
+			var searchConfig = new MangaSearchConfig()
+			{
+				Status = AiringStatus.Airing
+			};
+
+			// When
+			Func<Task<MangaSearchResult>> func = _jikan.Awaiting(x => x.SearchManga(query, 2, searchConfig));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Theory]
+		[InlineData(int.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task SearchManga_OreQueryWithConfigInvalidPage_ShouldThrowValidationException(int query)
+		{
+			// Given
+			var searchConfig = new MangaSearchConfig()
+			{
+				Status = AiringStatus.Airing
+			};
+
+			// When
+			Func<Task<MangaSearchResult>> func = _jikan.Awaiting(x => x.SearchManga("ore", query, searchConfig));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
 
 		[Fact]
 		public async Task SearchManga_OreQueryComedyMangaSecondPage_ShouldReturnNotEmptyCollection()

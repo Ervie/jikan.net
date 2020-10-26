@@ -1,5 +1,7 @@
 ﻿using FluentAssertions;
 using FluentAssertions.Execution;
+using JikanDotNet.Exceptions;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -13,6 +15,19 @@ namespace JikanDotNet.Tests
 		public GenreTests()
 		{
 			_jikan = new Jikan(true);
+		}
+
+		[Theory]
+		[InlineData(long.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetAnimeGenre_InvalidId_ShouldThrowValidationException(long id)
+		{
+			// When
+			Func<Task<AnimeGenre>> func = _jikan.Awaiting(x => x.GetAnimeGenre(id));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Fact]
@@ -64,6 +79,45 @@ namespace JikanDotNet.Tests
 			}
 		}
 
+		[Theory]
+		[InlineData(long.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetAnimeGenre_SecondPageInvalidId_ShouldThrowValidationException(long id)
+		{
+			// When
+			Func<Task<AnimeGenre>> func = _jikan.Awaiting(x => x.GetAnimeGenre(id, 2));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Theory]
+		[InlineData(int.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetAnimeGenre_ValidIdInvalidPage_ShouldThrowValidationException(int page)
+		{
+			// When
+			Func<Task<AnimeGenre>> func = _jikan.Awaiting(x => x.GetAnimeGenre(1, page));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Theory]
+		[InlineData(int.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetAnimeGenre_ValidGenreInvalidPage_ShouldThrowValidationException(int page)
+		{
+			// When
+			Func<Task<AnimeGenre>> func = _jikan.Awaiting(x => x.GetAnimeGenre(GenreSearch.Mystery, page));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
 		[Fact]
 		public async Task GetAnimeGenre_MysteryGenreIdSecondPage_ShouldParseAnimeMysteryGenreMetadata()
 		{
@@ -84,16 +138,29 @@ namespace JikanDotNet.Tests
 		public async Task GetAnimeGenre_ActionGenreIdSecondPage_ShouldParseAnimeMysteryGenre()
 		{
 			// When
-			var genre = await _jikan.GetAnimeGenre(GenreSearch.Mystery, 2);
+			var genre = await _jikan.GetAnimeGenre(GenreSearch.Action, 2);
 
 			// Then
 			using (new AssertionScope())
 			{
 				genre.Should().NotBeNull();
 				genre.TotalCount.Should().BeGreaterThan(600);
-				genre.Metadata.Name.Should().Be("Mystery Anime");
+				genre.Metadata.Name.Should().Be("Action Anime");
 				genre.Anime.Should().HaveCount(100);
 			}
+		}
+
+		[Theory]
+		[InlineData(long.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetMangaGenre_InvalidId_ShouldThrowValidationException(long id)
+		{
+			// When
+			Func<Task<MangaGenre>> func = _jikan.Awaiting(x => x.GetMangaGenre(id));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Fact]
@@ -127,6 +194,45 @@ namespace JikanDotNet.Tests
 				genre.Metadata.MalId.Should().Be(18);
 				genre.Manga.First().Title.Should().Be("Neon Genesis Evangelion");
 			}
+		}
+
+		[Theory]
+		[InlineData(long.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetMangaGenre_SecondPageInvalidId_ShouldThrowValidationException(long id)
+		{
+			// When
+			Func<Task<MangaGenre>> func = _jikan.Awaiting(x => x.GetMangaGenre(id, 2));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Theory]
+		[InlineData(int.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetMangaGenre_ValidIdInvalidPage_ShouldThrowValidationException(int page)
+		{
+			// When
+			Func<Task<MangaGenre>> func = _jikan.Awaiting(x => x.GetMangaGenre(1, page));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Theory]
+		[InlineData(int.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetMangaGenre_ValidGenreInvalidPage_ShouldThrowValidationException(int page)
+		{
+			// When
+			Func<Task<MangaGenre>> func = _jikan.Awaiting(x => x.GetMangaGenre(GenreSearch.Mystery, page));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Fact]

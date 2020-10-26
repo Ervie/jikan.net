@@ -1,5 +1,7 @@
 ﻿using FluentAssertions;
 using FluentAssertions.Execution;
+using JikanDotNet.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,6 +16,21 @@ namespace JikanDotNet.Tests
 		public AnimeSearchTests()
 		{
 			_jikan = new Jikan();
+		}
+
+		[Theory]
+		[InlineData(null)]
+		[InlineData("")]
+		[InlineData("\n\n\t    \t")]
+		[InlineData("a")]
+		[InlineData("bb")]
+		public async Task SearchAnime_InvalidQuery_ShouldThrowValidationException(string query)
+		{
+			// When
+			Func<Task<AnimeSearchResult>> func = _jikan.Awaiting(x => x.SearchAnime(query));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Theory]
@@ -72,6 +89,34 @@ namespace JikanDotNet.Tests
 			}
 		}
 
+		[Theory]
+		[InlineData(null)]
+		[InlineData("")]
+		[InlineData("\n\n\t    \t")]
+		[InlineData("a")]
+		[InlineData("bb")]
+		public async Task SearchAnime_InvalidQuerySecondPage_ShouldThrowValidationException(string query)
+		{
+			// When
+			Func<Task<AnimeSearchResult>> func = _jikan.Awaiting(x => x.SearchAnime(query, 2));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Theory]
+		[InlineData(int.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task SearchAnime_GirlQueryInvalidPage_ShouldThrowValidationException(int page)
+		{
+			// When
+			Func<Task<AnimeSearchResult>> func = _jikan.Awaiting(x => x.SearchAnime("girl", page));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
 		[Fact]
 		public async Task SearchAnime_GirlQuerySecondPage_ShouldFindGirlAnime()
 		{
@@ -99,6 +144,37 @@ namespace JikanDotNet.Tests
 
 			// Then
 			returnedAnime.Should().Be(returnedAnime);
+		}
+
+		[Theory]
+		[InlineData(null)]
+		[InlineData("")]
+		[InlineData("\n\n\t    \t")]
+		[InlineData("a")]
+		[InlineData("bb")]
+		public async Task SearchAnime_InvalidQueryWithConfig_ShouldThrowValidationException(string query)
+		{
+			// Given
+			var searchConfig = new AnimeSearchConfig
+			{
+				Type = AnimeType.TV
+			};
+
+			// When
+			Func<Task<AnimeSearchResult>> func = _jikan.Awaiting(x => x.SearchAnime(query, searchConfig));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Fact]
+		public async Task SearchAnime_DanganronpaQueryNullConfig_ShouldThrowValidationException()
+		{
+			// When
+			Func<Task<AnimeSearchResult>> func = _jikan.Awaiting(x => x.SearchAnime("danganronpa", null));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Fact]
@@ -274,6 +350,16 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
+		public async Task SearchAnime_EmptyQueryNullConfig_ShouldThrowValidationException()
+		{
+			// When
+			Func<Task<AnimeSearchResult>> func = _jikan.Awaiting(x => x.SearchAnime("danganronpa", null));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Fact]
 		public async Task SearchAnime_EmptyQueryActionTvAnime_ShouldFindAfroSamuraiAndAjin()
 		{
 			// Given
@@ -293,6 +379,26 @@ namespace JikanDotNet.Tests
 				titles.Should().Contain("Ajin");
 				titles.Should().Contain("Afro Samurai");
 			}
+		}
+
+		[Theory]
+		[InlineData(int.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task SearchAnime_EmptyQueryActionTvAnimeInvalidPage_ShouldThrowValidationException(int page)
+		{
+			// Given
+			var searchConfig = new AnimeSearchConfig
+			{
+				Type = AnimeType.TV,
+				Genres = new List<GenreSearch> { GenreSearch.Action }
+			};
+
+			// When
+			Func<Task<AnimeSearchResult>> func = _jikan.Awaiting(x => x.SearchAnime(searchConfig, page));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Fact]
@@ -339,6 +445,48 @@ namespace JikanDotNet.Tests
 			}
 		}
 
+		[Theory]
+		[InlineData(null)]
+		[InlineData("")]
+		[InlineData("\n\n\t    \t")]
+		[InlineData("a")]
+		[InlineData("bb")]
+		public async Task SearchAnime_InvalidQueryActionCompletedAnimeSecondPage_ShouldThrowValidationException(string query)
+		{
+			// Given
+			var searchConfig = new AnimeSearchConfig
+			{
+				Status = AiringStatus.Completed,
+				Genres = new List<GenreSearch> { GenreSearch.Action }
+			};
+
+			// When
+			Func<Task<AnimeSearchResult>> func = _jikan.Awaiting(x => x.SearchAnime(query, 2, searchConfig));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Theory]
+		[InlineData(int.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task SearchAnime_GirlQueryActionCompletedAnimeInvalidPage_ShouldThrowValidationException(int page)
+		{
+			// Given
+			var searchConfig = new AnimeSearchConfig
+			{
+				Status = AiringStatus.Completed,
+				Genres = new List<GenreSearch> { GenreSearch.Action }
+			};
+
+			// When
+			Func<Task<AnimeSearchResult>> func = _jikan.Awaiting(x => x.SearchAnime("girl", page, searchConfig));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
 		[Fact]
 		public async Task SearchAnime_OneQueryActionCompletedAnimeSecondPage_ShouldReturnNotEmptyCollection()
 		{
@@ -358,6 +506,16 @@ namespace JikanDotNet.Tests
 				returnedAnime.Should().NotBeNull();
 				returnedAnime.Results.Should().NotBeEmpty();
 			}
+		}
+
+		[Fact]
+		public async Task SearchAnime_EmptyQuerySecondPageNullConfig_ShouldThrowValidationException()
+		{
+			// When
+			Func<Task<AnimeSearchResult>> func = _jikan.Awaiting(x => x.SearchAnime("danganronpa", 2, null));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Fact]

@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using FluentAssertions.Execution;
+using JikanDotNet.Exceptions;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,11 +17,24 @@ namespace JikanDotNet.Tests
 			_jikan = new Jikan();
 		}
 
+		[Theory]
+		[InlineData(long.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetAnimeEpisodes_InvalidId_ShouldThrowValidationException(long malId)
+		{
+			// When
+			Func<Task<AnimeEpisodes>> func = _jikan.Awaiting(x => x.GetAnimeEpisodes(malId));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
 		[Fact]
 		public async Task GetAnimeEpisodes_BebopId_ShouldParseCowboyBebopEpisode()
 		{
 			// When
-			AnimeEpisodes bebop = await _jikan.GetAnimeEpisodes(1);
+			var bebop = await _jikan.GetAnimeEpisodes(1);
 
 			// Then
 			using (new AssertionScope())
@@ -30,11 +44,24 @@ namespace JikanDotNet.Tests
 			}
 		}
 
+		[Theory]
+		[InlineData(long.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetAnimeCharactersStaff_InvalidId_ShouldThrowValidationException(long malId)
+		{
+			// When
+			Func<Task<AnimeCharactersStaff>> func = _jikan.Awaiting(x => x.GetAnimeCharactersStaff(malId));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
 		[Fact]
 		public async Task GetAnimeCharactersStaff_BebopId_ShouldParseCowboyBebopCharactersAndStaff()
 		{
 			// When
-			AnimeCharactersStaff bebop = await _jikan.GetAnimeCharactersStaff(1);
+			var bebop = await _jikan.GetAnimeCharactersStaff(1);
 
 			// Then
 			using (new AssertionScope())
@@ -44,21 +71,47 @@ namespace JikanDotNet.Tests
 			}
 		}
 
+		[Theory]
+		[InlineData(long.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetAnimePictures_InvalidId_ShouldThrowValidationException(long malId)
+		{
+			// When
+			Func<Task<AnimePictures>> func = _jikan.Awaiting(x => x.GetAnimePictures(malId));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
 		[Fact]
 		public async Task GetAnimePictures_BebopId_ShouldParseCowboyBebopImages()
 		{
 			// When
-			AnimePictures bebop = await _jikan.GetAnimePictures(1);
+			var bebop = await _jikan.GetAnimePictures(1);
 
 			// Then
 			bebop.Pictures.Should().HaveCount(13);
+		}
+
+		[Theory]
+		[InlineData(long.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetAnimeVideos_InvalidId_ShouldThrowValidationException(long malId)
+		{
+			// When
+			Func<Task<AnimeVideos>> func = _jikan.Awaiting(x => x.GetAnimeVideos(malId));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Fact]
 		public async Task GetAnimeVideos_BebopId_ShouldParseCowboyBebopVideos()
 		{
 			// When
-			AnimeVideos bebop = await _jikan.GetAnimeVideos(1);
+			var bebop = await _jikan.GetAnimeVideos(1);
 
 			// Then
 			using (new AssertionScope())
@@ -70,11 +123,24 @@ namespace JikanDotNet.Tests
 			}
 		}
 
+		[Theory]
+		[InlineData(long.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetAnimeStatistics_InvalidId_ShouldThrowValidationException(long malId)
+		{
+			// When
+			Func<Task<AnimeStats>> func = _jikan.Awaiting(x => x.GetAnimeStatistics(malId));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
 		[Fact]
 		public async Task GetAnimeStatistics_BebopId_ShouldParseCowboyBebopStats()
 		{
 			// When
-			AnimeStats bebop = await _jikan.GetAnimeStatistics(1);
+			var bebop = await _jikan.GetAnimeStatistics(1);
 
 			// Then
 			using (new AssertionScope())
@@ -86,11 +152,24 @@ namespace JikanDotNet.Tests
 			}
 		}
 
+		[Theory]
+		[InlineData(long.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetAnimeNews_InvalidId_ShouldThrowValidationException(long malId)
+		{
+			// When
+			Func<Task<AnimeNews>> func = _jikan.Awaiting(x => x.GetAnimeNews(malId));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
 		[Fact]
 		public async Task GetAnimeNews_BebopId_ShouldParseCowboyBebopNews()
 		{
 			// When
-			AnimeNews bebop = await _jikan.GetAnimeNews(1);
+			var bebop = await _jikan.GetAnimeNews(1);
 
 			// Then
 			using (new AssertionScope())
@@ -100,31 +179,70 @@ namespace JikanDotNet.Tests
 			}
 		}
 
+		[Theory]
+		[InlineData(long.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetAnimeForumTopics_InvalidId_ShouldThrowValidationException(long malId)
+		{
+			// When
+			Func<Task<ForumTopics>> func = _jikan.Awaiting(x => x.GetAnimeForumTopics(malId));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
 		[Fact]
 		public async Task GetAnimeForumTopics_BebopId_ShouldParseCowboyBebopTopics()
 		{
 			// When
-			ForumTopics bebop = await _jikan.GetAnimeForumTopics(1);
+			var bebop = await _jikan.GetAnimeForumTopics(1);
 
 			// Then
 			bebop.Topics.Should().HaveCount(15);
+		}
+
+		[Theory]
+		[InlineData(long.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetAnimeMoreInfo_InvalidId_ShouldThrowValidationException(long malId)
+		{
+			// When
+			Func<Task<MoreInfo>> func = _jikan.Awaiting(x => x.GetAnimeMoreInfo(malId));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Fact]
 		public async Task GetAnimeMoreInfo_BebopId_ShouldParseCowboyBebopMoreInfo()
 		{
 			// When
-			MoreInfo bebop = await _jikan.GetAnimeMoreInfo(1);
+			var bebop = await _jikan.GetAnimeMoreInfo(1);
 
 			// Then
 			bebop.Info.Should().Contain("Suggested Order of Viewing");
+		}
+
+		[Theory]
+		[InlineData(long.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetAnimeRecommendations_InvalidId_ShouldThrowValidationException(long malId)
+		{
+			// When
+			Func<Task<Recommendations>> func = _jikan.Awaiting(x => x.GetAnimeRecommendations(malId));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Fact]
 		public async Task GetAnimeRecommendation_BebopId_ShouldParseCowboyBebopRecommendations()
 		{
 			// When
-			Recommendations bebop = await _jikan.GetAnimeRecommendations(1);
+			var bebop = await _jikan.GetAnimeRecommendations(1);
 
 			// Then
 			using (new AssertionScope())
@@ -135,11 +253,24 @@ namespace JikanDotNet.Tests
 			}
 		}
 
+		[Theory]
+		[InlineData(long.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetAnimeReviews_InvalidId_ShouldThrowValidationException(long malId)
+		{
+			// When
+			Func<Task<AnimeReviews>> func = _jikan.Awaiting(x => x.GetAnimeReviews(malId));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
 		[Fact]
 		public async Task GetAnimeReviews_BebopId_ShouldParseCowboyBebopReviews()
 		{
 			// When
-			AnimeReviews bebop = await _jikan.GetAnimeReviews(1);
+			var bebop = await _jikan.GetAnimeReviews(1);
 
 			// Then
 			var firstReview = bebop.Reviews.First();
@@ -155,11 +286,37 @@ namespace JikanDotNet.Tests
 			}
 		}
 
+		[Theory]
+		[InlineData(long.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetAnimeReviews_SecondPageWithInvalidId_ShouldThrowValidationException(long malId)
+		{
+			// When
+			Func<Task<AnimeReviews>> func = _jikan.Awaiting(x => x.GetAnimeReviews(malId, 2));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Theory]
+		[InlineData(int.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetAnimeReviews_CorrectIdWrongPage_ShouldThrowValidationException(int page)
+		{
+			// When
+			Func<Task<AnimeReviews>> func = _jikan.Awaiting(x => x.GetAnimeReviews(1, page));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
 		[Fact]
 		public async Task GetAnimeReviews_BebopIdSecondPage_ShouldParseCowboyBebopReviewsPaged()
 		{
 			// When
-			AnimeReviews bebop = await _jikan.GetAnimeReviews(1, 2);
+			var bebop = await _jikan.GetAnimeReviews(1, 2);
 
 			// Then
 			var firstReview = bebop.Reviews.First();
@@ -170,11 +327,24 @@ namespace JikanDotNet.Tests
 			}
 		}
 
+		[Theory]
+		[InlineData(long.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetAnimeUserUpdates_InvalidId_ShouldThrowValidationException(long malId)
+		{
+			// When
+			Func<Task<AnimeUserUpdates>> func = _jikan.Awaiting(x => x.GetAnimeUserUpdates(malId));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
 		[Fact]
 		public async Task GetAnimeUserUpdates_BebopId_ShouldParseCowboyBebopUserUpdates()
 		{
 			// When
-			AnimeUserUpdates bebop = await _jikan.GetAnimeUserUpdates(1);
+			var bebop = await _jikan.GetAnimeUserUpdates(1);
 
 			// Then
 			var firstUpdate = bebop.Updates.First();
@@ -185,11 +355,37 @@ namespace JikanDotNet.Tests
 			}
 		}
 
+		[Theory]
+		[InlineData(long.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetAnimeUserUpdates_SecondPageInvalidId_ShouldThrowValidationException(long malId)
+		{
+			// When
+			Func<Task<AnimeUserUpdates>> func = _jikan.Awaiting(x => x.GetAnimeUserUpdates(malId, 2));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Theory]
+		[InlineData(int.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetAnimeUserUpdates_ValidIdInvalidpage_ShouldThrowValidationException(int page)
+		{
+			// When
+			Func<Task<AnimeUserUpdates>> func = _jikan.Awaiting(x => x.GetAnimeUserUpdates(1, page));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
 		[Fact]
 		public async Task GetAnimeUserUpdates_BebopIdSecondPage_ShouldParseCowboyBebopUserUpdatesPaged()
 		{
 			// When
-			AnimeUserUpdates bebop = await _jikan.GetAnimeUserUpdates(1, 2);
+			var bebop = await _jikan.GetAnimeUserUpdates(1, 2);
 
 			// Then
 			var firstUpdate = bebop.Updates.First();

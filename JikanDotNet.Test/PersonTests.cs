@@ -18,6 +18,19 @@ namespace JikanDotNet.Tests
 		}
 
 		[Theory]
+		[InlineData(long.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetPerson_InvalidId_ShouldThrowValidationException(long malId)
+		{
+			// When
+			Func<Task<Person>> func = _jikan.Awaiting(x => x.GetPerson(malId));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Theory]
 		[InlineData(1)]
 		[InlineData(2)]
 		[InlineData(3)]

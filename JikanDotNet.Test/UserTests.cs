@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using FluentAssertions.Execution;
 using JikanDotNet.Exceptions;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -14,6 +15,19 @@ namespace JikanDotNet.Tests
 		public UserTests()
 		{
 			_jikan = new Jikan(true);
+		}
+
+		[Theory]
+		[InlineData(null)]
+		[InlineData("")]
+		[InlineData("\n\n\t    \t")]
+		public async Task GetUserProfile_InvalidUsername_ShouldThrowValidationException(string username)
+		{
+			// When
+			Func<Task<UserProfile>> func = _jikan.Awaiting(x => x.GetUserProfile(username));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Fact]
@@ -53,6 +67,19 @@ namespace JikanDotNet.Tests
 			}
 		}
 
+		[Theory]
+		[InlineData(null)]
+		[InlineData("")]
+		[InlineData("\n\n\t    \t")]
+		public async Task GetUserHistory_InvalidUsername_ShouldThrowValidationException(string username)
+		{
+			// When
+			Func<Task<UserHistory>> func = _jikan.Awaiting(x => x.GetUserHistory(username));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
 		[Fact]
 		public async Task GetUserHistory_Nekomata_ShouldParseNekomataHistory()
 		{
@@ -67,6 +94,19 @@ namespace JikanDotNet.Tests
 			}
 		}
 
+		[Theory]
+		[InlineData(null)]
+		[InlineData("")]
+		[InlineData("\n\n\t    \t")]
+		public async Task GetUserHistory_InvalidUsernameWithExtension_ShouldThrowValidationException(string username)
+		{
+			// When
+			Func<Task<UserHistory>> func = _jikan.Awaiting(x => x.GetUserHistory(username, UserHistoryExtension.Manga));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
 		[Fact]
 		public async Task GetUserHistory_ErvelanMangaHistory_ShouldParseErvelanMangaHistory()
 		{
@@ -79,6 +119,19 @@ namespace JikanDotNet.Tests
 				userHistory.Should().NotBeNull();
 				userHistory.History.Count.Should().BeGreaterOrEqualTo(0);
 			}
+		}
+
+		[Theory]
+		[InlineData(null)]
+		[InlineData("")]
+		[InlineData("\n\n\t    \t")]
+		public async Task GetUserFriends_InvalidUsername_ShouldThrowValidationException(string username)
+		{
+			// When
+			Func<Task<UserFriends>> func = _jikan.Awaiting(x => x.GetUserFriends(username));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Fact]
@@ -96,6 +149,32 @@ namespace JikanDotNet.Tests
 				friendUsernames.Should().Contain("SonMati");
 				friendUsernames.Should().Contain("Progeusz");
 			}
+		}
+
+		[Theory]
+		[InlineData(null)]
+		[InlineData("")]
+		[InlineData("\n\n\t    \t")]
+		public async Task GetUserFriends_InvalidUsernameWithPage_ShouldThrowValidationException(string username)
+		{
+			// When
+			Func<Task<UserFriends>> func = _jikan.Awaiting(x => x.GetUserFriends(username, 2));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Theory]
+		[InlineData(int.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetUserFriends_ValidUsernameWithInvalidPage_ShouldThrowValidationException(int page)
+		{
+			// When
+			Func<Task<UserFriends>> func = _jikan.Awaiting(x => x.GetUserFriends("Ervelan", page));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Fact]

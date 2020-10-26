@@ -1,5 +1,7 @@
 ﻿using FluentAssertions;
 using FluentAssertions.Execution;
+using JikanDotNet.Exceptions;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -12,7 +14,20 @@ namespace JikanDotNet.Tests
 
 		public ProducerTests()
 		{
-			_jikan = new Jikan(true);
+			_jikan = new Jikan();
+		}
+
+		[Theory]
+		[InlineData(long.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetProducer_InvalidId_ShouldThrowValidationException(long id)
+		{
+			// When
+			Func<Task<Producer>> func = _jikan.Awaiting(x => x.GetProducer(id));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Fact]

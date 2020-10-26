@@ -37,7 +37,7 @@ namespace JikanDotNet.Helpers
 			}
 		}
 
-		internal static void IsValid<T>(Func<T, bool> isValidFunc, T arg, string argumentName, string? message = null)
+		internal static void IsValid<T>(Func<T, bool> isValidFunc, T arg, string argumentName, string message = null)
 		{
 			if (isValidFunc(arg))
 			{
