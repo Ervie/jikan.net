@@ -6,13 +6,13 @@ using Xunit;
 
 namespace JikanDotNet.Tests
 {
-    public class ExceptionsTests
-    {
+	public class ExceptionsTests
+	{
 		private readonly IJikan _jikan;
 
 		public ExceptionsTests()
 		{
-			_jikan = new Jikan(true, false);
+			_jikan = new Jikan(new Config.JikanClientOptions { SuppressException = true });
 		}
 
 		[Fact]

@@ -11,7 +11,7 @@ namespace JikanDotNet.Tests
 
 		public MetadataTests()
 		{
-			_jikan = new Jikan(true);
+			_jikan = new Jikan();
 		}
 
 		[Fact]

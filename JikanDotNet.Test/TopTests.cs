@@ -15,7 +15,7 @@ namespace JikanDotNet.Tests
 
 		public TopTests()
 		{
-			_jikan = new Jikan(true);
+			_jikan = new Jikan();
 		}
 
 		[Fact]

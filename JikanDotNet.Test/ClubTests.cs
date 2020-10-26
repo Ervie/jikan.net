@@ -14,7 +14,7 @@ namespace JikanDotNet.Tests
 
 		public ClubTests()
 		{
-			_jikan = new Jikan(true);
+			_jikan = new Jikan();
 		}
 
 		[Theory]

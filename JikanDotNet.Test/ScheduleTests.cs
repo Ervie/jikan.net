@@ -12,7 +12,7 @@ namespace JikanDotNet.Tests
 
 		public ScheduleTests()
 		{
-			_jikan = new Jikan(true);
+			_jikan = new Jikan();
 		}
 
 		[Fact]
