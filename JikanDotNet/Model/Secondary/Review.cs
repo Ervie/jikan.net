@@ -6,7 +6,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Model class for base review.
 	/// </summary>
-	public class Review : IMalEntity
+	public class Review
 	{
 		/// <summary>
 		/// ID associated with MyAnimeList.
