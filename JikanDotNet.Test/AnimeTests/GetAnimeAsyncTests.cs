@@ -8,8 +8,8 @@ using Xunit;
 
 namespace JikanDotNet.AnimeTests
 {
-    public class GetAnimeAsyncTests
-    {
+	public class GetAnimeAsyncTests
+	{
 		private readonly IJikan _jikan;
 
 		public GetAnimeAsyncTests()
@@ -35,13 +35,13 @@ namespace JikanDotNet.AnimeTests
 		[InlineData(5)]
 		[InlineData(6)]
 		public async Task GetAnimeAsync_CorrectId_ShouldReturnNotNullAnime(long malId)
-        {
+		{
 			// When
 			var returnedAnime = await _jikan.GetAnimeAsync(malId);
 
 			// Then
 			returnedAnime.Should().NotBeNull();
-        }
+		}
 
 		[Theory]
 		[InlineData(2)]
@@ -77,7 +77,7 @@ namespace JikanDotNet.AnimeTests
 		}
 
 		[Fact]
-		public async Task GetAnimeAsync_BebopId_ShouldParseCowboyBebopRelatedAnimeTypes()
+		public async Task GetAnimeAsync_BebopId_ShouldParseCowboyBebopPictures()
 		{
 			// When
 			var bebopAnime = await _jikan.GetAnimeAsync(1);
@@ -85,8 +85,39 @@ namespace JikanDotNet.AnimeTests
 			// Then
 			using (new AssertionScope())
 			{
-				bebopAnime.Related.Should().HaveCount(2);
+				bebopAnime.Images.JPG.Should().HaveCount(3);
+				bebopAnime.Images.WebP.Should().HaveCount(3);
 			}
+		}
+
+		[Fact]
+		public async Task GetAnimeAsync_BebopId_ShouldParseCowboyBebopTrailer()
+		{
+			// When
+			var bebopAnime = await _jikan.GetAnimeAsync(1);
+
+			// Then
+			using (new AssertionScope())
+			{
+				bebopAnime.Trailer.Should().NotBeNull();
+				bebopAnime.Trailer.YoutubeUrl.Should().NotBeNullOrWhiteSpace();
+				bebopAnime.Trailer.Url.Should().NotBeNullOrWhiteSpace();
+				bebopAnime.Trailer.EmbedUrl.Should().NotBeNullOrWhiteSpace();
+				bebopAnime.Trailer.Images.Small.Should().NotBeNullOrWhiteSpace();
+				bebopAnime.Trailer.Images.Large.Should().NotBeNullOrWhiteSpace();
+				bebopAnime.Trailer.Images.Medium.Should().NotBeNullOrWhiteSpace();
+				bebopAnime.Trailer.Images.Maximum.Should().NotBeNullOrWhiteSpace();
+			}
+		}
+
+		[Fact]
+		public async Task GetAnimeAsync_BebopId_ShouldParseCowboyBebopRelatedAnimeTypes()
+		{
+			// When
+			var bebopAnime = await _jikan.GetAnimeAsync(1);
+
+			// Then
+			bebopAnime.Related.Should().HaveCount(2);
 		}
 
 		[Fact]
@@ -98,7 +129,6 @@ namespace JikanDotNet.AnimeTests
 			// Then
 			var relatedAnimeSummaries = bebopAnime.Related.Where(x => x.Relation.Equals("Summaries")).First();
 			relatedAnimeSummaries.Items.Should().ContainSingle();
-
 		}
 
 		[Fact]
@@ -110,11 +140,10 @@ namespace JikanDotNet.AnimeTests
 			// Then
 			var relatedAnimeAdaptations = bebopAnime.Related.Where(x => x.Relation.Equals("Adaptations")).First();
 			relatedAnimeAdaptations.Items.Should().ContainSingle();
-
 		}
 
 		[Fact]
-		public async Task GetAnimeAsync_FSNId_ShouldParseFateStayNightRelatedAnime()
+		public async Task GetAnimeAsync_FSNId_ShouldParseFateStayNightAlternativeVersions()
 		{
 			// When
 			var fsnAnime = await _jikan.GetAnimeAsync(356);
@@ -125,7 +154,7 @@ namespace JikanDotNet.AnimeTests
 		}
 
 		[Fact]
-		public async Task GetAnimeAsync_FSNReproductionId_ShouldParseFateStayNightReproductionRelatedAnime()
+		public async Task GetAnimeAsync_FSNReproductionId_ShouldParseFateStayNightReproductionFullStories()
 		{
 			// When
 			var fsnAnime = await _jikan.GetAnimeAsync(7559);
@@ -140,7 +169,7 @@ namespace JikanDotNet.AnimeTests
 		}
 
 		[Fact]
-		public async Task GetAnimeAsync_KamiNomiId_ShouldParseKamiNomiRelatedAnime()
+		public async Task GetAnimeAsync_KamiNomiId_ShouldParseKamiNomiParentStories()
 		{
 			// When
 			var kamiNomi = await _jikan.GetAnimeAsync(17725);

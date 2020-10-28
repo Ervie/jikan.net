@@ -11,26 +11,26 @@ namespace JikanDotNet
 		/// <summary>
 		/// ID associated with MyAnimeList.
 		/// </summary>
-		[JsonPropertyName("episode_id")]
-		public long Id { get; set; }
+		[JsonPropertyName("mal_id")]
+		public long MalId { get; set; }
+
+		/// <summary>
+		/// URL to the episode.
+		/// </summary>
+		[JsonPropertyName("url")]
+		public string Url { get; set; }
 
 		/// <summary>
 		/// Title of the episode.
 		/// </summary>
 		[JsonPropertyName("title")]
-		public string Title { get; set; }
+		public AnimeTitle Title { get; set; }
 
 		/// <summary>
-		/// Title of the anime in Japanese.
+		/// Episode's duration.
 		/// </summary>
-		[JsonPropertyName("title_japanese")]
-		public string TitleJapanese { get; set; }
-
-		/// <summary>
-		/// Title of the anime in romanji.
-		/// </summary>
-		[JsonPropertyName("title_romanji")]
-		public string TitleEnglish { get; set; }
+		[JsonPropertyName("duration")]
+		public string Duration { get; set; }
 
 		/// <summary>
 		/// Date when episode aired at first.
@@ -51,15 +51,15 @@ namespace JikanDotNet
 		public bool? Recap { get; set; }
 
 		/// <summary>
-		/// URL to the video of the episode.
+		/// Episode's synopsis.
 		/// </summary>
-		[JsonPropertyName("video_url")]
-		public string VideoUrl { get; set; }
+		[JsonPropertyName("synopsis")]
+		public string Synopsis { get; set; }
 
 		/// <summary>
-		/// URL to the forum topic of the episode.
+		/// URL to the Crunchyroll video.
 		/// </summary>
-		[JsonPropertyName("forum_url")]
-		public string ForumUrl { get; set; }
+		[JsonPropertyName("crunchyroll")]
+		public AnimeCrunchyrollVideo Crunchyroll { get; set; }
 	}
 }

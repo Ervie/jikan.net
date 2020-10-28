@@ -27,7 +27,7 @@ namespace JikanDotNet
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
 		/// <returns>List of episodes with details.</returns>
-		Task<AnimeEpisodes> GetAnimeEpisodes(long id);
+		Task<AnimeEpisodes> GetAnimeEpisodesAsync(long id);
 
 		/// <summary>
 		/// Returns list of episodes for anime with given MAL id.
@@ -35,7 +35,19 @@ namespace JikanDotNet
 		/// <param name="id">MAL id of anime.</param>
 		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
 		/// <returns>List of episodes with details.</returns>
-		Task<AnimeEpisodes> GetAnimeEpisodes(long id, int page);
+		Task<AnimeEpisodes> GetAnimeEpisodesAsync(long id, int page);
+
+		#endregion
+
+		#region GetAnimeEpisode
+
+		/// <summary>
+		/// Returns details about specific episode.
+		/// </summary>
+		/// <param name="animeId">MAL id of anime.</param>
+		/// <param name="episodeId">Id of episode.</param>
+		/// <returns>Details about specific episode.</returns>
+		Task<AnimeEpisode> GetAnimeEpisodeAsync(long animeId, int episodeId);
 
 		#endregion
 
@@ -46,7 +58,7 @@ namespace JikanDotNet
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
 		/// <returns>Collections of characters and staff of anime with given MAL id.</returns>
-		Task<AnimeCharactersStaff> GetAnimeCharactersStaff(long id);
+		Task<AnimeCharactersStaff> GetAnimeCharactersStaffAsync(long id);
 
 		#endregion
 

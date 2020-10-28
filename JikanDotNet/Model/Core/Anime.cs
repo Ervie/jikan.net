@@ -22,6 +22,12 @@ namespace JikanDotNet
 		public string Url { get; set; }
 
 		/// <summary>
+		/// Anime's trailer.
+		/// </summary>
+		[JsonPropertyName("trailer")]
+		public AnimeTrailer Trailer { get; set; }
+
+		/// <summary>
 		/// Title of the anime.
 		/// </summary>
 		[JsonPropertyName("title")]

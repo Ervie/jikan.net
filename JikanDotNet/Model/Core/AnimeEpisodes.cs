@@ -11,8 +11,8 @@ namespace JikanDotNet
 		/// <summary>
 		/// Last page of episodes' list.
 		/// </summary>
-		[JsonPropertyName("episodes_last_page")]
-		public int EpisodesLastPage { get; set; }
+		[JsonPropertyName("last_page")]
+		public int LastPage { get; set; }
 
 		/// <summary>
 		/// Anime's episode collection with basic information.

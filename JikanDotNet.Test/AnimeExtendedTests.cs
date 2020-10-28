@@ -21,60 +21,6 @@ namespace JikanDotNet.Tests
 		[InlineData(long.MinValue)]
 		[InlineData(-1)]
 		[InlineData(0)]
-		public async Task GetAnimeEpisodes_InvalidId_ShouldThrowValidationException(long malId)
-		{
-			// When
-			Func<Task<AnimeEpisodes>> func = _jikan.Awaiting(x => x.GetAnimeEpisodes(malId));
-
-			// Then
-			await func.Should().ThrowExactlyAsync<JikanValidationException>();
-		}
-
-		[Fact]
-		public async Task GetAnimeEpisodes_BebopId_ShouldParseCowboyBebopEpisode()
-		{
-			// When
-			var bebop = await _jikan.GetAnimeEpisodes(1);
-
-			// Then
-			using (new AssertionScope())
-			{
-				bebop.EpisodeCollection.Should().HaveCount(26);
-				bebop.EpisodeCollection.First().Title.Should().Be("Asteroid Blues");
-			}
-		}
-
-		[Theory]
-		[InlineData(long.MinValue)]
-		[InlineData(-1)]
-		[InlineData(0)]
-		public async Task GetAnimeCharactersStaff_InvalidId_ShouldThrowValidationException(long malId)
-		{
-			// When
-			Func<Task<AnimeCharactersStaff>> func = _jikan.Awaiting(x => x.GetAnimeCharactersStaff(malId));
-
-			// Then
-			await func.Should().ThrowExactlyAsync<JikanValidationException>();
-		}
-
-		[Fact]
-		public async Task GetAnimeCharactersStaff_BebopId_ShouldParseCowboyBebopCharactersAndStaff()
-		{
-			// When
-			var bebop = await _jikan.GetAnimeCharactersStaff(1);
-
-			// Then
-			using (new AssertionScope())
-			{
-				bebop.Characters.Should().Contain(x => x.Name.Equals("Black, Jet"));
-				bebop.Staff.Where(x => x.Role.Contains("Director") && x.Role.Contains("Script")).Select(x => x.Name).Should().Contain("Watanabe, Shinichiro");
-			}
-		}
-
-		[Theory]
-		[InlineData(long.MinValue)]
-		[InlineData(-1)]
-		[InlineData(0)]
 		public async Task GetAnimePictures_InvalidId_ShouldThrowValidationException(long malId)
 		{
 			// When
