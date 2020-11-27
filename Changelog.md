@@ -1,3 +1,7 @@
+## 27.11.2020 - Version 1.5.3 (newest)
+
+- Jikan.net now can be used with own instance of `HttpClient` targetting Jikan REST API. Read more [here](https://github.com/Ervie/jikan.net/wiki/Using-own-instance-of-Jikan).
+
 ## 26.10.2020 - Version 1.5.2 (newest)
 - Features
     - <b>[Validation]</b> Validation of input parameters for most method are added for fail fast approach. General rules

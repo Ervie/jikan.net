@@ -68,6 +68,17 @@ namespace JikanDotNet
 			_httpClient = HttpProvider.GetHttpClient(endpointUrl);
 		}
 
+		/// <summary>
+		/// Constructor.
+		/// </summary>
+		/// <param name="httpClient">Http client to call REST request and receive REST response</param>
+		/// <param name="suppressException">Should exception be thrown in case of failed request. If true, failed request return null.</param>
+		public Jikan(HttpClient httpClient, bool suppressException = false)
+		{
+			_suppressException = suppressException;
+			_httpClient = httpClient;
+		}
+
 		#endregion Constructors
 
 		#region Private Methods

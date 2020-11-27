@@ -112,13 +112,9 @@ Then restore dependencies:
 
 - Compatible with Jikan REST API v4.0
 
-## 26.10.2020 - Version 1.5.2 (newest)
-- Features
-    - <b>[Validation]</b> Validation of input parameters for most method are added for fail fast approach. General rules
-        - Methods using mal Id (e.g. `GetAnime()`) accept only number larger than 0.
-        - Search query for searcg methods (e.g. `SearchAnime()`) must not be null or whitespace and at least 3 characters long.
-        - Methods with page number as a parameter (e.g. `SearchAnime()`) only accepts page when it's larger than 0.
-        - Search configs for search methods (e.g. `SearchAnime()`) must not `null`.
+## 27.11.2020 - Version 1.5.3 (newest)
+
+- Jikan.net now can be used with own instance of `HttpClient` targetting Jikan REST API. Read more [here](https://github.com/Ervie/jikan.net/wiki/Using-own-instance-of-Jikan).
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**
 
