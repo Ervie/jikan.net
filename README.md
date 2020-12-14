@@ -112,9 +112,10 @@ Then restore dependencies:
 
 - Compatible with Jikan REST API v4.0
 
-## 27.11.2020 - Version 1.5.3 (newest)
+## 14.12.2020 - Version 1.5.4 (newest)
 
-- Jikan.net now can be used with own instance of `HttpClient` targetting Jikan REST API. Read more [here](https://github.com/Ervie/jikan.net/wiki/Using-own-instance-of-Jikan).
+- Fixes
+    - <b>[Seasons]</b> Extends available range for acceptable input year to <1000, 9999>.
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**
 

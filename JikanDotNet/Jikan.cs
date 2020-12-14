@@ -782,7 +782,7 @@ namespace JikanDotNet
 		/// <returns>Season preview.</returns>
 		public async Task<Season> GetSeason(int year, Seasons season)
 		{
-			Guard.IsValid(year => year >= 1916 && year < DateTime.UtcNow.AddYears(1).Year, year, nameof(year));
+			Guard.IsValid(year => year >= 1000 && year < 10000, year, nameof(year));
 			string[] endpointParts = new string[] { JikanEndPointCategories.Season, year.ToString(), season.GetDescription() };
 			return await ExecuteGetRequest<Season>(endpointParts);
 		}

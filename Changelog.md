@@ -1,8 +1,13 @@
-## 27.11.2020 - Version 1.5.3 (newest)
+## 14.12.2020 - Version 1.5.4 (newest)
+
+- Fixes
+    - <b>[Seasons]</b> Extends available range for acceptable input year to <1000, 9999>.
+
+## 27.11.2020 - Version 1.5.3
 
 - Jikan.net now can be used with own instance of `HttpClient` targetting Jikan REST API. Read more [here](https://github.com/Ervie/jikan.net/wiki/Using-own-instance-of-Jikan).
 
-## 26.10.2020 - Version 1.5.2 (newest)
+## 26.10.2020 - Version 1.5.2
 - Features
     - <b>[Validation]</b> Validation of input parameters for most method are added for fail fast approach. General rules
         - Methods using mal Id (e.g. `GetAnime()`) accept only number larger than 0.

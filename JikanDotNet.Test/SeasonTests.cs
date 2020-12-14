@@ -23,8 +23,8 @@ namespace JikanDotNet.Tests
 		[InlineData(-1)]
 		[InlineData(0)]
 		[InlineData(1)]
-		[InlineData(1900)]
-		[InlineData(2030)]
+		[InlineData(999)]
+		[InlineData(10000)]
 		[InlineData(int.MaxValue)]
 		public async Task GetSeason_InvalidYear_ShouldThrowValidationException(int year)
 		{
@@ -33,6 +33,25 @@ namespace JikanDotNet.Tests
 
 			// Then
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Theory]
+		[InlineData(1000)]
+		[InlineData(1900)]
+		[InlineData(2100)]
+		[InlineData(9999)]
+		public async Task GetSeason_ValidYearNotExistingSeason_ShouldReturnSeasonWithNulls(int year)
+		{
+			// When
+			var season = await _jikan.GetSeason(year, Seasons.Winter);
+
+			// Then
+			using (new AssertionScope())
+			{
+				season.SeasonName.Should().BeNull();
+				season.SeasonYear.Should().BeNull();
+				season.SeasonEntries.Should().BeEmpty();
+			}
 		}
 
 		[Fact]
