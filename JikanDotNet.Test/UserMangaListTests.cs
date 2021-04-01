@@ -75,6 +75,21 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
+		public async Task GetUserMangaList_ErvelanCompleted_ShouldParseErvelanMangaCompletedList()
+		{
+			// When
+			var mangalist = await this._jikan.GetUserMangaList("Ervelan", UserMangaListExtension.Completed, 1);
+
+			// Then
+			using (new AssertionScope())
+			{
+				mangalist.Should().NotBeNull();
+				mangalist.Manga.First().ReadingStatus.Should().Be(UserMangaListExtension.Completed);
+				mangalist.Manga.First().PublishingStatus.Should().Be(AiringStatus.Completed);
+			}
+		}
+
+		[Fact]
 		public async Task GetUserMangaList_ErvelanDropped_ShouldParseErvelanMangaDroppedList()
 		{
 			// When

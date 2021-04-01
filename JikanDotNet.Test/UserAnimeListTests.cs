@@ -87,6 +87,21 @@ namespace JikanDotNet.Tests
 			}
 		}
 
+		[Fact]
+		public async Task GetUserAnimeList_ErvelanCompleted_ShouldParseErvelanAnimeCompletedListWithPage()
+		{
+			// When
+			var animeList = await _jikan.GetUserAnimeList("Ervelan", UserAnimeListExtension.Completed, 1);
+
+			// Then
+			using (new AssertionScope())
+			{
+				animeList.Should().NotBeNull();
+				animeList.Anime.First().WatchingStatus.Should().Be(UserAnimeListExtension.Completed);
+				animeList.Anime.First().AiringStatus.Should().Be(AiringStatus.Completed);
+			}
+		}
+
 		[Theory]
 		[InlineData(null)]
 		[InlineData("")]
