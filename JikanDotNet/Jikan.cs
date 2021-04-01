@@ -1142,8 +1142,7 @@ namespace JikanDotNet
 		{
 			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
 			Guard.IsGreaterThanZero(page, nameof(page));
-			var query = string.Concat(UserExtension.AnimeList.GetDescription(), filter.GetDescription());
-			string[] endpointParts = new string[] { JikanEndPointCategories.User, username, query, page.ToString() };
+			string[] endpointParts = new string[] { JikanEndPointCategories.User, username, UserExtension.AnimeList.GetDescription(), filter.GetDescription(), page.ToString() };
 			return await ExecuteGetRequest<UserAnimeList>(endpointParts);
 		}
 
@@ -1216,8 +1215,7 @@ namespace JikanDotNet
 		{
 			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
 			Guard.IsGreaterThanZero(page, nameof(page));
-			var query = string.Concat(UserExtension.MangaList.GetDescription(), filter.GetDescription());
-			string[] endpointParts = new string[] { JikanEndPointCategories.User, username, query, page.ToString() };
+			string[] endpointParts = new string[] { JikanEndPointCategories.User, username, UserExtension.MangaList.GetDescription(), filter.GetDescription(), page.ToString() };
 			return await ExecuteGetRequest<UserMangaList>(endpointParts);
 		}
 
