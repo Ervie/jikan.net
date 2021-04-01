@@ -1,4 +1,9 @@
-## 14.12.2020 - Version 1.5.4 (newest)
+## 01.04.2021 - Version 1.5.5 (newest)
+
+- Fixes
+    - <b>[Animelist|Mangalist]</b> Fix building url for scenario with filter.
+
+## 14.12.2020 - Version 1.5.4
 
 - Fixes
     - <b>[Seasons]</b> Extends available range for acceptable input year to <1000, 9999>.

@@ -112,10 +112,10 @@ Then restore dependencies:
 
 - Compatible with Jikan REST API v4.0
 
-## 14.12.2020 - Version 1.5.4 (newest)
+## 01.04.2021 - Version 1.5.5 (newest)
 
 - Fixes
-    - <b>[Seasons]</b> Extends available range for acceptable input year to <1000, 9999>.
+    - <b>[Animelist|Mangalist]</b> Fix building url for scenario with filter.
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**
 
