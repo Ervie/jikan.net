@@ -1498,7 +1498,7 @@ namespace JikanDotNet
 			Guard.IsGreaterThanZero(page, nameof(page));
 			Guard.IsNotNull(searchConfig, nameof(searchConfig));
 			query = string.Concat(JikanEndPointCategories.Manga, "/", page.ToString(), "?q=", query.Replace(' ', '+'), "&", searchConfig.ConfigToString());
-			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query, page.ToString() };
+			string[] endpointParts = new string[] { JikanEndPointCategories.Search, query};
 			return await ExecuteGetRequest<MangaSearchResult>(endpointParts);
 		}
 
