@@ -58,6 +58,29 @@ namespace JikanDotNet.Tests
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
+		[Theory]
+		[InlineData((UserMangaListExtension)int.MaxValue)]
+		[InlineData((UserMangaListExtension)int.MinValue)]
+		public async Task GetUserMangaList_ErvelanWithInvalidExtension_ShouldThrowValidationException(UserMangaListExtension userMangaListExtension)
+		{
+			// When
+			Func<Task<UserMangaList>> func = _jikan.Awaiting(x => x.GetUserMangaList("Ervelan", userMangaListExtension));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Theory]
+		[InlineData((UserMangaListExtension)int.MaxValue)]
+		[InlineData((UserMangaListExtension)int.MinValue)]
+		public async Task GetUserMangaList_ErvelanWithValidPageWithInvalidExtension_ShouldThrowValidationException(UserMangaListExtension userMangaListExtension)
+		{
+			// When
+			Func<Task<UserMangaList>> func = _jikan.Awaiting(x => x.GetUserMangaList("Ervelan", userMangaListExtension, 1));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
 		[Fact]
 		public async Task GetUserMangaList_ErvelanReading_ShouldParseErvelanMangaReadingList()
 		{
