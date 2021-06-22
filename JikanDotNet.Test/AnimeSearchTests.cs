@@ -359,6 +359,41 @@ namespace JikanDotNet.Tests
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
+		[Theory]
+		[InlineData((AiringStatus)int.MaxValue, null, null, null, null, null)]
+		[InlineData((AiringStatus)int.MinValue, null, null, null, null, null)]
+		[InlineData(null, (AgeRating)int.MaxValue, null, null, null, null)]
+		[InlineData(null, (AgeRating)int.MinValue, null, null, null, null)]
+		[InlineData(null, null, (AnimeType)int.MaxValue, null, null, null)]
+		[InlineData(null, null, (AnimeType)int.MinValue, null, null, null)]
+		[InlineData(null, null, null, (AnimeSearchSortable)int.MaxValue, null, null)]
+		[InlineData(null, null, null, (AnimeSearchSortable)int.MinValue, null, null)]
+		[InlineData(null, null, null, AnimeSearchSortable.Episodes, (SortDirection)int.MaxValue, null)]
+		[InlineData(null, null, null, AnimeSearchSortable.Episodes, (SortDirection)int.MinValue, null)]
+		[InlineData(null, null, null, null, null, (GenreSearch)int.MaxValue)]
+		[InlineData(null, null, null, null, null, (GenreSearch)int.MinValue)]
+		public async Task SearchManga_EmptyQueryWithConfigWithInvalidEnums_ShouldThrowValidationException(
+			AiringStatus? airingStatus, AgeRating? rating, AnimeType? mangaType, AnimeSearchSortable? orderBy, SortDirection? sortDirection,
+			GenreSearch? genreSearch)
+		{
+			// Given
+			var searchConfig = new AnimeSearchConfig()
+			{
+				Status = airingStatus.GetValueOrDefault(),
+				Rating = rating.GetValueOrDefault(),
+				Type = mangaType.GetValueOrDefault(),
+				OrderBy = orderBy.GetValueOrDefault(),
+				SortDirection = sortDirection.GetValueOrDefault(),
+				Genres = genreSearch.HasValue ? new []{ genreSearch.Value} : Array.Empty<GenreSearch>()
+			};
+
+			// When
+			Func<Task<AnimeSearchResult>> func = _jikan.Awaiting(x => x.SearchAnime(searchConfig));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
 		[Fact]
 		public async Task SearchAnime_EmptyQueryActionTvAnime_ShouldFindAfroSamuraiAndAjin()
 		{
