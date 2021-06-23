@@ -139,7 +139,6 @@ namespace JikanDotNet.Tests
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
-
 		[Theory]
 		[InlineData(int.MinValue)]
 		[InlineData(-1)]
@@ -212,8 +211,12 @@ namespace JikanDotNet.Tests
 		[InlineData(null, null, UserListAnimeSearchSortable.Priority, null, (SortDirection)int.MaxValue)]
 		[InlineData(null, null, UserListAnimeSearchSortable.Priority, null, (SortDirection)int.MinValue)]
 		public async Task GetUserAnimeList_ErvelanWithConfigWithInvalidEnums_ShouldThrowValidationException(
-			Seasons? season, UserListAnimeAiringStatus? airingStatus, UserListAnimeSearchSortable? orderBy, UserListAnimeSearchSortable? orderBy2,
-			SortDirection? sortDirection)
+			Seasons? season,
+			UserListAnimeAiringStatus? airingStatus,
+			UserListAnimeSearchSortable? orderBy,
+			UserListAnimeSearchSortable? orderBy2,
+			SortDirection? sortDirection
+		)
 		{
 			// Given
 			var searchConfig = new UserListAnimeSearchConfig()

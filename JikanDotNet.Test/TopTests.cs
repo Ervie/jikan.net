@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using FluentAssertions.Common;
 using FluentAssertions.Execution;
 using JikanDotNet.Exceptions;
 using System;
@@ -71,12 +70,12 @@ namespace JikanDotNet.Tests
 		}
 
 		[Theory]
-		[InlineData((TopAnimeExtension) int.MaxValue)]
-		[InlineData((TopAnimeExtension) int.MinValue)]
+		[InlineData((TopAnimeExtension)int.MaxValue)]
+		[InlineData((TopAnimeExtension)int.MinValue)]
 		public async Task GetAnimeTop_InvalidType_ShouldThrowValidationException(TopAnimeExtension topAnimeExtension)
 		{
 			// When
-			Func<Task<AnimeTop>> func = this._jikan.Awaiting(x=> x.GetAnimeTop(topAnimeExtension));
+			Func<Task<AnimeTop>> func = this._jikan.Awaiting(x => x.GetAnimeTop(topAnimeExtension));
 
 			// Then
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();
@@ -96,12 +95,12 @@ namespace JikanDotNet.Tests
 		}
 
 		[Theory]
-		[InlineData((TopAnimeExtension) int.MaxValue)]
-		[InlineData((TopAnimeExtension) int.MinValue)]
+		[InlineData((TopAnimeExtension)int.MaxValue)]
+		[InlineData((TopAnimeExtension)int.MinValue)]
 		public async Task GetAnimeTop_InvalidTypeValidPage_ShouldThrowValidationException(TopAnimeExtension topAnimeExtension)
 		{
 			// When
-			Func<Task<AnimeTop>> func = this._jikan.Awaiting(x=> x.GetAnimeTop(1, topAnimeExtension));
+			Func<Task<AnimeTop>> func = this._jikan.Awaiting(x => x.GetAnimeTop(1, topAnimeExtension));
 
 			// Then
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();

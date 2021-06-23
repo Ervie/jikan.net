@@ -1,10 +1,10 @@
 ﻿using JikanDotNet.Extensions;
+using JikanDotNet.Helpers;
 using JikanDotNet.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using JikanDotNet.Helpers;
 
 namespace JikanDotNet
 {
@@ -75,7 +75,7 @@ namespace JikanDotNet
 		public string ConfigToString()
 		{
 			StringBuilder builder = new StringBuilder();
-			
+
 			if (Type != MangaType.EveryType)
 			{
 				Guard.IsValidEnum(Type, nameof(Type));

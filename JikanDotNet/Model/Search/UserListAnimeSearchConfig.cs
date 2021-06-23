@@ -1,7 +1,7 @@
 ﻿using JikanDotNet.Extensions;
+using JikanDotNet.Helpers;
 using JikanDotNet.Interfaces;
 using System.Text;
-using JikanDotNet.Helpers;
 
 namespace JikanDotNet
 {

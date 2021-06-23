@@ -81,6 +81,7 @@ namespace JikanDotNet.Tests
 			// Then
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
+
 		[Fact]
 		public async Task GetUserMangaList_ErvelanReading_ShouldParseErvelanMangaReadingList()
 		{
@@ -151,7 +152,6 @@ namespace JikanDotNet.Tests
 			}
 		}
 
-
 		[Theory]
 		[InlineData(null)]
 		[InlineData("")]
@@ -181,8 +181,11 @@ namespace JikanDotNet.Tests
 		[InlineData(null, UserListMangaSearchSortable.Priority, null, (SortDirection)int.MaxValue)]
 		[InlineData(null, UserListMangaSearchSortable.Priority, null, (SortDirection)int.MinValue)]
 		public async Task GetUserMangaList_ErvelanWithConfigWithInvalidEnums_ShouldThrowValidationException(
-			UserListMangaPublishingStatus? publishingStatus, UserListMangaSearchSortable? orderBy, UserListMangaSearchSortable? orderBy2,
-			SortDirection? sortDirection)
+			UserListMangaPublishingStatus? publishingStatus,
+			UserListMangaSearchSortable? orderBy,
+			UserListMangaSearchSortable? orderBy2,
+			SortDirection? sortDirection
+		)
 		{
 			// Given
 			var searchConfig = new UserListMangaSearchConfig()

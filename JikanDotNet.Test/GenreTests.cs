@@ -131,13 +131,12 @@ namespace JikanDotNet.Tests
 		}
 
 		[Theory]
-		[InlineData((GenreSearch)int.MinValue)]
+		[InlineData((GenreSearch) int.MinValue)]
 		[InlineData((GenreSearch) int.MaxValue)]
 		public async Task GetAnimeGenre_InvalidGenreValidPage_ShouldThrowValidationException(GenreSearch genreSearch)
 		{
 			// When
-			Func<Task<AnimeGenre>> func = _jikan.Awaiting(x => x.
-				GetAnimeGenre(genreSearch, 1));
+			Func<Task<AnimeGenre>> func = _jikan.Awaiting(x => x.GetAnimeGenre(genreSearch, 1));
 
 			// Then
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();
@@ -274,13 +273,12 @@ namespace JikanDotNet.Tests
 		}
 
 		[Theory]
-		[InlineData((GenreSearch)int.MinValue)]
+		[InlineData((GenreSearch) int.MinValue)]
 		[InlineData((GenreSearch) int.MaxValue)]
 		public async Task GetMangaGenre_InvalidGenreValidPage_ShouldThrowValidationException(GenreSearch genreSearch)
 		{
 			// When
-			Func<Task<MangaGenre>> func = _jikan.Awaiting(x => x.
-				GetMangaGenre(genreSearch, 1));
+			Func<Task<MangaGenre>> func = _jikan.Awaiting(x => x.GetMangaGenre(genreSearch, 1));
 
 			// Then
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();

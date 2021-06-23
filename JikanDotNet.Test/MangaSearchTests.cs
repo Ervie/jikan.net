@@ -356,8 +356,13 @@ namespace JikanDotNet.Tests
 		[InlineData(null, null, null, null, null, (GenreSearch)int.MaxValue)]
 		[InlineData(null, null, null, null, null, (GenreSearch)int.MinValue)]
 		public async Task SearchManga_EmptyQueryWithConfigWithInvalidEnums_ShouldThrowValidationException(
-			AiringStatus? airingStatus, AgeRating? rating, MangaType? mangaType, MangaSearchSortable? orderBy, SortDirection? sortDirection,
-			GenreSearch? genreSearch)
+			AiringStatus? airingStatus,
+			AgeRating? rating,
+			MangaType? mangaType,
+			MangaSearchSortable? orderBy,
+			SortDirection? sortDirection,
+			GenreSearch? genreSearch
+		)
 		{
 			// Given
 			var searchConfig = new MangaSearchConfig()
@@ -367,7 +372,7 @@ namespace JikanDotNet.Tests
 				Type = mangaType.GetValueOrDefault(),
 				OrderBy = orderBy.GetValueOrDefault(),
 				SortDirection = sortDirection.GetValueOrDefault(),
-				Genres = genreSearch.HasValue ? new []{ genreSearch.Value} : Array.Empty<GenreSearch>()
+				Genres = genreSearch.HasValue ? new[] { genreSearch.Value } : Array.Empty<GenreSearch>()
 			};
 
 			// When
@@ -485,7 +490,6 @@ namespace JikanDotNet.Tests
 			// Then
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
-
 
 		[Fact]
 		public async Task SearchManga_OreQueryComedyMangaSecondPage_ShouldReturnNotEmptyCollection()

@@ -372,9 +372,14 @@ namespace JikanDotNet.Tests
 		[InlineData(null, null, null, AnimeSearchSortable.Episodes, (SortDirection)int.MinValue, null)]
 		[InlineData(null, null, null, null, null, (GenreSearch)int.MaxValue)]
 		[InlineData(null, null, null, null, null, (GenreSearch)int.MinValue)]
-		public async Task SearchManga_EmptyQueryWithConfigWithInvalidEnums_ShouldThrowValidationException(
-			AiringStatus? airingStatus, AgeRating? rating, AnimeType? mangaType, AnimeSearchSortable? orderBy, SortDirection? sortDirection,
-			GenreSearch? genreSearch)
+		public async Task SearchAnime_EmptyQueryWithConfigWithInvalidEnums_ShouldThrowValidationException(
+			AiringStatus? airingStatus,
+			AgeRating? rating,
+			AnimeType? mangaType,
+			AnimeSearchSortable? orderBy,
+			SortDirection? sortDirection,
+			GenreSearch? genreSearch
+		)
 		{
 			// Given
 			var searchConfig = new AnimeSearchConfig()
