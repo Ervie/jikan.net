@@ -1,4 +1,11 @@
-## 01.04.2021 - Version 1.5.5 (newest)
+## 23.06.2021 - Version 1.5.6
+
+- Features
+    - <b>[Validation]</b> Validation of input parameters of Enum types parameters most method are added for fail fast approach.
+- Fixes
+    - <b>[SearchManga]</b> Remove redundant page part during url building.
+
+## 01.04.2021 - Version 1.5.5
 
 - Fixes
     - <b>[Animelist|Mangalist]</b> Fix building url for scenario with filter.
