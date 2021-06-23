@@ -36,6 +36,18 @@ namespace JikanDotNet.Tests
 		}
 
 		[Theory]
+		[InlineData((Seasons) int.MaxValue)]
+		[InlineData((Seasons) int.MinValue)]
+		public async Task GetSeasons_InvalidSeasonValidYear_ShouldThrowValidationException(Seasons seasons)
+		{
+			// When
+			Func<Task<Season>> func = this._jikan.Awaiting(x=> x.GetSeason(2021,seasons));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Theory]
 		[InlineData(1000)]
 		[InlineData(1900)]
 		[InlineData(2100)]

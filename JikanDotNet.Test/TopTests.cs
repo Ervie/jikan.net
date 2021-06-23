@@ -71,6 +71,18 @@ namespace JikanDotNet.Tests
 		}
 
 		[Theory]
+		[InlineData((TopAnimeExtension) int.MaxValue)]
+		[InlineData((TopAnimeExtension) int.MinValue)]
+		public async Task GetAnimeTop_InvalidType_ShouldThrowValidationException(TopAnimeExtension topAnimeExtension)
+		{
+			// When
+			Func<Task<AnimeTop>> func = this._jikan.Awaiting(x=> x.GetAnimeTop(topAnimeExtension));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Theory]
 		[InlineData(int.MinValue)]
 		[InlineData(-1)]
 		[InlineData(0)]
@@ -78,6 +90,18 @@ namespace JikanDotNet.Tests
 		{
 			// When
 			Func<Task<AnimeTop>> func = _jikan.Awaiting(x => x.GetAnimeTop(page, TopAnimeExtension.TopAiring));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Theory]
+		[InlineData((TopAnimeExtension) int.MaxValue)]
+		[InlineData((TopAnimeExtension) int.MinValue)]
+		public async Task GetAnimeTop_InvalidTypeValidPage_ShouldThrowValidationException(TopAnimeExtension topAnimeExtension)
+		{
+			// When
+			Func<Task<AnimeTop>> func = this._jikan.Awaiting(x=> x.GetAnimeTop(1, topAnimeExtension));
 
 			// Then
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();
@@ -182,6 +206,18 @@ namespace JikanDotNet.Tests
 		}
 
 		[Theory]
+		[InlineData((TopMangaExtension)int.MinValue)]
+		[InlineData((TopMangaExtension)int.MaxValue)]
+		public async Task GetMangaTop_InvalidType_ShouldThrowValidationException(TopMangaExtension topMangaExtension)
+		{
+			// When
+			Func<Task<MangaTop>> func = _jikan.Awaiting(x => x.GetMangaTop(topMangaExtension));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Theory]
 		[InlineData(int.MinValue)]
 		[InlineData(-1)]
 		[InlineData(0)]
@@ -189,6 +225,18 @@ namespace JikanDotNet.Tests
 		{
 			// When
 			Func<Task<MangaTop>> func = _jikan.Awaiting(x => x.GetMangaTop(page, TopMangaExtension.TopPopularity));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Theory]
+		[InlineData((TopMangaExtension)int.MinValue)]
+		[InlineData((TopMangaExtension)int.MaxValue)]
+		public async Task GetMangaTop_InvalidTypeValidPage_ShouldThrowValidationException(TopMangaExtension topMangaExtension)
+		{
+			// When
+			Func<Task<MangaTop>> func = _jikan.Awaiting(x => x.GetMangaTop(1, topMangaExtension));
 
 			// Then
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();

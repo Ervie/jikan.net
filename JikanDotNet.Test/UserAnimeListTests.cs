@@ -58,6 +58,30 @@ namespace JikanDotNet.Tests
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
+		[Theory]
+		[InlineData((UserAnimeListExtension)int.MaxValue)]
+		[InlineData((UserAnimeListExtension)int.MinValue)]
+		public async Task GetUserAnimeList_ErvelanWithInvalidExtension_ShouldThrowValidationException(UserAnimeListExtension userAnimeListExtension)
+		{
+			// When
+			Func<Task<UserAnimeList>> func = _jikan.Awaiting(x => x.GetUserAnimeList("Ervelan", userAnimeListExtension));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Theory]
+		[InlineData((UserAnimeListExtension)int.MaxValue)]
+		[InlineData((UserAnimeListExtension)int.MinValue)]
+		public async Task GetUserAnimeList_ErvelanWithValidPageWithInvalidExtension_ShouldThrowValidationException(UserAnimeListExtension userAnimeListExtension)
+		{
+			// When
+			Func<Task<UserAnimeList>> func = _jikan.Awaiting(x => x.GetUserAnimeList("Ervelan", userAnimeListExtension, 1));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
 		[Fact]
 		public async Task GetUserAnimeList_ErvelanWatching_ShouldParseErvelanAnimeWatchingList()
 		{
@@ -171,6 +195,39 @@ namespace JikanDotNet.Tests
 
 			// When
 			Func<Task<UserAnimeList>> func = _jikan.Awaiting(x => x.GetUserAnimeList(username, searchConfig));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Theory]
+		[InlineData((Seasons)int.MaxValue, null, null, null, null)]
+		[InlineData((Seasons)int.MinValue, null, null, null, null)]
+		[InlineData(null, (UserListAnimeAiringStatus)int.MaxValue, null, null, null)]
+		[InlineData(null, (UserListAnimeAiringStatus)int.MinValue, null, null, null)]
+		[InlineData(null, null, (UserListAnimeSearchSortable)int.MaxValue, null, null)]
+		[InlineData(null, null, (UserListAnimeSearchSortable)int.MinValue, null, null)]
+		[InlineData(null, null, UserListAnimeSearchSortable.Priority, (UserListAnimeSearchSortable)int.MaxValue, null)]
+		[InlineData(null, null, UserListAnimeSearchSortable.Priority, (UserListAnimeSearchSortable)int.MinValue, null)]
+		[InlineData(null, null, UserListAnimeSearchSortable.Priority, null, (SortDirection)int.MaxValue)]
+		[InlineData(null, null, UserListAnimeSearchSortable.Priority, null, (SortDirection)int.MinValue)]
+		public async Task GetUserAnimeList_ErvelanWithConfigWithInvalidEnums_ShouldThrowValidationException(
+			Seasons? season, UserListAnimeAiringStatus? airingStatus, UserListAnimeSearchSortable? orderBy, UserListAnimeSearchSortable? orderBy2,
+			SortDirection? sortDirection)
+		{
+			// Given
+			var searchConfig = new UserListAnimeSearchConfig()
+			{
+				Year = season.HasValue ? 2021 : default,
+				Season = season.GetValueOrDefault(),
+				AiringStatus = airingStatus.GetValueOrDefault(),
+				OrderBy = orderBy.GetValueOrDefault(),
+				OrderBy2 = orderBy2.GetValueOrDefault(),
+				SortDirection = sortDirection.GetValueOrDefault()
+			};
+
+			// When
+			Func<Task<UserAnimeList>> func = _jikan.Awaiting(x => x.GetUserAnimeList("Ervelan", searchConfig));
 
 			// Then
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();

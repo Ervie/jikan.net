@@ -58,6 +58,29 @@ namespace JikanDotNet.Tests
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
+		[Theory]
+		[InlineData((UserMangaListExtension)int.MaxValue)]
+		[InlineData((UserMangaListExtension)int.MinValue)]
+		public async Task GetUserMangaList_ErvelanWithInvalidExtension_ShouldThrowValidationException(UserMangaListExtension userMangaListExtension)
+		{
+			// When
+			Func<Task<UserMangaList>> func = _jikan.Awaiting(x => x.GetUserMangaList("Ervelan", userMangaListExtension));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Theory]
+		[InlineData((UserMangaListExtension)int.MaxValue)]
+		[InlineData((UserMangaListExtension)int.MinValue)]
+		public async Task GetUserMangaList_ErvelanWithValidPageWithInvalidExtension_ShouldThrowValidationException(UserMangaListExtension userMangaListExtension)
+		{
+			// When
+			Func<Task<UserMangaList>> func = _jikan.Awaiting(x => x.GetUserMangaList("Ervelan", userMangaListExtension, 1));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
 		[Fact]
 		public async Task GetUserMangaList_ErvelanReading_ShouldParseErvelanMangaReadingList()
 		{
@@ -143,6 +166,35 @@ namespace JikanDotNet.Tests
 
 			// When
 			Func<Task<UserMangaList>> func = _jikan.Awaiting(x => x.GetUserMangaList(username, searchConfig));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Theory]
+		[InlineData((UserListMangaPublishingStatus)int.MaxValue, null, null, null)]
+		[InlineData((UserListMangaPublishingStatus)int.MinValue, null, null, null)]
+		[InlineData(null, (UserListMangaSearchSortable)int.MaxValue, null, null)]
+		[InlineData(null, (UserListMangaSearchSortable)int.MinValue, null, null)]
+		[InlineData(null, UserListMangaSearchSortable.Priority, (UserListMangaSearchSortable)int.MaxValue, null)]
+		[InlineData(null, UserListMangaSearchSortable.Priority, (UserListMangaSearchSortable)int.MinValue, null)]
+		[InlineData(null, UserListMangaSearchSortable.Priority, null, (SortDirection)int.MaxValue)]
+		[InlineData(null, UserListMangaSearchSortable.Priority, null, (SortDirection)int.MinValue)]
+		public async Task GetUserMangaList_ErvelanWithConfigWithInvalidEnums_ShouldThrowValidationException(
+			UserListMangaPublishingStatus? publishingStatus, UserListMangaSearchSortable? orderBy, UserListMangaSearchSortable? orderBy2,
+			SortDirection? sortDirection)
+		{
+			// Given
+			var searchConfig = new UserListMangaSearchConfig()
+			{
+				PublishingStatus = publishingStatus.GetValueOrDefault(),
+				OrderBy = orderBy.GetValueOrDefault(),
+				OrderBy2 = orderBy2.GetValueOrDefault(),
+				SortDirection = sortDirection.GetValueOrDefault()
+			};
+
+			// When
+			Func<Task<UserMangaList>> func = _jikan.Awaiting(x => x.GetUserMangaList("Ervelan", searchConfig));
 
 			// Then
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();

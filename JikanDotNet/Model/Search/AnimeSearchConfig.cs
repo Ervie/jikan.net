@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using JikanDotNet.Helpers;
 
 namespace JikanDotNet
 {
@@ -78,6 +79,7 @@ namespace JikanDotNet
 
 			if (Type != AnimeType.EveryType)
 			{
+				Guard.IsValidEnum(Type, nameof(Type));
 				builder.Append($"&type={Type.GetDescription()}");
 			}
 
@@ -88,11 +90,13 @@ namespace JikanDotNet
 
 			if (Rating != AgeRating.EveryRating)
 			{
+				Guard.IsValidEnum(Rating, nameof(Rating));
 				builder.Append($"&rated={Rating.GetDescription()}");
 			}
 
 			if (Status != AiringStatus.EveryStatus)
 			{
+				Guard.IsValidEnum(Status, nameof(Status));
 				builder.Append($"&status={Status.GetDescription()}");
 			}
 
@@ -108,7 +112,11 @@ namespace JikanDotNet
 
 			if (Genres.Count > 0 )
 			{
-				var genresId = Genres.Select(x => x.GetDescription()).ToArray();
+				var genresId = Genres.Select(genreSearch =>
+				{
+					Guard.IsValidEnum(genreSearch, nameof(genreSearch));
+					return genreSearch.GetDescription();
+				}).ToArray();
 
 				builder.Append($"&genre={string.Join(",", genresId)}");
 			}
@@ -120,6 +128,8 @@ namespace JikanDotNet
 
 			if (OrderBy != AnimeSearchSortable.NoSorting)
 			{
+				Guard.IsValidEnum(OrderBy, nameof(OrderBy));
+				Guard.IsValidEnum(SortDirection, nameof(SortDirection));
 				builder.Append($"&order_by={OrderBy.GetDescription()}");
 				builder.Append($"&sort={SortDirection.GetDescription()}");
 			}
