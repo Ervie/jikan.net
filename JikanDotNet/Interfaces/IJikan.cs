@@ -528,9 +528,9 @@ namespace JikanDotNet
 		/// <summary>
 		/// Returns information about anime genre.
 		/// </summary>
-		/// <param name="genre">Searched genre.</param>
+		/// <param name="animeGenre">Searched genre.</param>
 		/// <returns>Information about anime genre</returns>
-		Task<AnimeGenre> GetAnimeGenre(GenreSearch genre);
+		Task<AnimeGenre> GetAnimeGenre(AnimeGenreSearch animeGenre);
 
 		/// <summary>
 		/// Returns information about anime genre.
@@ -543,10 +543,10 @@ namespace JikanDotNet
 		/// <summary>
 		/// Returns information about anime genre.
 		/// </summary>
-		/// <param name="genre">Searched genre.</param>
+		/// <param name="animeGenre">Searched genre.</param>
 		/// <param name="page">Index of page folding 100 records of top ranging (e.g. 1 will return first 100 records, 2 will return record from 101 to 200 etc.)</param>
 		/// <returns>Information about anime genre</returns>
-		Task<AnimeGenre> GetAnimeGenre(GenreSearch genre, int page);
+		Task<AnimeGenre> GetAnimeGenre(AnimeGenreSearch animeGenre, int page);
 
 		#endregion
 
@@ -562,9 +562,9 @@ namespace JikanDotNet
 		/// <summary>
 		/// Returns information about manga genre.
 		/// </summary>
-		/// <param name="genre">Searched genre.</param>
+		/// <param name="mangaGenre">Searched genre.</param>
 		/// <returns>Information about manga genre</returns>
-		Task<MangaGenre> GetMangaGenre(GenreSearch genre);
+		Task<MangaGenre> GetMangaGenre(MangaGenreSearch mangaGenre);
 
 		/// <summary>
 		/// Returns information about manga genre.
@@ -577,10 +577,10 @@ namespace JikanDotNet
 		/// <summary>
 		/// Returns information about manga genre.
 		/// </summary>
-		/// <param name="genre">Searched genre.</param>
+		/// <param name="mangaGenre">Searched genre.</param>
 		/// <param name="page">Index of page folding 100 records of top ranging (e.g. 1 will return first 100 records, 2 will return record from 101 to 200 etc.)</param>
 		/// <returns>Information about manga genre</returns>
-		Task<MangaGenre> GetMangaGenre(GenreSearch genre, int page);
+		Task<MangaGenre> GetMangaGenre(MangaGenreSearch mangaGenre, int page);
 
 		#endregion
 

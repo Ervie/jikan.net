@@ -5,7 +5,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Enumeration of accessible genres (search config).
 	/// </summary>
-	public enum GenreSearch
+	public enum AnimeGenreSearch
 	{
 		/// <summary>
 		/// Action.
@@ -14,267 +14,261 @@ namespace JikanDotNet
 		Action,
 
 		/// <summary>
-		/// Action.
+		/// Adventure.
 		/// </summary>
 		[Description("2")]
 		Adventure,
 
 		/// <summary>
-		/// Action.
+		/// Cars.
 		/// </summary>
 		[Description("3")]
 		Cars,
 
 		/// <summary>
-		/// Action.
+		/// Comedy.
 		/// </summary>
 		[Description("4")]
 		Comedy,
 
 		/// <summary>
-		/// Action.
+		/// Avante garde.
 		/// </summary>
 		[Description("5")]
-		Dementia,
+		AvanteGarde,
 
 		/// <summary>
-		/// Action.
+		/// Demons.
 		/// </summary>
 		[Description("6")]
 		Demons,
 
 		/// <summary>
-		/// Action.
+		/// Mystery.
 		/// </summary>
 		[Description("7")]
 		Mystery,
 
 		/// <summary>
-		/// Action.
+		/// Drama.
 		/// </summary>
 		[Description("8")]
 		Drama,
 
 		/// <summary>
-		/// Action.
+		/// Ecchi.
 		/// </summary>
 		[Description("9")]
 		Ecchi,
 
 		/// <summary>
-		/// Action.
+		/// Fantasy.
 		/// </summary>
 		[Description("10")]
 		Fantasy,
 
 		/// <summary>
-		/// Action.
+		/// Game.
 		/// </summary>
 		[Description("11")]
 		Game,
 
 		/// <summary>
-		/// Action.
+		/// Hentai.
 		/// </summary>
 		[Description("12")]
 		Hentai,
 
 		/// <summary>
-		/// Action.
+		/// Historical.
 		/// </summary>
 		[Description("13")]
 		Historical,
 
 		/// <summary>
-		/// Action.
+		/// Horror.
 		/// </summary>
 		[Description("14")]
 		Horror,
 
 		/// <summary>
-		/// Action.
+		/// Kids.
 		/// </summary>
 		[Description("15")]
 		Kids,
 
 		/// <summary>
-		/// Action.
-		/// </summary>
-		[Description("16")]
-		Magic,
-
-		/// <summary>
-		/// Action.
+		/// Martial arts.
 		/// </summary>
 		[Description("17")]
 		MartialArts,
 
 		/// <summary>
-		/// Action.
+		/// Mecha.
 		/// </summary>
 		[Description("18")]
 		Mecha,
 
 		/// <summary>
-		/// Action.
+		/// Music.
 		/// </summary>
 		[Description("19")]
 		Music,
 
 		/// <summary>
-		/// Action.
+		/// Parody.
 		/// </summary>
 		[Description("20")]
 		Parody,
 
 		/// <summary>
-		/// Action.
+		/// Samurai.
 		/// </summary>
 		[Description("21")]
 		Samurai,
 
 		/// <summary>
-		/// Action.
+		/// Romance.
 		/// </summary>
 		[Description("22")]
 		Romance,
 
 		/// <summary>
-		/// Action.
+		/// School.
 		/// </summary>
 		[Description("23")]
 		School,
 
 		/// <summary>
-		/// Action.
+		/// SciFi.
 		/// </summary>
 		[Description("24")]
 		SciFi,
 
 		/// <summary>
-		/// Action.
+		/// Shoujo.
 		/// </summary>
 		[Description("25")]
 		Shoujo,
 
 		/// <summary>
-		/// Action.
+		/// Girls love.
 		/// </summary>
 		[Description("26")]
-		ShoujoAi,
+		GirlsLove,
 
 		/// <summary>
-		/// Action.
+		/// Shounen.
 		/// </summary>
 		[Description("27")]
 		Shounen,
 
 		/// <summary>
-		/// Action.
+		/// Boys love.
 		/// </summary>
 		[Description("28")]
-		ShounenAi,
+		BoysLove,
 
 		/// <summary>
-		/// Action.
+		/// Space.
 		/// </summary>
 		[Description("29")]
 		Space,
 
 		/// <summary>
-		/// Action.
+		/// Sports.
 		/// </summary>
 		[Description("30")]
 		Sports,
 
 		/// <summary>
-		/// Action.
+		/// SuperPower.
 		/// </summary>
-		[Description("32")]
+		[Description("31")]
 		SuperPower,
 
 		/// <summary>
-		/// Action.
+		/// Vampire.
 		/// </summary>
 		[Description("32")]
 		Vampire,
 
 		/// <summary>
-		/// Action.
-		/// </summary>
-		[Description("33")]
-		Yaoi,
-
-		/// <summary>
-		/// Action.
-		/// </summary>
-		[Description("34")]
-		Yuri,
-
-		/// <summary>
-		/// Action.
+		/// Harem.
 		/// </summary>
 		[Description("35")]
 		Harem,
 
 		/// <summary>
-		/// Action.
+		/// Slice of life.
 		/// </summary>
 		[Description("36")]
 		SliceOfLife,
 
 		/// <summary>
-		/// Action.
+		/// Supernatural.
 		/// </summary>
 		[Description("37")]
 		Supernatural,
 
 		/// <summary>
-		/// Action.
+		/// Military.
 		/// </summary>
 		[Description("38")]
 		Military,
 
 		/// <summary>
-		/// Action.
+		/// Police.
 		/// </summary>
 		[Description("39")]
 		Police,
 
 		/// <summary>
-		/// Action.
+		/// Psychological.
 		/// </summary>
 		[Description("40")]
 		Psychological,
 
 		/// <summary>
-		/// Action.
+		/// Suspense.
 		/// </summary>
 		[Description("41")]
-		Thriller,
+		Suspense,
 
 		/// <summary>
-		/// Action.
+		/// Seinen.
 		/// </summary>
 		[Description("42")]
 		Seinen,
 
 		/// <summary>
-		/// Action.
+		/// Josei.
 		/// </summary>
 		[Description("43")]
 		Josei,
 
 		/// <summary>
-		/// Action.
+		/// Award winning.
 		/// </summary>
-		[Description("44")]
-		Doujinshi,
+		[Description("46")]
+		AwardWinning,
 
 		/// <summary>
-		/// Action.
+		/// Gourmet.
 		/// </summary>
-		[Description("45")]
-		GenderBender
+		[Description("47")]
+		Gourmet,
+
+		/// <summary>
+		/// Work life.
+		/// </summary>
+		[Description("48")]
+		WorkLife,
+
+		/// <summary>
+		/// Erotica.
+		/// </summary>
+		[Description("49")]
+		Erotica
 	}
 }

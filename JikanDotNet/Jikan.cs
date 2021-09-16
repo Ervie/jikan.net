@@ -202,12 +202,12 @@ namespace JikanDotNet
 		/// <summary>
 		/// Return information about anime genre.
 		/// </summary>
-		/// <param name="genre">Searched genre.</param>
+		/// <param name="animeGenre">Searched genre.</param>
 		/// <returns>Information about anime genre</returns>
-		public async Task<AnimeGenre> GetAnimeGenre(GenreSearch genre)
+		public async Task<AnimeGenre> GetAnimeGenre(AnimeGenreSearch animeGenre)
 		{
-			Guard.IsValidEnum(genre, nameof(genre));
-			string[] endpointParts = new string[] { JikanEndPointCategories.Genre, JikanEndPointCategories.Anime, genre.GetDescription() };
+			Guard.IsValidEnum(animeGenre, nameof(animeGenre));
+			string[] endpointParts = new string[] { JikanEndPointCategories.Genre, JikanEndPointCategories.Anime, animeGenre.GetDescription() };
 			return await ExecuteGetRequest<AnimeGenre>(endpointParts);
 		}
 
@@ -228,14 +228,14 @@ namespace JikanDotNet
 		/// <summary>
 		/// Return information about anime genre.
 		/// </summary>
-		/// <param name="genre">Searched genre.</param>
+		/// <param name="animeGenre">Searched genre.</param>
 		/// <param name="page">Index of page folding 100 records of top ranging (e.g. 1 will return first 100 records, 2 will return record from 101 to 200 etc.)</param>
 		/// <returns>Information about anime genre</returns>
-		public async Task<AnimeGenre> GetAnimeGenre(GenreSearch genre, int page)
+		public async Task<AnimeGenre> GetAnimeGenre(AnimeGenreSearch animeGenre, int page)
 		{
 			Guard.IsGreaterThanZero(page, nameof(page));
-			Guard.IsValidEnum(genre, nameof(genre));
-			string[] endpointParts = new string[] { JikanEndPointCategories.Genre, JikanEndPointCategories.Anime, genre.GetDescription(), page.ToString() };
+			Guard.IsValidEnum(animeGenre, nameof(animeGenre));
+			string[] endpointParts = new string[] { JikanEndPointCategories.Genre, JikanEndPointCategories.Anime, animeGenre.GetDescription(), page.ToString() };
 			return await ExecuteGetRequest<AnimeGenre>(endpointParts);
 		}
 
@@ -518,12 +518,12 @@ namespace JikanDotNet
 		/// <summary>
 		/// Return information about manga genre.
 		/// </summary>
-		/// <param name="genre">Searched genre.</param>
+		/// <param name="mangaGenre">Searched genre.</param>
 		/// <returns>Information about manga genre</returns>
-		public async Task<MangaGenre> GetMangaGenre(GenreSearch genre)
+		public async Task<MangaGenre> GetMangaGenre(MangaGenreSearch mangaGenre)
 		{
-			Guard.IsValidEnum(genre, nameof(genre));
-			string[] endpointParts = new string[] { JikanEndPointCategories.Genre, JikanEndPointCategories.Manga, genre.GetDescription() };
+			Guard.IsValidEnum(mangaGenre, nameof(mangaGenre));
+			string[] endpointParts = new string[] { JikanEndPointCategories.Genre, JikanEndPointCategories.Manga, mangaGenre.GetDescription() };
 			return await ExecuteGetRequest<MangaGenre>(endpointParts);
 		}
 
@@ -544,14 +544,14 @@ namespace JikanDotNet
 		/// <summary>
 		/// Return information about manga genre.
 		/// </summary>
-		/// <param name="genre">Searched genre.</param>
+		/// <param name="mangaGenre">Searched genre.</param>
 		/// <param name="page">Index of page folding 100 records of top ranging (e.g. 1 will return first 100 records, 2 will return record from 101 to 200 etc.)</param>
 		/// <returns>Information about manga genre</returns>
-		public async Task<MangaGenre> GetMangaGenre(GenreSearch genre, int page)
+		public async Task<MangaGenre> GetMangaGenre(MangaGenreSearch mangaGenre, int page)
 		{
 			Guard.IsGreaterThanZero(page, nameof(page));
-			Guard.IsValidEnum(genre, nameof(genre));
-			string[] endpointParts = new string[] { JikanEndPointCategories.Genre, JikanEndPointCategories.Manga, genre.GetDescription(), page.ToString() };
+			Guard.IsValidEnum(mangaGenre, nameof(mangaGenre));
+			string[] endpointParts = new string[] { JikanEndPointCategories.Genre, JikanEndPointCategories.Manga, mangaGenre.GetDescription(), page.ToString() };
 			return await ExecuteGetRequest<MangaGenre>(endpointParts);
 		}
 

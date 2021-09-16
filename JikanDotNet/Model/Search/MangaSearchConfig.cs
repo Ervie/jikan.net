@@ -54,9 +54,9 @@ namespace JikanDotNet
 		public SortDirection SortDirection { get; set; }
 
 		/// <summary>
-		/// Genres to seach/exclude.
+		/// Genres to search/exclude.
 		/// </summary>
-		public ICollection<GenreSearch> Genres { get; set; } = new List<GenreSearch>();
+		public ICollection<MangaGenreSearch> Genres { get; set; } = new List<MangaGenreSearch>();
 
 		/// <summary>
 		/// Filter by magazine id.
