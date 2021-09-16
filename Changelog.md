@@ -1,3 +1,12 @@
+## 16.09.2021 - Version 1.6.0
+
+- Rework of Genres enumeration
+    - `GenreSearch` enum is now change to two separate enums: `AnimeGenreSearch` and `MangaGenreSearch`.
+    - <b>[GetAnimeGenre]</b> Now accepts `AnimeGenreSearch` as a parameter.
+    - <b>[GetMangaGenre]</b> Now accepts `MangaGenreSearch` as a parameter.
+    - <b>[AnimeSearch]</b> `AnimeSearchConfig` now has property `Genres` of `AnimeGenreSearch` type (was `GenreSearch` before).
+    - <b>[MangaSearch]</b> `MangaSearchConfig` now has property `Genres` of `MangaGenreSearch` type (was `GenreSearch` before).
+
 ## 23.06.2021 - Version 1.5.6
 
 - Features

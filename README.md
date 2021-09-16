@@ -112,12 +112,15 @@ Then restore dependencies:
 
 - Compatible with Jikan REST API v4.0
 
-## 23.06.2021 - Version 1.5.6 (newest)
+## 16.09.2021 - Version 1.6.0 (newest)
 
-- Features
-    - <b>[Validation]</b> Validation of input parameters of Enum types parameters most method are added for fail fast approach.
-- Fixes
-    - <b>[SearchManga]</b> Remove redundant page part during url building.
+- Rework of Genres enumeration
+    - `GenreSearch` enum is now change to two separate enums: `AnimeGenreSearch` and `MangaGenreSearch`.
+    - <b>[GetAnimeGenre]</b> Now accepts `AnimeGenreSearch` as a parameter.
+    - <b>[GetMangaGenre]</b> Now accepts `MangaGenreSearch` as a parameter.
+    - <b>[AnimeSearch]</b> `AnimeSearchConfig` now has property `Genres` of `AnimeGenreSearch` type (was `GenreSearch` before).
+    - <b>[MangaSearch]</b> `MangaSearchConfig` now has property `Genres` of `MangaGenreSearch` type (was `GenreSearch` before).
+
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**
 
