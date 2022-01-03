@@ -1,4 +1,4 @@
- ![build status](https://travis-ci.org/Ervie/jikan.net.svg?branch=master) ![build status](https://img.shields.io/nuget/v/JikanDotNet.svg) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) [![GitHub issues open](https://img.shields.io/github/issues/Ervie/jikan.net.svg?maxAge=2592000)]() 
+ [![Discord Server](https://img.shields.io/discord/460491088004907029.svg?style=flat&logo=discord)](https://discord.gg/4tvCr36) ![build status](https://travis-ci.org/Ervie/jikan.net.svg?branch=master) ![build status](https://img.shields.io/nuget/v/JikanDotNet.svg) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) [![GitHub issues open](https://img.shields.io/github/issues/Ervie/jikan.net.svg?maxAge=2592000)]() 
 
 # jikan.net
 
@@ -112,13 +112,15 @@ Then restore dependencies:
 
 - Compatible with Jikan REST API v4.0
 
-## 26.10.2020 - Version 1.5.2 (newest)
-- Features
-    - <b>[Validation]</b> Validation of input parameters for most method are added for fail fast approach. General rules
-        - Methods using mal Id (e.g. `GetAnime()`) accept only number larger than 0.
-        - Search query for searcg methods (e.g. `SearchAnime()`) must not be null or whitespace and at least 3 characters long.
-        - Methods with page number as a parameter (e.g. `SearchAnime()`) only accepts page when it's larger than 0.
-        - Search configs for search methods (e.g. `SearchAnime()`) must not `null`.
+## 16.09.2021 - Version 1.6.0 (newest)
+
+- Rework of Genres enumeration
+    - `GenreSearch` enum is now change to two separate enums: `AnimeGenreSearch` and `MangaGenreSearch`.
+    - <b>[GetAnimeGenre]</b> Now accepts `AnimeGenreSearch` as a parameter.
+    - <b>[GetMangaGenre]</b> Now accepts `MangaGenreSearch` as a parameter.
+    - <b>[AnimeSearch]</b> `AnimeSearchConfig` now has property `Genres` of `AnimeGenreSearch` type (was `GenreSearch` before).
+    - <b>[MangaSearch]</b> `MangaSearchConfig` now has property `Genres` of `MangaGenreSearch` type (was `GenreSearch` before).
+
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**
 

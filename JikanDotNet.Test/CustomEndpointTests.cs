@@ -2,6 +2,7 @@
 using JikanDotNet.Config;
 using JikanDotNet.Exceptions;
 using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -83,6 +84,40 @@ namespace JikanDotNet.Tests
 
 			// Then
 			func.Should().ThrowExactly<UriFormatException>();
+		}
+
+		[Fact]
+		public async Task JikanConstructorHttpClient_CorrectConfiguration_ShouldParseCorrectly()
+		{
+			// Given
+			var httpClient = new HttpClient
+			{
+				BaseAddress = new Uri("https://seiyuu.moe:8000/v3/")
+			};
+			var jikan = new Jikan(httpClient, false);
+
+			// When
+			Anime bebop = await jikan.GetAnime(1);
+
+			// Then
+			bebop.MalId.Should().Be(1);
+		}
+
+		[Fact]
+		public void JikanConstructorHttpClient_IncorrectConfiguration_ShouldThrowJikanException()
+		{
+			// Given
+			var httpClient = new HttpClient
+			{
+				BaseAddress = new Uri("https://google.com")
+			};
+			var jikan = new Jikan(httpClient, false);
+
+			// When
+			Func<Task<Anime>> func = jikan.Awaiting(x => x.GetAnime(1));
+
+			// Then
+			func.Should().ThrowExactlyAsync<JikanRequestException>();
 		}
 	}
 }

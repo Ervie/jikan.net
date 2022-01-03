@@ -1,5 +1,7 @@
 ﻿using FluentAssertions;
 using FluentAssertions.Execution;
+using JikanDotNet.Exceptions;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -68,6 +70,18 @@ namespace JikanDotNet.Tests
 				unknownScheduleTitles.Should().Contain("Yodel no Onna");
 				unknownScheduleTitles.Should().Contain("Jinxiu Shenzhou Zhi Qi You Ji");
 			}
+		}
+
+		[Theory]
+		[InlineData((ScheduledDay)int.MaxValue)]
+		[InlineData((ScheduledDay)int.MinValue)]
+		public async Task GetSchedule_InvalidScheduledDay_ShouldThrowValidationException(ScheduledDay schedule)
+		{
+			// When
+			Func<Task<Schedule>> func = this._jikan.Awaiting(x => x.GetSchedule(schedule));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 	}
 }

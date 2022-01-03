@@ -107,6 +107,18 @@ namespace JikanDotNet.Tests
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
+		[Theory]
+		[InlineData((UserHistoryExtension)int.MaxValue)]
+		[InlineData((UserHistoryExtension)int.MinValue)]
+		public async Task GetUserHistory_ErvelanWithInvalidExtension_ShouldThrowValidationException(UserHistoryExtension userHistoryExtension)
+		{
+			// When
+			Func<Task<UserHistory>> func = _jikan.Awaiting(x => x.GetUserHistory("Ervelan", userHistoryExtension));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
 		[Fact]
 		public async Task GetUserHistory_ErvelanMangaHistory_ShouldParseErvelanMangaHistory()
 		{

@@ -1,4 +1,5 @@
 ﻿using JikanDotNet.Extensions;
+using JikanDotNet.Helpers;
 using JikanDotNet.Interfaces;
 using System.Text;
 
@@ -74,11 +75,14 @@ namespace JikanDotNet
 
 			if (OrderBy != UserListAnimeSearchSortable.NoSorting)
 			{
+				Guard.IsValidEnum(OrderBy, nameof(OrderBy));
+				Guard.IsValidEnum(SortDirection, nameof(SortDirection));
 				builder.Append($"&order_by={OrderBy.GetDescription()}");
 				builder.Append($"&sort={SortDirection.GetDescription()}");
 
 				if (OrderBy2 != UserListAnimeSearchSortable.NoSorting)
 				{
+					Guard.IsValidEnum(OrderBy2, nameof(OrderBy2));
 					builder.Append($"&order_by2={OrderBy2.GetDescription()}");
 				}
 			}
@@ -90,12 +94,14 @@ namespace JikanDotNet
 
 			if (Year > 0)
 			{
+				Guard.IsValidEnum(Season, nameof(Season));
 				builder.Append($"&year={Year}");
 				builder.Append($"&season={Season.GetDescription()}");
 			}
 
 			if (AiringStatus != UserListAnimeAiringStatus.NoFilter)
 			{
+				Guard.IsValidEnum(AiringStatus, nameof(AiringStatus));
 				builder.Append($"&airing_status={AiringStatus.GetDescription()}");
 			}
 

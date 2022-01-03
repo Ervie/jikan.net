@@ -219,7 +219,7 @@ namespace JikanDotNet.Tests
 		{
 			// Given
 			var searchConfig = new AnimeSearchConfig();
-			searchConfig.Genres.Add(GenreSearch.Mecha);
+			searchConfig.Genres.Add(AnimeGenreSearch.Mecha);
 
 			// When
 			AnimeSearchResult returnedAnime = await _jikan.SearchAnime("Blame", searchConfig);
@@ -236,7 +236,7 @@ namespace JikanDotNet.Tests
 			{
 				Type = AnimeType.Movie
 			};
-			searchConfig.Genres.Add(GenreSearch.Mecha);
+			searchConfig.Genres.Add(AnimeGenreSearch.Mecha);
 
 			// When
 			AnimeSearchResult returnedAnime = await _jikan.SearchAnime("Blame", searchConfig);
@@ -249,7 +249,7 @@ namespace JikanDotNet.Tests
 		public async Task SearchAnime_BleachAfter2017Config_ShouldFilterBleachAfter2017()
 		{
 			// Given
-			System.DateTime configDate = new System.DateTime(2018, 1, 1);
+			DateTime configDate = new DateTime(2018, 1, 1);
 			var searchConfig = new AnimeSearchConfig
 			{
 				StartDate = configDate
@@ -359,6 +359,46 @@ namespace JikanDotNet.Tests
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
+		[Theory]
+		[InlineData((AiringStatus)int.MaxValue, null, null, null, null, null)]
+		[InlineData((AiringStatus)int.MinValue, null, null, null, null, null)]
+		[InlineData(null, (AgeRating)int.MaxValue, null, null, null, null)]
+		[InlineData(null, (AgeRating)int.MinValue, null, null, null, null)]
+		[InlineData(null, null, (AnimeType)int.MaxValue, null, null, null)]
+		[InlineData(null, null, (AnimeType)int.MinValue, null, null, null)]
+		[InlineData(null, null, null, (AnimeSearchSortable)int.MaxValue, null, null)]
+		[InlineData(null, null, null, (AnimeSearchSortable)int.MinValue, null, null)]
+		[InlineData(null, null, null, AnimeSearchSortable.Episodes, (SortDirection)int.MaxValue, null)]
+		[InlineData(null, null, null, AnimeSearchSortable.Episodes, (SortDirection)int.MinValue, null)]
+		[InlineData(null, null, null, null, null, (AnimeGenreSearch)int.MaxValue)]
+		[InlineData(null, null, null, null, null, (AnimeGenreSearch)int.MinValue)]
+		public async Task SearchAnime_EmptyQueryWithConfigWithInvalidEnums_ShouldThrowValidationException(
+			AiringStatus? airingStatus,
+			AgeRating? rating,
+			AnimeType? mangaType,
+			AnimeSearchSortable? orderBy,
+			SortDirection? sortDirection,
+			AnimeGenreSearch? genreSearch
+		)
+		{
+			// Given
+			var searchConfig = new AnimeSearchConfig()
+			{
+				Status = airingStatus.GetValueOrDefault(),
+				Rating = rating.GetValueOrDefault(),
+				Type = mangaType.GetValueOrDefault(),
+				OrderBy = orderBy.GetValueOrDefault(),
+				SortDirection = sortDirection.GetValueOrDefault(),
+				Genres = genreSearch.HasValue ? new[] { genreSearch.Value } : Array.Empty<AnimeGenreSearch>()
+			};
+
+			// When
+			Func<Task<AnimeSearchResult>> func = _jikan.Awaiting(x => x.SearchAnime(searchConfig));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
 		[Fact]
 		public async Task SearchAnime_EmptyQueryActionTvAnime_ShouldFindAfroSamuraiAndAjin()
 		{
@@ -366,7 +406,7 @@ namespace JikanDotNet.Tests
 			var searchConfig = new AnimeSearchConfig
 			{
 				Type = AnimeType.TV,
-				Genres = new List<GenreSearch> { GenreSearch.Action }
+				Genres = new List<AnimeGenreSearch> { AnimeGenreSearch.Action }
 			};
 
 			// When
@@ -391,7 +431,7 @@ namespace JikanDotNet.Tests
 			var searchConfig = new AnimeSearchConfig
 			{
 				Type = AnimeType.TV,
-				Genres = new List<GenreSearch> { GenreSearch.Action }
+				Genres = new List<AnimeGenreSearch> { AnimeGenreSearch.Action }
 			};
 
 			// When
@@ -408,7 +448,7 @@ namespace JikanDotNet.Tests
 			var searchConfig = new AnimeSearchConfig
 			{
 				Type = AnimeType.TV,
-				Genres = new List<GenreSearch> { GenreSearch.Action }
+				Genres = new List<AnimeGenreSearch> { AnimeGenreSearch.Action }
 			};
 
 			// When
@@ -430,7 +470,7 @@ namespace JikanDotNet.Tests
 			var searchConfig = new AnimeSearchConfig
 			{
 				Type = AnimeType.TV,
-				Genres = new List<GenreSearch> { GenreSearch.Action }
+				Genres = new List<AnimeGenreSearch> { AnimeGenreSearch.Action }
 			};
 
 			// When
@@ -457,7 +497,7 @@ namespace JikanDotNet.Tests
 			var searchConfig = new AnimeSearchConfig
 			{
 				Status = AiringStatus.Completed,
-				Genres = new List<GenreSearch> { GenreSearch.Action }
+				Genres = new List<AnimeGenreSearch> { AnimeGenreSearch.Action }
 			};
 
 			// When
@@ -477,7 +517,7 @@ namespace JikanDotNet.Tests
 			var searchConfig = new AnimeSearchConfig
 			{
 				Status = AiringStatus.Completed,
-				Genres = new List<GenreSearch> { GenreSearch.Action }
+				Genres = new List<AnimeGenreSearch> { AnimeGenreSearch.Action }
 			};
 
 			// When
@@ -494,7 +534,7 @@ namespace JikanDotNet.Tests
 			var searchConfig = new AnimeSearchConfig
 			{
 				Status = AiringStatus.Completed,
-				Genres = new List<GenreSearch> { GenreSearch.Action }
+				Genres = new List<AnimeGenreSearch> { AnimeGenreSearch.Action }
 			};
 
 			// When
@@ -524,7 +564,7 @@ namespace JikanDotNet.Tests
 			// Given
 			var searchConfig = new AnimeSearchConfig
 			{
-				Genres = new List<GenreSearch> { GenreSearch.Action, GenreSearch.Comedy },
+				Genres = new List<AnimeGenreSearch> { AnimeGenreSearch.Action, AnimeGenreSearch.Comedy },
 				GenreIncluded = true,
 				OrderBy = AnimeSearchSortable.Score,
 				SortDirection = SortDirection.Descending
@@ -547,7 +587,7 @@ namespace JikanDotNet.Tests
 			// Given
 			var searchConfig = new AnimeSearchConfig
 			{
-				Genres = new List<GenreSearch> { GenreSearch.Action, GenreSearch.Adventure },
+				Genres = new List<AnimeGenreSearch> { AnimeGenreSearch.Action, AnimeGenreSearch.Adventure },
 				GenreIncluded = false,
 				OrderBy = AnimeSearchSortable.Score,
 				SortDirection = SortDirection.Descending

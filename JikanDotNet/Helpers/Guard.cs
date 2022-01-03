@@ -51,5 +51,13 @@ namespace JikanDotNet.Helpers
 
 			throw new JikanValidationException(message, argumentName);
 		}
+
+		internal static void IsValidEnum<TEnum>(TEnum arg, string argumentName) where TEnum : struct, Enum
+		{
+			if (!Enum.IsDefined(typeof(TEnum), arg))
+			{
+				throw new JikanValidationException("Enum value must be valid", argumentName);
+			}
+		}
 	}
 }

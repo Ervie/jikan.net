@@ -1,4 +1,5 @@
 ﻿using JikanDotNet.Extensions;
+using JikanDotNet.Helpers;
 using JikanDotNet.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -53,9 +54,9 @@ namespace JikanDotNet
 		public SortDirection SortDirection { get; set; }
 
 		/// <summary>
-		/// Genres to seach/exclude.
+		/// Genres to search/exclude.
 		/// </summary>
-		public ICollection<GenreSearch> Genres { get; set; } = new List<GenreSearch>();
+		public ICollection<MangaGenreSearch> Genres { get; set; } = new List<MangaGenreSearch>();
 
 		/// <summary>
 		/// Filter by magazine id.
@@ -74,9 +75,10 @@ namespace JikanDotNet
 		public string ConfigToString()
 		{
 			StringBuilder builder = new StringBuilder();
-			
+
 			if (Type != MangaType.EveryType)
 			{
+				Guard.IsValidEnum(Type, nameof(Type));
 				builder.Append($"&type={Type.GetDescription()}");
 			}
 
@@ -87,11 +89,13 @@ namespace JikanDotNet
 
 			if (Rating != AgeRating.EveryRating)
 			{
+				Guard.IsValidEnum(Rating, nameof(Rating));
 				builder.Append($"&rated={Rating.GetDescription()}");
 			}
 
 			if (Status != AiringStatus.EveryStatus)
 			{
+				Guard.IsValidEnum(Status, nameof(Status));
 				builder.Append($"&status={Status.GetDescription()}");
 			}
 
@@ -107,7 +111,11 @@ namespace JikanDotNet
 
 			if (Genres.Count > 0)
 			{
-				var genresId = Genres.Select(x => x.GetDescription()).ToArray();
+				var genresId = Genres.Select(genreSearch =>
+				{
+					Guard.IsValidEnum(genreSearch, nameof(genreSearch));
+					return genreSearch.GetDescription();
+				}).ToArray();
 
 				builder.Append($"&genre={string.Join(",", genresId)}");
 			}
@@ -119,6 +127,8 @@ namespace JikanDotNet
 
 			if (OrderBy != MangaSearchSortable.NoSorting)
 			{
+				Guard.IsValidEnum(OrderBy, nameof(OrderBy));
+				Guard.IsValidEnum(SortDirection, nameof(SortDirection));
 				builder.Append($"&order_by={OrderBy.GetDescription()}");
 				builder.Append($"&sort={SortDirection.GetDescription()}");
 			}

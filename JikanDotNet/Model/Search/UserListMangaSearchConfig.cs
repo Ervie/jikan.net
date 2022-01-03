@@ -1,4 +1,5 @@
 ﻿using JikanDotNet.Extensions;
+using JikanDotNet.Helpers;
 using JikanDotNet.Interfaces;
 using System.Text;
 
@@ -64,11 +65,14 @@ namespace JikanDotNet
 
 			if (OrderBy != UserListMangaSearchSortable.NoSorting)
 			{
+				Guard.IsValidEnum(OrderBy, nameof(OrderBy));
+				Guard.IsValidEnum(SortDirection, nameof(SortDirection));
 				builder.Append($"&order_by={OrderBy.GetDescription()}");
 				builder.Append($"&sort={SortDirection.GetDescription()}");
 
 				if (OrderBy2 != UserListMangaSearchSortable.NoSorting)
 				{
+					Guard.IsValidEnum(OrderBy2, nameof(OrderBy2));
 					builder.Append($"&order_by2={OrderBy2.GetDescription()}");
 				}
 			}
@@ -80,6 +84,7 @@ namespace JikanDotNet
 
 			if (PublishingStatus != UserListMangaPublishingStatus.NoFilter)
 			{
+				Guard.IsValidEnum(PublishingStatus, nameof(PublishingStatus));
 				builder.Append($"&publishing_status={PublishingStatus.GetDescription()}");
 			}
 

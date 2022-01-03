@@ -233,7 +233,7 @@ namespace JikanDotNet.Tests
 			{
 				Type = MangaType.Manga,
 			};
-			searchConfig.Genres.Add(GenreSearch.Game);
+			searchConfig.Genres.Add(MangaGenreSearch.Game);
 
 			// When
 			var returnedManga = await _jikan.SearchManga("metal", searchConfig);
@@ -281,7 +281,8 @@ namespace JikanDotNet.Tests
 			{
 				titles.Should().Contain("Fullmetal Alchemist");
 				titles.Should().Contain("Fairy Tail");
-				returnedManga.Results.First().Title.Should().Be("Fairy Tail");
+				titles.Should().Contain("Kimetsu no Yaiba");
+				returnedManga.Results.First().Title.Should().Be("Kimetsu no Yaiba");
 			}
 		}
 
@@ -342,13 +343,53 @@ namespace JikanDotNet.Tests
 			}
 		}
 
+		[Theory]
+		[InlineData((AiringStatus)int.MaxValue, null, null, null, null, null)]
+		[InlineData((AiringStatus)int.MinValue, null, null, null, null, null)]
+		[InlineData(null, (AgeRating)int.MaxValue, null, null, null, null)]
+		[InlineData(null, (AgeRating)int.MinValue, null, null, null, null)]
+		[InlineData(null, null, (MangaType)int.MaxValue, null, null, null)]
+		[InlineData(null, null, (MangaType)int.MinValue, null, null, null)]
+		[InlineData(null, null, null, (MangaSearchSortable)int.MaxValue, null, null)]
+		[InlineData(null, null, null, (MangaSearchSortable)int.MinValue, null, null)]
+		[InlineData(null, null, null, MangaSearchSortable.Chapters, (SortDirection)int.MaxValue, null)]
+		[InlineData(null, null, null, MangaSearchSortable.Chapters, (SortDirection)int.MinValue, null)]
+		[InlineData(null, null, null, null, null, (MangaGenreSearch)int.MaxValue)]
+		[InlineData(null, null, null, null, null, (MangaGenreSearch)int.MinValue)]
+		public async Task SearchManga_EmptyQueryWithConfigWithInvalidEnums_ShouldThrowValidationException(
+			AiringStatus? airingStatus,
+			AgeRating? rating,
+			MangaType? mangaType,
+			MangaSearchSortable? orderBy,
+			SortDirection? sortDirection,
+			MangaGenreSearch? genreSearch
+		)
+		{
+			// Given
+			var searchConfig = new MangaSearchConfig()
+			{
+				Status = airingStatus.GetValueOrDefault(),
+				Rating = rating.GetValueOrDefault(),
+				Type = mangaType.GetValueOrDefault(),
+				OrderBy = orderBy.GetValueOrDefault(),
+				SortDirection = sortDirection.GetValueOrDefault(),
+				Genres = genreSearch.HasValue ? new[] { genreSearch.Value } : Array.Empty<MangaGenreSearch>()
+			};
+
+			// When
+			Func<Task<MangaSearchResult>> func = _jikan.Awaiting(x => x.SearchManga(searchConfig));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
 		[Fact]
 		public async Task SearchManga_EmptyQueryActionManga_ShouldFindCrowAnd007()
 		{
 			// Given
 			var searchConfig = new MangaSearchConfig
 			{
-				Genres = new List<GenreSearch> { GenreSearch.Action },
+				Genres = new List<MangaGenreSearch> { MangaGenreSearch.Action },
 				Type = MangaType.Manga
 			};
 
@@ -371,7 +412,7 @@ namespace JikanDotNet.Tests
 			// Given
 			var searchConfig = new MangaSearchConfig
 			{
-				Genres = new List<GenreSearch> { GenreSearch.Action },
+				Genres = new List<MangaGenreSearch> { MangaGenreSearch.Action },
 				Type = MangaType.Manga
 			};
 
@@ -394,7 +435,7 @@ namespace JikanDotNet.Tests
 			// Given
 			var searchConfig = new MangaSearchConfig
 			{
-				Genres = new List<GenreSearch> { GenreSearch.Action },
+				Genres = new List<MangaGenreSearch> { MangaGenreSearch.Action },
 				Type = MangaType.Manga
 			};
 
@@ -451,14 +492,13 @@ namespace JikanDotNet.Tests
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
-
 		[Fact]
 		public async Task SearchManga_OreQueryComedyMangaSecondPage_ShouldReturnNotEmptyCollection()
 		{
 			// Given
 			var searchConfig = new MangaSearchConfig
 			{
-				Genres = new List<GenreSearch> { GenreSearch.Comedy },
+				Genres = new List<MangaGenreSearch> { MangaGenreSearch.Comedy },
 				Type = MangaType.Manga
 			};
 
@@ -479,7 +519,7 @@ namespace JikanDotNet.Tests
 			// Given
 			var searchConfig = new MangaSearchConfig
 			{
-				Genres = new List<GenreSearch> { GenreSearch.Comedy },
+				Genres = new List<MangaGenreSearch> { MangaGenreSearch.Comedy },
 				GenreIncluded = true,
 				Type = MangaType.Manga
 			};
@@ -501,7 +541,7 @@ namespace JikanDotNet.Tests
 			// Given
 			var searchConfig = new MangaSearchConfig
 			{
-				Genres = new List<GenreSearch> { GenreSearch.Comedy },
+				Genres = new List<MangaGenreSearch> { MangaGenreSearch.Comedy },
 				GenreIncluded = false,
 				Type = MangaType.Manga
 			};

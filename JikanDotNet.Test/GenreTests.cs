@@ -62,11 +62,23 @@ namespace JikanDotNet.Tests
 			}
 		}
 
+		[Theory]
+		[InlineData((AnimeGenreSearch) int.MaxValue)]
+		[InlineData((AnimeGenreSearch) int.MinValue)]
+		public async Task GetAnimeGenre_InvalidGenre_ShouldThrowValidationException(AnimeGenreSearch genreSearch)
+		{
+			// When
+			Func<Task<AnimeGenre>> func = this._jikan.Awaiting(x=> x.GetAnimeGenre(genreSearch));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
 		[Fact]
 		public async Task GetAnimeGenre_MechaGenreId_ShouldParseAnimeMechaGenre()
 		{
 			// When
-			var genre = await _jikan.GetAnimeGenre(GenreSearch.Mecha);
+			var genre = await _jikan.GetAnimeGenre(AnimeGenreSearch.Mecha);
 
 			// Then
 			using (new AssertionScope())
@@ -112,7 +124,19 @@ namespace JikanDotNet.Tests
 		public async Task GetAnimeGenre_ValidGenreInvalidPage_ShouldThrowValidationException(int page)
 		{
 			// When
-			Func<Task<AnimeGenre>> func = _jikan.Awaiting(x => x.GetAnimeGenre(GenreSearch.Mystery, page));
+			Func<Task<AnimeGenre>> func = _jikan.Awaiting(x => x.GetAnimeGenre(AnimeGenreSearch.Mystery, page));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Theory]
+		[InlineData((AnimeGenreSearch) int.MinValue)]
+		[InlineData((AnimeGenreSearch) int.MaxValue)]
+		public async Task GetAnimeGenre_InvalidGenreValidPage_ShouldThrowValidationException(AnimeGenreSearch genreSearch)
+		{
+			// When
+			Func<Task<AnimeGenre>> func = _jikan.Awaiting(x => x.GetAnimeGenre(genreSearch, 1));
 
 			// Then
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();
@@ -122,7 +146,7 @@ namespace JikanDotNet.Tests
 		public async Task GetAnimeGenre_MysteryGenreIdSecondPage_ShouldParseAnimeMysteryGenreMetadata()
 		{
 			// When
-			var genre = await _jikan.GetAnimeGenre(GenreSearch.Mystery, 2);
+			var genre = await _jikan.GetAnimeGenre(AnimeGenreSearch.Mystery, 2);
 
 			// Then
 			using (new AssertionScope())
@@ -138,7 +162,7 @@ namespace JikanDotNet.Tests
 		public async Task GetAnimeGenre_ActionGenreIdSecondPage_ShouldParseAnimeMysteryGenre()
 		{
 			// When
-			var genre = await _jikan.GetAnimeGenre(GenreSearch.Action, 2);
+			var genre = await _jikan.GetAnimeGenre(AnimeGenreSearch.Action, 2);
 
 			// Then
 			using (new AssertionScope())
@@ -163,6 +187,19 @@ namespace JikanDotNet.Tests
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
+		[Theory]
+		[InlineData((MangaGenreSearch) int.MaxValue)]
+		[InlineData((MangaGenreSearch) int.MinValue)]
+		public async Task GetMangaGenre_InvalidGenre_ShouldThrowValidationException(MangaGenreSearch genreSearch)
+		{
+			// When
+			Func<Task<MangaGenre>> func = this._jikan.Awaiting(x=> x.GetMangaGenre(genreSearch));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+
 		[Fact]
 		public async Task GetMangaGenre_ActionGenreId_ShouldParseMangaActionGenre()
 		{
@@ -183,7 +220,7 @@ namespace JikanDotNet.Tests
 		public async Task GetMangaGenre_MechaGenreId_ShouldParseMangaMechaGenre()
 		{
 			// When
-			var genre = await _jikan.GetMangaGenre(GenreSearch.Mecha);
+			var genre = await _jikan.GetMangaGenre(MangaGenreSearch.Mecha);
 
 			// Then
 			using (new AssertionScope())
@@ -229,7 +266,19 @@ namespace JikanDotNet.Tests
 		public async Task GetMangaGenre_ValidGenreInvalidPage_ShouldThrowValidationException(int page)
 		{
 			// When
-			Func<Task<MangaGenre>> func = _jikan.Awaiting(x => x.GetMangaGenre(GenreSearch.Mystery, page));
+			Func<Task<MangaGenre>> func = _jikan.Awaiting(x => x.GetMangaGenre(MangaGenreSearch.Mystery, page));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Theory]
+		[InlineData((MangaGenreSearch) int.MinValue)]
+		[InlineData((MangaGenreSearch) int.MaxValue)]
+		public async Task GetMangaGenre_InvalidGenreValidPage_ShouldThrowValidationException(MangaGenreSearch genreSearch)
+		{
+			// When
+			Func<Task<MangaGenre>> func = _jikan.Awaiting(x => x.GetMangaGenre(genreSearch, 1));
 
 			// Then
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();
@@ -239,7 +288,7 @@ namespace JikanDotNet.Tests
 		public async Task GetMangaGenre_DramaGenreId_ShouldParseMangaDramaGenre()
 		{
 			// When
-			var genre = await _jikan.GetMangaGenre(GenreSearch.Drama, 2);
+			var genre = await _jikan.GetMangaGenre(MangaGenreSearch.Drama, 2);
 
 			// Then
 			using (new AssertionScope())

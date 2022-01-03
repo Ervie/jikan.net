@@ -1,4 +1,34 @@
-## 26.10.2020 - Version 1.5.2 (newest)
+## 16.09.2021 - Version 1.6.0
+
+- Rework of Genres enumeration
+    - `GenreSearch` enum is now change to two separate enums: `AnimeGenreSearch` and `MangaGenreSearch`.
+    - <b>[GetAnimeGenre]</b> Now accepts `AnimeGenreSearch` as a parameter.
+    - <b>[GetMangaGenre]</b> Now accepts `MangaGenreSearch` as a parameter.
+    - <b>[AnimeSearch]</b> `AnimeSearchConfig` now has property `Genres` of `AnimeGenreSearch` type (was `GenreSearch` before).
+    - <b>[MangaSearch]</b> `MangaSearchConfig` now has property `Genres` of `MangaGenreSearch` type (was `GenreSearch` before).
+
+## 23.06.2021 - Version 1.5.6
+
+- Features
+    - <b>[Validation]</b> Validation of input parameters of Enum types parameters most method are added for fail fast approach.
+- Fixes
+    - <b>[SearchManga]</b> Remove redundant page part during url building.
+
+## 01.04.2021 - Version 1.5.5
+
+- Fixes
+    - <b>[Animelist|Mangalist]</b> Fix building url for scenario with filter.
+
+## 14.12.2020 - Version 1.5.4
+
+- Fixes
+    - <b>[Seasons]</b> Extends available range for acceptable input year to <1000, 9999>.
+
+## 27.11.2020 - Version 1.5.3
+
+- Jikan.net now can be used with own instance of `HttpClient` targetting Jikan REST API. Read more [here](https://github.com/Ervie/jikan.net/wiki/Using-own-instance-of-Jikan).
+
+## 26.10.2020 - Version 1.5.2
 - Features
     - <b>[Validation]</b> Validation of input parameters for most method are added for fail fast approach. General rules
         - Methods using mal Id (e.g. `GetAnime()`) accept only number larger than 0.
