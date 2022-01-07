@@ -18,7 +18,7 @@ namespace JikanDotNet
 		/// Title of the anime.
 		/// </summary>
 		[JsonPropertyName("title")]
-		public AnimeTitle Title { get; set; }
+		public string Title { get; set; }
 
 		/// <summary>
 		/// Anime's image URL

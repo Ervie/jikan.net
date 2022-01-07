@@ -1,7 +1,6 @@
 ﻿using FluentAssertions;
 using FluentAssertions.Execution;
 using JikanDotNet.Exceptions;
-using System;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -23,7 +22,7 @@ namespace JikanDotNet.Tests.AnimeTests
 		public async Task GetAnimeEpisodeAsync_InvalidId_ShouldThrowValidationException(long malId)
 		{
 			// When
-			Func<Task<AnimeEpisode>> func = _jikan.Awaiting(x => x.GetAnimeEpisodeAsync(malId, 1));
+			var func = _jikan.Awaiting(x => x.GetAnimeEpisodeAsync(malId, 1));
 
 			// Then
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();
@@ -36,24 +35,24 @@ namespace JikanDotNet.Tests.AnimeTests
 		public async Task GetAnimeEpisodeAsync_ValidIdInvalidPage_ShouldThrowValidationException(int page)
 		{
 			// When
-			Func<Task<AnimeEpisode>> func = _jikan.Awaiting(x => x.GetAnimeEpisodeAsync(1, page));
+			var func = _jikan.Awaiting(x => x.GetAnimeEpisodeAsync(1, page));
 
 			// Then
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Fact]
-		public async Task GetAnimeEpisodeAsync_BebopIdFirstEpisode_ShouldParseCowboyBebopFirstEpisodeTitles()
+		public async Task GetAnimeEpisodeAsync_CardcaptorFirstirstEpisode_ShouldParseCardcaptorFirstEpisodeTitles()
 		{
 			// When
-			var bebopFirstEpisode = await _jikan.GetAnimeEpisodeAsync(1, 1);
+			var cardcaptorFirstEpisode = await _jikan.GetAnimeEpisodeAsync(232, 1);
 
 			// Then
 			using (new AssertionScope())
 			{
-				bebopFirstEpisode.Title.English.Should().Be("Sakura and the Strange Magical Book");
-				bebopFirstEpisode.Title.Romaji.Should().Be("Sakura to Fushigi na Mahou no Hon");
-				bebopFirstEpisode.Title.Japanese.Should().Be("さくらと不思議な魔法の本");
+				cardcaptorFirstEpisode.Data.Title.Should().Be("Sakura and the Strange Magical Book");
+				cardcaptorFirstEpisode.Data.TitleRomanji.Should().Be("Sakura to Fushigi na Mahou no Hon");
+				cardcaptorFirstEpisode.Data.TitleJapanese.Should().Be("さくらと不思議な魔法の本");
 			}
 		}
 
@@ -66,24 +65,20 @@ namespace JikanDotNet.Tests.AnimeTests
 			// Then
 			using (new AssertionScope())
 			{
-				cardcaptorFirstEpisode.Duration.Should().Be("00:25:00");
-				cardcaptorFirstEpisode.Filler.Should().BeFalse();
-				cardcaptorFirstEpisode.Recap.Should().BeFalse();
+				cardcaptorFirstEpisode.Data.Duration.Should().Be(1500);
+				cardcaptorFirstEpisode.Data.Filler.Should().BeFalse();
+				cardcaptorFirstEpisode.Data.Recap.Should().BeFalse();
 			}
 		}
 
 		[Fact]
-		public async Task GetAnimeEpisodeAsync_CardcaptorSakuraIdTenthEpisode_ShouldParseCardcaptorTentEpisodeBasicDataCrunchyroll()
+		public async Task GetAnimeEpisodeAsync_CardcaptorSakuraIdTenthEpisode_ShouldParseSynopsis()
 		{
 			// When
-			var cardcaptorTenthEpisode = await _jikan.GetAnimeEpisodeAsync(232, 1);
+			var cardcaptorTenthEpisode = await _jikan.GetAnimeEpisodeAsync(232, 10);
 
 			// Then
-			using (new AssertionScope())
-			{
-				cardcaptorTenthEpisode.Crunchyroll.Should().NotBeNull();
-				cardcaptorTenthEpisode.Crunchyroll.Url.Should().NotBeNullOrWhiteSpace();
-			}
+			cardcaptorTenthEpisode.Data.Synopsis.Should().StartWith("It's Sports Day at Sakura's school");
 		}
 	}
 }

@@ -8,7 +8,7 @@ namespace JikanDotNet
 	public class BaseJikanResponse<TResponse>
 	{
 		/// <summary>
-		/// Hash of the request.
+		/// Data of the request.
 		/// </summary>
 		[JsonPropertyName("data")]
 		public TResponse Data { get; set; }

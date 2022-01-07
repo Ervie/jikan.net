@@ -24,7 +24,7 @@ namespace JikanDotNet.Tests.AnimeTests
 		public async Task GetAnimeEpisodesAsync_InvalidId_ShouldThrowValidationException(long malId)
 		{
 			// When
-			Func<Task<AnimeEpisodes>> func = _jikan.Awaiting(x => x.GetAnimeEpisodesAsync(malId));
+			var func = _jikan.Awaiting(x => x.GetAnimeEpisodesAsync(malId));
 
 			// Then
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();
@@ -42,8 +42,8 @@ namespace JikanDotNet.Tests.AnimeTests
 			// Then
 			using (new AssertionScope())
 			{
-				bebop.EpisodeCollection.Should().HaveCount(26);
-				bebop.EpisodeCollection.First().Aired.Should().BeSameDateAs(expectedDate);
+				bebop.Data.Should().HaveCount(26);
+				bebop.Data.First().Aired.Should().BeSameDateAs(expectedDate);
 			}
 		}
 
@@ -54,12 +54,12 @@ namespace JikanDotNet.Tests.AnimeTests
 			var bebop = await _jikan.GetAnimeEpisodesAsync(1);
 
 			// Then
-			var firstEpisodeTitle = bebop.EpisodeCollection.First().Title;
+			var firstEpisodeTitle = bebop.Data.First();
 			using (new AssertionScope())
 			{
-				firstEpisodeTitle.English.Should().Be("Asteroid Blues");
-				firstEpisodeTitle.Romaji.Should().Be("Asteroid Blues");
-				firstEpisodeTitle.Japanese.Should().Be("アステロイド・ブルース");
+				firstEpisodeTitle.Title.Should().Be("Asteroid Blues");
+				firstEpisodeTitle.TitleRomanji.Should().StartWith("Asteroid Blues");
+				firstEpisodeTitle.TitleJapanese.Should().Be("アステロイド・ブルース");
 			}
 		}
 
@@ -70,12 +70,12 @@ namespace JikanDotNet.Tests.AnimeTests
 			var bebop = await _jikan.GetAnimeEpisodesAsync(1);
 
 			// Then
-			var firstEpisodeTitle = bebop.EpisodeCollection.First().Title;
+			var firstEpisodeTitle = bebop.Data.Last();
 			using (new AssertionScope())
 			{
-				firstEpisodeTitle.English.Should().Be("The Real Folk Blues (Part 2)");
-				firstEpisodeTitle.Romaji.Should().Be("The Real Folk Blues (Kouhen)");
-				firstEpisodeTitle.Japanese.Should().Be("ザ・リアル・フォークブルース（後編）");
+				firstEpisodeTitle.Title.Should().Be("The Real Folk Blues (Part 2)");
+				firstEpisodeTitle.TitleRomanji.Should().StartWith("The Real Folk Blues (Kouhen)");
+				firstEpisodeTitle.TitleJapanese.Should().Be("ザ・リアル・フォークブルース（後編）");
 			}
 		}
 
@@ -86,11 +86,11 @@ namespace JikanDotNet.Tests.AnimeTests
 			var cardcaptor = await _jikan.GetAnimeEpisodesAsync(232);
 
 			// Then
-			var firstEpisode = cardcaptor.EpisodeCollection.First();
+			var firstEpisode = cardcaptor.Data.First();
 			using (new AssertionScope())
 			{
-				firstEpisode.Url.Should().Be("https://myanimelist.net/forum/?topicid=42950");
-				firstEpisode.MalId.Should().Be(42950);
+				firstEpisode.Url.Should().Be("https://myanimelist.net/anime/232/Cardcaptor_Sakura/episode/1");
+				firstEpisode.MalId.Should().Be(1);
 			}
 		}
 	}

@@ -150,14 +150,14 @@ namespace JikanDotNet
 		/// Return list of episodes for anime with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
-		/// <param name="page">Indexx of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <param name="page">Index of page folding 100 records of top ranging (e.g. 1 will return first 100 records, 2 will return record from 101 to 200 etc.)</param>
 		/// <returns>List of episodes with details.</returns>
-		public async Task<AnimeEpisodes> GetAnimeEpisodesAsync(long id, int page)
+		public async Task<PaginatedJikanResponse<ICollection<AnimeEpisode>>> GetAnimeEpisodesAsync(long id, int page)
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
 			Guard.IsGreaterThanZero(page, nameof(page));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Anime, id.ToString(), AnimeExtension.Episodes.GetDescription(), page.ToString() };
-			return await ExecuteGetRequestAsync<AnimeEpisodes>(endpointParts);
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Anime, id.ToString(), AnimeExtension.Episodes.GetDescription(), "?page=" , page.ToString() };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<AnimeEpisode>>>(endpointParts);
 		}
 
 		/// <summary>
@@ -165,11 +165,11 @@ namespace JikanDotNet
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
 		/// <returns>List of episodes with details.</returns>
-		public async Task<AnimeEpisodes> GetAnimeEpisodesAsync(long id)
+		public async Task<PaginatedJikanResponse<ICollection<AnimeEpisode>>> GetAnimeEpisodesAsync(long id)
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Anime, id.ToString(), AnimeExtension.Episodes.GetDescription() };
-			return await ExecuteGetRequestAsync<AnimeEpisodes>(endpointParts);
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<AnimeEpisode>>>(endpointParts);
 		}
 
 		#endregion GetAnimeEpisodes
@@ -182,12 +182,12 @@ namespace JikanDotNet
 		/// <param name="animeId">MAL id of anime.</param>
 		/// <param name="episodeId">Id of episode.</param>
 		/// <returns>Details about specific episode.</returns>
-		public async Task<AnimeEpisode> GetAnimeEpisodeAsync(long animeId, int episodeId)
+		public async Task<BaseJikanResponse<AnimeEpisode>> GetAnimeEpisodeAsync(long animeId, int episodeId)
 		{
 			Guard.IsGreaterThanZero(animeId, nameof(animeId));
 			Guard.IsGreaterThanZero(episodeId, nameof(episodeId));
 			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Anime, animeId.ToString(), AnimeExtension.Episodes.GetDescription(), episodeId.ToString() };
-			return await ExecuteGetRequestAsync<AnimeEpisode>(endpointParts);
+			return await ExecuteGetRequestAsync<BaseJikanResponse<AnimeEpisode>>(endpointParts);
 		}
 
 		#endregion GetAnimeEpisode

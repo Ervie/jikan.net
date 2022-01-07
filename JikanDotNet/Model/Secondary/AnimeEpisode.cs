@@ -24,13 +24,25 @@ namespace JikanDotNet
 		/// Title of the episode.
 		/// </summary>
 		[JsonPropertyName("title")]
-		public AnimeTitle Title { get; set; }
+		public string Title { get; set; }
+
+		/// <summary>
+		/// Title of the anime in Japanese.
+		/// </summary>
+		[JsonPropertyName("title_japanese")]
+		public string TitleJapanese { get; set; }
+
+		/// <summary>
+		/// Title of the anime in romaji.
+		/// </summary>
+		[JsonPropertyName("title_romanji")]
+		public string TitleRomanji { get; set; }
 
 		/// <summary>
 		/// Episode's duration.
 		/// </summary>
 		[JsonPropertyName("duration")]
-		public string Duration { get; set; }
+		public int? Duration { get; set; }
 
 		/// <summary>
 		/// Date when episode aired at first.
@@ -57,9 +69,9 @@ namespace JikanDotNet
 		public string Synopsis { get; set; }
 
 		/// <summary>
-		/// URL to the Crunchyroll video.
+		/// URL to forum discussion
 		/// </summary>
-		[JsonPropertyName("crunchyroll")]
-		public AnimeCrunchyrollVideo Crunchyroll { get; set; }
+		[JsonPropertyName("forum_url")]
+		public string ForumUrl{ get; set; }
 	}
 }
