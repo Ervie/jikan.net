@@ -20,10 +20,16 @@ namespace JikanDotNet
 		Episodes,
 
 		/// <summary>
-		/// Characters and staff extension, return list of basic information about characters appearing in the anime.
+		/// Characters extension, return list of basic information about characters appearing in the anime.
 		/// </summary>
-		[Description("characters_staff")]
-		CharactersStaff,
+		[Description("characters")]
+		Characters,
+
+		/// <summary>
+		/// Staff extension, return list of basic information about staff working on the anime.
+		/// </summary>
+		[Description("staff")]
+		Staff,
 
 		/// <summary>
 		/// Pictures extension, return extra images of anime.

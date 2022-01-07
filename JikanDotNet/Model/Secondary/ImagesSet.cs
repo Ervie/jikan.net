@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace JikanDotNet.Model.Secondary
+namespace JikanDotNet
 {
 	/// <summary>
 	/// Set of images in various formats.

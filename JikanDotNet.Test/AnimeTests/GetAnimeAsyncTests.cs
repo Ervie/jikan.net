@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace JikanDotNet.AnimeTests
+namespace JikanDotNet.Tests.AnimeTests
 {
 	public class GetAnimeAsyncTests
 	{

@@ -1,7 +1,6 @@
 ﻿using FluentAssertions;
 using FluentAssertions.Execution;
 using JikanDotNet.Exceptions;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -21,56 +20,55 @@ namespace JikanDotNet.Tests.AnimeTests
 		[InlineData(long.MinValue)]
 		[InlineData(-1)]
 		[InlineData(0)]
-		public async Task GetAnimeCharactersStaffAsync_InvalidId_ShouldThrowValidationException(long malId)
+		public async Task GetAnimeCharactersAsync_InvalidId_ShouldThrowValidationException(long malId)
 		{
 			// When
-			Func<Task<AnimeCharactersStaff>> func = _jikan.Awaiting(x => x.GetAnimeCharactersStaffAsync(malId));
+			var func = _jikan.Awaiting(x => x.GetAnimeCharactersAsync(malId));
 
 			// Then
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Fact]
-		public async Task GetAnimeCharactersStaffAsync_BebopId_ShouldParseCowboyBebopCharactersAndStaff()
+		public async Task GetAnimeCharactersStaffAsync_BebopId_ShouldParseCowboyBebopCharacters()
 		{
 			// When
-			var bebop = await _jikan.GetAnimeCharactersStaffAsync(1);
+			var bebop = await _jikan.GetAnimeCharactersAsync(1);
 
 			// Then
+			bebop.Data.Should().Contain(x => x.Character.Name.Equals("Black, Jet"));
+		}
+
+		[Fact]
+		public async Task GetAnimeCharactersAsync_BebopId_ShouldParseJetBlackPictures()
+		{
+			// When
+			var bebop = await _jikan.GetAnimeCharactersAsync(1);
+
+			// Then
+			var jetBlack = bebop.Data.First(x => x.Character.Name.Equals("Black, Jet"));
 			using (new AssertionScope())
 			{
-				bebop.Characters.Should().Contain(x => x.Name.Equals("Black, Jet"));
-				bebop.Staff.Where(x => x.Role.Contains("Director") && x.Role.Contains("Script")).Select(x => x.Name).Should().Contain("Watanabe, Shinichiro");
+				jetBlack.Character.Images.WebP.SmallImageUrl.Should().NotBeNullOrEmpty();
+				jetBlack.Character.Images.WebP.ImageUrl.Should().NotBeNullOrEmpty();
+				jetBlack.Character.Images.JPG.ImageUrl.Should().NotBeNullOrEmpty();
 			}
 		}
 
 		[Fact]
-		public async Task GetAnimeCharactersStaffAsync_BebopId_ShouldParseJetBlackPictures()
+		public async Task GetAnimeCharactersAsync_BebopId_ShouldParseSpikeSpiegelVoiceActors()
 		{
 			// When
-			var bebop = await _jikan.GetAnimeCharactersStaffAsync(1);
+			var bebop = await _jikan.GetAnimeCharactersAsync(1);
 
 			// Then
-			var jetBlack = bebop.Characters.First(x => x.Name.Equals("Black, Jet"));
+			var spikeSpiegel = bebop.Data.First(x => x.Character.MalId.Equals(1));
 			using (new AssertionScope())
 			{
-				jetBlack.ImageURL.SmallImageUrl.Should().NotBeNullOrEmpty();
-				jetBlack.ImageURL.ImageUrl.Should().NotBeNullOrEmpty();
-			}
-		}
-
-		[Fact]
-		public async Task GetAnimeCharactersStaffAsync_BebopId_ShouldParseShinichiroWatanabePictures()
-		{
-			// When
-			var bebop = await _jikan.GetAnimeCharactersStaffAsync(1);
-
-			// Then
-			var shinichiroWatanabe = bebop.Staff.First(x => x.Name.Equals("Watanabe, Shinichiro"));
-			using (new AssertionScope())
-			{
-				shinichiroWatanabe.ImageURL.SmallImageUrl.Should().NotBeNullOrEmpty();
-				shinichiroWatanabe.ImageURL.ImageUrl.Should().NotBeNullOrEmpty();
+				spikeSpiegel.VoiceActors.Should().ContainSingle(x => x.Language.Equals("Japanese"));
+				spikeSpiegel.VoiceActors.Should().ContainSingle(x => x.Person.Name.Equals("Yamadera, Kouichi"));
+				spikeSpiegel.VoiceActors.Should().ContainSingle(x => x.Language.Equals("English"));
+				spikeSpiegel.VoiceActors.Should().ContainSingle(x => x.Person.Name.Equals("Blum, Steven"));
 			}
 		}
 	}

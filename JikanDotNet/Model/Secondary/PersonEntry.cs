@@ -3,9 +3,9 @@
 namespace JikanDotNet
 {
 	/// <summary>
-	/// Model class for anime/manga staff position.
+	/// Model for person under voice acting or staff role.
 	/// </summary>
-	public class CharacterEntry
+	public class PersonEntry
 	{
 		/// <summary>
 		/// ID associated with MyAnimeList.
@@ -14,19 +14,19 @@ namespace JikanDotNet
 		public long MalId { get; set; }
 
 		/// <summary>
-		/// Character's name.
+		/// Person's name.
 		/// </summary>
 		[JsonPropertyName("name")]
 		public string Name { get; set; }
 
 		/// <summary>
-		/// Url to character's main page.
+		/// Url to person main page.
 		/// </summary>
 		[JsonPropertyName("url")]
 		public string Url { get; set; }
 
 		/// <summary>
-		/// Character's set of images
+		/// Person's images set
 		/// </summary>
 		[JsonPropertyName("images")]
 		public ImagesSet Images { get; set; }

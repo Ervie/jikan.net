@@ -5,9 +5,9 @@ using JikanDotNet.Extensions;
 using JikanDotNet.Helpers;
 using JikanDotNet.Model;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace JikanDotNet
@@ -96,7 +96,7 @@ namespace JikanDotNet
 
 		#region Anime methods
 
-		#region GetAnime
+		#region GetAnimeAsync
 
 		/// <summary>
 		/// Return anime with given MAL id.
@@ -110,7 +110,39 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<BaseJikanResponse<Anime>>(endpointParts);
 		}
 
-		#endregion GetAnime
+		#endregion GetAnimeAsync
+
+		#region GetAnimeCharactersAsync
+
+		/// <summary>
+		/// Return collections of characters of anime with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <returns>Collections of characters of anime with given MAL id.</returns>
+		public async Task<BaseJikanResponse<ICollection<AnimeCharacter>>> GetAnimeCharactersAsync(long id)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Anime, id.ToString(), AnimeExtension.Characters.GetDescription() };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<AnimeCharacter>>>(endpointParts);
+		}
+
+		#endregion GetAnimeCharactersAsync
+
+		#region GetAnimeStaffAsync
+
+		/// <summary>
+		/// Return collections of characters of anime with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <returns>Collections of characters of anime with given MAL id.</returns>
+		public async Task<BaseJikanResponse<ICollection<AnimeStaffPosition>>> GetAnimeStaffAsync(long id)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Anime, id.ToString(), AnimeExtension.Staff.GetDescription() };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<AnimeStaffPosition>>>(endpointParts);
+		}
+
+		#endregion GetAnimeStaffAsync
 
 		#region GetAnimeEpisodes
 
@@ -159,22 +191,6 @@ namespace JikanDotNet
 		}
 
 		#endregion GetAnimeEpisode
-
-		#region GetAnimeCharactersStaff
-
-		/// <summary>
-		/// Return collections of characters and staff of anime with given MAL id.
-		/// </summary>
-		/// <param name="id">MAL id of anime.</param>
-		/// <returns>Collections of characters and staff of anime with given MAL id.</returns>
-		public async Task<AnimeCharactersStaff> GetAnimeCharactersStaffAsync(long id)
-		{
-			Guard.IsGreaterThanZero(id, nameof(id));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Anime, id.ToString(), AnimeExtension.CharactersStaff.GetDescription() };
-			return await ExecuteGetRequestAsync<AnimeCharactersStaff>(endpointParts);
-		}
-
-		#endregion GetAnimeCharactersStaff
 
 		#region GetAnimeGenre
 

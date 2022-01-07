@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace JikanDotNet
 {
@@ -8,15 +9,15 @@ namespace JikanDotNet
 	public class AnimeStaffPosition
 	{
 		/// <summary>
-		/// Anime associated with staff position.
+		/// Person details.
 		/// </summary>
-		[JsonPropertyName("anime")]
-		public MALImageSubItem Anime { get; set; }
+		[JsonPropertyName("person")]
+		public PersonEntry Person { get; set; }
 
 		/// <summary>
-		/// Position associated with staff position.
+		/// Positions associated with staff member.
 		/// </summary>
-		[JsonPropertyName("position")]
-		public string Position { get; set; }
+		[JsonPropertyName("positions")]
+		public ICollection<string> Position { get; set; }
 	}
 }

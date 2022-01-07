@@ -1,5 +1,4 @@
-﻿using JikanDotNet.Model.Secondary;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace JikanDotNet
@@ -86,7 +85,7 @@ namespace JikanDotNet
 		/// </summary>
 		[JsonPropertyName("airing")]
 		public bool Airing { get; set; }
-		
+
 		/// <summary>
 		/// Assiociative keys "from" and "to" which are alternative version of AiredString in ISO8601 format.
 		/// </summary>

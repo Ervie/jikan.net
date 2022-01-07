@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace JikanDotNet
 {
@@ -17,6 +19,28 @@ namespace JikanDotNet
 		/// <param name="id">MAL id of anime.</param>
 		/// <returns>Anime with given MAL id.</returns>
 		Task<BaseJikanResponse<Anime>> GetAnimeAsync(long id);
+
+		#region GetAnimeCharactersAsync
+
+		/// <summary>
+		/// Returns collections of characters of anime with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <returns>Collection of characters of anime with given MAL id.</returns>
+		Task<BaseJikanResponse<ICollection<AnimeCharacter>>> GetAnimeCharactersAsync(long id);
+
+		#endregion
+
+		#region GetAnimeStaffAsync
+
+		/// <summary>
+		/// Returns collections of staff of anime with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <returns>Collection of staff of anime with given MAL id.</returns>
+		Task<BaseJikanResponse<ICollection<AnimeStaffPosition>>> GetAnimeStaffAsync(long id);
+
+		#endregion
 
 		#endregion
 
@@ -51,16 +75,6 @@ namespace JikanDotNet
 
 		#endregion
 
-		#region GetAnimeCharactersStaff
-
-		/// <summary>
-		/// Returns collections of characters and staff of anime with given MAL id.
-		/// </summary>
-		/// <param name="id">MAL id of anime.</param>
-		/// <returns>Collections of characters and staff of anime with given MAL id.</returns>
-		Task<AnimeCharactersStaff> GetAnimeCharactersStaffAsync(long id);
-
-		#endregion
 
 		#region GetAnimePictures
 

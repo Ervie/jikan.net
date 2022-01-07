@@ -9,12 +9,12 @@ namespace JikanDotNet.Tests
 {
 	public class CustomEndpointTests
 	{
-		private bool _isV4CustomeEndpointReady = false;
+		private readonly bool _isV4CustomEndpointReady = false;
 
 		[SkippableFact]
 		public async Task JikanConstructor_DefaultUrl_ShouldParseCorrectly()
 		{
-			Skip.IfNot(_isV4CustomeEndpointReady);
+			Skip.IfNot(_isV4CustomEndpointReady);
 			// Given
 			var jikan = new Jikan(new JikanClientConfiguration { Endpoint = "https://api.jikan.moe/v4-alpha/" });
 
@@ -28,7 +28,7 @@ namespace JikanDotNet.Tests
 		[Fact]
 		public async Task JikanConstructor_CustomUrl_ShouldParseCorrectly()
 		{
-			Skip.IfNot(_isV4CustomeEndpointReady);
+			Skip.IfNot(_isV4CustomEndpointReady);
 			// Given
 			var jikan = new Jikan(new JikanClientConfiguration { Endpoint = "https://seiyuu.moe:8000/v4-alpha/" });
 
