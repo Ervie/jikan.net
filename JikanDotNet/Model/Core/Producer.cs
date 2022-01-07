@@ -12,7 +12,7 @@ namespace JikanDotNet
 		/// Metadata about producer.
 		/// </summary>
 		[JsonPropertyName("meta")]
-		public MALSubItem Metadata { get; set; }
+		public MalUrl Metadata { get; set; }
 
 		/// <summary>
 		/// List of anime published by producer.

@@ -18,6 +18,6 @@ namespace JikanDotNet
 		/// Collection of related anime of given relation type.
 		/// </summary>
 		[JsonPropertyName("items")]
-		public ICollection<MALSubItem> Items { get; set; }
+		public ICollection<MalUrl> Items { get; set; }
 	}
 }

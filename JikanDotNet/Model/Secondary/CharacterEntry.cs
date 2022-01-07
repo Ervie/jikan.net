@@ -30,7 +30,7 @@ namespace JikanDotNet
 		/// Character's set of images
 		/// </summary>
 		[JsonPropertyName("image")]
-		public Picture ImageURL { get; set; }
+		public Image ImageURL { get; set; }
 
 		/// <summary>
 		/// Character's role (e. g. "main", "supporting")

@@ -29,7 +29,7 @@ namespace JikanDotNet
 		/// Voice actor's image URL
 		/// </summary>
 		[JsonPropertyName("image_url")]
-		public Picture ImageURL { get; set; }
+		public Image ImageURL { get; set; }
 
 		/// <summary>
 		/// Voice actor's language.

@@ -200,8 +200,8 @@ namespace JikanDotNet.Tests
 		}
 
 		[Theory]
-		[InlineData((Seasons)int.MaxValue, null, null, null, null)]
-		[InlineData((Seasons)int.MinValue, null, null, null, null)]
+		[InlineData((Season)int.MaxValue, null, null, null, null)]
+		[InlineData((Season)int.MinValue, null, null, null, null)]
 		[InlineData(null, (UserListAnimeAiringStatus)int.MaxValue, null, null, null)]
 		[InlineData(null, (UserListAnimeAiringStatus)int.MinValue, null, null, null)]
 		[InlineData(null, null, (UserListAnimeSearchSortable)int.MaxValue, null, null)]
@@ -211,7 +211,7 @@ namespace JikanDotNet.Tests
 		[InlineData(null, null, UserListAnimeSearchSortable.Priority, null, (SortDirection)int.MaxValue)]
 		[InlineData(null, null, UserListAnimeSearchSortable.Priority, null, (SortDirection)int.MinValue)]
 		public async Task GetUserAnimeList_ErvelanWithConfigWithInvalidEnums_ShouldThrowValidationException(
-			Seasons? season,
+			Season? season,
 			UserListAnimeAiringStatus? airingStatus,
 			UserListAnimeSearchSortable? orderBy,
 			UserListAnimeSearchSortable? orderBy2,
@@ -221,7 +221,7 @@ namespace JikanDotNet.Tests
 			// Given
 			var searchConfig = new UserListAnimeSearchConfig()
 			{
-				Year = season.HasValue ? 2021 : default,
+				Year = season.HasValue ? 2022 : default,
 				Season = season.GetValueOrDefault(),
 				AiringStatus = airingStatus.GetValueOrDefault(),
 				OrderBy = orderBy.GetValueOrDefault(),
@@ -366,7 +366,7 @@ namespace JikanDotNet.Tests
 			using (new AssertionScope())
 			{
 				animeList.Should().NotBeNull();
-				animeList.Anime.First().Title.Should().Contain("Ginga");
+				animeList.Anime.First().Title.Should().Be("Ginga Eiyuu Densetsu");
 			}
 		}
 
@@ -441,7 +441,7 @@ namespace JikanDotNet.Tests
 			var searchConfig = new UserListAnimeSearchConfig()
 			{
 				Year = 2010,
-				Season = Seasons.Summer
+				Season = Season.Summer
 			};
 
 			// When

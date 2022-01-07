@@ -114,7 +114,7 @@ namespace JikanDotNet
 		/// Current publishing status of manga.
 		/// </summary>
 		[JsonPropertyName("publishing_status")]
-		public AiringStatus PublishingStatus { get; set; }
+		public AnimeAiringStatus PublishingStatus { get; set; }
 
 		/// <summary>
 		/// Current user's reading status of manga.

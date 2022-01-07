@@ -12,31 +12,13 @@ namespace JikanDotNet.Helpers
 		/// <summary>
 		/// Endpoint for SSL encrypted requests.
 		/// </summary>
-		public const string defaultEndpoint = "https://api.jikan.moe/v4-alpha/";
-		
-		/// <summary>
-		/// Constructor.
-		/// </summary>
-		static HttpProvider()
-		{
-		}
+		public const string defaultEndpoint = "https://api.jikan.moe/v4/";
 
 		/// <summary>
 		/// Get static HttpClient. Using default Jikan REST endpoint.
 		/// </summary>
 		/// <returns>Static HttpClient.</returns>
-		public static HttpClient GetHttpClient()
-		{
-			HttpClient Client = new HttpClient
-			{
-				BaseAddress = new Uri(defaultEndpoint)
-			};
-			Client.DefaultRequestHeaders.Accept.Clear();
-			Client.DefaultRequestHeaders.Accept.Add(
-				new MediaTypeWithQualityHeaderValue("text/html"));
-			
-			return Client;
-		}
+		public static HttpClient GetHttpClient() => GetHttpClient(new Uri(defaultEndpoint));
 
 		/// <summary>
 		/// Get static HttpClient. Using custom, user defined Jikan REST endpoint.
@@ -45,13 +27,12 @@ namespace JikanDotNet.Helpers
 		/// <returns>Static HttpClient.</returns>
 		public static HttpClient GetHttpClient(Uri endpoint)
 		{
-			HttpClient Client = new HttpClient
+			HttpClient Client = new()
 			{
 				BaseAddress = endpoint
 			};
 			Client.DefaultRequestHeaders.Accept.Clear();
-			Client.DefaultRequestHeaders.Accept.Add(
-				new MediaTypeWithQualityHeaderValue("text/html"));
+			Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/html"));
 			
 			return Client;
 		}

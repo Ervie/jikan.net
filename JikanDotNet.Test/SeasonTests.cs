@@ -29,19 +29,19 @@ namespace JikanDotNet.Tests
 		public async Task GetSeason_InvalidYear_ShouldThrowValidationException(int year)
 		{
 			// When
-			Func<Task<Season>> func = _jikan.Awaiting(x => x.GetSeason(year, Seasons.Fall));
+			Func<Task<AnimeSeason>> func = _jikan.Awaiting(x => x.GetSeason(year, Season.Fall));
 
 			// Then
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Theory]
-		[InlineData((Seasons) int.MaxValue)]
-		[InlineData((Seasons) int.MinValue)]
-		public async Task GetSeasons_InvalidSeasonValidYear_ShouldThrowValidationException(Seasons seasons)
+		[InlineData((Season) int.MaxValue)]
+		[InlineData((Season) int.MinValue)]
+		public async Task GetSeason_InvalidSeasonValidYear_ShouldThrowValidationException(Season Season)
 		{
 			// When
-			Func<Task<Season>> func = this._jikan.Awaiting(x=> x.GetSeason(2021,seasons));
+			Func<Task<AnimeSeason>> func = this._jikan.Awaiting(x=> x.GetSeason(2021,Season));
 
 			// Then
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();
@@ -55,7 +55,7 @@ namespace JikanDotNet.Tests
 		public async Task GetSeason_ValidYearNotExistingSeason_ShouldReturnSeasonWithNulls(int year)
 		{
 			// When
-			var season = await _jikan.GetSeason(year, Seasons.Winter);
+			var season = await _jikan.GetSeason(year, Season.Winter);
 
 			// Then
 			using (new AssertionScope())
@@ -70,7 +70,7 @@ namespace JikanDotNet.Tests
 		public async Task GetSeason_Winter2000_ShouldParseWinter2000()
 		{
 			// When 
-			var winter2000 = await _jikan.GetSeason(2000, Seasons.Winter);
+			var winter2000 = await _jikan.GetSeason(2000, Season.Winter);
 
 			// Then
 			var titles = winter2000.SeasonEntries.Select(x => x.Title);
@@ -85,7 +85,7 @@ namespace JikanDotNet.Tests
 		public async Task GetSeason_Spring1970_ShouldParseSpring1970()
 		{
 			// When 
-			var spring1970 = await _jikan.GetSeason(1970, Seasons.Spring);
+			var spring1970 = await _jikan.GetSeason(1970, Season.Spring);
 
 			// Then
 			spring1970.SeasonEntries.Should().HaveCount(17);
@@ -95,7 +95,7 @@ namespace JikanDotNet.Tests
 		public async Task GetSeason_Winter2017_ShouldParseYoujoSenki()
 		{
 			// When 
-			var winter2017 = await _jikan.GetSeason(2017, Seasons.Winter);
+			var winter2017 = await _jikan.GetSeason(2017, Season.Winter);
 
 			// Then
 			var youjoSenki = winter2017.SeasonEntries.FirstOrDefault(x => x.Title.Equals("Youjo Senki"));
@@ -128,7 +128,7 @@ namespace JikanDotNet.Tests
 		public async Task GetSeason_Spring1970_ShouldParseSpring1970ExtraInfo()
 		{
 			// When 
-			var spring1970 = await _jikan.GetSeason(1970, Seasons.Spring);
+			var spring1970 = await _jikan.GetSeason(1970, Season.Spring);
 
 			// Then
 			using (new AssertionScope())

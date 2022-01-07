@@ -1,6 +1,5 @@
-﻿using System.Text.Json.Serialization;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace JikanDotNet
 {
@@ -19,6 +18,6 @@ namespace JikanDotNet
 		/// Collection of available seasons in year to query.
 		/// </summary>
 		[JsonPropertyName("seasons")]
-		public ICollection<Seasons> Season { get; set; }
+		public ICollection<AnimeSeason> Season { get; set; }
 	}
 }

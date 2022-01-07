@@ -12,14 +12,14 @@ namespace JikanDotNet.Tests
 
 		public ExceptionsTests()
 		{
-			_jikan = new Jikan(new Config.JikanClientOptions { SuppressException = true });
+			_jikan = new Jikan(new Config.JikanClientConfiguration { SuppressException = true });
 		}
 
 		[Fact]
 		public void GetAnime_WrongIdDoNotSurpressExceptions_ShouldThrowJikanRequestExceptionGetAnime()
 		{
 			// When
-			Func<Task<Anime>> func = _jikan.Awaiting(x => x.GetAnimeAsync(2));
+			Func<Task<BaseJikanResponse<Anime>>> func = _jikan.Awaiting(x => x.GetAnimeAsync(2));
 
 			// Then
 			func.Should().ThrowExactlyAsync<JikanRequestException>();

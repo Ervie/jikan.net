@@ -51,11 +51,11 @@ namespace JikanDotNet.Tests.AnimeTests
 			var bebop = await _jikan.GetAnimeCharactersStaffAsync(1);
 
 			// Then
-			var jetBlack = bebop.Characters.First(x => x.Name.Equals("Black, Jet");
+			var jetBlack = bebop.Characters.First(x => x.Name.Equals("Black, Jet"));
 			using (new AssertionScope())
 			{
-				jetBlack.ImageURL.Small.Should().NotBeNullOrEmpty();
-				jetBlack.ImageURL.Default.Should().NotBeNullOrEmpty();
+				jetBlack.ImageURL.SmallImageUrl.Should().NotBeNullOrEmpty();
+				jetBlack.ImageURL.ImageUrl.Should().NotBeNullOrEmpty();
 			}
 		}
 
@@ -69,8 +69,8 @@ namespace JikanDotNet.Tests.AnimeTests
 			var shinichiroWatanabe = bebop.Staff.First(x => x.Name.Equals("Watanabe, Shinichiro"));
 			using (new AssertionScope())
 			{
-				shinichiroWatanabe.ImageURL.Small.Should().NotBeNullOrEmpty();
-				shinichiroWatanabe.ImageURL.Default.Should().NotBeNullOrEmpty();
+				shinichiroWatanabe.ImageURL.SmallImageUrl.Should().NotBeNullOrEmpty();
+				shinichiroWatanabe.ImageURL.ImageUrl.Should().NotBeNullOrEmpty();
 			}
 		}
 	}

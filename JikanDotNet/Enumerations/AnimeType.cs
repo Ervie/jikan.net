@@ -8,45 +8,45 @@ namespace JikanDotNet
 	public enum AnimeType
 	{
 		/// <summary>
-		/// Allow all types to be displayed in results.
-		/// </summary>
-		[Description("")]
-		EveryType,
-
-		/// <summary>
 		/// TV series.
 		/// </summary>
-		[Description("tv")]
+		[Description("TV")]
 		TV,
 
 		/// <summary>
 		/// Original video animation.
 		/// </summary>
-		[Description("ova")]
+		[Description("OVA")]
 		OVA,
 
 		/// <summary>
 		/// Feature-lenght movie.
 		/// </summary>
-		[Description("movie")]
+		[Description("Movie")]
 		Movie,
 
 		/// <summary>
 		/// A special episode.
 		/// </summary>
-		[Description("special")]
+		[Description("Special")]
 		Special,
 
 		/// <summary>
 		/// Original net animation.
 		/// </summary>
-		[Description("ona")]
+		[Description("ONA")]
 		ONA,
 
 		/// <summary>
 		/// Music video.
 		/// </summary>
-		[Description("music")]
-		Music
+		[Description("Music")]
+		Music,
+
+		/// <summary>
+		/// Allow all types to be displayed in results.
+		/// </summary>
+		[Description("")]
+		EveryType
 	}
 }

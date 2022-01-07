@@ -12,6 +12,6 @@ namespace JikanDotNet
 		/// Person's extra image URLs.
 		/// </summary>
 		[JsonPropertyName("pictures")]
-		public ICollection<Picture> Pictures { get; set; }
+		public ICollection<Image> Pictures { get; set; }
 	}
 }

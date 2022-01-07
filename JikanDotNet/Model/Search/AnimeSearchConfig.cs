@@ -16,7 +16,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Anime type of searched result;
 		/// </summary>
-		public AnimeType Type { get; set; }
+		public AnimeType Type { get; set; } = AnimeType.EveryType;
 
 		/// <summary>
 		/// Minimum score results (1-10).
@@ -26,7 +26,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Age rating.
 		/// </summary>
-		public AgeRating Rating { get; set; }
+		public AnimeAgeRating Rating { get; set; } = AnimeAgeRating.EveryRating;
 
 		/// <summary>
 		/// Current status.
@@ -74,7 +74,7 @@ namespace JikanDotNet
 		/// <returns>Query from current parameters for search request</returns>
 		public string ConfigToString()
 		{
-			StringBuilder builder = new StringBuilder();
+			StringBuilder builder = new();
 
 
 			if (Type != AnimeType.EveryType)
@@ -88,7 +88,7 @@ namespace JikanDotNet
 				builder.Append($"&score={Score}");
 			}
 
-			if (Rating != AgeRating.EveryRating)
+			if (Rating != AnimeAgeRating.EveryRating)
 			{
 				Guard.IsValidEnum(Rating, nameof(Rating));
 				builder.Append($"&rated={Rating.GetDescription()}");

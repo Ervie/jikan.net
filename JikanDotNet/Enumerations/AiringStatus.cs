@@ -8,12 +8,6 @@ namespace JikanDotNet
 	public enum AiringStatus
 	{
 		/// <summary>
-		/// Allow all statuses to be displayed in results.
-		/// </summary>
-		[Description("")]
-		EveryStatus,
-
-		/// <summary>
 		/// Airing (anime) or publishing (manga) status.
 		/// </summary>
 		[Description("airing")]
@@ -29,6 +23,12 @@ namespace JikanDotNet
 		/// Upcoming status.
 		/// </summary>
 		[Description("upcoming")]
-		Upcoming
+		Upcoming,
+
+		/// <summary>
+		/// Allow all statuses to be displayed in results.
+		/// </summary>
+		[Description("")]
+		EveryStatus
 	}
 }

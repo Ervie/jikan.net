@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
-namespace JikanDotNet.Model.Secondary
+namespace JikanDotNet
 {
 	/// <summary>
-	/// Anime trailer  model class.
+	/// Anime trailer model class.
 	/// </summary>
 	public class AnimeTrailer
 	{
@@ -14,7 +11,7 @@ namespace JikanDotNet.Model.Secondary
 		/// ID associated with Youtube.
 		/// </summary>
 		[JsonPropertyName("youtube_id")]
-		public string YoutubeUrl { get; set; }
+		public string YoutubeId { get; set; }
 
 		/// <summary>
 		/// Url to the video.
@@ -29,9 +26,9 @@ namespace JikanDotNet.Model.Secondary
 		public string EmbedUrl { get; set; }
 
 		/// <summary>
-		/// Set of images related to the trailer.
+		/// Image related to the trailer in various resolutions.
 		/// </summary>
 		[JsonPropertyName("images")]
-		public Picture Images { get; set; }
+		public Image Image { get; set; }
 	}
 }

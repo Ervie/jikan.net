@@ -5,14 +5,8 @@ namespace JikanDotNet
 	/// <summary>
 	/// Age rating for anime/manga (search config).
 	/// </summary>
-	public enum AgeRating
+	public enum AnimeAgeRating
 	{
-		/// <summary>
-		/// All ages.
-		/// </summary>
-		[Description("")]
-		EveryRating,
-
 		/// <summary>
 		/// All ages.
 		/// </summary>
@@ -47,6 +41,12 @@ namespace JikanDotNet
 		/// Adult (Hentai).
 		/// </summary>
 		[Description("rx")]
-		RX
+		RX,
+
+		/// <summary>
+		/// All ages.
+		/// </summary>
+		[Description("")]
+		EveryRating
 	}
 }

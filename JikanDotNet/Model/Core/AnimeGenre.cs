@@ -12,7 +12,7 @@ namespace JikanDotNet
 		/// Metadata about genre.
 		/// </summary>
 		[JsonPropertyName("mal_url")]
-		public MALSubItem Metadata { get; set; }
+		public MalUrl Metadata { get; set; }
 
 		/// <summary>
 		/// Total count of anime with assigned

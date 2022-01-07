@@ -12,7 +12,7 @@ namespace JikanDotNet
 		/// Metadata about updated manga/anime.
 		/// </summary>
 		[JsonPropertyName("meta")]
-		public MALSubItem Metadata { get; set; }
+		public MalUrl Metadata { get; set; }
 
 		/// <summary>
 		/// New value for watched episodes/read chapters.

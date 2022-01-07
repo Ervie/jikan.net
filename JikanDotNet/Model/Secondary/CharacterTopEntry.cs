@@ -55,12 +55,12 @@ namespace JikanDotNet
 		/// Character's animeography.
 		/// </summary>
 		[JsonPropertyName("animeography")]
-		public ICollection<MALSubItem> Animeography { get; set; }
+		public ICollection<MalUrl> Animeography { get; set; }
 
 		/// <summary>
 		/// Character's mangaography.
 		/// </summary>
 		[JsonPropertyName("mangaography")]
-		public ICollection<MALSubItem> Mangaography { get; set; }
+		public ICollection<MalUrl> Mangaography { get; set; }
 	}
 }

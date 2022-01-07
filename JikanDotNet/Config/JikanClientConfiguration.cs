@@ -1,6 +1,9 @@
 ﻿namespace JikanDotNet.Config
 {
-	public class JikanClientOptions
+	/// <summary>
+	/// Object containing information of client configuration.
+	/// </summary>
+	public class JikanClientConfiguration
 	{
 		/// <summary>
 		/// Should exception be thrown in case of failed request.

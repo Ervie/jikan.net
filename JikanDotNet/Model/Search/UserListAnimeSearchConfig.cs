@@ -48,7 +48,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Filter anime from a season (require year).
 		/// </summary>
-		public Seasons Season { get; set; }
+		public Season Season { get; set; }
 
 		/// <summary>
 		/// Filter Anime with a status.
@@ -61,7 +61,7 @@ namespace JikanDotNet
 		/// <returns>Query from current parameters for search request</returns>
 		public string ConfigToString()
 		{
-			StringBuilder builder = new StringBuilder();
+			StringBuilder builder = new();
 
 			if (!string.IsNullOrWhiteSpace(Query))
 			{

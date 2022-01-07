@@ -12,7 +12,7 @@ namespace JikanDotNet
 		/// Metadata about magazine..
 		/// </summary>
 		[JsonPropertyName("meta")]
-		public MALSubItem Metadata { get; set; }
+		public MalUrl Metadata { get; set; }
 
 		/// <summary>
 		/// List of manga published in magazine.

@@ -30,7 +30,7 @@ namespace JikanDotNet
 		/// Staff's images set.
 		/// </summary>
 		[JsonPropertyName("image")]
-		public Picture ImageURL { get; set; }
+		public Image ImageURL { get; set; }
 
 		/// <summary>
 		/// Role associated with staff position.

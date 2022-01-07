@@ -7,7 +7,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Anime model class.
 	/// </summary>
-	public class Anime : BaseJikanRequest
+	public class Anime
 	{
 		/// <summary>
 		/// ID associated with MyAnimeList.
@@ -20,6 +20,12 @@ namespace JikanDotNet
 		/// </summary>
 		[JsonPropertyName("url")]
 		public string Url { get; set; }
+
+		/// <summary>
+		/// Anime's images in various formats.
+		/// </summary>
+		[JsonPropertyName("images")]
+		public ImagesSet Images { get; set; }
 
 		/// <summary>
 		/// Anime's trailer.
@@ -52,12 +58,6 @@ namespace JikanDotNet
 		public ICollection<string> TitleSynonyms { get; set; }
 
 		/// <summary>
-		/// Anime's image URL
-		/// </summary>
-		[JsonPropertyName("image_url")]
-		public string ImageURL { get; set; }
-
-		/// <summary>
 		/// Anime type (e. g. "TV", "Movie").
 		/// </summary>
 		[JsonPropertyName("type")]
@@ -76,16 +76,10 @@ namespace JikanDotNet
 		public int? Episodes { get; set; }
 
 		/// <summary>
-		/// Anime's status (e. g. "Airing").
+		/// Anime's airing status (e. g. "Currently Airing").
 		/// </summary>
 		[JsonPropertyName("status")]
 		public string Status { get; set; }
-
-		/// <summary>
-		/// Anime's images in various formats.
-		/// </summary>
-		[JsonPropertyName("images")]
-		public PictureSet Images { get; set; }
 
 		/// <summary>
 		/// Is anime currently airing.
@@ -115,7 +109,7 @@ namespace JikanDotNet
 		/// Anime's score on MyAnimeList up to 2 decimal places.
 		/// </summary>
 		[JsonPropertyName("score")]
-		public float? Score { get; set; }
+		public double? Score { get; set; }
 
 		/// <summary>
 		/// Number of people the anime has been scored by.
@@ -160,57 +154,63 @@ namespace JikanDotNet
 		public string Background { get; set; }
 
 		/// <summary>
-		/// Season and year the anime premiered.
+		/// Season of the year the anime premiered.
 		/// </summary>
-		[JsonPropertyName("premiered")]
-		public string Premiered { get; set; }
+		[JsonPropertyName("season")]
+		public Season? Season { get; set; }
+
+		/// <summary>
+		/// Year the anime premiered.
+		/// </summary>
+		[JsonPropertyName("year")]
+		public int? Year { get; set; }
 
 		/// <summary>
 		/// Anime broadcast day and timings (usually JST).
 		/// </summary>
 		[JsonPropertyName("broadcast")]
-		public string Broadcast { get; set; }
-
-		/// <summary>
-		/// Anime's related items (anime, manga, spin offs, etc.)
-		/// </summary>
-		[JsonPropertyName("related")]
-		public ICollection<RelatedAnime> Related { get; set; }
+		public AnimeBroadcast Broadcast { get; set; }
 
 		/// <summary>
 		/// Anime's producers numerically indexed with array values.
 		/// </summary>
 		[JsonPropertyName("producers")]
-		public ICollection<MALSubItem> Producers { get; set; }
+		public ICollection<MalUrl> Producers { get; set; }
 
 		/// <summary>
 		/// Anime's licensors numerically indexed with array values.
 		/// </summary>
 		[JsonPropertyName("licensors")]
-		public ICollection<MALSubItem> Licensors { get; set; }
+		public ICollection<MalUrl> Licensors { get; set; }
 
 		/// <summary>
 		/// Anime's studio(s) numerically indexed with array values.
 		/// </summary>
 		[JsonPropertyName("studios")]
-		public ICollection<MALSubItem> Studios { get; set; }
+		public ICollection<MalUrl> Studios { get; set; }
 
 		/// <summary>
 		/// Anime's genres numerically indexed with array values.
 		/// </summary>
 		[JsonPropertyName("genres")]
-		public ICollection<MALSubItem> Genres { get; set; }
+		public ICollection<MalUrl> Genres { get; set; }
 
 		/// <summary>
-		/// Anime's opening themes numerically indexed with array values.
+		/// Explicit genres
 		/// </summary>
-		[JsonPropertyName("opening_themes")]
-		public ICollection<string> OpeningTheme { get; set; }
+		[JsonPropertyName("explicit_genres")]
+		public ICollection<MalUrl> ExplicitGenres { get; set; }
 
 		/// <summary>
-		/// Anime's ending themes numerically indexed with array values.
+		/// Anime's themes
 		/// </summary>
-		[JsonPropertyName("ending_themes")]
-		public ICollection<string> EndingTheme { get; set; }
+		[JsonPropertyName("themes")]
+		public ICollection<MalUrl> Themes { get; set; }
+
+		/// <summary>
+		/// Anime's demographics
+		/// </summary>
+		[JsonPropertyName("demographics")]
+		public ICollection<MalUrl> Demographics { get; set; }
 	}
 }

@@ -24,7 +24,7 @@ namespace JikanDotNet.AnimeTests
 		public async Task GetAnimeAsync_InvalidId_ShouldThrowValidationException(long malId)
 		{
 			// When
-			Func<Task<Anime>> func = _jikan.Awaiting(x => x.GetAnimeAsync(malId));
+			Func<Task<BaseJikanResponse<Anime>>> func = _jikan.Awaiting(x => x.GetAnimeAsync(malId));
 
 			// Then
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();
@@ -50,7 +50,7 @@ namespace JikanDotNet.AnimeTests
 		public async Task GetAnimeAsync_WrongId_ShouldThrowException(long malId)
 		{
 			// When
-			Func<Task<Anime>> func = _jikan.Awaiting(x => x.GetAnimeAsync(malId));
+			Func<Task<BaseJikanResponse<Anime>>> func = _jikan.Awaiting(x => x.GetAnimeAsync(malId));
 
 			// Then
 			await func.Should().ThrowExactlyAsync<JikanRequestException>();
@@ -63,7 +63,7 @@ namespace JikanDotNet.AnimeTests
 			var gundamAnime = await _jikan.GetAnimeAsync(80);
 
 			// Then
-			gundamAnime.Title.Should().Be("Mobile Suit Gundam");
+			gundamAnime.Data.Title.Should().Be("Mobile Suit Gundam");
 		}
 
 		[Fact]
@@ -73,11 +73,11 @@ namespace JikanDotNet.AnimeTests
 			var bebopAnime = await _jikan.GetAnimeAsync(1);
 
 			// Then
-			bebopAnime.Title.Should().Be("Cowboy Bebop");
+			bebopAnime.Data.Title.Should().Be("Cowboy Bebop");
 		}
 
 		[Fact]
-		public async Task GetAnimeAsync_BebopId_ShouldParseCowboyBebopPictures()
+		public async Task GetAnimeAsync_BebopId_ShouldParseCowboyBebopImages()
 		{
 			// When
 			var bebopAnime = await _jikan.GetAnimeAsync(1);
@@ -85,8 +85,12 @@ namespace JikanDotNet.AnimeTests
 			// Then
 			using (new AssertionScope())
 			{
-				bebopAnime.Images.JPG.Should().HaveCount(3);
-				bebopAnime.Images.WebP.Should().HaveCount(3);
+				bebopAnime.Data.Images.JPG.ImageUrl.Should().NotBeNullOrEmpty();
+				bebopAnime.Data.Images.JPG.SmallImageUrl.Should().NotBeNullOrEmpty();
+				bebopAnime.Data.Images.JPG.LargeImageUrl.Should().NotBeNullOrEmpty();
+				bebopAnime.Data.Images.WebP.ImageUrl.Should().NotBeNullOrEmpty();
+				bebopAnime.Data.Images.WebP.SmallImageUrl.Should().NotBeNullOrEmpty();
+				bebopAnime.Data.Images.WebP.LargeImageUrl.Should().NotBeNullOrEmpty();
 			}
 		}
 
@@ -99,87 +103,14 @@ namespace JikanDotNet.AnimeTests
 			// Then
 			using (new AssertionScope())
 			{
-				bebopAnime.Trailer.Should().NotBeNull();
-				bebopAnime.Trailer.YoutubeUrl.Should().NotBeNullOrWhiteSpace();
-				bebopAnime.Trailer.Url.Should().NotBeNullOrWhiteSpace();
-				bebopAnime.Trailer.EmbedUrl.Should().NotBeNullOrWhiteSpace();
-				bebopAnime.Trailer.Images.Small.Should().NotBeNullOrWhiteSpace();
-				bebopAnime.Trailer.Images.Large.Should().NotBeNullOrWhiteSpace();
-				bebopAnime.Trailer.Images.Medium.Should().NotBeNullOrWhiteSpace();
-				bebopAnime.Trailer.Images.Maximum.Should().NotBeNullOrWhiteSpace();
-			}
-		}
-
-		[Fact]
-		public async Task GetAnimeAsync_BebopId_ShouldParseCowboyBebopRelatedAnimeTypes()
-		{
-			// When
-			var bebopAnime = await _jikan.GetAnimeAsync(1);
-
-			// Then
-			bebopAnime.Related.Should().HaveCount(2);
-		}
-
-		[Fact]
-		public async Task GetAnimeAsync_BebopId_ShouldParseCowboyBebopRelatedAnimeSummaries()
-		{
-			// When
-			var bebopAnime = await _jikan.GetAnimeAsync(1);
-
-			// Then
-			var relatedAnimeSummaries = bebopAnime.Related.Where(x => x.Relation.Equals("Summaries")).First();
-			relatedAnimeSummaries.Items.Should().ContainSingle();
-		}
-
-		[Fact]
-		public async Task GetAnimeAsync_BebopId_ShouldParseCowboyBebopRelatedAnimeAdaptations()
-		{
-			// When
-			var bebopAnime = await _jikan.GetAnimeAsync(1);
-
-			// Then
-			var relatedAnimeAdaptations = bebopAnime.Related.Where(x => x.Relation.Equals("Adaptations")).First();
-			relatedAnimeAdaptations.Items.Should().ContainSingle();
-		}
-
-		[Fact]
-		public async Task GetAnimeAsync_FSNId_ShouldParseFateStayNightAlternativeVersions()
-		{
-			// When
-			var fsnAnime = await _jikan.GetAnimeAsync(356);
-
-			// Then
-			var relatedAnimeAlternativeVersion = fsnAnime.Related.Where(x => x.Relation.Equals("Alternative Version")).First();
-			relatedAnimeAlternativeVersion.Items.Should().ContainSingle();
-		}
-
-		[Fact]
-		public async Task GetAnimeAsync_FSNReproductionId_ShouldParseFateStayNightReproductionFullStories()
-		{
-			// When
-			var fsnAnime = await _jikan.GetAnimeAsync(7559);
-
-			// Then
-			var relatedAnimeFullVersions = fsnAnime.Related.Where(x => x.Relation.Equals("Full Story")).First();
-			using (new AssertionScope())
-			{
-				relatedAnimeFullVersions.Items.Should().ContainSingle();
-				relatedAnimeFullVersions.Items.First().Name.Should().Be("Fate/stay night");
-			}
-		}
-
-		[Fact]
-		public async Task GetAnimeAsync_KamiNomiId_ShouldParseKamiNomiParentStories()
-		{
-			// When
-			var kamiNomi = await _jikan.GetAnimeAsync(17725);
-
-			// Then
-			var relatedAnimeParentStories = kamiNomi.Related.Where(x => x.Relation.Equals("Parent Story")).First();
-			using (new AssertionScope())
-			{
-				relatedAnimeParentStories.Items.Should().ContainSingle();
-				relatedAnimeParentStories.Items.First().Name.Should().Be("Kami nomi zo Shiru Sekai");
+				bebopAnime.Data.Trailer.Should().NotBeNull();
+				bebopAnime.Data.Trailer.YoutubeId.Should().NotBeNullOrWhiteSpace();
+				bebopAnime.Data.Trailer.Url.Should().NotBeNullOrWhiteSpace();
+				bebopAnime.Data.Trailer.EmbedUrl.Should().NotBeNullOrWhiteSpace();
+				bebopAnime.Data.Trailer.Image.SmallImageUrl.Should().NotBeNullOrWhiteSpace();
+				bebopAnime.Data.Trailer.Image.LargeImageUrl.Should().NotBeNullOrWhiteSpace();
+				bebopAnime.Data.Trailer.Image.MediumImageUrl.Should().NotBeNullOrWhiteSpace();
+				bebopAnime.Data.Trailer.Image.MaximumImageUrl.Should().NotBeNullOrWhiteSpace();
 			}
 		}
 
@@ -192,13 +123,17 @@ namespace JikanDotNet.AnimeTests
 			// Then
 			using (new AssertionScope())
 			{
-				cardcaptor.Episodes.Should().Be(70);
-				cardcaptor.Type.Should().Be("TV");
-				cardcaptor.Premiered.Should().Be("Spring 1998");
-				cardcaptor.Duration.Should().Be("25 min per ep");
-				cardcaptor.Rating.Should().Be("PG - Children");
-				cardcaptor.Broadcast.Should().Be("Tuesdays at 18:00 (JST)");
-				cardcaptor.Source.Should().Be("Manga");
+				cardcaptor.Data.Episodes.Should().Be(70);
+				cardcaptor.Data.Type.Should().Be("TV");
+				cardcaptor.Data.Year.Should().Be(1998);
+				cardcaptor.Data.Season.Should().Be(Season.Spring);
+				cardcaptor.Data.Duration.Should().Be("25 min per ep");
+				cardcaptor.Data.Rating.Should().Be("PG - Children");
+				cardcaptor.Data.Broadcast.Day.Should().Be("Tuesdays");
+				cardcaptor.Data.Broadcast.String.Should().Be("Tuesdays at 18:00 (JST)");
+				cardcaptor.Data.Broadcast.Time.Should().Be("18:00");
+				cardcaptor.Data.Broadcast.Timezone.Should().Be("Asia/Tokyo");
+				cardcaptor.Data.Source.Should().Be("Manga");
 			}
 		}
 
@@ -211,25 +146,14 @@ namespace JikanDotNet.AnimeTests
 			// Then
 			using (new AssertionScope())
 			{
-				akiraAnime.Producers.Should().HaveCount(3);
-				akiraAnime.Licensors.Should().HaveCount(3);
-				akiraAnime.Studios.Should().ContainSingle();
-				akiraAnime.Genres.Should().HaveCount(7);
-				akiraAnime.Licensors.First().ToString().Should().Be("Funimation");
-				akiraAnime.Studios.First().ToString().Should().Be("Tokyo Movie Shinsha");
-				akiraAnime.Genres.First().ToString().Should().Be("Action");
+				akiraAnime.Data.Producers.Should().HaveCount(3);
+				akiraAnime.Data.Licensors.Should().HaveCount(3);
+				akiraAnime.Data.Studios.Should().ContainSingle();
+				akiraAnime.Data.Genres.Should().HaveCount(5);
+				akiraAnime.Data.Licensors.First().ToString().Should().Be("Funimation");
+				akiraAnime.Data.Studios.First().ToString().Should().Be("Tokyo Movie Shinsha");
+				akiraAnime.Data.Genres.First().ToString().Should().Be("Action");
 			}
-		}
-
-		[Fact]
-		public async Task GetAnimeAsync_KeyTheMetalIdolId_ShouldParseAnimeWithNoRelatedAdaptations()
-		{
-			// Given
-			var returnedAnime = await _jikan.GetAnimeAsync(1457);
-
-			// When
-			var relatedAnimeFirstAdaptation = returnedAnime.Related.Where(x => x.Relation.Equals("Adaptations")).FirstOrDefault();
-			relatedAnimeFirstAdaptation.Should().BeNull();
 		}
 	}
 }

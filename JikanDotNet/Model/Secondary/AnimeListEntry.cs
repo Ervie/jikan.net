@@ -132,7 +132,7 @@ namespace JikanDotNet
 		/// Current airing status of anime.
 		/// </summary>
 		[JsonPropertyName("airing_status")]
-		public AiringStatus AiringStatus { get; set; }
+		public AnimeAiringStatus AiringStatus { get; set; }
 
 		/// <summary>
 		/// Current user's watching status of anime.

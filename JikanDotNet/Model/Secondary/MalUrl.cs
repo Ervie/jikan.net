@@ -5,7 +5,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Model class representing sub item on MyAnimeList without image.
 	/// </summary>
-	public class MALSubItem
+	public class MalUrl
 	{
 		/// <summary>
 		/// ID associated with MyAnimeList.
@@ -14,7 +14,7 @@ namespace JikanDotNet
 		public long MalId { get; set; }
 
 		/// <summary>
-		/// Item type (e. g. "anime", "manga").
+		/// Type of resource
 		/// </summary>
 		[JsonPropertyName("type")]
 		public string Type { get; set; }
@@ -26,7 +26,7 @@ namespace JikanDotNet
 		public string Url { get; set; }
 
 		/// <summary>
-		/// Title of the item
+		/// Title/Name of the item
 		/// </summary>
 		[JsonPropertyName("name")]
 		public string Name { get; set; }

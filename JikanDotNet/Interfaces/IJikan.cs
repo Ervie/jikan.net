@@ -9,14 +9,14 @@ namespace JikanDotNet
 	{
 		#region Anime requests
 
-		#region GetAnime
+		#region GetAnimeAsync
 
 		/// <summary>
 		/// Returns anime with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
 		/// <returns>Anime with given MAL id.</returns>
-		Task<Anime> GetAnimeAsync(long id);
+		Task<BaseJikanResponse<Anime>> GetAnimeAsync(long id);
 
 		#endregion
 
@@ -369,7 +369,7 @@ namespace JikanDotNet
 		/// Returns current season preview.
 		/// </summary>
 		/// <returns>Current season preview.</returns>
-		Task<Season> GetSeason();
+		Task<AnimeSeason> GetSeason();
 
 		/// <summary>
 		/// Returns season preview.
@@ -377,14 +377,14 @@ namespace JikanDotNet
 		/// <param name="year">Year of selected season.</param>
 		/// <param name="season">Selected season.</param>
 		/// <returns>Season preview.</returns>
-		Task<Season> GetSeason(int year, Seasons season);
+		Task<AnimeSeason> GetSeason(int year, Season season);
 
 		#endregion
 
 		#region GetSeasonArchive
 
 		/// <summary>
-		/// Returns list of availaible season to query with <see cref="GetSeason(int, Seasons)"/>
+		/// Returns list of availaible season to query with <see cref="GetSeason(int, Season)"/>
 		/// </summary>
 		/// <returns></returns>
 		Task<SeasonArchives> GetSeasonArchive();
@@ -397,7 +397,7 @@ namespace JikanDotNet
 		/// Return season preview for anime with undefined airing season (marked as "Later" on MAL).
 		/// </summary>
 		/// <returns>Season preview for anime with undefined airing date.</returns>
-		Task<Season> GetSeasonLater();
+		Task<AnimeSeason> GetSeasonLater();
 
 		#endregion
 

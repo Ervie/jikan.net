@@ -362,8 +362,8 @@ namespace JikanDotNet.Tests
 		[Theory]
 		[InlineData((AiringStatus)int.MaxValue, null, null, null, null, null)]
 		[InlineData((AiringStatus)int.MinValue, null, null, null, null, null)]
-		[InlineData(null, (AgeRating)int.MaxValue, null, null, null, null)]
-		[InlineData(null, (AgeRating)int.MinValue, null, null, null, null)]
+		[InlineData(null, (AnimeAgeRating)int.MaxValue, null, null, null, null)]
+		[InlineData(null, (AnimeAgeRating)int.MinValue, null, null, null, null)]
 		[InlineData(null, null, (AnimeType)int.MaxValue, null, null, null)]
 		[InlineData(null, null, (AnimeType)int.MinValue, null, null, null)]
 		[InlineData(null, null, null, (AnimeSearchSortable)int.MaxValue, null, null)]
@@ -374,7 +374,7 @@ namespace JikanDotNet.Tests
 		[InlineData(null, null, null, null, null, (AnimeGenreSearch)int.MinValue)]
 		public async Task SearchAnime_EmptyQueryWithConfigWithInvalidEnums_ShouldThrowValidationException(
 			AiringStatus? airingStatus,
-			AgeRating? rating,
+			AnimeAgeRating? rating,
 			AnimeType? mangaType,
 			AnimeSearchSortable? orderBy,
 			SortDirection? sortDirection,

@@ -7,7 +7,7 @@ namespace JikanDotNet
 	/// Enumeration representing seasons of year.
 	/// </summary>
 	[JsonConverter(typeof(JsonStringEnumConverter))]
-	public enum Seasons
+	public enum Season
 	{
 		/// <summary>
 		/// Spring season.

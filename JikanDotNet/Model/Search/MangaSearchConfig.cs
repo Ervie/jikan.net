@@ -26,7 +26,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Age rating.
 		/// </summary>
-		public AgeRating Rating { get; set; }
+		public AnimeAgeRating Rating { get; set; } = AnimeAgeRating.EveryRating;
 
 		/// <summary>
 		/// Current status.
@@ -74,7 +74,7 @@ namespace JikanDotNet
 		/// <returns>Query from current parameters for search request</returns>
 		public string ConfigToString()
 		{
-			StringBuilder builder = new StringBuilder();
+			StringBuilder builder = new();
 
 			if (Type != MangaType.EveryType)
 			{
@@ -87,7 +87,7 @@ namespace JikanDotNet
 				builder.Append($"&score={Score}");
 			}
 
-			if (Rating != AgeRating.EveryRating)
+			if (Rating != AnimeAgeRating.EveryRating)
 			{
 				Guard.IsValidEnum(Rating, nameof(Rating));
 				builder.Append($"&rated={Rating.GetDescription()}");
