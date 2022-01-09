@@ -144,7 +144,7 @@ namespace JikanDotNet
 
 		#endregion GetAnimeStaffAsync
 
-		#region GetAnimeEpisodes
+		#region GetAnimeEpisodesAsync
 
 		/// <summary>
 		/// Return list of episodes for anime with given MAL id.
@@ -156,7 +156,7 @@ namespace JikanDotNet
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
 			Guard.IsGreaterThanZero(page, nameof(page));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Anime, id.ToString(), AnimeExtension.Episodes.GetDescription(), "?page=" , page.ToString() };
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Anime, id.ToString(), AnimeExtension.Episodes.GetDescription() + $"?page={page}" };
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<AnimeEpisode>>>(endpointParts);
 		}
 
@@ -172,9 +172,9 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<AnimeEpisode>>>(endpointParts);
 		}
 
-		#endregion GetAnimeEpisodes
+		#endregion GetAnimeEpisodesAsync
 
-		#region GetAnimeEpisode
+		#region GetAnimeEpisodeAsync
 
 		/// <summary>
 		/// Returns details about specific episode.
@@ -190,7 +190,37 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<BaseJikanResponse<AnimeEpisode>>(endpointParts);
 		}
 
-		#endregion GetAnimeEpisode
+		#endregion GetAnimeEpisodeAsync
+
+		#region GetAnimeNewsAsync
+
+		/// <summary>
+		/// Return collections of news related to anime with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <returns>Collections of news related to anime with given MAL id.</returns>
+		public async Task<PaginatedJikanResponse<ICollection<News>>> GetAnimeNewsAsync(long id)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Anime, id.ToString(), AnimeExtension.News.GetDescription() };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<News>>>(endpointParts);
+		}
+
+		/// <summary>
+		/// Return collections of news related to anime with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <param name="page">Index of page folding 100 records of top ranging (e.g. 1 will return first 100 records, 2 will return record from 101 to 200 etc.)</param>
+		/// <returns>Collections of news related to anime with given MAL id.</returns>
+		public async Task<PaginatedJikanResponse<ICollection<News>>> GetAnimeNewsAsync(long id, int page)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			Guard.IsGreaterThanZero(page, nameof(page));
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Anime, id.ToString(), AnimeExtension.News.GetDescription() + $"?page={page}" };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<News>>>(endpointParts);
+		}
+
+		#endregion GetAnimeNewsAsync
 
 		#region GetAnimeGenre
 
@@ -263,22 +293,6 @@ namespace JikanDotNet
 		}
 
 		#endregion GetAnimePictures
-
-		#region GetAnimeNews
-
-		/// <summary>
-		/// Return collections of news related to anime with given MAL id.
-		/// </summary>
-		/// <param name="id">MAL id of anime.</param>
-		/// <returns>Collections of news related to anime with given MAL id.</returns>
-		public async Task<AnimeNews> GetAnimeNews(long id)
-		{
-			Guard.IsGreaterThanZero(id, nameof(id));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Anime, id.ToString(), AnimeExtension.News.GetDescription() };
-			return await ExecuteGetRequestAsync<AnimeNews>(endpointParts);
-		}
-
-		#endregion GetAnimeNews
 
 		#region GetAnimeVideos
 

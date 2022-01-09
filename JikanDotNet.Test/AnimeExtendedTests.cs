@@ -102,33 +102,6 @@ namespace JikanDotNet.Tests
 		[InlineData(long.MinValue)]
 		[InlineData(-1)]
 		[InlineData(0)]
-		public async Task GetAnimeNews_InvalidId_ShouldThrowValidationException(long malId)
-		{
-			// When
-			Func<Task<AnimeNews>> func = _jikan.Awaiting(x => x.GetAnimeNews(malId));
-
-			// Then
-			await func.Should().ThrowExactlyAsync<JikanValidationException>();
-		}
-
-		[Fact]
-		public async Task GetAnimeNews_BebopId_ShouldParseCowboyBebopNews()
-		{
-			// When
-			var bebop = await _jikan.GetAnimeNews(1);
-
-			// Then
-			using (new AssertionScope())
-			{
-				bebop.News.Should().HaveCount(7);
-				bebop.News.Select(x => x.Author).Should().Contain("Snow");
-			}
-		}
-
-		[Theory]
-		[InlineData(long.MinValue)]
-		[InlineData(-1)]
-		[InlineData(0)]
 		public async Task GetAnimeForumTopics_InvalidId_ShouldThrowValidationException(long malId)
 		{
 			// When

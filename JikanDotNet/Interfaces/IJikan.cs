@@ -56,7 +56,7 @@ namespace JikanDotNet
 		/// Returns list of episodes for anime with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
-		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <param name="page">Index of page folding 100 records of top ranging (e.g. 1 will return first 100 records, 2 will return record from 101 to 200 etc.)</param>
 		/// <returns>List of episodes with details.</returns>
 		Task<PaginatedJikanResponse<ICollection<AnimeEpisode>>> GetAnimeEpisodesAsync(long id, int page);
 
@@ -74,6 +74,25 @@ namespace JikanDotNet
 
 		#endregion GetAnimeEpisode
 
+		#region GetAnimeNews
+
+		/// <summary>
+		/// Returns collections of news related to anime with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <returns>Collections of news related to anime with given MAL id.</returns>
+		Task<PaginatedJikanResponse<ICollection<News>>> GetAnimeNewsAsync(long id);
+
+		/// <summary>
+		/// Returns collections of news related to anime with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <param name="page">Index of page folding 100 records of top ranging (e.g. 1 will return first 100 records, 2 will return record from 101 to 200 etc.)</param>
+		/// <returns>Collections of news related to anime with given MAL id.</returns>
+		Task<PaginatedJikanResponse<ICollection<News>>> GetAnimeNewsAsync(long id, int page);
+
+		#endregion GetAnimeNews
+
 		#region GetAnimePictures
 
 		/// <summary>
@@ -84,17 +103,6 @@ namespace JikanDotNet
 		Task<AnimePictures> GetAnimePictures(long id);
 
 		#endregion GetAnimePictures
-
-		#region GetAnimeNews
-
-		/// <summary>
-		/// Returns collections of news related to anime with given MAL id.
-		/// </summary>
-		/// <param name="id">MAL id of anime.</param>
-		/// <returns>Collections of news related to anime with given MAL id.</returns>
-		Task<AnimeNews> GetAnimeNews(long id);
-
-		#endregion GetAnimeNews
 
 		#region GetAnimeVideos
 

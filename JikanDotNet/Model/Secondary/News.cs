@@ -9,28 +9,16 @@ namespace JikanDotNet
 	public class News
 	{
 		/// <summary>
+		/// ID associated with MyAnimeList.
+		/// </summary>
+		[JsonPropertyName("mal_id")]
+		public long MalId { get; set; }
+
+		/// <summary>
 		/// News' URL.
 		/// </summary>
 		[JsonPropertyName("url")]
 		public string Url { get; set; }
-
-		/// <summary>
-		/// News' image URL.
-		/// </summary>
-		[JsonPropertyName("image_url")]
-		public string ImageURL { get; set; }
-
-		/// <summary>
-		/// News' forum URL.
-		/// </summary>
-		[JsonPropertyName("forum_url")]
-		public string ForumUrl { get; set; }
-
-		/// <summary>
-		/// Amount of comments under news.
-		/// </summary>
-		[JsonPropertyName("comments")]
-		public int? Comments { get; set; }
 
 		/// <summary>
 		/// Title of the news.
@@ -47,7 +35,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// News' author username.
 		/// </summary>
-		[JsonPropertyName("author_name")]
+		[JsonPropertyName("author_username")]
 		public string Author { get; set; }
 
 		/// <summary>
@@ -55,5 +43,29 @@ namespace JikanDotNet
 		/// </summary>
 		[JsonPropertyName("author_url")]
 		public string AuthorUrl { get; set; }
+
+		/// <summary>
+		/// News' forum URL.
+		/// </summary>
+		[JsonPropertyName("forum_url")]
+		public string ForumUrl { get; set; }
+
+		/// <summary>
+		/// News' images set.
+		/// </summary>
+		[JsonPropertyName("images")]
+		public ImagesSet Images{ get; set; }
+
+		/// <summary>
+		/// Amount of comments under news.
+		/// </summary>
+		[JsonPropertyName("comments")]
+		public int? Comments { get; set; }
+
+		/// <summary>
+		/// News' excerptL.
+		/// </summary>
+		[JsonPropertyName("excerpt")]
+		public string Excerpt { get; set; }
 	}
 }
