@@ -11,8 +11,8 @@ namespace JikanDotNet
 		/// <summary>
 		/// Topic's MyAnimeList Id.
 		/// </summary>
-		[JsonPropertyName("topic_id")]
-		public long? TopicId { get; set; }
+		[JsonPropertyName("mal_id")]
+		public long MalId { get; set; }
 
 		/// <summary>
 		/// Topic's URL.
@@ -23,37 +23,37 @@ namespace JikanDotNet
 		/// <summary>
 		/// Topic's title.
 		/// </summary>
-		[JsonPropertyName("Title")]
+		[JsonPropertyName("title")]
 		public string Title { get; set; }
 
 		/// <summary>
 		/// Date of topic start.
 		/// </summary>
-		[JsonPropertyName("date_posted")]
-		public DateTime? DatePosted { get; set; }
+		[JsonPropertyName("date")]
+		public DateTime? Date { get; set; }
 
 		/// <summary>
 		/// Topic's author username.
 		/// </summary>
-		[JsonPropertyName("author_name")]
-		public string AuthorName { get; set; }
+		[JsonPropertyName("author_username")]
+		public string AuthorUsername { get; set; }
 
 		/// <summary>
 		/// URL to profile of topic author.
 		/// </summary>
 		[JsonPropertyName("author_url")]
-		public string AuthorURL { get; set; }
+		public string AuthorUrl { get; set; }
 
 		/// <summary>
-		/// Number of replies.
+		/// Comment count.
 		/// </summary>
-		[JsonPropertyName("replies")]
-		public int? Replies { get; set; }
+		[JsonPropertyName("comments")]
+		public int? Comments { get; set; }
 
 		/// <summary>
-		/// Basic information about last post in the topic.
+		/// Basic information about last comment in the topic.
 		/// </summary>
-		[JsonPropertyName("last_post")]
+		[JsonPropertyName("last_comment")]
 		public ForumPostSnippet LastPost { get; set; }
 	}
 }

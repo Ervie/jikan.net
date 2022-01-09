@@ -102,29 +102,6 @@ namespace JikanDotNet.Tests
 		[InlineData(long.MinValue)]
 		[InlineData(-1)]
 		[InlineData(0)]
-		public async Task GetAnimeForumTopics_InvalidId_ShouldThrowValidationException(long malId)
-		{
-			// When
-			Func<Task<ForumTopics>> func = _jikan.Awaiting(x => x.GetAnimeForumTopics(malId));
-
-			// Then
-			await func.Should().ThrowExactlyAsync<JikanValidationException>();
-		}
-
-		[Fact]
-		public async Task GetAnimeForumTopics_BebopId_ShouldParseCowboyBebopTopics()
-		{
-			// When
-			var bebop = await _jikan.GetAnimeForumTopics(1);
-
-			// Then
-			bebop.Topics.Should().HaveCount(15);
-		}
-
-		[Theory]
-		[InlineData(long.MinValue)]
-		[InlineData(-1)]
-		[InlineData(0)]
 		public async Task GetAnimeMoreInfo_InvalidId_ShouldThrowValidationException(long malId)
 		{
 			// When

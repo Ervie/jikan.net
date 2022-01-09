@@ -43,7 +43,7 @@ namespace JikanDotNet
 
 		#endregion GetAnimeStaffAsync
 
-		#region GetAnimeEpisodes
+		#region GetAnimeEpisodesAsync
 
 		/// <summary>
 		/// Returns list of episodes for anime with given MAL id.
@@ -60,9 +60,9 @@ namespace JikanDotNet
 		/// <returns>List of episodes with details.</returns>
 		Task<PaginatedJikanResponse<ICollection<AnimeEpisode>>> GetAnimeEpisodesAsync(long id, int page);
 
-		#endregion GetAnimeEpisodes
+		#endregion GetAnimeEpisodesAsync
 
-		#region GetAnimeEpisode
+		#region GetAnimeEpisodeAsync
 
 		/// <summary>
 		/// Returns details about specific episode.
@@ -72,9 +72,9 @@ namespace JikanDotNet
 		/// <returns>Details about specific episode.</returns>
 		Task<BaseJikanResponse<AnimeEpisode>> GetAnimeEpisodeAsync(long animeId, int episodeId);
 
-		#endregion GetAnimeEpisode
+		#endregion GetAnimeEpisodeAsync
 
-		#region GetAnimeNews
+		#region GetAnimeNewsAsync
 
 		/// <summary>
 		/// Returns collections of news related to anime with given MAL id.
@@ -91,7 +91,26 @@ namespace JikanDotNet
 		/// <returns>Collections of news related to anime with given MAL id.</returns>
 		Task<PaginatedJikanResponse<ICollection<News>>> GetAnimeNewsAsync(long id, int page);
 
-		#endregion GetAnimeNews
+		#endregion GetAnimeNewsAsync
+
+		#region GetAnimeForumTopicsAsync
+
+		/// <summary>
+		/// Returns collections of forum topics related to anime with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <returns>Collections of forum topics related to anime with given MAL id.</returns>
+		Task<BaseJikanResponse<ICollection<ForumTopic>>> GetAnimeForumTopicsAsync(long id);
+
+		/// <summary>
+		/// Returns collections of forum topics related to anime with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <param name="type">ForumTopicType filter</param>
+		/// <returns>Collections of forum topics related to anime with given MAL id.</returns>
+		Task<BaseJikanResponse<ICollection<ForumTopic>>> GetAnimeForumTopicsAsync(long id, ForumTopicType type);
+
+		#endregion GetAnimeForumTopicsAsync
 
 		#region GetAnimePictures
 
@@ -125,17 +144,6 @@ namespace JikanDotNet
 		Task<AnimeStats> GetAnimeStatistics(long id);
 
 		#endregion GetAnimeStatistics
-
-		#region GetAnimeForumTopics
-
-		/// <summary>
-		/// Returns collections of forum topics related to anime with given MAL id.
-		/// </summary>
-		/// <param name="id">MAL id of anime.</param>
-		/// <returns>Collections of forum topics related to anime with given MAL id.</returns>
-		Task<ForumTopics> GetAnimeForumTopics(long id);
-
-		#endregion GetAnimeForumTopics
 
 		#region GetAnimeMoreInfo
 
@@ -263,7 +271,7 @@ namespace JikanDotNet
 		/// </summary>
 		/// <param name="id">MAL id of manga.</param>
 		/// <returns>Collections of forum topics related to manga with given MAL id.</returns>
-		Task<ForumTopics> GetMangaForumTopics(long id);
+		Task<BaseJikanResponse<ICollection<ForumTopic>>> GetMangaForumTopics(long id);
 
 		#endregion GetMangaForumTopics
 

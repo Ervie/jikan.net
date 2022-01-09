@@ -222,6 +222,38 @@ namespace JikanDotNet
 
 		#endregion GetAnimeNewsAsync
 
+		#region GetAnimeForumTopicsAsync
+
+		/// <summary>
+		/// Return collections of forum topics related to anime with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <returns>Collections of forum topics related to anime with given MAL id.</returns>
+		public async Task<BaseJikanResponse<ICollection<ForumTopic>>> GetAnimeForumTopicsAsync(long id)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Anime, id.ToString(), AnimeExtension.Forum.GetDescription() };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<ForumTopic>>>(endpointParts);
+		}
+
+		/// <summary>
+		/// Return collections of forum topics related to anime with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <param name="type">ForumTopicType filter</param>
+		/// <returns>Collections of forum topics related to anime with given MAL id.</returns>
+		public async Task<BaseJikanResponse<ICollection<ForumTopic>>> GetAnimeForumTopicsAsync(long id, ForumTopicType type = ForumTopicType.All)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			Guard.IsValidEnum(type, nameof(type));
+
+			var queryParams = $"?topic={type.GetDescription()}";
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Anime, id.ToString(), AnimeExtension.Forum.GetDescription() + queryParams };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<ForumTopic>>>(endpointParts);
+		}
+
+		#endregion GetAnimeForumTopicsAsync
+
 		#region GetAnimeGenre
 
 		/// <summary>
@@ -325,22 +357,6 @@ namespace JikanDotNet
 		}
 
 		#endregion GetAnimeStatistics
-
-		#region GetAnimeForumTopics
-
-		/// <summary>
-		/// Return collections of forum topics related to anime with given MAL id.
-		/// </summary>
-		/// <param name="id">MAL id of anime.</param>
-		/// <returns>Collections of forum topics related to anime with given MAL id.</returns>
-		public async Task<ForumTopics> GetAnimeForumTopics(long id)
-		{
-			Guard.IsGreaterThanZero(id, nameof(id));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Anime, id.ToString(), AnimeExtension.Forum.GetDescription() };
-			return await ExecuteGetRequestAsync<ForumTopics>(endpointParts);
-		}
-
-		#endregion GetAnimeForumTopics
 
 		#region GetAnimeMoreInfo
 
@@ -617,11 +633,11 @@ namespace JikanDotNet
 		/// </summary>
 		/// <param name="id">MAL id of manga.</param>
 		/// <returns>Collections of forum topics related to manga with given MAL id.</returns>
-		public async Task<ForumTopics> GetMangaForumTopics(long id)
+		public async Task<BaseJikanResponse<ICollection<ForumTopic>>> GetMangaForumTopics(long id)
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Manga, id.ToString(), MangaExtension.Forum.GetDescription() };
-			return await ExecuteGetRequestAsync<ForumTopics>(endpointParts);
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<ForumTopic>>>(endpointParts);
 		}
 
 		#endregion GetMangaForumTopics
@@ -939,7 +955,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Return list of top manga.
 		/// </summary>
-		/// <param name="page">Indexx of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
 		/// <param name="extension">Extension for specific type of ranking.</param>
 		/// <returns>List of top manga.</returns>
 		public async Task<MangaTop> GetMangaTop(int page, TopMangaExtension extension = TopMangaExtension.None)

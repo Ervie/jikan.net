@@ -135,7 +135,7 @@ namespace JikanDotNet.Tests
 		public async Task GetMangaForumTopics_InvalidId_ShouldThrowValidationException(long id)
 		{
 			// When
-			Func<Task<ForumTopics>> func = _jikan.Awaiting(x => x.GetMangaForumTopics(id));
+			var func = _jikan.Awaiting(x => x.GetMangaForumTopics(id));
 
 			// Then
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();
@@ -148,7 +148,7 @@ namespace JikanDotNet.Tests
 			var monster = await _jikan.GetMangaForumTopics(1);
 
 			// Then
-			var topics = monster.Topics.Select(x => x.TopicId);
+			var topics = monster.Data.Select(x => x.MalId);
 			using (new AssertionScope())
 			{
 				topics.Should().Contain(395611);

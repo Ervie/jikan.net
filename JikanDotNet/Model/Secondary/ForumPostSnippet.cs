@@ -17,19 +17,19 @@ namespace JikanDotNet
 		/// <summary>
 		/// Post's author username.
 		/// </summary>
-		[JsonPropertyName("author_name")]
-		public string AuthorName { get; set; }
+		[JsonPropertyName("author_username")]
+		public string AuthorUsername { get; set; }
 
 		/// <summary>
 		/// URL to profile of post author.
 		/// </summary>
 		[JsonPropertyName("author_url")]
-		public string AuthorURL { get; set; }
+		public string AuthorUrl { get; set; }
 
 		/// <summary>
-		/// Relative date of time when post was publicated.
+		/// Date when the post was publicated.
 		/// </summary>
-		[JsonPropertyName("date_posted")]
-		public DateTime? DateRelative { get; set; }
+		[JsonPropertyName("date")]
+		public DateTime? Date { get; set; }
 	}
 }
