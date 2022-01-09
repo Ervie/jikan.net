@@ -14,15 +14,9 @@ namespace JikanDotNet
 		public string Title { get; set; }
 
 		/// <summary>
-		/// Url to promotional video.
+		/// Trailer to promo video
 		/// </summary>
-		[JsonPropertyName("video_url")]
-		public string VideoUrl { get; set; }
-
-		/// <summary>
-		/// Promo's image URL.
-		/// </summary>
-		[JsonPropertyName("image_url")]
-		public string ImageURL { get; set; }
+		[JsonPropertyName("traile")]
+		public AnimeTrailer Trailer { get; set; }
 	}
 }

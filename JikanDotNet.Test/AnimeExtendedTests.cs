@@ -44,35 +44,6 @@ namespace JikanDotNet.Tests
 		[InlineData(long.MinValue)]
 		[InlineData(-1)]
 		[InlineData(0)]
-		public async Task GetAnimeVideos_InvalidId_ShouldThrowValidationException(long malId)
-		{
-			// When
-			Func<Task<AnimeVideos>> func = _jikan.Awaiting(x => x.GetAnimeVideos(malId));
-
-			// Then
-			await func.Should().ThrowExactlyAsync<JikanValidationException>();
-		}
-
-		[Fact]
-		public async Task GetAnimeVideos_BebopId_ShouldParseCowboyBebopVideos()
-		{
-			// When
-			var bebop = await _jikan.GetAnimeVideos(1);
-
-			// Then
-			using (new AssertionScope())
-			{
-				bebop.PromoVideos.Should().HaveCount(3);
-				bebop.PromoVideos.Select(x => x.Title).Should().Contain("PV 2");
-				bebop.EpisodeVideos.Should().HaveCount(26);
-				bebop.EpisodeVideos.Select(x => x.Title).Should().Contain("Pierrot Le Fou");
-			}
-		}
-
-		[Theory]
-		[InlineData(long.MinValue)]
-		[InlineData(-1)]
-		[InlineData(0)]
 		public async Task GetAnimeStatistics_InvalidId_ShouldThrowValidationException(long malId)
 		{
 			// When

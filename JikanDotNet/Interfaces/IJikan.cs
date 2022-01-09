@@ -112,6 +112,17 @@ namespace JikanDotNet
 
 		#endregion GetAnimeForumTopicsAsync
 
+		#region GetAnimeVideosAsync
+
+		/// <summary>
+		/// Returns collections of videos related to anime with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <returns>Collections of videos related to anime with given MAL id.</returns>
+		Task<BaseJikanResponse<AnimeVideos>> GetAnimeVideosAsync(long id);
+
+		#endregion GetAnimeVideosAsync
+
 		#region GetAnimePictures
 
 		/// <summary>
@@ -122,17 +133,6 @@ namespace JikanDotNet
 		Task<AnimePictures> GetAnimePictures(long id);
 
 		#endregion GetAnimePictures
-
-		#region GetAnimeVideos
-
-		/// <summary>
-		/// Returns collections of videos related to anime with given MAL id.
-		/// </summary>
-		/// <param name="id">MAL id of anime.</param>
-		/// <returns>Collections of videos related to anime with given MAL id.</returns>
-		Task<AnimeVideos> GetAnimeVideos(long id);
-
-		#endregion GetAnimeVideos
 
 		#region GetAnimeStatistics
 

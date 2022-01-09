@@ -8,6 +8,12 @@ namespace JikanDotNet
 	public class EpisodeVideo
 	{
 		/// <summary>
+		/// Episode's MyAnimeList Id.
+		/// </summary>
+		[JsonPropertyName("mal_id")]
+		public long MalId { get; set; }
+
+		/// <summary>
 		/// Title of the episode video.
 		/// </summary>
 		[JsonPropertyName("title")]
@@ -26,9 +32,9 @@ namespace JikanDotNet
 		public string Url { get; set; }
 
 		/// <summary>
-		/// Episode's image URL.
+		/// Episode's images set.
 		/// </summary>
-		[JsonPropertyName("image_url")]
-		public string ImageURL { get; set; }
+		[JsonPropertyName("Images")]
+		public ImagesSet Images { get; set; }
 	}
 }

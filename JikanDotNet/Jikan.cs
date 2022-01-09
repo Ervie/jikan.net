@@ -254,6 +254,22 @@ namespace JikanDotNet
 
 		#endregion GetAnimeForumTopicsAsync
 
+		#region GetAnimeVideosAsync
+
+		/// <summary>
+		/// Return collections of videos related to anime with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <returns>Collections of videos related to anime with given MAL id.</returns>
+		public async Task<BaseJikanResponse<AnimeVideos>> GetAnimeVideosAsync(long id)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Anime, id.ToString(), AnimeExtension.Videos.GetDescription() };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<AnimeVideos>>(endpointParts);
+		}
+
+		#endregion GetAnimeVideosAsync
+
 		#region GetAnimeGenre
 
 		/// <summary>
@@ -325,22 +341,6 @@ namespace JikanDotNet
 		}
 
 		#endregion GetAnimePictures
-
-		#region GetAnimeVideos
-
-		/// <summary>
-		/// Return collections of videos related to anime with given MAL id.
-		/// </summary>
-		/// <param name="id">MAL id of anime.</param>
-		/// <returns>Collections of videos related to anime with given MAL id.</returns>
-		public async Task<AnimeVideos> GetAnimeVideos(long id)
-		{
-			Guard.IsGreaterThanZero(id, nameof(id));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Anime, id.ToString(), AnimeExtension.Videos.GetDescription() };
-			return await ExecuteGetRequestAsync<AnimeVideos>(endpointParts);
-		}
-
-		#endregion GetAnimeVideos
 
 		#region GetAnimeStatistics
 
