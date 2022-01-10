@@ -342,21 +342,21 @@ namespace JikanDotNet
 
 		#endregion GetAnimePicturesAsync
 
-		#region GetAnimeStatistics
+		#region GetAnimeStatisticsAsync
 
 		/// <summary>
 		/// Return statistics related to anime with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
 		/// <returns>Statistics related to anime with given MAL id.</returns>
-		public async Task<AnimeStats> GetAnimeStatistics(long id)
+		public async Task<BaseJikanResponse<AnimeStatistics>> GetAnimeStatisticsAsync(long id)
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Anime, id.ToString(), AnimeExtension.Stats.GetDescription() };
-			return await ExecuteGetRequestAsync<AnimeStats>(endpointParts);
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Anime, id.ToString(), AnimeExtension.Statistics.GetDescription() };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<AnimeStatistics>>(endpointParts);
 		}
 
-		#endregion GetAnimeStatistics
+		#endregion GetAnimeStatisticsAsync
 
 		#region GetAnimeMoreInfo
 

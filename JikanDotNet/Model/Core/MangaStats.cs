@@ -41,6 +41,6 @@ namespace JikanDotNet
 		/// Number of users who added manga to their lists.
 		/// </summary>
 		[JsonPropertyName("scores")]
-		public ScoringStats ScoreStats { get; set; }
+		public ScoringStatistics ScoreStats { get; set; }
 	}
 }

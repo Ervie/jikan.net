@@ -5,13 +5,19 @@ namespace JikanDotNet
 	/// <summary>
 	/// Model class representing number of votes and percentage share for single score.
 	/// </summary>
-	public class ScoringStatEntry
+	public class ScoringStatistics
 	{
+		/// <summary>
+		/// Score value (1-10).
+		/// </summary>
+		[JsonPropertyName("score")]
+		public int Score { get; set; }
+
 		/// <summary>
 		/// Percentage share of overall votes poll.
 		/// </summary>
 		[JsonPropertyName("percentage")]
-		public float? Percentage { get; set; }
+		public double? Percentage { get; set; }
 
 		/// <summary>
 		/// Number of votes casted for score.
@@ -22,10 +28,10 @@ namespace JikanDotNet
 		/// <summary>
 		/// Overriden ToString method.
 		/// </summary>
-		/// <returns>Number of votes if not null, base method elsewhere.</returns>
+		/// <returns>Score value if not null, base method elsewhere.</returns>
 		public override string ToString()
 		{
-			return Votes.ToString() ?? base.ToString();
+			return Score.ToString() ?? base.ToString();
 		}
 	}
 }

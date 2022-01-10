@@ -17,36 +17,6 @@ namespace JikanDotNet.Tests
 			_jikan = new Jikan();
 		}
 
-
-		[Theory]
-		[InlineData(long.MinValue)]
-		[InlineData(-1)]
-		[InlineData(0)]
-		public async Task GetAnimeStatistics_InvalidId_ShouldThrowValidationException(long malId)
-		{
-			// When
-			Func<Task<AnimeStats>> func = _jikan.Awaiting(x => x.GetAnimeStatistics(malId));
-
-			// Then
-			await func.Should().ThrowExactlyAsync<JikanValidationException>();
-		}
-
-		[Fact]
-		public async Task GetAnimeStatistics_BebopId_ShouldParseCowboyBebopStats()
-		{
-			// When
-			var bebop = await _jikan.GetAnimeStatistics(1);
-
-			// Then
-			using (new AssertionScope())
-			{
-				bebop.ScoreStats.Should().NotBeNull();
-				bebop.Completed.Should().BeGreaterThan(450000);
-				bebop.PlanToWatch.Should().BeGreaterThan(50000);
-				bebop.ScoreStats._5.Votes.Should().BeGreaterThan(5000);
-			}
-		}
-
 		[Theory]
 		[InlineData(long.MinValue)]
 		[InlineData(-1)]

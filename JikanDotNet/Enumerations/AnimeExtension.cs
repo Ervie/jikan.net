@@ -46,8 +46,8 @@ namespace JikanDotNet
 		/// <summary>
 		/// Statistics extension, return exact information about status and scores of anime among users.
 		/// </summary>
-		[Description("stats")]
-		Stats,
+		[Description("statistics")]
+		Statistics,
 
 		/// <summary>
 		/// News extension, return basic information about all news related to anime.
