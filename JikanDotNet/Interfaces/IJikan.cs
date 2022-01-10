@@ -123,14 +123,14 @@ namespace JikanDotNet
 
 		#endregion GetAnimeVideosAsync
 
-		#region GetAnimePictures
+		#region GetAnimePicturesAsync
 
 		/// <summary>
 		/// Returns collections of links to pictures related to anime with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
 		/// <returns>Collections of links to pictures related to anime with given MAL id.</returns>
-		Task<AnimePictures> GetAnimePictures(long id);
+		Task<BaseJikanResponse<ICollection<ImagesSet>>> GetAnimePicturesAsync(long id);
 
 		#endregion GetAnimePictures
 

@@ -326,21 +326,21 @@ namespace JikanDotNet
 
 		#endregion GetAnimeGenre
 
-		#region GetAnimePictures
+		#region GetAnimePicturesAsync
 
 		/// <summary>
 		/// Return collections of links to pictures related to anime with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
 		/// <returns>Collections of links to pictures related to anime with given MAL id.</returns>
-		public async Task<AnimePictures> GetAnimePictures(long id)
+		public async Task<BaseJikanResponse<ICollection<ImagesSet>>> GetAnimePicturesAsync(long id)
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Anime, id.ToString(), AnimeExtension.Pictures.GetDescription() };
-			return await ExecuteGetRequestAsync<AnimePictures>(endpointParts);
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<ImagesSet>>>(endpointParts);
 		}
 
-		#endregion GetAnimePictures
+		#endregion GetAnimePicturesAsync
 
 		#region GetAnimeStatistics
 
