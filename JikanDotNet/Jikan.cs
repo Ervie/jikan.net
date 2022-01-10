@@ -374,21 +374,21 @@ namespace JikanDotNet
 
 		#endregion GetAnimeMoreInfoAsync
 
-		#region GetAnimeRecommendations
+		#region GetAnimeRecommendationsAsync
 
 		/// <summary>
 		/// Returns collection of anime recommendation.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
 		/// <returns>Collection of anime recomendation.</returns>
-		public async Task<Recommendations> GetAnimeRecommendations(long id)
+		public async Task<BaseJikanResponse<ICollection<Recommendation>>> GetAnimeRecommendationsAsync(long id)
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Anime, id.ToString(), AnimeExtension.Recommendations.GetDescription() };
-			return await ExecuteGetRequestAsync<Recommendations>(endpointParts);
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<Recommendation>>>(endpointParts);
 		}
 
-		#endregion GetAnimeRecommendations
+		#endregion GetAnimeRecommendationsAsync
 
 		#region GetAnimeReviews
 

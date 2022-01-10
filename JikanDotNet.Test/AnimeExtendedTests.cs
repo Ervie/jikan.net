@@ -21,34 +21,6 @@ namespace JikanDotNet.Tests
 		[InlineData(long.MinValue)]
 		[InlineData(-1)]
 		[InlineData(0)]
-		public async Task GetAnimeRecommendations_InvalidId_ShouldThrowValidationException(long malId)
-		{
-			// When
-			Func<Task<Recommendations>> func = _jikan.Awaiting(x => x.GetAnimeRecommendations(malId));
-
-			// Then
-			await func.Should().ThrowExactlyAsync<JikanValidationException>();
-		}
-
-		[Fact]
-		public async Task GetAnimeRecommendation_BebopId_ShouldParseCowboyBebopRecommendations()
-		{
-			// When
-			var bebop = await _jikan.GetAnimeRecommendations(1);
-
-			// Then
-			using (new AssertionScope())
-			{
-				bebop.RecommendationCollection.First().MalId.Should().Be(205); // Samurai Champloo
-				bebop.RecommendationCollection.First().RecommendationCount.Should().BeGreaterThan(70);
-				bebop.RecommendationCollection.Count.Should().BeGreaterThan(100);
-			}
-		}
-
-		[Theory]
-		[InlineData(long.MinValue)]
-		[InlineData(-1)]
-		[InlineData(0)]
 		public async Task GetAnimeReviews_InvalidId_ShouldThrowValidationException(long malId)
 		{
 			// When

@@ -156,16 +156,16 @@ namespace JikanDotNet
 
 		#endregion GetAnimeMoreInfoAsync
 
-		#region GetAnimeRecommendations
+		#region GetAnimeRecommendationsAsync
 
 		/// <summary>
 		/// Returns collection of anime recommendation.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
 		/// <returns>Collection of anime recomendation.</returns>
-		Task<Recommendations> GetAnimeRecommendations(long id);
+		Task<BaseJikanResponse<ICollection<Recommendation>>> GetAnimeRecommendationsAsync(long id);
 
-		#endregion GetAnimeRecommendations
+		#endregion GetAnimeRecommendationsAsync
 
 		#region GetAnimeReviews
 

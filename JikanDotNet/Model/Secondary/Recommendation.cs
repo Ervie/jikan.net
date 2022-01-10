@@ -8,39 +8,21 @@ namespace JikanDotNet
 	public class Recommendation
 	{
 		/// <summary>
-		/// Mal Id of recommended anime/manga.
-		/// </summary>
-		[JsonPropertyName("mal_id")]
-		public long MalId { get; set; }
-
-		/// <summary>
-		/// Title of recommended anime/manga.
-		/// </summary>
-		[JsonPropertyName("title")]
-		public string Title { get; set; }
-
-		/// <summary>
-		/// Url to page of recommended anime/manga.
+		/// Url to recommendation.
 		/// </summary>
 		[JsonPropertyName("url")]
 		public string Url { get; set; }
 
 		/// <summary>
-		/// Recommended anime/manga image URL.
+		/// Number of users who have recommended this entry.
 		/// </summary>
-		[JsonPropertyName("image_url")]
-		public string ImageURL { get; set; }
+		[JsonPropertyName("votes")]
+		public int Votes { get; set; }
 
 		/// <summary>
-		/// Url to recommendation.
+		/// Details about recommendation.
 		/// </summary>
-		[JsonPropertyName("recommendation_url")]
-		public string RecommendationUrl { get; set; }
-
-		/// <summary>
-		/// Number of recommendations.
-		/// </summary>
-		[JsonPropertyName("recommendation_count")]
-		public int? RecommendationCount { get; set; }
+		[JsonPropertyName("entry")]
+		public RecommendationEntry Entry { get; set; }
 	}
 }
