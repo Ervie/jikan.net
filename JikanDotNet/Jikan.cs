@@ -390,6 +390,38 @@ namespace JikanDotNet
 
 		#endregion GetAnimeRecommendationsAsync
 
+		#region GetAnimeUserUpdatesAsync
+
+		/// <summary>
+		/// Returns collection of anime user updates.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <returns>Collection of anime user updates.</returns>
+		public async Task<PaginatedJikanResponse<ICollection<AnimeUserUpdate>>> GetAnimeUserUpdatesAsync(long id)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Anime, id.ToString(), AnimeExtension.UserUpdates.GetDescription() };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<AnimeUserUpdate>>>(endpointParts);
+		}
+
+		/// <summary>
+		/// Returns collection of anime user updates.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <param name="page">Index of page folding 75 records (e.g. 1 will return first 75 records, 2 will return record from 76 to 150 etc.)</param>
+		/// <returns>Collection of anime user updates.</returns>
+		public async Task<PaginatedJikanResponse<ICollection<AnimeUserUpdate>>> GetAnimeUserUpdatesAsync(long id, int page)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			Guard.IsGreaterThanZero(page, nameof(page));
+
+			var queryParams = $"?page={page}";
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Anime, id.ToString(), AnimeExtension.UserUpdates.GetDescription() + queryParams };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<AnimeUserUpdate>>>(endpointParts);
+		}
+
+		#endregion GetAnimeUserUpdatesAsync
+
 		#region GetAnimeReviews
 
 		/// <summary>
@@ -419,36 +451,6 @@ namespace JikanDotNet
 		}
 
 		#endregion GetAnimeReviews
-
-		#region GetAnimeUserUpdates
-
-		/// <summary>
-		/// Returns collection of anime user updates.
-		/// </summary>
-		/// <param name="id">MAL id of anime.</param>
-		/// <returns>Collection of anime user updates.</returns>
-		public async Task<AnimeUserUpdates> GetAnimeUserUpdates(long id)
-		{
-			Guard.IsGreaterThanZero(id, nameof(id));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Anime, id.ToString(), AnimeExtension.UserUpdates.GetDescription() };
-			return await ExecuteGetRequestAsync<AnimeUserUpdates>(endpointParts);
-		}
-
-		/// <summary>
-		/// Returns collection of anime user updates.
-		/// </summary>
-		/// <param name="id">MAL id of anime.</param>
-		/// <param name="page">Index of page folding 75 records (e.g. 1 will return first 75 records, 2 will return record from 76 to 150 etc.)</param>
-		/// <returns>Collection of anime user updates.</returns>
-		public async Task<AnimeUserUpdates> GetAnimeUserUpdates(long id, int page)
-		{
-			Guard.IsGreaterThanZero(id, nameof(id));
-			Guard.IsGreaterThanZero(page, nameof(page));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Anime, id.ToString(), AnimeExtension.UserUpdates.GetDescription(), page.ToString() };
-			return await ExecuteGetRequestAsync<AnimeUserUpdates>(endpointParts);
-		}
-
-		#endregion GetAnimeUserUpdates
 
 		#endregion Anime methods
 

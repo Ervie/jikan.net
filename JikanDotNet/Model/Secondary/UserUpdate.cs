@@ -9,22 +9,10 @@ namespace JikanDotNet
 	public class UserUpdate
 	{
 		/// <summary>
-		/// Username.
+		/// Data about the user who made the update.
 		/// </summary>
-		[JsonPropertyName("username")]
-		public string Username { get; set; }
-
-		/// <summary>
-		/// User's image URL
-		/// </summary>
-		[JsonPropertyName("image_url")]
-		public string ImageURL { get; set; }
-
-		/// <summary>
-		/// User's URL
-		/// </summary>
-		[JsonPropertyName("url")]
-		public string URL { get; set; }
+		[JsonPropertyName("user")]
+		public UserMetadata User { get; set; }
 
 		/// <summary>
 		/// User's score.

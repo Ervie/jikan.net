@@ -167,6 +167,25 @@ namespace JikanDotNet
 
 		#endregion GetAnimeRecommendationsAsync
 
+		#region GetAnimeUserUpdatesAsync
+
+		/// <summary>
+		/// Returns collection of anime user updates.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <returns>Collection of anime user updates.</returns>
+		Task<PaginatedJikanResponse<ICollection<AnimeUserUpdate>>> GetAnimeUserUpdatesAsync(long id);
+
+		/// <summary>
+		/// Returns collection of anime user updates.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <param name="page">Index of page folding 75 records of top ranging (e.g. 1 will return first 75 records, 2 will return record from 76 to 150 etc.)</param>
+		/// <returns>Collection of anime user updates.</returns>
+		Task<PaginatedJikanResponse<ICollection<AnimeUserUpdate>>> GetAnimeUserUpdatesAsync(long id, int page);
+
+		#endregion GetAnimeUserUpdatesAsync
+
 		#region GetAnimeReviews
 
 		/// <summary>
@@ -185,25 +204,6 @@ namespace JikanDotNet
 		Task<AnimeReviews> GetAnimeReviews(long id, int page);
 
 		#endregion GetAnimeReviews
-
-		#region GetAnimeUserUpdates
-
-		/// <summary>
-		/// Returns collection of anime user updates.
-		/// </summary>
-		/// <param name="id">MAL id of anime.</param>
-		/// <returns>Collection of anime user updates.</returns>
-		Task<AnimeUserUpdates> GetAnimeUserUpdates(long id);
-
-		/// <summary>
-		/// Returns collection of anime user updates.
-		/// </summary>
-		/// <param name="id">MAL id of anime.</param>
-		/// <param name="page">Index of page folding 75 records of top ranging (e.g. 1 will return first 75 records, 2 will return record from 76 to 150 etc.)</param>
-		/// <returns>Collection of anime user updates.</returns>
-		Task<AnimeUserUpdates> GetAnimeUserUpdates(long id, int page);
-
-		#endregion GetAnimeUserUpdates
 
 		#endregion Anime requests
 
