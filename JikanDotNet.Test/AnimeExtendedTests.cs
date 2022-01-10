@@ -21,29 +21,6 @@ namespace JikanDotNet.Tests
 		[InlineData(long.MinValue)]
 		[InlineData(-1)]
 		[InlineData(0)]
-		public async Task GetAnimeMoreInfo_InvalidId_ShouldThrowValidationException(long malId)
-		{
-			// When
-			Func<Task<MoreInfo>> func = _jikan.Awaiting(x => x.GetAnimeMoreInfo(malId));
-
-			// Then
-			await func.Should().ThrowExactlyAsync<JikanValidationException>();
-		}
-
-		[Fact]
-		public async Task GetAnimeMoreInfo_BebopId_ShouldParseCowboyBebopMoreInfo()
-		{
-			// When
-			var bebop = await _jikan.GetAnimeMoreInfo(1);
-
-			// Then
-			bebop.Info.Should().Contain("Suggested Order of Viewing");
-		}
-
-		[Theory]
-		[InlineData(long.MinValue)]
-		[InlineData(-1)]
-		[InlineData(0)]
 		public async Task GetAnimeRecommendations_InvalidId_ShouldThrowValidationException(long malId)
 		{
 			// When

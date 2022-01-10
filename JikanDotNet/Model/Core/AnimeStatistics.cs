@@ -6,7 +6,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Anime related statistics model class.
 	/// </summary>
-	public class AnimeStatistics: BaseJikanRequest
+	public class AnimeStatistics
 	{
 		/// <summary>
 		/// Number of users who labeled anime status as "watching"

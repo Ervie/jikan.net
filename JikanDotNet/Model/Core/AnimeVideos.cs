@@ -6,7 +6,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Anime related videos list model class.
 	/// </summary>
-	public class AnimeVideos: BaseJikanRequest
+	public class AnimeVideos
 	{
 		/// <summary>
 		/// Anime's related promo videos URLs.

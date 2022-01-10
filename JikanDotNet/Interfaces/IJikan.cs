@@ -145,16 +145,16 @@ namespace JikanDotNet
 
 		#endregion GetAnimeStatisticsAsync
 
-		#region GetAnimeMoreInfo
+		#region GetAnimeMoreInfoAsync
 
 		/// <summary>
 		/// Returns additional information related to anime with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
 		/// <returns>Additional information related to anime with given MAL id.</returns>
-		Task<MoreInfo> GetAnimeMoreInfo(long id);
+		Task<BaseJikanResponse<MoreInfo>> GetAnimeMoreInfoAsync(long id);
 
-		#endregion GetAnimeMoreInfo
+		#endregion GetAnimeMoreInfoAsync
 
 		#region GetAnimeRecommendations
 
