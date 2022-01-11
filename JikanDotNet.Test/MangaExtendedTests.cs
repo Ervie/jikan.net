@@ -22,57 +22,6 @@ namespace JikanDotNet.Tests
 		[InlineData(long.MinValue)]
 		[InlineData(-1)]
 		[InlineData(0)]
-		public async Task GetMangaMoreInfo_InvalidId_ShouldThrowValidationException(long id)
-		{
-			// When
-			Func<Task<MoreInfo>> func = _jikan.Awaiting(x => x.GetMangaMoreInfo(id));
-
-			// Then
-			await func.Should().ThrowExactlyAsync<JikanValidationException>();
-		}
-
-		[Fact]
-		public async Task GetMangaMoreInfo_BerserkId_ShouldParseBerserkMoreInfo()
-		{
-			// When
-			var berserk = await _jikan.GetMangaMoreInfo(2);
-
-			berserk.Info.Should().Contain("The Prototype (1988)");
-		}
-
-		[Theory]
-		[InlineData(long.MinValue)]
-		[InlineData(-1)]
-		[InlineData(0)]
-		public async Task GetMangaRecommendations_InvalidId_ShouldThrowValidationException(long id)
-		{
-			// When
-			Func<Task<Recommendations>> func = _jikan.Awaiting(x => x.GetMangaRecommendations(id));
-
-			// Then
-			await func.Should().ThrowExactlyAsync<JikanValidationException>();
-		}
-
-		[Fact]
-		public async Task GetMangaRecommendation_BerserkId_ShouldParseBerserkRecommendations()
-		{
-			// When
-			var berserk = await _jikan.GetMangaRecommendations(2);
-
-			// Then
-			using (new AssertionScope())
-			{
-				//Claymore
-				//berserk.RecommendationCollection.First().MalId.Should().Be(583);
-				//berserk.RecommendationCollection.First().RecommendationCount.Should().BeGreaterThan(25);
-				berserk.RecommendationCollection.Count.Should().BeGreaterThan(90);
-			}
-		}
-
-		[Theory]
-		[InlineData(long.MinValue)]
-		[InlineData(-1)]
-		[InlineData(0)]
 		public async Task GetMangaReviews_InvalidId_ShouldThrowValidationException(long id)
 		{
 			// When

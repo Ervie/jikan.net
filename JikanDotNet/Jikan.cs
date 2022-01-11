@@ -533,41 +533,41 @@ namespace JikanDotNet
 
 		#endregion GetMangaGenre
 
-		#region GetMangaStatistics
+		#region GetMangaStatisticsAsync
 
 		/// <inheritdoc />
-		public async Task<MangaStats> GetMangaStatistics(long id)
+		public async Task<BaseJikanResponse<MangaStatistics>> GetMangaStatisticsAsync(long id)
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Manga, id.ToString(), MangaExtension.Stats.GetDescription() };
-			return await ExecuteGetRequestAsync<MangaStats>(endpointParts);
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Manga, id.ToString(), MangaExtension.Statistics.GetDescription() };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<MangaStatistics>>(endpointParts);
 		}
 
-		#endregion GetMangaStatistics
+		#endregion GetMangaStatisticsAsync
 
-		#region GetMangaMoreInfo
+		#region GetMangaMoreInfoAsync
 
 		/// <inheritdoc />
-		public async Task<MoreInfo> GetMangaMoreInfo(long id)
+		public async Task<BaseJikanResponse<MoreInfo>> GetMangaMoreInfoAsync(long id)
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Manga, id.ToString(), AnimeExtension.MoreInfo.GetDescription() };
-			return await ExecuteGetRequestAsync<MoreInfo>(endpointParts);
+			return await ExecuteGetRequestAsync<BaseJikanResponse<MoreInfo>>(endpointParts);
 		}
 
-		#endregion GetMangaMoreInfo
+		#endregion GetMangaMoreInfoAsync
 
-		#region GetMangaRecommendations
+		#region GetMangaRecommendationsAsync
 
 		/// <inheritdoc />
-		public async Task<Recommendations> GetMangaRecommendations(long id)
+		public async Task<BaseJikanResponse<ICollection<Recommendation>>> GetMangaRecommendationsAsync(long id)
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Manga, id.ToString(), MangaExtension.Recommendations.GetDescription() };
-			return await ExecuteGetRequestAsync<Recommendations>(endpointParts);
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<Recommendation>>>(endpointParts);
 		}
 
-		#endregion GetMangaRecommendations
+		#endregion GetMangaRecommendationsAsync
 
 		#region GetMangaReviews
 
