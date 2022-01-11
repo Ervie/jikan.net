@@ -272,6 +272,17 @@ namespace JikanDotNet
 
 		#endregion GetMangaNewsAsync
 
+		#region GetMangaForumTopicsAsync
+
+		/// <summary>
+		/// Returns collections of forum topics related to manga with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of manga.</param>
+		/// <returns>Collections of forum topics related to manga with given MAL id.</returns>
+		Task<BaseJikanResponse<ICollection<ForumTopic>>> GetMangaForumTopicsAsync(long id);
+
+		#endregion GetMangaForumTopicsAsync
+
 		#region GetMangaPictures
 
 		/// <summary>
@@ -293,17 +304,6 @@ namespace JikanDotNet
 		Task<MangaStats> GetMangaStatistics(long id);
 
 		#endregion GetMangaStatistics
-
-		#region GetMangaForumTopics
-
-		/// <summary>
-		/// Returns collections of forum topics related to manga with given MAL id.
-		/// </summary>
-		/// <param name="id">MAL id of manga.</param>
-		/// <returns>Collections of forum topics related to manga with given MAL id.</returns>
-		Task<BaseJikanResponse<ICollection<ForumTopic>>> GetMangaForumTopics(long id);
-
-		#endregion GetMangaForumTopics
 
 		#region GetMangaMoreInfo
 

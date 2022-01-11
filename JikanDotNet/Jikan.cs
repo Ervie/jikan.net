@@ -471,6 +471,18 @@ namespace JikanDotNet
 
 		#endregion GetMangaNewsAsync
 
+		#region GetMangaForumTopicsAsync
+
+		/// <inheritdoc />
+		public async Task<BaseJikanResponse<ICollection<ForumTopic>>> GetMangaForumTopicsAsync(long id)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Manga, id.ToString(), MangaExtension.Forum.GetDescription() };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<ForumTopic>>>(endpointParts);
+		}
+
+		#endregion GetMangaForumTopicsAsync
+
 		#region GetMangaPictures
 
 		/// <inheritdoc />
@@ -532,18 +544,6 @@ namespace JikanDotNet
 		}
 
 		#endregion GetMangaStatistics
-
-		#region GetMangaForumTopics
-
-		/// <inheritdoc />
-		public async Task<BaseJikanResponse<ICollection<ForumTopic>>> GetMangaForumTopics(long id)
-		{
-			Guard.IsGreaterThanZero(id, nameof(id));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Manga, id.ToString(), MangaExtension.Forum.GetDescription() };
-			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<ForumTopic>>>(endpointParts);
-		}
-
-		#endregion GetMangaForumTopics
 
 		#region GetMangaMoreInfo
 
