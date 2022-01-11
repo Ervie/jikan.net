@@ -6,7 +6,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Model class representing collection of related anime entries.
 	/// </summary>
-	public class RelatedAnime
+	public class RelatedEntry
 	{
 		/// <summary>
 		/// Type of relation, e.g. "Adaptation" or "Side Story".
@@ -15,9 +15,9 @@ namespace JikanDotNet
 		public string Relation { get; set; }
 
 		/// <summary>
-		/// Collection of related anime of given relation type.
+		/// Collection of related anime/manga of given relation type.
 		/// </summary>
-		[JsonPropertyName("items")]
-		public ICollection<MalUrl> Items { get; set; }
+		[JsonPropertyName("entry")]
+		public ICollection<MalUrl> Entry { get; set; }
 	}
 }

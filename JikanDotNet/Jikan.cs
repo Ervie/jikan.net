@@ -452,7 +452,23 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<AnimeReview>>>(endpointParts);
 		}
 
-		#endregion GetAnimeReviews
+		#endregion GetAnimeReviewsAsync
+
+		#region GetAnimeRelationsAsync
+
+		/// <summary>
+		/// Returns collection of anime related entries.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <returns>Collection of anime related entries.</returns>
+		public async Task<PaginatedJikanResponse<ICollection<RelatedEntry>>> GetAnimeRelationsAsync(long id)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Anime, id.ToString(), AnimeExtension.Relations.GetDescription() };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<RelatedEntry>>>(endpointParts);
+		}
+
+		#endregion GetAnimeRelationsAsync
 
 		#endregion Anime methods
 

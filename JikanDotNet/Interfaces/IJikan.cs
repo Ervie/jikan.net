@@ -205,6 +205,17 @@ namespace JikanDotNet
 
 		#endregion GetAnimeReviewsAsync
 
+		#region GetAnimeRelationsAsync
+
+		/// <summary>
+		/// Returns collection of anime related entries.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <returns>Collection of anime related entries.</returns>
+		Task<PaginatedJikanResponse<ICollection<RelatedEntry>>> GetAnimeRelationsAsync(long id);
+
+		#endregion GetAnimeRelationsAsync
+
 		#endregion Anime requests
 
 		#region Manga requests
