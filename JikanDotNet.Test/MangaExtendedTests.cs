@@ -17,56 +17,6 @@ namespace JikanDotNet.Tests
 			_jikan = new Jikan();
 		}
 
-		[Theory]
-		[InlineData(long.MinValue)]
-		[InlineData(-1)]
-		[InlineData(0)]
-		public async Task GetMangaPictures_InvalidId_ShouldThrowValidationException(long id)
-		{
-			// When
-			Func<Task<MangaPictures>> func = _jikan.Awaiting(x => x.GetMangaPictures(id));
-
-			// Then
-			await func.Should().ThrowExactlyAsync<JikanValidationException>();
-		}
-
-		[Fact]
-		public async Task GetMangaPictures_MonsterId_ShouldParseMonsterImages()
-		{
-			// When
-			var monster = await _jikan.GetMangaPictures(1);
-
-			// Then
-			monster.Pictures.Should().HaveCount(8);
-		}
-
-		[Theory]
-		[InlineData(long.MinValue)]
-		[InlineData(-1)]
-		[InlineData(0)]
-		public async Task GetMangaStatistics_InvalidId_ShouldThrowValidationException(long id)
-		{
-			// When
-			Func<Task<MangaStats>> func = _jikan.Awaiting(x => x.GetMangaStatistics(id));
-
-			// Then
-			await func.Should().ThrowExactlyAsync<JikanValidationException>();
-		}
-
-		[Fact]
-		public async Task GetMangaStatistics_MonsterId_ShouldParseMonsterStats()
-		{
-			// When
-			var monster = await _jikan.GetMangaStatistics(1);
-
-			// Then
-			using (new AssertionScope())
-			{
-				monster.ScoreStats.Should().NotBeNull();
-				monster.Completed.Should().BeGreaterThan(25000);
-				monster.Dropped.Should().BeGreaterThan(500);
-			}
-		}
 
 		[Theory]
 		[InlineData(long.MinValue)]

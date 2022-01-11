@@ -1,11 +1,12 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace JikanDotNet
 {
 	/// <summary>
 	/// Manga related statistics model class.
 	/// </summary>
-	public class MangaStats: BaseJikanRequest
+	public class MangaStatistics
 	{
 		/// <summary>
 		/// Number of users who labeled manga status as "reading"
@@ -38,9 +39,15 @@ namespace JikanDotNet
 		public int? PlanToRead { get; set; }
 
 		/// <summary>
-		/// Number of users who added manga to their lists.
+		/// Total count of users who added anime to their lists.
+		/// </summary>
+		[JsonPropertyName("total")]
+		public int? Total { get; set; }
+
+		/// <summary>
+		/// Number of users who added anime to their lists.
 		/// </summary>
 		[JsonPropertyName("scores")]
-		public ScoringStatistics ScoreStats { get; set; }
+		public ICollection<ScoringStatistics> ScoreStats { get; set; }
 	}
 }

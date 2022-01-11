@@ -483,17 +483,17 @@ namespace JikanDotNet
 
 		#endregion GetMangaForumTopicsAsync
 
-		#region GetMangaPictures
+		#region GetMangaPicturesAsync
 
 		/// <inheritdoc />
-		public async Task<MangaPictures> GetMangaPictures(long id)
+		public async Task<BaseJikanResponse<ICollection<ImagesSet>>> GetMangaPicturesAsync(long id)
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Manga, id.ToString(), MangaExtension.Pictures.GetDescription() };
-			return await ExecuteGetRequestAsync<MangaPictures>(endpointParts);
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<ImagesSet>>>(endpointParts);
 		}
 
-		#endregion GetMangaPictures
+		#endregion GetMangaPicturesAsync
 
 		#region GetMangaGenre
 

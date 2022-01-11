@@ -283,27 +283,27 @@ namespace JikanDotNet
 
 		#endregion GetMangaForumTopicsAsync
 
-		#region GetMangaPictures
+		#region GetMangaPicturesAsync
 
 		/// <summary>
 		/// Returns collections of links to pictures related to manga with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of manga.</param>
 		/// <returns>Collections of links to pictures related to manga with given MAL id.</returns>
-		Task<MangaPictures> GetMangaPictures(long id);
+		Task<BaseJikanResponse<ICollection<ImagesSet>>> GetMangaPicturesAsync(long id);
 
-		#endregion GetMangaPictures
+		#endregion GetMangaPicturesAsync
 
-		#region GetMangaStatistics
+		#region GetMangaStatisticsAsync
 
 		/// <summary>
 		/// Returns statistics related to manga with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of manga.</param>
 		/// <returns>Statistics related to manga with given MAL id.</returns>
-		Task<MangaStats> GetMangaStatistics(long id);
+		Task<BaseJikanResponse<MangaStatistics>> GetMangaStatisticsAsync(long id);
 
-		#endregion GetMangaStatistics
+		#endregion GetMangaStatisticsAsync
 
 		#region GetMangaMoreInfo
 
