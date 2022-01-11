@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace JikanDotNet
 {
 	/// <summary>
-	/// Model class for anime character entry.
+	/// Manga characters list model class.
 	/// </summary>
-	public class AnimeCharacter
+	public class MangaCharacter : BaseJikanRequest
 	{
 		/// <summary>
 		/// Character details
@@ -19,11 +18,5 @@ namespace JikanDotNet
 		/// </summary>
 		[JsonPropertyName("role")]
 		public string Role { get; set; }
-
-		/// <summary>
-		/// Character's list of voice actor in this entry (anime only).
-		/// </summary>
-		[JsonPropertyName("voice_actors")]
-		public ICollection<VoiceActorEntry> VoiceActors { get; set; }
 	}
 }

@@ -242,6 +242,17 @@ namespace JikanDotNet
 
 		#endregion GetMangaAsync
 
+		#region GetMangaCharactersAsync
+
+		/// <summary>
+		/// Returns collections of characters appearing in manga with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of manga.</param>
+		/// <returns>Collections of characters appearing in manga with given MAL id.</returns>
+		Task<BaseJikanResponse<ICollection<MangaCharacter>>> GetMangaCharactersAsync(long id);
+
+		#endregion GetMangaCharactersAsync
+
 		#region GetMangaPictures
 
 		/// <summary>
@@ -252,17 +263,6 @@ namespace JikanDotNet
 		Task<MangaPictures> GetMangaPictures(long id);
 
 		#endregion GetMangaPictures
-
-		#region GetMangaCharacters
-
-		/// <summary>
-		/// Returns collections of characters appearing in manga with given MAL id.
-		/// </summary>
-		/// <param name="id">MAL id of manga.</param>
-		/// <returns>Collections of characters appearing in manga with given MAL id.</returns>
-		Task<MangaCharacters> GetMangaCharacters(long id);
-
-		#endregion GetMangaCharacters
 
 		#region GetMangaNews
 

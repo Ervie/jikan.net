@@ -44,39 +44,6 @@ namespace JikanDotNet.Tests
 		[InlineData(long.MinValue)]
 		[InlineData(-1)]
 		[InlineData(0)]
-		public async Task GetMangaCharacters_InvalidId_ShouldThrowValidationException(long id)
-		{
-			// When
-			Func<Task<MangaCharacters>> func = _jikan.Awaiting(x => x.GetMangaCharacters(id));
-
-			// Then
-			await func.Should().ThrowExactlyAsync<JikanValidationException>();
-		}
-
-		[Fact]
-		public async Task GetMangaCharacters_MonsterId_ShouldParseMonsterCharacters()
-		{
-			// When
-			var monster = await _jikan.GetMangaCharacters(1);
-
-			// Then
-			monster.Characters.Should().HaveCount(33);
-		}
-
-		[Fact]
-		public async Task GetMangaPictures_MonsterId_ShouldParseMonsterCharactersJohan()
-		{
-			// When
-			var monster = await _jikan.GetMangaCharacters(1);
-
-			// Then
-			monster.Characters.Select(x => x.Name).Should().Contain("Liebert, Johan");
-		}
-
-		[Theory]
-		[InlineData(long.MinValue)]
-		[InlineData(-1)]
-		[InlineData(0)]
 		public async Task GetMangaStatistics_InvalidId_ShouldThrowValidationException(long id)
 		{
 			// When
