@@ -72,33 +72,6 @@ namespace JikanDotNet.Tests
 		[InlineData(long.MinValue)]
 		[InlineData(-1)]
 		[InlineData(0)]
-		public async Task GetMangaNews_InvalidId_ShouldThrowValidationException(long id)
-		{
-			// When
-			Func<Task<MangaNews>> func = _jikan.Awaiting(x => x.GetMangaNews(id));
-
-			// Then
-			await func.Should().ThrowExactlyAsync<JikanValidationException>();
-		}
-
-		[Fact]
-		public async Task GetMangaNews_MonsterId_ShouldParseMonsterNews()
-		{
-			// When
-			var monster = await _jikan.GetMangaNews(1);
-
-			// Then
-			using (new AssertionScope())
-			{
-				monster.News.Should().HaveCount(11);
-				monster.News.Select(x => x.Author).Should().Contain("Xinil");
-			}
-		}
-
-		[Theory]
-		[InlineData(long.MinValue)]
-		[InlineData(-1)]
-		[InlineData(0)]
 		public async Task GetMangaForumTopics_InvalidId_ShouldThrowValidationException(long id)
 		{
 			// When

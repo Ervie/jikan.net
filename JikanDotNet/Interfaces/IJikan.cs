@@ -253,6 +253,25 @@ namespace JikanDotNet
 
 		#endregion GetMangaCharactersAsync
 
+		#region GetMangaNewsAsync
+
+		/// <summary>
+		/// Returns collections of news related to manga with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of manga.</param>
+		/// <returns>Collections of news related to manga with given MAL id.</returns>
+		Task<PaginatedJikanResponse<ICollection<News>>> GetMangaNewsAsync(long id);
+
+		/// <summary>
+		/// Returns collections of news related to manga with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of manga.</param>
+		/// <param name="page">Index of page folding 100 records of top ranging (e.g. 1 will return first 100 records, 2 will return record from 101 to 200 etc.)</param>
+		/// <returns>Collections of news related to manga with given MAL id.</returns>
+		Task<PaginatedJikanResponse<ICollection<News>>> GetMangaNewsAsync(long id, int page);
+
+		#endregion GetMangaNewsAsync
+
 		#region GetMangaPictures
 
 		/// <summary>
@@ -263,17 +282,6 @@ namespace JikanDotNet
 		Task<MangaPictures> GetMangaPictures(long id);
 
 		#endregion GetMangaPictures
-
-		#region GetMangaNews
-
-		/// <summary>
-		/// Returns collections of news related to manga with given MAL id.
-		/// </summary>
-		/// <param name="id">MAL id of manga.</param>
-		/// <returns>Collections of news related to manga with given MAL id.</returns>
-		Task<MangaNews> GetMangaNews(long id);
-
-		#endregion GetMangaNews
 
 		#region GetMangaStatistics
 

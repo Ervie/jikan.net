@@ -8,20 +8,15 @@ namespace JikanDotNet
 	public class PaginatedJikanResponse<TResponse> : BaseJikanResponse<TResponse>
 	{
 		/// <summary>
-		/// Last visible page
+		/// Pagination
 		/// </summary>
-		[JsonPropertyName("last_visible_page")]
-		public int LastVisiblePage { get; set; }
-
-		/// <summary>
-		/// Has next page
-		/// </summary>
-		[JsonPropertyName("has_nextPage")]
-		public bool HasNextPage { get; set; }
+		[JsonPropertyName("pagination")]
+		public Pagination Pagination { get; set; }
 
 		/// <summary>
 		/// Parametereless constructor, required for serialization
 		/// </summary>
-		public PaginatedJikanResponse() { }
+		public PaginatedJikanResponse()
+		{ }
 	}
 }

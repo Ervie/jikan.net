@@ -436,6 +436,41 @@ namespace JikanDotNet
 
 		#endregion GetMangaAsync
 
+		#region GetMangaCharactersAsync
+
+		/// <inheritdoc />
+		public async Task<BaseJikanResponse<ICollection<MangaCharacter>>> GetMangaCharactersAsync(long id)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Manga, id.ToString(), MangaExtension.Characters.GetDescription() };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<MangaCharacter>>>(endpointParts);
+		}
+
+		#endregion GetMangaCharactersAsync
+
+		#region GetMangaNewsAsync
+
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<News>>> GetMangaNewsAsync(long id)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Manga, id.ToString(), MangaExtension.News.GetDescription() };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<News>>>(endpointParts);
+		}
+
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<News>>> GetMangaNewsAsync(long id, int page)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			Guard.IsGreaterThanZero(page, nameof(page));
+
+			var queryParams = $"?page={page}";
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Manga, id.ToString(), MangaExtension.News.GetDescription() + queryParams };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<News>>>(endpointParts);
+		}
+
+		#endregion GetMangaNewsAsync
+
 		#region GetMangaPictures
 
 		/// <inheritdoc />
@@ -447,18 +482,6 @@ namespace JikanDotNet
 		}
 
 		#endregion GetMangaPictures
-
-		#region GetMangaCharacters
-
-		/// <inheritdoc />
-		public async Task<MangaCharacters> GetMangaCharacters(long id)
-		{
-			Guard.IsGreaterThanZero(id, nameof(id));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Manga, id.ToString(), MangaExtension.Characters.GetDescription() };
-			return await ExecuteGetRequestAsync<MangaCharacters>(endpointParts);
-		}
-
-		#endregion GetMangaCharacters
 
 		#region GetMangaGenre
 
@@ -497,18 +520,6 @@ namespace JikanDotNet
 		}
 
 		#endregion GetMangaGenre
-
-		#region GetMangaNews
-
-		/// <inheritdoc />
-		public async Task<MangaNews> GetMangaNews(long id)
-		{
-			Guard.IsGreaterThanZero(id, nameof(id));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Manga, id.ToString(), MangaExtension.News.GetDescription() };
-			return await ExecuteGetRequestAsync<MangaNews>(endpointParts);
-		}
-
-		#endregion GetMangaNews
 
 		#region GetMangaStatistics
 
