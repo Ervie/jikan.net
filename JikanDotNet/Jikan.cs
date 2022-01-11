@@ -557,6 +557,29 @@ namespace JikanDotNet
 
 		#endregion GetMangaMoreInfoAsync
 
+		#region GetMangaUserUpdatesAsync
+
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<MangaUserUpdate>>> GetMangaUserUpdatesAsync(long id)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Manga, id.ToString(), MangaExtension.UserUpdates.GetDescription() };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<MangaUserUpdate>>>(endpointParts);
+		}
+
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<MangaUserUpdate>>> GetMangaUserUpdatesAsync(long id, int page)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			Guard.IsGreaterThanZero(page, nameof(page));
+
+			var queryParams = $"?page={page}";
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Manga, id.ToString(), MangaExtension.UserUpdates.GetDescription() + queryParams };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<MangaUserUpdate>>>(endpointParts);
+		}
+
+		#endregion GetMangaUserUpdatesAsync
+
 		#region GetMangaRecommendationsAsync
 
 		/// <inheritdoc />
@@ -589,27 +612,6 @@ namespace JikanDotNet
 		}
 
 		#endregion GetMangaReviews
-
-		#region GetMangaUserUpdates
-
-		/// <inheritdoc />
-		public async Task<MangaUserUpdates> GetMangaUserUpdates(long id)
-		{
-			Guard.IsGreaterThanZero(id, nameof(id));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Manga, id.ToString(), MangaExtension.UserUpdates.GetDescription() };
-			return await ExecuteGetRequestAsync<MangaUserUpdates>(endpointParts);
-		}
-
-		/// <inheritdoc />
-		public async Task<MangaUserUpdates> GetMangaUserUpdates(long id, int page)
-		{
-			Guard.IsGreaterThanZero(id, nameof(id));
-			Guard.IsGreaterThanZero(page, nameof(page));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Manga, id.ToString(), MangaExtension.UserUpdates.GetDescription(), page.ToString() };
-			return await ExecuteGetRequestAsync<MangaUserUpdates>(endpointParts);
-		}
-
-		#endregion GetMangaUserUpdates
 
 		#endregion Manga methods
 

@@ -93,37 +93,5 @@ namespace JikanDotNet.Tests
 				berserk.Reviews.First().Reviewer.Scores.Story.Should().Be(5);
 			}
 		}
-
-		[Fact]
-		public async Task GetMangaUserUpdates_MonsterId_ShouldParseMonsterUserUpdates()
-		{
-			// When
-			var monster = await _jikan.GetMangaUserUpdates(1);
-
-			// Then
-			var firstUpdate = monster.Updates.First();
-			using (new AssertionScope())
-			{
-				monster.Updates.Should().HaveCount(75);
-				firstUpdate.Date.Value.Should().BeBefore(DateTime.Now);
-				firstUpdate.ChaptersTotal.Should().Be(162);
-			}
-		}
-
-		[Fact]
-		public async Task GetMangaUserUpdates_MonsterIdSecondPage_ShouldParseMonsterUserUpdatesPaged()
-		{
-			// When
-			var monster = await _jikan.GetMangaUserUpdates(1, 2);
-
-			// Then
-			var firstUpdate = monster.Updates.First();
-			using (new AssertionScope())
-			{
-				monster.Updates.Should().HaveCount(75);
-				firstUpdate.Date.Value.Should().BeBefore(DateTime.Now);
-				firstUpdate.ChaptersTotal.Should().Be(162);
-			}
-		}
 	}
 }

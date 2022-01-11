@@ -327,6 +327,25 @@ namespace JikanDotNet
 
 		#endregion GetMangaRecommendationsAsync
 
+		#region GetMangaUserUpdatesAsync
+
+		/// <summary>
+		/// Returns collection of manga user updates.
+		/// </summary>
+		/// <param name="id">MAL id of manga.</param>
+		/// <returns>Collection of manga user updates.</returns>
+		Task<PaginatedJikanResponse<ICollection<MangaUserUpdate>>> GetMangaUserUpdatesAsync(long id);
+
+		/// <summary>
+		/// Returns collection of manga user updates.
+		/// </summary>
+		/// <param name="id">MAL id of manga.</param>
+		/// <param name="page">Index of page folding 75 records of top ranging (e.g. 1 will return first 75 records, 2 will return record from 76 to 150 etc.)</param>
+		/// <returns>Collection of manga user updates.</returns>
+		Task<PaginatedJikanResponse<ICollection<MangaUserUpdate>>> GetMangaUserUpdatesAsync(long id, int page);
+
+		#endregion GetMangaUserUpdatesAsync
+
 		#region GetMangaReviews
 
 		/// <summary>
@@ -345,25 +364,6 @@ namespace JikanDotNet
 		Task<MangaReviews> GetMangaReviews(long id, int page);
 
 		#endregion GetMangaReviews
-
-		#region GetMangaUserUpdates
-
-		/// <summary>
-		/// Returns collection of manga user updates.
-		/// </summary>
-		/// <param name="id">MAL id of manga.</param>
-		/// <returns>Collection of manga user updates.</returns>
-		Task<MangaUserUpdates> GetMangaUserUpdates(long id);
-
-		/// <summary>
-		/// Returns collection of manga user updates.
-		/// </summary>
-		/// <param name="id">MAL id of manga.</param>
-		/// <param name="page">Index of page folding 75 records of top ranging (e.g. 1 will return first 75 records, 2 will return record from 76 to 150 etc.)</param>
-		/// <returns>Collection of manga user updates.</returns>
-		Task<MangaUserUpdates> GetMangaUserUpdates(long id, int page);
-
-		#endregion GetMangaUserUpdates
 
 		#endregion Manga requests
 
