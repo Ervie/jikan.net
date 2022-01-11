@@ -216,6 +216,17 @@ namespace JikanDotNet
 
 		#endregion GetAnimeRelationsAsync
 
+		#region GetAnimeThemesAsync
+
+		/// <summary>
+		/// Returns collection of anime openings and endings.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <returns>Collection of anime openings and endings.</returns>
+		Task<BaseJikanResponse<AnimeThemes>> GetAnimeThemesAsync(long id);
+
+		#endregion GetAnimeThemesAsync
+
 		#endregion Anime requests
 
 		#region Manga requests

@@ -89,6 +89,12 @@ namespace JikanDotNet
 		/// Relations extension, return related mangas/anime.
 		/// </summary>
 		[Description("relations")]
-		Relations
+		Relations,
+
+		/// <summary>
+		/// Themes extension, return openings and endings.
+		/// </summary>
+		[Description("themes")]
+		Themes
 	}
 }

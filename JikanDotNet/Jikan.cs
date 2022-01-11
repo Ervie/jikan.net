@@ -358,7 +358,7 @@ namespace JikanDotNet
 			Guard.IsGreaterThanZero(page, nameof(page));
 
 			var queryParams = $"?page={page}";
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Anime, id.ToString(), AnimeExtension.Reviews.GetDescription() + queryParams};
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Anime, id.ToString(), AnimeExtension.Reviews.GetDescription() + queryParams };
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<AnimeReview>>>(endpointParts);
 		}
 
@@ -375,6 +375,22 @@ namespace JikanDotNet
 		}
 
 		#endregion GetAnimeRelationsAsync
+
+		#region GetAnimeThemesAsync
+
+		/// <summary>
+		/// Returns collection of anime openings and endings.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <returns>Collection of anime openings and endings.</returns>
+		public async Task<BaseJikanResponse<AnimeThemes>> GetAnimeThemesAsync(long id)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Anime, id.ToString(), AnimeExtension.Themes.GetDescription() };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<AnimeThemes>>(endpointParts);
+		}
+
+		#endregion GetAnimeThemesAsync
 
 		#endregion Anime methods
 
