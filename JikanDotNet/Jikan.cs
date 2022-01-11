@@ -424,17 +424,17 @@ namespace JikanDotNet
 
 		#region Manga methods
 
-		#region GetManga
+		#region GetMangaAsync
 
 		/// <inheritdoc />
-		public async Task<Manga> GetManga(long id)
+		public async Task<BaseJikanResponse<Manga>> GetMangaAsync(long id)
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Manga, id.ToString() };
-			return await ExecuteGetRequestAsync<Manga>(endpointParts);
+			return await ExecuteGetRequestAsync<BaseJikanResponse<Manga>>(endpointParts);
 		}
 
-		#endregion GetManga
+		#endregion GetMangaAsync
 
 		#region GetMangaPictures
 

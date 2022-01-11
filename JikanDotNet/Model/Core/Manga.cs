@@ -6,7 +6,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Manga model class.
 	/// </summary>
-	public class Manga: BaseJikanRequest
+	public class Manga
 	{
 		/// <summary>
 		/// ID associated with MyAnimeList.
@@ -18,7 +18,7 @@ namespace JikanDotNet
 		/// Manga's canonical link.
 		/// </summary>
 		[JsonPropertyName("url")]
-		public string LinkCanonical { get; set; }
+		public string Url { get; set; }
 
 		/// <summary>
 		/// Title of the manga.
@@ -45,10 +45,10 @@ namespace JikanDotNet
 		public ICollection<string> TitleSynonyms { get; set; }
 
 		/// <summary>
-		/// Manga's image URL
+		/// Manga's images in various formats.
 		/// </summary>
-		[JsonPropertyName("image_url")]
-		public string ImageURL { get; set; }
+		[JsonPropertyName("images")]
+		public ImagesSet Images { get; set; }
 
 		/// <summary>
 		/// Manga's status (e. g. "Finished").
@@ -75,7 +75,7 @@ namespace JikanDotNet
 		public int? Chapters { get; set; }
 
 		/// <summary>
-		/// Is manga currently being published..
+		/// Is manga currently being published.
 		/// </summary>
 		[JsonPropertyName("publishing")]
 		public bool Publishing { get; set; }
@@ -90,7 +90,7 @@ namespace JikanDotNet
 		/// Manga's score on MyAnimeList up to 2 decimal places.
 		/// </summary>
 		[JsonPropertyName("score")]
-		public float? Score { get; set; }
+		public decimal? Score { get; set; }
 
 		/// <summary>
 		/// Number of people the manga has been scored by.
@@ -135,12 +135,6 @@ namespace JikanDotNet
 		public string Background { get; set; }
 
 		/// <summary>
-		/// Manga's related items (anime, manga, spin offs, etc.)
-		/// </summary>
-		[JsonPropertyName("related")]
-		public RelatedManga Related { get; set; }
-
-		/// <summary>
 		/// Manga's genres numerically indexed with array values.
 		/// </summary>
 		[JsonPropertyName("genres")]
@@ -157,5 +151,23 @@ namespace JikanDotNet
 		/// </summary>
 		[JsonPropertyName("serializations")]
 		public ICollection<MalUrl> Serializations { get; set; }
+
+		/// <summary>
+		/// Explicit genres
+		/// </summary>
+		[JsonPropertyName("explicit_genres")]
+		public ICollection<MalUrl> ExplicitGenres { get; set; }
+
+		/// <summary>
+		/// Manga's themes
+		/// </summary>
+		[JsonPropertyName("themes")]
+		public ICollection<MalUrl> Themes { get; set; }
+
+		/// <summary>
+		/// Manga's demographics
+		/// </summary>
+		[JsonPropertyName("demographics")]
+		public ICollection<MalUrl> Demographics { get; set; }
 	}
 }

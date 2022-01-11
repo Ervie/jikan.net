@@ -16,20 +16,20 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public void GetAnime_WrongIdDoNotSurpressExceptions_ShouldThrowJikanRequestExceptionGetAnime()
+		public void GetAnimeAsync_WrongIdDoNotSurpressExceptions_ShouldThrowJikanRequestExceptionGetAnime()
 		{
 			// When
-			Func<Task<BaseJikanResponse<Anime>>> func = _jikan.Awaiting(x => x.GetAnimeAsync(2));
+			var func = _jikan.Awaiting(x => x.GetAnimeAsync(2));
 
 			// Then
 			func.Should().ThrowExactlyAsync<JikanRequestException>();
 		}
 
 		[Fact]
-		public void GetManga_WrongIdDoNotSurpressExceptions_ShouldThrowJikanRequestExceptionGetManga()
+		public void GetMangaAsync_WrongIdDoNotSurpressExceptions_ShouldThrowJikanRequestExceptionGetManga()
 		{
 			// When
-			Func<Task<Manga>> func = _jikan.Awaiting(x => x.GetManga(5));
+			var func = _jikan.Awaiting(x => x.GetMangaAsync(5));
 
 			// Then
 			func.Should().ThrowExactlyAsync<JikanRequestException>();

@@ -231,16 +231,16 @@ namespace JikanDotNet
 
 		#region Manga requests
 
-		#region GetManga
+		#region GetMangaAsync
 
 		/// <summary>
 		/// Returns manga with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of manga.</param>
 		/// <returns>Manga with given MAL id.</returns>
-		Task<Manga> GetManga(long id);
+		Task<BaseJikanResponse<Manga>> GetMangaAsync(long id);
 
-		#endregion GetManga
+		#endregion GetMangaAsync
 
 		#region GetMangaPictures
 
