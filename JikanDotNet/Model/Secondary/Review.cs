@@ -18,7 +18,13 @@ namespace JikanDotNet
 		/// Review's URL.
 		/// </summary>
 		[JsonPropertyName("url")]
-		public string URL { get; set; }
+		public string Url { get; set; }
+
+		/// <summary>
+		/// Review's type.
+		/// </summary>
+		[JsonPropertyName("type")]
+		public string Type { get; set; }
 
 		/// <summary>
 		/// Date of review creation.
@@ -29,13 +35,19 @@ namespace JikanDotNet
 		/// <summary>
 		/// Review's content.
 		/// </summary>
-		[JsonPropertyName("content")]
+		[JsonPropertyName("review")]
 		public string Content { get; set; }
 
 		/// <summary>
-		/// Number of times the review was marked as helpful.
+		/// Count of votes when the review was marked as helpful.
 		/// </summary>
-		[JsonPropertyName("helpful_count")]
-		public int? HelpfulCount { get; set; }
+		[JsonPropertyName("votes")]
+		public int? Votes { get; set; }
+
+		/// <summary>
+		/// Reviewwing user
+		/// </summary>
+		[JsonPropertyName("user")]
+		public UserMetadata User { get; set; }
 	}
 }

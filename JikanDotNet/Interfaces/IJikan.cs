@@ -186,14 +186,14 @@ namespace JikanDotNet
 
 		#endregion GetAnimeUserUpdatesAsync
 
-		#region GetAnimeReviews
+		#region GetAnimeReviewsAsync
 
 		/// <summary>
 		/// Returns collection of anime reviews.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
 		/// <returns>Collection of anime reviews.</returns>
-		Task<AnimeReviews> GetAnimeReviews(long id);
+		Task<PaginatedJikanResponse<ICollection<AnimeReview>>> GetAnimeReviewsAsync(long id);
 
 		/// <summary>
 		/// Returns collection of anime reviews.
@@ -201,9 +201,9 @@ namespace JikanDotNet
 		/// <param name="id">MAL id of anime.</param>
 		/// <param name="page">Index of page folding 20 records of top ranging (e.g. 1 will return first 20 records, 2 will return record from 21 to 40 etc.)</param>
 		/// <returns>Collection of anime reviews.</returns>
-		Task<AnimeReviews> GetAnimeReviews(long id, int page);
+		Task<PaginatedJikanResponse<ICollection<AnimeReview>>> GetAnimeReviewsAsync(long id, int page);
 
-		#endregion GetAnimeReviews
+		#endregion GetAnimeReviewsAsync
 
 		#endregion Anime requests
 

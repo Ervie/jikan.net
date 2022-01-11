@@ -231,7 +231,7 @@ namespace JikanDotNet.Tests
 			{
 				berserk.Reviews.First().Reviewer.Username.Should().Be("TheCriticsClub");
 				berserk.Reviews.First().MalId.Should().Be(4403);
-				berserk.Reviews.First().HelpfulCount.Should().BeGreaterThan(1200);
+				berserk.Reviews.First().Votes.Should().BeGreaterThan(1200);
 
 				berserk.Reviews.First().Reviewer.Scores.Overall.Should().Be(10);
 				berserk.Reviews.First().Reviewer.Scores.Story.Should().Be(9);
@@ -276,7 +276,7 @@ namespace JikanDotNet.Tests
 				berserk.Reviews.First().Reviewer.Username.Should().Be("Sibi_Gowtham");
 				berserk.Reviews.First().MalId.Should().Be(261738);
 				berserk.Reviews.First().Reviewer.ChaptersRead.Should().Be(351);
-				berserk.Reviews.First().HelpfulCount.Should().BeGreaterThan(15);
+				berserk.Reviews.First().Votes.Should().BeGreaterThan(15);
 
 				berserk.Reviews.First().Reviewer.Scores.Overall.Should().Be(4);
 				berserk.Reviews.First().Reviewer.Scores.Story.Should().Be(5);

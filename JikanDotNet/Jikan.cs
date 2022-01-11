@@ -422,18 +422,18 @@ namespace JikanDotNet
 
 		#endregion GetAnimeUserUpdatesAsync
 
-		#region GetAnimeReviews
+		#region GetAnimeReviewsAsync
 
 		/// <summary>
 		/// Returns collection of anime reviews.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
 		/// <returns>Collection of anime reviews.</returns>
-		public async Task<AnimeReviews> GetAnimeReviews(long id)
+		public async Task<PaginatedJikanResponse<ICollection<AnimeReview>>> GetAnimeReviewsAsync(long id)
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
 			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Anime, id.ToString(), AnimeExtension.Reviews.GetDescription() };
-			return await ExecuteGetRequestAsync<AnimeReviews>(endpointParts);
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<AnimeReview>>>(endpointParts);
 		}
 
 		/// <summary>
@@ -442,12 +442,14 @@ namespace JikanDotNet
 		/// <param name="id">MAL id of anime.</param>
 		/// <param name="page">Index of page folding 20 records (e.g. 1 will return first 20 records, 2 will return record from 21 to 40 etc.)</param>
 		/// <returns>Collection of anime reviews.</returns>
-		public async Task<AnimeReviews> GetAnimeReviews(long id, int page)
+		public async Task<PaginatedJikanResponse<ICollection<AnimeReview>>> GetAnimeReviewsAsync(long id, int page)
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
 			Guard.IsGreaterThanZero(page, nameof(page));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Anime, id.ToString(), AnimeExtension.Reviews.GetDescription(), page.ToString() };
-			return await ExecuteGetRequestAsync<AnimeReviews>(endpointParts);
+
+			var queryParams = $"?page={page}";
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Anime, id.ToString(), AnimeExtension.Reviews.GetDescription() + queryParams};
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<AnimeReview>>>(endpointParts);
 		}
 
 		#endregion GetAnimeReviews

@@ -8,9 +8,15 @@ namespace JikanDotNet
 	public class AnimeReview : Review
 	{
 		/// <summary>
-		/// Reviewer.
+		/// Scores from the review.
 		/// </summary>
-		[JsonPropertyName("reviewer")]
-		public AnimeReviewer Reviewer { get; set; }
+		[JsonPropertyName("scores")]
+		public AnimeReviewScores Scores { get; set; }
+
+		/// <summary>
+		/// Number of episodes watched by the reviewer.
+		/// </summary>
+		[JsonPropertyName("episodes_watched")]
+		public int? EpisodesWatched { get; set; }
 	}
 }
