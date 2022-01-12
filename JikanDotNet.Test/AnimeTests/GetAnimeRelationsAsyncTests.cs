@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using FluentAssertions.Execution;
 using JikanDotNet.Exceptions;
 using System.Threading.Tasks;
 using Xunit;
@@ -35,6 +36,7 @@ namespace JikanDotNet.Tests.AnimeTests
 			var bebop = await _jikan.GetAnimeRelationsAsync(1);
 
 			// Then
+			using var _ = new AssertionScope();
 			bebop.Data.Should().HaveCount(3);
 			bebop.Data.Should().ContainSingle(x => x.Relation.Equals("Adaptation") && x.Entry.Count == 2);
 			bebop.Data.Should().ContainSingle(x => x.Relation.Equals("Side story") && x.Entry.Count == 2);

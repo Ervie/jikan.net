@@ -65,6 +65,12 @@ namespace JikanDotNet
 		/// User Updates extension, return extra information about user updates stored in "stats" tab of anime.
 		/// </summary>
 		[Description("userupdates")]
-		UserUpdates
+		UserUpdates,
+
+		/// <summary>
+		/// Relations extension, return related mangas/anime.
+		/// </summary>
+		[Description("relations")]
+		Relations
 	}
 }

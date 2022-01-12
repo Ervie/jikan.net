@@ -604,6 +604,18 @@ namespace JikanDotNet
 
 		#endregion GetMangaReviewsAsync
 
+		#region GetMangaRelationsAsync
+
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<RelatedEntry>>> GetMangaRelationsAsync(long id)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Manga, id.ToString(), MangaExtension.Relations.GetDescription() };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<RelatedEntry>>>(endpointParts);
+		}
+
+		#endregion GetMangaRelationsAsync
+
 		#endregion Manga methods
 
 		#region Person methods
