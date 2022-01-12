@@ -45,7 +45,7 @@ namespace JikanDotNet
 		public int? Votes { get; set; }
 
 		/// <summary>
-		/// Reviewwing user
+		/// Reviewing user.
 		/// </summary>
 		[JsonPropertyName("user")]
 		public UserMetadata User { get; set; }
