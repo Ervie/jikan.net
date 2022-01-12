@@ -396,29 +396,65 @@ namespace JikanDotNet
 
 		#region Character methods
 
-		#region GetCharacter
+		#region GetCharacterAsync
 
 		/// <inheritdoc />
-		public async Task<Character> GetCharacter(long id)
+		public async Task<BaseJikanResponse<Character>> GetCharacterAsync(long id)
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Character, id.ToString() };
-			return await ExecuteGetRequestAsync<Character>(endpointParts);
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Characters, id.ToString() };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<Character>>(endpointParts);
 		}
 
-		#endregion GetCharacter
+		#endregion GetCharacterAsync
 
-		#region GetCharacterPictures
+		#region GetCharacterAnimeAsync
 
 		/// <inheritdoc />
-		public async Task<CharacterPictures> GetCharacterPictures(long id)
+		public async Task<BaseJikanResponse<ICollection<CharacterAnimeography>>> GetCharacterAnimeAsync(long id)
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Character, id.ToString(), CharacterExtension.Pictures.GetDescription() };
-			return await ExecuteGetRequestAsync<CharacterPictures>(endpointParts);
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Characters, id.ToString(), CharacterExtension.Anime.GetDescription() };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<CharacterAnimeography>>>(endpointParts);
 		}
 
-		#endregion GetCharacterPictures
+		#endregion GetCharacterAnimeAsync
+
+		#region GetCharacterMangaAsync
+
+		/// <inheritdoc />
+		public async Task<BaseJikanResponse<ICollection<CharacterMangaography>>> GetCharacterMangaAsync(long id)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Characters, id.ToString(), CharacterExtension.Manga.GetDescription() };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<CharacterMangaography>>>(endpointParts);
+		}
+
+		#endregion GetCharacterMangaAsync
+
+		#region GetCharacterVoiceActorsAsync
+
+		/// <inheritdoc />
+		public async Task<BaseJikanResponse<ICollection<VoiceActorEntry>>> GetCharacterVoiceActorsAsync(long id)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Characters, id.ToString(), CharacterExtension.Voices.GetDescription() };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<VoiceActorEntry>>>(endpointParts);
+		}
+
+		#endregion GetCharacterVoiceActorsAsync
+
+		#region GetCharacterPicturesAsync
+
+		/// <inheritdoc />
+		public async Task<BaseJikanResponse<ICollection<ImagesSet>>> GetCharacterPicturesAsync(long id)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Characters, id.ToString(), CharacterExtension.Pictures.GetDescription() };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<ImagesSet>>>(endpointParts);
+		}
+
+		#endregion GetCharacterPicturesAsync
 
 		#endregion Character methods
 

@@ -17,6 +17,6 @@ namespace JikanDotNet
 		/// Voice actor's details.
 		/// </summary>
 		[JsonPropertyName("person")]
-		public PersonEntry Person { get; set; }
+		public MalImageSubItem Person { get; set; }
 	}
 }

@@ -11,13 +11,13 @@ namespace JikanDotNet
 		/// Anime associated with voice acting role.
 		/// </summary>
 		[JsonPropertyName("anime")]
-		public MALImageSubItem Anime { get; set; }
+		public MalImageSubItem Anime { get; set; }
 
 		/// <summary>
 		/// Character associated with voice acting role.
 		/// </summary>
 		[JsonPropertyName("character")]
-		public MALImageSubItem Character { get; set; }
+		public MalImageSubItem Character { get; set; }
 
 		/// <summary>
 		/// Status of the role: Main/Supporting.

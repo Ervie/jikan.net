@@ -12,24 +12,24 @@ namespace JikanDotNet
 		/// User's favorite anime.
 		/// </summary>
 		[JsonPropertyName("anime")]
-		public ICollection<MALImageSubItem> Anime { get; set; }
+		public ICollection<MalImageSubItem> Anime { get; set; }
 
 		/// <summary>
 		/// User's favorite manga.
 		/// </summary>
 		[JsonPropertyName("manga")]
-		public ICollection<MALImageSubItem> Manga { get; set; }
+		public ICollection<MalImageSubItem> Manga { get; set; }
 
 		/// <summary>
 		/// User's favorite characters.
 		/// </summary>
 		[JsonPropertyName("characters")]
-		public ICollection<MALImageSubItem> Characters { get; set; }
+		public ICollection<MalImageSubItem> Characters { get; set; }
 
 		/// <summary>
 		/// User's favorite people.
 		/// </summary>
 		[JsonPropertyName("people")]
-		public ICollection<MALImageSubItem> People { get; set; }
+		public ICollection<MalImageSubItem> People { get; set; }
 	}
 }

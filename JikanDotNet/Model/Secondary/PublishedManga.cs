@@ -11,7 +11,7 @@ namespace JikanDotNet
 		/// Published manga.
 		/// </summary>
 		[JsonPropertyName("manga")]
-		public MALImageSubItem Manga { get; set; }
+		public MalImageSubItem Manga { get; set; }
 
 		/// <summary>
 		/// Position associated with published manga.

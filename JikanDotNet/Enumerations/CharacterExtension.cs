@@ -17,6 +17,24 @@ namespace JikanDotNet
 		/// Pictures extension, return extra images of character.
 		/// </summary>
 		[Description("pictures")]
-		Pictures
+		Pictures,
+
+		/// <summary>
+		/// Anime extension, return animeography of character.
+		/// </summary>
+		[Description("anime")]
+		Anime,
+
+		/// <summary>
+		/// Manga extension, return mangaography of character.
+		/// </summary>
+		[Description("manga")]
+		Manga,
+
+		/// <summary>
+		/// Voices extension, return list of voice actors of a characters.
+		/// </summary>
+		[Description("voices")]
+		Voices
 	}
 }

@@ -372,27 +372,60 @@ namespace JikanDotNet
 
 		#region Character requests
 
-		#region GetCharacter
+		#region GetCharacterAsync
 
 		/// <summary>
 		/// Returns character with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of character.</param>
 		/// <returns>Character with given MAL id.</returns>
-		Task<Character> GetCharacter(long id);
+		Task<BaseJikanResponse<Character>> GetCharacterAsync(long id);
 
-		#endregion GetCharacter
+		#endregion GetCharacterAsync
 
-		#region GetCharacterPictures
+		#region GetCharacterAnimeAsync
+
+		/// <summary>
+		/// Returns return animeography of character with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of character.</param>
+		/// <returns>Collection of anime where character has appeared.</returns>
+		Task<BaseJikanResponse<ICollection<CharacterAnimeography>>> GetCharacterAnimeAsync(long id);
+
+		#endregion GetCharacterAnimeAsync
+
+		#region GetCharacterMangaAsync
+
+		/// <summary>
+		/// Returns return mangaography of character with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of character.</param>
+		/// <returns>Collection of manga where character has appeared.</returns>
+		Task<BaseJikanResponse<ICollection<CharacterMangaography>>> GetCharacterMangaAsync(long id);
+
+		#endregion GetCharacterMangaAsync
+
+		#region GetCharacterVoiceActorsAsync
+
+		/// <summary>
+		/// Returns return voice actors of character with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of character.</param>
+		/// <returns>Collection of voice acotrs voicing character.</returns>
+		Task<BaseJikanResponse<ICollection<VoiceActorEntry>>> GetCharacterVoiceActorsAsync(long id);
+
+		#endregion GetCharacterVoiceActorsAsync
+
+		#region GetCharacterPicturesAsync
 
 		/// <summary>
 		/// Returns collections of links to pictures related to character with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of character.</param>
 		/// <returns>Collections of links to pictures related to character with given MAL id.</returns>
-		Task<CharacterPictures> GetCharacterPictures(long id);
+		Task<BaseJikanResponse<ICollection<ImagesSet>>> GetCharacterPicturesAsync(long id);
 
-		#endregion GetCharacterPictures
+		#endregion GetCharacterPicturesAsync
 
 		#endregion Character requests
 

@@ -1,12 +1,12 @@
-﻿using System.Text.Json.Serialization;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace JikanDotNet
 {
 	/// <summary>
 	/// Character model class.
 	/// </summary>
-	public class Character: BaseJikanRequest
+	public class Character
 	{
 		/// <summary>
 		/// ID associated with MyAnimeList.
@@ -15,22 +15,16 @@ namespace JikanDotNet
 		public long MalId { get; set; }
 
 		/// <summary>
-		/// Character's canonical link.
+		/// Character's page url.
 		/// </summary>
 		[JsonPropertyName("url")]
-		public string LinkCanonical { get; set; }
+		public string Url { get; set; }
 
 		/// <summary>
 		/// Character's name.
 		/// </summary>
 		[JsonPropertyName("name")]
 		public string Name { get; set; }
-
-		/// <summary>
-		/// Character's name in kanji.
-		/// </summary>
-		[JsonPropertyName("name_kanji")]
-		public string NameKanji { get; set; }
 
 		/// <summary>
 		/// Character's nicknames.
@@ -47,31 +41,13 @@ namespace JikanDotNet
 		/// <summary>
 		/// Character favourite count on MyAnimeList.
 		/// </summary>
-		[JsonPropertyName("member_favorites")]
-		public int? MemberFavorites { get; set; }
+		[JsonPropertyName("favorites")]
+		public int? Favorites { get; set; }
 
 		/// <summary>
-		/// Character's image URL
+		/// Character's image set
 		/// </summary>
-		[JsonPropertyName("image_url")]
-		public string ImageURL { get; set; }
-
-		/// <summary>
-		/// Character's animeography.
-		/// </summary>
-		[JsonPropertyName("animeography")]
-		public ICollection<MALImageSubItem> Animeography { get; set; }
-
-		/// <summary>
-		/// Character's mangaography.
-		/// </summary>
-		[JsonPropertyName("mangaography")]
-		public ICollection<MALImageSubItem> Mangaography { get; set; }
-
-		/// <summary>
-		/// Character's voice actors.
-		/// </summary>
-		[JsonPropertyName("voice_actors")]
-		public ICollection<VoiceActorEntry> VoiceActors { get; set; }
+		[JsonPropertyName("images")]
+		public ImagesSet Images { get; set; }
 	}
 }

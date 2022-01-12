@@ -12,7 +12,7 @@ namespace JikanDotNet
 		/// Person details.
 		/// </summary>
 		[JsonPropertyName("person")]
-		public PersonEntry Person { get; set; }
+		public MalImageSubItem Person { get; set; }
 
 		/// <summary>
 		/// Positions associated with staff member.

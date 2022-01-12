@@ -5,7 +5,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Model class representing sub item on MyAnimeList with image.
 	/// </summary>
-	public class MALImageSubItem
+	public class MalImageSubItem
 	{
 		/// <summary>
 		/// ID associated with MyAnimeList.
@@ -20,22 +20,22 @@ namespace JikanDotNet
 		public string Name { get; set; }
 
 		/// <summary>
+		/// Item's title.
+		/// </summary>
+		[JsonPropertyName("title")]
+		public string Title { get; set; }
+
+		/// <summary>
 		/// Url to sub item main page.
 		/// </summary>
 		[JsonPropertyName("url")]
 		public string Url { get; set; }
 
 		/// <summary>
-		/// Item's image URL
+		/// Item's images set
 		/// </summary>
-		[JsonPropertyName("image_url")]
-		public string ImageURL { get; set; }
-
-		/// <summary>
-		/// Role of character in sub item (anime or manga). Not available in all requests.
-		/// </summary>
-		[JsonPropertyName("role")]
-		public string Role { get; set; }
+		[JsonPropertyName("images")]
+		public ImagesSet Images { get; set; }
 
 		/// <summary>
 		/// Overriden ToString method.
@@ -43,7 +43,7 @@ namespace JikanDotNet
 		/// <returns>Name if not null, base method elsewhere.</returns>
 		public override string ToString()
 		{
-			return Name ?? base.ToString();
+			return Name ?? Title ?? base.ToString();
 		}
 	}
 }

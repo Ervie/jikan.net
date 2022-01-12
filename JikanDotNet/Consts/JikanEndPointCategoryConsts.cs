@@ -3,7 +3,7 @@
 	/// <summary>
 	/// Endpoints in Jikan REST API.
 	/// </summary>
-	internal class JikanEndPointCategoryConsts
+	internal static class JikanEndPointCategoryConsts
 	{
 		/// <summary>
 		/// Anime endpoint.
