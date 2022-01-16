@@ -445,9 +445,9 @@ namespace JikanDotNet
 		#region GetPersonAnimeAsync
 
 		/// <summary>
-		/// Returns return animeography of person with given MAL id.
+		/// Returns animeography of person with given MAL id.
 		/// </summary>
-		/// <param name="id">MAL id of character.</param>
+		/// <param name="id">MAL id of person.</param>
 		/// <returns>Collection of anime the person collaborated on.</returns>
 		Task<BaseJikanResponse<ICollection<PersonAnimeographyEntry>>> GetPersonAnimeAsync(long id);
 
@@ -456,24 +456,35 @@ namespace JikanDotNet
 		#region GetPersonMangaAsync
 
 		/// <summary>
-		/// Returns return mangaography of person with given MAL id.
+		/// Returns mangaography of person with given MAL id.
 		/// </summary>
-		/// <param name="id">MAL id of character.</param>
+		/// <param name="id">MAL id of person.</param>
 		/// <returns>Collection of manga the person worked on.</returns>
 		Task<BaseJikanResponse<ICollection<PersonMangaographyEntry>>> GetPersonMangaAsync(long id);
 
 		#endregion GetPersonMangaAsync
 
-		#region GetPersonPictures
+		#region GetPersonVoiceActingRolesAsync
+
+		/// <summary>
+		/// Returns voice acting roles of person with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of person.</param>
+		/// <returns>Collection of voice acting roles of the person.</returns>
+		Task<BaseJikanResponse<ICollection<VoiceActingRole>>> GetPersonVoiceActingRolesAsync(long id);
+
+		#endregion GetPersonVoiceActingRolesAsync
+
+		#region GetPersonPicturesAsync
 
 		/// <summary>
 		/// Returns collections of links to pictures related to person with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of person.</param>
 		/// <returns>Collections of links to pictures related to person with given MAL id.</returns>
-		Task<PersonPictures> GetPersonPictures(long id);
+		Task<BaseJikanResponse<ICollection<ImagesSet>>> GetPersonPicturesAsync(long id);
 
-		#endregion GetPersonPictures
+		#endregion GetPersonPicturesAsync
 
 		#endregion Person requests
 

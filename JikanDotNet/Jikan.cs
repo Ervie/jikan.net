@@ -692,17 +692,29 @@ namespace JikanDotNet
 
 		#endregion GetPersonMangaAsync
 
-		#region GetPersonPictures
+		#region GetPersonVoiceActingRolesAsync
 
 		/// <inheritdoc />
-		public async Task<PersonPictures> GetPersonPictures(long id)
+		public async Task<BaseJikanResponse<ICollection<VoiceActingRole>>> GetPersonVoiceActingRolesAsync(long id)
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Person, id.ToString(), PersonExtension.Pictures.GetDescription() };
-			return await ExecuteGetRequestAsync<PersonPictures>(endpointParts);
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.People, id.ToString(), CharacterExtension.Voices.GetDescription() };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<VoiceActingRole>>>(endpointParts);
 		}
 
-		#endregion GetPersonPictures
+		#endregion GetPersonVoiceActingRolesAsync
+
+		#region GetPersonPicturesAsync
+
+		/// <inheritdoc />
+		public async Task<BaseJikanResponse<ICollection<ImagesSet>>> GetPersonPicturesAsync(long id)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.People, id.ToString(), PersonExtension.Pictures.GetDescription() };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<ImagesSet>>>(endpointParts);
+		}
+
+		#endregion GetPersonPicturesAsync
 
 		#endregion Person methods
 

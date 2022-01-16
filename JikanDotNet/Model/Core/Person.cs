@@ -74,11 +74,5 @@ namespace JikanDotNet
 		/// </summary>
 		[JsonPropertyName("images")]
 		public ImagesSet Images { get; set; }
-
-		/// <summary>
-		/// Person's voice acting roles.
-		/// </summary>
-		[JsonPropertyName("voice_acting_roles")]
-		public ICollection<VoiceActingRole> VoiceActingRoles { get; set; }
 	}
 }
