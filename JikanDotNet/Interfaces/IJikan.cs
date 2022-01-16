@@ -390,7 +390,7 @@ namespace JikanDotNet
 		/// </summary>
 		/// <param name="id">MAL id of character.</param>
 		/// <returns>Collection of anime where character has appeared.</returns>
-		Task<BaseJikanResponse<ICollection<AnimeographyEntry>>> GetCharacterAnimeAsync(long id);
+		Task<BaseJikanResponse<ICollection<CharacterAnimeographyEntry>>> GetCharacterAnimeAsync(long id);
 
 		#endregion GetCharacterAnimeAsync
 
@@ -401,7 +401,7 @@ namespace JikanDotNet
 		/// </summary>
 		/// <param name="id">MAL id of character.</param>
 		/// <returns>Collection of manga where character has appeared.</returns>
-		Task<BaseJikanResponse<ICollection<MangaographyEntry>>> GetCharacterMangaAsync(long id);
+		Task<BaseJikanResponse<ICollection<CharacterMangaographyEntry>>> GetCharacterMangaAsync(long id);
 
 		#endregion GetCharacterMangaAsync
 
@@ -449,9 +449,20 @@ namespace JikanDotNet
 		/// </summary>
 		/// <param name="id">MAL id of character.</param>
 		/// <returns>Collection of anime the person collaborated on.</returns>
-		Task<BaseJikanResponse<ICollection<AnimeographyEntry>>> GetPersonAnimeAsync(long id);
+		Task<BaseJikanResponse<ICollection<PersonAnimeographyEntry>>> GetPersonAnimeAsync(long id);
 
 		#endregion GetPersonAnimeAsync
+
+		#region GetPersonMangaAsync
+
+		/// <summary>
+		/// Returns return mangaography of person with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of character.</param>
+		/// <returns>Collection of manga the person worked on.</returns>
+		Task<BaseJikanResponse<ICollection<PersonMangaographyEntry>>> GetPersonMangaAsync(long id);
+
+		#endregion GetPersonMangaAsync
 
 		#region GetPersonPictures
 

@@ -80,17 +80,5 @@ namespace JikanDotNet
 		/// </summary>
 		[JsonPropertyName("voice_acting_roles")]
 		public ICollection<VoiceActingRole> VoiceActingRoles { get; set; }
-
-		/// <summary>
-		/// Person's anime staff positions.
-		/// </summary>
-		[JsonPropertyName("anime_staff_positions")]
-		public ICollection<AnimeStaffPosition> AnimeStaffPositions { get; set; }
-
-		/// <summary>
-		/// Person's published manga.
-		/// </summary>
-		[JsonPropertyName("published_manga")]
-		public ICollection<PublishedManga> PublishedManga { get; set; }
 	}
 }

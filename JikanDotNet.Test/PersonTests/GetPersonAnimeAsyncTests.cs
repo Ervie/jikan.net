@@ -47,13 +47,13 @@ namespace JikanDotNet.Tests.PersonTests
 		public async Task GetPersonAnimeAsync_SekiTomokazuId_ShouldParseSekiTomokazuAnime()
 		{
 			// Given
-			var seki = await _jikan.GetPersonAnimeAsync(5068);
+			var seki = await _jikan.GetPersonAnimeAsync(1);
 
 			// Then
 			using (new AssertionScope())
 			{
 				seki.Data.Should().HaveCountLessThan(20);
-				seki.Data.Should().Contain(x => x.Anime.Title.Equals("Anime Tenchou") && x.Role.Equals("add Theme Song Performance"));
+				seki.Data.Should().Contain(x => x.Anime.Title.Equals("Anime Tenchou") && x.Position.Equals("add Theme Song Performance"));
 			}
 		}
 	}

@@ -3,15 +3,15 @@
 namespace JikanDotNet
 {
 	/// <summary>
-	/// Model for character mangaography
+	/// Model for animeography entry
 	/// </summary>
-	public class MangaographyEntry
+	public class CharacterAnimeographyEntry
 	{
 		/// <summary>
 		/// Character's animeography entry.
 		/// </summary>
-		[JsonPropertyName("manga")]
-		public MalImageSubItem Manga { get; set; }
+		[JsonPropertyName("anime")]
+		public MalImageSubItem Anime { get; set; }
 
 		/// <summary>
 		/// Role of character in sub item (anime or manga). Not available in all requests.

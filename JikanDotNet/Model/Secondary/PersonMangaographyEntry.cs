@@ -3,18 +3,18 @@
 namespace JikanDotNet
 {
 	/// <summary>
-	/// Published manga  model class for person's class.
+	/// Model for mangaography entry of a person
 	/// </summary>
-	public class PublishedManga
+	public class PersonMangaographyEntry
 	{
 		/// <summary>
-		/// Published manga.
+		/// Person's mangaography entry.
 		/// </summary>
 		[JsonPropertyName("manga")]
 		public MalImageSubItem Manga { get; set; }
 
 		/// <summary>
-		/// Position associated with published manga.
+		/// Position of the person in the manga production
 		/// </summary>
 		[JsonPropertyName("position")]
 		public string Position { get; set; }
