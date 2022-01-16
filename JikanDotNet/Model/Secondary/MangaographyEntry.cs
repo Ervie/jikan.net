@@ -5,7 +5,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Model for character mangaography
 	/// </summary>
-	public class CharacterMangaography
+	public class MangaographyEntry
 	{
 		/// <summary>
 		/// Character's animeography entry.

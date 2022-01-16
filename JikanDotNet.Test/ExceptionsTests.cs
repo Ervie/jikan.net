@@ -1,7 +1,5 @@
 ﻿using FluentAssertions;
 using JikanDotNet.Exceptions;
-using System;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace JikanDotNet.Tests
@@ -39,7 +37,7 @@ namespace JikanDotNet.Tests
 		public void GetPerson_WrongIdDoNotSurpressExceptions_ShouldThrowJikanRequestExceptionGetPerson()
 		{
 			// When
-			Func<Task<Person>> func = _jikan.Awaiting(x => x.GetPerson(13308));
+			var func = _jikan.Awaiting(x => x.GetPersonAsync(13308));
 
 			// Then
 			func.Should().ThrowExactlyAsync<JikanRequestException>();

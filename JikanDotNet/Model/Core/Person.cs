@@ -16,10 +16,10 @@ namespace JikanDotNet
 		public long MalId { get; set; }
 
 		/// <summary>
-		/// Person's canonical link.
+		/// Person's url.
 		/// </summary>
 		[JsonPropertyName("url")]
-		public string LinkCanonical { get; set; }
+		public string Url { get; set; }
 
 		/// <summary>
 		/// Person's name.
@@ -42,8 +42,8 @@ namespace JikanDotNet
 		/// <summary>
 		/// Person's alternate names.
 		/// </summary>
-		[JsonPropertyName("alternate_name")]
-		public ICollection<string> AlternativeName { get; set; }
+		[JsonPropertyName("alternate_names")]
+		public ICollection<string> AlternativeNames { get; set; }
 
 		/// <summary>
 		/// Person's birthday.
@@ -60,20 +60,20 @@ namespace JikanDotNet
 		/// <summary>
 		/// Person's favourite count on MyAnimeList.
 		/// </summary>
-		[JsonPropertyName("member_favorites")]
+		[JsonPropertyName("favorites")]
 		public int? MemberFavorites { get; set; }
 
 		/// <summary>
 		/// More information about person.
 		/// </summary>
 		[JsonPropertyName("about")]
-		public string More { get; set; }
+		public string About { get; set; }
 
 		/// <summary>
-		/// Person's image URL
+		/// Person's image set
 		/// </summary>
-		[JsonPropertyName("image_url")]
-		public string ImageURL { get; set; }
+		[JsonPropertyName("images")]
+		public ImagesSet Images { get; set; }
 
 		/// <summary>
 		/// Person's voice acting roles.
