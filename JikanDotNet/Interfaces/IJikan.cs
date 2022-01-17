@@ -571,37 +571,22 @@ namespace JikanDotNet
 
 		#endregion GetAnimeTopAsync
 
-		#region GetMangaTop
+		#region GetMangaTopAsync
 
 		/// <summary>
 		/// Returns list of top manga.
 		/// </summary>
 		/// <returns>List of top manga.</returns>
-		Task<MangaTop> GetMangaTop();
+		Task<PaginatedJikanResponse<ICollection<Manga>>> GetMangaTopAsync();
 
 		/// <summary>
 		/// Returns list of top manga.
 		/// </summary>
-		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <param name="page">Index of page folding 25 records of top ranging (e.g. 1 will return first 25 records, 2 will return record from 26 to 50 etc.)</param>
 		/// <returns>List of top manga.</returns>
-		Task<MangaTop> GetMangaTop(int page);
+		Task<PaginatedJikanResponse<ICollection<Manga>>> GetMangaTopAsync(int page);
 
-		/// <summary>
-		/// Returns list of top manga.
-		/// </summary>
-		/// <param name="extension">Extension for specific type of ranking.</param>
-		/// <returns>List of top manga.</returns>
-		Task<MangaTop> GetMangaTop(TopMangaExtension extension);
-
-		/// <summary>
-		/// Returns list of top manga.
-		/// </summary>
-		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
-		/// <param name="extension">Extension for specific type of ranking.</param>
-		/// <returns>List of top manga.</returns>
-		Task<MangaTop> GetMangaTop(int page, TopMangaExtension extension);
-
-		#endregion GetMangaTop
+		#endregion GetMangaTopAsync
 
 		#region GetPeopleTop
 

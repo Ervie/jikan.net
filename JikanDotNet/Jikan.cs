@@ -812,41 +812,25 @@ namespace JikanDotNet
 
 		#endregion GetAnimeTopAsync
 
-		#region GetMangaTop
+		#region GetMangaTopAsync
 
 		/// <inheritdoc />
-		public async Task<MangaTop> GetMangaTop()
+		public async Task<PaginatedJikanResponse<ICollection<Manga>>> GetMangaTopAsync()
 		{
 			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.TopList, JikanEndPointCategoryConsts.Manga };
-			return await ExecuteGetRequestAsync<MangaTop>(endpointParts);
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Manga>>>(endpointParts);
 		}
 
 		/// <inheritdoc />
-		public async Task<MangaTop> GetMangaTop(int page)
+		public async Task<PaginatedJikanResponse<ICollection<Manga>>> GetMangaTopAsync(int page)
 		{
 			Guard.IsGreaterThanZero(page, nameof(page));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.TopList, JikanEndPointCategoryConsts.Manga, page.ToString() };
-			return await ExecuteGetRequestAsync<MangaTop>(endpointParts);
+			var queryParams = $"?page={page}";
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.TopList, JikanEndPointCategoryConsts.Manga + queryParams };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Manga>>>(endpointParts);
 		}
 
-		/// <inheritdoc />
-		public async Task<MangaTop> GetMangaTop(TopMangaExtension extension)
-		{
-			Guard.IsValidEnum(extension, nameof(extension));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.TopList, JikanEndPointCategoryConsts.Manga, "1", extension.GetDescription() };
-			return await ExecuteGetRequestAsync<MangaTop>(endpointParts);
-		}
-
-		/// <inheritdoc />
-		public async Task<MangaTop> GetMangaTop(int page, TopMangaExtension extension = TopMangaExtension.None)
-		{
-			Guard.IsGreaterThanZero(page, nameof(page));
-			Guard.IsValidEnum(extension, nameof(extension));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.TopList, JikanEndPointCategoryConsts.Manga, page.ToString(), extension.GetDescription() };
-			return await ExecuteGetRequestAsync<MangaTop>(endpointParts);
-		}
-
-		#endregion GetMangaTop
+		#endregion GetMangaTopAsync
 
 		#region GetPeopleTop
 
