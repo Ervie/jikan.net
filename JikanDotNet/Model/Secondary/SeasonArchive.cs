@@ -18,6 +18,6 @@ namespace JikanDotNet
 		/// Collection of available seasons in year to query.
 		/// </summary>
 		[JsonPropertyName("seasons")]
-		public ICollection<AnimeSeason> Season { get; set; }
+		public ICollection<Season> Season { get; set; }
 	}
 }

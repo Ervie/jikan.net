@@ -490,13 +490,7 @@ namespace JikanDotNet
 
 		#region Season requests
 
-		#region GetSeason
-
-		/// <summary>
-		/// Returns current season preview.
-		/// </summary>
-		/// <returns>Current season preview.</returns>
-		Task<AnimeSeason> GetSeason();
+		#region GetSeasonAsync
 
 		/// <summary>
 		/// Returns season preview.
@@ -504,17 +498,17 @@ namespace JikanDotNet
 		/// <param name="year">Year of selected season.</param>
 		/// <param name="season">Selected season.</param>
 		/// <returns>Season preview.</returns>
-		Task<AnimeSeason> GetSeason(int year, Season season);
+		Task<PaginatedJikanResponse<ICollection<Anime>>> GetSeasonAsync(int year, Season season);
 
-		#endregion GetSeason
+		#endregion GetSeasonAsync
 
 		#region GetSeasonArchive
 
 		/// <summary>
-		/// Returns list of availaible season to query with <see cref="GetSeason(int, Season)"/>
+		/// Returns list of availaible season to query with <see cref="GetSeasonAsync(int, Season)"/>
 		/// </summary>
 		/// <returns></returns>
-		Task<SeasonArchives> GetSeasonArchive();
+		Task<PaginatedJikanResponse<ICollection<SeasonArchive>>> GetSeasonArchiveAsync();
 
 		#endregion GetSeasonArchive
 
@@ -524,7 +518,7 @@ namespace JikanDotNet
 		/// Return season preview for anime with undefined airing season (marked as "Later" on MAL).
 		/// </summary>
 		/// <returns>Season preview for anime with undefined airing date.</returns>
-		Task<AnimeSeason> GetSeasonLater();
+		Task<PaginatedJikanResponse<ICollection<Anime>>> GetUpcomingSeasonAsync();
 
 		#endregion GetSeasonLater
 

@@ -38,7 +38,7 @@
 		/// <summary>
 		/// Season endpoint.
 		/// </summary>
-		public const string Season = "season";
+		public const string Seasons = "seasons";
 
 		/// <summary>
 		/// Schedule endpoint.

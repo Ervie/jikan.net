@@ -718,6 +718,45 @@ namespace JikanDotNet
 
 		#endregion Person methods
 
+		#region Season methods
+
+		#region GetSeasonAsync
+
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetSeasonAsync(int year, Season season)
+		{
+			Guard.IsValid(year => year >= 1000 && year < 10000, year, nameof(year));
+			Guard.IsValidEnum(season, nameof(season));
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Seasons, year.ToString(), season.GetDescription() };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
+		}
+
+		#endregion GetSeasonAsync
+
+		#region GetSeasonArchive
+
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<SeasonArchive>>> GetSeasonArchiveAsync()
+		{
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Seasons };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<SeasonArchive>>>(endpointParts);
+		}
+
+		#endregion GetSeasonArchive
+
+		#region GetSeasonLater
+
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetUpcomingSeasonAsync()
+		{
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Seasons, SeasonExtension.Upcoming.GetDescription() };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
+		}
+
+		#endregion GetSeasonLater
+
+		#endregion Season methods
+
 		#region Schedule methods
 
 		#region GetSchedule
@@ -740,52 +779,6 @@ namespace JikanDotNet
 		#endregion GetSchedule
 
 		#endregion Schedule methods
-
-		#region Season methods
-
-		#region GetSeason
-
-		/// <inheritdoc />
-		public async Task<AnimeSeason> GetSeason()
-		{
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Season };
-			return await ExecuteGetRequestAsync<AnimeSeason>(endpointParts);
-		}
-
-		/// <inheritdoc />
-		public async Task<AnimeSeason> GetSeason(int year, Season season)
-		{
-			Guard.IsValid(year => year >= 1000 && year < 10000, year, nameof(year));
-			Guard.IsValidEnum(season, nameof(season));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Season, year.ToString(), season.GetDescription() };
-			return await ExecuteGetRequestAsync<AnimeSeason>(endpointParts);
-		}
-
-		#endregion GetSeason
-
-		#region GetSeasonArchive
-
-		/// <inheritdoc />
-		public async Task<SeasonArchives> GetSeasonArchive()
-		{
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Season, SeasonExtension.Archive.GetDescription() };
-			return await ExecuteGetRequestAsync<SeasonArchives>(endpointParts);
-		}
-
-		#endregion GetSeasonArchive
-
-		#region GetSeasonLater
-
-		/// <inheritdoc />
-		public async Task<AnimeSeason> GetSeasonLater()
-		{
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Season, SeasonExtension.Later.GetDescription() };
-			return await ExecuteGetRequestAsync<AnimeSeason>(endpointParts);
-		}
-
-		#endregion GetSeasonLater
-
-		#endregion Season methods
 
 		#region Top methods
 

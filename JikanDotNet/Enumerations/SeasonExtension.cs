@@ -14,15 +14,9 @@ namespace JikanDotNet
 		None,
 
 		/// <summary>
-		/// Archive extension, return collection of available years and their seasons to query.
+		/// Upcoming extension, for anime with undefined airing date.
 		/// </summary>
-		[Description("archive")]
-		Archive,
-
-		/// <summary>
-		/// Later extension, for anime with undefined airing date.
-		/// </summary>
-		[Description("later")]
-		Later
+		[Description("upcoming")]
+		Upcoming
 	}
 }
