@@ -603,24 +603,24 @@ namespace JikanDotNet
 		/// <returns>List of most popular people.</returns>
 		Task<PaginatedJikanResponse<ICollection<Person>>> GetTopPeopleAsync(int page);
 
-		#endregion GetPeopleTop
+		#endregion GetTopPeopleAsync
 
-		#region GetCharactersTop
+		#region GetTopCharactersAsync
 
 		/// <summary>
 		/// Returns list of most popular characters.
 		/// </summary>
 		/// <returns>List of most popular characters.</returns>
-		Task<CharactersTop> GetCharactersTop();
+		Task<PaginatedJikanResponse<ICollection<Character>>> GetTopCharactersAsync();
 
 		/// <summary>
 		/// Returns list of most popular characters.
 		/// </summary>
-		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <param name="page">Index of page folding 25 records of top ranging (e.g. 1 will return first 25 records, 2 will return record from 26 to 50 etc.)</param>
 		/// <returns>List of most popular characters.</returns>
-		Task<CharactersTop> GetCharactersTop(int page);
+		Task<PaginatedJikanResponse<ICollection<Character>>> GetTopCharactersAsync(int page);
 
-		#endregion GetCharactersTop
+		#endregion GetTopCharactersAsync
 
 		#endregion Top requests
 

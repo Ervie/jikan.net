@@ -852,24 +852,25 @@ namespace JikanDotNet
 
 		#endregion GetTopPeopleAsync
 
-		#region GetCharactersTop
+		#region GetTopCharactersAsync
 
 		/// <inheritdoc />
-		public async Task<CharactersTop> GetCharactersTop()
+		public async Task<PaginatedJikanResponse<ICollection<Character>>> GetTopCharactersAsync()
 		{
 			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.TopList, JikanEndPointCategoryConsts.Characters };
-			return await ExecuteGetRequestAsync<CharactersTop>(endpointParts);
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Character>>>(endpointParts);
 		}
 
 		/// <inheritdoc />
-		public async Task<CharactersTop> GetCharactersTop(int page)
+		public async Task<PaginatedJikanResponse<ICollection<Character>>> GetTopCharactersAsync(int page)
 		{
 			Guard.IsGreaterThanZero(page, nameof(page));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.TopList, JikanEndPointCategoryConsts.Characters, page.ToString() };
-			return await ExecuteGetRequestAsync<CharactersTop>(endpointParts);
+			var queryParams = $"?page={page}";
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.TopList, JikanEndPointCategoryConsts.Characters + queryParams };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Character>>>(endpointParts);
 		}
 
-		#endregion GetCharactersTop
+		#endregion GetTopCharactersAsync
 
 		#endregion Top methods
 
