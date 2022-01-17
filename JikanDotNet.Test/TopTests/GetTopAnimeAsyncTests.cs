@@ -7,29 +7,29 @@ using Xunit;
 
 namespace JikanDotNet.Tests.TopTests
 {
-	public class GetAnimeTopAsyncTests
+	public class GetTopAnimeAsyncTests
 	{
 		private readonly IJikan _jikan;
 
-		public GetAnimeTopAsyncTests()
+		public GetTopAnimeAsyncTests()
 		{
 			_jikan = new Jikan();
 		}
 
 		[Fact]
-		public async Task GetAnimeTopAsync_NoParameter_ShouldParseTopAnime()
+		public async Task GetTopAnimeAsync_NoParameter_ShouldParseTopAnime()
 		{
 			// When
-			var top = await _jikan.GetAnimeTopAsync();
+			var top = await _jikan.GetTopAnimeAsync();
 
 			top.Should().NotBeNull();
 		}
 
 		[Fact]
-		public async Task GetAnimeTopAsync_NoParameter_ShouldParseFMA()
+		public async Task GetTopAnimeAsync_NoParameter_ShouldParseFMA()
 		{
 			// When
-			var top = await _jikan.GetAnimeTopAsync();
+			var top = await _jikan.GetTopAnimeAsync();
 
 			// Then
 			top.Data.First().Title.Should().Be("Fullmetal Alchemist: Brotherhood");
@@ -42,10 +42,10 @@ namespace JikanDotNet.Tests.TopTests
 		}
 
 		[Fact]
-		public async Task GetAnimeTopAsync_NoParameter_ShouldParseLOGHType()
+		public async Task GetTopAnimeAsync_NoParameter_ShouldParseLOGHType()
 		{
 			// When
-			var top = await _jikan.GetAnimeTopAsync();
+			var top = await _jikan.GetTopAnimeAsync();
 
 			// Then
 			var logh = top.Data.Single(x => x.Title == "Ginga Eiyuu Densetsu");
@@ -56,10 +56,10 @@ namespace JikanDotNet.Tests.TopTests
 		[InlineData(int.MinValue)]
 		[InlineData(-1)]
 		[InlineData(0)]
-		public async Task GetAnimeTopAsync_InvalidPage_ShouldThrowValidationException(int page)
+		public async Task GetTopAnimeAsync_InvalidPage_ShouldThrowValidationException(int page)
 		{
 			// When
-			var func = _jikan.Awaiting(x => x.GetAnimeTopAsync(page));
+			var func = _jikan.Awaiting(x => x.GetTopAnimeAsync(page));
 
 			// Then
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();
@@ -69,20 +69,20 @@ namespace JikanDotNet.Tests.TopTests
 		[InlineData(int.MinValue)]
 		[InlineData(-1)]
 		[InlineData(0)]
-		public async Task GetAnimeTopAsync_ValidTypeInvalidPage_ShouldThrowValidationException(int page)
+		public async Task GetTopAnimeAsync_ValidTypeInvalidPage_ShouldThrowValidationException(int page)
 		{
 			// When
-			var func = _jikan.Awaiting(x => x.GetAnimeTopAsync(page));
+			var func = _jikan.Awaiting(x => x.GetTopAnimeAsync(page));
 
 			// Then
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Fact]
-		public async Task GetAnimeTopAsync_SecondPage_ShouldParseAnimeSecondPage()
+		public async Task GetTopAnimeAsync_SecondPage_ShouldParseAnimeSecondPage()
 		{
 			// When
-			var top = await _jikan.GetAnimeTopAsync(2);
+			var top = await _jikan.GetTopAnimeAsync(2);
 
 			// Then
 			var titles = top.Data.Select(x => x.Title);

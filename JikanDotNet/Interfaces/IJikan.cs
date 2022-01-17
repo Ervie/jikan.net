@@ -554,54 +554,54 @@ namespace JikanDotNet
 
 		#region Top requests
 
-		#region GetAnimeTopAsync
+		#region GetTopAnimeAsync
 
 		/// <summary>
 		/// Returns list of top anime.
 		/// </summary>
 		/// <returns>List of top anime.</returns>
-		Task<PaginatedJikanResponse<ICollection<Anime>>> GetAnimeTopAsync();
+		Task<PaginatedJikanResponse<ICollection<Anime>>> GetTopAnimeAsync();
 
 		/// <summary>
 		/// Returns list of top anime.
 		/// </summary>
 		/// <param name="page">Index of page folding 25 records of top ranging (e.g. 1 will return first 25 records, 2 will return record from 26 to 50 etc.)</param>
 		/// <returns>List of top anime.</returns>
-		Task<PaginatedJikanResponse<ICollection<Anime>>> GetAnimeTopAsync(int page);
+		Task<PaginatedJikanResponse<ICollection<Anime>>> GetTopAnimeAsync(int page);
 
-		#endregion GetAnimeTopAsync
+		#endregion GetTopAnimeAsync
 
-		#region GetMangaTopAsync
+		#region GetTopMangaAsync
 
 		/// <summary>
 		/// Returns list of top manga.
 		/// </summary>
 		/// <returns>List of top manga.</returns>
-		Task<PaginatedJikanResponse<ICollection<Manga>>> GetMangaTopAsync();
+		Task<PaginatedJikanResponse<ICollection<Manga>>> GetTopMangaAsync();
 
 		/// <summary>
 		/// Returns list of top manga.
 		/// </summary>
 		/// <param name="page">Index of page folding 25 records of top ranging (e.g. 1 will return first 25 records, 2 will return record from 26 to 50 etc.)</param>
 		/// <returns>List of top manga.</returns>
-		Task<PaginatedJikanResponse<ICollection<Manga>>> GetMangaTopAsync(int page);
+		Task<PaginatedJikanResponse<ICollection<Manga>>> GetTopMangaAsync(int page);
 
-		#endregion GetMangaTopAsync
+		#endregion GetTopMangaAsync
 
-		#region GetPeopleTop
+		#region GetTopPeopleAsync
 
 		/// <summary>
 		/// Returns list of most popular people.
 		/// </summary>
 		/// <returns>List of most popular people.</returns>
-		Task<PeopleTop> GetPeopleTop();
+		Task<PaginatedJikanResponse<ICollection<Person>>> GetTopPeopleAsync();
 
 		/// <summary>
 		/// Returns list of most popular people.
 		/// </summary>
-		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <param name="page">Index of page folding 25 records of top ranging (e.g. 1 will return first 25 records, 2 will return record from 26 to 50 etc.)</param>
 		/// <returns>List of most popular people.</returns>
-		Task<PeopleTop> GetPeopleTop(int page);
+		Task<PaginatedJikanResponse<ICollection<Person>>> GetTopPeopleAsync(int page);
 
 		#endregion GetPeopleTop
 

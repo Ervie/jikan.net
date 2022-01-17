@@ -18,65 +18,6 @@ namespace JikanDotNet.Tests
 		}
 
 		[Fact]
-		public async Task GetPeopleTop_NoParameters_ShouldParseKanaHanazawa()
-		{
-			// When
-			var top = await _jikan.GetPeopleTop();
-
-			// Then
-			var kana = top.Top.First();
-			using (new AssertionScope())
-			{
-				kana.Name.Should().Be("Hanazawa, Kana");
-				kana.NameKanji.Should().Be("花澤 香菜");
-				kana.MalId.Should().Be(185);
-				kana.Birthday.Value.Year.Should().Be(1989);
-				kana.Favorites.Should().BeGreaterThan(60000);
-			}
-		}
-
-		[Fact]
-		public async Task GetPeopleTop_NoParameters_ShouldParseHiroshiKamiya()
-		{
-			// When
-			var top = await _jikan.GetPeopleTop();
-
-			// Then
-			var kamiya = top.Top.Skip(1).First();
-			using (new AssertionScope())
-			{
-				kamiya.Name.Should().Be("Kamiya, Hiroshi");
-				kamiya.NameKanji.Should().Be("神谷 浩史");
-				kamiya.MalId.Should().Be(118);
-				kamiya.Birthday.Value.Year.Should().Be(1975);
-				kamiya.Favorites.Should().BeGreaterThan(50000);
-			}
-		}
-
-		[Theory]
-		[InlineData(int.MinValue)]
-		[InlineData(-1)]
-		[InlineData(0)]
-		public async Task GetPeopleTop_InvalidPage_ShouldThrowValidationException(int page)
-		{
-			// When
-			Func<Task<PeopleTop>> func = _jikan.Awaiting(x => x.GetPeopleTop(page));
-
-			// Then
-			await func.Should().ThrowExactlyAsync<JikanValidationException>();
-		}
-
-		[Fact]
-		public async Task GetPeopleTop_SecondPage_ShouldFindKentarouMiura()
-		{
-			// When
-			var top = await _jikan.GetPeopleTop(2);
-
-			// Then
-			top.Top.Select(x => x.Name).Should().Contain("Miura, Kentarou");
-		}
-
-		[Fact]
 		public async Task GetCharactersTop_NoParameters_ShouldParseLelouchLamperouge()
 		{
 			// When

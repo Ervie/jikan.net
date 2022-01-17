@@ -792,17 +792,17 @@ namespace JikanDotNet
 
 		#region Top methods
 
-		#region GetAnimeTopAsync
+		#region GetTopAnimeAsync
 
 		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetAnimeTopAsync()
+		public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetTopAnimeAsync()
 		{
 			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.TopList, JikanEndPointCategoryConsts.Anime };
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
 		}
 
 		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetAnimeTopAsync(int page)
+		public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetTopAnimeAsync(int page)
 		{
 			Guard.IsGreaterThanZero(page, nameof(page));
 			var queryParams = $"?page={page}";
@@ -810,19 +810,19 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
 		}
 
-		#endregion GetAnimeTopAsync
+		#endregion GetTopAnimeAsync
 
-		#region GetMangaTopAsync
+		#region GetTopMangaAsync
 
 		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<Manga>>> GetMangaTopAsync()
+		public async Task<PaginatedJikanResponse<ICollection<Manga>>> GetTopMangaAsync()
 		{
 			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.TopList, JikanEndPointCategoryConsts.Manga };
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Manga>>>(endpointParts);
 		}
 
 		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<Manga>>> GetMangaTopAsync(int page)
+		public async Task<PaginatedJikanResponse<ICollection<Manga>>> GetTopMangaAsync(int page)
 		{
 			Guard.IsGreaterThanZero(page, nameof(page));
 			var queryParams = $"?page={page}";
@@ -830,26 +830,27 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Manga>>>(endpointParts);
 		}
 
-		#endregion GetMangaTopAsync
+		#endregion GetTopMangaAsync
 
-		#region GetPeopleTop
+		#region GetTopPeopleAsync
 
 		/// <inheritdoc />
-		public async Task<PeopleTop> GetPeopleTop()
+		public async Task<PaginatedJikanResponse<ICollection<Person>>> GetTopPeopleAsync()
 		{
 			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.TopList, JikanEndPointCategoryConsts.People };
-			return await ExecuteGetRequestAsync<PeopleTop>(endpointParts);
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Person>>>(endpointParts);
 		}
 
 		/// <inheritdoc />
-		public async Task<PeopleTop> GetPeopleTop(int page)
+		public async Task<PaginatedJikanResponse<ICollection<Person>>> GetTopPeopleAsync(int page)
 		{
 			Guard.IsGreaterThanZero(page, nameof(page));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.TopList, JikanEndPointCategoryConsts.People, page.ToString() };
-			return await ExecuteGetRequestAsync<PeopleTop>(endpointParts);
+			var queryParams = $"?page={page}";
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.TopList, JikanEndPointCategoryConsts.People + queryParams };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Person>>>(endpointParts);
 		}
 
-		#endregion GetPeopleTop
+		#endregion GetTopPeopleAsync
 
 		#region GetCharactersTop
 

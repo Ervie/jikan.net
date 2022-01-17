@@ -7,30 +7,30 @@ using Xunit;
 
 namespace JikanDotNet.Tests.TopTests
 {
-	public class GetMangaTopAsyncTests
+	public class GetTopMangaAsyncTests
 	{
 		private readonly IJikan _jikan;
 
-		public GetMangaTopAsyncTests()
+		public GetTopMangaAsyncTests()
 		{
 			_jikan = new Jikan();
 		}
 
 		[Fact]
-		public async Task GetMangaTopAsync_NoParameter_ShouldParseTopManga()
+		public async Task GetTopMangaAsync_NoParameter_ShouldParseTopManga()
 		{
 			// When
-			var top = await _jikan.GetMangaTopAsync();
+			var top = await _jikan.GetTopMangaAsync();
 
 			// Then
 			top.Should().NotBeNull();
 		}
 
 		[Fact]
-		public async Task GetMangaTopAsync_NoParameter_ShouldParseBerserk()
+		public async Task GetTopMangaAsync_NoParameter_ShouldParseBerserk()
 		{
 			// When
-			var top = await _jikan.GetMangaTopAsync();
+			var top = await _jikan.GetTopMangaAsync();
 
 			// Then
 			using var _ = new AssertionScope();
@@ -46,20 +46,20 @@ namespace JikanDotNet.Tests.TopTests
 		[InlineData(int.MinValue)]
 		[InlineData(-1)]
 		[InlineData(0)]
-		public async Task GetMangaTopAsync_InvalidPage_ShouldThrowValidationException(int page)
+		public async Task GetTopMangaAsync_InvalidPage_ShouldThrowValidationException(int page)
 		{
 			// When
-			var func = _jikan.Awaiting(x => x.GetMangaTopAsync(page));
+			var func = _jikan.Awaiting(x => x.GetTopMangaAsync(page));
 
 			// Then
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
 		[Fact]
-		public async Task GetMangaTopAsync_SecondPage_ShouldParseSecondPage()
+		public async Task GetTopMangaAsync_SecondPage_ShouldParseSecondPage()
 		{
 			// When
-			var top = await _jikan.GetMangaTopAsync(2);
+			var top = await _jikan.GetTopMangaAsync(2);
 
 			// Then
 			var titles = top.Data.Select(x => x.Title);
