@@ -792,41 +792,25 @@ namespace JikanDotNet
 
 		#region Top methods
 
-		#region GetAnimeTop
+		#region GetAnimeTopAsync
 
 		/// <inheritdoc />
-		public async Task<AnimeTop> GetAnimeTop()
+		public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetAnimeTopAsync()
 		{
 			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.TopList, JikanEndPointCategoryConsts.Anime };
-			return await ExecuteGetRequestAsync<AnimeTop>(endpointParts);
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
 		}
 
 		/// <inheritdoc />
-		public async Task<AnimeTop> GetAnimeTop(int page)
+		public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetAnimeTopAsync(int page)
 		{
 			Guard.IsGreaterThanZero(page, nameof(page));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.TopList, JikanEndPointCategoryConsts.Anime, page.ToString() };
-			return await ExecuteGetRequestAsync<AnimeTop>(endpointParts);
+			var queryParams = $"?page={page}";
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.TopList, JikanEndPointCategoryConsts.Anime + queryParams };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
 		}
 
-		/// <inheritdoc />
-		public async Task<AnimeTop> GetAnimeTop(TopAnimeExtension extension)
-		{
-			Guard.IsValidEnum(extension, nameof(extension));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.TopList, JikanEndPointCategoryConsts.Anime, "1", extension.GetDescription() };
-			return await ExecuteGetRequestAsync<AnimeTop>(endpointParts);
-		}
-
-		/// <inheritdoc />
-		public async Task<AnimeTop> GetAnimeTop(int page, TopAnimeExtension extension = TopAnimeExtension.None)
-		{
-			Guard.IsGreaterThanZero(page, nameof(page));
-			Guard.IsValidEnum(extension, nameof(extension));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.TopList, JikanEndPointCategoryConsts.Anime, page.ToString(), extension.GetDescription() };
-			return await ExecuteGetRequestAsync<AnimeTop>(endpointParts);
-		}
-
-		#endregion GetAnimeTop
+		#endregion GetAnimeTopAsync
 
 		#region GetMangaTop
 
