@@ -526,22 +526,29 @@ namespace JikanDotNet
 
 		#region Schedule requests
 
-		#region GetSchedule
+		#region GetScheduleAsync
 
 		/// <summary>
 		/// Returns current season schedule.
 		/// </summary>
 		/// <returns>Current season schedule.</returns>
-		Task<Schedule> GetSchedule();
+		Task<PaginatedJikanResponse<ICollection<Anime>>> GetScheduleAsync();
+
+		/// <summary>
+		/// Returns current season schedule.
+		/// </summary>
+		/// <param name="page">Index of page folding 25 records of top ranging (e.g. 1 will return first 25 records, 2 will return record from 26 to 50 etc.)</param>
+		/// <returns>Current season schedule.</returns>
+		Task<PaginatedJikanResponse<ICollection<Anime>>> GetScheduleAsync(int page);
 
 		/// <summary>
 		/// Returns current season schedule.
 		/// </summary>
 		/// <param name="scheduledDay">Scheduled day to filter by.</param>
 		/// <returns>Current season schedule.</returns>
-		Task<Schedule> GetSchedule(ScheduledDay scheduledDay);
+		Task<PaginatedJikanResponse<ICollection<Anime>>> GetScheduleAsync(ScheduledDay scheduledDay);
 
-		#endregion GetSchedule
+		#endregion GetScheduleAsync
 
 		#endregion Schedule requests
 

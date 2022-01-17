@@ -733,7 +733,7 @@ namespace JikanDotNet
 
 		#endregion GetSeasonAsync
 
-		#region GetSeasonArchive
+		#region GetSeasonArchiveAsync
 
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<SeasonArchive>>> GetSeasonArchiveAsync()
@@ -742,9 +742,9 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<SeasonArchive>>>(endpointParts);
 		}
 
-		#endregion GetSeasonArchive
+		#endregion GetSeasonArchiveAsync
 
-		#region GetSeasonLater
+		#region GetUpcomingSeasonAsync
 
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetUpcomingSeasonAsync()
@@ -753,30 +753,40 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
 		}
 
-		#endregion GetSeasonLater
+		#endregion GetUpcomingSeasonAsync
 
 		#endregion Season methods
 
 		#region Schedule methods
 
-		#region GetSchedule
+		#region GetScheduleAsync
 
 		/// <inheritdoc />
-		public async Task<Schedule> GetSchedule()
+		public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetScheduleAsync()
 		{
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Schedule };
-			return await ExecuteGetRequestAsync<Schedule>(endpointParts);
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Schedules };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
 		}
 
 		/// <inheritdoc />
-		public async Task<Schedule> GetSchedule(ScheduledDay scheduledDay)
+		public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetScheduleAsync(int page)
+		{
+			Guard.IsGreaterThanZero(page, nameof(page));
+			var queryParams = $"?page={page}";
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Schedules + queryParams };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
+		}
+
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetScheduleAsync(ScheduledDay scheduledDay)
 		{
 			Guard.IsValidEnum(scheduledDay, nameof(scheduledDay));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Schedule, scheduledDay.GetDescription() };
-			return await ExecuteGetRequestAsync<Schedule>(endpointParts);
+			var queryParams = $"?topic={scheduledDay.GetDescription()}";
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Schedules + queryParams };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
 		}
 
-		#endregion GetSchedule
+		#endregion GetScheduleAsync
 
 		#endregion Schedule methods
 
