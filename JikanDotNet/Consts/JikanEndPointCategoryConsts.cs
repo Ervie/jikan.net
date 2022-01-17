@@ -84,5 +84,10 @@
 		/// Metadata endpoint.
 		/// </summary>
 		public const string Meta = "meta";
+
+		/// <summary>
+		/// Reviews endpoint.
+		/// </summary>
+		public const string Reviews = "reviews";
 	}
 }

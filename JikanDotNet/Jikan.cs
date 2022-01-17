@@ -872,6 +872,26 @@ namespace JikanDotNet
 
 		#endregion GetTopCharactersAsync
 
+		#region GetTopReviewsAsync
+
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<Review>>> GetTopReviewsAsync()
+		{
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.TopList, JikanEndPointCategoryConsts.Reviews };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Review>>>(endpointParts);
+		}
+
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<Review>>> GetTopReviewsAsync(int page)
+		{
+			Guard.IsGreaterThanZero(page, nameof(page));
+			var queryParams = $"?page={page}";
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.TopList, JikanEndPointCategoryConsts.Reviews + queryParams };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Review>>>(endpointParts);
+		}
+
+		#endregion GetTopReviewsAsync
+
 		#endregion Top methods
 
 		#region Producer methods
