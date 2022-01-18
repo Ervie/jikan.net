@@ -681,47 +681,43 @@ namespace JikanDotNet
 
 		#region Producer requests
 
-		#region GetProducer
+		#region GetProducersAsync
 
 		/// <summary>
-		/// Returns information about producer with given MAL id.
+		/// Returns information about producers.
 		/// </summary>
-		/// <param name="id">MAL id of the producer.</param>
-		/// <returns>Information about producer with given MAL id. </returns>
-		Task<Producer> GetProducer(long id);
+		/// <returns>Basic Information about producers.</returns>
+		Task<PaginatedJikanResponse<ICollection<Producer>>> GetProducersAsync();
 
 		/// <summary>
-		/// Returns information about producer with given MAL id.
+		/// Returns information about producers.
 		/// </summary>
-		/// <param name="id">MAL id of the producer.</param>
 		/// <param name="page">Index of page folding 100 records of top ranging (e.g. 1 will return first 100 records, 2 will return record from 101 to 200 etc.)</param>
-		/// <returns>Information about producer with given MAL id. </returns>
-		Task<Producer> GetProducer(long id, int page);
+		/// <returns>Basic Information about producers.</returns>
+		Task<PaginatedJikanResponse<ICollection<Producer>>> GetProducersAsync(int page);
 
-		#endregion GetProducer
+		#endregion GetProducersAsync
 
 		#endregion Producer requests
 
 		#region Magazine requests
 
-		#region GetMagazine
+		#region GetMagazinesAsync
 
 		/// <summary>
-		/// Returns information about magazine with given MAL id.
+		/// Returns information about magazines.
 		/// </summary>
-		/// <param name="id">MAL id of the magazine.</param>
-		/// <returns>Information about magazine with given MAL id. </returns>
-		Task<Magazine> GetMagazine(long id);
+		/// <returns>Basic Information about magazines.</returns>
+		Task<PaginatedJikanResponse<ICollection<Magazine>>> GetMagazinesAsync();
 
 		/// <summary>
-		/// Returns information about magazine with given MAL id.
+		/// Returns information about magazines.
 		/// </summary>
-		/// <param name="id">MAL id of the magazine.</param>
 		/// <param name="page">Index of page folding 100 records of top ranging (e.g. 1 will return first 100 records, 2 will return record from 101 to 200 etc.)</param>
-		/// <returns>Information about magazine with given MAL id. </returns>
-		Task<Magazine> GetMagazine(long id, int page);
+		/// <returns>Basic Information about magazines.</returns>
+		Task<PaginatedJikanResponse<ICollection<Magazine>>> GetMagazinesAsync(int page);
 
-		#endregion GetMagazine
+		#endregion GetMagazinesAsync
 
 		#endregion Magazine requests
 

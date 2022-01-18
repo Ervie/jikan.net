@@ -58,12 +58,12 @@
 		/// <summary>
 		/// Producer endpoint.
 		/// </summary>
-		public const string Producer = "producer";
+		public const string Producers = "producers";
 
 		/// <summary>
 		/// Magazine endpoint.
 		/// </summary>
-		public const string Magazine = "magazine";
+		public const string Magazines = "magazines";
 
 		/// <summary>
 		/// User endpoint.

@@ -1,38 +1,34 @@
 ﻿using System.Text.Json.Serialization;
-using System.Collections.Generic;
 
 namespace JikanDotNet
 {
 	/// <summary>
 	/// Magazine model class.
 	/// </summary>
-	public class Magazine : BaseJikanRequest
+	public class Magazine
 	{
-		/// <summary>
-		/// Metadata about magazine..
-		/// </summary>
-		[JsonPropertyName("meta")]
-		public MalUrl Metadata { get; set; }
-
-		/// <summary>
-		/// List of manga published in magazine.
-		/// </summary>
-		[JsonPropertyName("manga")]
-		public ICollection<MangaSubEntry> Manga { get; set; }
-
 		/// <summary>
 		/// ID associated with MyAnimeList.
 		/// </summary>
-		public long MalId
-		{
-			get
-			{
-				return Metadata.MalId;
-			}
-			set
-			{
-				Metadata.MalId = value;
-			}
-		}
+		[JsonPropertyName("mal_id")]
+		public long MalId { get; set; }
+
+		/// <summary>
+		/// Url to sub item main page.
+		/// </summary>
+		[JsonPropertyName("url")]
+		public string Url { get; set; }
+
+		/// <summary>
+		/// Name of the magazine
+		/// </summary>
+		[JsonPropertyName("name")]
+		public string Name { get; set; }
+
+		/// <summary>
+		/// Total count of manga assigned to this magazine
+		/// </summary>
+		[JsonPropertyName("count")]
+		public int TotalCount { get; set; }
 	}
 }

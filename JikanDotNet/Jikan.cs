@@ -854,51 +854,49 @@ namespace JikanDotNet
 
 		#region Producer methods
 
-		#region GetProducer
+		#region GetProducersAsync
 
 		/// <inheritdoc />
-		public async Task<Producer> GetProducer(long id)
+		public async Task<PaginatedJikanResponse<ICollection<Producer>>> GetProducersAsync()
 		{
-			Guard.IsGreaterThanZero(id, nameof(id));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Producer, id.ToString() };
-			return await ExecuteGetRequestAsync<Producer>(endpointParts);
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Producers};
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Producer>>>(endpointParts);
 		}
 
 		/// <inheritdoc />
-		public async Task<Producer> GetProducer(long id, int page)
+		public async Task<PaginatedJikanResponse<ICollection<Producer>>> GetProducersAsync(int page)
 		{
-			Guard.IsGreaterThanZero(id, nameof(id));
 			Guard.IsGreaterThanZero(page, nameof(page));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Producer, id.ToString(), page.ToString() };
-			return await ExecuteGetRequestAsync<Producer>(endpointParts);
+			var queryParams = $"?page={page}";
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Producers + queryParams };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Producer>>>(endpointParts);
 		}
 
-		#endregion GetProducer
+		#endregion GetProducersAsync
 
 		#endregion Producer methods
 
 		#region Magazine methods
 
-		#region GetMagazine
+		#region GetMagazinesAsync
 
 		/// <inheritdoc />
-		public async Task<Magazine> GetMagazine(long id)
+		public async Task<PaginatedJikanResponse<ICollection<Magazine>>> GetMagazinesAsync()
 		{
-			Guard.IsGreaterThanZero(id, nameof(id));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Magazine, id.ToString() };
-			return await ExecuteGetRequestAsync<Magazine>(endpointParts);
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Magazines };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Magazine>>>(endpointParts);
 		}
 
 		/// <inheritdoc />
-		public async Task<Magazine> GetMagazine(long id, int page)
+		public async Task<PaginatedJikanResponse<ICollection<Magazine>>> GetMagazinesAsync(int page)
 		{
-			Guard.IsGreaterThanZero(id, nameof(id));
 			Guard.IsGreaterThanZero(page, nameof(page));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Magazine, id.ToString(), page.ToString() };
-			return await ExecuteGetRequestAsync<Magazine>(endpointParts);
+			var queryParams = $"?page={page}";
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Magazines + queryParams };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Magazine>>>(endpointParts);
 		}
 
-		#endregion GetMagazine
+		#endregion GetMagazinesAsync
 
 		#endregion Magazine methods
 
