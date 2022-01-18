@@ -56,29 +56,5 @@ namespace JikanDotNet
 		/// </summary>
 		[JsonPropertyName("created")]
 		public DateTime? Created { get; set; }
-
-		/// <summary>
-		/// Club's staff.
-		/// </summary>
-		[JsonPropertyName("staff")]
-		public ICollection<MalUrl> Staff { get; set; }
-
-		/// <summary>
-		/// Club's anime relations.
-		/// </summary>
-		[JsonPropertyName("anime_relations")]
-		public ICollection<MalUrl> AnimeRelations { get; set; }
-
-		/// <summary>
-		/// Club's manga relations.
-		/// </summary>
-		[JsonPropertyName("manga_relations")]
-		public ICollection<MalUrl> MangaRelations { get; set; }
-
-		/// <summary>
-		/// Club's character relations.
-		/// </summary>
-		[JsonPropertyName("character_relations")]
-		public ICollection<MalUrl> CharacterRelations { get; set; }
 	}
 }

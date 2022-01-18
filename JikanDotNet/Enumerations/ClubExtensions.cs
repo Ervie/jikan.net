@@ -17,6 +17,18 @@ namespace JikanDotNet
 		/// Members extension, return list of club members.
 		/// </summary>
 		[Description("members")]
-		Members
+		Members,
+
+		/// <summary>
+		/// Staff extension, return list of club staff.
+		/// </summary>
+		[Description("staff")]
+		Staff,
+
+		/// <summary>
+		/// Members extension, return collections of related entities..
+		/// </summary>
+		[Description("relations")]
+		Relations
 	}
 }

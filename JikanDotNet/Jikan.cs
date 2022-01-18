@@ -936,6 +936,30 @@ namespace JikanDotNet
 
 		#endregion GetClubMembersAsync
 
+		#region GetClubStaffAsync
+
+		/// <inheritdoc />
+		public async Task<BaseJikanResponse<ICollection<ClubStaff>>> GetClubStaffAsync(long id)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Clubs, id.ToString(), ClubExtensions.Staff.GetDescription() };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<ClubStaff>>>(endpointParts);
+		}
+
+		#endregion GetClubStaffAsync
+
+		#region GetClubRelationsAsync
+
+		/// <inheritdoc />
+		public async Task<BaseJikanResponse<ClubRelations>> GetClubRelationsAsync(long id)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Clubs, id.ToString(), ClubExtensions.Relations.GetDescription() };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ClubRelations>>(endpointParts);
+		}
+
+		#endregion GetClubRelationsAsync
+
 		#endregion Club methods
 
 		#region User methods

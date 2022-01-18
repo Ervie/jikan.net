@@ -753,6 +753,28 @@ namespace JikanDotNet
 
 		#endregion GetClubMembersAsync
 
+		#region GetClubStaffAsync
+
+		/// <summary>
+		/// Return club's staff list.
+		/// </summary>
+		/// <param name="id">MAL id of the club.</param>
+		/// <returns>Club's staff list.</returns>
+		Task<BaseJikanResponse<ICollection<ClubStaff>>> GetClubStaffAsync(long id);
+
+		#endregion GetClubStaffAsync
+
+		#region GetClubRelationsAsync
+
+		/// <summary>
+		/// Return club's relatied entities.
+		/// </summary>
+		/// <param name="id">MAL id of the club.</param>
+		/// <returns>Club's related entities collections..</returns>
+		Task<BaseJikanResponse<ClubRelations>> GetClubRelationsAsync(long id);
+
+		#endregion GetClubRelationsAsync
+
 		#endregion Club requests
 
 		#region User requests
