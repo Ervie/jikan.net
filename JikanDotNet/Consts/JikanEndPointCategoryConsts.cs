@@ -53,7 +53,7 @@
 		/// <summary>
 		/// Genre endpoint.
 		/// </summary>
-		public const string Genre = "genre";
+		public const string Genres = "genres";
 
 		/// <summary>
 		/// Producer endpoint.

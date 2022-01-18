@@ -222,54 +222,6 @@ namespace JikanDotNet
 
 		#endregion GetAnimeVideosAsync
 
-		#region GetAnimeGenre
-
-		/// <inheritdoc />
-		public async Task<AnimeGenre> GetAnimeGenre(long genreId)
-		{
-			Guard.IsGreaterThanZero(genreId, nameof(genreId));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Genre, JikanEndPointCategoryConsts.Anime, genreId.ToString() };
-			return await ExecuteGetRequestAsync<AnimeGenre>(endpointParts);
-		}
-
-		/// <inheritdoc />
-		public async Task<AnimeGenre> GetAnimeGenre(AnimeGenreSearch animeGenre)
-		{
-			Guard.IsValidEnum(animeGenre, nameof(animeGenre));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Genre, JikanEndPointCategoryConsts.Anime, animeGenre.GetDescription() };
-			return await ExecuteGetRequestAsync<AnimeGenre>(endpointParts);
-		}
-
-		/// <summary>
-		/// Return information about anime genre.
-		/// </summary>
-		/// <param name="genreId">Id of the searched genre.</param>
-		/// <param name="page">Indexx of page folding 100 records of top ranging (e.g. 1 will return first 100 records, 2 will return record from 101 to 200 etc.)</param>
-		/// <returns>Information about anime genre</returns>
-		public async Task<AnimeGenre> GetAnimeGenre(long genreId, int page)
-		{
-			Guard.IsGreaterThanZero(genreId, nameof(genreId));
-			Guard.IsGreaterThanZero(page, nameof(page));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Genre, JikanEndPointCategoryConsts.Anime, genreId.ToString(), page.ToString() };
-			return await ExecuteGetRequestAsync<AnimeGenre>(endpointParts);
-		}
-
-		/// <summary>
-		/// Return information about anime genre.
-		/// </summary>
-		/// <param name="animeGenre">Searched genre.</param>
-		/// <param name="page">Index of page folding 100 records of top ranging (e.g. 1 will return first 100 records, 2 will return record from 101 to 200 etc.)</param>
-		/// <returns>Information about anime genre</returns>
-		public async Task<AnimeGenre> GetAnimeGenre(AnimeGenreSearch animeGenre, int page)
-		{
-			Guard.IsGreaterThanZero(page, nameof(page));
-			Guard.IsValidEnum(animeGenre, nameof(animeGenre));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Genre, JikanEndPointCategoryConsts.Anime, animeGenre.GetDescription(), page.ToString() };
-			return await ExecuteGetRequestAsync<AnimeGenre>(endpointParts);
-		}
-
-		#endregion GetAnimeGenre
-
 		#region GetAnimePicturesAsync
 
 		/// <inheritdoc />
@@ -530,44 +482,6 @@ namespace JikanDotNet
 		}
 
 		#endregion GetMangaPicturesAsync
-
-		#region GetMangaGenre
-
-		/// <inheritdoc />
-		public async Task<MangaGenre> GetMangaGenre(long genreId)
-		{
-			Guard.IsGreaterThanZero(genreId, nameof(genreId));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Genre, JikanEndPointCategoryConsts.Manga, genreId.ToString() };
-			return await ExecuteGetRequestAsync<MangaGenre>(endpointParts);
-		}
-
-		/// <inheritdoc />
-		public async Task<MangaGenre> GetMangaGenre(MangaGenreSearch mangaGenre)
-		{
-			Guard.IsValidEnum(mangaGenre, nameof(mangaGenre));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Genre, JikanEndPointCategoryConsts.Manga, mangaGenre.GetDescription() };
-			return await ExecuteGetRequestAsync<MangaGenre>(endpointParts);
-		}
-
-		/// <inheritdoc />
-		public async Task<MangaGenre> GetMangaGenre(long genreId, int page)
-		{
-			Guard.IsGreaterThanZero(genreId, nameof(genreId));
-			Guard.IsGreaterThanZero(page, nameof(page));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Genre, JikanEndPointCategoryConsts.Manga, genreId.ToString(), page.ToString() };
-			return await ExecuteGetRequestAsync<MangaGenre>(endpointParts);
-		}
-
-		/// <inheritdoc />
-		public async Task<MangaGenre> GetMangaGenre(MangaGenreSearch mangaGenre, int page)
-		{
-			Guard.IsGreaterThanZero(page, nameof(page));
-			Guard.IsValidEnum(mangaGenre, nameof(mangaGenre));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Genre, JikanEndPointCategoryConsts.Manga, mangaGenre.GetDescription(), page.ToString() };
-			return await ExecuteGetRequestAsync<MangaGenre>(endpointParts);
-		}
-
-		#endregion GetMangaGenre
 
 		#region GetMangaStatisticsAsync
 
@@ -893,6 +807,50 @@ namespace JikanDotNet
 		#endregion GetTopReviewsAsync
 
 		#endregion Top methods
+
+		#region Genre methods
+
+		#region GetAnimeGenresAsync
+
+		/// <inheritdoc />
+		public async Task<BaseJikanResponse<ICollection<Genre>>> GetAnimeGenresAsync()
+		{
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Genres, JikanEndPointCategoryConsts.Anime};
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<Genre>>>(endpointParts);
+		}
+
+		/// <inheritdoc />
+		public async Task<BaseJikanResponse<ICollection<Genre>>> GetAnimeGenresAsync(GenresFilter filter)
+		{
+			Guard.IsValidEnum(filter, nameof(filter));
+			var queryParams = $"?filter={filter.GetDescription()}";
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Genres, JikanEndPointCategoryConsts.Anime + queryParams };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<Genre>>>(endpointParts);
+		}
+
+		#endregion GetAnimeGenresAsync
+
+		#region GetMangaGenresAsync
+
+		/// <inheritdoc />
+		public async Task<BaseJikanResponse<ICollection<Genre>>> GetMangaGenresAsync()
+		{
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Genres, JikanEndPointCategoryConsts.Manga };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<Genre>>>(endpointParts);
+		}
+
+		/// <inheritdoc />
+		public async Task<BaseJikanResponse<ICollection<Genre>>> GetMangaGenresAsync(GenresFilter filter)
+		{
+			Guard.IsValidEnum(filter, nameof(filter));
+			var queryParams = $"?filter={filter.GetDescription()}";
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Genres, JikanEndPointCategoryConsts.Manga + queryParams };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<Genre>>>(endpointParts);
+		}
+
+		#endregion GetMangaGenresAsync
+
+		#endregion Genre methods
 
 		#region Producer methods
 

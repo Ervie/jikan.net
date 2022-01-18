@@ -643,73 +643,39 @@ namespace JikanDotNet
 
 		#region Genre requests
 
-		#region GetAnimeGenre
+		#region GetAnimeGenresAsync
 
 		/// <summary>
-		/// Returns information about anime genre.
+		/// Returns list of anime genres.
 		/// </summary>
-		/// <param name="genreId">Id of the searched genre.</param>
-		/// <returns>Information about anime genre</returns>
-		Task<AnimeGenre> GetAnimeGenre(long genreId);
+		/// <returns>List of anime genres</returns>
+		Task<BaseJikanResponse<ICollection<Genre>>> GetAnimeGenresAsync();
 
 		/// <summary>
-		/// Returns information about anime genre.
+		/// Returns list of anime genres.
 		/// </summary>
-		/// <param name="animeGenre">Searched genre.</param>
-		/// <returns>Information about anime genre</returns>
-		Task<AnimeGenre> GetAnimeGenre(AnimeGenreSearch animeGenre);
+		/// <param name="filter">Filter for genre types.</param>
+		/// <returns>List of anime genres</returns>
+		Task<BaseJikanResponse<ICollection<Genre>>> GetAnimeGenresAsync(GenresFilter filter);
+
+		#endregion GetAnimeGenresAsync
+
+		#region GetMangaGenresAsync
 
 		/// <summary>
-		/// Returns information about anime genre.
+		/// Returns list of manga genres.
 		/// </summary>
-		/// <param name="genreId">Id of the searched genre.</param>
-		/// <param name="page">Index of page folding 100 records of top ranging (e.g. 1 will return first 100 records, 2 will return record from 101 to 200 etc.)</param>
-		/// <returns>Information about anime genre</returns>
-		Task<AnimeGenre> GetAnimeGenre(long genreId, int page);
+		/// <returns>List of manga genres</returns>
+		Task<BaseJikanResponse<ICollection<Genre>>> GetMangaGenresAsync();
 
 		/// <summary>
-		/// Returns information about anime genre.
+		/// Returns list of manga genres.
 		/// </summary>
-		/// <param name="animeGenre">Searched genre.</param>
-		/// <param name="page">Index of page folding 100 records of top ranging (e.g. 1 will return first 100 records, 2 will return record from 101 to 200 etc.)</param>
-		/// <returns>Information about anime genre</returns>
-		Task<AnimeGenre> GetAnimeGenre(AnimeGenreSearch animeGenre, int page);
+		/// <param name="filter">Filter for genre types.</param>
+		/// <returns>List of manga genres</returns>
+		Task<BaseJikanResponse<ICollection<Genre>>> GetMangaGenresAsync(GenresFilter filter);
 
-		#endregion GetAnimeGenre
-
-		#region GetMangaGenre
-
-		/// <summary>
-		/// Returns information about manga genre.
-		/// </summary>
-		/// <param name="genreId">Id of the searched genre.</param>
-		/// <returns>Information about manga genre</returns>
-		Task<MangaGenre> GetMangaGenre(long genreId);
-
-		/// <summary>
-		/// Returns information about manga genre.
-		/// </summary>
-		/// <param name="mangaGenre">Searched genre.</param>
-		/// <returns>Information about manga genre</returns>
-		Task<MangaGenre> GetMangaGenre(MangaGenreSearch mangaGenre);
-
-		/// <summary>
-		/// Returns information about manga genre.
-		/// </summary>
-		/// <param name="genreId">Id of the searched genre.</param>
-		/// <param name="page">Index of page folding 100 records of top ranging (e.g. 1 will return first 100 records, 2 will return record from 101 to 200 etc.)</param>
-		/// <returns>Information about manga genre</returns>
-		Task<MangaGenre> GetMangaGenre(long genreId, int page);
-
-		/// <summary>
-		/// Returns information about manga genre.
-		/// </summary>
-		/// <param name="mangaGenre">Searched genre.</param>
-		/// <param name="page">Index of page folding 100 records of top ranging (e.g. 1 will return first 100 records, 2 will return record from 101 to 200 etc.)</param>
-		/// <returns>Information about manga genre</returns>
-		Task<MangaGenre> GetMangaGenre(MangaGenreSearch mangaGenre, int page);
-
-		#endregion GetMangaGenre
+		#endregion GetMangaGenresAsync
 
 		#endregion Genre requests
 
