@@ -721,6 +721,40 @@ namespace JikanDotNet
 
 		#endregion Magazine requests
 
+		#region Club requests
+
+		#region GetClubAsync
+
+		/// <summary>
+		/// Return club's profile information.
+		/// </summary>
+		/// <param name="id">MAL id of the club.</param>
+		/// <returns>Club's profile information.</returns>
+		Task<BaseJikanResponse<Club>> GetClubAsync(long id);
+
+		#endregion GetClubAsync
+
+		#region GetClubMembersAsync
+
+		/// <summary>
+		/// Return club's member list.
+		/// </summary>
+		/// <param name="id">MAL id of the club.</param>
+		/// <returns>Club's member list.</returns>
+		Task<PaginatedJikanResponse<ICollection<ClubMember>>> GetClubMembersAsync(long id);
+
+		/// <summary>
+		/// Return club's member list.
+		/// </summary>
+		/// <param name="id">MAL id of the club.</param>
+		/// <param name="page">Index of page folding 36 records of top ranging (e.g. 1 will return first 36 records, 2 will return record from 37 to 72 etc.)</param>
+		/// <returns>Club's member list.</returns>
+		Task<PaginatedJikanResponse<ICollection<ClubMember>>> GetClubMembersAsync(long id, int page);
+
+		#endregion GetClubMembersAsync
+
+		#endregion Club requests
+
 		#region User requests
 
 		#region GetUserProfile
@@ -861,40 +895,6 @@ namespace JikanDotNet
 		#endregion GetUserMangaList
 
 		#endregion User requests
-
-		#region Club requests
-
-		#region GetClub
-
-		/// <summary>
-		/// Return club's profile information.
-		/// </summary>
-		/// <param name="id">MAL id of the club.</param>
-		/// <returns>Club's profile information.</returns>
-		Task<Club> GetClub(long id);
-
-		#endregion GetClub
-
-		#region GetClubMembers
-
-		/// <summary>
-		/// Return club's member list.
-		/// </summary>
-		/// <param name="id">MAL id of the club.</param>
-		/// <returns>Club's member list.</returns>
-		Task<ClubMembers> GetClubMembers(long id);
-
-		/// <summary>
-		/// Return club's member list.
-		/// </summary>
-		/// <param name="id">MAL id of the club.</param>
-		/// <param name="page">Index of page folding 36 records of top ranging (e.g. 1 will return first 36 records, 2 will return record from 37 to 72 etc.)</param>
-		/// <returns>Club's member list.</returns>
-		Task<ClubMembers> GetClubMembers(long id, int page);
-
-		#endregion GetClubMembers
-
-		#endregion Club requests
 
 		#region Search requests
 

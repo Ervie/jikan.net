@@ -815,7 +815,7 @@ namespace JikanDotNet
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<ICollection<Genre>>> GetAnimeGenresAsync()
 		{
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Genres, JikanEndPointCategoryConsts.Anime};
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Genres, JikanEndPointCategoryConsts.Anime };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<Genre>>>(endpointParts);
 		}
 
@@ -859,7 +859,7 @@ namespace JikanDotNet
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<Producer>>> GetProducersAsync()
 		{
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Producers};
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Producers };
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Producer>>>(endpointParts);
 		}
 
@@ -899,6 +899,44 @@ namespace JikanDotNet
 		#endregion GetMagazinesAsync
 
 		#endregion Magazine methods
+
+		#region Club methods
+
+		#region GetClubAsync
+
+		/// <inheritdoc />
+		public async Task<BaseJikanResponse<Club>> GetClubAsync(long id)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Clubs, id.ToString() };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<Club>>(endpointParts);
+		}
+
+		#endregion GetClubAsync
+
+		#region GetClubMembersAsync
+
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<ClubMember>>> GetClubMembersAsync(long id)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Clubs, id.ToString(), ClubExtensions.Members.GetDescription() };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<ClubMember>>>(endpointParts);
+		}
+
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<ClubMember>>> GetClubMembersAsync(long id, int page)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			Guard.IsGreaterThanZero(page, nameof(page));
+			var queryParams = $"?page={page}";
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Clubs, id.ToString(), ClubExtensions.Members.GetDescription() + queryParams };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<ClubMember>>>(endpointParts);
+		}
+
+		#endregion GetClubMembersAsync
+
+		#endregion Club methods
 
 		#region User methods
 
@@ -1057,43 +1095,6 @@ namespace JikanDotNet
 		#endregion GetUserFriend
 
 		#endregion User methods
-
-		#region Club Methods
-
-		#region GetClub
-
-		/// <inheritdoc />
-		public async Task<Club> GetClub(long id)
-		{
-			Guard.IsGreaterThanZero(id, nameof(id));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Club, id.ToString() };
-			return await ExecuteGetRequestAsync<Club>(endpointParts);
-		}
-
-		#endregion GetClub
-
-		#region GetClubMembers
-
-		/// <inheritdoc />
-		public async Task<ClubMembers> GetClubMembers(long id)
-		{
-			Guard.IsGreaterThanZero(id, nameof(id));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Club, id.ToString(), ClubExtensions.Members.GetDescription() };
-			return await ExecuteGetRequestAsync<ClubMembers>(endpointParts);
-		}
-
-		/// <inheritdoc />
-		public async Task<ClubMembers> GetClubMembers(long id, int page)
-		{
-			Guard.IsGreaterThanZero(id, nameof(id));
-			Guard.IsGreaterThanZero(page, nameof(page));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Club, id.ToString(), ClubExtensions.Members.GetDescription(), page.ToString() };
-			return await ExecuteGetRequestAsync<ClubMembers>(endpointParts);
-		}
-
-		#endregion GetClubMembers
-
-		#endregion Club Methods
 
 		#region Search methods
 

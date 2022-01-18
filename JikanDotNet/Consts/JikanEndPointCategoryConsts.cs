@@ -73,7 +73,7 @@
 		/// <summary>
 		/// Club endpoint.
 		/// </summary>
-		public const string Club = "club";
+		public const string Clubs = "clubs";
 
 		/// <summary>
 		/// Search endpoint.

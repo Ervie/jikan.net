@@ -14,10 +14,10 @@ namespace JikanDotNet
 		public string Username { get; set; }
 
 		/// <summary>
-		/// Club member's image URL
+		/// Club member's image set
 		/// </summary>
-		[JsonPropertyName("image_url")]
-		public string ImageURL { get; set; }
+		[JsonPropertyName("images")]
+		public ImagesSet Images{ get; set; }
 
 		/// <summary>
 		/// Club member's URL
