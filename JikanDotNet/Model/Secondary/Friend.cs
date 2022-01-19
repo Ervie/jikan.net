@@ -1,30 +1,18 @@
-﻿using System.Text.Json.Serialization;
-using System;
+﻿using System;
+using System.Text.Json.Serialization;
 
 namespace JikanDotNet
 {
 	/// <summary>
-	/// Model class for entry on user's history (single update).
+	/// Model class for entry on user's history.
 	/// </summary>
 	public class Friend
 	{
 		/// <summary>
-		/// Friend's username.
+		/// Friend's user metadata.
 		/// </summary>
-		[JsonPropertyName("username")]
-		public string Username { get; set; }
-
-		/// <summary>
-		/// Url to friend page.
-		/// </summary>
-		[JsonPropertyName("url")]
-		public string Url { get; set; }
-
-		/// <summary>
-		/// Friend's image URL.
-		/// </summary>
-		[JsonPropertyName("image_url")]
-		public string ImageURL { get; set; }
+		[JsonPropertyName("user")]
+		public UserMetadata User { get; set; }
 
 		/// <summary>
 		/// Timestamp of friend's last online activity.
@@ -37,6 +25,5 @@ namespace JikanDotNet
 		/// </summary>
 		[JsonPropertyName("friends_since")]
 		public DateTime? FriendsSince { get; set; }
-
 	}
 }

@@ -823,14 +823,14 @@ namespace JikanDotNet
 
 		#endregion GetUserAboutAsync
 
-		#region GetUserHistory
+		#region GetUserHistoryAsync
 
 		/// <summary>
 		/// Returns information about user's history with given username.
 		/// </summary>
 		/// <param name="username">Username.</param>
 		/// <returns>Information about user's profile with given username.</returns>
-		Task<UserHistory> GetUserHistory(string username);
+		Task<BaseJikanResponse<ICollection<HistoryEntry>>> GetUserHistoryAsync(string username);
 
 		/// <summary>
 		/// Returns information about user's history with given username.
@@ -838,18 +838,18 @@ namespace JikanDotNet
 		/// <param name="username">Username.</param>
 		/// <param name="filter">Option to filter history.</param>
 		/// <returns>Information about user's profile with given username.</returns>
-		Task<UserHistory> GetUserHistory(string username, UserHistoryExtension filter);
+		Task<BaseJikanResponse<ICollection<HistoryEntry>>> GetUserHistoryAsync(string username, UserHistoryExtension filter);
 
-		#endregion GetUserHistory
+		#endregion GetUserHistoryAsync
 
-		#region GetUserFriends
+		#region GetUserFriendsAsync
 
 		/// <summary>
 		/// Returns information about user's friends with given username.
 		/// </summary>
 		/// <param name="username">Username.</param>
 		/// <returns>Information about user's friends with given username.</returns>
-		Task<UserFriends> GetUserFriends(string username);
+		Task<PaginatedJikanResponse<ICollection<Friend>>> GetUserFriendsAsync(string username);
 
 		/// <summary>
 		/// Returns information about user's friends with given username.
@@ -857,9 +857,9 @@ namespace JikanDotNet
 		/// <param name="username">Username.</param>
 		/// <param name="page">Index of the page.</param>
 		/// <returns>Information about user's friends with given username.</returns>
-		Task<UserFriends> GetUserFriends(string username, int page);
+		Task<PaginatedJikanResponse<ICollection<Friend>>> GetUserFriendsAsync(string username, int page);
 
-		#endregion GetUserFriends
+		#endregion GetUserFriendsAsync
 
 		#region GetUserAnimeList
 

@@ -1012,26 +1012,26 @@ namespace JikanDotNet
 
 		#endregion GetUserAboutAsync
 
-		#region GetUserHistory
+		#region GetUserHistoryAsync
 
 		/// <inheritdoc />
-		public async Task<UserHistory> GetUserHistory(string username)
+		public async Task<BaseJikanResponse<ICollection<HistoryEntry>>> GetUserHistoryAsync(string username)
 		{
 			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
 			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Users, username, UserExtension.History.GetDescription() };
-			return await ExecuteGetRequestAsync<UserHistory>(endpointParts);
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<HistoryEntry>>>(endpointParts);
 		}
 
 		/// <inheritdoc />
-		public async Task<UserHistory> GetUserHistory(string username, UserHistoryExtension historyExtension)
+		public async Task<BaseJikanResponse<ICollection<HistoryEntry>>> GetUserHistoryAsync(string username, UserHistoryExtension historyExtension)
 		{
 			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
 			Guard.IsValidEnum(historyExtension, nameof(historyExtension));
 			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Users, username, UserExtension.History.GetDescription(), historyExtension.GetDescription() };
-			return await ExecuteGetRequestAsync<UserHistory>(endpointParts);
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<HistoryEntry>>>(endpointParts);
 		}
 
-		#endregion GetUserHistory
+		#endregion GetUserHistoryAsync
 
 		#region GetUserAnimeList
 
@@ -1133,26 +1133,27 @@ namespace JikanDotNet
 
 		#endregion GetUserMangaList
 
-		#region GetUserFriend
+		#region GetUserFriendsAsync
 
 		/// <inheritdoc />
-		public async Task<UserFriends> GetUserFriends(string username)
+		public async Task<PaginatedJikanResponse<ICollection<Friend>>> GetUserFriendsAsync(string username)
 		{
 			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
 			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Users, username, UserExtension.Friends.GetDescription() };
-			return await ExecuteGetRequestAsync<UserFriends>(endpointParts);
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Friend>>>(endpointParts);
 		}
 
 		/// <inheritdoc />
-		public async Task<UserFriends> GetUserFriends(string username, int page)
+		public async Task<PaginatedJikanResponse<ICollection<Friend>>> GetUserFriendsAsync(string username, int page)
 		{
 			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
 			Guard.IsGreaterThanZero(page, nameof(page));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Users, username, UserExtension.Friends.GetDescription(), page.ToString() };
-			return await ExecuteGetRequestAsync<UserFriends>(endpointParts);
+			var queryParams = $"?page={page}";
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Users, username, UserExtension.Friends.GetDescription() + queryParams };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Friend>>>(endpointParts);
 		}
 
-		#endregion GetUserFriend
+		#endregion GetUserFriendsAsync
 
 		#endregion User methods
 
