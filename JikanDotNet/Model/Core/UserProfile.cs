@@ -6,8 +6,14 @@ namespace JikanDotNet
 	/// <summary>
 	/// User's profile model class.
 	/// </summary>
-	public class UserProfile: BaseJikanRequest
+	public class UserProfile
 	{
+		/// <summary>
+		/// ID associated with MyAnimeList.
+		/// </summary>
+		[JsonPropertyName("mal_id")]
+		public long? MalId { get; set; }
+
 		/// <summary>
 		/// Username.
 		/// </summary>
@@ -15,22 +21,16 @@ namespace JikanDotNet
 		public string Username { get; set; }
 
 		/// <summary>
-		/// User's image URL
-		/// </summary>
-		[JsonPropertyName("image_url")]
-		public string ImageURL { get; set; }
-
-		/// <summary>
 		/// User's URL
 		/// </summary>
 		[JsonPropertyName("url")]
-		public string URL { get; set; }
+		public string Url { get; set; }
 
 		/// <summary>
-		/// User's id.
+		/// User's image set
 		/// </summary>
-		[JsonPropertyName("user_id")]
-		public long UserId { get; set; }
+		[JsonPropertyName("images")]
+		public ImagesSet Images { get; set; }
 
 		/// <summary>
 		/// User's gender.
@@ -61,29 +61,5 @@ namespace JikanDotNet
 		/// </summary>
 		[JsonPropertyName("joined")]
 		public DateTime? Joined { get; set; }
-
-		/// <summary>
-		/// User's favorite section.
-		/// </summary>
-		[JsonPropertyName("favorites")]
-		public UserFavoritesSection Favorites { get; set; }
-
-		/// <summary>
-		/// User's anime statistics.
-		/// </summary>
-		[JsonPropertyName("anime_stats")]
-		public UserAnimeStatistics AnimeStatistics { get; set; }
-
-		/// <summary>
-		/// User's manga statistics.
-		/// </summary>
-		[JsonPropertyName("manga_stats")]
-		public UserMangaStatistics MangaStatistics { get; set; }
-
-		/// <summary>
-		/// User's about section as a text.
-		/// </summary>
-		[JsonPropertyName("about")]
-		public string About { get; set; }
 	}
 }

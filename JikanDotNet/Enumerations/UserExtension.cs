@@ -36,5 +36,23 @@ namespace JikanDotNet
 		/// </summary>
 		[Description("mangalist")]
 		MangaList,
+
+		/// <summary>
+		/// Statistics extension, return data about user's statistics.
+		/// </summary>
+		[Description("statistics")]
+		Statistics,
+
+		/// <summary>
+		/// Favorites extension, return data about user's favorites.
+		/// </summary>
+		[Description("favorites")]
+		Favorites,
+
+		/// <summary>
+		/// About  extension, return data about user's description on the profile.
+		/// </summary>
+		[Description("about")]
+		About
 	}
 }

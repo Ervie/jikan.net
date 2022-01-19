@@ -68,7 +68,7 @@
 		/// <summary>
 		/// User endpoint.
 		/// </summary>
-		public const string User = "user";
+		public const string Users = "users";
 
 		/// <summary>
 		/// Club endpoint.

@@ -779,16 +779,49 @@ namespace JikanDotNet
 
 		#region User requests
 
-		#region GetUserProfile
+		#region GetUserProfileAsync
 
 		/// <summary>
 		/// Returns information about user's profile with given username.
 		/// </summary>
 		/// <param name="username">Username.</param>
 		/// <returns>Information about user's profile with given username.</returns>
-		Task<UserProfile> GetUserProfile(string username);
+		Task<BaseJikanResponse<UserProfile>> GetUserProfileAsync(string username);
 
-		#endregion GetUserProfile
+		#endregion GetUserProfileAsync
+
+		#region GetUserStatisticsAsync
+
+		/// <summary>
+		/// Returns information about user's anime and manga statistics
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <returns>Information about user's anime and manga statistics.</returns>
+		Task<BaseJikanResponse<UserStatistics>> GetUserStatisticsAsync(string username);
+
+		#endregion GetUserStatisticsAsync
+
+		#region GetUserFavoritesAsync
+
+		/// <summary>
+		/// Returns information about user's favorite section.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <returns>Information about user's favorite section..</returns>
+		Task<BaseJikanResponse<UserFavorites>> GetUserFavoritesAsync(string username);
+
+		#endregion GetUserFavoritesAsync
+
+		#region GetUserAboutAsync
+
+		/// <summary>
+		/// Returns information about user's description on the profile.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <returns>Information about user's description on the profile.</returns>
+		Task<BaseJikanResponse<UserAbout>> GetUserAboutAsync(string username);
+
+		#endregion GetUserAboutAsync
 
 		#region GetUserHistory
 

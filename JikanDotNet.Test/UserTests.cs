@@ -8,63 +8,13 @@ using Xunit;
 
 namespace JikanDotNet.Tests
 {
-	public class UserTests
+	public class UserTestss
 	{
 		private readonly IJikan _jikan;
 
-		public UserTests()
+		public UserTestss()
 		{
 			_jikan = new Jikan();
-		}
-
-		[Theory]
-		[InlineData(null)]
-		[InlineData("")]
-		[InlineData("\n\n\t    \t")]
-		public async Task GetUserProfile_InvalidUsername_ShouldThrowValidationException(string username)
-		{
-			// When
-			Func<Task<UserProfile>> func = _jikan.Awaiting(x => x.GetUserProfile(username));
-
-			// Then
-			await func.Should().ThrowExactlyAsync<JikanValidationException>();
-		}
-
-		[Fact]
-		public async Task GetUserProfile_Ervelan_ShouldParseErvelanProfile()
-		{
-			// When
-			var user = await _jikan.GetUserProfile("Ervelan");
-
-			// Then
-			using (new AssertionScope())
-			{
-				user.Should().NotBeNull();
-				user.Username.Should().Be("Ervelan");
-				user.UserId.Should().Be(289183);
-				user.Joined.Value.Year.Should().Be(2010);
-				user.AnimeStatistics.Completed.Should().BeGreaterThan(500);
-				user.Favorites.Anime.Select(x => x.Name).Should().Contain("Haibane Renmei");
-				user.Favorites.Characters.Select(x => x.Name).Should().Contain("Oshino, Shinobu");
-			}
-		}
-
-		[Fact]
-		public async Task GetUserProfile_Nekomata1037_ShouldParseNekomataProfile()
-		{
-			// When
-			var user = await _jikan.GetUserProfile("Nekomata1037");
-
-			// Then
-			using (new AssertionScope())
-			{
-				user.Should().NotBeNull();
-				user.Username.Should().Be("Nekomata1037");
-				user.UserId.Should().Be(4901676);
-				user.Joined.Value.Year.Should().Be(2015);
-				user.AnimeStatistics.TotalEntries.Should().BeGreaterThan(700);
-				user.Favorites.Anime.Select(x => x.Name).Should().Contain("Steins;Gate");
-			}
 		}
 
 		[Theory]

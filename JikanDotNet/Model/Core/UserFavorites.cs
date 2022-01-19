@@ -1,24 +1,24 @@
-﻿using System.Text.Json.Serialization;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace JikanDotNet
 {
 	/// <summary>
-	/// User favorites section model class.
+	/// Model representing user favorites
 	/// </summary>
-	public class UserFavoritesSection
+	public class UserFavorites
 	{
 		/// <summary>
 		/// User's favorite anime.
 		/// </summary>
 		[JsonPropertyName("anime")]
-		public ICollection<MalImageSubItem> Anime { get; set; }
+		public ICollection<FavoritesEntry> Anime { get; set; }
 
 		/// <summary>
 		/// User's favorite manga.
 		/// </summary>
 		[JsonPropertyName("manga")]
-		public ICollection<MalImageSubItem> Manga { get; set; }
+		public ICollection<FavoritesEntry> Manga { get; set; }
 
 		/// <summary>
 		/// User's favorite characters.
