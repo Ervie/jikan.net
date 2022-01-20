@@ -937,6 +937,25 @@ namespace JikanDotNet
 
 		#endregion GetUserRecommendationsAsync
 
+		#region GetUserClubsAsync
+
+		/// <summary>
+		/// Returns user's clubs.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <returns>User's clubs.</returns>
+		Task<PaginatedJikanResponse<ICollection<MalUrl>>> GetUserClubsAsync(string username);
+
+		/// <summary>
+		/// Returns user's clubs.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <param name="page">Index of page folding 10 records of top ranging (e.g. 1 will return first 10 records, 2 will return record from 11 to 21 etc.)</param>
+		/// <returns>User's clubs.</returns>
+		Task<PaginatedJikanResponse<ICollection<MalUrl>>> GetUserClubsAsync(string username, int page);
+
+		#endregion GetUserClubsAsync
+
 		#endregion User requests
 
 		#region Search requests

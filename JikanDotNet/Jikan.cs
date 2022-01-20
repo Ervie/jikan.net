@@ -1142,6 +1142,28 @@ namespace JikanDotNet
 
 		#endregion GetUserRecommendationsAsync
 
+		#region GetUserClubsAsync
+
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<MalUrl>>> GetUserClubsAsync(string username)
+		{
+			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Users, username, UserExtension.Clubs.GetDescription() };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<MalUrl>>>(endpointParts);
+		}
+
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<MalUrl>>> GetUserClubsAsync(string username, int page)
+		{
+			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
+			Guard.IsGreaterThanZero(page, nameof(page));
+			var queryParams = $"?page={page}";
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Users, username, UserExtension.Clubs.GetDescription() + queryParams };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<MalUrl>>>(endpointParts);
+		}
+
+		#endregion GetUserClubsAsync
+
 		#endregion User methods
 
 		#region Search methods

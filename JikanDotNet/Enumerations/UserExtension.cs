@@ -65,6 +65,12 @@ namespace JikanDotNet
 		/// Recommendations extension, return data about user's recommendations.
 		/// </summary>
 		[Description("recommendations")]
-		Recommendations
+		Recommendations,
+
+		/// <summary>
+		/// Clubs extension, return data about user's clubs.
+		/// </summary>
+		[Description("clubs")]
+		Clubs
 	}
 }
