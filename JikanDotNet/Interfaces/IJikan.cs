@@ -1101,19 +1101,5 @@ namespace JikanDotNet
 		#endregion SearchCharacter
 
 		#endregion Search requests
-
-		#region Metadata requests
-
-		#region GetStatusMetadata
-
-		/// <summary>
-		/// Return Jikan REST API metadata - status.
-		/// </summary>
-		/// <returns>Jikan REST API metadata - status.</returns>
-		Task<StatusMetadata> GetStatusMetadata();
-
-		#endregion GetStatusMetadata
-
-		#endregion Metadata requests
 	}
 }

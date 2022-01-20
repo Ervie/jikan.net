@@ -5,7 +5,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Manga characters list model class.
 	/// </summary>
-	public class MangaCharacter : BaseJikanRequest
+	public class MangaCharacter
 	{
 		/// <summary>
 		/// Character details

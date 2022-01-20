@@ -6,7 +6,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Model class for result from searching characters.
 	/// </summary>
-	public class CharacterSearchResult : BaseJikanRequest
+	public class CharacterSearchResult
 	{
 		/// <summary>
 		/// List of search results.

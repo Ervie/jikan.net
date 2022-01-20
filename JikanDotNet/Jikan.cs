@@ -1342,21 +1342,6 @@ namespace JikanDotNet
 
 		#endregion Search methods
 
-		#region Metadata methods
-
-		#region GetStatusMetadata
-
-		/// <inheritdoc />
-		public async Task<StatusMetadata> GetStatusMetadata()
-		{
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Meta, "status" };
-			return await ExecuteGetRequestAsync<StatusMetadata>(endpointParts);
-		}
-
-		#endregion GetStatusMetadata
-
-		#endregion Metadata methods
-
 		#endregion Public Methods
 	}
 }

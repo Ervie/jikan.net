@@ -6,7 +6,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Model class for result from searching anime.
 	/// </summary>
-	public class AnimeSearchResult : BaseJikanRequest
+	public class AnimeSearchResult
 	{
 		/// <summary>
 		/// List of search results.

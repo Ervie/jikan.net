@@ -6,7 +6,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Model class for result from searching person.
 	/// </summary>
-	public class PersonSearchResult : BaseJikanRequest
+	public class PersonSearchResult
 	{
 		/// <summary>
 		/// List of search results.
