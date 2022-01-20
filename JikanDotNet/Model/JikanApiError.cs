@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Text.Json.Serialization;
 
-namespace JikanDotNet.Model
+namespace JikanDotNet
 {
 	/// <summary>
 	/// Class of error data returned in case http call was unsucessfull
@@ -31,5 +31,11 @@ namespace JikanDotNet.Model
 		/// </summary>
 		[JsonPropertyName("error")]
 		public string Error { get; private set; }
+
+		/// <summary>
+		/// Url where you can report problem
+		/// </summary>
+		[JsonPropertyName("report_url")]
+		public string ReportUrl { get; private set; }
 	}
 }

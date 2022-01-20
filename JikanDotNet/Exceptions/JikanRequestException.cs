@@ -1,5 +1,4 @@
-﻿using JikanDotNet.Model;
-using System;
+﻿using System;
 
 namespace JikanDotNet.Exceptions
 {

@@ -50,9 +50,21 @@ namespace JikanDotNet
 		Favorites,
 
 		/// <summary>
-		/// About  extension, return data about user's description on the profile.
+		/// About extension, return data about user's description on the profile.
 		/// </summary>
 		[Description("about")]
-		About
+		About,
+
+		/// <summary>
+		/// Reviews extension, return data about user's reviews.
+		/// </summary>
+		[Description("reviews")]
+		Reviews,
+
+		/// <summary>
+		/// Recommendations extension, return data about user's recommendations.
+		/// </summary>
+		[Description("recommendations")]
+		Recommendations
 	}
 }

@@ -899,6 +899,44 @@ namespace JikanDotNet
 
 		#endregion GetUserMangaListAsync
 
+		#region GetUserReviewsAsync
+
+		/// <summary>
+		/// Returns user's reviews.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <returns>User's reviews.</returns>
+		Task<PaginatedJikanResponse<ICollection<Review>>> GetUserReviewsAsync(string username);
+
+		/// <summary>
+		/// Returns user's reviews.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <param name="page">Index of page folding 10 records of top ranging (e.g. 1 will return first 10 records, 2 will return record from 11 to 21 etc.)</param>
+		/// <returns>User's reviews.</returns>
+		Task<PaginatedJikanResponse<ICollection<Review>>> GetUserReviewsAsync(string username, int page);
+
+		#endregion GetUserReviewsAsync
+
+		#region GetUserRecommendationsAsync
+
+		/// <summary>
+		/// Returns user's recommendations.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <returns>User's recommendations.</returns>
+		Task<PaginatedJikanResponse<ICollection<UserRecommendation>>> GetUserRecommendationsAsync(string username);
+
+		/// <summary>
+		/// Returns user's recommendations.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <param name="page">Index of page folding 10 records of top ranging (e.g. 1 will return first 10 records, 2 will return record from 11 to 21 etc.)</param>
+		/// <returns>User's recommendations.</returns>
+		Task<PaginatedJikanResponse<ICollection<UserRecommendation>>> GetUserRecommendationsAsync(string username, int page);
+
+		#endregion GetUserRecommendationsAsync
+
 		#endregion User requests
 
 		#region Search requests

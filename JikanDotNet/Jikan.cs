@@ -3,7 +3,6 @@ using JikanDotNet.Consts;
 using JikanDotNet.Exceptions;
 using JikanDotNet.Extensions;
 using JikanDotNet.Helpers;
-using JikanDotNet.Model;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -1098,6 +1097,50 @@ namespace JikanDotNet
 		}
 
 		#endregion GetUserFriendsAsync
+
+		#region GetUserReviewsAsync
+
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<Review>>> GetUserReviewsAsync(string username)
+		{
+			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Users, username, UserExtension.Reviews.GetDescription() };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Review>>>(endpointParts);
+		}
+
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<Review>>> GetUserReviewsAsync(string username, int page)
+		{
+			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
+			Guard.IsGreaterThanZero(page, nameof(page));
+			var queryParams = $"?page={page}";
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Users, username, UserExtension.Reviews.GetDescription() + queryParams };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Review>>>(endpointParts);
+		}
+
+		#endregion GetUserReviewsAsync
+
+		#region GetUserRecommendationsAsync
+
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<UserRecommendation>>> GetUserRecommendationsAsync(string username)
+		{
+			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Users, username, UserExtension.Recommendations.GetDescription() };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<UserRecommendation>>>(endpointParts);
+		}
+
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<UserRecommendation>>> GetUserRecommendationsAsync(string username, int page)
+		{
+			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
+			Guard.IsGreaterThanZero(page, nameof(page));
+			var queryParams = $"?page={page}";
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Users, username, UserExtension.Recommendations.GetDescription() + queryParams };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<UserRecommendation>>>(endpointParts);
+		}
+
+		#endregion GetUserRecommendationsAsync
 
 		#endregion User methods
 
