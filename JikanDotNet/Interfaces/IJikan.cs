@@ -861,14 +861,14 @@ namespace JikanDotNet
 
 		#endregion GetUserFriendsAsync
 
-		#region GetUserAnimeList
+		#region GetUserAnimeListAsync
 
 		/// <summary>
 		/// Returns entries on user's anime list.
 		/// </summary>
 		/// <param name="username">Username.</param>
 		/// <returns>Entries on user's anime list.</returns>
-		Task<UserAnimeList> GetUserAnimeList(string username);
+		Task<BaseJikanResponse<ICollection<AnimeListEntry>>> GetUserAnimeListAsync(string username);
 
 		/// <summary>
 		/// Returns entries on user's anime list.
@@ -876,43 +876,18 @@ namespace JikanDotNet
 		/// <param name="username">Username.</param>
 		/// <param name="page">Index of page folding 300 records of top ranging (e.g. 1 will return first 300 records, 2 will return record from 301 to 600 etc.)</param>
 		/// <returns>Entries on user's anime list.</returns>
-		Task<UserAnimeList> GetUserAnimeList(string username, int page);
+		Task<BaseJikanResponse<ICollection<AnimeListEntry>>> GetUserAnimeListAsync(string username, int page);
 
-		/// <summary>
-		/// Returns entries on user's anime list.
-		/// </summary>
-		/// <param name="username">Username.</param>
-		/// <param name="filter">Option to filter list.</param>
-		/// <returns>Entries on user's anime list.</returns>
-		Task<UserAnimeList> GetUserAnimeList(string username, UserAnimeListExtension filter);
+		#endregion GetUserAnimeListAsync
 
-		/// <summary>
-		/// Returns entries on user's anime list.
-		/// </summary>
-		/// <param name="username">Username.</param>
-		/// <param name="filter">Option to filter list.</param>
-		/// <param name="page">Index of page folding 300 records of top ranging (e.g. 1 will return first 300 records, 2 will return record from 301 to 600 etc.)</param>
-		/// <returns>Entries on user's anime list.</returns>
-		Task<UserAnimeList> GetUserAnimeList(string username, UserAnimeListExtension filter, int page);
-
-		/// <summary>
-		/// Returns entries on user's anime list.
-		/// </summary>
-		/// <param name="username">Username.</param>
-		/// <param name="searchConfig">Config to modify request input parameters.</param>
-		/// <returns>Entries on user's anime list.</returns>
-		Task<UserAnimeList> GetUserAnimeList(string username, UserListAnimeSearchConfig searchConfig);
-
-		#endregion GetUserAnimeList
-
-		#region GetUserMangaList
+		#region GetUserMangaListAsync
 
 		/// <summary>
 		/// Returns entries on user's manga list.
 		/// </summary>
 		/// <param name="username">Username.</param>
 		/// <returns>Entries on user's manga list.</returns>
-		Task<UserMangaList> GetUserMangaList(string username);
+		Task<BaseJikanResponse<ICollection<MangaListEntry>>> GetUserMangaListAsync(string username);
 
 		/// <summary>
 		/// Returns entries on user's manga list.
@@ -920,34 +895,9 @@ namespace JikanDotNet
 		/// <param name="username">Username.</param>
 		/// <param name="page">Index of page folding 300 records of top ranging (e.g. 1 will return first 300 records, 2 will return record from 301 to 600 etc.)</param>
 		/// <returns>Entries on user's manga list.</returns>
-		Task<UserMangaList> GetUserMangaList(string username, int page);
+		Task<BaseJikanResponse<ICollection<MangaListEntry>>> GetUserMangaListAsync(string username, int page);
 
-		/// <summary>
-		/// Returns entries on user's manga list.
-		/// </summary>
-		/// <param name="username">Username.</param>
-		/// <param name="filter">Option to filter list.</param>
-		/// <returns>Entries on user's manga list.</returns>
-		Task<UserMangaList> GetUserMangaList(string username, UserMangaListExtension filter);
-
-		/// <summary>
-		/// Returns entries on user's manga list.
-		/// </summary>
-		/// <param name="username">Username.</param>
-		/// <param name="filter">Option to filter list.</param>
-		/// <param name="page">Index of page folding 300 records of top ranging (e.g. 1 will return first 300 records, 2 will return record from 301 to 600 etc.)</param>
-		/// <returns>Entries on user's manga list.</returns>
-		Task<UserMangaList> GetUserMangaList(string username, UserMangaListExtension filter, int page);
-
-		/// <summary>
-		/// Returns entries on user's manga list.
-		/// </summary>
-		/// <param name="username">Username.</param>
-		/// <param name="searchConfig">Config to modify request input parameters.</param>
-		/// <returns>Entries on user's manga list.</returns>
-		Task<UserMangaList> GetUserMangaList(string username, UserListMangaSearchConfig searchConfig);
-
-		#endregion GetUserMangaList
+		#endregion GetUserMangaListAsync
 
 		#endregion User requests
 

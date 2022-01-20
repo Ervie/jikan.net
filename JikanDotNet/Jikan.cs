@@ -1033,105 +1033,49 @@ namespace JikanDotNet
 
 		#endregion GetUserHistoryAsync
 
-		#region GetUserAnimeList
+		#region GetUserAnimeListAsync
 
 		/// <inheritdoc />
-		public async Task<UserAnimeList> GetUserAnimeList(string username)
+		public async Task<BaseJikanResponse<ICollection<AnimeListEntry>>> GetUserAnimeListAsync(string username)
 		{
 			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
 			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Users, username, UserExtension.AnimeList.GetDescription() };
-			return await ExecuteGetRequestAsync<UserAnimeList>(endpointParts);
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<AnimeListEntry>>>(endpointParts);
 		}
 
 		/// <inheritdoc />
-		public async Task<UserAnimeList> GetUserAnimeList(string username, int page)
+		public async Task<BaseJikanResponse<ICollection<AnimeListEntry>>> GetUserAnimeListAsync(string username, int page)
 		{
 			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
 			Guard.IsGreaterThanZero(page, nameof(page));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Users, username, UserExtension.AnimeList.GetDescription(), UserAnimeListExtension.All.GetDescription(), page.ToString() };
-			return await ExecuteGetRequestAsync<UserAnimeList>(endpointParts);
+			var queryParams = $"?page={page}";
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Users, username, UserExtension.AnimeList.GetDescription() + queryParams };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<AnimeListEntry>>>(endpointParts);
 		}
 
-		/// <inheritdoc />
-		public async Task<UserAnimeList> GetUserAnimeList(string username, UserAnimeListExtension filter)
-		{
-			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
-			Guard.IsValidEnum(filter, nameof(filter));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Users, username, UserExtension.AnimeList.GetDescription(), filter.GetDescription() };
-			return await ExecuteGetRequestAsync<UserAnimeList>(endpointParts);
-		}
+		#endregion GetUserAnimeListAsync
+
+		#region GetUserMangaListAsync
 
 		/// <inheritdoc />
-		public async Task<UserAnimeList> GetUserAnimeList(string username, UserAnimeListExtension filter, int page)
-		{
-			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
-			Guard.IsGreaterThanZero(page, nameof(page));
-			Guard.IsValidEnum(filter, nameof(filter));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Users, username, UserExtension.AnimeList.GetDescription(), filter.GetDescription(), page.ToString() };
-			return await ExecuteGetRequestAsync<UserAnimeList>(endpointParts);
-		}
-
-		/// <inheritdoc />
-		public async Task<UserAnimeList> GetUserAnimeList(string username, UserListAnimeSearchConfig searchConfig)
-		{
-			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
-			Guard.IsNotNull(searchConfig, nameof(searchConfig));
-			var query = string.Concat(UserExtension.AnimeList.GetDescription(), searchConfig.ConfigToString());
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Users, username, query };
-			return await ExecuteGetRequestAsync<UserAnimeList>(endpointParts);
-		}
-
-		#endregion GetUserAnimeList
-
-		#region GetUserMangaList
-
-		/// <inheritdoc />
-		public async Task<UserMangaList> GetUserMangaList(string username)
+		public async Task<BaseJikanResponse<ICollection<MangaListEntry>>> GetUserMangaListAsync(string username)
 		{
 			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
 			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Users, username, UserExtension.MangaList.GetDescription() };
-			return await ExecuteGetRequestAsync<UserMangaList>(endpointParts);
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<MangaListEntry>>>(endpointParts);
 		}
 
 		/// <inheritdoc />
-		public async Task<UserMangaList> GetUserMangaList(string username, int page)
+		public async Task<BaseJikanResponse<ICollection<MangaListEntry>>> GetUserMangaListAsync(string username, int page)
 		{
 			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
 			Guard.IsGreaterThanZero(page, nameof(page));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Users, username, UserExtension.MangaList.GetDescription(), UserMangaListExtension.All.GetDescription(), page.ToString() };
-			return await ExecuteGetRequestAsync<UserMangaList>(endpointParts);
+			var queryParams = $"?page={page}";
+			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Users, username, UserExtension.MangaList.GetDescription() + queryParams};
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<MangaListEntry>>>(endpointParts);
 		}
 
-		/// <inheritdoc />
-		public async Task<UserMangaList> GetUserMangaList(string username, UserMangaListExtension filter)
-		{
-			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
-			Guard.IsValidEnum(filter, nameof(filter));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Users, username, UserExtension.MangaList.GetDescription(), filter.GetDescription() };
-			return await ExecuteGetRequestAsync<UserMangaList>(endpointParts);
-		}
-
-		/// <inheritdoc />
-		public async Task<UserMangaList> GetUserMangaList(string username, UserMangaListExtension filter, int page)
-		{
-			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
-			Guard.IsGreaterThanZero(page, nameof(page));
-			Guard.IsValidEnum(filter, nameof(filter));
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Users, username, UserExtension.MangaList.GetDescription(), filter.GetDescription(), page.ToString() };
-			return await ExecuteGetRequestAsync<UserMangaList>(endpointParts);
-		}
-
-		/// <inheritdoc />
-		public async Task<UserMangaList> GetUserMangaList(string username, UserListMangaSearchConfig searchConfig)
-		{
-			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
-			Guard.IsNotNull(searchConfig, nameof(searchConfig));
-			var query = string.Concat(UserExtension.MangaList.GetDescription(), searchConfig.ConfigToString());
-			string[] endpointParts = new string[] { JikanEndPointCategoryConsts.Users, username, query };
-			return await ExecuteGetRequestAsync<UserMangaList>(endpointParts);
-		}
-
-		#endregion GetUserMangaList
+		#endregion GetUserMangaListAsync
 
 		#region GetUserFriendsAsync
 
