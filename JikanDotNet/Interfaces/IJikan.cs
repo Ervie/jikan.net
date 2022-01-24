@@ -958,6 +958,40 @@ namespace JikanDotNet
 
 		#endregion User requests
 
+		#region GetRandom requests
+
+		/// <summary>
+		/// Gets random anime.
+		/// </summary>
+		/// <returns>Random anime</returns>
+		Task<BaseJikanResponse<Anime>> GetRandomAnimeAsync();
+
+		/// <summary>
+		/// Gets random manga.
+		/// </summary>
+		/// <returns>Random manga</returns>
+		Task<BaseJikanResponse<Manga>> GetRandomMangaAsync();
+
+		/// <summary>
+		/// Gets random character.
+		/// </summary>
+		/// <returns>Random character</returns>
+		Task<BaseJikanResponse<Character>> GetRandomCharacterAsync();
+
+		/// <summary>
+		/// Gets random person.
+		/// </summary>
+		/// <returns>Random person</returns>
+		Task<BaseJikanResponse<Person>> GetRandomPersonAsync();
+
+		/// <summary>
+		/// Gets random user.
+		/// </summary>
+		/// <returns>Random character</returns>
+		Task<BaseJikanResponse<UserProfile>> GetRandomUserAsync();
+
+		#endregion
+
 		#region Search requests
 
 		#region SearchAnime

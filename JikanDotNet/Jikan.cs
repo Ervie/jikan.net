@@ -1070,7 +1070,7 @@ namespace JikanDotNet
 			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
 			Guard.IsGreaterThanZero(page, nameof(page));
 			var queryParams = $"?page={page}";
-			string[] endpointParts = new string[] { JikanEndpointConsts.Users, username, JikanEndpointConsts.MangaList + queryParams};
+			string[] endpointParts = new string[] { JikanEndpointConsts.Users, username, JikanEndpointConsts.MangaList + queryParams };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<MangaListEntry>>>(endpointParts);
 		}
 
@@ -1165,6 +1165,45 @@ namespace JikanDotNet
 		#endregion GetUserClubsAsync
 
 		#endregion User methods
+
+		#region GetRandom methods
+
+		/// <inheritdoc/>
+		public async Task<BaseJikanResponse<Anime>> GetRandomAnimeAsync()
+		{
+			string[] endpointParts = new string[] { JikanEndpointConsts.Random, JikanEndpointConsts.Anime };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<Anime>>(endpointParts);
+		}
+
+		/// <inheritdoc/>
+		public async Task<BaseJikanResponse<Manga>> GetRandomMangaAsync()
+		{
+			string[] endpointParts = new string[] { JikanEndpointConsts.Random, JikanEndpointConsts.Manga };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<Manga>>(endpointParts);
+		}
+
+		/// <inheritdoc/>
+		public async Task<BaseJikanResponse<Character>> GetRandomCharacterAsync()
+		{
+			string[] endpointParts = new string[] { JikanEndpointConsts.Random, JikanEndpointConsts.Characters };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<Character>>(endpointParts);
+		}
+
+		/// <inheritdoc/>
+		public async Task<BaseJikanResponse<Person>> GetRandomPersonAsync()
+		{
+			string[] endpointParts = new string[] { JikanEndpointConsts.Random, JikanEndpointConsts.People };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<Person>>(endpointParts);
+		}
+
+		/// <inheritdoc/>
+		public async Task<BaseJikanResponse<UserProfile>> GetRandomUserAsync()
+		{
+			string[] endpointParts = new string[] { JikanEndpointConsts.Random, JikanEndpointConsts.Users };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<UserProfile>>(endpointParts);
+		}
+
+		#endregion GetRandom methods
 
 		#region Search methods
 

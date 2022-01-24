@@ -43,5 +43,6 @@
 		internal const string MangaList = "mangalist";
 		internal const string Favorites = "favorites";
 		internal const string About = "about";
+		internal const string Random = "random";
 	}
 }
