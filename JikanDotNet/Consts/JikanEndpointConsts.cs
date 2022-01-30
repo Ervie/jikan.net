@@ -45,5 +45,6 @@
 		internal const string Random = "random";
 		internal const string Watch = "watch";
 		internal const string Popular  = "popular";
+		internal const string Promos = "promos";
 	}
 }

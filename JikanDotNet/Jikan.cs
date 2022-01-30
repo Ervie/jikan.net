@@ -1221,6 +1221,20 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<WatchEpisode>>>(endpointParts);
 		}
 		
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<WatchPromoVideo>>> GetWatchRecentPromosAsync()
+		{
+			var endpointParts = new string[] { JikanEndpointConsts.Watch, JikanEndpointConsts.Promos };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<WatchPromoVideo>>>(endpointParts);
+		}
+		
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<WatchPromoVideo>>> GetWatchPopularPromosAsync()
+		{
+			var endpointParts = new string[] { JikanEndpointConsts.Watch, JikanEndpointConsts.Promos, JikanEndpointConsts.Popular };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<WatchPromoVideo>>>(endpointParts);
+		}
+		
 		#endregion
 
 		#region Search methods

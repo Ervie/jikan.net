@@ -997,14 +997,26 @@ namespace JikanDotNet
 		/// <summary>
 		/// Return collection of recently released episodes details.
 		/// </summary>
-		/// <returns>Club's profile information.</returns>
+		/// <returns>Collection of recently released episodes details..</returns>
 		Task<PaginatedJikanResponse<ICollection<WatchEpisode>>> GetWatchRecentEpisodesAsync();
 		
 		/// <summary>
 		/// Return collection of popular episodes details.
 		/// </summary>
-		/// <returns>Club's profile information.</returns>
+		/// <returns>Collection of popular episodes details.</returns>
 		Task<PaginatedJikanResponse<ICollection<WatchEpisode>>> GetWatchPopularEpisodesAsync();
+
+		/// <summary>
+		/// Return collection of recently released promos details.
+		/// </summary>
+		/// <returns>Collection of recently released promos details.</returns>
+		Task<PaginatedJikanResponse<ICollection<WatchPromoVideo>>> GetWatchRecentPromosAsync();
+		
+		/// <summary>
+		/// Return collection of popular promos details.
+		/// </summary>
+		/// <returns>Collection of popular promos details.</returns>
+		Task<PaginatedJikanResponse<ICollection<WatchPromoVideo>>> GetWatchPopularPromosAsync();
 
 		#endregion Watch requests
 

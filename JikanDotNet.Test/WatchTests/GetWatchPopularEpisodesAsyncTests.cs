@@ -20,17 +20,17 @@ namespace JikanDotNet.Tests.WatchTests
         public async Task GetWatchPopularEpisodesAsync_ShouldReturnNonEmptyCollection()
         {
             // When
-            var recentEpisodes = await _jikan.GetWatchPopularEpisodesAsync();
+            var episodes = await _jikan.GetWatchPopularEpisodesAsync();
 
             // Then
             using var _ = new AssertionScope();
-            recentEpisodes.Data.Should().NotBeEmpty();
-            recentEpisodes.Pagination.HasNextPage.Should().BeFalse();
-            recentEpisodes.Pagination.LastVisiblePage.Should().Be(1);
-            recentEpisodes.Data.First().Episodes.Should().HaveCount(2);
-            recentEpisodes.Data.First().RegionLocked.Should().BeTrue();
-            recentEpisodes.Data.First().Episodes.Should().HaveCount(2);
-            recentEpisodes.Data.First().Episodes.Should().OnlyContain(x => x.Premium.HasValue);
+            episodes.Data.Should().NotBeEmpty();
+            episodes.Pagination.HasNextPage.Should().BeFalse();
+            episodes.Pagination.LastVisiblePage.Should().Be(1);
+            episodes.Data.First().Episodes.Should().HaveCount(2);
+            episodes.Data.First().RegionLocked.Should().BeTrue();
+            episodes.Data.First().Episodes.Should().HaveCount(2);
+            episodes.Data.First().Episodes.Should().OnlyContain(x => x.Premium.HasValue);
         }
     }
 }

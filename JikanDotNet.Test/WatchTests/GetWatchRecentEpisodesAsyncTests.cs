@@ -19,15 +19,15 @@ namespace JikanDotNet.Tests.WatchTests
         public async Task GetWatchRecentEpisodesAsync_ShouldReturnNonEmptyCollection()
         {
             // When
-            var recentEpisodes = await _jikan.GetWatchRecentEpisodesAsync();
+            var episodes = await _jikan.GetWatchRecentEpisodesAsync();
 
             // Then
             using var _ = new AssertionScope();
-            recentEpisodes.Data.Should().NotBeEmpty();
-            recentEpisodes.Data.First().Episodes.Should().HaveCount(2);
-            recentEpisodes.Data.First().RegionLocked.Should().BeFalse();
-            recentEpisodes.Data.First().Episodes.Should().HaveCount(2);
-            recentEpisodes.Data.First().Episodes.Should().OnlyContain(x => x.Premium.HasValue);
+            episodes.Data.Should().NotBeEmpty();
+            episodes.Data.First().Episodes.Should().HaveCount(2);
+            episodes.Data.First().RegionLocked.Should().BeFalse();
+            episodes.Data.First().Episodes.Should().HaveCount(2);
+            episodes.Data.First().Episodes.Should().OnlyContain(x => x.Premium.HasValue);
         }
     }
 }

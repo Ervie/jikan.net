@@ -15,7 +15,7 @@ namespace JikanDotNet
         public bool? RegionLocked { get; set; }
         
         /// <summary>
-        /// Relate anime entry
+        /// Related anime entry
         /// </summary>
         [JsonPropertyName("entry")]
         public MalImageSubItem Entry { get; set; }
