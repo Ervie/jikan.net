@@ -36,6 +36,14 @@ namespace JikanDotNet.Helpers
 				throw new JikanValidationException("Argument must be a natural number greater than 0.", argumentName);
 			}
 		}
+		
+		internal static void IsLesserThan(long arg, long max, string argumentName)
+		{
+			if (arg > max)
+			{
+				throw new JikanValidationException($"Argument must not be greater than {max}.", argumentName);
+			}
+		}
 
 		internal static void IsValid<T>(Func<T, bool> isValidFunc, T arg, string argumentName, string message = null)
 		{

@@ -1,7 +1,6 @@
 using FluentAssertions;
 using FluentAssertions.Execution;
 using JikanDotNet.Exceptions;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -24,7 +23,7 @@ namespace JikanDotNet.Tests.AnimeTests
 		public async Task GetAnimeAsync_InvalidId_ShouldThrowValidationException(long malId)
 		{
 			// When
-			Func<Task<BaseJikanResponse<Anime>>> func = _jikan.Awaiting(x => x.GetAnimeAsync(malId));
+			var func = _jikan.Awaiting(x => x.GetAnimeAsync(malId));
 
 			// Then
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();
@@ -50,7 +49,7 @@ namespace JikanDotNet.Tests.AnimeTests
 		public async Task GetAnimeAsync_WrongId_ShouldThrowException(long malId)
 		{
 			// When
-			Func<Task<BaseJikanResponse<Anime>>> func = _jikan.Awaiting(x => x.GetAnimeAsync(malId));
+			var func = _jikan.Awaiting(x => x.GetAnimeAsync(malId));
 
 			// Then
 			await func.Should().ThrowExactlyAsync<JikanRequestException>();

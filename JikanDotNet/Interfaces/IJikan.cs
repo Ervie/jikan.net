@@ -9,7 +9,7 @@ namespace JikanDotNet
 	public interface IJikan
 	{
 		#region Anime requests
-
+		
 		#region GetAnimeAsync
 
 		/// <summary>
@@ -18,6 +18,20 @@ namespace JikanDotNet
 		/// <param name="id">MAL id of anime.</param>
 		/// <returns>Anime with given MAL id.</returns>
 		Task<BaseJikanResponse<Anime>> GetAnimeAsync(long id);
+
+		/// <summary>
+		/// Returns collection of anime.
+		/// </summary>
+		/// <returns>Collection of anime.</returns>
+		Task<PaginatedJikanResponse<ICollection<Anime>>> GetAnimeAsync();
+		
+		/// <summary>
+		/// Returns collection of anime.
+		/// </summary>
+		/// <param name="page">Index of the page.</param>
+		/// <param name="pageSize">Size of the page (25 is the max).</param>
+		/// <returns>Collection of anime.</returns>
+		Task<PaginatedJikanResponse<ICollection<Anime>>> GetAnimeAsync(int page, int pageSize);
 
 		#endregion GetAnimeAsync
 
