@@ -162,7 +162,7 @@ namespace JikanDotNet
 		/// Returns collection of anime recommendation.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
-		/// <returns>Collection of anime recomendation.</returns>
+		/// <returns>Collection of anime recommendation.</returns>
 		Task<BaseJikanResponse<ICollection<Recommendation>>> GetAnimeRecommendationsAsync(long id);
 
 		#endregion GetAnimeRecommendationsAsync
@@ -411,7 +411,7 @@ namespace JikanDotNet
 		/// Returns return voice actors of character with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of character.</param>
-		/// <returns>Collection of voice acotrs voicing character.</returns>
+		/// <returns>Collection of voice actors voicing character.</returns>
 		Task<BaseJikanResponse<ICollection<VoiceActorEntry>>> GetCharacterVoiceActorsAsync(long id);
 
 		#endregion GetCharacterVoiceActorsAsync
@@ -505,7 +505,7 @@ namespace JikanDotNet
 		#region GetSeasonArchive
 
 		/// <summary>
-		/// Returns list of availaible season to query with <see cref="GetSeasonAsync(int, Season)"/>
+		/// Returns list of available season to query with <see cref="GetSeasonAsync(int, Season)"/>
 		/// </summary>
 		/// <returns></returns>
 		Task<PaginatedJikanResponse<ICollection<SeasonArchive>>> GetSeasonArchiveAsync();
@@ -767,7 +767,7 @@ namespace JikanDotNet
 		#region GetClubRelationsAsync
 
 		/// <summary>
-		/// Return club's relatied entities.
+		/// Return club's related entities.
 		/// </summary>
 		/// <param name="id">MAL id of the club.</param>
 		/// <returns>Club's related entities collections..</returns>

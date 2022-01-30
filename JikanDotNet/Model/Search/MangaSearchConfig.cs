@@ -74,7 +74,7 @@ namespace JikanDotNet
 		/// <returns>Query from current parameters for search request</returns>
 		public string ConfigToString()
 		{
-			StringBuilder builder = new();
+			var builder = new StringBuilder();
 
 			if (Type != MangaType.EveryType)
 			{

@@ -65,16 +65,16 @@ namespace JikanDotNet
 			var requestUrl = string.Join("/", args);
 			try
 			{
-				using HttpResponseMessage response = await _httpClient.GetAsync(requestUrl);
+				using var response = await _httpClient.GetAsync(requestUrl);
 				if (response.IsSuccessStatusCode)
 				{
-					string json = await response.Content.ReadAsStringAsync();
+					var json = await response.Content.ReadAsStringAsync();
 
 					returnedObject = JsonSerializer.Deserialize<T>(json);
 				}
 				else if (!_jikanConfiguration.SuppressException)
 				{
-					string json = await response.Content.ReadAsStringAsync();
+					var json = await response.Content.ReadAsStringAsync();
 					var errorData = JsonSerializer.Deserialize<JikanApiError>(json);
 					throw new JikanRequestException(string.Format(ErrorMessagesConst.FailedRequest, response.StatusCode, response.Content), errorData);
 				}
@@ -192,7 +192,7 @@ namespace JikanDotNet
 		public async Task<BaseJikanResponse<ICollection<ForumTopic>>> GetAnimeForumTopicsAsync(long id)
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
-			string[] endpointParts = new string[] { JikanEndpointConsts.Anime, id.ToString(), JikanEndpointConsts.Forum };
+			var endpointParts = new string[] { JikanEndpointConsts.Anime, id.ToString(), JikanEndpointConsts.Forum };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<ForumTopic>>>(endpointParts);
 		}
 
