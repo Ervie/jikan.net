@@ -1,7 +1,7 @@
 ﻿namespace JikanDotNet.Consts
 {
 	/// <summary>
-	/// Endpoint sectionsin Jikan REST API.
+	/// Endpoint sections in Jikan REST API.
 	/// </summary>
 	internal static class JikanEndpointConsts
 	{
@@ -36,7 +36,6 @@
 		internal const string Voices = "voices";
 		internal const string Members = "members";
 		internal const string Upcoming = "upcoming";
-		internal const string Profle = "profile";
 		internal const string History = "history";
 		internal const string Friends = "friends";
 		internal const string AnimeList = "animelist";
@@ -44,5 +43,7 @@
 		internal const string Favorites = "favorites";
 		internal const string About = "about";
 		internal const string Random = "random";
+		internal const string Watch = "watch";
+		internal const string Popular  = "popular";
 	}
 }

@@ -992,6 +992,22 @@ namespace JikanDotNet
 
 		#endregion
 
+		#region Watch requests
+
+		/// <summary>
+		/// Return collection of recently released episodes details.
+		/// </summary>
+		/// <returns>Club's profile information.</returns>
+		Task<PaginatedJikanResponse<ICollection<WatchEpisode>>> GetWatchRecentEpisodesAsync();
+		
+		/// <summary>
+		/// Return collection of popular episodes details.
+		/// </summary>
+		/// <returns>Club's profile information.</returns>
+		Task<PaginatedJikanResponse<ICollection<WatchEpisode>>> GetWatchPopularEpisodesAsync();
+
+		#endregion Watch requests
+
 		#region Search requests
 
 		#region SearchAnime

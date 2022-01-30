@@ -16,7 +16,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Trailer to promo video
 		/// </summary>
-		[JsonPropertyName("traile")]
+		[JsonPropertyName("trailer")]
 		public AnimeTrailer Trailer { get; set; }
 	}
 }
