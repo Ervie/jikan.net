@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.1;netcoreapp3.0;netstandard2.0</TargetFrameworks>
-    <Version>1.6.0</Version>
+    <Version>2.0.0</Version>
     <Authors>Bartłomiej Buchała</Authors>
     <Description>A dotnet wrapper for Jikan REST API, fetching data from MyAnimeList.</Description>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
@@ -13,9 +12,11 @@
     <PackageLicenseUrl>https://github.com/Ervie/jikan.net/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/Ervie/jikan.net</PackageProjectUrl>
     <PackageIconUrl>https://jikan.moe/assets/images/favicon/apple-touch-icon.png</PackageIconUrl>
-    <FileVersion>1.6.0.0</FileVersion>
+    <FileVersion>2.0.0.0</FileVersion>
     <LangVersion>latest</LangVersion>
-    <AssemblyVersion>1.6.0.0</AssemblyVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <TargetFrameworks>netcoreapp3.1;netstandard2.0;net6.0</TargetFrameworks>
+    <PackageVersion>2.0.0</PackageVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
