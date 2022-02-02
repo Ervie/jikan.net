@@ -41,7 +41,7 @@ namespace JikanDotNet.Tests.TopTests
 		}
 
 		[Fact]
-		public async Task GetTopReviewsAsync_sECONDpAGE_ShouldParseTopReviewssECONDpAGE()
+		public async Task GetTopReviewsAsync_sECONDpAGE_ShouldParseTopReviewsSecondPage()
 		{
 			// When
 			var reviews = await _jikan.GetTopReviewsAsync(2);

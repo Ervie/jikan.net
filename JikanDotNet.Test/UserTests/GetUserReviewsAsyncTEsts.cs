@@ -99,7 +99,9 @@ namespace JikanDotNet.Tests.UserTests
 			var reviews = await _jikan.GetUserReviewsAsync("Archaeon", 2);
 
 			// Then
+			using var _ = new AssertionScope();
 			reviews.Data.Should().NotBeEmpty().And.HaveCount(10);
+			reviews.Data.Should().OnlyContain(x => x.Type.Equals("anime") && x.EpisodesWatched != null && x.ReviewScores.Animation != null);
 		}
 	}
 }

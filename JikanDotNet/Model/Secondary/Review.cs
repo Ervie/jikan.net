@@ -49,5 +49,23 @@ namespace JikanDotNet
 		/// </summary>
 		[JsonPropertyName("user")]
 		public UserMetadata User { get; set; }
+		
+		/// <summary>
+		/// Review scores.
+		/// </summary>
+		[JsonPropertyName("scores")]
+		public ReviewScores ReviewScores { get; set; }
+		
+		/// <summary>
+		/// Number of episodes watched by the reviewer (if review is about anime).
+		/// </summary>
+		[JsonPropertyName("episodes_watched")]
+		public int? EpisodesWatched { get; set; }
+		
+		/// <summary>
+		/// Number of chapters read by reviewer (if review is about manga).
+		/// </summary>
+		[JsonPropertyName("chapters_read")]
+		public int? ChaptersRead { get; set; }
 	}
 }

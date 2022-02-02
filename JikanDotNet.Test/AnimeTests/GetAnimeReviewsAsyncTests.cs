@@ -44,8 +44,8 @@ namespace JikanDotNet.Tests.AnimeTests
 				firstReview.EpisodesWatched.Should().Be(26);
 				firstReview.Votes.Should().BeGreaterThan(1400);
 
-				firstReview.Scores.Overall.Should().Be(10);
-				firstReview.Scores.Animation.Should().Be(9);
+				firstReview.ReviewScores.Overall.Should().Be(10);
+				firstReview.ReviewScores.Animation.Should().Be(9);
 			}
 		}
 

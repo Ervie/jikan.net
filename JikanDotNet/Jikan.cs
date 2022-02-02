@@ -314,22 +314,22 @@ namespace JikanDotNet
 		#region GetAnimeReviewsAsync
 
 		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<AnimeReview>>> GetAnimeReviewsAsync(long id)
+		public async Task<PaginatedJikanResponse<ICollection<Review>>> GetAnimeReviewsAsync(long id)
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
 			var endpointParts = new[] { JikanEndpointConsts.Anime, id.ToString(), JikanEndpointConsts.Reviews };
-			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<AnimeReview>>>(endpointParts);
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Review>>>(endpointParts);
 		}
 
 		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<AnimeReview>>> GetAnimeReviewsAsync(long id, int page)
+		public async Task<PaginatedJikanResponse<ICollection<Review>>> GetAnimeReviewsAsync(long id, int page)
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
 			Guard.IsGreaterThanZero(page, nameof(page));
 
 			var queryParams = $"?page={page}";
 			var endpointParts = new[] { JikanEndpointConsts.Anime, id.ToString(), JikanEndpointConsts.Reviews + queryParams };
-			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<AnimeReview>>>(endpointParts);
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Review>>>(endpointParts);
 		}
 
 		#endregion GetAnimeReviewsAsync
@@ -601,11 +601,11 @@ namespace JikanDotNet
 		#region GetMangaReviewsAsync
 
 		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<MangaReview>>> GetMangaReviewsAsync(long id)
+		public async Task<PaginatedJikanResponse<ICollection<Review>>> GetMangaReviewsAsync(long id)
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
 			var endpointParts = new[] { JikanEndpointConsts.Manga, id.ToString(), JikanEndpointConsts.Reviews };
-			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<MangaReview>>>(endpointParts);
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Review>>>(endpointParts);
 		}
 
 		#endregion GetMangaReviewsAsync
