@@ -638,6 +638,29 @@ namespace JikanDotNet
 
 		#endregion GetPersonAsync
 
+		#region GetPeopleAsync
+
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<Person>>> GetPeopleAsync()
+		{
+			var endpointParts = new[] { JikanEndpointConsts.People };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Person>>>(endpointParts);
+		}
+		
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<Person>>> GetPeopleAsync(int page, int pageSize)
+		{
+			Guard.IsGreaterThanZero(page, nameof(page));
+			Guard.IsGreaterThanZero(pageSize, nameof(pageSize));
+			Guard.IsLesserThan(pageSize,ParameterConsts.MaximumPageSize, nameof(pageSize));
+			
+			var queryParams = $"?page={page}&limit={pageSize}";
+			var endpointParts = new[] { JikanEndpointConsts.People + queryParams};
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Person>>>(endpointParts);
+		}
+		
+		#endregion GetPeopleAsync
+
 		#region GetPersonAnimeAsync
 
 		/// <inheritdoc />
@@ -1020,6 +1043,20 @@ namespace JikanDotNet
 
 		#region User methods
 
+		#region GetUsersAsync
+		
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<UserMetadata>>> GetUsersAsync(int page = 20)
+		{
+			Guard.IsGreaterThanZero(page, nameof(page));
+			
+			var queryParams = $"?page={page}";
+			var endpointParts = new[] { JikanEndpointConsts.Users + queryParams};
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<UserMetadata>>>(endpointParts);
+		}
+		
+		#endregion
+		
 		#region GetUserProfileAsync
 
 		/// <inheritdoc />

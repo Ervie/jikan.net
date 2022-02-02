@@ -409,7 +409,6 @@ namespace JikanDotNet
 		/// <returns>Character with given MAL id.</returns>
 		Task<BaseJikanResponse<Character>> GetCharacterAsync(long id);
 		
-		
 		/// <summary>
 		/// Returns collection of characters.
 		/// </summary>
@@ -484,6 +483,24 @@ namespace JikanDotNet
 		Task<BaseJikanResponse<Person>> GetPersonAsync(long id);
 
 		#endregion GetPersonAsync
+		
+		#region GetPeopleAsync
+		
+		/// <summary>
+		/// Returns collection of people.
+		/// </summary>
+		/// <returns>Collection of people.</returns>
+		Task<PaginatedJikanResponse<ICollection<Person>>> GetPeopleAsync();
+		
+		/// <summary>
+		/// Returns collection of people.
+		/// </summary>
+		/// <param name="page">Index of the page.</param>
+		/// <param name="pageSize">Size of the page (25 is the max).</param>
+		/// <returns>Collection of people.</returns>
+		Task<PaginatedJikanResponse<ICollection<Person>>> GetPeopleAsync(int page, int pageSize);
+		
+		#endregion GetPeopleAsync
 
 		#region GetPersonAnimeAsync
 
@@ -821,6 +838,17 @@ namespace JikanDotNet
 		#endregion Club requests
 
 		#region User requests
+		
+		#region GetUsersAsync
+		
+		/// <summary>
+		/// Returns collection of users.
+		/// </summary>
+		/// <param name="page">Index of the page. Size page = 20</param>
+		/// <returns>Collection of users.</returns>
+		Task<PaginatedJikanResponse<ICollection<UserMetadata>>> GetUsersAsync(int page);
+		
+		#endregion GetUsersAsync
 
 		#region GetUserProfileAsync
 
