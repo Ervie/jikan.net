@@ -375,6 +375,25 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.Characters, id.ToString() };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<Character>>(endpointParts);
 		}
+		
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<Character>>> GetCharactersAsync()
+		{
+			var endpointParts = new[] { JikanEndpointConsts.Characters };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Character>>>(endpointParts);
+		}
+		
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<Character>>> GetCharactersAsync(int page, int pageSize)
+		{
+			Guard.IsGreaterThanZero(page, nameof(page));
+			Guard.IsGreaterThanZero(pageSize, nameof(pageSize));
+			Guard.IsLesserThan(pageSize,ParameterConsts.MaximumPageSize, nameof(pageSize));
+			
+			var queryParams = $"?page={page}&limit={pageSize}";
+			var endpointParts = new[] { JikanEndpointConsts.Characters + queryParams};
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Character>>>(endpointParts);
+		}
 
 		#endregion GetCharacterAsync
 
@@ -438,6 +457,25 @@ namespace JikanDotNet
 			Guard.IsGreaterThanZero(id, nameof(id));
 			var endpointParts = new[] { JikanEndpointConsts.Manga, id.ToString() };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<Manga>>(endpointParts);
+		}
+		
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<Manga>>> GetMangaAsync()
+		{
+			var endpointParts = new[] { JikanEndpointConsts.Manga };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Manga>>>(endpointParts);
+		}
+		
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<Manga>>> GetMangaAsync(int page, int pageSize)
+		{
+			Guard.IsGreaterThanZero(page, nameof(page));
+			Guard.IsGreaterThanZero(pageSize, nameof(pageSize));
+			Guard.IsLesserThan(pageSize,ParameterConsts.MaximumPageSize, nameof(pageSize));
+			
+			var queryParams = $"?page={page}&limit={pageSize}";
+			var endpointParts = new[] { JikanEndpointConsts.Manga + queryParams};
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Manga>>>(endpointParts);
 		}
 
 		#endregion GetMangaAsync

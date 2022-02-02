@@ -253,6 +253,20 @@ namespace JikanDotNet
 		/// <param name="id">MAL id of manga.</param>
 		/// <returns>Manga with given MAL id.</returns>
 		Task<BaseJikanResponse<Manga>> GetMangaAsync(long id);
+		
+		/// <summary>
+		/// Returns collection of manga.
+		/// </summary>
+		/// <returns>Collection of manga.</returns>
+		Task<PaginatedJikanResponse<ICollection<Manga>>> GetMangaAsync();
+		
+		/// <summary>
+		/// Returns collection of manga.
+		/// </summary>
+		/// <param name="page">Index of the page.</param>
+		/// <param name="pageSize">Size of the page (25 is the max).</param>
+		/// <returns>Collection of manga.</returns>
+		Task<PaginatedJikanResponse<ICollection<Manga>>> GetMangaAsync(int page, int pageSize);
 
 		#endregion GetMangaAsync
 
@@ -394,6 +408,21 @@ namespace JikanDotNet
 		/// <param name="id">MAL id of character.</param>
 		/// <returns>Character with given MAL id.</returns>
 		Task<BaseJikanResponse<Character>> GetCharacterAsync(long id);
+		
+		
+		/// <summary>
+		/// Returns collection of characters.
+		/// </summary>
+		/// <returns>Collection of characters.</returns>
+		Task<PaginatedJikanResponse<ICollection<Character>>> GetCharactersAsync();
+		
+		/// <summary>
+		/// Returns collection of characters.
+		/// </summary>
+		/// <param name="page">Index of the page.</param>
+		/// <param name="pageSize">Size of the page (25 is the max).</param>
+		/// <returns>Collection of characters.</returns>
+		Task<PaginatedJikanResponse<ICollection<Character>>> GetCharactersAsync(int page, int pageSize);
 
 		#endregion GetCharacterAsync
 
