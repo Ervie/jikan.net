@@ -1366,6 +1366,42 @@ namespace JikanDotNet
 		}
 		
 		#endregion
+		
+		#region Recommendations
+		
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<UserRecommendation>>> GetRecentAnimeRecommendationsAsync()
+		{
+			var endpointParts = new[] { JikanEndpointConsts.Recommendations, JikanEndpointConsts.Anime };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<UserRecommendation>>>(endpointParts);
+		}
+		
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<UserRecommendation>>> GetRecentAnimeRecommendationsAsync(int page)
+		{
+			Guard.IsGreaterThanZero(page, nameof(page));
+			var queryParams = $"?page={page}";
+			var endpointParts = new[] { JikanEndpointConsts.Recommendations, JikanEndpointConsts.Anime + queryParams };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<UserRecommendation>>>(endpointParts);
+		}
+		
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<UserRecommendation>>> GetRecentMangaRecommendationsAsync()
+		{
+			var endpointParts = new[] { JikanEndpointConsts.Recommendations, JikanEndpointConsts.Manga };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<UserRecommendation>>>(endpointParts);
+		}
+		
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<UserRecommendation>>> GetRecentMangaRecommendationsAsync(int page)
+		{
+			Guard.IsGreaterThanZero(page, nameof(page));
+			var queryParams = $"?page={page}";
+			var endpointParts = new[] { JikanEndpointConsts.Recommendations, JikanEndpointConsts.Manga + queryParams };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<UserRecommendation>>>(endpointParts);
+		}
+		
+		#endregion
 
 		#region Search methods
 

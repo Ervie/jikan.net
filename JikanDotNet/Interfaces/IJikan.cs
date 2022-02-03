@@ -1069,27 +1069,27 @@ namespace JikanDotNet
 		/// Gets collection of recently added anime recommendations.
 		/// </summary>
 		/// <returns>Collection of recently added recommendations.r</returns>
-		//Task<PaginatedJikanResponse<ICollection<Recommendation>>> GetRecentAnimeRecommendationsAsync();
+		Task<PaginatedJikanResponse<ICollection<UserRecommendation>>> GetRecentAnimeRecommendationsAsync();
 		
 		/// <summary>
 		/// Gets collection of recently added anime recommendations.
 		/// </summary>
 		/// <param name="page">Index of page folding 100 records of top ranging (e.g. 1 will return first 100 records, 2 will return record from 101 to 200 etc.)</param>
 		/// <returns>Collection of recently added recommendations.r</returns>
-		//Task<PaginatedJikanResponse<ICollection<Recommendation>>> GetRecentAnimeRecommendationsAsync(int page);
+		Task<PaginatedJikanResponse<ICollection<UserRecommendation>>> GetRecentAnimeRecommendationsAsync(int page);
 
 		/// <summary>
 		/// Gets collection of recently added manga recommendations.
 		/// </summary>
 		/// <returns>Collection of recently added recommendations.r</returns>
-		//Task<PaginatedJikanResponse<ICollection<Recommendation>>> GetRecentMangaRecommendationsAsync();
+		Task<PaginatedJikanResponse<ICollection<UserRecommendation>>> GetRecentMangaRecommendationsAsync();
 		
 		/// <summary>
 		/// Gets collection of recently added manga recommendations.
 		/// </summary>
 		/// <param name="page">Index of page folding 100 records of top ranging (e.g. 1 will return first 100 records, 2 will return record from 101 to 200 etc.)</param>
 		/// <returns>Collection of recently added recommendations.r</returns>
-		//Task<PaginatedJikanResponse<ICollection<Recommendation>>> GetRecentMangaRecommendationsAsync(int page);
+		Task<PaginatedJikanResponse<ICollection<UserRecommendation>>> GetRecentMangaRecommendationsAsync(int page);
 		
 		#endregion
 
