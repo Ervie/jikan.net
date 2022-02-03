@@ -10,8 +10,6 @@ namespace JikanDotNet
 	{
 		#region Anime requests
 		
-		#region GetAnimeAsync
-
 		/// <summary>
 		/// Returns anime with given MAL id.
 		/// </summary>
@@ -32,33 +30,21 @@ namespace JikanDotNet
 		/// <param name="pageSize">Size of the page (25 is the max).</param>
 		/// <returns>Collection of anime.</returns>
 		Task<PaginatedJikanResponse<ICollection<Anime>>> GetAnimeAsync(int page, int pageSize);
-
-		#endregion GetAnimeAsync
-
-		#region GetAnimeCharactersAsync
-
+		
 		/// <summary>
 		/// Returns collections of characters of anime with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
 		/// <returns>Collection of characters of anime with given MAL id.</returns>
 		Task<BaseJikanResponse<ICollection<AnimeCharacter>>> GetAnimeCharactersAsync(long id);
-
-		#endregion GetAnimeCharactersAsync
-
-		#region GetAnimeStaffAsync
-
+		
 		/// <summary>
 		/// Returns collections of staff of anime with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
 		/// <returns>Collection of staff of anime with given MAL id.</returns>
 		Task<BaseJikanResponse<ICollection<AnimeStaffPosition>>> GetAnimeStaffAsync(long id);
-
-		#endregion GetAnimeStaffAsync
-
-		#region GetAnimeEpisodesAsync
-
+		
 		/// <summary>
 		/// Returns list of episodes for anime with given MAL id.
 		/// </summary>
@@ -73,11 +59,7 @@ namespace JikanDotNet
 		/// <param name="page">Index of page folding 100 records of top ranging (e.g. 1 will return first 100 records, 2 will return record from 101 to 200 etc.)</param>
 		/// <returns>List of episodes with details.</returns>
 		Task<PaginatedJikanResponse<ICollection<AnimeEpisode>>> GetAnimeEpisodesAsync(long id, int page);
-
-		#endregion GetAnimeEpisodesAsync
-
-		#region GetAnimeEpisodeAsync
-
+		
 		/// <summary>
 		/// Returns details about specific episode.
 		/// </summary>
@@ -85,11 +67,7 @@ namespace JikanDotNet
 		/// <param name="episodeId">Id of episode.</param>
 		/// <returns>Details about specific episode.</returns>
 		Task<BaseJikanResponse<AnimeEpisode>> GetAnimeEpisodeAsync(long animeId, int episodeId);
-
-		#endregion GetAnimeEpisodeAsync
-
-		#region GetAnimeNewsAsync
-
+		
 		/// <summary>
 		/// Returns collections of news related to anime with given MAL id.
 		/// </summary>
@@ -104,11 +82,7 @@ namespace JikanDotNet
 		/// <param name="page">Index of page folding 100 records of top ranging (e.g. 1 will return first 100 records, 2 will return record from 101 to 200 etc.)</param>
 		/// <returns>Collections of news related to anime with given MAL id.</returns>
 		Task<PaginatedJikanResponse<ICollection<News>>> GetAnimeNewsAsync(long id, int page);
-
-		#endregion GetAnimeNewsAsync
-
-		#region GetAnimeForumTopicsAsync
-
+		
 		/// <summary>
 		/// Returns collections of forum topics related to anime with given MAL id.
 		/// </summary>
@@ -123,32 +97,19 @@ namespace JikanDotNet
 		/// <param name="type">ForumTopicType filter</param>
 		/// <returns>Collections of forum topics related to anime with given MAL id.</returns>
 		Task<BaseJikanResponse<ICollection<ForumTopic>>> GetAnimeForumTopicsAsync(long id, ForumTopicType type);
-
-		#endregion GetAnimeForumTopicsAsync
-
-		#region GetAnimeVideosAsync
-
+		
 		/// <summary>
 		/// Returns collections of videos related to anime with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
 		/// <returns>Collections of videos related to anime with given MAL id.</returns>
 		Task<BaseJikanResponse<AnimeVideos>> GetAnimeVideosAsync(long id);
-
-		#endregion GetAnimeVideosAsync
-
-		#region GetAnimePicturesAsync
-
 		/// <summary>
 		/// Returns collections of links to pictures related to anime with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
 		/// <returns>Collections of links to pictures related to anime with given MAL id.</returns>
 		Task<BaseJikanResponse<ICollection<ImagesSet>>> GetAnimePicturesAsync(long id);
-
-		#endregion GetAnimePictures
-
-		#region GetAnimeStatisticsAsync
 
 		/// <summary>
 		/// Returns statistics related to anime with given MAL id.
@@ -157,10 +118,6 @@ namespace JikanDotNet
 		/// <returns>Statistics related to anime with given MAL id.</returns>
 		Task<BaseJikanResponse<AnimeStatistics>> GetAnimeStatisticsAsync(long id);
 
-		#endregion GetAnimeStatisticsAsync
-
-		#region GetAnimeMoreInfoAsync
-
 		/// <summary>
 		/// Returns additional information related to anime with given MAL id.
 		/// </summary>
@@ -168,20 +125,12 @@ namespace JikanDotNet
 		/// <returns>Additional information related to anime with given MAL id.</returns>
 		Task<BaseJikanResponse<MoreInfo>> GetAnimeMoreInfoAsync(long id);
 
-		#endregion GetAnimeMoreInfoAsync
-
-		#region GetAnimeRecommendationsAsync
-
 		/// <summary>
 		/// Returns collection of anime recommendation.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
 		/// <returns>Collection of anime recommendation.</returns>
 		Task<BaseJikanResponse<ICollection<Recommendation>>> GetAnimeRecommendationsAsync(long id);
-
-		#endregion GetAnimeRecommendationsAsync
-
-		#region GetAnimeUserUpdatesAsync
 
 		/// <summary>
 		/// Returns collection of anime user updates.
@@ -197,11 +146,6 @@ namespace JikanDotNet
 		/// <param name="page">Index of page folding 75 records of top ranging (e.g. 1 will return first 75 records, 2 will return record from 76 to 150 etc.)</param>
 		/// <returns>Collection of anime user updates.</returns>
 		Task<PaginatedJikanResponse<ICollection<AnimeUserUpdate>>> GetAnimeUserUpdatesAsync(long id, int page);
-
-		#endregion GetAnimeUserUpdatesAsync
-
-		#region GetAnimeReviewsAsync
-
 		/// <summary>
 		/// Returns collection of anime reviews.
 		/// </summary>
@@ -217,10 +161,6 @@ namespace JikanDotNet
 		/// <returns>Collection of anime reviews.</returns>
 		Task<PaginatedJikanResponse<ICollection<Review>>> GetAnimeReviewsAsync(long id, int page);
 
-		#endregion GetAnimeReviewsAsync
-
-		#region GetAnimeRelationsAsync
-
 		/// <summary>
 		/// Returns collection of anime related entries.
 		/// </summary>
@@ -228,24 +168,16 @@ namespace JikanDotNet
 		/// <returns>Collection of anime related entries.</returns>
 		Task<PaginatedJikanResponse<ICollection<RelatedEntry>>> GetAnimeRelationsAsync(long id);
 
-		#endregion GetAnimeRelationsAsync
-
-		#region GetAnimeThemesAsync
-
 		/// <summary>
 		/// Returns collection of anime openings and endings.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
 		/// <returns>Collection of anime openings and endings.</returns>
 		Task<BaseJikanResponse<AnimeThemes>> GetAnimeThemesAsync(long id);
-
-		#endregion GetAnimeThemesAsync
-
+		
 		#endregion Anime requests
 
 		#region Manga requests
-
-		#region GetMangaAsync
 
 		/// <summary>
 		/// Returns manga with given MAL id.
@@ -268,20 +200,12 @@ namespace JikanDotNet
 		/// <returns>Collection of manga.</returns>
 		Task<PaginatedJikanResponse<ICollection<Manga>>> GetMangaAsync(int page, int pageSize);
 
-		#endregion GetMangaAsync
-
-		#region GetMangaCharactersAsync
-
 		/// <summary>
 		/// Returns collections of characters appearing in manga with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of manga.</param>
 		/// <returns>Collections of characters appearing in manga with given MAL id.</returns>
 		Task<BaseJikanResponse<ICollection<MangaCharacter>>> GetMangaCharactersAsync(long id);
-
-		#endregion GetMangaCharactersAsync
-
-		#region GetMangaNewsAsync
 
 		/// <summary>
 		/// Returns collections of news related to manga with given MAL id.
@@ -298,20 +222,12 @@ namespace JikanDotNet
 		/// <returns>Collections of news related to manga with given MAL id.</returns>
 		Task<PaginatedJikanResponse<ICollection<News>>> GetMangaNewsAsync(long id, int page);
 
-		#endregion GetMangaNewsAsync
-
-		#region GetMangaForumTopicsAsync
-
 		/// <summary>
 		/// Returns collections of forum topics related to manga with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of manga.</param>
 		/// <returns>Collections of forum topics related to manga with given MAL id.</returns>
 		Task<BaseJikanResponse<ICollection<ForumTopic>>> GetMangaForumTopicsAsync(long id);
-
-		#endregion GetMangaForumTopicsAsync
-
-		#region GetMangaPicturesAsync
 
 		/// <summary>
 		/// Returns collections of links to pictures related to manga with given MAL id.
@@ -320,10 +236,6 @@ namespace JikanDotNet
 		/// <returns>Collections of links to pictures related to manga with given MAL id.</returns>
 		Task<BaseJikanResponse<ICollection<ImagesSet>>> GetMangaPicturesAsync(long id);
 
-		#endregion GetMangaPicturesAsync
-
-		#region GetMangaStatisticsAsync
-
 		/// <summary>
 		/// Returns statistics related to manga with given MAL id.
 		/// </summary>
@@ -331,20 +243,12 @@ namespace JikanDotNet
 		/// <returns>Statistics related to manga with given MAL id.</returns>
 		Task<BaseJikanResponse<MangaStatistics>> GetMangaStatisticsAsync(long id);
 
-		#endregion GetMangaStatisticsAsync
-
-		#region GetMangaMoreInfoAsync
-
 		/// <summary>
 		/// Returns additional information related to manga with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of manga.</param>
 		/// <returns>Collections of forum topics related to manga with given MAL id.</returns>
 		Task<BaseJikanResponse<MoreInfo>> GetMangaMoreInfoAsync(long id);
-
-		#endregion GetMangaMoreInfoAsync
-
-		#region GetMangaUserUpdatesAsync
 
 		/// <summary>
 		/// Returns collection of manga user updates.
@@ -361,20 +265,12 @@ namespace JikanDotNet
 		/// <returns>Collection of manga user updates.</returns>
 		Task<PaginatedJikanResponse<ICollection<MangaUserUpdate>>> GetMangaUserUpdatesAsync(long id, int page);
 
-		#endregion GetMangaUserUpdatesAsync
-
-		#region GetMangaRecommendationsAsync
-
 		/// <summary>
 		/// Returns collection of manga recommendation.
 		/// </summary>
 		/// <param name="id">MAL id of manga.</param>
 		/// <returns>Collection of manga recomendation.</returns>
 		Task<BaseJikanResponse<ICollection<Recommendation>>> GetMangaRecommendationsAsync(long id);
-
-		#endregion GetMangaRecommendationsAsync
-
-		#region GetMangaReviewsAsync
 
 		/// <summary>
 		/// Returns collection of manga reviews.
@@ -383,10 +279,6 @@ namespace JikanDotNet
 		/// <returns>Collection of manga reviews.</returns>
 		Task<PaginatedJikanResponse<ICollection<Review>>> GetMangaReviewsAsync(long id);
 
-		#endregion GetMangaReviewsAsync
-
-		#region GetMangaRelationsAsync
-
 		/// <summary>
 		/// Returns collection of manga related entries.
 		/// </summary>
@@ -394,13 +286,9 @@ namespace JikanDotNet
 		/// <returns>Collection of manga related entries.</returns>
 		Task<PaginatedJikanResponse<ICollection<RelatedEntry>>> GetMangaRelationsAsync(long id);
 
-		#endregion GetMangaRelationsAsync
-
 		#endregion Manga requests
 
 		#region Character requests
-
-		#region GetCharacterAsync
 
 		/// <summary>
 		/// Returns character with given MAL id.
@@ -423,20 +311,12 @@ namespace JikanDotNet
 		/// <returns>Collection of characters.</returns>
 		Task<PaginatedJikanResponse<ICollection<Character>>> GetCharactersAsync(int page, int pageSize);
 
-		#endregion GetCharacterAsync
-
-		#region GetCharacterAnimeAsync
-
 		/// <summary>
 		/// Returns return animeography of character with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of character.</param>
 		/// <returns>Collection of anime where character has appeared.</returns>
 		Task<BaseJikanResponse<ICollection<CharacterAnimeographyEntry>>> GetCharacterAnimeAsync(long id);
-
-		#endregion GetCharacterAnimeAsync
-
-		#region GetCharacterMangaAsync
 
 		/// <summary>
 		/// Returns return mangaography of character with given MAL id.
@@ -445,20 +325,12 @@ namespace JikanDotNet
 		/// <returns>Collection of manga where character has appeared.</returns>
 		Task<BaseJikanResponse<ICollection<CharacterMangaographyEntry>>> GetCharacterMangaAsync(long id);
 
-		#endregion GetCharacterMangaAsync
-
-		#region GetCharacterVoiceActorsAsync
-
 		/// <summary>
 		/// Returns return voice actors of character with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of character.</param>
 		/// <returns>Collection of voice actors voicing character.</returns>
 		Task<BaseJikanResponse<ICollection<VoiceActorEntry>>> GetCharacterVoiceActorsAsync(long id);
-
-		#endregion GetCharacterVoiceActorsAsync
-
-		#region GetCharacterPicturesAsync
 
 		/// <summary>
 		/// Returns collections of links to pictures related to character with given MAL id.
@@ -467,13 +339,9 @@ namespace JikanDotNet
 		/// <returns>Collections of links to pictures related to character with given MAL id.</returns>
 		Task<BaseJikanResponse<ICollection<ImagesSet>>> GetCharacterPicturesAsync(long id);
 
-		#endregion GetCharacterPicturesAsync
-
 		#endregion Character requests
 
 		#region Person requests
-
-		#region GetPersonAsync
 
 		/// <summary>
 		/// Returns person with given MAL id.
@@ -482,10 +350,6 @@ namespace JikanDotNet
 		/// <returns>Person with given MAL id.</returns>
 		Task<BaseJikanResponse<Person>> GetPersonAsync(long id);
 
-		#endregion GetPersonAsync
-		
-		#region GetPeopleAsync
-		
 		/// <summary>
 		/// Returns collection of people.
 		/// </summary>
@@ -500,20 +364,12 @@ namespace JikanDotNet
 		/// <returns>Collection of people.</returns>
 		Task<PaginatedJikanResponse<ICollection<Person>>> GetPeopleAsync(int page, int pageSize);
 		
-		#endregion GetPeopleAsync
-
-		#region GetPersonAnimeAsync
-
 		/// <summary>
 		/// Returns animeography of person with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of person.</param>
 		/// <returns>Collection of anime the person collaborated on.</returns>
 		Task<BaseJikanResponse<ICollection<PersonAnimeographyEntry>>> GetPersonAnimeAsync(long id);
-
-		#endregion GetPersonAnimeAsync
-
-		#region GetPersonMangaAsync
 
 		/// <summary>
 		/// Returns mangaography of person with given MAL id.
@@ -522,20 +378,12 @@ namespace JikanDotNet
 		/// <returns>Collection of manga the person worked on.</returns>
 		Task<BaseJikanResponse<ICollection<PersonMangaographyEntry>>> GetPersonMangaAsync(long id);
 
-		#endregion GetPersonMangaAsync
-
-		#region GetPersonVoiceActingRolesAsync
-
 		/// <summary>
 		/// Returns voice acting roles of person with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of person.</param>
 		/// <returns>Collection of voice acting roles of the person.</returns>
 		Task<BaseJikanResponse<ICollection<VoiceActingRole>>> GetPersonVoiceActingRolesAsync(long id);
-
-		#endregion GetPersonVoiceActingRolesAsync
-
-		#region GetPersonPicturesAsync
 
 		/// <summary>
 		/// Returns collections of links to pictures related to person with given MAL id.
@@ -544,13 +392,9 @@ namespace JikanDotNet
 		/// <returns>Collections of links to pictures related to person with given MAL id.</returns>
 		Task<BaseJikanResponse<ICollection<ImagesSet>>> GetPersonPicturesAsync(long id);
 
-		#endregion GetPersonPicturesAsync
-
 		#endregion Person requests
 
 		#region Season requests
-
-		#region GetSeasonAsync
 
 		/// <summary>
 		/// Returns season preview.
@@ -560,19 +404,11 @@ namespace JikanDotNet
 		/// <returns>Season preview.</returns>
 		Task<PaginatedJikanResponse<ICollection<Anime>>> GetSeasonAsync(int year, Season season);
 
-		#endregion GetSeasonAsync
-
-		#region GetSeasonArchive
-
 		/// <summary>
 		/// Returns list of available season to query with <see cref="GetSeasonAsync(int, Season)"/>
 		/// </summary>
 		/// <returns></returns>
 		Task<PaginatedJikanResponse<ICollection<SeasonArchive>>> GetSeasonArchiveAsync();
-
-		#endregion GetSeasonArchive
-
-		#region GetSeasonLater
 
 		/// <summary>
 		/// Return season preview for anime with undefined airing season (marked as "Later" on MAL).
@@ -580,13 +416,9 @@ namespace JikanDotNet
 		/// <returns>Season preview for anime with undefined airing date.</returns>
 		Task<PaginatedJikanResponse<ICollection<Anime>>> GetUpcomingSeasonAsync();
 
-		#endregion GetSeasonLater
-
 		#endregion Season requests
 
 		#region Schedule requests
-
-		#region GetScheduleAsync
 
 		/// <summary>
 		/// Returns current season schedule.
@@ -608,13 +440,9 @@ namespace JikanDotNet
 		/// <returns>Current season schedule.</returns>
 		Task<PaginatedJikanResponse<ICollection<Anime>>> GetScheduleAsync(ScheduledDay scheduledDay);
 
-		#endregion GetScheduleAsync
-
 		#endregion Schedule requests
 
 		#region Top requests
-
-		#region GetTopAnimeAsync
 
 		/// <summary>
 		/// Returns list of top anime.
@@ -629,10 +457,6 @@ namespace JikanDotNet
 		/// <returns>List of top anime.</returns>
 		Task<PaginatedJikanResponse<ICollection<Anime>>> GetTopAnimeAsync(int page);
 
-		#endregion GetTopAnimeAsync
-
-		#region GetTopMangaAsync
-
 		/// <summary>
 		/// Returns list of top manga.
 		/// </summary>
@@ -645,10 +469,6 @@ namespace JikanDotNet
 		/// <param name="page">Index of page folding 25 records of top ranging (e.g. 1 will return first 25 records, 2 will return record from 26 to 50 etc.)</param>
 		/// <returns>List of top manga.</returns>
 		Task<PaginatedJikanResponse<ICollection<Manga>>> GetTopMangaAsync(int page);
-
-		#endregion GetTopMangaAsync
-
-		#region GetTopPeopleAsync
 
 		/// <summary>
 		/// Returns list of most popular people.
@@ -663,10 +483,6 @@ namespace JikanDotNet
 		/// <returns>List of most popular people.</returns>
 		Task<PaginatedJikanResponse<ICollection<Person>>> GetTopPeopleAsync(int page);
 
-		#endregion GetTopPeopleAsync
-
-		#region GetTopCharactersAsync
-
 		/// <summary>
 		/// Returns list of most popular characters.
 		/// </summary>
@@ -679,10 +495,6 @@ namespace JikanDotNet
 		/// <param name="page">Index of page folding 25 records of top ranging (e.g. 1 will return first 25 records, 2 will return record from 26 to 50 etc.)</param>
 		/// <returns>List of most popular characters.</returns>
 		Task<PaginatedJikanResponse<ICollection<Character>>> GetTopCharactersAsync(int page);
-
-		#endregion GetTopCharactersAsync
-
-		#region GetTopReviewsAsync
 
 		/// <summary>
 		/// Returns list of most popular characters.
@@ -697,13 +509,9 @@ namespace JikanDotNet
 		/// <returns>List of most popular characters.</returns>
 		Task<PaginatedJikanResponse<ICollection<Review>>> GetTopReviewsAsync(int page);
 
-		#endregion GetTopReviewsAsync
-
 		#endregion Top requests
 
 		#region Genre requests
-
-		#region GetAnimeGenresAsync
 
 		/// <summary>
 		/// Returns list of anime genres.
@@ -718,10 +526,6 @@ namespace JikanDotNet
 		/// <returns>List of anime genres</returns>
 		Task<BaseJikanResponse<ICollection<Genre>>> GetAnimeGenresAsync(GenresFilter filter);
 
-		#endregion GetAnimeGenresAsync
-
-		#region GetMangaGenresAsync
-
 		/// <summary>
 		/// Returns list of manga genres.
 		/// </summary>
@@ -735,13 +539,9 @@ namespace JikanDotNet
 		/// <returns>List of manga genres</returns>
 		Task<BaseJikanResponse<ICollection<Genre>>> GetMangaGenresAsync(GenresFilter filter);
 
-		#endregion GetMangaGenresAsync
-
 		#endregion Genre requests
 
 		#region Producer requests
-
-		#region GetProducersAsync
 
 		/// <summary>
 		/// Returns information about producers.
@@ -756,13 +556,9 @@ namespace JikanDotNet
 		/// <returns>Basic Information about producers.</returns>
 		Task<PaginatedJikanResponse<ICollection<Producer>>> GetProducersAsync(int page);
 
-		#endregion GetProducersAsync
-
 		#endregion Producer requests
 
 		#region Magazine requests
-
-		#region GetMagazinesAsync
 
 		/// <summary>
 		/// Returns information about magazines.
@@ -777,13 +573,9 @@ namespace JikanDotNet
 		/// <returns>Basic Information about magazines.</returns>
 		Task<PaginatedJikanResponse<ICollection<Magazine>>> GetMagazinesAsync(int page);
 
-		#endregion GetMagazinesAsync
-
 		#endregion Magazine requests
 
 		#region Club requests
-
-		#region GetClubAsync
 
 		/// <summary>
 		/// Return club's profile information.
@@ -791,10 +583,6 @@ namespace JikanDotNet
 		/// <param name="id">MAL id of the club.</param>
 		/// <returns>Club's profile information.</returns>
 		Task<BaseJikanResponse<Club>> GetClubAsync(long id);
-
-		#endregion GetClubAsync
-
-		#region GetClubMembersAsync
 
 		/// <summary>
 		/// Return club's member list.
@@ -811,20 +599,12 @@ namespace JikanDotNet
 		/// <returns>Club's member list.</returns>
 		Task<PaginatedJikanResponse<ICollection<ClubMember>>> GetClubMembersAsync(long id, int page);
 
-		#endregion GetClubMembersAsync
-
-		#region GetClubStaffAsync
-
 		/// <summary>
 		/// Return club's staff list.
 		/// </summary>
 		/// <param name="id">MAL id of the club.</param>
 		/// <returns>Club's staff list.</returns>
 		Task<BaseJikanResponse<ICollection<ClubStaff>>> GetClubStaffAsync(long id);
-
-		#endregion GetClubStaffAsync
-
-		#region GetClubRelationsAsync
 
 		/// <summary>
 		/// Return club's related entities.
@@ -833,13 +613,9 @@ namespace JikanDotNet
 		/// <returns>Club's related entities collections..</returns>
 		Task<BaseJikanResponse<ClubRelations>> GetClubRelationsAsync(long id);
 
-		#endregion GetClubRelationsAsync
-
 		#endregion Club requests
 
 		#region User requests
-		
-		#region GetUsersAsync
 		
 		/// <summary>
 		/// Returns collection of users.
@@ -848,20 +624,12 @@ namespace JikanDotNet
 		/// <returns>Collection of users.</returns>
 		Task<PaginatedJikanResponse<ICollection<UserMetadata>>> GetUsersAsync(int page);
 		
-		#endregion GetUsersAsync
-
-		#region GetUserProfileAsync
-
 		/// <summary>
 		/// Returns information about user's profile with given username.
 		/// </summary>
 		/// <param name="username">Username.</param>
 		/// <returns>Information about user's profile with given username.</returns>
 		Task<BaseJikanResponse<UserProfile>> GetUserProfileAsync(string username);
-
-		#endregion GetUserProfileAsync
-
-		#region GetUserStatisticsAsync
 
 		/// <summary>
 		/// Returns information about user's anime and manga statistics
@@ -870,10 +638,6 @@ namespace JikanDotNet
 		/// <returns>Information about user's anime and manga statistics.</returns>
 		Task<BaseJikanResponse<UserStatistics>> GetUserStatisticsAsync(string username);
 
-		#endregion GetUserStatisticsAsync
-
-		#region GetUserFavoritesAsync
-
 		/// <summary>
 		/// Returns information about user's favorite section.
 		/// </summary>
@@ -881,20 +645,12 @@ namespace JikanDotNet
 		/// <returns>Information about user's favorite section..</returns>
 		Task<BaseJikanResponse<UserFavorites>> GetUserFavoritesAsync(string username);
 
-		#endregion GetUserFavoritesAsync
-
-		#region GetUserAboutAsync
-
 		/// <summary>
 		/// Returns information about user's description on the profile.
 		/// </summary>
 		/// <param name="username">Username.</param>
 		/// <returns>Information about user's description on the profile.</returns>
 		Task<BaseJikanResponse<UserAbout>> GetUserAboutAsync(string username);
-
-		#endregion GetUserAboutAsync
-
-		#region GetUserHistoryAsync
 
 		/// <summary>
 		/// Returns information about user's history with given username.
@@ -911,10 +667,6 @@ namespace JikanDotNet
 		/// <returns>Information about user's profile with given username.</returns>
 		Task<BaseJikanResponse<ICollection<HistoryEntry>>> GetUserHistoryAsync(string username, UserHistoryExtension filter);
 
-		#endregion GetUserHistoryAsync
-
-		#region GetUserFriendsAsync
-
 		/// <summary>
 		/// Returns information about user's friends with given username.
 		/// </summary>
@@ -929,10 +681,6 @@ namespace JikanDotNet
 		/// <param name="page">Index of the page.</param>
 		/// <returns>Information about user's friends with given username.</returns>
 		Task<PaginatedJikanResponse<ICollection<Friend>>> GetUserFriendsAsync(string username, int page);
-
-		#endregion GetUserFriendsAsync
-
-		#region GetUserAnimeListAsync
 
 		/// <summary>
 		/// Returns entries on user's anime list.
@@ -949,10 +697,6 @@ namespace JikanDotNet
 		/// <returns>Entries on user's anime list.</returns>
 		Task<BaseJikanResponse<ICollection<AnimeListEntry>>> GetUserAnimeListAsync(string username, int page);
 
-		#endregion GetUserAnimeListAsync
-
-		#region GetUserMangaListAsync
-
 		/// <summary>
 		/// Returns entries on user's manga list.
 		/// </summary>
@@ -967,11 +711,7 @@ namespace JikanDotNet
 		/// <param name="page">Index of page folding 300 records of top ranging (e.g. 1 will return first 300 records, 2 will return record from 301 to 600 etc.)</param>
 		/// <returns>Entries on user's manga list.</returns>
 		Task<BaseJikanResponse<ICollection<MangaListEntry>>> GetUserMangaListAsync(string username, int page);
-
-		#endregion GetUserMangaListAsync
-
-		#region GetUserReviewsAsync
-
+		
 		/// <summary>
 		/// Returns user's reviews.
 		/// </summary>
@@ -986,10 +726,6 @@ namespace JikanDotNet
 		/// <param name="page">Index of page folding 10 records of top ranging (e.g. 1 will return first 10 records, 2 will return record from 11 to 21 etc.)</param>
 		/// <returns>User's reviews.</returns>
 		Task<PaginatedJikanResponse<ICollection<Review>>> GetUserReviewsAsync(string username, int page);
-
-		#endregion GetUserReviewsAsync
-
-		#region GetUserRecommendationsAsync
 
 		/// <summary>
 		/// Returns user's recommendations.
@@ -1006,10 +742,6 @@ namespace JikanDotNet
 		/// <returns>User's recommendations.</returns>
 		Task<PaginatedJikanResponse<ICollection<UserRecommendation>>> GetUserRecommendationsAsync(string username, int page);
 
-		#endregion GetUserRecommendationsAsync
-
-		#region GetUserClubsAsync
-
 		/// <summary>
 		/// Returns user's clubs.
 		/// </summary>
@@ -1024,8 +756,6 @@ namespace JikanDotNet
 		/// <param name="page">Index of page folding 10 records of top ranging (e.g. 1 will return first 10 records, 2 will return record from 11 to 21 etc.)</param>
 		/// <returns>User's clubs.</returns>
 		Task<PaginatedJikanResponse<ICollection<MalUrl>>> GetUserClubsAsync(string username, int page);
-
-		#endregion GetUserClubsAsync
 
 		#endregion User requests
 
@@ -1063,7 +793,7 @@ namespace JikanDotNet
 
 		#endregion
 
-		#region Recommendations
+		#region Recommendations requests
 
 		/// <summary>
 		/// Gets collection of recently added anime recommendations.
@@ -1093,7 +823,7 @@ namespace JikanDotNet
 		
 		#endregion
 
-		#region Reviews
+		#region Reviews requests
 
 		/// <summary>
 		/// Gets collection of recently added anime reviews.
@@ -1153,8 +883,6 @@ namespace JikanDotNet
 
 		#region Search requests
 
-		#region SearchAnime
-
 		/// <summary>
 		/// Returns list of results related to search.
 		/// </summary>
@@ -1201,10 +929,6 @@ namespace JikanDotNet
 		/// <param name="searchConfig">Additional configuration for advanced search.</param>
 		/// <returns>List of result related to search query.</returns>
 		Task<AnimeSearchResult> SearchAnime(string query, int page, AnimeSearchConfig searchConfig);
-
-		#endregion SearchAnime
-
-		#region SearchManga
 
 		/// <summary>
 		/// Returns list of results related to search.
@@ -1253,10 +977,6 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		Task<MangaSearchResult> SearchManga(string query, int page, MangaSearchConfig searchConfig);
 
-		#endregion SearchManga
-
-		#region SearchPerson
-
 		/// <summary>
 		/// Returns list of results related to search.
 		/// </summary>
@@ -1272,10 +992,6 @@ namespace JikanDotNet
 		/// <returns>List of result related to search query.</returns>
 		Task<PersonSearchResult> SearchPerson(string query, int page);
 
-		#endregion SearchPerson
-
-		#region SearchCharacter
-
 		/// <summary>
 		/// Returns list of results related to search.
 		/// </summary>
@@ -1290,8 +1006,6 @@ namespace JikanDotNet
 		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
 		/// <returns>List of result related to search query.</returns>
 		Task<CharacterSearchResult> SearchCharacter(string query, int page);
-
-		#endregion SearchCharacter
 
 		#endregion Search requests
 	}

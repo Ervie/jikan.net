@@ -95,8 +95,6 @@ namespace JikanDotNet
 
 		#region Anime methods
 
-		#region GetAnimeAsync
-
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<Anime>> GetAnimeAsync(long id)
 		{
@@ -124,10 +122,6 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
 		}
 
-		#endregion GetAnimeAsync
-
-		#region GetAnimeCharactersAsync
-
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<ICollection<AnimeCharacter>>> GetAnimeCharactersAsync(long id)
 		{
@@ -136,10 +130,6 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<AnimeCharacter>>>(endpointParts);
 		}
 
-		#endregion GetAnimeCharactersAsync
-
-		#region GetAnimeStaffAsync
-
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<ICollection<AnimeStaffPosition>>> GetAnimeStaffAsync(long id)
 		{
@@ -147,10 +137,6 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.Anime, id.ToString(), JikanEndpointConsts.Staff };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<AnimeStaffPosition>>>(endpointParts);
 		}
-
-		#endregion GetAnimeStaffAsync
-
-		#region GetAnimeEpisodesAsync
 
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<AnimeEpisode>>> GetAnimeEpisodesAsync(long id, int page)
@@ -169,10 +155,6 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<AnimeEpisode>>>(endpointParts);
 		}
 
-		#endregion GetAnimeEpisodesAsync
-
-		#region GetAnimeEpisodeAsync
-
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<AnimeEpisode>> GetAnimeEpisodeAsync(long animeId, int episodeId)
 		{
@@ -181,10 +163,6 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.Anime, animeId.ToString(), JikanEndpointConsts.Episodes, episodeId.ToString() };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<AnimeEpisode>>(endpointParts);
 		}
-
-		#endregion GetAnimeEpisodeAsync
-
-		#region GetAnimeNewsAsync
 
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<News>>> GetAnimeNewsAsync(long id)
@@ -202,10 +180,6 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.Anime, id.ToString(), JikanEndpointConsts.News + $"?page={page}" };
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<News>>>(endpointParts);
 		}
-
-		#endregion GetAnimeNewsAsync
-
-		#region GetAnimeForumTopicsAsync
 
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<ICollection<ForumTopic>>> GetAnimeForumTopicsAsync(long id)
@@ -226,10 +200,6 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<ForumTopic>>>(endpointParts);
 		}
 
-		#endregion GetAnimeForumTopicsAsync
-
-		#region GetAnimeVideosAsync
-
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<AnimeVideos>> GetAnimeVideosAsync(long id)
 		{
@@ -237,10 +207,6 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.Anime, id.ToString(), JikanEndpointConsts.Videos };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<AnimeVideos>>(endpointParts);
 		}
-
-		#endregion GetAnimeVideosAsync
-
-		#region GetAnimePicturesAsync
 
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<ICollection<ImagesSet>>> GetAnimePicturesAsync(long id)
@@ -250,10 +216,6 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<ImagesSet>>>(endpointParts);
 		}
 
-		#endregion GetAnimePicturesAsync
-
-		#region GetAnimeStatisticsAsync
-
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<AnimeStatistics>> GetAnimeStatisticsAsync(long id)
 		{
@@ -261,10 +223,6 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.Anime, id.ToString(), JikanEndpointConsts.Statistics };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<AnimeStatistics>>(endpointParts);
 		}
-
-		#endregion GetAnimeStatisticsAsync
-
-		#region GetAnimeMoreInfoAsync
 
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<MoreInfo>> GetAnimeMoreInfoAsync(long id)
@@ -274,10 +232,6 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<BaseJikanResponse<MoreInfo>>(endpointParts);
 		}
 
-		#endregion GetAnimeMoreInfoAsync
-
-		#region GetAnimeRecommendationsAsync
-
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<ICollection<Recommendation>>> GetAnimeRecommendationsAsync(long id)
 		{
@@ -285,10 +239,6 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.Anime, id.ToString(), JikanEndpointConsts.Recommendations };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<Recommendation>>>(endpointParts);
 		}
-
-		#endregion GetAnimeRecommendationsAsync
-
-		#region GetAnimeUserUpdatesAsync
 
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<AnimeUserUpdate>>> GetAnimeUserUpdatesAsync(long id)
@@ -309,10 +259,6 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<AnimeUserUpdate>>>(endpointParts);
 		}
 
-		#endregion GetAnimeUserUpdatesAsync
-
-		#region GetAnimeReviewsAsync
-
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<Review>>> GetAnimeReviewsAsync(long id)
 		{
@@ -332,10 +278,6 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Review>>>(endpointParts);
 		}
 
-		#endregion GetAnimeReviewsAsync
-
-		#region GetAnimeRelationsAsync
-
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<RelatedEntry>>> GetAnimeRelationsAsync(long id)
 		{
@@ -344,15 +286,7 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<RelatedEntry>>>(endpointParts);
 		}
 
-		#endregion GetAnimeRelationsAsync
-
-		#region GetAnimeThemesAsync
-
-		/// <summary>
-		/// Returns collection of anime openings and endings.
-		/// </summary>
-		/// <param name="id">MAL id of anime.</param>
-		/// <returns>Collection of anime openings and endings.</returns>
+		/// <inheritdoc />
 		public async Task<BaseJikanResponse<AnimeThemes>> GetAnimeThemesAsync(long id)
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
@@ -360,13 +294,9 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<BaseJikanResponse<AnimeThemes>>(endpointParts);
 		}
 
-		#endregion GetAnimeThemesAsync
-
 		#endregion Anime methods
 
 		#region Character methods
-
-		#region GetCharacterAsync
 
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<Character>> GetCharacterAsync(long id)
@@ -395,10 +325,6 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Character>>>(endpointParts);
 		}
 
-		#endregion GetCharacterAsync
-
-		#region GetCharacterAnimeAsync
-
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<ICollection<CharacterAnimeographyEntry>>> GetCharacterAnimeAsync(long id)
 		{
@@ -406,10 +332,6 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.Characters, id.ToString(), JikanEndpointConsts.Anime };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<CharacterAnimeographyEntry>>>(endpointParts);
 		}
-
-		#endregion GetCharacterAnimeAsync
-
-		#region GetCharacterMangaAsync
 
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<ICollection<CharacterMangaographyEntry>>> GetCharacterMangaAsync(long id)
@@ -419,10 +341,6 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<CharacterMangaographyEntry>>>(endpointParts);
 		}
 
-		#endregion GetCharacterMangaAsync
-
-		#region GetCharacterVoiceActorsAsync
-
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<ICollection<VoiceActorEntry>>> GetCharacterVoiceActorsAsync(long id)
 		{
@@ -430,10 +348,6 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.Characters, id.ToString(), JikanEndpointConsts.Voices };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<VoiceActorEntry>>>(endpointParts);
 		}
-
-		#endregion GetCharacterVoiceActorsAsync
-
-		#region GetCharacterPicturesAsync
 
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<ICollection<ImagesSet>>> GetCharacterPicturesAsync(long id)
@@ -443,13 +357,9 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<ImagesSet>>>(endpointParts);
 		}
 
-		#endregion GetCharacterPicturesAsync
-
 		#endregion Character methods
 
 		#region Manga methods
-
-		#region GetMangaAsync
 
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<Manga>> GetMangaAsync(long id)
@@ -478,10 +388,6 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Manga>>>(endpointParts);
 		}
 
-		#endregion GetMangaAsync
-
-		#region GetMangaCharactersAsync
-
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<ICollection<MangaCharacter>>> GetMangaCharactersAsync(long id)
 		{
@@ -489,10 +395,6 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.Manga, id.ToString(), JikanEndpointConsts.Characters };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<MangaCharacter>>>(endpointParts);
 		}
-
-		#endregion GetMangaCharactersAsync
-
-		#region GetMangaNewsAsync
 
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<News>>> GetMangaNewsAsync(long id)
@@ -513,10 +415,6 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<News>>>(endpointParts);
 		}
 
-		#endregion GetMangaNewsAsync
-
-		#region GetMangaForumTopicsAsync
-
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<ICollection<ForumTopic>>> GetMangaForumTopicsAsync(long id)
 		{
@@ -524,10 +422,6 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.Manga, id.ToString(), JikanEndpointConsts.Forum };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<ForumTopic>>>(endpointParts);
 		}
-
-		#endregion GetMangaForumTopicsAsync
-
-		#region GetMangaPicturesAsync
 
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<ICollection<ImagesSet>>> GetMangaPicturesAsync(long id)
@@ -537,10 +431,6 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<ImagesSet>>>(endpointParts);
 		}
 
-		#endregion GetMangaPicturesAsync
-
-		#region GetMangaStatisticsAsync
-
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<MangaStatistics>> GetMangaStatisticsAsync(long id)
 		{
@@ -549,10 +439,6 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<BaseJikanResponse<MangaStatistics>>(endpointParts);
 		}
 
-		#endregion GetMangaStatisticsAsync
-
-		#region GetMangaMoreInfoAsync
-
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<MoreInfo>> GetMangaMoreInfoAsync(long id)
 		{
@@ -560,10 +446,6 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.Manga, id.ToString(), JikanEndpointConsts.MoreInfo };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<MoreInfo>>(endpointParts);
 		}
-
-		#endregion GetMangaMoreInfoAsync
-
-		#region GetMangaUserUpdatesAsync
 
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<MangaUserUpdate>>> GetMangaUserUpdatesAsync(long id)
@@ -584,10 +466,6 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<MangaUserUpdate>>>(endpointParts);
 		}
 
-		#endregion GetMangaUserUpdatesAsync
-
-		#region GetMangaRecommendationsAsync
-
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<ICollection<Recommendation>>> GetMangaRecommendationsAsync(long id)
 		{
@@ -595,10 +473,6 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.Manga, id.ToString(), JikanEndpointConsts.Recommendations };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<Recommendation>>>(endpointParts);
 		}
-
-		#endregion GetMangaRecommendationsAsync
-
-		#region GetMangaReviewsAsync
 
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<Review>>> GetMangaReviewsAsync(long id)
@@ -608,10 +482,6 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Review>>>(endpointParts);
 		}
 
-		#endregion GetMangaReviewsAsync
-
-		#region GetMangaRelationsAsync
-
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<RelatedEntry>>> GetMangaRelationsAsync(long id)
 		{
@@ -620,13 +490,9 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<RelatedEntry>>>(endpointParts);
 		}
 
-		#endregion GetMangaRelationsAsync
-
 		#endregion Manga methods
 
 		#region Person methods
-
-		#region GetPersonAsync
 
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<Person>> GetPersonAsync(long id)
@@ -635,10 +501,6 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.People, id.ToString() };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<Person>>(endpointParts);
 		}
-
-		#endregion GetPersonAsync
-
-		#region GetPeopleAsync
 
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<Person>>> GetPeopleAsync()
@@ -658,10 +520,6 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.People + queryParams};
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Person>>>(endpointParts);
 		}
-		
-		#endregion GetPeopleAsync
-
-		#region GetPersonAnimeAsync
 
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<ICollection<PersonAnimeographyEntry>>> GetPersonAnimeAsync(long id)
@@ -671,10 +529,6 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<PersonAnimeographyEntry>>>(endpointParts);
 		}
 
-		#endregion GetPersonAnimeAsync
-
-		#region GetPersonMangaAsync
-
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<ICollection<PersonMangaographyEntry>>> GetPersonMangaAsync(long id)
 		{
@@ -682,10 +536,6 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.People, id.ToString(), JikanEndpointConsts.Manga };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<PersonMangaographyEntry>>>(endpointParts);
 		}
-
-		#endregion GetPersonMangaAsync
-
-		#region GetPersonVoiceActingRolesAsync
 
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<ICollection<VoiceActingRole>>> GetPersonVoiceActingRolesAsync(long id)
@@ -695,10 +545,6 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<VoiceActingRole>>>(endpointParts);
 		}
 
-		#endregion GetPersonVoiceActingRolesAsync
-
-		#region GetPersonPicturesAsync
-
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<ICollection<ImagesSet>>> GetPersonPicturesAsync(long id)
 		{
@@ -707,26 +553,18 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<ImagesSet>>>(endpointParts);
 		}
 
-		#endregion GetPersonPicturesAsync
-
 		#endregion Person methods
 
 		#region Season methods
 
-		#region GetSeasonAsync
-
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetSeasonAsync(int year, Season season)
 		{
-			Guard.IsValid(year => year >= 1000 && year < 10000, year, nameof(year));
+			Guard.IsValid(x => x >= 1000 && x < 10000, year, nameof(year));
 			Guard.IsValidEnum(season, nameof(season));
 			var endpointParts = new[] { JikanEndpointConsts.Seasons, year.ToString(), season.GetDescription() };
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
 		}
-
-		#endregion GetSeasonAsync
-
-		#region GetSeasonArchiveAsync
 
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<SeasonArchive>>> GetSeasonArchiveAsync()
@@ -735,10 +573,6 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<SeasonArchive>>>(endpointParts);
 		}
 
-		#endregion GetSeasonArchiveAsync
-
-		#region GetUpcomingSeasonAsync
-
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetUpcomingSeasonAsync()
 		{
@@ -746,13 +580,9 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
 		}
 
-		#endregion GetUpcomingSeasonAsync
-
 		#endregion Season methods
 
 		#region Schedule methods
-
-		#region GetScheduleAsync
 
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetScheduleAsync()
@@ -779,13 +609,9 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
 		}
 
-		#endregion GetScheduleAsync
-
 		#endregion Schedule methods
 
 		#region Top methods
-
-		#region GetTopAnimeAsync
 
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetTopAnimeAsync()
@@ -803,10 +629,6 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
 		}
 
-		#endregion GetTopAnimeAsync
-
-		#region GetTopMangaAsync
-
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<Manga>>> GetTopMangaAsync()
 		{
@@ -822,10 +644,6 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.TopList, JikanEndpointConsts.Manga + queryParams };
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Manga>>>(endpointParts);
 		}
-
-		#endregion GetTopMangaAsync
-
-		#region GetTopPeopleAsync
 
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<Person>>> GetTopPeopleAsync()
@@ -843,10 +661,6 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Person>>>(endpointParts);
 		}
 
-		#endregion GetTopPeopleAsync
-
-		#region GetTopCharactersAsync
-
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<Character>>> GetTopCharactersAsync()
 		{
@@ -862,10 +676,6 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.TopList, JikanEndpointConsts.Characters + queryParams };
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Character>>>(endpointParts);
 		}
-
-		#endregion GetTopCharactersAsync
-
-		#region GetTopReviewsAsync
 
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<Review>>> GetTopReviewsAsync()
@@ -883,13 +693,9 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Review>>>(endpointParts);
 		}
 
-		#endregion GetTopReviewsAsync
-
 		#endregion Top methods
 
 		#region Genre methods
-
-		#region GetAnimeGenresAsync
 
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<ICollection<Genre>>> GetAnimeGenresAsync()
@@ -907,10 +713,6 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<Genre>>>(endpointParts);
 		}
 
-		#endregion GetAnimeGenresAsync
-
-		#region GetMangaGenresAsync
-
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<ICollection<Genre>>> GetMangaGenresAsync()
 		{
@@ -927,13 +729,9 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<Genre>>>(endpointParts);
 		}
 
-		#endregion GetMangaGenresAsync
-
 		#endregion Genre methods
 
 		#region Producer methods
-
-		#region GetProducersAsync
 
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<Producer>>> GetProducersAsync()
@@ -951,13 +749,9 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Producer>>>(endpointParts);
 		}
 
-		#endregion GetProducersAsync
-
 		#endregion Producer methods
 
 		#region Magazine methods
-
-		#region GetMagazinesAsync
 
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<Magazine>>> GetMagazinesAsync()
@@ -975,13 +769,9 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Magazine>>>(endpointParts);
 		}
 
-		#endregion GetMagazinesAsync
-
 		#endregion Magazine methods
 
 		#region Club methods
-
-		#region GetClubAsync
 
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<Club>> GetClubAsync(long id)
@@ -990,10 +780,6 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.Clubs, id.ToString() };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<Club>>(endpointParts);
 		}
-
-		#endregion GetClubAsync
-
-		#region GetClubMembersAsync
 
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<ClubMember>>> GetClubMembersAsync(long id)
@@ -1013,10 +799,6 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<ClubMember>>>(endpointParts);
 		}
 
-		#endregion GetClubMembersAsync
-
-		#region GetClubStaffAsync
-
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<ICollection<ClubStaff>>> GetClubStaffAsync(long id)
 		{
@@ -1024,10 +806,6 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.Clubs, id.ToString(), JikanEndpointConsts.Staff };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<ClubStaff>>>(endpointParts);
 		}
-
-		#endregion GetClubStaffAsync
-
-		#region GetClubRelationsAsync
 
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<ClubRelations>> GetClubRelationsAsync(long id)
@@ -1037,14 +815,10 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<BaseJikanResponse<ClubRelations>>(endpointParts);
 		}
 
-		#endregion GetClubRelationsAsync
-
 		#endregion Club methods
 
 		#region User methods
-
-		#region GetUsersAsync
-		
+	
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<UserMetadata>>> GetUsersAsync(int page = 20)
 		{
@@ -1054,10 +828,6 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.Users + queryParams};
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<UserMetadata>>>(endpointParts);
 		}
-		
-		#endregion
-		
-		#region GetUserProfileAsync
 
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<UserProfile>> GetUserProfileAsync(string username)
@@ -1067,10 +837,6 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<BaseJikanResponse<UserProfile>>(endpointParts);
 		}
 
-		#endregion GetUserProfileAsync
-
-		#region GetUserStatisticsAsync
-
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<UserStatistics>> GetUserStatisticsAsync(string username)
 		{
@@ -1078,10 +844,6 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.Users, username, JikanEndpointConsts.Statistics };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<UserStatistics>>(endpointParts);
 		}
-
-		#endregion GetUserStatisticsAsync
-
-		#region GetUserFavoritesAsync
 
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<UserFavorites>> GetUserFavoritesAsync(string username)
@@ -1091,10 +853,6 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<BaseJikanResponse<UserFavorites>>(endpointParts);
 		}
 
-		#endregion GetUserFavoritesAsync
-
-		#region GetUserAboutAsync
-
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<UserAbout>> GetUserAboutAsync(string username)
 		{
@@ -1102,10 +860,6 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.Users, username, JikanEndpointConsts.About };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<UserAbout>>(endpointParts);
 		}
-
-		#endregion GetUserAboutAsync
-
-		#region GetUserHistoryAsync
 
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<ICollection<HistoryEntry>>> GetUserHistoryAsync(string username)
@@ -1123,10 +877,6 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.Users, username, JikanEndpointConsts.History, historyExtension.GetDescription() };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<HistoryEntry>>>(endpointParts);
 		}
-
-		#endregion GetUserHistoryAsync
-
-		#region GetUserAnimeListAsync
 
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<ICollection<AnimeListEntry>>> GetUserAnimeListAsync(string username)
@@ -1146,10 +896,6 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<AnimeListEntry>>>(endpointParts);
 		}
 
-		#endregion GetUserAnimeListAsync
-
-		#region GetUserMangaListAsync
-
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<ICollection<MangaListEntry>>> GetUserMangaListAsync(string username)
 		{
@@ -1167,10 +913,6 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.Users, username, JikanEndpointConsts.MangaList + queryParams };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<MangaListEntry>>>(endpointParts);
 		}
-
-		#endregion GetUserMangaListAsync
-
-		#region GetUserFriendsAsync
 
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<Friend>>> GetUserFriendsAsync(string username)
@@ -1190,10 +932,6 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Friend>>>(endpointParts);
 		}
 
-		#endregion GetUserFriendsAsync
-
-		#region GetUserReviewsAsync
-
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<Review>>> GetUserReviewsAsync(string username)
 		{
@@ -1211,10 +949,6 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.Users, username, JikanEndpointConsts.Reviews + queryParams };
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Review>>>(endpointParts);
 		}
-
-		#endregion GetUserReviewsAsync
-
-		#region GetUserRecommendationsAsync
 
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<UserRecommendation>>> GetUserRecommendationsAsync(string username)
@@ -1234,10 +968,6 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<UserRecommendation>>>(endpointParts);
 		}
 
-		#endregion GetUserRecommendationsAsync
-
-		#region GetUserClubsAsync
-
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<MalUrl>>> GetUserClubsAsync(string username)
 		{
@@ -1255,8 +985,6 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.Users, username, JikanEndpointConsts.Clubs + queryParams };
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<MalUrl>>>(endpointParts);
 		}
-
-		#endregion GetUserClubsAsync
 
 		#endregion User methods
 
@@ -1367,7 +1095,7 @@ namespace JikanDotNet
 		
 		#endregion
 		
-		#region Recommendations
+		#region Recommendations methods
 		
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<UserRecommendation>>> GetRecentAnimeRecommendationsAsync()
