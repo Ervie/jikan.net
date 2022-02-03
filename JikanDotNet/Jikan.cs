@@ -1331,6 +1331,42 @@ namespace JikanDotNet
 		
 		#endregion
 
+		#region Reviews methods
+
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<Review>>> GetRecentAnimeReviewsAsync()
+		{
+			var endpointParts = new[] { JikanEndpointConsts.Reviews, JikanEndpointConsts.Anime };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Review>>>(endpointParts);
+		}
+		
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<Review>>> GetRecentAnimeReviewsAsync(int page)
+		{
+			Guard.IsGreaterThanZero(page, nameof(page));
+			var queryParams = $"?page={page}";
+			var endpointParts = new[] { JikanEndpointConsts.Reviews, JikanEndpointConsts.Anime + queryParams };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Review>>>(endpointParts);
+		}
+		
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<Review>>> GetRecentMangaReviewsAsync()
+		{
+			var endpointParts = new[] { JikanEndpointConsts.Reviews, JikanEndpointConsts.Manga };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Review>>>(endpointParts);
+		}
+		
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<Review>>> GetRecentMangaReviewsAsync(int page)
+		{
+			Guard.IsGreaterThanZero(page, nameof(page));
+			var queryParams = $"?page={page}";
+			var endpointParts = new[] { JikanEndpointConsts.Reviews, JikanEndpointConsts.Manga + queryParams };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Review>>>(endpointParts);
+		}
+		
+		#endregion
+
 		#region Search methods
 
 		#region SearchAnime
