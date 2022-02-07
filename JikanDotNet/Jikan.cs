@@ -115,7 +115,7 @@ namespace JikanDotNet
 		{
 			Guard.IsGreaterThanZero(page, nameof(page));
 			Guard.IsGreaterThanZero(pageSize, nameof(pageSize));
-			Guard.IsLesserThan(pageSize,ParameterConsts.MaximumPageSize, nameof(pageSize));
+			Guard.IsLesserOrEqualThan(pageSize,ParameterConsts.MaximumPageSize, nameof(pageSize));
 			
 			var queryParams = $"?page={page}&limit={pageSize}";
 			var endpointParts = new[] { JikanEndpointConsts.Anime + queryParams};
@@ -318,7 +318,7 @@ namespace JikanDotNet
 		{
 			Guard.IsGreaterThanZero(page, nameof(page));
 			Guard.IsGreaterThanZero(pageSize, nameof(pageSize));
-			Guard.IsLesserThan(pageSize,ParameterConsts.MaximumPageSize, nameof(pageSize));
+			Guard.IsLesserOrEqualThan(pageSize,ParameterConsts.MaximumPageSize, nameof(pageSize));
 			
 			var queryParams = $"?page={page}&limit={pageSize}";
 			var endpointParts = new[] { JikanEndpointConsts.Characters + queryParams};
@@ -381,7 +381,7 @@ namespace JikanDotNet
 		{
 			Guard.IsGreaterThanZero(page, nameof(page));
 			Guard.IsGreaterThanZero(pageSize, nameof(pageSize));
-			Guard.IsLesserThan(pageSize,ParameterConsts.MaximumPageSize, nameof(pageSize));
+			Guard.IsLesserOrEqualThan(pageSize,ParameterConsts.MaximumPageSize, nameof(pageSize));
 			
 			var queryParams = $"?page={page}&limit={pageSize}";
 			var endpointParts = new[] { JikanEndpointConsts.Manga + queryParams};
@@ -500,25 +500,6 @@ namespace JikanDotNet
 			Guard.IsGreaterThanZero(id, nameof(id));
 			var endpointParts = new[] { JikanEndpointConsts.People, id.ToString() };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<Person>>(endpointParts);
-		}
-
-		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<Person>>> GetPeopleAsync()
-		{
-			var endpointParts = new[] { JikanEndpointConsts.People };
-			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Person>>>(endpointParts);
-		}
-		
-		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<Person>>> GetPeopleAsync(int page, int pageSize)
-		{
-			Guard.IsGreaterThanZero(page, nameof(page));
-			Guard.IsGreaterThanZero(pageSize, nameof(pageSize));
-			Guard.IsLesserThan(pageSize,ParameterConsts.MaximumPageSize, nameof(pageSize));
-			
-			var queryParams = $"?page={page}&limit={pageSize}";
-			var endpointParts = new[] { JikanEndpointConsts.People + queryParams};
-			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Person>>>(endpointParts);
 		}
 
 		/// <inheritdoc />
@@ -1262,22 +1243,14 @@ namespace JikanDotNet
 		#region SearchPerson
 
 		/// <inheritdoc />
-		public async Task<PersonSearchResult> SearchPerson(string query)
-		{
-			Guard.IsLongerThan2Characters(query, nameof(query));
-			query = string.Concat(JikanEndpointConsts.Person, "?q=", query.Replace(' ', '+'));
-			var endpointParts = new[] { JikanEndpointConsts.Search, query };
-			return await ExecuteGetRequestAsync<PersonSearchResult>(endpointParts);
-		}
-
+		public Task<PaginatedJikanResponse<ICollection<Person>>> SearchPersonAsync(string query)
+			=> SearchPersonAsync(new PersonSearchConfig {Query = query});
+		
 		/// <inheritdoc />
-		public async Task<PersonSearchResult> SearchPerson(string query, int page)
-		{
-			Guard.IsLongerThan2Characters(query, nameof(query));
-			Guard.IsGreaterThanZero(page, nameof(page));
-			query = string.Concat(JikanEndpointConsts.Person, "/", page.ToString(), "?q=", query.Replace(' ', '+'));
-			var endpointParts = new[] { JikanEndpointConsts.Search, query };
-			return await ExecuteGetRequestAsync<PersonSearchResult>(endpointParts);
+		public async Task<PaginatedJikanResponse<ICollection<Person>>> SearchPersonAsync(PersonSearchConfig searchConfig)
+		{	
+			var endpointParts = new[] { JikanEndpointConsts.People + searchConfig.ConfigToString()};
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Person>>>(endpointParts);
 		}
 
 		#endregion SearchPerson
@@ -1302,7 +1275,7 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.Search, query };
 			return await ExecuteGetRequestAsync<CharacterSearchResult>(endpointParts);
 		}
-
+		
 		#endregion SearchCharacter
 
 		#endregion Search methods

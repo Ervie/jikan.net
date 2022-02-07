@@ -37,7 +37,7 @@ namespace JikanDotNet.Helpers
 			}
 		}
 		
-		internal static void IsLesserThan(long arg, long max, string argumentName)
+		internal static void IsLesserOrEqualThan(long arg, long max, string argumentName)
 		{
 			if (arg > max)
 			{
@@ -65,6 +65,14 @@ namespace JikanDotNet.Helpers
 			if (!Enum.IsDefined(typeof(TEnum), arg))
 			{
 				throw new JikanValidationException("Enum value must be valid", argumentName);
+			}
+		}
+		
+		internal static void IsLetter(char character, string argumentName)
+		{
+			if (!Char.IsLetter(character))
+			{
+				throw new JikanValidationException("Character must be a letter", argumentName);
 			}
 		}
 	}

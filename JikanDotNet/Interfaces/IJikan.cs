@@ -349,20 +349,6 @@ namespace JikanDotNet
 		/// <param name="id">MAL id of person.</param>
 		/// <returns>Person with given MAL id.</returns>
 		Task<BaseJikanResponse<Person>> GetPersonAsync(long id);
-
-		/// <summary>
-		/// Returns collection of people.
-		/// </summary>
-		/// <returns>Collection of people.</returns>
-		Task<PaginatedJikanResponse<ICollection<Person>>> GetPeopleAsync();
-		
-		/// <summary>
-		/// Returns collection of people.
-		/// </summary>
-		/// <param name="page">Index of the page.</param>
-		/// <param name="pageSize">Size of the page (25 is the max).</param>
-		/// <returns>Collection of people.</returns>
-		Task<PaginatedJikanResponse<ICollection<Person>>> GetPeopleAsync(int page, int pageSize);
 		
 		/// <summary>
 		/// Returns animeography of person with given MAL id.
@@ -976,21 +962,20 @@ namespace JikanDotNet
 		/// <param name="searchConfig">Additional configuration for advanced search.</param>
 		/// <returns>List of result related to search query.</returns>
 		Task<MangaSearchResult> SearchManga(string query, int page, MangaSearchConfig searchConfig);
-
+		
 		/// <summary>
 		/// Returns list of results related to search.
 		/// </summary>
 		/// <param name="query">Search query.</param>
 		/// <returns>List of result related to search query.</returns>
-		Task<PersonSearchResult> SearchPerson(string query);
+		Task<PaginatedJikanResponse<ICollection<Person>>> SearchPersonAsync(string query);
 
 		/// <summary>
 		/// Returns list of results related to search.
 		/// </summary>
-		/// <param name="query">Search query.</param>
-		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <param name="searchConfig">Additional configuration for advanced search.</param>
 		/// <returns>List of result related to search query.</returns>
-		Task<PersonSearchResult> SearchPerson(string query, int page);
+		Task<PaginatedJikanResponse<ICollection<Person>>> SearchPersonAsync(PersonSearchConfig searchConfig);
 
 		/// <summary>
 		/// Returns list of results related to search.
