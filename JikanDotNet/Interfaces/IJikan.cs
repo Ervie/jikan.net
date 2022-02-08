@@ -296,20 +296,6 @@ namespace JikanDotNet
 		/// <param name="id">MAL id of character.</param>
 		/// <returns>Character with given MAL id.</returns>
 		Task<BaseJikanResponse<Character>> GetCharacterAsync(long id);
-		
-		/// <summary>
-		/// Returns collection of characters.
-		/// </summary>
-		/// <returns>Collection of characters.</returns>
-		Task<PaginatedJikanResponse<ICollection<Character>>> GetCharactersAsync();
-		
-		/// <summary>
-		/// Returns collection of characters.
-		/// </summary>
-		/// <param name="page">Index of the page.</param>
-		/// <param name="pageSize">Size of the page (25 is the max).</param>
-		/// <returns>Collection of characters.</returns>
-		Task<PaginatedJikanResponse<ICollection<Character>>> GetCharactersAsync(int page, int pageSize);
 
 		/// <summary>
 		/// Returns return animeography of character with given MAL id.
@@ -982,15 +968,14 @@ namespace JikanDotNet
 		/// </summary>
 		/// <param name="query">Search query.</param>
 		/// <returns>List of result related to search query.</returns>
-		Task<CharacterSearchResult> SearchCharacter(string query);
+		Task<PaginatedJikanResponse<ICollection<Character>>> SearchCharacterAsync(string query);
 
 		/// <summary>
 		/// Returns list of results related to search.
 		/// </summary>
-		/// <param name="query">Search query.</param>
-		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
+		/// <param name="searchConfig">Additional configuration for advanced search.</param>
 		/// <returns>List of result related to search query.</returns>
-		Task<CharacterSearchResult> SearchCharacter(string query, int page);
+		Task<PaginatedJikanResponse<ICollection<Character>>> SearchCharacterAsync(CharacterSearchConfig searchConfig);
 
 		#endregion Search requests
 	}

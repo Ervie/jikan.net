@@ -9,9 +9,9 @@ namespace JikanDotNet;
 /// <summary>
 /// Model class of search configuration for advanced person search.
 /// </summary>
-public class PersonSearchConfig: ISearchConfig
+public class CharacterSearchConfig: ISearchConfig
 {
-	/// <summary>
+    /// <summary>
 	/// Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)
 	/// </summary>
 	public int? Page { get; set; }
@@ -34,7 +34,7 @@ public class PersonSearchConfig: ISearchConfig
 	/// <summary>
 	/// Select order by property.
 	/// </summary>
-	public PersonSearchOrderBy OrderBy { get; set; }
+	public CharacterSearchOrderBy OrderBy { get; set; }
 
 	/// <summary>
 	/// Define sort direction for <see cref="OrderBy">OrderBy</see> property.
@@ -73,7 +73,7 @@ public class PersonSearchConfig: ISearchConfig
 	        builder.Append($"letter={Letter.Value}&");
         }
     	
-    	if (OrderBy != PersonSearchOrderBy.NoSorting)
+    	if (OrderBy != CharacterSearchOrderBy.NoSorting)
     	{
     		Guard.IsValidEnum(OrderBy, nameof(OrderBy));
     		Guard.IsValidEnum(SortDirection, nameof(SortDirection));

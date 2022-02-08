@@ -5,7 +5,7 @@ namespace JikanDotNet;
 /// <summary>
 /// Properties by which anime search results can be ordered.
 /// </summary>
-public enum PersonSearchOrderBy
+public enum CharacterSearchOrderBy
 {
     /// <summary>
     /// Does not order results.
@@ -24,12 +24,6 @@ public enum PersonSearchOrderBy
     /// </summary>
     [Description("name")]
     Name,
-
-    /// <summary>
-    /// Orders results by birthday.
-    /// </summary>
-    [Description("birthday")]
-    Birthday,
 
     /// <summary>
     /// Orders results by favorites.

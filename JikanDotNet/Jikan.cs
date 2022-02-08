@@ -305,25 +305,6 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.Characters, id.ToString() };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<Character>>(endpointParts);
 		}
-		
-		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<Character>>> GetCharactersAsync()
-		{
-			var endpointParts = new[] { JikanEndpointConsts.Characters };
-			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Character>>>(endpointParts);
-		}
-		
-		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<Character>>> GetCharactersAsync(int page, int pageSize)
-		{
-			Guard.IsGreaterThanZero(page, nameof(page));
-			Guard.IsGreaterThanZero(pageSize, nameof(pageSize));
-			Guard.IsLesserOrEqualThan(pageSize,ParameterConsts.MaximumPageSize, nameof(pageSize));
-			
-			var queryParams = $"?page={page}&limit={pageSize}";
-			var endpointParts = new[] { JikanEndpointConsts.Characters + queryParams};
-			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Character>>>(endpointParts);
-		}
 
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<ICollection<CharacterAnimeographyEntry>>> GetCharacterAnimeAsync(long id)
@@ -1240,8 +1221,6 @@ namespace JikanDotNet
 
 		#endregion SearchManga
 
-		#region SearchPerson
-
 		/// <inheritdoc />
 		public Task<PaginatedJikanResponse<ICollection<Person>>> SearchPersonAsync(string query)
 			=> SearchPersonAsync(new PersonSearchConfig {Query = query});
@@ -1253,30 +1232,16 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Person>>>(endpointParts);
 		}
 
-		#endregion SearchPerson
-
-		#region SearchCharacter
-
 		/// <inheritdoc />
-		public async Task<CharacterSearchResult> SearchCharacter(string query)
-		{
-			Guard.IsLongerThan2Characters(query, nameof(query));
-			query = string.Concat(JikanEndpointConsts.Character, "?q=", query.Replace(' ', '+'));
-			var endpointParts = new[] { JikanEndpointConsts.Search, query };
-			return await ExecuteGetRequestAsync<CharacterSearchResult>(endpointParts);
-		}
-
-		/// <inheritdoc />
-		public async Task<CharacterSearchResult> SearchCharacter(string query, int page)
-		{
-			Guard.IsLongerThan2Characters(query, nameof(query));
-			Guard.IsGreaterThanZero(page, nameof(page));
-			query = string.Concat(JikanEndpointConsts.Character, "/", page.ToString(), "?q=", query.Replace(' ', '+'));
-			var endpointParts = new[] { JikanEndpointConsts.Search, query };
-			return await ExecuteGetRequestAsync<CharacterSearchResult>(endpointParts);
-		}
+		public Task<PaginatedJikanResponse<ICollection<Character>>> SearchCharacterAsync(string query)
+			=> SearchCharacterAsync(new CharacterSearchConfig {Query = query});
 		
-		#endregion SearchCharacter
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<Character>>> SearchCharacterAsync(CharacterSearchConfig searchConfig)
+		{
+			var endpointParts = new[] { JikanEndpointConsts.Characters + searchConfig.ConfigToString()};
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Character>>>(endpointParts);
+		}
 
 		#endregion Search methods
 
