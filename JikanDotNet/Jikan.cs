@@ -780,16 +780,6 @@ namespace JikanDotNet
 		#endregion Club methods
 
 		#region User methods
-	
-		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<UserMetadata>>> GetUsersAsync(int page = 20)
-		{
-			Guard.IsGreaterThanZero(page, nameof(page));
-			
-			var queryParams = $"?page={page}";
-			var endpointParts = new[] { JikanEndpointConsts.Users + queryParams};
-			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<UserMetadata>>>(endpointParts);
-		}
 
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<UserProfile>> GetUserProfileAsync(string username)
@@ -1241,6 +1231,16 @@ namespace JikanDotNet
 		{
 			var endpointParts = new[] { JikanEndpointConsts.Characters + searchConfig.ConfigToString()};
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Character>>>(endpointParts);
+		}
+	
+		/// <inheritdoc />
+		public  Task<PaginatedJikanResponse<ICollection<UserMetadata>>> SearchUserAsync(string query) => SearchUserAsync(new UserSearchConfig {Query = query});
+
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<UserMetadata>>> SearchUserAsync(UserSearchConfig searchConfig)
+		{
+			var endpointParts = new[] {JikanEndpointConsts.Users + searchConfig.ConfigToString()};
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<UserMetadata>>>(endpointParts);
 		}
 
 		#endregion Search methods

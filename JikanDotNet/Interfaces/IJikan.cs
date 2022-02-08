@@ -590,13 +590,6 @@ namespace JikanDotNet
 		#region User requests
 		
 		/// <summary>
-		/// Returns collection of users.
-		/// </summary>
-		/// <param name="page">Index of the page. Size page = 20</param>
-		/// <returns>Collection of users.</returns>
-		Task<PaginatedJikanResponse<ICollection<UserMetadata>>> GetUsersAsync(int page);
-		
-		/// <summary>
 		/// Returns information about user's profile with given username.
 		/// </summary>
 		/// <param name="username">Username.</param>
@@ -976,6 +969,20 @@ namespace JikanDotNet
 		/// <param name="searchConfig">Additional configuration for advanced search.</param>
 		/// <returns>List of result related to search query.</returns>
 		Task<PaginatedJikanResponse<ICollection<Character>>> SearchCharacterAsync(CharacterSearchConfig searchConfig);
+		
+		/// <summary>
+		/// Returns list of results related to search.
+		/// </summary>
+		/// <param name="query">Search query.</param>
+		/// <returns>List of result related to search query.</returns>
+		Task<PaginatedJikanResponse<ICollection<UserMetadata>>> SearchUserAsync(string query);
+
+		/// <summary>
+		/// Returns list of results related to search.
+		/// </summary>
+		/// <param name="searchConfig">Additional configuration for advanced search.</param>
+		/// <returns>List of result related to search query.</returns>
+		Task<PaginatedJikanResponse<ICollection<UserMetadata>>> SearchUserAsync(UserSearchConfig searchConfig);
 
 		#endregion Search requests
 	}
