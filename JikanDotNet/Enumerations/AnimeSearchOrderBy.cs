@@ -18,19 +18,6 @@ namespace JikanDotNet
 		/// </summary>
 		[Description("title")]
 		Title,
-
-		/// <summary>
-		/// Orders results by start date.
-		/// </summary>
-		[Description("start_date")]
-		StartDate,
-
-		/// <summary>
-		/// Orders results by end date.
-		/// </summary>
-		[Description("end_date")]
-		EndDate,
-
 		/// <summary>
 		/// Orders results by score.
 		/// </summary>
@@ -50,9 +37,21 @@ namespace JikanDotNet
 		Members,
 
 		/// <summary>
-		/// Orders results by id.
+		/// Orders results by favorites.
 		/// </summary>
-		[Description("id")]
+		[Description("favorites")]
+		Favorites,
+
+		/// <summary>
+		/// Orders results by popularity.
+		/// </summary>
+		[Description("popularity")]
+		Popularity,
+
+		/// <summary>
+		/// Orders results by MalId.
+		/// </summary>
+		[Description("mal_id")]
 		Id,
 
 		/// <summary>
@@ -65,6 +64,18 @@ namespace JikanDotNet
 		/// Orders results by rating.
 		/// </summary>
 		[Description("rating")]
-		Rating
+		Rating,
+		
+		/// <summary>
+		/// Orders results by start date.
+		/// </summary>
+		[Description("start_date")]
+		StartDate,
+
+		/// <summary>
+		/// Orders results by end date.
+		/// </summary>
+		[Description("end_date")]
+		EndDate
 	}
 }

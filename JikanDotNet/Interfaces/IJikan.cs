@@ -16,20 +16,6 @@ namespace JikanDotNet
 		/// <param name="id">MAL id of anime.</param>
 		/// <returns>Anime with given MAL id.</returns>
 		Task<BaseJikanResponse<Anime>> GetAnimeAsync(long id);
-
-		/// <summary>
-		/// Returns collection of anime.
-		/// </summary>
-		/// <returns>Collection of anime.</returns>
-		Task<PaginatedJikanResponse<ICollection<Anime>>> GetAnimeAsync();
-		
-		/// <summary>
-		/// Returns collection of anime.
-		/// </summary>
-		/// <param name="page">Index of the page.</param>
-		/// <param name="pageSize">Size of the page (25 is the max).</param>
-		/// <returns>Collection of anime.</returns>
-		Task<PaginatedJikanResponse<ICollection<Anime>>> GetAnimeAsync(int page, int pageSize);
 		
 		/// <summary>
 		/// Returns collections of characters of anime with given MAL id.
@@ -853,48 +839,15 @@ namespace JikanDotNet
 		/// </summary>
 		/// <param name="query">Search query.</param>
 		/// <returns>List of result related to search query.</returns>
-		Task<AnimeSearchResult> SearchAnime(string query);
-
-		/// <summary>
-		/// Returns list of results related to search.
-		/// </summary>
-		/// <param name="query">Search query.</param>
-		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
-		/// <returns>List of result related to search query.</returns>
-		Task<AnimeSearchResult> SearchAnime(string query, int page);
-
-		/// <summary>
-		/// Returns list of results related to search.
-		/// </summary>
-		/// <param name="query">Search query.</param>
-		/// <param name="searchConfig">Additional configuration for advanced search.</param>
-		/// <returns>List of result related to search query.</returns>
-		Task<AnimeSearchResult> SearchAnime(string query, AnimeSearchConfig searchConfig);
-
+		Task<PaginatedJikanResponse<ICollection<Anime>>> SearchAnimeAsync(string query);
+		
 		/// <summary>
 		/// Returns list of results related to search.
 		/// </summary>
 		/// <param name="searchConfig">Additional configuration for advanced search.</param>
 		/// <returns>List of result related to search query.</returns>
-		Task<AnimeSearchResult> SearchAnime(AnimeSearchConfig searchConfig);
-
-		/// <summary>
-		/// Returns list of results related to search.
-		/// </summary>
-		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
-		/// <param name="searchConfig">Additional configuration for advanced search.</param>
-		/// <returns>List of result related to search query.</returns>
-		Task<AnimeSearchResult> SearchAnime(AnimeSearchConfig searchConfig, int page);
-
-		/// <summary>
-		/// Returns list of results related to search.
-		/// </summary>
-		/// <param name="query">Search query.</param>
-		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
-		/// <param name="searchConfig">Additional configuration for advanced search.</param>
-		/// <returns>List of result related to search query.</returns>
-		Task<AnimeSearchResult> SearchAnime(string query, int page, AnimeSearchConfig searchConfig);
-
+		Task<PaginatedJikanResponse<ICollection<Anime>>> SearchAnimeAsync(AnimeSearchConfig searchConfig);
+		
 		/// <summary>
 		/// Returns list of results related to search.
 		/// </summary>

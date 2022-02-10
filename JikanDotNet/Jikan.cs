@@ -102,25 +102,6 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.Anime, id.ToString() };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<Anime>>(endpointParts);
 		}
-		
-		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetAnimeAsync()
-		{
-			var endpointParts = new[] { JikanEndpointConsts.Anime };
-			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
-		}
-		
-		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetAnimeAsync(int page, int pageSize)
-		{
-			Guard.IsGreaterThanZero(page, nameof(page));
-			Guard.IsGreaterThanZero(pageSize, nameof(pageSize));
-			Guard.IsLesserOrEqualThan(pageSize,ParameterConsts.MaximumPageSize, nameof(pageSize));
-			
-			var queryParams = $"?page={page}&limit={pageSize}";
-			var endpointParts = new[] { JikanEndpointConsts.Anime + queryParams};
-			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
-		}
 
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<ICollection<AnimeCharacter>>> GetAnimeCharactersAsync(long id)
@@ -1084,69 +1065,21 @@ namespace JikanDotNet
 		#endregion
 
 		#region Search methods
-
-		#region SearchAnime
+		
+		
+		
+		/// <inheritdoc />
+		public Task<PaginatedJikanResponse<ICollection<Anime>>> SearchAnimeAsync(string query)
+			=> SearchAnimeAsync(new AnimeSearchConfig {Query = query});
+		
 
 		/// <inheritdoc />
-		public async Task<AnimeSearchResult> SearchAnime(string query)
-		{
-			Guard.IsLongerThan2Characters(query, nameof(query));
-			query = string.Concat(JikanEndpointConsts.Anime, "?q=", query.Replace(' ', '+'));
-			var endpointParts = new[] { JikanEndpointConsts.Search, query };
-			return await ExecuteGetRequestAsync<AnimeSearchResult>(endpointParts);
-		}
-
-		/// <inheritdoc />
-		public async Task<AnimeSearchResult> SearchAnime(string query, int page)
-		{
-			Guard.IsLongerThan2Characters(query, nameof(query));
-			Guard.IsGreaterThanZero(page, nameof(page));
-			query = string.Concat(JikanEndpointConsts.Anime, "/", page.ToString(), "?q=", query.Replace(' ', '+'));
-			var endpointParts = new[] { JikanEndpointConsts.Search, query };
-			return await ExecuteGetRequestAsync<AnimeSearchResult>(endpointParts);
-		}
-
-		/// <inheritdoc />
-		public async Task<AnimeSearchResult> SearchAnime(string query, AnimeSearchConfig searchConfig)
-		{
-			Guard.IsLongerThan2Characters(query, nameof(query));
-			Guard.IsNotNull(searchConfig, nameof(searchConfig));
-			query = string.Concat(JikanEndpointConsts.Anime, "?q=", query.Replace(' ', '+'), "&", searchConfig.ConfigToString());
-			var endpointParts = new[] { JikanEndpointConsts.Search, query };
-			return await ExecuteGetRequestAsync<AnimeSearchResult>(endpointParts);
-		}
-
-		/// <inheritdoc />
-		public async Task<AnimeSearchResult> SearchAnime(AnimeSearchConfig searchConfig)
+		public async Task<PaginatedJikanResponse<ICollection<Anime>>> SearchAnimeAsync(AnimeSearchConfig searchConfig)
 		{
 			Guard.IsNotNull(searchConfig, nameof(searchConfig));
-			var query = string.Concat(JikanEndpointConsts.Anime, "?", searchConfig.ConfigToString());
-			var endpointParts = new[] { JikanEndpointConsts.Search, query };
-			return await ExecuteGetRequestAsync<AnimeSearchResult>(endpointParts);
+			var endpointParts = new[] { JikanEndpointConsts.Anime + searchConfig.ConfigToString()};
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
 		}
-
-		/// <inheritdoc />
-		public async Task<AnimeSearchResult> SearchAnime(AnimeSearchConfig searchConfig, int page)
-		{
-			Guard.IsNotNull(searchConfig, nameof(searchConfig));
-			Guard.IsGreaterThanZero(page, nameof(page));
-			var query = string.Concat(JikanEndpointConsts.Anime, "/", page.ToString(), "?", searchConfig.ConfigToString());
-			var endpointParts = new[] { JikanEndpointConsts.Search, query };
-			return await ExecuteGetRequestAsync<AnimeSearchResult>(endpointParts);
-		}
-
-		/// <inheritdoc />
-		public async Task<AnimeSearchResult> SearchAnime(string query, int page, AnimeSearchConfig searchConfig)
-		{
-			Guard.IsLongerThan2Characters(query, nameof(query));
-			Guard.IsGreaterThanZero(page, nameof(page));
-			Guard.IsNotNull(searchConfig, nameof(searchConfig));
-			query = string.Concat(JikanEndpointConsts.Anime, "/", page.ToString(), "?q=", query.Replace(' ', '+'), "&", searchConfig.ConfigToString());
-			var endpointParts = new[] { JikanEndpointConsts.Search, query };
-			return await ExecuteGetRequestAsync<AnimeSearchResult>(endpointParts);
-		}
-
-		#endregion SearchAnime
 
 		#region SearchManga
 
