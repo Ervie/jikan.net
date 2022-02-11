@@ -171,12 +171,12 @@ namespace JikanDotNet
 		}
 
 		/// <inheritdoc />
-		public async Task<BaseJikanResponse<ICollection<ForumTopic>>> GetAnimeForumTopicsAsync(long id, ForumTopicType type = ForumTopicType.All)
+		public async Task<BaseJikanResponse<ICollection<ForumTopic>>> GetAnimeForumTopicsAsync(long id, ForumTopicType type)
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
 			Guard.IsValidEnum(type, nameof(type));
 
-			var queryParams = $"?topic={type.GetDescription()}";
+			var queryParams = $"?filter={type.GetDescription()}";
 			var endpointParts = new[] { JikanEndpointConsts.Anime, id.ToString(), JikanEndpointConsts.Forum + queryParams };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<ForumTopic>>>(endpointParts);
 		}
