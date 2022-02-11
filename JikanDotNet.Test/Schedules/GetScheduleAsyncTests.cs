@@ -37,16 +37,15 @@ namespace JikanDotNet.Tests.Schedules
 
 			// Then
 			using var _ = new AssertionScope();
-			currentSeason.Data.Select(x => x.Title).Should().Contain("One Piece");
-			currentSeason.Data.Select(x => x.Title).Should().Contain("Boruto: Naruto Next Generations");
-			currentSeason.Data.Select(x => x.Title).Should().Contain("Detective Conan");
+			currentSeason.Data.Select(x => x.Title).Should().Contain("Sasaki to Miyano");
+			currentSeason.Data.Select(x => x.Title).Should().Contain("Slow Loop");
 		}
 
 		[Theory]
 		[InlineData(int.MinValue)]
 		[InlineData(-1)]
 		[InlineData(0)]
-		public async Task GetAnimeReviewsAsync_WithInvalidPage_ShouldThrowValidationException(int page)
+		public async Task GetScheduleAsync_WithInvalidPage_ShouldThrowValidationException(int page)
 		{
 			// When
 			var func = _jikan.Awaiting(x => x.GetScheduleAsync(page));
@@ -65,53 +64,37 @@ namespace JikanDotNet.Tests.Schedules
 			currentSeason.Data.Should().BeEmpty();
 		}
 
-		// TODO: Uncomment when api is fixed
-		//[Fact]
-		//public async Task GetScheduleAsync_Monday_ShouldParseMondaySchedule()
-		//{
-		//	// When
-		//	var currentSeason = await _jikan.GetScheduleAsync(ScheduledDay.Monday);
+		[Fact]
+		public async Task GetScheduleAsync_Monday_ShouldParseMondaySchedule()
+		{
+			// When
+			var currentSeason = await _jikan.GetScheduleAsync(ScheduledDay.Monday);
 
-		//	// Then
-		//	var mondayScheduleTitles = currentSeason.Data.Select(x => x.Title);
-		//	using (new AssertionScope())
-		//	{
-		//		currentSeason.Pagination.HasNextPage.Should().BeTrue();
-		//		currentSeason.Pagination.LastVisiblePage.Should().BeGreaterOrEqualTo(3);
-		//		mondayScheduleTitles.Should().Contain("Golden Kamuy 3rd Season");
-		//		mondayScheduleTitles.Should().Contain("Kingdom 3rd Season");
-		//	}
-		//}
+			// Then
+			var mondayScheduleTitles = currentSeason.Data.Select(x => x.Title);
+			using (new AssertionScope())
+			{
+				currentSeason.Pagination.HasNextPage.Should().BeFalse();
+				currentSeason.Pagination.LastVisiblePage.Should().Be(1);
+				mondayScheduleTitles.Should().Contain("Shingeki no Kyojin: The Final Season Part 2");
+				mondayScheduleTitles.Should().Contain("Tribe Nine");
+			}
+		}
 
-		//[Fact]
-		//public async Task GetScheduleAsync_Friday_ShouldParseFridaySchedule()
-		//{
-		//	// When
-		//	var currentSeason = await _jikan.GetScheduleAsync(ScheduledDay.Friday);
+		[Fact]
+		public async Task GetScheduleAsync_Friday_ShouldParseFridaySchedule()
+		{
+			// When
+			var currentSeason = await _jikan.GetScheduleAsync(ScheduledDay.Friday);
 
-		//	// Then
-		//	var fridayScheduleTitles = currentSeason.Data.Select(x => x.Title);
-		//	using (new AssertionScope())
-		//	{
-		//		fridayScheduleTitles.Should().Contain("Adachi to Shimamura");
-		//		fridayScheduleTitles.Should().Contain("Crayon Shin-chan");
-		//	}
-		//}
-
-		//[Fact]
-		//public async Task GetScheduleAsync_UnknownSchedule_ShouldParseUnknownSchedule()
-		//{
-		//	// When
-		//	var currentSeason = await _jikan.GetScheduleAsync(ScheduledDay.Unknown);
-
-		//	// Then
-		//	var unknownScheduleTitles = currentSeason.Data.Select(x => x.Title);
-		//	using (new AssertionScope())
-		//	{
-		//		unknownScheduleTitles.Should().Contain("Yodel no Onna");
-		//		unknownScheduleTitles.Should().Contain("Jinxiu Shenzhou Zhi Qi You Ji");
-		//	}
-		//}
+			// Then
+			var fridayScheduleTitles = currentSeason.Data.Select(x => x.Title);
+			using (new AssertionScope())
+			{
+				fridayScheduleTitles.Should().Contain("Platinum End");
+				fridayScheduleTitles.Should().Contain("Crayon Shin-chan");
+			}
+		}
 
 		[Theory]
 		[InlineData((ScheduledDay)int.MaxValue)]

@@ -528,7 +528,7 @@ namespace JikanDotNet
 		public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetScheduleAsync(ScheduledDay scheduledDay)
 		{
 			Guard.IsValidEnum(scheduledDay, nameof(scheduledDay));
-			var queryParams = $"?topic={scheduledDay.GetDescription()}";
+			var queryParams = $"?filter={scheduledDay.GetDescription()}";
 			var endpointParts = new[] { JikanEndpointConsts.Schedules + queryParams };
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
 		}
