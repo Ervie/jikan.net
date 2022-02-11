@@ -7,9 +7,7 @@
 	{
 		internal const string Anime = "anime";
 		internal const string Manga = "manga";
-		internal const string Character = "character";
 		internal const string Characters = "characters";
-		internal const string Person = "person";
 		internal const string People = "people";
 		internal const string Seasons = "seasons";
 		internal const string Schedules = "schedules";
@@ -19,7 +17,6 @@
 		internal const string Magazines = "magazines";
 		internal const string Users = "users";
 		internal const string Clubs = "clubs";
-		internal const string Search = "search";
 		internal const string Reviews = "reviews";
 		internal const string Episodes = "episodes";
 		internal const string Staff = "staff";
@@ -46,5 +43,6 @@
 		internal const string Watch = "watch";
 		internal const string Popular  = "popular";
 		internal const string Promos = "promos";
+		internal const string External = "external";
 	}
 }

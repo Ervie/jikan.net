@@ -274,6 +274,14 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.Anime, id.ToString(), JikanEndpointConsts.Themes };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<AnimeThemes>>(endpointParts);
 		}
+		
+		/// <inheritdoc />
+		public async Task<BaseJikanResponse<ICollection<ExternalLink>>> GetAnimeExternalLinksAsync(long id)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			var endpointParts = new[] { JikanEndpointConsts.Anime, id.ToString(), JikanEndpointConsts.External };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<ExternalLink>>>(endpointParts);
+		}
 
 		#endregion Anime methods
 
@@ -431,6 +439,14 @@ namespace JikanDotNet
 			Guard.IsGreaterThanZero(id, nameof(id));
 			var endpointParts = new[] { JikanEndpointConsts.Manga, id.ToString(), JikanEndpointConsts.Relations };
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<RelatedEntry>>>(endpointParts);
+		}
+		
+		/// <inheritdoc />
+		public async Task<BaseJikanResponse<ICollection<ExternalLink>>> GetMangaExternalLinksAsync(long id)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			var endpointParts = new[] { JikanEndpointConsts.Manga, id.ToString(), JikanEndpointConsts.External };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<ExternalLink>>>(endpointParts);
 		}
 
 		#endregion Manga methods

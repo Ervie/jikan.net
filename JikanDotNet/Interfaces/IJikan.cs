@@ -161,6 +161,13 @@ namespace JikanDotNet
 		/// <returns>Collection of anime openings and endings.</returns>
 		Task<BaseJikanResponse<AnimeThemes>> GetAnimeThemesAsync(long id);
 		
+		/// <summary>
+		/// Returns collection of external services links related to anime.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <returns>Collection of external services links related to anime.</returns>
+		Task<BaseJikanResponse<ICollection<ExternalLink>>> GetAnimeExternalLinksAsync(long id);
+		
 		#endregion Anime requests
 
 		#region Manga requests
@@ -257,6 +264,13 @@ namespace JikanDotNet
 		/// <param name="id">MAL id of manga.</param>
 		/// <returns>Collection of manga related entries.</returns>
 		Task<PaginatedJikanResponse<ICollection<RelatedEntry>>> GetMangaRelationsAsync(long id);
+		
+		/// <summary>
+		/// Returns collection of external services links related to manga.
+		/// </summary>
+		/// <param name="id">MAL id of manga.</param>
+		/// <returns>Collection of external services links related to anime.</returns>
+		Task<BaseJikanResponse<ICollection<ExternalLink>>> GetMangaExternalLinksAsync(long id);
 
 		#endregion Manga requests
 
