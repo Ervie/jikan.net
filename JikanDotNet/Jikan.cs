@@ -788,7 +788,8 @@ namespace JikanDotNet
 		{
 			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
 			Guard.IsValidEnum(historyExtension, nameof(historyExtension));
-			var endpointParts = new[] { JikanEndpointConsts.Users, username, JikanEndpointConsts.History, historyExtension.GetDescription() };
+			var queryParams = $"?filter={historyExtension.GetDescription()}";
+			var endpointParts = new[] { JikanEndpointConsts.Users, username, JikanEndpointConsts.History + queryParams };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<HistoryEntry>>>(endpointParts);
 		}
 
