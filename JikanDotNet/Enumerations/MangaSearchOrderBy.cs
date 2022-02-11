@@ -5,7 +5,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Properties by which manga search results can be ordered.
 	/// </summary>
-	public enum MangaSearchSortable
+	public enum MangaSearchOrderBy
 	{
 		/// <summary>
 		/// Does not order results.
@@ -36,6 +36,12 @@ namespace JikanDotNet
 		/// </summary>
 		[Description("score")]
 		Score,
+		
+		/// <summary>
+		/// Orders results by count of scores.
+		/// </summary>
+		[Description("scored_by")]
+		ScoredBy,
 
 		/// <summary>
 		/// Orders results by anime type.
@@ -52,8 +58,8 @@ namespace JikanDotNet
 		/// <summary>
 		/// Orders results by id.
 		/// </summary>
-		[Description("id")]
-		Id,
+		[Description("mal_id")]
+		MalId,
 
 		/// <summary>
 		/// Orders results by number of chapters.
@@ -65,6 +71,24 @@ namespace JikanDotNet
 		/// Orders results by number of volumes.
 		/// </summary>
 		[Description("volumes")]
-		Volumes
+		Volumes,
+
+		/// <summary>
+		/// Orders results by rank.
+		/// </summary>
+		[Description("rank")]
+		Rank,
+		
+		/// <summary>
+		/// Orders results by popularity.
+		/// </summary>
+		[Description("popularity")]
+		Popularity,
+
+		/// <summary>
+		/// Orders results by favorites.
+		/// </summary>
+		[Description("favorites")]
+		Favorites
 	}
 }

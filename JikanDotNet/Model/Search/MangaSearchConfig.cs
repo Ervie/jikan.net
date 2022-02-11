@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using JikanDotNet.Consts;
 
 namespace JikanDotNet
 {
@@ -14,39 +15,49 @@ namespace JikanDotNet
 	public class MangaSearchConfig : ISearchConfig
 	{
 		/// <summary>
-		/// Manga type of searched result;
+		/// Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)
 		/// </summary>
-		public MangaType Type { get; set; }
+		public int? Page { get; set; }
+	
+		/// <summary>
+		/// Size of the page (25 is the max).
+		/// </summary>
+		public int? PageSize { get; set; }
+	
+		/// <summary>
+		/// Search query.
+		/// </summary>
+		public string Query { get; set; }
+	
+		/// <summary>
+		/// Return entries starting with the given letter.
+		/// </summary>
+		public char? Letter { get; set; }
+		
+		/// <summary>
+		/// Manga type of searched result.
+		/// </summary>
+		public MangaType Type { get; set; } = MangaType.EveryType;
 
 		/// <summary>
 		/// Minimum score results (1-10).
 		/// </summary>
-		public int? Score { get; set; }
-
+		public int? MinimumScore { get; set; }
+		
 		/// <summary>
-		/// Age rating.
+		/// Maximum score results (1-10).
 		/// </summary>
-		public AnimeAgeRating Rating { get; set; } = AnimeAgeRating.EveryRating;
+		public int? MaximumScore { get; set; }
 
 		/// <summary>
 		/// Current status.
 		/// </summary>
-		public AiringStatus Status { get; set; }
-
-		/// <summary>
-		/// Filter start date of results.
-		/// </summary>
-		public DateTime? StartDate { get; set; }
-
-		/// <summary>
-		/// Filter end date of results.
-		/// </summary>
-		public DateTime? EndDate { get; set; }
+		public PublishingStatus Status { get; set; }
 
 		/// <summary>
 		/// Select order property.
 		/// </summary>
-		public MangaSearchSortable OrderBy { get; set; }
+		public MangaSearchOrderBy OrderBy { get; set; }
 
 		/// <summary>
 		/// Define sort direction for <see cref="OrderBy">OrderBy</see> property.
@@ -54,90 +65,120 @@ namespace JikanDotNet
 		public SortDirection SortDirection { get; set; }
 
 		/// <summary>
-		/// Genres to search/exclude.
+		/// Genres to include.
 		/// </summary>
 		public ICollection<MangaGenreSearch> Genres { get; set; } = new List<MangaGenreSearch>();
+		
+		/// <summary>
+		/// Genres to exclude.
+		/// </summary>
+		public ICollection<MangaGenreSearch> ExcludedGenres { get; set; } = new List<MangaGenreSearch>();
 
 		/// <summary>
 		/// Filter by magazine id.
 		/// </summary>
-		public long MagazineId { get; set; }
-
+		public ICollection<long> MagazineIds { get; set; } = new List<long>();
+		
 		/// <summary>
-		/// If true, search manga of genres included in <see cref="Genres">Genres</see>. If false, exclude genres included from <see cref="Genres">Genres</see> from search result. />
+		/// Should only search for sfw title. Filter out adult entries.
 		/// </summary>
-		public bool GenreIncluded { get; set; } = true;
-
+		public bool Sfw { get; set; } = true;
+		
 		/// <summary>
 		/// Create query from current parameters for search request.
 		/// </summary>
 		/// <returns>Query from current parameters for search request</returns>
 		public string ConfigToString()
 		{
-			var builder = new StringBuilder();
-
+			var builder = new StringBuilder().Append('?');
+			
+			if (Page.HasValue)
+			{
+				Guard.IsGreaterThanZero(Page.Value, nameof(Page.Value));
+				builder.Append($"page={Page.Value}&");
+			}
+        
+			if (PageSize.HasValue)
+			{
+				Guard.IsGreaterThanZero(PageSize.Value, nameof(PageSize.Value));
+				Guard.IsLesserOrEqualThan(PageSize.Value,ParameterConsts.MaximumPageSize, nameof(PageSize.Value));
+				builder.Append($"limit={PageSize.Value}&");
+			}
+        
+			if (!string.IsNullOrWhiteSpace(Query))
+			{
+				builder.Append($"q={Query}&");
+			}
+        
+			if (Letter.HasValue)
+			{
+				Guard.IsLetter(Letter.Value, nameof(Letter.Value));
+				builder.Append($"letter={Letter.Value}&");
+			}
+			
 			if (Type != MangaType.EveryType)
 			{
 				Guard.IsValidEnum(Type, nameof(Type));
-				builder.Append($"&type={Type.GetDescription()}");
+				builder.Append($"type={Type.GetDescription()}&");
 			}
 
-			if (Score.HasValue)
+			if (MinimumScore.HasValue)
 			{
-				builder.Append($"&score={Score}");
+				builder.Append($"min_score={MinimumScore}&");
 			}
-
-			if (Rating != AnimeAgeRating.EveryRating)
+			
+			if (MaximumScore.HasValue)
 			{
-				Guard.IsValidEnum(Rating, nameof(Rating));
-				builder.Append($"&rated={Rating.GetDescription()}");
+				builder.Append($"max_score={MaximumScore}&");
 			}
 
-			if (Status != AiringStatus.EveryStatus)
+			if (Status != PublishingStatus.EveryStatus)
 			{
 				Guard.IsValidEnum(Status, nameof(Status));
-				builder.Append($"&status={Status.GetDescription()}");
+				builder.Append($"status={Status.GetDescription()}&");
 			}
 
-			if (StartDate.HasValue)
+			if (Genres.Count > 0 )
 			{
-				builder.Append($"&start_date={StartDate.Value:yyyy-MM-dd}");
-			}
-
-			if (EndDate.HasValue)
-			{
-				builder.Append($"&end_date={EndDate.Value:yyyy-MM-dd}");
-			}
-
-			if (Genres.Count > 0)
-			{
-				var genresId = Genres.Select(genreSearch =>
+				var genresIds = Genres.Select(genreSearch =>
 				{
 					Guard.IsValidEnum(genreSearch, nameof(genreSearch));
 					return genreSearch.GetDescription();
 				}).ToArray();
 
-				builder.Append($"&genre={string.Join(",", genresId)}");
+				builder.Append($"genres={string.Join(",", genresIds)}&");
 			}
-
-			if (!GenreIncluded)
+			
+			
+			if (ExcludedGenres.Count > 0 )
 			{
-				builder.Append($"&genre_exclude=0$");
+				var genresIds = ExcludedGenres.Select(genreSearch =>
+				{
+					Guard.IsValidEnum(genreSearch, nameof(genreSearch));
+					return genreSearch.GetDescription();
+				}).ToArray();
+
+				builder.Append($"excluded_genres={string.Join(",", genresIds)}&");
 			}
 
-			if (OrderBy != MangaSearchSortable.NoSorting)
+			if (OrderBy != MangaSearchOrderBy.NoSorting)
 			{
 				Guard.IsValidEnum(OrderBy, nameof(OrderBy));
 				Guard.IsValidEnum(SortDirection, nameof(SortDirection));
-				builder.Append($"&order_by={OrderBy.GetDescription()}");
-				builder.Append($"&sort={SortDirection.GetDescription()}");
+				builder.Append($"order_by={OrderBy.GetDescription()}&");
+				builder.Append($"sort={SortDirection.GetDescription()}&");
 			}
 
-			if (MagazineId > 0)
+			if (MagazineIds.Any())
 			{
-				builder.Append($"&magazine={MagazineId}");
+				builder.Append($"magazine={string.Join(",", MagazineIds)}&");
 			}
 
+			if (Sfw)
+			{
+				builder.Append("sfw");
+			}
+			
 			return builder.ToString().Trim('&');
 		}
 	}

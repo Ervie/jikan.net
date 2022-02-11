@@ -330,25 +330,6 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.Manga, id.ToString() };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<Manga>>(endpointParts);
 		}
-		
-		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<Manga>>> GetMangaAsync()
-		{
-			var endpointParts = new[] { JikanEndpointConsts.Manga };
-			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Manga>>>(endpointParts);
-		}
-		
-		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<Manga>>> GetMangaAsync(int page, int pageSize)
-		{
-			Guard.IsGreaterThanZero(page, nameof(page));
-			Guard.IsGreaterThanZero(pageSize, nameof(pageSize));
-			Guard.IsLesserOrEqualThan(pageSize,ParameterConsts.MaximumPageSize, nameof(pageSize));
-			
-			var queryParams = $"?page={page}&limit={pageSize}";
-			var endpointParts = new[] { JikanEndpointConsts.Manga + queryParams};
-			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Manga>>>(endpointParts);
-		}
 
 		/// <inheritdoc />
 		public async Task<BaseJikanResponse<ICollection<MangaCharacter>>> GetMangaCharactersAsync(long id)
@@ -1080,69 +1061,18 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.Anime + searchConfig.ConfigToString()};
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
 		}
-
-		#region SearchManga
-
+		
 		/// <inheritdoc />
-		public async Task<MangaSearchResult> SearchManga(string query)
-		{
-			Guard.IsLongerThan2Characters(query, nameof(query));
-			query = string.Concat(JikanEndpointConsts.Manga, "?q=", query.Replace(' ', '+'));
-			var endpointParts = new[] { JikanEndpointConsts.Search, query };
-			return await ExecuteGetRequestAsync<MangaSearchResult>(endpointParts);
-		}
-
+		public Task<PaginatedJikanResponse<ICollection<Manga>>> SearchMangaAsync(string query)
+			=> SearchMangaAsync(new MangaSearchConfig {Query = query});
+		
 		/// <inheritdoc />
-		public async Task<MangaSearchResult> SearchManga(string query, int page)
-		{
-			Guard.IsLongerThan2Characters(query, nameof(query));
-			Guard.IsGreaterThanZero(page, nameof(page));
-			query = string.Concat(JikanEndpointConsts.Manga, "/", page.ToString(), "?q=", query.Replace(' ', '+'));
-			var endpointParts = new[] { JikanEndpointConsts.Search, query };
-			return await ExecuteGetRequestAsync<MangaSearchResult>(endpointParts);
-		}
-
-		/// <inheritdoc />
-		public async Task<MangaSearchResult> SearchManga(string query, MangaSearchConfig searchConfig)
-		{
-			Guard.IsLongerThan2Characters(query, nameof(query));
-			Guard.IsNotNull(searchConfig, nameof(searchConfig));
-			query = string.Concat(JikanEndpointConsts.Manga, "?q=", query.Replace(' ', '+'), "&", searchConfig.ConfigToString());
-			var endpointParts = new[] { JikanEndpointConsts.Search, query };
-			return await ExecuteGetRequestAsync<MangaSearchResult>(endpointParts);
-		}
-
-		/// <inheritdoc />
-		public async Task<MangaSearchResult> SearchManga(MangaSearchConfig searchConfig)
+		public async Task<PaginatedJikanResponse<ICollection<Manga>>> SearchMangaAsync(MangaSearchConfig searchConfig)
 		{
 			Guard.IsNotNull(searchConfig, nameof(searchConfig));
-			var query = string.Concat(JikanEndpointConsts.Manga, "?", searchConfig.ConfigToString());
-			var endpointParts = new[] { JikanEndpointConsts.Search, query };
-			return await ExecuteGetRequestAsync<MangaSearchResult>(endpointParts);
+			var endpointParts = new[] { JikanEndpointConsts.Manga + searchConfig.ConfigToString()};
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Manga>>>(endpointParts);
 		}
-
-		/// <inheritdoc />
-		public async Task<MangaSearchResult> SearchManga(MangaSearchConfig searchConfig, int page)
-		{
-			Guard.IsNotNull(searchConfig, nameof(searchConfig));
-			Guard.IsGreaterThanZero(page, nameof(page));
-			var query = string.Concat(JikanEndpointConsts.Manga, "/", page.ToString(), "?", searchConfig.ConfigToString());
-			var endpointParts = new[] { JikanEndpointConsts.Search, query };
-			return await ExecuteGetRequestAsync<MangaSearchResult>(endpointParts);
-		}
-
-		/// <inheritdoc />
-		public async Task<MangaSearchResult> SearchManga(string query, int page, MangaSearchConfig searchConfig)
-		{
-			Guard.IsLongerThan2Characters(query, nameof(query));
-			Guard.IsGreaterThanZero(page, nameof(page));
-			Guard.IsNotNull(searchConfig, nameof(searchConfig));
-			query = string.Concat(JikanEndpointConsts.Manga, "/", page.ToString(), "?q=", query.Replace(' ', '+'), "&", searchConfig.ConfigToString());
-			var endpointParts = new[] { JikanEndpointConsts.Search, query };
-			return await ExecuteGetRequestAsync<MangaSearchResult>(endpointParts);
-		}
-
-		#endregion SearchManga
 
 		/// <inheritdoc />
 		public Task<PaginatedJikanResponse<ICollection<Person>>> SearchPersonAsync(string query)
@@ -1151,6 +1081,7 @@ namespace JikanDotNet
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<Person>>> SearchPersonAsync(PersonSearchConfig searchConfig)
 		{	
+			Guard.IsNotNull(searchConfig, nameof(searchConfig));
 			var endpointParts = new[] { JikanEndpointConsts.People + searchConfig.ConfigToString()};
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Person>>>(endpointParts);
 		}
@@ -1162,6 +1093,7 @@ namespace JikanDotNet
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<Character>>> SearchCharacterAsync(CharacterSearchConfig searchConfig)
 		{
+			Guard.IsNotNull(searchConfig, nameof(searchConfig));
 			var endpointParts = new[] { JikanEndpointConsts.Characters + searchConfig.ConfigToString()};
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Character>>>(endpointParts);
 		}
@@ -1172,6 +1104,7 @@ namespace JikanDotNet
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<UserMetadata>>> SearchUserAsync(UserSearchConfig searchConfig)
 		{
+			Guard.IsNotNull(searchConfig, nameof(searchConfig));
 			var endpointParts = new[] {JikanEndpointConsts.Users + searchConfig.ConfigToString()};
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<UserMetadata>>>(endpointParts);
 		}

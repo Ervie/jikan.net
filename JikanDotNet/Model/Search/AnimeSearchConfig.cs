@@ -34,14 +34,19 @@ namespace JikanDotNet
 		public char? Letter { get; set; }
 		
 		/// <summary>
-		/// Anime type of searched result;
+		/// Anime type of searched result.
 		/// </summary>
 		public AnimeType Type { get; set; } = AnimeType.EveryType;
 
 		/// <summary>
 		/// Minimum score results (1-10).
 		/// </summary>
-		public int? Score { get; set; }
+		public int? MinimumScore { get; set; }
+		
+		/// <summary>
+		/// Maximum score results (1-10).
+		/// </summary>
+		public int? MaximumScore { get; set; }
 
 		/// <summary>
 		/// Age rating.
@@ -56,7 +61,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Select order property.
 		/// </summary>
-		public AnimeSearchSortable OrderBy { get; set; }
+		public AnimeSearchOrderBy OrderBy { get; set; }
 
 		/// <summary>
 		/// Define sort direction for <see cref="OrderBy">OrderBy</see> property.
@@ -64,9 +69,14 @@ namespace JikanDotNet
 		public SortDirection SortDirection { get; set; }
 
 		/// <summary>
-		/// Genres to search/exclude.
+		/// Genres to include.
 		/// </summary>
 		public ICollection<AnimeGenreSearch> Genres { get; set; } = new List<AnimeGenreSearch>();
+		
+		/// <summary>
+		/// Genres to exclude.
+		/// </summary>
+		public ICollection<MangaGenreSearch> ExcludedGenres { get; set; } = new List<MangaGenreSearch>();
 
 		/// <summary>
 		/// Filter by producer id.
@@ -116,9 +126,14 @@ namespace JikanDotNet
 				builder.Append($"type={Type.GetDescription()}&");
 			}
 
-			if (Score.HasValue)
+			if (MinimumScore.HasValue)
 			{
-				builder.Append($"score={Score}&");
+				builder.Append($"min_score={MinimumScore}&");
+			}
+			
+			if (MaximumScore.HasValue)
+			{
+				builder.Append($"max_score={MaximumScore}&");
 			}
 
 			if (Rating != AnimeAgeRating.EveryRating)
@@ -141,10 +156,22 @@ namespace JikanDotNet
 					return genreSearch.GetDescription();
 				}).ToArray();
 
-				builder.Append($"genre={string.Join(",", genresIds)}&");
+				builder.Append($"genres={string.Join(",", genresIds)}&");
+			}
+			
+			
+			if (ExcludedGenres.Count > 0 )
+			{
+				var genresIds = ExcludedGenres.Select(genreSearch =>
+				{
+					Guard.IsValidEnum(genreSearch, nameof(genreSearch));
+					return genreSearch.GetDescription();
+				}).ToArray();
+
+				builder.Append($"excluded_genres={string.Join(",", genresIds)}&");
 			}
 
-			if (OrderBy != AnimeSearchSortable.NoSorting)
+			if (OrderBy != AnimeSearchOrderBy.NoSorting)
 			{
 				Guard.IsValidEnum(OrderBy, nameof(OrderBy));
 				Guard.IsValidEnum(SortDirection, nameof(SortDirection));

@@ -195,7 +195,7 @@ namespace JikanDotNet.Tests.AnimeTests
             {
                 Query = "Fairy Tail",
                 Type = AnimeType.TV,
-                Score = 7
+                MinimumScore = 7
             };
 
             // When
@@ -247,7 +247,7 @@ namespace JikanDotNet.Tests.AnimeTests
             var searchConfig = new AnimeSearchConfig
             {
                 Query = "one",
-                OrderBy = AnimeSearchSortable.Members,
+                OrderBy = AnimeSearchOrderBy.Members,
                 SortDirection = SortDirection.Descending
             };
 
@@ -269,7 +269,7 @@ namespace JikanDotNet.Tests.AnimeTests
 			var searchConfig = new AnimeSearchConfig
 			{
 				Query = "one",
-				OrderBy = AnimeSearchSortable.Id,
+				OrderBy = AnimeSearchOrderBy.Id,
 				SortDirection = SortDirection.Ascending
 			};
 
@@ -333,17 +333,17 @@ namespace JikanDotNet.Tests.AnimeTests
 		[InlineData(null, (AnimeAgeRating)int.MinValue, null, null, null, null)]
 		[InlineData(null, null, (AnimeType)int.MaxValue, null, null, null)]
 		[InlineData(null, null, (AnimeType)int.MinValue, null, null, null)]
-		[InlineData(null, null, null, (AnimeSearchSortable)int.MaxValue, null, null)]
-		[InlineData(null, null, null, (AnimeSearchSortable)int.MinValue, null, null)]
-		[InlineData(null, null, null, AnimeSearchSortable.Episodes, (SortDirection)int.MaxValue, null)]
-		[InlineData(null, null, null, AnimeSearchSortable.Episodes, (SortDirection)int.MinValue, null)]
+		[InlineData(null, null, null, (AnimeSearchOrderBy)int.MaxValue, null, null)]
+		[InlineData(null, null, null, (AnimeSearchOrderBy)int.MinValue, null, null)]
+		[InlineData(null, null, null, AnimeSearchOrderBy.Episodes, (SortDirection)int.MaxValue, null)]
+		[InlineData(null, null, null, AnimeSearchOrderBy.Episodes, (SortDirection)int.MinValue, null)]
 		[InlineData(null, null, null, null, null, (AnimeGenreSearch)int.MaxValue)]
 		[InlineData(null, null, null, null, null, (AnimeGenreSearch)int.MinValue)]
 		public async Task SearchAnimeAsync_EmptyQueryWithConfigWithInvalidEnums_ShouldThrowValidationException(
 			AiringStatus? airingStatus,
 			AnimeAgeRating? rating,
 			AnimeType? mangaType,
-			AnimeSearchSortable? orderBy,
+			AnimeSearchOrderBy? orderBy,
 			SortDirection? sortDirection,
 			AnimeGenreSearch? genreSearch
 		)
@@ -460,7 +460,7 @@ namespace JikanDotNet.Tests.AnimeTests
 			{
 				Page = page,
 				Query = "girl",
-				Status = AiringStatus.Completed,
+				Status = AiringStatus.Complete,
 				Genres = new List<AnimeGenreSearch> { AnimeGenreSearch.Action }
 			};
 
@@ -479,7 +479,7 @@ namespace JikanDotNet.Tests.AnimeTests
 			{
 				Query = "one",
 				Page = 2,
-				Status = AiringStatus.Completed,
+				Status = AiringStatus.Complete,
 				Genres = new List<AnimeGenreSearch> { AnimeGenreSearch.Action }
 			};
 
@@ -501,7 +501,7 @@ namespace JikanDotNet.Tests.AnimeTests
 			var searchConfig = new AnimeSearchConfig
 			{
 				Genres = new List<AnimeGenreSearch> { AnimeGenreSearch.Action, AnimeGenreSearch.Comedy },
-				OrderBy = AnimeSearchSortable.Score,
+				OrderBy = AnimeSearchOrderBy.Score,
 				SortDirection = SortDirection.Descending
 			};
 

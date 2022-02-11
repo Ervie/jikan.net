@@ -5,7 +5,7 @@ namespace JikanDotNet
 	/// <summary>
 	/// Properties by which anime search results can be ordered.
 	/// </summary>
-	public enum AnimeSearchSortable
+	public enum AnimeSearchOrderBy
 	{
 		/// <summary>
 		/// Does not order results.
@@ -18,6 +18,7 @@ namespace JikanDotNet
 		/// </summary>
 		[Description("title")]
 		Title,
+		
 		/// <summary>
 		/// Orders results by score.
 		/// </summary>
@@ -29,6 +30,12 @@ namespace JikanDotNet
 		/// </summary>
 		[Description("type")]
 		Type,
+		
+		/// <summary>
+		/// Orders results by count of scores.
+		/// </summary>
+		[Description("scored_by")]
+		ScoredBy,
 
 		/// <summary>
 		/// Orders results by members.
@@ -41,12 +48,6 @@ namespace JikanDotNet
 		/// </summary>
 		[Description("favorites")]
 		Favorites,
-
-		/// <summary>
-		/// Orders results by popularity.
-		/// </summary>
-		[Description("popularity")]
-		Popularity,
 
 		/// <summary>
 		/// Orders results by MalId.
@@ -76,6 +77,18 @@ namespace JikanDotNet
 		/// Orders results by end date.
 		/// </summary>
 		[Description("end_date")]
-		EndDate
+		EndDate,
+		
+		/// <summary>
+		/// Orders results by rank.
+		/// </summary>
+		[Description("rank")]
+		Rank,
+		
+		/// <summary>
+		/// Orders results by popularity.
+		/// </summary>
+		[Description("popularity")]
+		Popularity
 	}
 }

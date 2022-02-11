@@ -3,9 +3,9 @@
 namespace JikanDotNet
 {
 	/// <summary>
-	/// Current status of anime or (search config).
+	/// Current status of manga (search config).
 	/// </summary>
-	public enum AiringStatus
+	public enum PublishingStatus
 	{
 		/// <summary>
 		/// Allow all statuses to be displayed in results.
@@ -14,16 +14,28 @@ namespace JikanDotNet
 		EveryStatus,
 		
 		/// <summary>
-		/// Airing status.
+		/// Publishing status.
 		/// </summary>
-		[Description("airing")]
-		Airing,
+		[Description("publishing")]
+		Publishing,
 
 		/// <summary>
 		/// Complete status.
 		/// </summary>
 		[Description("complete")]
 		Complete,
+
+		/// <summary>
+		/// Hiatus status.
+		/// </summary>
+		[Description("hiatus")]
+		Hiatus,
+
+		/// <summary>
+		/// Discontinued status.
+		/// </summary>
+		[Description("discontinued")]
+		Discontinued,
 
 		/// <summary>
 		/// Upcoming status.

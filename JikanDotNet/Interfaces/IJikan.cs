@@ -171,20 +171,6 @@ namespace JikanDotNet
 		/// <param name="id">MAL id of manga.</param>
 		/// <returns>Manga with given MAL id.</returns>
 		Task<BaseJikanResponse<Manga>> GetMangaAsync(long id);
-		
-		/// <summary>
-		/// Returns collection of manga.
-		/// </summary>
-		/// <returns>Collection of manga.</returns>
-		Task<PaginatedJikanResponse<ICollection<Manga>>> GetMangaAsync();
-		
-		/// <summary>
-		/// Returns collection of manga.
-		/// </summary>
-		/// <param name="page">Index of the page.</param>
-		/// <param name="pageSize">Size of the page (25 is the max).</param>
-		/// <returns>Collection of manga.</returns>
-		Task<PaginatedJikanResponse<ICollection<Manga>>> GetMangaAsync(int page, int pageSize);
 
 		/// <summary>
 		/// Returns collections of characters appearing in manga with given MAL id.
@@ -853,47 +839,14 @@ namespace JikanDotNet
 		/// </summary>
 		/// <param name="query">Search query.</param>
 		/// <returns>List of result related to search query.</returns>
-		Task<MangaSearchResult> SearchManga(string query);
-
-		/// <summary>
-		/// Returns list of results related to search.
-		/// </summary>
-		/// <param name="query">Search query.</param>
-		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
-		/// <returns>List of result related to search query.</returns>
-		Task<MangaSearchResult> SearchManga(string query, int page);
-
-		/// <summary>
-		/// Returns list of results related to search.
-		/// </summary>
-		/// <param name="query">Search query.</param>
-		/// <param name="searchConfig">Additional configuration for advanced search.</param>
-		/// <returns>List of result related to search query.</returns>
-		Task<MangaSearchResult> SearchManga(string query, MangaSearchConfig searchConfig);
-
+		Task<PaginatedJikanResponse<ICollection<Manga>>> SearchMangaAsync(string query);
+		
 		/// <summary>
 		/// Returns list of results related to search.
 		/// </summary>
 		/// <param name="searchConfig">Additional configuration for advanced search.</param>
 		/// <returns>List of result related to search query.</returns>
-		Task<MangaSearchResult> SearchManga(MangaSearchConfig searchConfig);
-
-		/// <summary>
-		/// Returns list of results related to search.
-		/// </summary>
-		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
-		/// <param name="searchConfig">Additional configuration for advanced search.</param>
-		/// <returns>List of result related to search query.</returns>
-		Task<MangaSearchResult> SearchManga(MangaSearchConfig searchConfig, int page);
-
-		/// <summary>
-		/// Returns list of results related to search.
-		/// </summary>
-		/// <param name="query">Search query.</param>
-		/// <param name="page">Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)</param>
-		/// <param name="searchConfig">Additional configuration for advanced search.</param>
-		/// <returns>List of result related to search query.</returns>
-		Task<MangaSearchResult> SearchManga(string query, int page, MangaSearchConfig searchConfig);
+		Task<PaginatedJikanResponse<ICollection<Manga>>> SearchMangaAsync(MangaSearchConfig searchConfig);
 		
 		/// <summary>
 		/// Returns list of results related to search.
