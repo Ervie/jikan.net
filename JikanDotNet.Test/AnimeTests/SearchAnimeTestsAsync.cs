@@ -429,7 +429,7 @@ namespace JikanDotNet.Tests.AnimeTests
 		}
 
 		[Fact]
-		public async Task SearchAnimeAsync_EmptyQueryActionTvAnimeSecondPage_ShouldFindNanohaAndRozenMaiden()
+		public async Task SearchAnimeAsync_EmptyQueryActionTvAnimeSecondPage_ShouldFindNanohaAndSeed()
 		{
 			// Given
 			var searchConfig = new AnimeSearchConfig
@@ -446,7 +446,7 @@ namespace JikanDotNet.Tests.AnimeTests
 			var titles = returnedAnime.Data.Select(x => x.Title);
 			using var _ = new AssertionScope();
 			titles.Should().Contain("Mahou Shoujo Lyrical Nanoha");
-			titles.Should().Contain("Rozen Maiden");
+			titles.Should().Contain("Mobile Suit Gundam SEED");
 		}
 
 		[Theory]

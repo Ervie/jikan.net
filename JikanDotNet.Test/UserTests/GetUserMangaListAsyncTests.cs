@@ -44,7 +44,7 @@ namespace JikanDotNet.Tests.UserTests
 			}
 		}
 		[Fact]
-		public async Task GetUserMangaListAsync_ErvelanSecondPAge_ShouldParseErvelanMangaList()
+		public async Task GetUserMangaListAsync_ErvelanSecondPage_ShouldParseErvelanMangaList()
 		{
 			// When
 			var mangaList = await _jikan.GetUserMangaListAsync("Ervelan", 2);

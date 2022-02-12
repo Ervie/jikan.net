@@ -84,15 +84,14 @@ namespace JikanDotNet.Tests.UserTests
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
-		// This one does not work, most likely on jikan side
 		[Fact]
 		public async Task GetUserClubsAsync_ArchaeonSecondPage_ShouldParseArchaeonClubs()
 		{
 			// When
-			var Clubs = await _jikan.GetUserClubsAsync("Archaeon", 2);
+			var clubs = await _jikan.GetUserClubsAsync("Archaeon", 2);
 
 			// Then
-			Clubs.Data.Should().BeEmpty();
+			clubs.Data.Should().HaveCountGreaterThan(30);
 		}
 	}
 }

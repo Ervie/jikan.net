@@ -79,21 +79,5 @@ namespace JikanDotNet.Tests.CharacterTests
 			// Then
 			jetBlack.Data.Nicknames.Should().HaveCount(2);
 		}
-
-		//[Fact]
-		//public async Task GetCharacterAsync_EinId_ShouldParseEin()
-		//{
-		//	// When
-		//	var ein = await _jikan.GetCharacter(4);
-
-		//	// Then
-		//	using (new AssertionScope())
-		//	{
-		//		ein.Name.Should().Be("Ein");
-		//		ein.Animeography.First().Role.Should().Be("Supporting");
-		//		ein.Mangaography.First().Role.Should().Be("Supporting");
-		//		ein.Animeography.Last().Role.Should().Be("Main");
-		//	}
-		//}
 	}
 }

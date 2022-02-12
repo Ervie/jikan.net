@@ -80,7 +80,7 @@ namespace JikanDotNet.Tests.MangaTests
 			// Then
 			using var _ = new AssertionScope();
 			onePiece.Data.Should().NotBeEmpty();
-			onePiece.Pagination.HasNextPage.Should().BeFalse();
+			onePiece.Pagination.HasNextPage.Should().BeTrue();
 			onePiece.Data.Select(x => x.Author).Should().Contain("Snow");
 		}
 

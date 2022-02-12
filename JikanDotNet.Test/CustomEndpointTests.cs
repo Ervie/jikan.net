@@ -74,15 +74,5 @@ namespace JikanDotNet.Tests
 			// Then
 			func.Should().ThrowExactly<UriFormatException>();
 		}
-
-		[Fact]
-		public void JikanConstructor_Empty_ShouldNotParseCorrectly()
-		{
-			// When
-			Func<Jikan> func = () => new Jikan(new JikanClientConfiguration { Endpoint = string.Empty, SuppressException = false });
-
-			// Then
-			func.Should().ThrowExactly<UriFormatException>();
-		}
 	}
 }

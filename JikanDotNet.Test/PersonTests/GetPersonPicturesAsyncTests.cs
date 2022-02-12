@@ -39,13 +39,13 @@ namespace JikanDotNet.Tests.PersonTests
 		}
 
 		[Fact]
-		public async Task GetPersonPicturesAsync_Sugitad_ShouldParseSugitaTomokazuImages()
+		public async Task GetPersonPicturesAsync_SugitaId_ShouldParseSugitaTomokazuImages()
 		{
 			// Given
 			var norioWakamoto = await _jikan.GetPersonPicturesAsync(2);
 
 			// Then
-			norioWakamoto.Data.Should().HaveCount(7);
+			norioWakamoto.Data.Should().HaveCount(8);
 		}
 	}
 }

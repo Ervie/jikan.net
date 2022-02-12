@@ -51,8 +51,8 @@ namespace JikanDotNet.Tests.MangaTests
 			var topics = monster.Data.Select(x => x.MalId);
 			using (new AssertionScope())
 			{
-				topics.Should().Contain(395611);
-				topics.Should().Contain(57668);
+				topics.Should().Contain(396141L);
+				topics.Should().Contain(396155L);
 			}
 		}
 	}

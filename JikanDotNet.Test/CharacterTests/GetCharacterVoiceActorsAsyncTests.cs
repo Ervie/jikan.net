@@ -35,13 +35,11 @@ namespace JikanDotNet.Tests.CharacterTests
 			var spike = await _jikan.GetCharacterVoiceActorsAsync(1);
 
 			// Then
-			using (new AssertionScope())
-			{
-				spike.Data.Should().HaveCount(12);
-				spike.Data.Should().Contain(x => x.Language.Equals("Japanese") && x.Person.Name.Equals("Yamadera, Kouichi"));
-				spike.Data.Should().Contain(x => x.Language.Equals("English") && x.Person.Name.Equals("Blum, Steven"));
-				spike.Data.Should().Contain(x => x.Language.Equals("German") && x.Person.Name.Equals("Neumann, Viktor"));
-			}
+			using var _ = new AssertionScope();
+			spike.Data.Should().HaveCount(13);
+			spike.Data.Should().Contain(x => x.Language.Equals("Japanese") && x.Person.Name.Equals("Yamadera, Kouichi"));
+			spike.Data.Should().Contain(x => x.Language.Equals("English") && x.Person.Name.Equals("Blum, Steven"));
+			spike.Data.Should().Contain(x => x.Language.Equals("German") && x.Person.Name.Equals("Neumann, Viktor"));
 		}
 
 		[Fact]
@@ -53,7 +51,7 @@ namespace JikanDotNet.Tests.CharacterTests
 			// Then
 			using (new AssertionScope())
 			{
-				faye.Data.Should().HaveCount(11);
+				faye.Data.Should().HaveCount(12);
 				faye.Data.Should().Contain(x => x.Language.Equals("Japanese") && x.Person.Name.Equals("Hayashibara, Megumi"));
 				faye.Data.Should().Contain(x => x.Language.Equals("English") && x.Person.Name.Equals("Lee, Wendee"));
 			}

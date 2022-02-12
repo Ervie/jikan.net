@@ -60,7 +60,7 @@ namespace JikanDotNet.Tests.TopTests
 			using (new AssertionScope())
 			{
 				top.Data.Skip(3).First().Name.Should().Be("Luffy Monkey D.");
-				top.Data.Skip(3).First().About.Should().StartWith("Name: Monkey D. Luffy");
+				top.Data.Skip(3).First().About.Should().StartWith("Age: 17; 19");
 			}
 		}
 

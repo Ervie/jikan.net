@@ -13,7 +13,7 @@ namespace JikanDotNet
 		/// Current user's reading status of manga.
 		/// </summary>
 		[JsonPropertyName("reading_status")]
-		public UserMangaListExtension ReadingStatus { get; set; }
+		public string ReadingStatus { get; set; }
 
 		/// <summary>
 		/// User's score for the manga. 0 if not assigned yet.
