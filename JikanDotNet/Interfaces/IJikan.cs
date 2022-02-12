@@ -903,6 +903,20 @@ namespace JikanDotNet
 		/// <param name="searchConfig">Additional configuration for advanced search.</param>
 		/// <returns>List of result related to search query.</returns>
 		Task<PaginatedJikanResponse<ICollection<UserMetadata>>> SearchUserAsync(UserSearchConfig searchConfig);
+		
+		/// <summary>
+		/// Returns list of results related to search.
+		/// </summary>
+		/// <param name="query">Search query.</param>
+		/// <returns>List of result related to search query.</returns>
+		Task<PaginatedJikanResponse<ICollection<Club>>> SearchClubAsync(string query);
+
+		/// <summary>
+		/// Returns list of results related to search.
+		/// </summary>
+		/// <param name="searchConfig">Additional configuration for advanced search.</param>
+		/// <returns>List of result related to search query.</returns>
+		Task<PaginatedJikanResponse<ICollection<Club>>> SearchClubAsync(ClubSearchConfig searchConfig);
 
 		#endregion Search requests
 	}

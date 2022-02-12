@@ -1125,6 +1125,17 @@ namespace JikanDotNet
 			var endpointParts = new[] {JikanEndpointConsts.Users + searchConfig.ConfigToString()};
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<UserMetadata>>>(endpointParts);
 		}
+		
+		/// <inheritdoc />
+		public  Task<PaginatedJikanResponse<ICollection<Club>>> SearchClubAsync(string query) => SearchClubAsync(new ClubSearchConfig {Query = query});
+
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<Club>>> SearchClubAsync(ClubSearchConfig searchConfig)
+		{
+			Guard.IsNotNull(searchConfig, nameof(searchConfig));
+			var endpointParts = new[] {JikanEndpointConsts.Users + searchConfig.ConfigToString()};
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Club>>>(endpointParts);
+		}
 
 		#endregion Search methods
 
