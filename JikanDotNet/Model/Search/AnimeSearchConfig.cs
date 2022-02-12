@@ -1,9 +1,9 @@
 ﻿using JikanDotNet.Extensions;
 using JikanDotNet.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using JikanDotNet.Consts;
 using JikanDotNet.Helpers;
 
 namespace JikanDotNet
@@ -14,19 +14,44 @@ namespace JikanDotNet
 	public class AnimeSearchConfig : ISearchConfig
 	{
 		/// <summary>
-		/// Anime type of searched result;
+		/// Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)
 		/// </summary>
-		public AnimeType Type { get; set; }
+		public int? Page { get; set; }
+	
+		/// <summary>
+		/// Size of the page (25 is the max).
+		/// </summary>
+		public int? PageSize { get; set; }
+	
+		/// <summary>
+		/// Search query.
+		/// </summary>
+		public string Query { get; set; }
+	
+		/// <summary>
+		/// Return entries starting with the given letter.
+		/// </summary>
+		public char? Letter { get; set; }
+		
+		/// <summary>
+		/// Anime type of searched result.
+		/// </summary>
+		public AnimeType Type { get; set; } = AnimeType.EveryType;
 
 		/// <summary>
 		/// Minimum score results (1-10).
 		/// </summary>
-		public int? Score { get; set; }
+		public int? MinimumScore { get; set; }
+		
+		/// <summary>
+		/// Maximum score results (1-10).
+		/// </summary>
+		public int? MaximumScore { get; set; }
 
 		/// <summary>
 		/// Age rating.
 		/// </summary>
-		public AgeRating Rating { get; set; }
+		public AnimeAgeRating Rating { get; set; } = AnimeAgeRating.EveryRating;
 
 		/// <summary>
 		/// Current status.
@@ -34,39 +59,34 @@ namespace JikanDotNet
 		public AiringStatus Status { get; set; }
 
 		/// <summary>
-		/// Filter start date of results.
-		/// </summary>
-		public DateTime? StartDate { get; set; }
-
-		/// <summary>
-		/// Filter end date of results.
-		/// </summary>
-		public DateTime? EndDate { get; set; }
-
-		/// <summary>
 		/// Select order property.
 		/// </summary>
-		public AnimeSearchSortable OrderBy { get; set; }
+		public AnimeSearchOrderBy OrderBy { get; set; }
 
 		/// <summary>
 		/// Define sort direction for <see cref="OrderBy">OrderBy</see> property.
 		/// </summary>
-		public SortDirection SortDirection{ get; set; }
+		public SortDirection SortDirection { get; set; }
 
 		/// <summary>
-		/// Genres to search/exclude.
+		/// Genres to include.
 		/// </summary>
 		public ICollection<AnimeGenreSearch> Genres { get; set; } = new List<AnimeGenreSearch>();
+		
+		/// <summary>
+		/// Genres to exclude.
+		/// </summary>
+		public ICollection<MangaGenreSearch> ExcludedGenres { get; set; } = new List<MangaGenreSearch>();
 
 		/// <summary>
 		/// Filter by producer id.
 		/// </summary>
-		public long ProducerId { get; set; }
+		public ICollection<long> ProducerIds { get; set; } = new List<long>();
 
 		/// <summary>
-		/// If true, search anime of genres included in <see cref="Genres">Genres</see>. If false, exclude genres included from <see cref="Genres">Genres</see> from search result. />
+		/// Should only search for sfw title. Filter out adult entries.
 		/// </summary>
-		public bool GenreIncluded { get; set; } = true;
+		public bool Sfw { get; set; } = true;
 
 		/// <summary>
 		/// Create query from current parameters for search request.
@@ -74,69 +94,99 @@ namespace JikanDotNet
 		/// <returns>Query from current parameters for search request</returns>
 		public string ConfigToString()
 		{
-			StringBuilder builder = new StringBuilder();
+			var builder = new StringBuilder().Append('?');
 
-
+			if (Page.HasValue)
+			{
+				Guard.IsGreaterThanZero(Page.Value, nameof(Page.Value));
+				builder.Append($"page={Page.Value}&");
+			}
+        
+			if (PageSize.HasValue)
+			{
+				Guard.IsGreaterThanZero(PageSize.Value, nameof(PageSize.Value));
+				Guard.IsLesserOrEqualThan(PageSize.Value,ParameterConsts.MaximumPageSize, nameof(PageSize.Value));
+				builder.Append($"limit={PageSize.Value}&");
+			}
+        
+			if (!string.IsNullOrWhiteSpace(Query))
+			{
+				builder.Append($"q={Query}&");
+			}
+        
+			if (Letter.HasValue)
+			{
+				Guard.IsLetter(Letter.Value, nameof(Letter.Value));
+				builder.Append($"letter={Letter.Value}&");
+			}
+			
 			if (Type != AnimeType.EveryType)
 			{
 				Guard.IsValidEnum(Type, nameof(Type));
-				builder.Append($"&type={Type.GetDescription()}");
+				builder.Append($"type={Type.GetDescription()}&");
 			}
 
-			if (Score.HasValue)
+			if (MinimumScore.HasValue)
 			{
-				builder.Append($"&score={Score}");
+				builder.Append($"min_score={MinimumScore}&");
+			}
+			
+			if (MaximumScore.HasValue)
+			{
+				builder.Append($"max_score={MaximumScore}&");
 			}
 
-			if (Rating != AgeRating.EveryRating)
+			if (Rating != AnimeAgeRating.EveryRating)
 			{
 				Guard.IsValidEnum(Rating, nameof(Rating));
-				builder.Append($"&rated={Rating.GetDescription()}");
+				builder.Append($"rated={Rating.GetDescription()}&");
 			}
 
 			if (Status != AiringStatus.EveryStatus)
 			{
 				Guard.IsValidEnum(Status, nameof(Status));
-				builder.Append($"&status={Status.GetDescription()}");
-			}
-
-			if (StartDate.HasValue)
-			{
-				builder.Append($"&start_date={StartDate.Value:yyyy-MM-dd}");
-			}
-
-			if (EndDate.HasValue)
-			{
-				builder.Append($"&end_date={EndDate.Value:yyyy-MM-dd}");
+				builder.Append($"status={Status.GetDescription()}&");
 			}
 
 			if (Genres.Count > 0 )
 			{
-				var genresId = Genres.Select(genreSearch =>
+				var genresIds = Genres.Select(genreSearch =>
 				{
 					Guard.IsValidEnum(genreSearch, nameof(genreSearch));
 					return genreSearch.GetDescription();
 				}).ToArray();
 
-				builder.Append($"&genre={string.Join(",", genresId)}");
+				builder.Append($"genres={string.Join(",", genresIds)}&");
 			}
-
-			if (!GenreIncluded)
+			
+			
+			if (ExcludedGenres.Count > 0 )
 			{
-				builder.Append($"&genre_exclude=0");
+				var genresIds = ExcludedGenres.Select(genreSearch =>
+				{
+					Guard.IsValidEnum(genreSearch, nameof(genreSearch));
+					return genreSearch.GetDescription();
+				}).ToArray();
+
+				builder.Append($"excluded_genres={string.Join(",", genresIds)}&");
 			}
 
-			if (OrderBy != AnimeSearchSortable.NoSorting)
+			if (OrderBy != AnimeSearchOrderBy.NoSorting)
 			{
 				Guard.IsValidEnum(OrderBy, nameof(OrderBy));
 				Guard.IsValidEnum(SortDirection, nameof(SortDirection));
-				builder.Append($"&order_by={OrderBy.GetDescription()}");
-				builder.Append($"&sort={SortDirection.GetDescription()}");
+				builder.Append($"order_by={OrderBy.GetDescription()}&");
+				builder.Append($"sort={SortDirection.GetDescription()}&");
 			}
 
-			if (ProducerId > 0)
+			if (ProducerIds.Any())
 			{
-				builder.Append($"&producer={ProducerId}");
+				builder.Append($"producer={string.Join(",", ProducerIds)}&");
+			}
+
+			if (Sfw)
+			{
+				builder.Append("sfw");
 			}
 
 			return builder.ToString().Trim('&');

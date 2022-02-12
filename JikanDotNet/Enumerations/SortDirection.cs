@@ -10,13 +10,13 @@ namespace JikanDotNet
 		/// <summary>
 		/// Sort ascending.
 		/// </summary>
-		[Description("ascending")]
+		[Description("asc")]
 		Ascending,
 
 		/// <summary>
 		/// Use descending.
 		/// </summary>
-		[Description("descending")]
+		[Description("desc")]
 		Descending,
 	}
 }

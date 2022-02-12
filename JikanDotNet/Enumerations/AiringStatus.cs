@@ -3,7 +3,7 @@
 namespace JikanDotNet
 {
 	/// <summary>
-	/// Current status of anime or manga (search config and users' lists).
+	/// Current status of anime or (search config).
 	/// </summary>
 	public enum AiringStatus
 	{
@@ -12,18 +12,18 @@ namespace JikanDotNet
 		/// </summary>
 		[Description("")]
 		EveryStatus,
-
+		
 		/// <summary>
-		/// Airing (anime) or publishing (manga) status.
+		/// Airing status.
 		/// </summary>
 		[Description("airing")]
 		Airing,
 
 		/// <summary>
-		/// Completed status.
+		/// Complete status.
 		/// </summary>
-		[Description("completed")]
-		Completed,
+		[Description("complete")]
+		Complete,
 
 		/// <summary>
 		/// Upcoming status.

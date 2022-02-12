@@ -36,6 +36,14 @@ namespace JikanDotNet.Helpers
 				throw new JikanValidationException("Argument must be a natural number greater than 0.", argumentName);
 			}
 		}
+		
+		internal static void IsLesserOrEqualThan(long arg, long max, string argumentName)
+		{
+			if (arg > max)
+			{
+				throw new JikanValidationException($"Argument must not be greater than {max}.", argumentName);
+			}
+		}
 
 		internal static void IsValid<T>(Func<T, bool> isValidFunc, T arg, string argumentName, string message = null)
 		{
@@ -57,6 +65,14 @@ namespace JikanDotNet.Helpers
 			if (!Enum.IsDefined(typeof(TEnum), arg))
 			{
 				throw new JikanValidationException("Enum value must be valid", argumentName);
+			}
+		}
+		
+		internal static void IsLetter(char character, string argumentName)
+		{
+			if (!Char.IsLetter(character))
+			{
+				throw new JikanValidationException("Character must be a letter", argumentName);
 			}
 		}
 	}

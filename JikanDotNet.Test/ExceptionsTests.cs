@@ -1,35 +1,33 @@
 ﻿using FluentAssertions;
 using JikanDotNet.Exceptions;
-using System;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace JikanDotNet.Tests
 {
-    public class ExceptionsTests
-    {
+	public class ExceptionsTests
+	{
 		private readonly IJikan _jikan;
 
 		public ExceptionsTests()
 		{
-			_jikan = new Jikan(true, false);
+			_jikan = new Jikan(new Config.JikanClientConfiguration { SuppressException = true });
 		}
 
 		[Fact]
-		public void GetAnime_WrongIdDoNotSurpressExceptions_ShouldThrowJikanRequestExceptionGetAnime()
+		public void GetAnimeAsync_WrongIdDoNotSurpressExceptions_ShouldThrowJikanRequestExceptionGetAnime()
 		{
 			// When
-			Func<Task<Anime>> func = _jikan.Awaiting(x => x.GetAnime(2));
+			var func = _jikan.Awaiting(x => x.GetAnimeAsync(2));
 
 			// Then
 			func.Should().ThrowExactlyAsync<JikanRequestException>();
 		}
 
 		[Fact]
-		public void GetManga_WrongIdDoNotSurpressExceptions_ShouldThrowJikanRequestExceptionGetManga()
+		public void GetMangaAsync_WrongIdDoNotSurpressExceptions_ShouldThrowJikanRequestExceptionGetManga()
 		{
 			// When
-			Func<Task<Manga>> func = _jikan.Awaiting(x => x.GetManga(5));
+			var func = _jikan.Awaiting(x => x.GetMangaAsync(5));
 
 			// Then
 			func.Should().ThrowExactlyAsync<JikanRequestException>();
@@ -39,7 +37,7 @@ namespace JikanDotNet.Tests
 		public void GetPerson_WrongIdDoNotSurpressExceptions_ShouldThrowJikanRequestExceptionGetPerson()
 		{
 			// When
-			Func<Task<Person>> func = _jikan.Awaiting(x => x.GetPerson(13308));
+			var func = _jikan.Awaiting(x => x.GetPersonAsync(13308));
 
 			// Then
 			func.Should().ThrowExactlyAsync<JikanRequestException>();
