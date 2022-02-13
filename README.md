@@ -6,11 +6,10 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
 
 ### Main attributes
 
-* Written in to work with .Net Standard 2.0, compatible with .Net Framework (4.6.1 or newer) and .Net Core (2.0 or newer).
+* Written in to work with .Net Standard 2.0, compatible with .Net Framework (4.6.1 or newer), .Net Core (2.0 or newer) and .net (6.0 or newer).
 * Fully asynchromous request fetching (can be forced to synchromous if needed).
-* Can handle both SSL encrypted and non-SSL encrypted requests.
 * Light on dependencies 
-    * No dependencies if you are using .Net Core 3.x.
+    * No dependencies if you are using .Net Core 3.x or net 6.0.
     * Single dependancy for .Net Framework and .Net Core 2.x (System.Text.Json).
 * Usable with Dependency Injection.
 
@@ -18,17 +17,21 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
 
 - Anime
     - Basic information
-    - Characters & Staff
+    - Characters 
+    - Staff
     - Episode
     - News
     - Videos/PV/Episodes
     - Pictures
-    - Stats
+    - Statistics
     - Forum Topics
     - More Info
     - Reviews
     - Recommendations
     - User Updates
+    - Related entries
+    - Themes
+    - External links
 - Manga
     - Basic information
     - Characters 
@@ -40,29 +43,35 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
     - Reviews
     - Recommendations
     - User Updates
+    - Related entries
+    - External links
 - People
     - Basic information
+    - Related anime
+    - Related manga
+    - Voice acting roles
     - Pictures
 - Characters
     - Basic information
+    - Related anime
+    - Related manga
+    - Voice actors
     - Pictures
-- Search (Anime/Manga/Character/Person)
-    - Basic query
-    - Filters (Advanced Search)
-    - Pagination Support
-    - No.# of pages
+- Search 
+    - Anime
+    - Manga
+    - People
+    - Characters
+    - Users
+    - CLubs
 - Seasonal Anime 
-    - Season + Year
-    - Undefined airing date
-- Season Archive
 - Anime Scheduling (for current season)
-    - Filtering by day of the week.
 - Top
     - Anime
     - Manga
     - People
     - Characters
-    - Sub Types & Pagination Support
+    - Reviews
 - Genre
     - Anime genres
     - Manga genres
@@ -72,21 +81,19 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
     - Profile
     - Friends
     - History
-        - Filter by Anime/Manga.
-    - Anime list
-        - Filter by status (watching, completed, etc.)
-        - Advanced filters
-        - Pagination support
-    - Manga list
-        - Filter by status (reading, completed, etc.)
-        - Advanced filters
-        - Pagination support
+    - Statistics
+    - Favorites
+    - About
+    - Reviews
+    - Recommendations
+    - Clubs
+    - Anime list (will become obsolete soon)
+    - Manga list (will become obsolete soon)
 - Clubs
     - Profile
     - Member list
-        - Pagination support
-- Meta
-    - API status
+    - Staff
+    - Relations
 # Installation
 
 ### Package manager
@@ -108,19 +115,10 @@ Then restore dependencies:
 
 # Changelog
 
-## Future - Version 2.0.0
+## 14.02.2022 - Version 2.0.0
 
 - Compatible with Jikan REST API v4.0
-
-## 16.09.2021 - Version 1.6.0 (newest)
-
-- Rework of Genres enumeration
-    - `GenreSearch` enum is now change to two separate enums: `AnimeGenreSearch` and `MangaGenreSearch`.
-    - <b>[GetAnimeGenre]</b> Now accepts `AnimeGenreSearch` as a parameter.
-    - <b>[GetMangaGenre]</b> Now accepts `MangaGenreSearch` as a parameter.
-    - <b>[AnimeSearch]</b> `AnimeSearchConfig` now has property `Genres` of `AnimeGenreSearch` type (was `GenreSearch` before).
-    - <b>[MangaSearch]</b> `MangaSearchConfig` now has property `Genres` of `MangaGenreSearch` type (was `GenreSearch` before).
-
+    - Important - current documentation is for versions 1.x of library and is largely obsolete (although most of the endpoints overlaps). In the future, it will be either updated or moved to external documentation link. For now, please use the [following guide](https://github.com/Ervie/jikan.net/wiki/Migrating-from-1.x-to-2.0).
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**
 

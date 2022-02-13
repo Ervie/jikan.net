@@ -1,3 +1,8 @@
+## 14.02.2022 - Version 2.0.0
+
+- Compatible with Jikan REST API v4.0
+    - Important - current documentation is for versions 1.x of library and is largely obsolete (although most of the endpoints overlaps). In the future, it will be either updated or moved to external documentation link. For now, please use the [following guide](https://github.com/Ervie/jikan.net/wiki/Migrating-from-1.x-to-2.0).
+
 ## 16.09.2021 - Version 1.6.0
 
 - Rework of Genres enumeration

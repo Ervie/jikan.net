@@ -3,7 +3,7 @@ using System.ComponentModel;
 namespace JikanDotNet;
 
 /// <summary>
-/// Properties by which anime search results can be ordered.
+/// Properties by which club search results can be ordered.
 /// </summary>
 public enum ClubSearchOrderBy
 {

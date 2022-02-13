@@ -455,16 +455,16 @@ namespace JikanDotNet
 		Task<PaginatedJikanResponse<ICollection<Character>>> GetTopCharactersAsync(int page);
 
 		/// <summary>
-		/// Returns list of most popular characters.
+		/// Returns list of most popular reviews.
 		/// </summary>
-		/// <returns>List of most popular characters.</returns>
+		/// <returns>List of most popular reviews.</returns>
 		Task<PaginatedJikanResponse<ICollection<Review>>> GetTopReviewsAsync();
 
 		/// <summary>
-		/// Returns list of most popular characters.
+		/// Returns list of most popular reviews.
 		/// </summary>
 		/// <param name="page">Index of page folding 25 records of top ranging (e.g. 1 will return first 25 records, 2 will return record from 26 to 50 etc.)</param>
-		/// <returns>List of most popular characters.</returns>
+		/// <returns>List of most popular reviews.</returns>
 		Task<PaginatedJikanResponse<ICollection<Review>>> GetTopReviewsAsync(int page);
 
 		#endregion Top requests
