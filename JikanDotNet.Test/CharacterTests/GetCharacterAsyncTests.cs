@@ -1,6 +1,8 @@
 ﻿using FluentAssertions;
 using JikanDotNet.Exceptions;
 using System.Threading.Tasks;
+using FluentAssertions.Execution;
+using FluentAssertions.Reflection;
 using Xunit;
 
 namespace JikanDotNet.Tests.CharacterTests
@@ -57,7 +59,9 @@ namespace JikanDotNet.Tests.CharacterTests
 			var ichigo = await _jikan.GetCharacterAsync(5);
 
 			// Then
+			using var _ = new AssertionScope();
 			ichigo.Data.Name.Should().Be("Ichigo Kurosaki");
+			ichigo.Data.NameKanji.Should().Be("黒崎 一護");
 		}
 
 		[Fact]

@@ -25,6 +25,12 @@ namespace JikanDotNet
 		/// </summary>
 		[JsonPropertyName("name")]
 		public string Name { get; set; }
+		
+		/// <summary>
+		/// Character's name in kanji.
+		/// </summary>
+		[JsonPropertyName("name_kanji")]
+		public string NameKanji { get; set; }
 
 		/// <summary>
 		/// Character's nicknames.

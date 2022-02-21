@@ -30,7 +30,8 @@ namespace JikanDotNet.Tests.CharacterTests
             // Then
             using var _ = new AssertionScope();
             characters.Data.Should().HaveCount(ParameterConsts.MaximumPageSize);
-            characters.Data.Skip(1).First().Name.Should().Be("Spike Spiegel");
+            characters.Data.First().Name.Should().Be("Spike Spiegel");
+            characters.Data.First().NameKanji.Should().Be("スパイク・スピーゲル");
             characters.Pagination.LastVisiblePage.Should().BeGreaterThan(2350);
         }
         
@@ -80,7 +81,8 @@ namespace JikanDotNet.Tests.CharacterTests
             // Then
             using var _ = new AssertionScope();
             characters.Data.Should().HaveCount(ParameterConsts.MaximumPageSize);
-            characters.Data.First().Name.Should().Be("Killua Zoldyck");
+            characters.Data.First().Name.Should().Be("Kurapika");
+            characters.Data.First().NameKanji.Should().Be("クラピカ");
             characters.Pagination.LastVisiblePage.Should().BeGreaterThan(2350);
         }
         
@@ -97,7 +99,8 @@ namespace JikanDotNet.Tests.CharacterTests
             // Then
             using var _ = new AssertionScope();
             characters.Data.Should().HaveCount(pageSize);
-            characters.Data.Skip(1).First().Name.Should().Be("Spike Spiegel");
+            characters.Data.First().Name.Should().Be("Spike Spiegel");
+            characters.Data.First().NameKanji.Should().Be("スパイク・スピーゲル");
         }
         
         [Fact]
@@ -113,7 +116,7 @@ namespace JikanDotNet.Tests.CharacterTests
             // Then
             using var _ = new AssertionScope();
             characters.Data.Should().HaveCount(pageSize);
-            characters.Data.First().Name.Should().Be("Ichigo Kurosaki");
+            characters.Data.First().Name.Should().Be("Rukia Kuchiki");
         }
         
         [Theory]

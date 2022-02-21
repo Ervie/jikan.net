@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using JikanDotNet.Consts;
 using Xunit;
 
-namespace JikanDotNet.Tests.CharacterTests
+namespace JikanDotNet.Tests.ClubTests
 {
     public class SearchClubAsyncTests
     {
@@ -97,7 +97,7 @@ namespace JikanDotNet.Tests.CharacterTests
         }
         
         [Fact]
-        public async Task SearchCharacterAsync_GivenValidPageAndPageSize_ShouldReturnPageSizeNumberOfRecordsFromNextPage()
+        public async Task SearchClubAsync_GivenValidPageAndPageSize_ShouldReturnPageSizeNumberOfRecordsFromNextPage()
         {
             // Given
             const int pageSize = 5;
