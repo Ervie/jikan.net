@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace JikanDotNet.Tests.Schedules
+namespace JikanDotNet.Tests.ScheduleTests
 {
 	public class GetScheduleAsyncTests
 	{

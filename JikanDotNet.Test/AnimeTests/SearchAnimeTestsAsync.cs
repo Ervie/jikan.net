@@ -281,12 +281,11 @@ namespace JikanDotNet.Tests.AnimeTests
 		}
 
 		[Fact]
-		public async Task SearchAnimeAsync_VioletProducerKyotoAnimationConfig_ShouldReturnVEGAsTop3()
+		public async Task SearchAnimeAsync_ProducerKyotoAnimationConfig_ShouldReturnFMPAndLuckyStar()
 		{
 			// Given
 			var searchConfig = new AnimeSearchConfig
 			{
-				Query = "violet",
 				ProducerIds = { 2 }
 			};
 
@@ -294,18 +293,16 @@ namespace JikanDotNet.Tests.AnimeTests
 			var returnedAnime = await _jikan.SearchAnimeAsync(searchConfig);
 
 			// Then
-			returnedAnime.Data.Should().OnlyContain(x => x.Title.Contains("Evergarden") || x.Title.StartsWith("Ultra"));
+			returnedAnime.Data.Should().Contain(x => x.Title.Contains("Full Metal Panic? Fumoffu"));
+			returnedAnime.Data.Should().Contain(x => x.Title.Contains("Lucky☆Star"));
 		}
 
 		[Fact]
-		public async Task SearchAnimeAsync_VioletIncorrectProducerConfig_ShouldNotFilter()
+		public async Task SearchAnimeAsync_IncorrectProducerConfig_ShouldReturnEmpty()
 		{
-			Skip.If(true, "Seems like producer filter does not work 100% time yet. Recheck this.");
-			
 			// Given
 			var searchConfig = new AnimeSearchConfig
 			{
-				Query = "violet",
 				ProducerIds = { -1 }
 			};
 
@@ -429,12 +426,12 @@ namespace JikanDotNet.Tests.AnimeTests
 		}
 
 		[Fact]
-		public async Task SearchAnimeAsync_EmptyQueryActionTvAnimeSecondPage_ShouldFindNanohaAndSeed()
+		public async Task SearchAnimeAsync_EmptyQueryActionTvAnimeThirdPage_ShouldFindNanohaAndSeed()
 		{
 			// Given
 			var searchConfig = new AnimeSearchConfig
 			{
-				Page = 2,
+				Page = 3,
 				Type = AnimeType.TV,
 				Genres = new List<AnimeGenreSearch> { AnimeGenreSearch.Action }
 			};

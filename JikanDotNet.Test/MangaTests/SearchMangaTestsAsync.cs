@@ -119,7 +119,7 @@ namespace JikanDotNet.Tests.MangaTests
             // When
             var danganronpaManga = await _jikan.SearchMangaAsync("danganronpa");
 
-            danganronpaManga.Data.Should().HaveCountGreaterThan(20);
+            danganronpaManga.Data.Should().HaveCountGreaterThan(15);
         }
         
         [Fact]
@@ -203,11 +203,9 @@ namespace JikanDotNet.Tests.MangaTests
             var returnedAnime = await _jikan.SearchMangaAsync(searchConfig);
 
             // Then
-            using (new AssertionScope())
-            {
-                returnedAnime.Data.Select(x => x.Title).Should().Contain("Girly Air Force");
-                returnedAnime.Pagination.LastVisiblePage.Should().BeGreaterThan(20);
-            }
+            using var _ = new AssertionScope();
+            returnedAnime.Data.Select(x => x.Title).Should().Contain("Misty Girl"); 
+            returnedAnime.Pagination.LastVisiblePage.Should().BeGreaterThan(15);
         }
         
         [Theory]
@@ -243,7 +241,7 @@ namespace JikanDotNet.Tests.MangaTests
             var danganronpaManga = await _jikan.SearchMangaAsync(searchConfig);
 
             // Then
-            danganronpaManga.Data.Should().HaveCountGreaterThan(15);
+            danganronpaManga.Data.Should().HaveCountGreaterThan(12);
         }
         
         
@@ -325,14 +323,11 @@ namespace JikanDotNet.Tests.MangaTests
 		}
 
 		[Fact]
-		public async Task SearchMangaAsync_TorikoShonenJumpMagazineConfig_ShouldReturnTwoEntries()
+		public async Task SearchMangaAsync_ShonenJumpMagazineConfig_ShouldReturnNarutoAndBleach()
 		{
-			Skip.If(true, "Seems like magazine filter does not work 100% time yet. Recheck this.");
-			
 			// Given
 			var searchConfig = new MangaSearchConfig
 			{
-				Query = "toriko",
 				MagazineIds = { 83 }
 			};
 
@@ -342,8 +337,9 @@ namespace JikanDotNet.Tests.MangaTests
 			// Then
 			using (new AssertionScope())
 			{
-				returnedManga.Data.First().Title.Should().Be("Toriko");
-				returnedManga.Data.Should().HaveCount(3);
+				returnedManga.Data.First().Title.Should().Be("Naruto");
+				returnedManga.Data.Skip(1).First().Title.Should().Be("Bleach");
+				returnedManga.Data.Should().HaveCount(25);
 			}
 		}
 
@@ -389,8 +385,7 @@ namespace JikanDotNet.Tests.MangaTests
 			// Given
 			var searchConfig = new MangaSearchConfig
 			{
-				Genres = new List<MangaGenreSearch> { MangaGenreSearch.Action },
-				Type = MangaType.Manga
+				Genres = new List<MangaGenreSearch> { MangaGenreSearch.Action }
 			};
 
 			// When
@@ -410,8 +405,7 @@ namespace JikanDotNet.Tests.MangaTests
 			var searchConfig = new MangaSearchConfig
 			{
 				Page = 1,
-				Genres = new List<MangaGenreSearch> { MangaGenreSearch.Action },
-				Type = MangaType.Manga
+				Genres = new List<MangaGenreSearch> { MangaGenreSearch.Action }
 			};
 
 			// When
@@ -431,8 +425,7 @@ namespace JikanDotNet.Tests.MangaTests
 			var searchConfig = new MangaSearchConfig
 			{
 				Page = 2,
-				Genres = new List<MangaGenreSearch> { MangaGenreSearch.Action },
-				Type = MangaType.Manga
+				Genres = new List<MangaGenreSearch> { MangaGenreSearch.Action }
 			};
 
 			// When

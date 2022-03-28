@@ -158,7 +158,7 @@ namespace JikanDotNet
 					return genreSearch.GetDescription();
 				}).ToArray();
 
-				builder.Append($"excluded_genres={string.Join(",", genresIds)}&");
+				builder.Append($"genre_exclude={string.Join(",", genresIds)}&");
 			}
 
 			if (OrderBy != MangaSearchOrderBy.NoSorting)
@@ -171,7 +171,7 @@ namespace JikanDotNet
 
 			if (MagazineIds.Any())
 			{
-				builder.Append($"magazine={string.Join(",", MagazineIds)}&");
+				builder.Append($"magazines={string.Join(",", MagazineIds)}&");
 			}
 
 			if (Sfw)

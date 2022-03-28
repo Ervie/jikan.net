@@ -168,7 +168,7 @@ namespace JikanDotNet
 					return genreSearch.GetDescription();
 				}).ToArray();
 
-				builder.Append($"excluded_genres={string.Join(",", genresIds)}&");
+				builder.Append($"genre_exclude={string.Join(",", genresIds)}&");
 			}
 
 			if (OrderBy != AnimeSearchOrderBy.NoSorting)
@@ -181,7 +181,7 @@ namespace JikanDotNet
 
 			if (ProducerIds.Any())
 			{
-				builder.Append($"producer={string.Join(",", ProducerIds)}&");
+				builder.Append($"producers={string.Join(",", ProducerIds)}&");
 			}
 
 			if (Sfw)
