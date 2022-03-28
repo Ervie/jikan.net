@@ -425,7 +425,7 @@ namespace JikanDotNet.Tests.MangaTests
 			var searchConfig = new MangaSearchConfig
 			{
 				Page = 2,
-				Genres = new List<MangaGenreSearch> { MangaGenreSearch.Action 
+				Genres = new List<MangaGenreSearch> { MangaGenreSearch.Action }
 			};
 
 			// When
