@@ -1,3 +1,9 @@
+## 28.03.2022 - Version 2.0.1
+
+- Bug fixes
+    - <b>[Character]</b> Add missing `NameKanji` property
+    - <b>[AnimeSearchConfig/MangaSearchConfig]</b> Adjust `Genre`, `MagazineIds` and `ProducerIds` according to recent changes
+
 ## 14.02.2022 - Version 2.0.0
 
 - Compatible with Jikan REST API v4.0
