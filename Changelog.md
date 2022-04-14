@@ -1,3 +1,31 @@
+## 14.04.2022 - Version 2.1.0
+
+- Feature: additional paging information returned from entries queried from jikan database.
+
+Example:
+```
+{
+  "pagination": {
+    "last_visible_page": 4, // already exists
+    "has_next_page": true, // already exists
+    
+    // ...
+
+    "current_page": 4, // NEW: as the name suggests, the current page we're on
+    "items": { // NEW
+      "count": 7, // results on the current page
+      "total": 80, // total results
+      "per_page": 25 // total results per page (can be changed with `limit` query)
+    }
+  },
+  // data
+```
+This additional information is available in the following endpoints:
+* Schedules
+* Seasons
+* Search Anime/Manga/People/Characters
+* Top Anime/Manga/People/Characters
+
 ## 28.03.2022 - Version 2.0.1
 
 - Bug fixes
