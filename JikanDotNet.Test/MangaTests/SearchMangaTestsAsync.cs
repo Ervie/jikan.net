@@ -66,6 +66,9 @@ namespace JikanDotNet.Tests.MangaTests
             manga.Data.Should().HaveCount(ParameterConsts.MaximumPageSize);
             manga.Data.First().Title.Should().Be("Nana");
             manga.Pagination.LastVisiblePage.Should().BeGreaterThan(780);
+            manga.Pagination.CurrentPage.Should().Be(2);
+            manga.Pagination.Items.Count.Should().Be(25);
+            manga.Pagination.Items.PerPage.Should().Be(25);
         }
         
         [Fact]
@@ -82,6 +85,9 @@ namespace JikanDotNet.Tests.MangaTests
             using var _ = new AssertionScope();
             manga.Data.Should().HaveCount(pageSize);
             manga.Data.First().Title.Should().Be("Monster");
+            manga.Pagination.CurrentPage.Should().Be(1);
+            manga.Pagination.Items.Count.Should().Be(pageSize);
+            manga.Pagination.Items.PerPage.Should().Be(pageSize);
         }
         
         [Fact]
@@ -98,6 +104,9 @@ namespace JikanDotNet.Tests.MangaTests
             using var _ = new AssertionScope();
             manga.Data.Should().HaveCount(pageSize);
             manga.Data.First().Title.Should().Be("Full Moon wo Sagashite");
+            manga.Pagination.CurrentPage.Should().Be(2);
+            manga.Pagination.Items.Count.Should().Be(pageSize);
+            manga.Pagination.Items.PerPage.Should().Be(pageSize);
         }
         
         [Theory]
@@ -217,6 +226,7 @@ namespace JikanDotNet.Tests.MangaTests
             // Given
             var searchConfig = new MangaSearchConfig
             {
+	            Query = query,
                 Type = MangaType.Manga
             };
 

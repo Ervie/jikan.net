@@ -32,13 +32,16 @@ namespace JikanDotNet.Tests.PersonTests
             people.Data.Should().HaveCount(ParameterConsts.MaximumPageSize);
             people.Data.First().Name.Should().Be("Tomokazu Seki");
             people.Pagination.LastVisiblePage.Should().BeGreaterThan(370);
+            people.Pagination.CurrentPage.Should().Be(1);
+            people.Pagination.Items.Count.Should().Be(25);
+            people.Pagination.Items.PerPage.Should().Be(25);
         }
         
         [Theory]
         [InlineData(int.MinValue)]
         [InlineData(-1)]
         [InlineData(0)]
-        public async Task GetPeopleAsync_InvalidPage_ShouldThrowValidationException(int page)
+        public async Task SearchPersonAsync_InvalidPage_ShouldThrowValidationException(int page)
         {
             // Given
             var config = new PersonSearchConfig{Page = page};
@@ -82,6 +85,9 @@ namespace JikanDotNet.Tests.PersonTests
             people.Data.Should().HaveCount(ParameterConsts.MaximumPageSize);
             people.Data.First().Name.Should().Be("Travis Willingham");
             people.Pagination.LastVisiblePage.Should().BeGreaterThan(370);
+            people.Pagination.CurrentPage.Should().Be(2);
+            people.Pagination.Items.Count.Should().Be(25);
+            people.Pagination.Items.PerPage.Should().Be(25);
         }
         
         [Fact]
@@ -98,6 +104,9 @@ namespace JikanDotNet.Tests.PersonTests
             using var _ = new AssertionScope();
             people.Data.Should().HaveCount(pageSize);
             people.Data.First().Name.Should().Be("Tomokazu Seki");
+            people.Pagination.CurrentPage.Should().Be(1);
+            people.Pagination.Items.Count.Should().Be(pageSize);
+            people.Pagination.Items.PerPage.Should().Be(pageSize);
         }
         
         [Fact]
@@ -114,6 +123,9 @@ namespace JikanDotNet.Tests.PersonTests
             using var _ = new AssertionScope();
             people.Data.Should().HaveCount(pageSize);
             people.Data.First().Name.Should().Be("Toshiyuki Morikawa");
+            people.Pagination.CurrentPage.Should().Be(2);
+            people.Pagination.Items.Count.Should().Be(pageSize);
+            people.Pagination.Items.PerPage.Should().Be(pageSize);
         }
         
         [Theory]

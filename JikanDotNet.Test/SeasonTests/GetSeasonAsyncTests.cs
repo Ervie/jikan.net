@@ -91,10 +91,13 @@ namespace JikanDotNet.Tests.SeasonTests
 			var winter2017 = await _jikan.GetSeasonAsync(2017, Season.Winter);
 
 			// Then
-			var youjoSenki = winter2017.Data.FirstOrDefault(x => x.Title.Equals("Youjo Senki"));
-
 			using (new AssertionScope())
 			{
+				winter2017.Pagination.Items.Count.Should().Be(25);
+				winter2017.Pagination.Items.Total.Should().Be(54);
+				
+				var youjoSenki = winter2017.Data.FirstOrDefault(x => x.Title.Equals("Youjo Senki"));
+
 				youjoSenki.Type.Should().Be("TV");
 				youjoSenki.Status.Should().Be("Finished Airing");
 				youjoSenki.Episodes.Should().Be(12);

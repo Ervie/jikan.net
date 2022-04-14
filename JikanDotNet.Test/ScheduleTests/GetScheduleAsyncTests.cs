@@ -27,18 +27,23 @@ namespace JikanDotNet.Tests.ScheduleTests
 			currentSeason.Data.Should().NotBeEmpty();
 			currentSeason.Pagination.HasNextPage.Should().BeTrue();
 			currentSeason.Pagination.LastVisiblePage.Should().BeGreaterOrEqualTo(3);
+			currentSeason.Pagination.CurrentPage.Should().Be(1);
+			currentSeason.Pagination.Items.Count.Should().Be(25);
+			currentSeason.Pagination.Items.PerPage.Should().Be(25);
+			currentSeason.Pagination.Items.Total.Should().BeGreaterThan(100);
 		}
 
 		[Fact]
 		public async Task GetScheduleAsync_AllScheduleWithPage_ShouldParseCurrentSchedule()
 		{
 			// When
-			var currentSeason = await _jikan.GetScheduleAsync(5);
+			var currentSeason = await _jikan.GetScheduleAsync(3);
 
 			// Then
 			using var _ = new AssertionScope();
-			currentSeason.Data.Select(x => x.Title).Should().Contain("Sasaki to Miyano");
-			currentSeason.Data.Select(x => x.Title).Should().Contain("Slow Loop");
+			currentSeason.Pagination.CurrentPage.Should().Be(3);
+			currentSeason.Pagination.HasNextPage.Should().BeTrue();
+			currentSeason.Pagination.Items.Count.Should().Be(25);
 		}
 
 		[Theory]
@@ -76,8 +81,7 @@ namespace JikanDotNet.Tests.ScheduleTests
 			{
 				currentSeason.Pagination.HasNextPage.Should().BeFalse();
 				currentSeason.Pagination.LastVisiblePage.Should().Be(1);
-				mondayScheduleTitles.Should().Contain("Shingeki no Kyojin: The Final Season Part 2");
-				mondayScheduleTitles.Should().Contain("Tribe Nine");
+				mondayScheduleTitles.Should().Contain("Healer Girl");
 			}
 		}
 
@@ -91,7 +95,7 @@ namespace JikanDotNet.Tests.ScheduleTests
 			var fridayScheduleTitles = currentSeason.Data.Select(x => x.Title);
 			using (new AssertionScope())
 			{
-				fridayScheduleTitles.Should().Contain("Platinum End");
+				fridayScheduleTitles.Should().Contain("Date A Live IV");
 				fridayScheduleTitles.Should().Contain("Crayon Shin-chan");
 			}
 		}

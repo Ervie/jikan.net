@@ -498,12 +498,12 @@ namespace JikanDotNet
 		#region Season methods
 
 		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetSeasonAsync(int year, Season season)
+		public async Task<DbPaginatedJikanResponse<ICollection<Anime>>> GetSeasonAsync(int year, Season season)
 		{
 			Guard.IsValid(x => x >= 1000 && x < 10000, year, nameof(year));
 			Guard.IsValidEnum(season, nameof(season));
 			var endpointParts = new[] { JikanEndpointConsts.Seasons, year.ToString(), season.GetDescription() };
-			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
+			return await ExecuteGetRequestAsync<DbPaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
 		}
 
 		/// <inheritdoc />
@@ -514,10 +514,10 @@ namespace JikanDotNet
 		}
 
 		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetUpcomingSeasonAsync()
+		public async Task<DbPaginatedJikanResponse<ICollection<Anime>>> GetUpcomingSeasonAsync()
 		{
 			var endpointParts = new[] { JikanEndpointConsts.Seasons, JikanEndpointConsts.Upcoming };
-			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
+			return await ExecuteGetRequestAsync<DbPaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
 		}
 
 		#endregion Season methods
@@ -525,28 +525,28 @@ namespace JikanDotNet
 		#region Schedule methods
 
 		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetScheduleAsync()
+		public async Task<DbPaginatedJikanResponse<ICollection<Anime>>> GetScheduleAsync()
 		{
 			var endpointParts = new[] { JikanEndpointConsts.Schedules };
-			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
+			return await ExecuteGetRequestAsync<DbPaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
 		}
 
 		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetScheduleAsync(int page)
+		public async Task<DbPaginatedJikanResponse<ICollection<Anime>>> GetScheduleAsync(int page)
 		{
 			Guard.IsGreaterThanZero(page, nameof(page));
 			var queryParams = $"?page={page}";
 			var endpointParts = new[] { JikanEndpointConsts.Schedules + queryParams };
-			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
+			return await ExecuteGetRequestAsync<DbPaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
 		}
 
 		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetScheduleAsync(ScheduledDay scheduledDay)
+		public async Task<DbPaginatedJikanResponse<ICollection<Anime>>> GetScheduleAsync(ScheduledDay scheduledDay)
 		{
 			Guard.IsValidEnum(scheduledDay, nameof(scheduledDay));
 			var queryParams = $"?filter={scheduledDay.GetDescription()}";
 			var endpointParts = new[] { JikanEndpointConsts.Schedules + queryParams };
-			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
+			return await ExecuteGetRequestAsync<DbPaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
 		}
 
 		#endregion Schedule methods
@@ -554,67 +554,67 @@ namespace JikanDotNet
 		#region Top methods
 
 		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetTopAnimeAsync()
+		public async Task<DbPaginatedJikanResponse<ICollection<Anime>>> GetTopAnimeAsync()
 		{
 			var endpointParts = new[] { JikanEndpointConsts.TopList, JikanEndpointConsts.Anime };
-			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
+			return await ExecuteGetRequestAsync<DbPaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
 		}
 
 		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetTopAnimeAsync(int page)
+		public async Task<DbPaginatedJikanResponse<ICollection<Anime>>> GetTopAnimeAsync(int page)
 		{
 			Guard.IsGreaterThanZero(page, nameof(page));
 			var queryParams = $"?page={page}";
 			var endpointParts = new[] { JikanEndpointConsts.TopList, JikanEndpointConsts.Anime + queryParams };
-			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
+			return await ExecuteGetRequestAsync<DbPaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
 		}
 
 		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<Manga>>> GetTopMangaAsync()
+		public async Task<DbPaginatedJikanResponse<ICollection<Manga>>> GetTopMangaAsync()
 		{
 			var endpointParts = new[] { JikanEndpointConsts.TopList, JikanEndpointConsts.Manga };
-			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Manga>>>(endpointParts);
+			return await ExecuteGetRequestAsync<DbPaginatedJikanResponse<ICollection<Manga>>>(endpointParts);
 		}
 
 		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<Manga>>> GetTopMangaAsync(int page)
+		public async Task<DbPaginatedJikanResponse<ICollection<Manga>>> GetTopMangaAsync(int page)
 		{
 			Guard.IsGreaterThanZero(page, nameof(page));
 			var queryParams = $"?page={page}";
 			var endpointParts = new[] { JikanEndpointConsts.TopList, JikanEndpointConsts.Manga + queryParams };
-			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Manga>>>(endpointParts);
+			return await ExecuteGetRequestAsync<DbPaginatedJikanResponse<ICollection<Manga>>>(endpointParts);
 		}
 
 		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<Person>>> GetTopPeopleAsync()
+		public async Task<DbPaginatedJikanResponse<ICollection<Person>>> GetTopPeopleAsync()
 		{
 			var endpointParts = new[] { JikanEndpointConsts.TopList, JikanEndpointConsts.People };
-			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Person>>>(endpointParts);
+			return await ExecuteGetRequestAsync<DbPaginatedJikanResponse<ICollection<Person>>>(endpointParts);
 		}
 
 		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<Person>>> GetTopPeopleAsync(int page)
+		public async Task<DbPaginatedJikanResponse<ICollection<Person>>> GetTopPeopleAsync(int page)
 		{
 			Guard.IsGreaterThanZero(page, nameof(page));
 			var queryParams = $"?page={page}";
 			var endpointParts = new[] { JikanEndpointConsts.TopList, JikanEndpointConsts.People + queryParams };
-			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Person>>>(endpointParts);
+			return await ExecuteGetRequestAsync<DbPaginatedJikanResponse<ICollection<Person>>>(endpointParts);
 		}
 
 		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<Character>>> GetTopCharactersAsync()
+		public async Task<DbPaginatedJikanResponse<ICollection<Character>>> GetTopCharactersAsync()
 		{
 			var endpointParts = new[] { JikanEndpointConsts.TopList, JikanEndpointConsts.Characters };
-			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Character>>>(endpointParts);
+			return await ExecuteGetRequestAsync<DbPaginatedJikanResponse<ICollection<Character>>>(endpointParts);
 		}
 
 		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<Character>>> GetTopCharactersAsync(int page)
+		public async Task<DbPaginatedJikanResponse<ICollection<Character>>> GetTopCharactersAsync(int page)
 		{
 			Guard.IsGreaterThanZero(page, nameof(page));
 			var queryParams = $"?page={page}";
 			var endpointParts = new[] { JikanEndpointConsts.TopList, JikanEndpointConsts.Characters + queryParams };
-			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Character>>>(endpointParts);
+			return await ExecuteGetRequestAsync<DbPaginatedJikanResponse<ICollection<Character>>>(endpointParts);
 		}
 
 		/// <inheritdoc />
@@ -1067,52 +1067,51 @@ namespace JikanDotNet
 		
 		
 		/// <inheritdoc />
-		public Task<PaginatedJikanResponse<ICollection<Anime>>> SearchAnimeAsync(string query)
+		public Task<DbPaginatedJikanResponse<ICollection<Anime>>> SearchAnimeAsync(string query)
 			=> SearchAnimeAsync(new AnimeSearchConfig {Query = query});
 		
-
 		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<Anime>>> SearchAnimeAsync(AnimeSearchConfig searchConfig)
+		public async Task<DbPaginatedJikanResponse<ICollection<Anime>>> SearchAnimeAsync(AnimeSearchConfig searchConfig)
 		{
 			Guard.IsNotNull(searchConfig, nameof(searchConfig));
 			var endpointParts = new[] { JikanEndpointConsts.Anime + searchConfig.ConfigToString()};
-			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
+			return await ExecuteGetRequestAsync<DbPaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
 		}
 		
 		/// <inheritdoc />
-		public Task<PaginatedJikanResponse<ICollection<Manga>>> SearchMangaAsync(string query)
+		public Task<DbPaginatedJikanResponse<ICollection<Manga>>> SearchMangaAsync(string query)
 			=> SearchMangaAsync(new MangaSearchConfig {Query = query});
 		
 		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<Manga>>> SearchMangaAsync(MangaSearchConfig searchConfig)
+		public async Task<DbPaginatedJikanResponse<ICollection<Manga>>> SearchMangaAsync(MangaSearchConfig searchConfig)
 		{
 			Guard.IsNotNull(searchConfig, nameof(searchConfig));
 			var endpointParts = new[] { JikanEndpointConsts.Manga + searchConfig.ConfigToString()};
-			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Manga>>>(endpointParts);
+			return await ExecuteGetRequestAsync<DbPaginatedJikanResponse<ICollection<Manga>>>(endpointParts);
 		}
 
 		/// <inheritdoc />
-		public Task<PaginatedJikanResponse<ICollection<Person>>> SearchPersonAsync(string query)
+		public Task<DbPaginatedJikanResponse<ICollection<Person>>> SearchPersonAsync(string query)
 			=> SearchPersonAsync(new PersonSearchConfig {Query = query});
 		
 		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<Person>>> SearchPersonAsync(PersonSearchConfig searchConfig)
+		public async Task<DbPaginatedJikanResponse<ICollection<Person>>> SearchPersonAsync(PersonSearchConfig searchConfig)
 		{	
 			Guard.IsNotNull(searchConfig, nameof(searchConfig));
 			var endpointParts = new[] { JikanEndpointConsts.People + searchConfig.ConfigToString()};
-			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Person>>>(endpointParts);
+			return await ExecuteGetRequestAsync<DbPaginatedJikanResponse<ICollection<Person>>>(endpointParts);
 		}
 
 		/// <inheritdoc />
-		public Task<PaginatedJikanResponse<ICollection<Character>>> SearchCharacterAsync(string query)
+		public Task<DbPaginatedJikanResponse<ICollection<Character>>> SearchCharacterAsync(string query)
 			=> SearchCharacterAsync(new CharacterSearchConfig {Query = query});
 		
 		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<Character>>> SearchCharacterAsync(CharacterSearchConfig searchConfig)
+		public async Task<DbPaginatedJikanResponse<ICollection<Character>>> SearchCharacterAsync(CharacterSearchConfig searchConfig)
 		{
 			Guard.IsNotNull(searchConfig, nameof(searchConfig));
 			var endpointParts = new[] { JikanEndpointConsts.Characters + searchConfig.ConfigToString()};
-			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Character>>>(endpointParts);
+			return await ExecuteGetRequestAsync<DbPaginatedJikanResponse<ICollection<Character>>>(endpointParts);
 		}
 	
 		/// <inheritdoc />

@@ -14,7 +14,7 @@ namespace JikanDotNet
 		public Pagination Pagination { get; set; }
 
 		/// <summary>
-		/// Parametereless constructor, required for serialization
+		/// Parameterless constructor, required for serialization
 		/// </summary>
 		public PaginatedJikanResponse()
 		{ }

@@ -360,7 +360,7 @@ namespace JikanDotNet
 		/// <param name="year">Year of selected season.</param>
 		/// <param name="season">Selected season.</param>
 		/// <returns>Season preview.</returns>
-		Task<PaginatedJikanResponse<ICollection<Anime>>> GetSeasonAsync(int year, Season season);
+		Task<DbPaginatedJikanResponse<ICollection<Anime>>> GetSeasonAsync(int year, Season season);
 
 		/// <summary>
 		/// Returns list of available season to query with <see cref="GetSeasonAsync(int, Season)"/>
@@ -372,7 +372,7 @@ namespace JikanDotNet
 		/// Return season preview for anime with undefined airing season (marked as "Later" on MAL).
 		/// </summary>
 		/// <returns>Season preview for anime with undefined airing date.</returns>
-		Task<PaginatedJikanResponse<ICollection<Anime>>> GetUpcomingSeasonAsync();
+		Task<DbPaginatedJikanResponse<ICollection<Anime>>> GetUpcomingSeasonAsync();
 
 		#endregion Season requests
 
@@ -382,21 +382,21 @@ namespace JikanDotNet
 		/// Returns current season schedule.
 		/// </summary>
 		/// <returns>Current season schedule.</returns>
-		Task<PaginatedJikanResponse<ICollection<Anime>>> GetScheduleAsync();
+		Task<DbPaginatedJikanResponse<ICollection<Anime>>> GetScheduleAsync();
 
 		/// <summary>
 		/// Returns current season schedule.
 		/// </summary>
 		/// <param name="page">Index of page folding 25 records of top ranging (e.g. 1 will return first 25 records, 2 will return record from 26 to 50 etc.)</param>
 		/// <returns>Current season schedule.</returns>
-		Task<PaginatedJikanResponse<ICollection<Anime>>> GetScheduleAsync(int page);
+		Task<DbPaginatedJikanResponse<ICollection<Anime>>> GetScheduleAsync(int page);
 
 		/// <summary>
 		/// Returns current season schedule.
 		/// </summary>
 		/// <param name="scheduledDay">Scheduled day to filter by.</param>
 		/// <returns>Current season schedule.</returns>
-		Task<PaginatedJikanResponse<ICollection<Anime>>> GetScheduleAsync(ScheduledDay scheduledDay);
+		Task<DbPaginatedJikanResponse<ICollection<Anime>>> GetScheduleAsync(ScheduledDay scheduledDay);
 
 		#endregion Schedule requests
 
@@ -406,53 +406,53 @@ namespace JikanDotNet
 		/// Returns list of top anime.
 		/// </summary>
 		/// <returns>List of top anime.</returns>
-		Task<PaginatedJikanResponse<ICollection<Anime>>> GetTopAnimeAsync();
+		Task<DbPaginatedJikanResponse<ICollection<Anime>>> GetTopAnimeAsync();
 
 		/// <summary>
 		/// Returns list of top anime.
 		/// </summary>
 		/// <param name="page">Index of page folding 25 records of top ranging (e.g. 1 will return first 25 records, 2 will return record from 26 to 50 etc.)</param>
 		/// <returns>List of top anime.</returns>
-		Task<PaginatedJikanResponse<ICollection<Anime>>> GetTopAnimeAsync(int page);
+		Task<DbPaginatedJikanResponse<ICollection<Anime>>> GetTopAnimeAsync(int page);
 
 		/// <summary>
 		/// Returns list of top manga.
 		/// </summary>
 		/// <returns>List of top manga.</returns>
-		Task<PaginatedJikanResponse<ICollection<Manga>>> GetTopMangaAsync();
+		Task<DbPaginatedJikanResponse<ICollection<Manga>>> GetTopMangaAsync();
 
 		/// <summary>
 		/// Returns list of top manga.
 		/// </summary>
 		/// <param name="page">Index of page folding 25 records of top ranging (e.g. 1 will return first 25 records, 2 will return record from 26 to 50 etc.)</param>
 		/// <returns>List of top manga.</returns>
-		Task<PaginatedJikanResponse<ICollection<Manga>>> GetTopMangaAsync(int page);
+		Task<DbPaginatedJikanResponse<ICollection<Manga>>> GetTopMangaAsync(int page);
 
 		/// <summary>
 		/// Returns list of most popular people.
 		/// </summary>
 		/// <returns>List of most popular people.</returns>
-		Task<PaginatedJikanResponse<ICollection<Person>>> GetTopPeopleAsync();
+		Task<DbPaginatedJikanResponse<ICollection<Person>>> GetTopPeopleAsync();
 
 		/// <summary>
 		/// Returns list of most popular people.
 		/// </summary>
 		/// <param name="page">Index of page folding 25 records of top ranging (e.g. 1 will return first 25 records, 2 will return record from 26 to 50 etc.)</param>
 		/// <returns>List of most popular people.</returns>
-		Task<PaginatedJikanResponse<ICollection<Person>>> GetTopPeopleAsync(int page);
+		Task<DbPaginatedJikanResponse<ICollection<Person>>> GetTopPeopleAsync(int page);
 
 		/// <summary>
 		/// Returns list of most popular characters.
 		/// </summary>
 		/// <returns>List of most popular characters.</returns>
-		Task<PaginatedJikanResponse<ICollection<Character>>> GetTopCharactersAsync();
+		Task<DbPaginatedJikanResponse<ICollection<Character>>> GetTopCharactersAsync();
 
 		/// <summary>
 		/// Returns list of most popular characters.
 		/// </summary>
 		/// <param name="page">Index of page folding 25 records of top ranging (e.g. 1 will return first 25 records, 2 will return record from 26 to 50 etc.)</param>
 		/// <returns>List of most popular characters.</returns>
-		Task<PaginatedJikanResponse<ICollection<Character>>> GetTopCharactersAsync(int page);
+		Task<DbPaginatedJikanResponse<ICollection<Character>>> GetTopCharactersAsync(int page);
 
 		/// <summary>
 		/// Returns list of most popular reviews.
@@ -839,56 +839,56 @@ namespace JikanDotNet
 		/// </summary>
 		/// <param name="query">Search query.</param>
 		/// <returns>List of result related to search query.</returns>
-		Task<PaginatedJikanResponse<ICollection<Anime>>> SearchAnimeAsync(string query);
+		Task<DbPaginatedJikanResponse<ICollection<Anime>>> SearchAnimeAsync(string query);
 		
 		/// <summary>
 		/// Returns list of results related to search.
 		/// </summary>
 		/// <param name="searchConfig">Additional configuration for advanced search.</param>
 		/// <returns>List of result related to search query.</returns>
-		Task<PaginatedJikanResponse<ICollection<Anime>>> SearchAnimeAsync(AnimeSearchConfig searchConfig);
-		
-		/// <summary>
-		/// Returns list of results related to search.
-		/// </summary>
-		/// <param name="query">Search query.</param>
-		/// <returns>List of result related to search query.</returns>
-		Task<PaginatedJikanResponse<ICollection<Manga>>> SearchMangaAsync(string query);
-		
-		/// <summary>
-		/// Returns list of results related to search.
-		/// </summary>
-		/// <param name="searchConfig">Additional configuration for advanced search.</param>
-		/// <returns>List of result related to search query.</returns>
-		Task<PaginatedJikanResponse<ICollection<Manga>>> SearchMangaAsync(MangaSearchConfig searchConfig);
+		Task<DbPaginatedJikanResponse<ICollection<Anime>>> SearchAnimeAsync(AnimeSearchConfig searchConfig);
 		
 		/// <summary>
 		/// Returns list of results related to search.
 		/// </summary>
 		/// <param name="query">Search query.</param>
 		/// <returns>List of result related to search query.</returns>
-		Task<PaginatedJikanResponse<ICollection<Person>>> SearchPersonAsync(string query);
+		Task<DbPaginatedJikanResponse<ICollection<Manga>>> SearchMangaAsync(string query);
+		
+		/// <summary>
+		/// Returns list of results related to search.
+		/// </summary>
+		/// <param name="searchConfig">Additional configuration for advanced search.</param>
+		/// <returns>List of result related to search query.</returns>
+		Task<DbPaginatedJikanResponse<ICollection<Manga>>> SearchMangaAsync(MangaSearchConfig searchConfig);
+		
+		/// <summary>
+		/// Returns list of results related to search.
+		/// </summary>
+		/// <param name="query">Search query.</param>
+		/// <returns>List of result related to search query.</returns>
+		Task<DbPaginatedJikanResponse<ICollection<Person>>> SearchPersonAsync(string query);
 
 		/// <summary>
 		/// Returns list of results related to search.
 		/// </summary>
 		/// <param name="searchConfig">Additional configuration for advanced search.</param>
 		/// <returns>List of result related to search query.</returns>
-		Task<PaginatedJikanResponse<ICollection<Person>>> SearchPersonAsync(PersonSearchConfig searchConfig);
+		Task<DbPaginatedJikanResponse<ICollection<Person>>> SearchPersonAsync(PersonSearchConfig searchConfig);
 
 		/// <summary>
 		/// Returns list of results related to search.
 		/// </summary>
 		/// <param name="query">Search query.</param>
 		/// <returns>List of result related to search query.</returns>
-		Task<PaginatedJikanResponse<ICollection<Character>>> SearchCharacterAsync(string query);
+		Task<DbPaginatedJikanResponse<ICollection<Character>>> SearchCharacterAsync(string query);
 
 		/// <summary>
 		/// Returns list of results related to search.
 		/// </summary>
 		/// <param name="searchConfig">Additional configuration for advanced search.</param>
 		/// <returns>List of result related to search query.</returns>
-		Task<PaginatedJikanResponse<ICollection<Character>>> SearchCharacterAsync(CharacterSearchConfig searchConfig);
+		Task<DbPaginatedJikanResponse<ICollection<Character>>> SearchCharacterAsync(CharacterSearchConfig searchConfig);
 		
 		/// <summary>
 		/// Returns list of results related to search.

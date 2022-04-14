@@ -6,6 +6,9 @@ using JikanDotNet.Interfaces;
 
 namespace JikanDotNet;
 
+/// <summary>
+/// Model class of search configuration for advanced user search.
+/// </summary>
 public class UserSearchConfig: ISearchConfig
 {
     /// <summary>

@@ -67,6 +67,9 @@ namespace JikanDotNet.Tests.AnimeTests
             anime.Data.Should().HaveCount(ParameterConsts.MaximumPageSize);
             anime.Data.First().Title.Should().Be("Rurouni Kenshin: Meiji Kenkaku Romantan - Tsuioku-hen");
             anime.Pagination.LastVisiblePage.Should().BeGreaterThan(780);
+            anime.Pagination.CurrentPage.Should().Be(2);
+            anime.Pagination.Items.Count.Should().Be(25);
+            anime.Pagination.Items.PerPage.Should().Be(25);
         }
         
         [Fact]
@@ -83,6 +86,9 @@ namespace JikanDotNet.Tests.AnimeTests
             using var _ = new AssertionScope();
             anime.Data.Should().HaveCount(pageSize);
             anime.Data.First().Title.Should().Be("Cowboy Bebop");
+            anime.Pagination.CurrentPage.Should().Be(1);
+            anime.Pagination.Items.Count.Should().Be(pageSize);
+            anime.Pagination.Items.PerPage.Should().Be(pageSize);
         }
         
         [Fact]
@@ -99,6 +105,9 @@ namespace JikanDotNet.Tests.AnimeTests
             using var _ = new AssertionScope();
             anime.Data.Should().HaveCount(pageSize);
             anime.Data.First().Title.Should().Be("Eyeshield 21");
+            anime.Pagination.CurrentPage.Should().Be(2);
+            anime.Pagination.Items.Count.Should().Be(pageSize);
+            anime.Pagination.Items.PerPage.Should().Be(pageSize);
         }
         
         [Theory]

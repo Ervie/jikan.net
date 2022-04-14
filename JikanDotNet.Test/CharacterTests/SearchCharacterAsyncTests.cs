@@ -81,9 +81,12 @@ namespace JikanDotNet.Tests.CharacterTests
             // Then
             using var _ = new AssertionScope();
             characters.Data.Should().HaveCount(ParameterConsts.MaximumPageSize);
-            characters.Data.First().Name.Should().Be("Kurapika");
-            characters.Data.First().NameKanji.Should().Be("クラピカ");
+            characters.Data.First().Name.Should().Be("Leorio Paladiknight");
+            characters.Data.First().NameKanji.Should().StartWith("レオリオ=パラディナｲﾄ");
             characters.Pagination.LastVisiblePage.Should().BeGreaterThan(2350);
+            characters.Pagination.CurrentPage.Should().Be(2);
+            characters.Pagination.Items.Count.Should().Be(25);
+            characters.Pagination.Items.PerPage.Should().Be(25);
         }
         
         [Fact]
@@ -101,6 +104,9 @@ namespace JikanDotNet.Tests.CharacterTests
             characters.Data.Should().HaveCount(pageSize);
             characters.Data.First().Name.Should().Be("Spike Spiegel");
             characters.Data.First().NameKanji.Should().Be("スパイク・スピーゲル");
+            characters.Pagination.CurrentPage.Should().Be(1);
+            characters.Pagination.Items.Count.Should().Be(pageSize);
+            characters.Pagination.Items.PerPage.Should().Be(pageSize);
         }
         
         [Fact]
@@ -117,6 +123,9 @@ namespace JikanDotNet.Tests.CharacterTests
             using var _ = new AssertionScope();
             characters.Data.Should().HaveCount(pageSize);
             characters.Data.First().Name.Should().Be("Rukia Kuchiki");
+            characters.Pagination.CurrentPage.Should().Be(2);
+            characters.Pagination.Items.Count.Should().Be(pageSize);
+            characters.Pagination.Items.PerPage.Should().Be(pageSize);
         }
         
         [Theory]
@@ -169,7 +178,7 @@ namespace JikanDotNet.Tests.CharacterTests
             people.Data.Should().Contain(x => x.Name.Equals("Fake Lupin"));
             people.Data.Should().Contain(x => x.Name.Equals("Arsène Lupin"));
             people.Data.Should().Contain(x => x.Name.Equals("Lupin II"));
-            people.Data.First().Name.Should().Be("Arsene Lupin III");
+            people.Data.First().Name.Should().Be("Lupin");
         }
         
         [Fact]
@@ -186,7 +195,7 @@ namespace JikanDotNet.Tests.CharacterTests
             people.Data.Should().Contain(x => x.Name.Equals("Fake Lupin"));
             people.Data.Should().Contain(x => x.Name.Equals("Arsène Lupin"));
             people.Data.Should().Contain(x => x.Name.Equals("Lupin II"));
-            people.Data.First().Name.Should().Be("Kaito Kuroba");
+            people.Data.First().Name.Should().Be("Lupin");
         }
         
         [Fact]
@@ -203,8 +212,8 @@ namespace JikanDotNet.Tests.CharacterTests
             people.Data.Should().Contain(x => x.Name.Equals("Fake Lupin"));
             people.Data.Should().Contain(x => x.Name.Equals("Arsène Lupin"));
             people.Data.Should().Contain(x => x.Name.Equals("Lupin II"));
-            people.Data.Last().Name.Should().Be("Kaito Kuroba");
-            people.Data.First().Favorites.Should().Be(0);
+            people.Data.Last().Name.Should().Be("Arsene Lupin III");
+            people.Data.First().Favorites.Should().BeGreaterOrEqualTo(0);
         }
         
         [Fact]
@@ -219,9 +228,7 @@ namespace JikanDotNet.Tests.CharacterTests
             // Then
             using var _ = new AssertionScope();
             people.Data.Should().HaveCount(config.PageSize.Value);
-            people.Data.Should().Contain(x => x.Name.Equals("Arsene Lupin III"));
-            people.Data.Should().Contain(x => x.Name.Equals("Kaito Kuroba"));
-            people.Data.Should().NotContain(x => x.Name.Equals("Lupin II"));
+            people.Data.Should().Contain(x => x.Name.Equals("Lupin"));
         }
         
         [Fact]

@@ -2,6 +2,9 @@ using System.ComponentModel;
 
 namespace JikanDotNet;
 
+/// <summary>
+/// Enum for user gender.
+/// </summary>
 public enum UserGender
 {
     /// <summary>
