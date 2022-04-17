@@ -1,3 +1,10 @@
+## 17.04.2022 - Version 2.1.1
+
+- Fixes
+    * <b>[GetUserAnimeListAsync/GetUserMangaListAsync]</b> - fix parsing `watching_status` and `reading_status`
+- Features
+    * Watching and reading statuses on user list endpoints are now represented in enum values `UserAnimeWatchingStatus` and `UserMangaReadingStatus`
+
 ## 14.04.2022 - Version 2.1.0
 
 - Feature: additional paging information returned from entries queried from jikan database.

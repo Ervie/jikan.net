@@ -13,7 +13,7 @@ namespace JikanDotNet
 		/// Current user's watching status of anime.
 		/// </summary>
 		[JsonPropertyName("watching_status")]
-		public string WatchingStatus { get; set; }
+		public UserAnimeWatchingStatus WatchingStatus { get; set; }
 
 		/// <summary>
 		/// User's score for the anime. 0 if not assigned yet.

@@ -115,33 +115,12 @@ Then restore dependencies:
 
 # Changelog
 
-## 14.04.2022 - Version 2.1.0
+## 17.04.2022 - Version 2.1.1
 
-- Feature: additional paging information returned from entries queried from jikan database.
-
-Example:
-```
-{
-  "pagination": {
-    "last_visible_page": 4, // already exists
-    "has_next_page": true, // already exists
-    
-    // ...
-
-    "current_page": 4, // NEW: as the name suggests, the current page we're on
-    "items": { // NEW
-      "count": 7, // results on the current page
-      "total": 80, // total results
-      "per_page": 25 // total results per page (can be changed with `limit` query)
-    }
-  },
-  // data
-```
-This additional information is available in the following endpoints:
-* Schedules
-* Seasons
-* Search Anime/Manga/People/Characters
-* Top Anime/Manga/People/Characters
+- Fixes
+    * <b>[GetUserAnimeListAsync/GetUserMangaListAsync]</b> - fix parsing `watching_status` and `reading_status`
+- Features
+    * Watching and reading statuses on user list endpoints are now represented in enum values `UserAnimeWatchingStatus` and `UserMangaReadingStatus`
 
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**
