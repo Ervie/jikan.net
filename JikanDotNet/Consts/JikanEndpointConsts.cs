@@ -44,5 +44,6 @@
 		internal const string Popular  = "popular";
 		internal const string Promos = "promos";
 		internal const string External = "external";
+		internal const string Full = "full";
 	}
 }

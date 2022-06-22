@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Version>2.0.1</Version>
+    <Version>2.1.1</Version>
     <Authors>Bartłomiej Buchała</Authors>
     <Description>A dotnet wrapper for Jikan REST API, fetching data from MyAnimeList.</Description>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
