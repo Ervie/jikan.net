@@ -298,21 +298,21 @@ namespace JikanDotNet
 		Task<BaseJikanResponse<Character>> GetCharacterAsync(long id);
 
 		/// <summary>
-		/// Returns return animeography of character with given MAL id.
+		/// Returns animeography of character with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of character.</param>
 		/// <returns>Collection of anime where character has appeared.</returns>
 		Task<BaseJikanResponse<ICollection<CharacterAnimeographyEntry>>> GetCharacterAnimeAsync(long id);
 
 		/// <summary>
-		/// Returns return mangaography of character with given MAL id.
+		/// Returns mangaography of character with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of character.</param>
 		/// <returns>Collection of manga where character has appeared.</returns>
 		Task<BaseJikanResponse<ICollection<CharacterMangaographyEntry>>> GetCharacterMangaAsync(long id);
 
 		/// <summary>
-		/// Returns return voice actors of character with given MAL id.
+		/// Returns voice actors of character with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of character.</param>
 		/// <returns>Collection of voice actors voicing character.</returns>
@@ -324,6 +324,13 @@ namespace JikanDotNet
 		/// <param name="id">MAL id of character.</param>
 		/// <returns>Collections of links to pictures related to character with given MAL id.</returns>
 		Task<BaseJikanResponse<ICollection<ImagesSet>>> GetCharacterPicturesAsync(long id);
+		
+		/// <summary>
+		/// Returns character with additional data.
+		/// </summary>
+		/// <param name="id">MAL id of character.</param>
+		/// <returns>Character with additional data.</returns>
+		Task<BaseJikanResponse<CharacterFull>> GetCharacterFullDataAsync(long id);
 
 		#endregion Character requests
 
@@ -363,6 +370,13 @@ namespace JikanDotNet
 		/// <param name="id">MAL id of person.</param>
 		/// <returns>Collections of links to pictures related to person with given MAL id.</returns>
 		Task<BaseJikanResponse<ICollection<ImagesSet>>> GetPersonPicturesAsync(long id);
+		
+		/// <summary>
+		/// Returns person with additional data.
+		/// </summary>
+		/// <param name="id">MAL id of person.</param>
+		/// <returns>Person with additional data.</returns>
+		Task<BaseJikanResponse<PersonFull>> GetPersonFullDataAsync(long id);
 
 		#endregion Person requests
 

@@ -3,6 +3,9 @@ using System.Text.Json.Serialization;
 
 namespace JikanDotNet;
 
+/// <summary>
+/// Manga with full data model class.
+/// </summary>
 public class MangaFull: Manga
 {
     /// <summary>

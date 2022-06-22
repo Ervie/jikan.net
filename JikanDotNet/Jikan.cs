@@ -334,6 +334,14 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.Characters, id.ToString(), JikanEndpointConsts.Pictures };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<ImagesSet>>>(endpointParts);
 		}
+		
+		/// <inheritdoc />
+		public async Task<BaseJikanResponse<CharacterFull>> GetCharacterFullDataAsync(long id)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			var endpointParts = new[] { JikanEndpointConsts.Characters, id.ToString(), JikanEndpointConsts.Full };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<CharacterFull>>(endpointParts);
+		}
 
 		#endregion Character methods
 
@@ -507,6 +515,14 @@ namespace JikanDotNet
 			Guard.IsGreaterThanZero(id, nameof(id));
 			var endpointParts = new[] { JikanEndpointConsts.People, id.ToString(), JikanEndpointConsts.Pictures };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<ImagesSet>>>(endpointParts);
+		}
+		
+		/// <inheritdoc />
+		public async Task<BaseJikanResponse<PersonFull>> GetPersonFullDataAsync(long id)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			var endpointParts = new[] { JikanEndpointConsts.People, id.ToString(), JikanEndpointConsts.Full };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<PersonFull>>(endpointParts);
 		}
 
 		#endregion Person methods

@@ -67,19 +67,5 @@ namespace JikanDotNet.Tests.PersonTests
 				norioWakamoto.Data.Birthday.Value.Year.Should().Be(1945);
 			}
 		}
-
-		//[Fact]
-		//public async Task GetPersonAsync_MinoriSuzukiId_ShouldParseMinoriSuzukiRoles()
-		//{
-		//	// Given
-		//	var minoriSuzuki = await _jikan.GetPersonAsync(39460);
-
-		//	// Then
-		//	using (new AssertionScope())
-		//	{
-		//		minoriSuzuki.VoiceActingRoles.Select(x => x.Character.Name).Should().Contain("Wion, Freyja");
-		//		minoriSuzuki.VoiceActingRoles.Select(x => x.Anime.Name).Should().Contain("Cardcaptor Sakura: Clear Card-hen");
-		//	}
-		//}
 	}
 }
