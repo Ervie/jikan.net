@@ -36,17 +36,16 @@ namespace JikanDotNet
 		/// Constructor.
 		/// </summary>
 		public Jikan() : this(new JikanClientConfiguration()) { }
-
+		
 		/// <summary>
 		/// Constructor.
 		/// </summary>
 		/// <param name="jikanClientConfiguration">Options.</param>
-		public Jikan(JikanClientConfiguration jikanClientConfiguration)
+		/// <param name="httpClient">Http client.</param>
+		public Jikan(JikanClientConfiguration jikanClientConfiguration, HttpClient httpClient = null)
 		{
 			_jikanConfiguration = jikanClientConfiguration;
-			_httpClient = string.IsNullOrWhiteSpace(_jikanConfiguration.Endpoint) ?
-				HttpProvider.GetHttpClient() :
-				HttpProvider.GetHttpClient(new Uri(_jikanConfiguration.Endpoint));
+			_httpClient = httpClient ?? DefaultHttpClientProvider.GetDefaultHttpClient(jikanClientConfiguration.Endpoint);
 		}
 
 		#endregion Constructors

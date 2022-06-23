@@ -2,6 +2,7 @@
 using JikanDotNet.Config;
 using JikanDotNet.Exceptions;
 using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -14,9 +15,8 @@ namespace JikanDotNet.Tests
 		[SkippableFact]
 		public async Task JikanConstructor_DefaultUrl_ShouldParseCorrectly()
 		{
-			Skip.IfNot(_isV4CustomEndpointReady);
 			// Given
-			var jikan = new Jikan(new JikanClientConfiguration { Endpoint = "https://api.jikan.moe/v4-alpha/" });
+			var jikan = new Jikan(new JikanClientConfiguration { Endpoint = "https://api.jikan.moe/v4/" });
 
 			// When
 			var bebop = await jikan.GetAnimeAsync(1);
@@ -25,7 +25,7 @@ namespace JikanDotNet.Tests
 			bebop.Data.MalId.Should().Be(1);
 		}
 
-		[Fact]
+		[SkippableFact]
 		public async Task JikanConstructor_CustomUrl_ShouldParseCorrectly()
 		{
 			Skip.IfNot(_isV4CustomEndpointReady);
@@ -73,6 +73,21 @@ namespace JikanDotNet.Tests
 
 			// Then
 			func.Should().ThrowExactly<UriFormatException>();
+		}
+		
+		
+		[Fact]
+		public async Task JikanConstructor_WithHttpClient_ShouldNotParseCorrectly()
+		{
+			// Given
+			var client = new HttpClient {BaseAddress = new Uri("https://api.jikan.moe/v4/")};
+			var jikan = new Jikan(new JikanClientConfiguration { SuppressException = false }, client);
+			
+			// When
+			var bebop = await jikan.GetAnimeAsync(1);
+
+			// Then
+			bebop.Data.MalId.Should().Be(1);
 		}
 	}
 }
