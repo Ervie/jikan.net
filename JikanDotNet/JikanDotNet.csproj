@@ -9,7 +9,7 @@
     <RepositoryUrl>https://github.com/Ervie/jikan.net</RepositoryUrl>
     <PackageId>JikanDotNet</PackageId>
     <PackageTags>anime, MAL, myanimelist.net, myanimelist, Jikan, REST, manga, API, wrapper, JikanDotNet, Jikan.net</PackageTags>
-    <PackageLicenseUrl>https://github.com/Ervie/jikan.net/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicense>https://github.com/Ervie/jikan.net/blob/master/LICENSE</PackageLicense>
     <PackageProjectUrl>https://github.com/Ervie/jikan.net</PackageProjectUrl>
     <PackageIconUrl>https://jikan.moe/assets/images/favicon/apple-touch-icon.png</PackageIconUrl>
     <FileVersion>2.2.0.0</FileVersion>
