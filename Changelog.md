@@ -1,3 +1,14 @@
+## 24.06.2022 - Version 2.2.0
+
+- Features
+    * Add new endpoint for retrieving additional data in single call:
+        * `GetAnimeFullDataAsync`
+        * `GetMangaFullDataAsync`
+        * `GetCharacterFullDataAsync`
+        * `GetPersonFullDataAsync`
+    * Add support for injecting own HTTP client with HttpClientFactory pattern
+        * Passing custom endoint in configuration is still supported, but will be phased out
+
 ## 17.04.2022 - Version 2.1.1
 
 - Fixes

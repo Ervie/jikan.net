@@ -115,12 +115,16 @@ Then restore dependencies:
 
 # Changelog
 
-## 17.04.2022 - Version 2.1.1
+## 24.06.2022 - Version 2.2.0
 
-- Fixes
-    * <b>[GetUserAnimeListAsync/GetUserMangaListAsync]</b> - fix parsing `watching_status` and `reading_status`
 - Features
-    * Watching and reading statuses on user list endpoints are now represented in enum values `UserAnimeWatchingStatus` and `UserMangaReadingStatus`
+    * Add new endpoint for retrieving additional data in single call:
+        * `GetAnimeFullDataAsync`
+        * `GetMangaFullDataAsync`
+        * `GetCharacterFullDataAsync`
+        * `GetPersonFullDataAsync`
+    * Add support for injecting own HTTP client with HttpClientFactory pattern
+        * Passing custom endoint in configuration is still supported, but will be phased out
 
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**
