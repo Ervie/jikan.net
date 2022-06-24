@@ -32,6 +32,7 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
     - Related entries
     - Themes
     - External links
+    - Full information
 - Manga
     - Basic information
     - Characters 
@@ -45,25 +46,28 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
     - User Updates
     - Related entries
     - External links
+    - Full information
 - People
     - Basic information
     - Related anime
     - Related manga
     - Voice acting roles
     - Pictures
+    - Full information
 - Characters
     - Basic information
     - Related anime
     - Related manga
     - Voice actors
     - Pictures
+    - Full information
 - Search 
     - Anime
     - Manga
     - People
     - Characters
     - Users
-    - CLubs
+    - Clubs
 - Seasonal Anime 
 - Anime Scheduling (for current season)
 - Top
