@@ -32,13 +32,13 @@ namespace JikanDotNet.Tests.TopTests
 			var top = await _jikan.GetTopAnimeAsync();
 
 			// Then
-			top.Data.First().Title.Should().Be("Fullmetal Alchemist: Brotherhood");
-			top.Data.First().Episodes.Should().Be(64);
-			top.Data.First().Source.Should().Be("Manga");
-			top.Data.First().Duration.Should().Be("24 min per ep");
-			top.Data.First().Producers.Should().HaveCount(4);
-			top.Data.First().Licensors.Should().HaveCount(2);
-			top.Data.First().Studios.Should().ContainSingle().Which.Name.Should().Be("Bones");
+			top.Data.Skip(1).First().Title.Should().Be("Fullmetal Alchemist: Brotherhood");
+			top.Data.Skip(1).First().Episodes.Should().Be(64);
+			top.Data.Skip(1).First().Source.Should().Be("Manga");
+			top.Data.Skip(1).First().Duration.Should().Be("24 min per ep");
+			top.Data.Skip(1).First().Producers.Should().HaveCount(4);
+			top.Data.Skip(1).First().Licensors.Should().HaveCount(2);
+			top.Data.Skip(1).First().Studios.Should().ContainSingle().Which.Name.Should().Be("Bones");
 		}
 
 		[Fact]
