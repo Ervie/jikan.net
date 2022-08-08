@@ -56,6 +56,17 @@ namespace JikanDotNet.Tests.AnimeTests
 		}
 
 		[Fact]
+		public async Task GetAnimeCharactersAsync_BebopId_ShouldParseJetBlackFavorites()
+		{
+			// When
+			var bebop = await _jikan.GetAnimeCharactersAsync(1);
+
+			// Then
+			var jetBlack = bebop.Data.First(x => x.Character.Name.Equals("Black, Jet"));
+			jetBlack.Favorites.Should().BeGreaterThan(1900);
+		}
+
+		[Fact]
 		public async Task GetAnimeCharactersAsync_BebopId_ShouldParseSpikeSpiegelVoiceActors()
 		{
 			// When

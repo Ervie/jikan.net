@@ -21,6 +21,12 @@ namespace JikanDotNet
 		public string Role { get; set; }
 
 		/// <summary>
+		/// Character favourite count on MyAnimeList.
+		/// </summary>
+		[JsonPropertyName("favorites")]
+		public int? Favorites { get; set; }
+
+		/// <summary>
 		/// Character's list of voice actor in this entry (anime only).
 		/// </summary>
 		[JsonPropertyName("voice_actors")]
