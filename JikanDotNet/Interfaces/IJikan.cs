@@ -169,6 +169,13 @@ namespace JikanDotNet
 		Task<BaseJikanResponse<ICollection<ExternalLink>>> GetAnimeExternalLinksAsync(long id);
 		
 		/// <summary>
+		/// Returns collection of external streaming services links related to anime.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <returns>Collection of external services links related to anime.</returns>
+		Task<BaseJikanResponse<ICollection<ExternalLink>>> GetAnimeStreamingLinksAsync(long id);
+		
+		/// <summary>
 		/// Returns anime with additional data.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>

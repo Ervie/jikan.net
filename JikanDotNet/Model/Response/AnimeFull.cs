@@ -25,4 +25,10 @@ public class AnimeFull: Anime
     /// </summary>
     [JsonPropertyName("external")]
     public ICollection<ExternalLink> ExternalLinks { get; set; } 
+    
+    /// <summary>
+    /// Anime streaming links.
+    /// </summary>
+    [JsonPropertyName("streaming")]
+    public ICollection<ExternalLink> StreamingLinks { get; set; } 
 }

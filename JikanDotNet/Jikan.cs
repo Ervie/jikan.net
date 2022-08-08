@@ -283,6 +283,14 @@ namespace JikanDotNet
 		}
 		
 		/// <inheritdoc />
+		public async Task<BaseJikanResponse<ICollection<ExternalLink>>> GetAnimeStreamingLinksAsync(long id)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			var endpointParts = new[] { JikanEndpointConsts.Anime, id.ToString(), JikanEndpointConsts.Streaming };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<ExternalLink>>>(endpointParts);
+		}
+		
+		/// <inheritdoc />
 		public async Task<BaseJikanResponse<AnimeFull>> GetAnimeFullDataAsync(long id)
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
