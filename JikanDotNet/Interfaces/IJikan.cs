@@ -90,6 +90,7 @@ namespace JikanDotNet
 		/// <param name="id">MAL id of anime.</param>
 		/// <returns>Collections of videos related to anime with given MAL id.</returns>
 		Task<BaseJikanResponse<AnimeVideos>> GetAnimeVideosAsync(long id);
+		
 		/// <summary>
 		/// Returns collections of links to pictures related to anime with given MAL id.
 		/// </summary>

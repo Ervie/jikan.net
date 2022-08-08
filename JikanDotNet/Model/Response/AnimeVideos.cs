@@ -19,5 +19,11 @@ namespace JikanDotNet
 		/// </summary>
 		[JsonPropertyName("episodes")]
 		public ICollection<EpisodeVideo> EpisodeVideos { get; set; }
+		
+		/// <summary>
+		/// Anime's related music videos URLs.
+		/// </summary>
+		[JsonPropertyName("music_videos")]
+		public ICollection<MusicVideo> MusicVideos { get; set; }
 	}
 }
