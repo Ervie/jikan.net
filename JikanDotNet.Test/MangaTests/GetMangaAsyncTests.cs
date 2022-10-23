@@ -89,6 +89,7 @@ namespace JikanDotNet.Tests.MangaTests
 				yotsubatoManga.Data.Chapters.Should().BeNull();
 				yotsubatoManga.Data.Volumes.Should().BeNull();
 				yotsubatoManga.Data.Type.Should().Be("Manga");
+				yotsubatoManga.Data.Approved.Should().BeTrue();
 			}
 		}
 
@@ -103,7 +104,7 @@ namespace JikanDotNet.Tests.MangaTests
 			{
 				onePieceManga.Data.Authors.Should().ContainSingle();
 				onePieceManga.Data.Serializations.Should().ContainSingle();
-				onePieceManga.Data.Genres.Should().HaveCount(4);
+				onePieceManga.Data.Genres.Should().HaveCount(3);
 				onePieceManga.Data.Authors.First().ToString().Should().Be("Oda, Eiichiro");
 				onePieceManga.Data.Serializations.First().ToString().Should().Be("Shounen Jump (Weekly)");
 				onePieceManga.Data.Genres.First().ToString().Should().Be("Action");

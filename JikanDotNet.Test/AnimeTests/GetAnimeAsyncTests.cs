@@ -133,6 +133,7 @@ namespace JikanDotNet.Tests.AnimeTests
 				cardcaptor.Data.Broadcast.Time.Should().Be("18:00");
 				cardcaptor.Data.Broadcast.Timezone.Should().Be("Asia/Tokyo");
 				cardcaptor.Data.Source.Should().Be("Manga");
+				cardcaptor.Data.Approved.Should().BeTrue();
 			}
 		}
 
@@ -145,13 +146,14 @@ namespace JikanDotNet.Tests.AnimeTests
 			// Then
 			using (new AssertionScope())
 			{
-				akiraAnime.Data.Producers.Should().HaveCount(3);
+				akiraAnime.Data.Producers.Should().HaveCount(4);
 				akiraAnime.Data.Licensors.Should().HaveCount(3);
 				akiraAnime.Data.Studios.Should().ContainSingle();
 				akiraAnime.Data.Genres.Should().HaveCount(5);
 				akiraAnime.Data.Licensors.First().ToString().Should().Be("Funimation");
 				akiraAnime.Data.Studios.First().ToString().Should().Be("Tokyo Movie Shinsha");
 				akiraAnime.Data.Genres.First().ToString().Should().Be("Action");
+				akiraAnime.Data.Approved.Should().BeTrue();
 			}
 		}
 	}

@@ -211,5 +211,11 @@ namespace JikanDotNet
 		/// </summary>
 		[JsonPropertyName("demographics")]
 		public ICollection<MalUrl> Demographics { get; set; }
+		
+		/// <summary>
+		/// If Approved is false then this means the entry is still pending review on MAL.
+		/// </summary>
+		[JsonPropertyName("approved")]
+		public bool Approved  { get; set; }
 	}
 }
