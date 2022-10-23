@@ -558,6 +558,15 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.Seasons, JikanEndpointConsts.Upcoming };
 			return await ExecuteGetRequestAsync<DbPaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
 		}
+		
+		/// <inheritdoc />
+		public async Task<DbPaginatedJikanResponse<ICollection<Anime>>> GetUpcomingSeasonAsync(int page)
+		{
+			Guard.IsGreaterThanZero(page, nameof(page));
+			var queryParams = $"?page={page}";
+			var endpointParts = new[] { JikanEndpointConsts.Seasons, JikanEndpointConsts.Upcoming + queryParams};
+			return await ExecuteGetRequestAsync<DbPaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
+		}
 
 		#endregion Season methods
 

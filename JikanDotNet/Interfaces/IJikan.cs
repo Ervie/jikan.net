@@ -409,6 +409,13 @@ namespace JikanDotNet
 		/// </summary>
 		/// <returns>Season preview for anime with undefined airing date.</returns>
 		Task<DbPaginatedJikanResponse<ICollection<Anime>>> GetUpcomingSeasonAsync();
+		
+		/// <summary>
+		/// Return season preview for anime with undefined airing season (marked as "Later" on MAL).
+		/// </summary>
+		/// <param name="page">Index of page folding 25 records of top ranging (e.g. 1 will return first 25 records, 2 will return record from 26 to 50 etc.)</param>
+		/// <returns>Season preview for anime with undefined airing date.</returns>
+		Task<DbPaginatedJikanResponse<ICollection<Anime>>> GetUpcomingSeasonAsync(int page);
 
 		#endregion Season requests
 
