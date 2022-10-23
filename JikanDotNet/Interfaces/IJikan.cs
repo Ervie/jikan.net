@@ -638,6 +638,13 @@ namespace JikanDotNet
 		/// <param name="username">Username.</param>
 		/// <returns>Information about user's favorite section..</returns>
 		Task<BaseJikanResponse<UserFavorites>> GetUserFavoritesAsync(string username);
+		
+		/// <summary>
+		/// Returns information about user's updates on anime/manga progress.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <returns>Information about user's updates on anime/manga progress.</returns>
+		Task<BaseJikanResponse<UserUpdates>> GetUserUpdatesAsync(string username);
 
 		/// <summary>
 		/// Returns information about user's description on the profile.
@@ -757,6 +764,13 @@ namespace JikanDotNet
 		/// <param name="username">Username.</param>
 		/// <returns>Collection of external services links related to anime.</returns>
 		Task<BaseJikanResponse<ICollection<ExternalLink>>> GetUserExternalLinksAsync(string username);
+		
+		/// <summary>
+		/// Returns user with additional data.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <returns>User profile with additional data.</returns>
+		Task<BaseJikanResponse<UserFull>> GetUserFullDataAsync(string username);
 
 		#endregion User requests
 

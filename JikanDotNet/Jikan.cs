@@ -832,6 +832,14 @@ namespace JikanDotNet
 		}
 
 		/// <inheritdoc />
+		public async Task<BaseJikanResponse<UserUpdates>> GetUserUpdatesAsync(string username)
+		{
+			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
+			var endpointParts = new[] { JikanEndpointConsts.Users, username, JikanEndpointConsts.UserUpdates };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<UserUpdates>>(endpointParts);
+		}
+
+		/// <inheritdoc />
 		public async Task<BaseJikanResponse<UserAbout>> GetUserAboutAsync(string username)
 		{
 			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
@@ -971,6 +979,14 @@ namespace JikanDotNet
 			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
 			var endpointParts = new[] { JikanEndpointConsts.Users, username, JikanEndpointConsts.External };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<ExternalLink>>>(endpointParts);
+		}
+
+		/// <inheritdoc />
+		public async Task<BaseJikanResponse<UserFull>> GetUserFullDataAsync(string username)
+		{
+			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
+			var endpointParts = new[] { JikanEndpointConsts.Users, username, JikanEndpointConsts.Full };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<UserFull>>(endpointParts);
 		}
 
 		#endregion User methods

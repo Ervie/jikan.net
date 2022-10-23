@@ -9,10 +9,16 @@ namespace JikanDotNet
 	public class UserUpdate
 	{
 		/// <summary>
-		/// Data about the user who made the update.
+		/// Data about the user who made the update. Null if checked for specific user.
 		/// </summary>
 		[JsonPropertyName("user")]
 		public UserMetadata User { get; set; }
+		
+		/// <summary>
+		/// Data about the manga/anime the update. Null if checked for specific manga/anime.
+		/// </summary>
+		[JsonPropertyName("entry")]
+		public MalImageSubItem Entry { get; set; }
 
 		/// <summary>
 		/// User's score.
