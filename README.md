@@ -80,6 +80,9 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
     - Anime genres
     - Manga genres
 - Producer
+    - Basic information
+    - External links
+    - Full data
 - Magazine
 - User
     - Profile
@@ -93,6 +96,7 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
     - Clubs
     - Anime list (will become obsolete soon)
     - Manga list (will become obsolete soon)
+    - Full data
 - Clubs
     - Profile
     - Member list
@@ -119,17 +123,26 @@ Then restore dependencies:
 
 # Changelog
 
-## 24.06.2022 - Version 2.2.0
+## 23.10.2022 - Version 2.3.0
 
 - Features
-    * Add new endpoint for retrieving additional data in single call:
-        * `GetAnimeFullDataAsync`
-        * `GetMangaFullDataAsync`
-        * `GetCharacterFullDataAsync`
-        * `GetPersonFullDataAsync`
-    * Add support for injecting own HTTP client with HttpClientFactory pattern
-        * Passing custom endoint in configuration is still supported, but will be phased out
-
+    * New endpoints
+        * `GetAnimeStreamingLinksAsync`
+        * `GetUpcomingSeasonAsync` with paging
+        * `GetProducerAsync`
+        * `GetUserExternalLinksAsync`
+        * `GetProducerExternalLinksAsync`
+        * `GetUserExternalLinksAsync`
+        * `GetUserUpdatesAsync`
+        * `GetProducerFullDataAsync`
+    * <b>[Anime/Manga]</b>
+        * Add `Approved` property
+        * Add `Titles` collection property
+        * `Title`, `TitleEnglish`, `TitleJapanese` and `TitleSynonyms` are now marked as obsolete
+    * <b>[AnimeVideos]</b>
+        * Add `MusicVideos` collection property
+    * <b>[AnimeCharacter]</b>
+        * Add `Favorites` property
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**
 

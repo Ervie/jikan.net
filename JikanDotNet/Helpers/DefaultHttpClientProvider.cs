@@ -19,7 +19,7 @@ namespace JikanDotNet.Helpers
 		/// </summary>
 		/// <param name="endpoint">Endpoint of the REST API.</param>
 		/// <returns>Static HttpClient.</returns>
-		internal static HttpClient GetDefaultHttpClient(string endpoint)
+		internal static HttpClient GetDefaultHttpClient(string endpoint = null)
 		{
 			var uriEndpoint = !string.IsNullOrWhiteSpace(endpoint) ? endpoint : DefaultEndpoint;
 			

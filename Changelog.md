@@ -1,3 +1,24 @@
+## 23.10.2022 - Version 2.3.0
+
+- Features
+    * New endpoints
+        * `GetAnimeStreamingLinksAsync`
+        * `GetUpcomingSeasonAsync` with paging
+        * `GetProducerAsync`
+        * `GetUserExternalLinksAsync`
+        * `GetProducerExternalLinksAsync`
+        * `GetUserExternalLinksAsync`
+        * `GetUserUpdatesAsync`
+        * `GetProducerFullDataAsync`
+    * <b>[Anime/Manga]</b>
+        * Add `Approved` property
+        * Add `Titles` collection property
+        * `Title`, `TitleEnglish`, `TitleJapanese` and `TitleSynonyms` are now marked as obsolete
+    * <b>[AnimeVideos]</b>
+        * Add `MusicVideos` collection property
+    * <b>[AnimeCharacter]</b>
+        * Add `Favorites` property
+        
 ## 24.06.2022 - Version 2.2.0
 
 - Features

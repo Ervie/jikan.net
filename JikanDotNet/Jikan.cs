@@ -45,7 +45,7 @@ namespace JikanDotNet
 		public Jikan(JikanClientConfiguration jikanClientConfiguration, HttpClient httpClient = null)
 		{
 			_jikanConfiguration = jikanClientConfiguration;
-			_httpClient = httpClient ?? DefaultHttpClientProvider.GetDefaultHttpClient(jikanClientConfiguration.Endpoint);
+			_httpClient = httpClient ?? DefaultHttpClientProvider.GetDefaultHttpClient();
 		}
 
 		#endregion Constructors
