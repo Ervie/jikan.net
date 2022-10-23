@@ -736,6 +736,30 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.Producers + queryParams };
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Producer>>>(endpointParts);
 		}
+		
+		/// <inheritdoc />
+		public async Task<BaseJikanResponse<Producer>> GetProducerAsync(long id)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			var endpointParts = new[] { JikanEndpointConsts.Producers, id.ToString() };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<Producer>>(endpointParts);
+		}
+		
+		/// <inheritdoc />
+		public async Task<BaseJikanResponse<ICollection<ExternalLink>>> GetProducerExternalLinksAsync(long id)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			var endpointParts = new[] { JikanEndpointConsts.Producers, id.ToString(), JikanEndpointConsts.External };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<ExternalLink>>>(endpointParts);
+		}
+		
+		/// <inheritdoc />
+		public async Task<BaseJikanResponse<ProducerFull>> GetProducerFullDataAsync(long id)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			var endpointParts = new[] { JikanEndpointConsts.Producers, id.ToString(), JikanEndpointConsts.Full };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ProducerFull>>(endpointParts);
+		}
 
 		#endregion Producer methods
 

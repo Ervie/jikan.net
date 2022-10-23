@@ -1,4 +1,6 @@
-﻿using System.Text.Json.Serialization;
+﻿using System;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace JikanDotNet
 {
@@ -20,15 +22,33 @@ namespace JikanDotNet
 		public string Url { get; set; }
 
 		/// <summary>
-		/// Name of the producer
+		/// Names of the producer.
 		/// </summary>
-		[JsonPropertyName("name")]
-		public string Name { get; set; }
+		[JsonPropertyName("titles")]
+		public ICollection<TitleEntry> Titles { get; set; }
 
 		/// <summary>
-		/// Total count of anime assigned to this producer
+		/// Image URLs
+		/// </summary>
+		[JsonPropertyName("images")]
+		public ImagesSet Images { get; set; }
+
+		/// <summary>
+		/// Date of establishing.
+		/// </summary>
+		[JsonPropertyName("established")]
+		public DateTime? Established { get; set; }
+
+		/// <summary>
+		/// Total count of anime assigned to this producer.
 		/// </summary>
 		[JsonPropertyName("count")]
 		public int TotalCount { get; set; }
+
+		/// <summary>
+		/// About the producer
+		/// </summary>
+		[JsonPropertyName("about")]
+		public string About { get; set; }
 	}
 }

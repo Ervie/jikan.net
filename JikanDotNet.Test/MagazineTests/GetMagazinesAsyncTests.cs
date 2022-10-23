@@ -39,7 +39,7 @@ namespace JikanDotNet.Tests.MagazineTests
 			using var _ = new AssertionScope();
 			results.Data.Should().HaveCount(25);
 			results.Pagination.HasNextPage.Should().BeTrue();
-			results.Pagination.LastVisiblePage.Should().Be(47);
+			results.Pagination.LastVisiblePage.Should().BeGreaterOrEqualTo(49);
 		}
 
 		[Fact]

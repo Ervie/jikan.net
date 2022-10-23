@@ -37,9 +37,9 @@ namespace JikanDotNet.Tests.ProducerTests
 
 			// Then
 			using var _ = new AssertionScope();
-			results.Data.Should().HaveCount(100);
+			results.Data.Should().HaveCount(25);
 			results.Pagination.HasNextPage.Should().BeTrue();
-			results.Pagination.LastVisiblePage.Should().Be(19);
+			results.Pagination.LastVisiblePage.Should().BeGreaterThan(50);
 		}
 
 		[Fact]
@@ -49,9 +49,9 @@ namespace JikanDotNet.Tests.ProducerTests
 			var results = await _jikan.GetProducersAsync();
 
 			// Then
-			var names = results.Data.Select(x => x.Name);
+			var names = results.Data.SelectMany(x => x.Titles).Select(y => y.Title);
 			using var _ = new AssertionScope();
-			names.Should().Contain("Studio Pierrot");
+			names.Should().Contain("Pierrot");
 			names.Should().Contain("Kyoto Animation");
 			names.Should().Contain("Gonzo");
 		}
@@ -63,11 +63,11 @@ namespace JikanDotNet.Tests.ProducerTests
 			var results = await _jikan.GetProducersAsync(2);
 
 			// Then
-			var names = results.Data.Select(x => x.Name);
+			var names = results.Data.SelectMany(x => x.Titles).Select(y => y.Title);
 			using var _ = new AssertionScope();
-			names.Should().Contain("Studio Matrix");
-			names.Should().Contain("Studio Izena");
-			names.Should().Contain("VIZ Media");
+			names.Should().Contain("Manglobe");
+			names.Should().Contain("Studio Deen");
+			names.Should().Contain("Satelight");
 		}
 	}
 }

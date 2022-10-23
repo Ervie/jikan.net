@@ -556,6 +556,27 @@ namespace JikanDotNet
 		/// <param name="page">Index of page folding 100 records of top ranging (e.g. 1 will return first 100 records, 2 will return record from 101 to 200 etc.)</param>
 		/// <returns>Basic Information about producers.</returns>
 		Task<PaginatedJikanResponse<ICollection<Producer>>> GetProducersAsync(int page);
+		
+		/// <summary>
+		/// Returns information about producer.
+		/// </summary>
+		/// <param name="id">MAL id of the producer.</param>
+		/// <returns>Basic Information about producer.</returns>
+		Task<BaseJikanResponse<Producer>> GetProducerAsync(long id);
+		
+		/// <summary>
+		/// Returns external links related to producer
+		/// </summary>
+		/// <param name="id">MAL id of the producer.</param>
+		/// <returns>External links related to producer</returns>
+		Task<BaseJikanResponse<ICollection<ExternalLink>>> GetProducerExternalLinksAsync(long id);
+		
+		/// <summary>
+		/// Returns full information about producer.
+		/// </summary>
+		/// <param name="id">MAL id of the producer.</param>
+		/// <returns>Full Information about producer.</returns>
+		Task<BaseJikanResponse<ProducerFull>> GetProducerFullDataAsync(long id);
 
 		#endregion Producer requests
 
