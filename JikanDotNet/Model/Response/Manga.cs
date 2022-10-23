@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System;
+using System.Text.Json.Serialization;
 using System.Collections.Generic;
 
 namespace JikanDotNet
@@ -24,25 +25,35 @@ namespace JikanDotNet
 		/// Title of the manga.
 		/// </summary>
 		[JsonPropertyName("title")]
+		[Obsolete("This will be removed in the future. Use titles property instead.")]
 		public string Title { get; set; }
 
 		/// <summary>
 		/// Title of the manga in English.
 		/// </summary>
 		[JsonPropertyName("title_english")]
+		[Obsolete("This will be removed in the future. Use titles property instead.")]
 		public string TitleEnglish { get; set; }
 
 		/// <summary>
 		/// Title of the manga in English.
 		/// </summary>
 		[JsonPropertyName("title_japanese")]
+		[Obsolete("This will be removed in the future. Use titles property instead.")]
 		public string TitleJapanese { get; set; }
 
 		/// <summary>
 		/// Manga's multiple titles (if any). Return null if there is none.
 		/// </summary>
 		[JsonPropertyName("title_synonyms")]
+		[Obsolete("This will be removed in the future. Use titles property instead.")]
 		public ICollection<string> TitleSynonyms { get; set; }
+		
+		/// <summary>
+		/// Anime's multiple titles (if any).
+		/// </summary>
+		[JsonPropertyName("titles")]
+		public ICollection<TitleEntry> Titles { get; set; }
 
 		/// <summary>
 		/// Manga's images in various formats.

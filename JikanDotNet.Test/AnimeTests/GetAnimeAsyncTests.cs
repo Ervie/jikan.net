@@ -94,6 +94,20 @@ namespace JikanDotNet.Tests.AnimeTests
 		}
 
 		[Fact]
+		public async Task GetAnimeAsync_BebopId_ShouldParseCowboyBebopTitles()
+		{
+			// When
+			var bebopAnime = await _jikan.GetAnimeAsync(1);
+
+			// Then
+			using var _ = new AssertionScope();
+			bebopAnime.Data.Titles.Should().HaveCount(3);
+			bebopAnime.Data.Titles.Should().ContainSingle(x => x.Type.Equals("Default") && x.Title.Equals("Cowboy Bebop"));
+			bebopAnime.Data.Titles.Should().ContainSingle(x => x.Type.Equals("English") && x.Title.Equals("Cowboy Bebop"));
+			bebopAnime.Data.Titles.Should().ContainSingle(x => x.Type.Equals("Japanese") && x.Title.Equals("カウボーイビバップ"));
+		}
+
+		[Fact]
 		public async Task GetAnimeAsync_BebopId_ShouldParseCowboyBebopTrailer()
 		{
 			// When

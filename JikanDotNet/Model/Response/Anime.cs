@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace JikanDotNet
@@ -35,26 +36,36 @@ namespace JikanDotNet
 		/// <summary>
 		/// Title of the anime.
 		/// </summary>
+		[Obsolete("This will be removed in the future. Use titles property instead.")]
 		[JsonPropertyName("title")]
 		public string Title { get; set; }
 
 		/// <summary>
 		/// Title of the anime in English.
 		/// </summary>
+		[Obsolete("This will be removed in the future. Use titles property instead.")]
 		[JsonPropertyName("title_english")]
 		public string TitleEnglish { get; set; }
 
 		/// <summary>
 		/// Title of the anime in Japanese.
 		/// </summary>
+		[Obsolete("This will be removed in the future. Use titles property instead.")]
 		[JsonPropertyName("title_japanese")]
 		public string TitleJapanese { get; set; }
 
 		/// <summary>
 		/// Anime's multiple titles (if any). Return null if there is none.
 		/// </summary>
+		[Obsolete("This will be removed in the future. Use titles property instead.")]
 		[JsonPropertyName("title_synonyms")]
 		public ICollection<string> TitleSynonyms { get; set; }
+		
+		/// <summary>
+		/// Anime's multiple titles (if any).
+		/// </summary>
+		[JsonPropertyName("titles")]
+		public ICollection<TitleEntry> Titles { get; set; }
 
 		/// <summary>
 		/// Anime type (e. g. "TV", "Movie").

@@ -92,6 +92,24 @@ namespace JikanDotNet.Tests.MangaTests
 				yotsubatoManga.Data.Approved.Should().BeTrue();
 			}
 		}
+		
+		
+		[Fact]
+		public async Task GetMangaAsync_YotsubatoId_ShouldParseYotsubatoTitles()
+		{
+			// When
+			var yotsubatoManga = await _jikan.GetMangaAsync(104);
+
+			// Then
+			using var _ = new AssertionScope();
+			yotsubatoManga.Data.Titles.Should().HaveCountGreaterOrEqualTo(8);
+			yotsubatoManga.Data.Titles.Should().ContainSingle(x => x.Type.Equals("Default") && x.Title.Equals("Yotsuba to!"));
+			yotsubatoManga.Data.Titles.Should().Contain(x => x.Type.Equals("Synonym") && x.Title.Equals("Yotsuba and!"));
+			yotsubatoManga.Data.Titles.Should().ContainSingle(x => x.Type.Equals("Japanese") && x.Title.Equals("よつばと!"));
+			yotsubatoManga.Data.Titles.Should().ContainSingle(x => x.Type.Equals("English") && x.Title.Equals("Yotsuba&!"));
+			yotsubatoManga.Data.Titles.Should().ContainSingle(x => x.Type.Equals("German") && x.Title.Equals("Yotsuba&!"));
+			yotsubatoManga.Data.Titles.Should().ContainSingle(x => x.Type.Equals("Spanish") && x.Title.Equals("¡Yotsuba!"));
+		}
 
 		[Fact]
 		public async Task GetMangaAsync_OnePieceId_ShouldParseOnePieceCollections()
@@ -109,7 +127,7 @@ namespace JikanDotNet.Tests.MangaTests
 				onePieceManga.Data.Serializations.First().ToString().Should().Be("Shounen Jump (Weekly)");
 				onePieceManga.Data.Genres.First().ToString().Should().Be("Action");
 				onePieceManga.Data.Demographics.First().ToString().Should().Be("Shounen");
-				onePieceManga.Data.Themes.First().ToString().Should().Be("Super Power");
+				onePieceManga.Data.Themes.Should().BeEmpty();
 			}
 		}
 	}
