@@ -750,6 +750,13 @@ namespace JikanDotNet
 		/// <param name="page">Index of page folding 10 records of top ranging (e.g. 1 will return first 10 records, 2 will return record from 11 to 21 etc.)</param>
 		/// <returns>User's clubs.</returns>
 		Task<PaginatedJikanResponse<ICollection<MalUrl>>> GetUserClubsAsync(string username, int page);
+		
+		/// <summary>
+		/// Returns collection of external services links related to user.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <returns>Collection of external services links related to anime.</returns>
+		Task<BaseJikanResponse<ICollection<ExternalLink>>> GetUserExternalLinksAsync(string username);
 
 		#endregion User requests
 

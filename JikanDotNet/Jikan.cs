@@ -965,6 +965,14 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<MalUrl>>>(endpointParts);
 		}
 
+		/// <inheritdoc />
+		public async Task<BaseJikanResponse<ICollection<ExternalLink>>> GetUserExternalLinksAsync(string username)
+		{
+			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
+			var endpointParts = new[] { JikanEndpointConsts.Users, username, JikanEndpointConsts.External };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<ExternalLink>>>(endpointParts);
+		}
+
 		#endregion User methods
 
 		#region GetRandom methods
