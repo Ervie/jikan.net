@@ -81,7 +81,7 @@ namespace JikanDotNet.Tests.ScheduleTests
 			{
 				currentSeason.Pagination.HasNextPage.Should().BeFalse();
 				currentSeason.Pagination.LastVisiblePage.Should().Be(1);
-				mondayScheduleTitles.Should().Contain("Healer Girl");
+				mondayScheduleTitles.Should().Contain("Golden Kamuy 4th Season");
 			}
 		}
 
@@ -95,8 +95,8 @@ namespace JikanDotNet.Tests.ScheduleTests
 			var fridayScheduleTitles = currentSeason.Data.Select(x => x.Title);
 			using (new AssertionScope())
 			{
-				fridayScheduleTitles.Should().Contain("Date A Live IV");
-				fridayScheduleTitles.Should().Contain("Crayon Shin-chan");
+				fridayScheduleTitles.Should().Contain("Doraemon (2005)");
+				fridayScheduleTitles.Should().Contain("Pokemon (2019)");
 			}
 		}
 
