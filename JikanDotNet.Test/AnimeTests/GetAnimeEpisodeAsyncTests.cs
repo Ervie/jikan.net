@@ -42,7 +42,7 @@ namespace JikanDotNet.Tests.AnimeTests
 		}
 
 		[Fact]
-		public async Task GetAnimeEpisodeAsync_CardcaptorFirstirstEpisode_ShouldParseCardcaptorFirstEpisodeTitles()
+		public async Task GetAnimeEpisodeAsync_CardcaptorFirstEpisode_ShouldParseCardcaptorFirstEpisodeTitles()
 		{
 			// When
 			var cardcaptorFirstEpisode = await _jikan.GetAnimeEpisodeAsync(232, 1);

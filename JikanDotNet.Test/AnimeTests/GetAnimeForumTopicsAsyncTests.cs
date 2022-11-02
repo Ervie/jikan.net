@@ -71,7 +71,7 @@ namespace JikanDotNet.Tests.AnimeTests
 			// Then
 			using var _ = new AssertionScope();
 			bebop.Data.Should().HaveCount(15);
-			bebop.Data.Should().NotContain(topic => topic.Title.Contains("Cowboy Bebop Episode"));
+			bebop.Data.Should().NotContain(topic => topic.Title.Contains("Cowboy Bebop Episode "));
 		}
 	}
 }

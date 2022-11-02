@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace JikanDotNet.Tests.AnimeTests;
+namespace JikanDotNet.Tests.MangaTests;
 
 public class GetMangaExternalLinksAsyncTests
 {

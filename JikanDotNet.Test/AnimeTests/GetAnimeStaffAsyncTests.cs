@@ -49,7 +49,7 @@ namespace JikanDotNet.Tests.AnimeTests
 			var shinichiroWatanabe = bebop.Data.First(x => x.Person.Name.Equals("Watanabe, Shinichiro"));
 			using (new AssertionScope())
 			{
-				shinichiroWatanabe.Position.Should().HaveCount(3);
+				shinichiroWatanabe.Position.Should().HaveCount(4);
 				shinichiroWatanabe.Position.Should().Contain("Director");
 				shinichiroWatanabe.Position.Should().Contain("Script");
 				shinichiroWatanabe.Person.Name.Should().Be("Watanabe, Shinichiro");

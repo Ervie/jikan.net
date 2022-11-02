@@ -33,7 +33,7 @@ namespace JikanDotNet.Tests.AnimeTests
 		[InlineData(int.MinValue)]
 		[InlineData(-1)]
 		[InlineData(0)]
-		public async Task GetAnimeNews_Invalidpage_ShouldThrowValidationException(int page)
+		public async Task GetAnimeNews_InvalidPage_ShouldThrowValidationException(int page)
 		{
 			// When
 			var func = _jikan.Awaiting(x => x.GetAnimeNewsAsync(1, page));

@@ -18,5 +18,17 @@ namespace JikanDotNet
 		/// </summary>
 		[JsonPropertyName("has_next_page")]
 		public bool HasNextPage { get; set; }
+		
+		/// <summary>
+		/// Current page
+		/// </summary>
+		[JsonPropertyName("current_page")]
+		public int? CurrentPage { get; set; }
+    
+		/// <summary>
+		/// Summary about current query
+		/// </summary>
+		[JsonPropertyName("items")]
+		public PaginationSummary Items { get; set; }
 	}
 }
