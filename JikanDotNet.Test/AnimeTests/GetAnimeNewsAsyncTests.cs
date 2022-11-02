@@ -53,6 +53,9 @@ namespace JikanDotNet.Tests.AnimeTests
 			{
 				bebop.Data.Should().HaveCount(7);
 				bebop.Data.Select(x => x.Author).Should().Contain("Snow");
+				bebop.Pagination.Items.Should().BeNull();
+				bebop.Pagination.CurrentPage.Should().BeNull();
+				bebop.Pagination.LastVisiblePage.Should().BePositive();
 			}
 		}
 

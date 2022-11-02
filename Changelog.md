@@ -1,3 +1,11 @@
+## 02.11.2022 - Version 2.4.0
+
+- Fixes
+    * Generalize Pagination models from response causing deserialization errors for .net core 3.1 and older frameworks
+        * `PaginatedJikanResponse` now contain properties `CurrentPage` and `PaginationSummary` from `DbPaginatedJikanResponse`
+        * Every endpoint that was returning `DbPaginatedJikanResponse` is now returning `PaginatedJikanResponse`
+        * Every endpoint that was returning `PaginatedJikanResponse` is still returning `PaginatedJikanResponse` but with null `CurrentPage` and `PaginationSummary`
+
 ## 23.10.2022 - Version 2.3.0
 
 - Features

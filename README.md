@@ -123,26 +123,13 @@ Then restore dependencies:
 
 # Changelog
 
-## 23.10.2022 - Version 2.3.0
+## 02.11.2022 - Version 2.4.0
 
-- Features
-    * New endpoints
-        * `GetAnimeStreamingLinksAsync`
-        * `GetUpcomingSeasonAsync` with paging
-        * `GetProducerAsync`
-        * `GetUserExternalLinksAsync`
-        * `GetProducerExternalLinksAsync`
-        * `GetUserExternalLinksAsync`
-        * `GetUserUpdatesAsync`
-        * `GetProducerFullDataAsync`
-    * <b>[Anime/Manga]</b>
-        * Add `Approved` property
-        * Add `Titles` collection property
-        * `Title`, `TitleEnglish`, `TitleJapanese` and `TitleSynonyms` are now marked as obsolete
-    * <b>[AnimeVideos]</b>
-        * Add `MusicVideos` collection property
-    * <b>[AnimeCharacter]</b>
-        * Add `Favorites` property
+- Fixes
+    * Generalize Pagination models from response causing deserialization errors for .net Core 3.1 and older frameworks
+        * `PaginatedJikanResponse` now contain properties `CurrentPage` and `PaginationSummary` from `DbPaginatedJikanResponse`
+        * Every endpoint that was returning `DbPaginatedJikanResponse` is now returning `PaginatedJikanResponse`
+        * Every endpoint that was returning `PaginatedJikanResponse` is still returning `PaginatedJikanResponse` but with null `CurrentPage` and `PaginationSummary`
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**
 
