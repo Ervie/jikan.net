@@ -68,7 +68,10 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
     - Characters
     - Users
     - Clubs
-- Seasonal Anime 
+- Seasonal Anime
+    - Current
+    - Upcoming
+    - Archival
 - Anime Scheduling (for current season)
 - Top
     - Anime
@@ -123,13 +126,13 @@ Then restore dependencies:
 
 # Changelog
 
-## 02.11.2022 - Version 2.4.0
+## 14.11.2022 - Version 2.4.1
 
-- Fixes
-    * Generalize Pagination models from response causing deserialization errors for .net Core 3.1 and older frameworks
-        * `PaginatedJikanResponse` now contain properties `CurrentPage` and `PaginationSummary` from `DbPaginatedJikanResponse`
-        * Every endpoint that was returning `DbPaginatedJikanResponse` is now returning `PaginatedJikanResponse`
-        * Every endpoint that was returning `PaginatedJikanResponse` is still returning `PaginatedJikanResponse` but with null `CurrentPage` and `PaginationSummary`
+- Features
+    * New Seasons endpoint
+        * `GetSeasonAsync`
+        * `GetCurrentSeasonAsync`
+        * `GetCurrentSeasonAsync` with paging
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**
 

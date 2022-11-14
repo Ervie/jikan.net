@@ -1,3 +1,11 @@
+## 14.11.2022 - Version 2.4.1
+
+- Features
+    * New Seasons endpoint
+        * `GetSeason(int page)`
+        * `GetCurrentSeason()`
+        * `GetCurrentSeason(int page)`
+
 ## 02.11.2022 - Version 2.4.0
 
 - Fixes
