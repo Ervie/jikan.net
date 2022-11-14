@@ -399,10 +399,32 @@ namespace JikanDotNet
 		Task<PaginatedJikanResponse<ICollection<Anime>>> GetSeasonAsync(int year, Season season);
 
 		/// <summary>
+		/// Returns season preview.
+		/// </summary>
+		/// <param name="year">Year of selected season.</param>
+		/// <param name="season">Selected season.</param>
+		/// <param name="page">Index of page folding 25 records of top ranging (e.g. 1 will return first 25 records, 2 will return record from 26 to 50 etc.)</param>
+		/// <returns>Season preview.</returns>
+		Task<PaginatedJikanResponse<ICollection<Anime>>> GetSeasonAsync(int year, Season season, int page);
+
+		/// <summary>
 		/// Returns list of available season to query with <see cref="GetSeasonAsync(int, Season)"/>
 		/// </summary>
 		/// <returns></returns>
 		Task<PaginatedJikanResponse<ICollection<SeasonArchive>>> GetSeasonArchiveAsync();
+
+		/// <summary>
+		/// Return season preview for anime in current airing season.
+		/// </summary>
+		/// <returns>Season preview for anime in current airing season.</returns>
+		Task<PaginatedJikanResponse<ICollection<Anime>>> GetCurrentSeasonAsync();
+
+		/// <summary>
+		/// Return season preview for anime in current airing season.
+		/// </summary>
+		/// <param name="page">Index of page folding 25 records of top ranging (e.g. 1 will return first 25 records, 2 will return record from 26 to 50 etc.)</param>
+		/// <returns>Season preview for anime in current airing season.</returns>
+		Task<PaginatedJikanResponse<ICollection<Anime>>> GetCurrentSeasonAsync(int page);
 
 		/// <summary>
 		/// Return season preview for anime with undefined airing season (marked as "Later" on MAL).

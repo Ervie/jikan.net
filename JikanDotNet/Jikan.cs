@@ -546,10 +546,37 @@ namespace JikanDotNet
 		}
 
 		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetSeasonAsync(int year, Season season, int page)
+		{
+			Guard.IsValid(x => x >= 1000 && x < 10000, year, nameof(year));
+			Guard.IsValidEnum(season, nameof(season));
+			Guard.IsGreaterThanZero(page, nameof(page));
+			var queryParams = $"?page={page}";
+			var endpointParts = new[] { JikanEndpointConsts.Seasons, year.ToString(), season.GetDescription() + queryParams};
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
+		}
+
+		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<SeasonArchive>>> GetSeasonArchiveAsync()
 		{
 			var endpointParts = new[] { JikanEndpointConsts.Seasons };
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<SeasonArchive>>>(endpointParts);
+		}
+
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetCurrentSeasonAsync()
+		{
+			var endpointParts = new[] { JikanEndpointConsts.Seasons, JikanEndpointConsts.Now };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
+		}
+		
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetCurrentSeasonAsync(int page)
+		{
+			Guard.IsGreaterThanZero(page, nameof(page));
+			var queryParams = $"?page={page}";
+			var endpointParts = new[] { JikanEndpointConsts.Seasons, JikanEndpointConsts.Now + queryParams};
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
 		}
 
 		/// <inheritdoc />

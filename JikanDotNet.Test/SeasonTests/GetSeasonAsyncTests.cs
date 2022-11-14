@@ -94,7 +94,7 @@ namespace JikanDotNet.Tests.SeasonTests
 			using (new AssertionScope())
 			{
 				winter2017.Pagination.Items.Count.Should().Be(25);
-				winter2017.Pagination.Items.Total.Should().Be(54);
+				winter2017.Pagination.Items.Total.Should().Be(57);
 				
 				var youjoSenki = winter2017.Data.FirstOrDefault(x => x.Title.Equals("Youjo Senki"));
 
@@ -110,6 +110,50 @@ namespace JikanDotNet.Tests.SeasonTests
 				youjoSenki.Favorites.Should().BeGreaterThan(9000);
 				youjoSenki.Season.Should().Be(Season.Winter);
 				youjoSenki.Year.Should().Be(2017);
+			}
+		}
+		
+		[Theory]
+		[InlineData(int.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetSeasonAsync_Spring1970_WithInvalidPage_ShouldThrowValidationException(int page)
+		{
+			// When
+			var func = this._jikan.Awaiting(x => x.GetSeasonAsync(1970, Season.Winter, page));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+		
+		[Fact]
+		public async Task GetSeasonAsync_Winter2017SecondPage_ShouldParseYowamushiPedal()
+		{
+			// When
+			const int page = 2;
+			var winter2017 = await _jikan.GetSeasonAsync(2017, Season.Winter, page);
+
+			// Then
+			using (new AssertionScope())
+			{
+				winter2017.Pagination.Items.Count.Should().Be(25);
+				winter2017.Pagination.Items.Total.Should().Be(57);
+				winter2017.Pagination.CurrentPage.Should().Be(page);
+				
+				var yowamushiPedal = winter2017.Data.FirstOrDefault(x => x.Title.Equals("Yowamushi Pedal: New Generation"));
+
+				yowamushiPedal.Type.Should().Be("TV");
+				yowamushiPedal.Status.Should().Be("Finished Airing");
+				yowamushiPedal.Episodes.Should().Be(25);
+				yowamushiPedal.Airing.Should().BeFalse();
+				yowamushiPedal.Duration.Should().Be("23 min per ep");
+				yowamushiPedal.Rating.Should().Be("PG-13 - Teens 13 or older");
+				yowamushiPedal.Score.Should().BeGreaterThan(7.00);
+				yowamushiPedal.ScoredBy.Should().BeGreaterThan(35000);
+				yowamushiPedal.Members.Should().BeGreaterThan(74000);
+				yowamushiPedal.Favorites.Should().BeGreaterThan(100);
+				yowamushiPedal.Season.Should().Be(Season.Winter);
+				yowamushiPedal.Year.Should().Be(2017);
 			}
 		}
 	}
