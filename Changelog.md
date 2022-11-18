@@ -1,3 +1,9 @@
+## 18.11.2022 - Version 2.4.2
+
+- Fixes
+    * Fix assigning properties in JikanApiError
+    * Remove obsolete ReportUrl from JikanApiError
+
 ## 14.11.2022 - Version 2.4.1
 
 - Features

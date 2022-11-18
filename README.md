@@ -126,13 +126,11 @@ Then restore dependencies:
 
 # Changelog
 
-## 14.11.2022 - Version 2.4.1
+## 18.11.2022 - Version 2.4.2
 
-- Features
-    * New Seasons endpoint
-        * `GetSeasonAsync`
-        * `GetCurrentSeasonAsync`
-        * `GetCurrentSeasonAsync` with paging
+- Fixes
+    * Fix assigning properties in JikanApiError
+    * Remove obsolete ReportUrl from JikanApiError
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**
 
