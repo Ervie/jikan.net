@@ -12,30 +12,24 @@ namespace JikanDotNet
 		/// Response code received from HttpResponseMessage.
 		/// </summary>
 		[JsonPropertyName("status")]
-		public HttpStatusCode Status { get; private set; }
+		public HttpStatusCode Status { get; set; }
 
 		/// <summary>
 		/// Type of http error.
 		/// </summary>
 		[JsonPropertyName("type")]
-		public string Type { get; private set; }
+		public string Type { get; set; }
 
 		/// <summary>
 		/// Message of the error.
 		/// </summary>
 		[JsonPropertyName("message")]
-		public string Message { get; private set; }
+		public string Message { get; set; }
 
 		/// <summary>
 		/// Additional data.
 		/// </summary>
 		[JsonPropertyName("error")]
-		public string Error { get; private set; }
-
-		/// <summary>
-		/// Url where you can report problem
-		/// </summary>
-		[JsonPropertyName("report_url")]
-		public string ReportUrl { get; private set; }
+		public string Error { get; set; }
 	}
 }

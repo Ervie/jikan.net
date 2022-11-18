@@ -62,7 +62,7 @@ namespace JikanDotNet.Tests.AnimeTests
 			var gundamAnime = await _jikan.GetAnimeAsync(80);
 
 			// Then
-			gundamAnime.Data.Title.Should().Be("Mobile Suit Gundam");
+			gundamAnime.Data.Title.Should().Be("Kidou Senshi Gundam");
 		}
 
 		[Fact]
