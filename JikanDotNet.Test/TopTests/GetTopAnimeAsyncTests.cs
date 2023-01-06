@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using FluentAssertions.Execution;
-using JikanDotNet.Enumerations;
 using JikanDotNet.Exceptions;
 using System.Linq;
 using System.Threading.Tasks;

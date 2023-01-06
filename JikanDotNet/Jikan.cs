@@ -1,6 +1,5 @@
 ﻿using JikanDotNet.Config;
 using JikanDotNet.Consts;
-using JikanDotNet.Enumerations;
 using JikanDotNet.Exceptions;
 using JikanDotNet.Extensions;
 using JikanDotNet.Helpers;
@@ -649,8 +648,8 @@ namespace JikanDotNet
         public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetTopAnimeAsync(TopAnimeFilter filter, int page = 1)
         {
             Guard.IsGreaterThanZero(page, nameof(page));
-            var queryParams = $"?page={page}" + (filter != TopAnimeFilter.None ? $"&filter={filter.GetDescription()}" : "");
-            var endpointParts = new[] { JikanEndpointConsts.TopList, JikanEndpointConsts.Anime + queryParams };
+            var queryParams = $"?page={page}&filter={filter.GetDescription()}";
+			var endpointParts = new[] { JikanEndpointConsts.TopList, JikanEndpointConsts.Anime + queryParams };
             return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
         }
 
