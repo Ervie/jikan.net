@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using JikanDotNet.Enumerations;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace JikanDotNet
@@ -480,11 +481,21 @@ namespace JikanDotNet
 		/// <returns>List of top anime.</returns>
 		Task<PaginatedJikanResponse<ICollection<Anime>>> GetTopAnimeAsync(int page);
 
-		/// <summary>
-		/// Returns list of top manga.
-		/// </summary>
-		/// <returns>List of top manga.</returns>
-		Task<PaginatedJikanResponse<ICollection<Manga>>> GetTopMangaAsync();
+        /// <summary>
+        /// Returns list of top anime.
+        /// </summary>
+        /// <param name="page">Index of page folding 25 records of top ranging (e.g. 1 will return first 25 records, 2 will return record from 26 to 50 etc.)</param>
+        /// <param name="filter">Filter determaning result of request (e.g. TopAnimeFilter.Airing will return top airing anime.)</param>
+		/// 
+        /// <returns>List of top anime.</returns>
+        Task<PaginatedJikanResponse<ICollection<Anime>>> GetTopAnimeAsync(TopAnimeFilter filter, int page=1);
+
+
+        /// <summary>
+        /// Returns list of top manga.
+        /// </summary>
+        /// <returns>List of top manga.</returns>
+        Task<PaginatedJikanResponse<ICollection<Manga>>> GetTopMangaAsync();
 
 		/// <summary>
 		/// Returns list of top manga.

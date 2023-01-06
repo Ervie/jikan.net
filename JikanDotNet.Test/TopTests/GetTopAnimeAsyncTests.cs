@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using FluentAssertions.Execution;
+using JikanDotNet.Enumerations;
 using JikanDotNet.Exceptions;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,7 +26,18 @@ namespace JikanDotNet.Tests.TopTests
 			top.Should().NotBeNull();
 		}
 
-		[Fact]
+        [Fact]
+        public async Task GetTopAnimeAsync_FilterParameter_ShouldParseFMA()
+		{
+			// When
+			var top = await _jikan.GetTopAnimeAsync(filter:TopAnimeFilter.Airing) ;
+
+			// Then
+			top.Data.First().Title.Should().Be("One Piece");
+        }
+
+
+        [Fact]
 		public async Task GetTopAnimeAsync_NoParameter_ShouldParseFMA()
 		{
 			// When
