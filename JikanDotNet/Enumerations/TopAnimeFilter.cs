@@ -32,11 +32,6 @@ namespace JikanDotNet.Enumerations
         /// Filter by favorites
         /// </summary>
         [Description("favorites")]
-        Favorite,
-        /// <summary>
-        /// Use no filter
-        /// </summary>
-        [Description("none")]
-        None
+        Favorite
     }
 }

@@ -31,7 +31,6 @@ namespace JikanDotNet.Tests.TopTests
 		{
 			var top = await _jikan.GetTopAnimeAsync(filter:TopAnimeFilter.Airing) ;
 
-
 			top.Data.First().Title.Should().Be("One Piece");
         }
 
