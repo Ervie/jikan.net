@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 
-namespace JikanDotNet.Enumerations
+namespace JikanDotNet
 {
     /// <summary>
 	/// Defines filter used in top anime request
@@ -25,13 +25,13 @@ namespace JikanDotNet.Enumerations
         /// <summary>
         /// Filter by popularity
         /// </summary>
-        [Description("popularity")]
+        [Description("bypopularity")]
         ByPopularity,
 
         /// <summary>
         /// Filter by favorites
         /// </summary>
-        [Description("favorites")]
+        [Description("favorite")]
         Favorite
     }
 }

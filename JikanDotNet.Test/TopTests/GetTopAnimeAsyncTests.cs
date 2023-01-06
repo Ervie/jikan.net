@@ -29,8 +29,10 @@ namespace JikanDotNet.Tests.TopTests
         [Fact]
         public async Task GetTopAnimeAsync_FilterParameter_ShouldParseFMA()
 		{
+			// When
 			var top = await _jikan.GetTopAnimeAsync(filter:TopAnimeFilter.Airing) ;
 
+			// Then
 			top.Data.First().Title.Should().Be("One Piece");
         }
 
