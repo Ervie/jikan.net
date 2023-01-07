@@ -126,11 +126,10 @@ Then restore dependencies:
 
 # Changelog
 
-## 18.11.2022 - Version 2.4.2
+## 07.01.2023 - Version 2.4.3
 
-- Fixes
-    * Fix assigning properties in JikanApiError
-    * Remove obsolete ReportUrl from JikanApiError
+- Features
+    * [TopAnime] Add optional filter (filter airing, upcoming, by popularity or by favorites)
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**
 

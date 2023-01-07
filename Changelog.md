@@ -1,3 +1,8 @@
+## 07.01.2023 - Version 2.4.3
+
+- Features
+    * [TopAnime] Add optional filter (filter airing, upcoming, by popularity or by favorites)
+
 ## 18.11.2022 - Version 2.4.2
 
 - Fixes
