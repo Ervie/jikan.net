@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using FluentAssertions.Execution;
-using JikanDotNet.Enumerations;
 using JikanDotNet.Exceptions;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,18 +25,7 @@ namespace JikanDotNet.Tests.TopTests
 			top.Should().NotBeNull();
 		}
 
-        [Fact]
-        public async Task GetTopAnimeAsync_FilterParameter_ShouldParseFMA()
-		{
-			// When
-			var top = await _jikan.GetTopAnimeAsync(filter:TopAnimeFilter.Airing) ;
-
-			// Then
-			top.Data.First().Title.Should().Be("One Piece");
-        }
-
-
-        [Fact]
+		[Fact]
 		public async Task GetTopAnimeAsync_NoParameter_ShouldParseFMA()
 		{
 			// When
@@ -77,19 +65,6 @@ namespace JikanDotNet.Tests.TopTests
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
-		[Theory]
-		[InlineData(int.MinValue)]
-		[InlineData(-1)]
-		[InlineData(0)]
-		public async Task GetTopAnimeAsync_ValidTypeInvalidPage_ShouldThrowValidationException(int page)
-		{
-			// When
-			var func = _jikan.Awaiting(x => x.GetTopAnimeAsync(page));
-
-			// Then
-			await func.Should().ThrowExactlyAsync<JikanValidationException>();
-		}
-
 		[Fact]
 		public async Task GetTopAnimeAsync_SecondPage_ShouldParseAnimeSecondPage()
 		{
@@ -100,9 +75,44 @@ namespace JikanDotNet.Tests.TopTests
 			var titles = top.Data.Select(x => x.Title);
 			using (new AssertionScope())
 			{
-				titles.Should().Contain("Monster");
-				titles.Should().Contain("Mushishi Zoku Shou");
+				titles.Should().Contain("Monogatari Series: Second Season");
+				titles.Should().Contain("Cowboy Bebop");
 			}
+		}
+
+		[Theory]
+		[InlineData(int.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetTopAnimeAsync_ValidFilterInvalidPage_ShouldThrowValidationException(int page)
+		{
+			// When
+			var func = _jikan.Awaiting(x => x.GetTopAnimeAsync(TopAnimeFilter.Airing, page));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+		
+		[Fact]
+		public async Task GetTopAnimeAsync_FilterParameter_ShouldParseOP()
+		{
+			// When
+			var top = await _jikan.GetTopAnimeAsync(TopAnimeFilter.Airing) ;
+
+			// Then
+			top.Data.First().Title.Should().Be("One Piece");
+		}
+		
+		[Fact]
+		public async Task GetTopAnimeAsync_FilterParameterWithSecondPage_ShouldParseNotOP()
+		{
+			// When
+			var top = await _jikan.GetTopAnimeAsync(TopAnimeFilter.Airing, 2) ;
+
+			// Then
+			using var _ = new AssertionScope();
+			top.Data.Should().HaveCount(25);
+			top.Data.First().Title.Should().NotBe("One Piece");
 		}
 	}
 }

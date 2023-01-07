@@ -1,6 +1,5 @@
 ﻿using JikanDotNet.Config;
 using JikanDotNet.Consts;
-using JikanDotNet.Enumerations;
 using JikanDotNet.Exceptions;
 using JikanDotNet.Extensions;
 using JikanDotNet.Helpers;
@@ -540,7 +539,7 @@ namespace JikanDotNet
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetSeasonAsync(int year, Season season)
 		{
-			Guard.IsValid(x => x >= 1000 && x < 10000, year, nameof(year));
+			Guard.IsValid(x => x is >= 1000 and < 10000, year, nameof(year));
 			Guard.IsValidEnum(season, nameof(season));
 			var endpointParts = new[] { JikanEndpointConsts.Seasons, year.ToString(), season.GetDescription() };
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
@@ -549,7 +548,7 @@ namespace JikanDotNet
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetSeasonAsync(int year, Season season, int page)
 		{
-			Guard.IsValid(x => x >= 1000 && x < 10000, year, nameof(year));
+			Guard.IsValid(x => x is >= 1000 and < 10000, year, nameof(year));
 			Guard.IsValidEnum(season, nameof(season));
 			Guard.IsGreaterThanZero(page, nameof(page));
 			var queryParams = $"?page={page}";
@@ -645,16 +644,25 @@ namespace JikanDotNet
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
 		}
 
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetTopAnimeAsync(TopAnimeFilter filter)
+		{
+			Guard.IsValidEnum(filter, nameof(filter));
+			var queryParams = $"?filter={filter.GetDescription()}";
+			var endpointParts = new[] { JikanEndpointConsts.TopList, JikanEndpointConsts.Anime + queryParams };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
+		}
+		
         /// <inheritdoc />
-        public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetTopAnimeAsync(TopAnimeFilter filter, int page = 1)
+        public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetTopAnimeAsync(TopAnimeFilter filter, int page)
         {
+	        Guard.IsValidEnum(filter, nameof(filter));
             Guard.IsGreaterThanZero(page, nameof(page));
-            var queryParams = $"?page={page}" + (filter != TopAnimeFilter.None ? $"&filter={filter.GetDescription()}" : "");
+            var queryParams = $"?page={page}&filter={filter.GetDescription()}";
             var endpointParts = new[] { JikanEndpointConsts.TopList, JikanEndpointConsts.Anime + queryParams };
             return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts);
         }
-
-
+        
         /// <inheritdoc />
         public async Task<PaginatedJikanResponse<ICollection<Manga>>> GetTopMangaAsync()
 		{
