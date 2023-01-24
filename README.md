@@ -126,10 +126,10 @@ Then restore dependencies:
 
 # Changelog
 
-## 07.01.2023 - Version 2.4.3
+## 24.01.2023 - Version 2.5.0
 
 - Features
-    * [TopAnime] Add optional filter (filter airing, upcoming, by popularity or by favorites)
+    * Add support of [CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken?view=net-7.0) for all methods
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**
 

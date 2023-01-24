@@ -1,3 +1,8 @@
+## 24.01.2023 - Version 2.5.0
+
+- Features
+    * Add support of [CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken?view=net-7.0) for all methods
+    
 ## 07.01.2023 - Version 2.4.3
 
 - Features
