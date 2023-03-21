@@ -126,10 +126,10 @@ Then restore dependencies:
 
 # Changelog
 
-## 24.01.2023 - Version 2.5.0
+## 21.03.2023 - Version 2.5.1
 
-- Features
-    * Add support of [CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken?view=net-7.0) for all methods
+- Fixes
+    * Fix json deserialization of HttpCode returned from failed HTTP requests
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**
 

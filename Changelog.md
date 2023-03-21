@@ -1,3 +1,8 @@
+## 21.03.2023 - Version 2.5.1
+
+- Fixes
+    * Fix json deserialization of HttpCode returned from failed HTTP requests
+    
 ## 24.01.2023 - Version 2.5.0
 
 - Features
