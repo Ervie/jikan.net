@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 namespace JikanDotNet
 {
 	/// <summary>
-	/// Class of error data returned in case http call was unsucessfull
+	/// Class of error data returned in case http call was unsuccessful
 	/// </summary>
 	public class JikanApiError
 	{
@@ -12,6 +12,7 @@ namespace JikanDotNet
 		/// Response code received from HttpResponseMessage.
 		/// </summary>
 		[JsonPropertyName("status")]
+		[JsonConverter(typeof(JsonStringEnumConverter))]
 		public HttpStatusCode Status { get; set; }
 
 		/// <summary>
