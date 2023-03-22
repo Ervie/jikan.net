@@ -3,8 +3,10 @@ using JikanDotNet.Consts;
 using JikanDotNet.Exceptions;
 using JikanDotNet.Extensions;
 using JikanDotNet.Helpers;
+using JikanDotNet.Limiter;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading;
@@ -29,6 +31,11 @@ namespace JikanDotNet
 		/// </summary>
 		private readonly JikanClientConfiguration _jikanConfiguration;
 
+		/// <summary>
+		/// API call limiter
+		/// </summary>
+		private readonly ITaskLimiter _limiter;
+
 		#endregion Fields
 
 		#region Constructors
@@ -46,6 +53,7 @@ namespace JikanDotNet
 		public Jikan(JikanClientConfiguration jikanClientConfiguration, HttpClient httpClient = null)
 		{
 			_jikanConfiguration = jikanClientConfiguration;
+			_limiter = new CompositeTaskLimiter(jikanClientConfiguration.LimiterConfigurations?.Distinct() ?? TaskLimiterConfiguration.None);
 			_httpClient = httpClient ?? DefaultHttpClientProvider.GetDefaultHttpClient();
 		}
 
@@ -66,7 +74,7 @@ namespace JikanDotNet
 			var requestUrl = string.Join("/", routeSections);
 			try
 			{
-				using var response = await _httpClient.GetAsync(requestUrl, cancellationToken);
+				using var response = await _limiter.LimitAsync(() => _httpClient.GetAsync(requestUrl, cancellationToken));
 				if (response.IsSuccessStatusCode)
 				{
 					var json = await response.Content.ReadAsStringAsync();
