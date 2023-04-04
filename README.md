@@ -126,10 +126,10 @@ Then restore dependencies:
 
 # Changelog
 
-## 21.03.2023 - Version 2.5.1
+## 04.04.2023 - Version 2.6.0
 
-- Fixes
-    * Fix json deserialization of HttpCode returned from failed HTTP requests
+- Features
+    * Add rate limiting
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**
 

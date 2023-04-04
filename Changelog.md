@@ -1,3 +1,8 @@
+## 04.04.2023 - Version 2.6.0
+
+- Features
+    * Add rate limiting
+    
 ## 21.03.2023 - Version 2.5.1
 
 - Fixes
