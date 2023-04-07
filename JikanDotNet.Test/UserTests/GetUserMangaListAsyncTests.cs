@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System;
+using FluentAssertions;
 using FluentAssertions.Execution;
 using JikanDotNet.Exceptions;
 using System.Linq;
@@ -14,6 +15,16 @@ namespace JikanDotNet.Tests.UserTests
 		public GetUserMangaListAsyncTests()
 		{
 			_jikan = new Jikan();
+		}
+
+		[Fact]
+		public async Task GetUserMangaListAsync_OnDefaultEndpoint_ShouldThrowNotSupportedException()
+		{
+			// When
+			var func = _jikan.Awaiting(x => x.GetUserMangaListAsync("Ervelan"));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<NotSupportedException>();
 		}
 
 		[Theory]
@@ -65,7 +76,7 @@ namespace JikanDotNet.Tests.UserTests
 			var action = _jikan.Awaiting(x => x.GetUserMangaListAsync("onrix"));
 
 			// Then
-			action.Should().ThrowAsync<JikanRequestException>();
+			action.Should().ThrowExactlyAsync<JikanRequestException>();
 		}
 
 		[Fact]

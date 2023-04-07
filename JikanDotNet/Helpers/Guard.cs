@@ -5,6 +5,14 @@ namespace JikanDotNet.Helpers
 {
 	internal static class Guard
 	{
+		internal static void IsDefaultEndpoint(string endpoint, string methodName)
+		{
+			if (endpoint.Equals(DefaultHttpClientProvider.DefaultEndpoint))
+			{
+				throw new NotSupportedException($"Operation {methodName} is not available on the default endpoint.");
+			}
+		}
+
 		internal static void IsNotNullOrWhiteSpace(string arg, string argumentName)
 		{
 			if (string.IsNullOrWhiteSpace(arg))
