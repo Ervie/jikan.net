@@ -12,7 +12,7 @@ namespace JikanDotNet.Helpers
 		/// <summary>
 		/// Endpoint for SSL encrypted requests.
 		/// </summary>
-		private const string DefaultEndpoint = "https://api.jikan.moe/v4/";
+		internal const string DefaultEndpoint = "https://api.jikan.moe/v4/";
 
 		/// <summary>
 		/// Get static HttpClient. Using default Jikan REST endpoint.
