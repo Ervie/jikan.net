@@ -40,9 +40,8 @@ namespace JikanDotNet.Tests.MangaTests
 			{
 				berserk.Data.First().User.Username.Should().Be("TheCriticsClub");
 				berserk.Data.First().MalId.Should().Be(4403);
-				berserk.Data.First().Votes.Should().BeGreaterThan(1200);
-				berserk.Data.First().ReviewScores.Overall.Should().Be(10);
-				berserk.Data.First().ReviewScores.Story.Should().Be(9);
+				berserk.Data.First().Score.Should().BeGreaterThan(7);
+				berserk.Data.First().Reactions.TotalReactions.Should().BeGreaterThan(1);
 			}
 		}
 	}

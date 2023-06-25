@@ -39,22 +39,16 @@ namespace JikanDotNet
 		public string Content { get; set; }
 
 		/// <summary>
-		/// Count of votes when the review was marked as helpful.
-		/// </summary>
-		[JsonPropertyName("votes")]
-		public int? Votes { get; set; }
-
-		/// <summary>
 		/// Reviewing user.
 		/// </summary>
 		[JsonPropertyName("user")]
 		public UserMetadata User { get; set; }
 		
 		/// <summary>
-		/// Review scores.
+		/// Review reactions.
 		/// </summary>
-		[JsonPropertyName("scores")]
-		public ReviewScores ReviewScores { get; set; }
+		[JsonPropertyName("reactions")]
+		public ReviewReactions Reactions { get; set; }
 		
 		/// <summary>
 		/// Number of episodes watched by the reviewer (if review is about anime).
@@ -67,5 +61,17 @@ namespace JikanDotNet
 		/// </summary>
 		[JsonPropertyName("chapters_read")]
 		public int? ChaptersRead { get; set; }
+		
+		/// <summary>
+		/// The score of the review.
+		/// </summary>
+		[JsonPropertyName("score")]
+		public int Score { get; set; }
+		
+		/// <summary>
+		/// If the review contains spoilers.
+		/// </summary>
+		[JsonPropertyName("is_spoiler")]
+		public bool IsSpoiler { get; set; }
 	}
 }
