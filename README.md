@@ -126,10 +126,14 @@ Then restore dependencies:
 
 # Changelog
 
-## 04.04.2023 - Version 2.6.0
+## 07.07.2023 - Version 2.6.1
 
-- Features
-    * Add rate limiting
+- Features/Fixes
+    * Adjust review models to new properties
+        * Add `IsSpoiler`
+        * Add `ReviewReactions`
+        * Add `Score` (single integer)
+        * Remove `ReviewScores`
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**
 

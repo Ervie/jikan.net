@@ -1,3 +1,12 @@
+## 07.07.2023 - Version 2.6.1
+
+- Features/Fixes
+    * Adjust review models to new properties
+        * Add `IsSpoiler`
+        * Add `ReviewReactions`
+        * Add `Score` (single integer)
+        * Remove `ReviewScores`
+
 ## 04.04.2023 - Version 2.6.0
 
 - Features
