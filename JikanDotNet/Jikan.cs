@@ -459,10 +459,11 @@ namespace JikanDotNet
 		}
 
 		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<Review>>> GetMangaReviewsAsync(long id, CancellationToken cancellationToken = default)
+		public async Task<PaginatedJikanResponse<ICollection<Review>>> GetMangaReviewsAsync(long id, bool includePreliminary = false, CancellationToken cancellationToken = default)
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
-			var endpointParts = new[] { JikanEndpointConsts.Manga, id.ToString(), JikanEndpointConsts.Reviews };
+			var queryParams = $"?preliminary={includePreliminary}";
+			var endpointParts = new[] { JikanEndpointConsts.Manga, id.ToString(), JikanEndpointConsts.Reviews, queryParams };
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Review>>>(endpointParts, cancellationToken);
 		}
 
