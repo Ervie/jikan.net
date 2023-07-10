@@ -71,7 +71,7 @@ namespace JikanDotNet
         private async Task<T> ExecuteGetRequestAsync<T>(ICollection<string> routeSections, CancellationToken cancellationToken = default) where T : class
 		{
 			T returnedObject = null;
-			var requestUrl = string.Join("/", routeSections);
+			var requestUrl = string.Join("/", routeSections).Replace("/?", "?");
 			try
 			{
 				using var response = await _limiter.LimitAsync(() => _httpClient.GetAsync(requestUrl, cancellationToken));
