@@ -459,11 +459,16 @@ namespace JikanDotNet
 		}
 
 		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<Review>>> GetMangaReviewsAsync(long id, bool includePreliminary = false, CancellationToken cancellationToken = default)
+		public async Task<PaginatedJikanResponse<ICollection<Review>>> GetMangaReviewsAsync(long id, bool includePreliminary = true, CancellationToken cancellationToken = default)
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
-			var queryParams = $"?preliminary={includePreliminary}";
-			var endpointParts = new[] { JikanEndpointConsts.Manga, id.ToString(), JikanEndpointConsts.Reviews, queryParams };
+			var endpointParts = new List<string>() {JikanEndpointConsts.Manga, id.ToString(), JikanEndpointConsts.Reviews};
+			
+			// If false explicitly passed, it will return nothing back. Must be added dynamically as if api has reviews/ it will also error out
+			if (includePreliminary)
+			{
+				endpointParts.Add("?preliminary=true");
+			}
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Review>>>(endpointParts, cancellationToken);
 		}
 
