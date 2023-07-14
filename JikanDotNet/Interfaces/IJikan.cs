@@ -306,9 +306,10 @@ namespace JikanDotNet
         /// Returns collection of manga reviews.
         /// </summary>
         /// <param name="id">MAL id of manga.</param>
+        /// <param name="includePreliminary">Include Preliminary Reviews. Defaults to true.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Collection of manga reviews.</returns>
-        Task<PaginatedJikanResponse<ICollection<Review>>> GetMangaReviewsAsync(long id, CancellationToken cancellationToken = default);
+        Task<PaginatedJikanResponse<ICollection<Review>>> GetMangaReviewsAsync(long id, bool includePreliminary = true, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns collection of manga related entries.

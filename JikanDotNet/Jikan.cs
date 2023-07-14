@@ -71,7 +71,7 @@ namespace JikanDotNet
         private async Task<T> ExecuteGetRequestAsync<T>(ICollection<string> routeSections, CancellationToken cancellationToken = default) where T : class
 		{
 			T returnedObject = null;
-			var requestUrl = string.Join("/", routeSections);
+			var requestUrl = string.Join("/", routeSections).Replace("/?", "?");
 			try
 			{
 				using var response = await _limiter.LimitAsync(() => _httpClient.GetAsync(requestUrl, cancellationToken));
@@ -459,10 +459,16 @@ namespace JikanDotNet
 		}
 
 		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<Review>>> GetMangaReviewsAsync(long id, CancellationToken cancellationToken = default)
+		public async Task<PaginatedJikanResponse<ICollection<Review>>> GetMangaReviewsAsync(long id, bool includePreliminary = true, CancellationToken cancellationToken = default)
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
-			var endpointParts = new[] { JikanEndpointConsts.Manga, id.ToString(), JikanEndpointConsts.Reviews };
+			var endpointParts = new List<string>() {JikanEndpointConsts.Manga, id.ToString(), JikanEndpointConsts.Reviews};
+			
+			// If false explicitly passed, it will return nothing back. Must be added dynamically as if api has reviews/ it will also error out
+			if (includePreliminary)
+			{
+				endpointParts.Add("?preliminary=true");
+			}
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Review>>>(endpointParts, cancellationToken);
 		}
 

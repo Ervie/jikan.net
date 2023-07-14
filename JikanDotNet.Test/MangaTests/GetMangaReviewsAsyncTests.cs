@@ -44,5 +44,6 @@ namespace JikanDotNet.Tests.MangaTests
 				berserk.Data.First().Reactions.TotalReactions.Should().BeGreaterThan(1);
 			}
 		}
+
 	}
 }
