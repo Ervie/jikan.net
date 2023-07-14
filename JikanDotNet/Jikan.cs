@@ -71,7 +71,7 @@ namespace JikanDotNet
         private async Task<T> ExecuteGetRequestAsync<T>(ICollection<string> routeSections, CancellationToken cancellationToken = default) where T : class
 		{
 			T returnedObject = null;
-			var requestUrl = string.Join("/", routeSections).Replace("/?", "?");
+			var requestUrl = string.Join("/", routeSections);
 			try
 			{
 				using var response = await _limiter.LimitAsync(() => _httpClient.GetAsync(requestUrl, cancellationToken));
@@ -250,20 +250,21 @@ namespace JikanDotNet
 		}
 
 		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<Review>>> GetAnimeReviewsAsync(long id, CancellationToken cancellationToken = default)
+		public async Task<PaginatedJikanResponse<ICollection<Review>>> GetAnimeReviewsAsync(long id, bool includePreliminary = true, bool includeSpoiler = false, CancellationToken cancellationToken = default)
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
-			var endpointParts = new[] { JikanEndpointConsts.Anime, id.ToString(), JikanEndpointConsts.Reviews };
+			var queryParams = $"?preliminary={includePreliminary.ToString().ToLower()}&spoiler={includeSpoiler.ToString().ToLower()}";
+			var endpointParts = new[] { JikanEndpointConsts.Anime, id.ToString(), JikanEndpointConsts.Reviews + queryParams };
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Review>>>(endpointParts, cancellationToken);
 		}
 
 		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<Review>>> GetAnimeReviewsAsync(long id, int page, CancellationToken cancellationToken = default)
+		public async Task<PaginatedJikanResponse<ICollection<Review>>> GetAnimeReviewsAsync(long id, int page, bool includePreliminary = true, bool includeSpoiler = false, CancellationToken cancellationToken = default)
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
 			Guard.IsGreaterThanZero(page, nameof(page));
 
-			var queryParams = $"?page={page}";
+			var queryParams = $"?page={page}&preliminary={includePreliminary.ToString().ToLower()}&spoiler={includeSpoiler.ToString().ToLower()}";
 			var endpointParts = new[] { JikanEndpointConsts.Anime, id.ToString(), JikanEndpointConsts.Reviews + queryParams };
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Review>>>(endpointParts, cancellationToken);
 		}
@@ -459,16 +460,21 @@ namespace JikanDotNet
 		}
 
 		/// <inheritdoc />
-		public async Task<PaginatedJikanResponse<ICollection<Review>>> GetMangaReviewsAsync(long id, bool includePreliminary = true, CancellationToken cancellationToken = default)
+		public async Task<PaginatedJikanResponse<ICollection<Review>>> GetMangaReviewsAsync(long id, bool includePreliminary = true, bool includeSpoiler = false, CancellationToken cancellationToken = default)
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
-			var endpointParts = new List<string>() {JikanEndpointConsts.Manga, id.ToString(), JikanEndpointConsts.Reviews};
-			
-			// If false explicitly passed, it will return nothing back. Must be added dynamically as if api has reviews/ it will also error out
-			if (includePreliminary)
-			{
-				endpointParts.Add("?preliminary=true");
-			}
+			var queryParams = $"?preliminary={includePreliminary.ToString().ToLower()}&spoiler={includeSpoiler.ToString().ToLower()}";
+			var endpointParts = new List<string>() {JikanEndpointConsts.Manga, id.ToString(), JikanEndpointConsts.Reviews + queryParams};
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Review>>>(endpointParts, cancellationToken);
+		}
+
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<Review>>> GetMangaReviewsAsync(long id, int page, bool includePreliminary = true, bool includeSpoiler = false, CancellationToken cancellationToken = default)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			Guard.IsGreaterThanZero(page, nameof(page));
+			var queryParams = $"?page={page}&preliminary={includePreliminary.ToString().ToLower()}&spoiler={includeSpoiler.ToString().ToLower()}";
+			var endpointParts = new List<string>() {JikanEndpointConsts.Manga, id.ToString(), JikanEndpointConsts.Reviews + queryParams};
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Review>>>(endpointParts, cancellationToken);
 		}
 

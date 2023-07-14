@@ -155,18 +155,22 @@ namespace JikanDotNet
         /// Returns collection of anime reviews.
         /// </summary>
         /// <param name="id">MAL id of anime.</param>
+        /// <param name="includePreliminary">Include Preliminary Reviews. Defaults to true.</param>
+        /// <param name="includeSpoiler">Include spoiler Reviews. Defaults to false.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Collection of anime reviews.</returns>
-        Task<PaginatedJikanResponse<ICollection<Review>>> GetAnimeReviewsAsync(long id, CancellationToken cancellationToken = default);
+        Task<PaginatedJikanResponse<ICollection<Review>>> GetAnimeReviewsAsync(long id, bool includePreliminary = true, bool includeSpoiler = false, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns collection of anime reviews.
         /// </summary>
         /// <param name="id">MAL id of anime.</param>
-        /// <param name="cancellationToken">Cancellation token.</param>
         /// <param name="page">Index of page folding 20 records of top ranging (e.g. 1 will return first 20 records, 2 will return record from 21 to 40 etc.)</param>
+        /// <param name="includePreliminary">Include Preliminary Reviews. Defaults to true.</param>
+        /// <param name="includeSpoiler">Include spoiler Reviews. Defaults to false.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Collection of anime reviews.</returns>
-        Task<PaginatedJikanResponse<ICollection<Review>>> GetAnimeReviewsAsync(long id, int page, CancellationToken cancellationToken = default);
+        Task<PaginatedJikanResponse<ICollection<Review>>> GetAnimeReviewsAsync(long id, int page, bool includePreliminary = true, bool includeSpoiler = false, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns collection of anime related entries.
@@ -307,9 +311,21 @@ namespace JikanDotNet
         /// </summary>
         /// <param name="id">MAL id of manga.</param>
         /// <param name="includePreliminary">Include Preliminary Reviews. Defaults to true.</param>
+        /// <param name="includeSpoiler">Include spoiler Reviews. Defaults to false.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Collection of manga reviews.</returns>
-        Task<PaginatedJikanResponse<ICollection<Review>>> GetMangaReviewsAsync(long id, bool includePreliminary = true, CancellationToken cancellationToken = default);
+        Task<PaginatedJikanResponse<ICollection<Review>>> GetMangaReviewsAsync(long id, bool includePreliminary = true, bool includeSpoiler = false, CancellationToken cancellationToken = default);
+        
+        /// <summary>
+        /// Returns collection of manga reviews.
+        /// </summary>
+        /// <param name="id">MAL id of manga.</param>
+        /// <param name="page">Index of page folding 20 records of top ranging (e.g. 1 will return first 20 records, 2 will return record from 21 to 40 etc.)</param>
+        /// <param name="includePreliminary">Include Preliminary Reviews. Defaults to true.</param>
+        /// <param name="includeSpoiler">Include spoiler Reviews. Defaults to false.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Collection of manga reviews.</returns>
+        Task<PaginatedJikanResponse<ICollection<Review>>> GetMangaReviewsAsync(long id, int page, bool includePreliminary = true, bool includeSpoiler = false,CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns collection of manga related entries.
