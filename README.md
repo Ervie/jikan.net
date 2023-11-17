@@ -9,7 +9,7 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
 * Written in to work with .Net Standard 2.0, compatible with .Net Framework (4.6.1 or newer), .Net Core (2.0 or newer) and .net (6.0 or newer).
 * Fully asynchromous request fetching (can be forced to synchromous if needed).
 * Light on dependencies 
-    * No dependencies if you are using .Net Core 3.x or net 6.0.
+    * No dependencies if you are using .Net Core 3.x or net 6.0+
     * Single dependancy for .Net Framework and .Net Core 2.x (System.Text.Json).
 * Usable with Dependency Injection.
 
@@ -126,14 +126,9 @@ Then restore dependencies:
 
 # Changelog
 
-## 07.07.2023 - Version 2.6.1
+## 17.11.2023 - Version 2.7.0
 
-- Features/Fixes
-    * Adjust review models to new properties
-        * Add `IsSpoiler`
-        * Add `ReviewReactions`
-        * Add `Score` (single integer)
-        * Remove `ReviewScores`
+- Add support for .net 8
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**
 

@@ -1,3 +1,7 @@
+## 17.11.2023 - Version 2.7.0
+
+- Add support for .net 8
+
 ## 07.07.2023 - Version 2.6.1
 
 - Features/Fixes
