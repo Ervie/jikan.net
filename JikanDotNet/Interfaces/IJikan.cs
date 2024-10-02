@@ -577,6 +577,14 @@ namespace JikanDotNet
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>List of top anime.</returns>
         Task<PaginatedJikanResponse<ICollection<Anime>>> GetTopAnimeAsync(TopAnimeFilter filter, int page, CancellationToken cancellationToken = default);
+        
+        /// <summary>
+        /// Returns list of top anime.
+        /// </summary>
+        /// <param name="searchConfig">Class containing properties representing query filters</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>List of top anime.</returns>
+        Task<PaginatedJikanResponse<ICollection<Anime>>> GetTopAnimeAsync(AnimeTopSearchConfig searchConfig, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns list of top manga.
@@ -592,6 +600,14 @@ namespace JikanDotNet
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>List of top manga.</returns>
         Task<PaginatedJikanResponse<ICollection<Manga>>> GetTopMangaAsync(int page, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns list of top manga.
+        /// </summary>
+        /// <param name="searchConfig">Class containing properties representing query filters</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>List of top manga.</returns>
+        Task<PaginatedJikanResponse<ICollection<Manga>>> GetTopMangaAsync(MangaTopSearchConfig searchConfig, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns list of most popular people.

@@ -14,37 +14,37 @@ namespace JikanDotNet
 		EveryType,
 
 		/// <summary>
-		/// TV series.
+		/// Manga.
 		/// </summary>
 		[Description("manga")]
 		Manga,
 
 		/// <summary>
-		/// Original video animation.
+		/// Light novel
 		/// </summary>
-		[Description("novel")]
+		[Description("lightnovel")]
 		Novel,
 
 		/// <summary>
-		/// Feature-lenght movie.
+		/// Oneshot
 		/// </summary>
 		[Description("oneshot")]
 		OneShot,
 
 		/// <summary>
-		/// A special episode.
+		/// Doijinshi
 		/// </summary>
 		[Description("doujin")]
 		Doujinshi,
 
 		/// <summary>
-		/// Original net animation.
+		/// Manhwa
 		/// </summary>
 		[Description("manhwa")]
 		Manhwa,
 
 		/// <summary>
-		/// Music video.
+		/// Manhua
 		/// </summary>
 		[Description("manhua")]
 		Manhua

@@ -35,10 +35,10 @@ namespace JikanDotNet.Tests.TopTests
 			// Then
 			using var _ = new AssertionScope();
 			top.Data.First().Title.Should().Be("Berserk");
-			top.Data.First().Publishing.Should().BeFalse();
+			top.Data.First().Publishing.Should().BeTrue();
 			top.Data.First().Type.Should().Be("Manga");
 			top.Data.First().Rank.Should().Be(1);
-			top.Data.First().Authors.Should().ContainSingle().Which.Name.Should().Be("Miura, Kentarou");
+			top.Data.First().Authors.Select(x => x.Name).Should().Contain("Miura, Kentarou");
 			top.Data.First().Serializations.Should().ContainSingle().Which.Name.Should().Be("Young Animal");
 		}
 
@@ -65,8 +65,63 @@ namespace JikanDotNet.Tests.TopTests
 			var titles = top.Data.Select(x => x.Title);
 			using var _ = new AssertionScope();
 			titles.Should().Contain("Made in Abyss");
-			titles.Should().Contain("Mushishi");
-			titles.Should().Contain("Nana");
+			titles.Should().Contain("Kokou no Hito");
+			titles.Should().Contain("Sousou no Frieren");
+		}
+		
+		[Fact]
+		public async Task GetTopMangaAsync_InvalidSearchConfig_ShouldThrowValidationException()
+		{
+			// When
+			var func = _jikan.Awaiting(x => x.GetTopMangaAsync(null));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Fact]
+		public async Task GetTopMangaAsync_DefaultSearchConfig_ShouldParseBerserk()
+		{
+			// Given
+			var searchConfig = new MangaTopSearchConfig();
+
+			// When
+			var result = await _jikan.GetTopMangaAsync(searchConfig);
+
+			// Then
+			result.Data.First().Titles.Should().Contain(x => x.Title.Equals("Berserk"));
+		}
+		
+		[Fact]
+		public async Task GetTopMangaAsyncSearchConfigWithPopularityFilter_ShouldParseBerserk()
+		{
+			// Given
+			var searchConfig = new MangaTopSearchConfig
+			{
+				Filter = TopMangaFilter.ByPopularity
+			};
+
+			// When
+			var result = await _jikan.GetTopMangaAsync(searchConfig);
+
+			// Then
+			result.Data.First().Titles.Should().Contain(x => x.Title.Equals("Berserk"));
+		}
+		
+		[Fact]
+		public async Task GetTopMangaAsync_SearchConfigLightNovel_ShouldParseMonogatari()
+		{
+			// Given
+			var searchConfig = new MangaTopSearchConfig
+			{
+				Type = MangaType.Novel
+			};
+
+			// When
+			var result = await _jikan.GetTopMangaAsync(searchConfig);
+
+			// Then
+			result.Data.First().Titles.Should().Contain(x => x.Title.StartsWith("Monogatari"));
 		}
 	}
 }

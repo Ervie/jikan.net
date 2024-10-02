@@ -684,6 +684,14 @@ namespace JikanDotNet
             var endpointParts = new[] { JikanEndpointConsts.TopList, JikanEndpointConsts.Anime + queryParams };
             return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts, cancellationToken);
         }
+		
+        /// <inheritdoc />
+        public async Task<PaginatedJikanResponse<ICollection<Anime>>> GetTopAnimeAsync(AnimeTopSearchConfig searchConfig, CancellationToken cancellationToken = default)
+        {
+	        Guard.IsNotNull(searchConfig, nameof(searchConfig));
+	        var endpointParts = new[] { JikanEndpointConsts.TopList, JikanEndpointConsts.Anime + searchConfig.ConfigToString()};
+	        return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Anime>>>(endpointParts, cancellationToken);
+        }
         
         /// <inheritdoc />
         public async Task<PaginatedJikanResponse<ICollection<Manga>>> GetTopMangaAsync(CancellationToken cancellationToken = default)
@@ -698,6 +706,14 @@ namespace JikanDotNet
 			Guard.IsGreaterThanZero(page, nameof(page));
 			var queryParams = $"?page={page}";
 			var endpointParts = new[] { JikanEndpointConsts.TopList, JikanEndpointConsts.Manga + queryParams };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Manga>>>(endpointParts, cancellationToken);
+		}
+		
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<Manga>>> GetTopMangaAsync(MangaTopSearchConfig searchConfig, CancellationToken cancellationToken = default)
+		{
+			Guard.IsNotNull(searchConfig, nameof(searchConfig));
+			var endpointParts = new[] { JikanEndpointConsts.TopList, JikanEndpointConsts.Manga + searchConfig.ConfigToString()};
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Manga>>>(endpointParts, cancellationToken);
 		}
 

@@ -114,5 +114,60 @@ namespace JikanDotNet.Tests.TopTests
 			top.Data.Should().HaveCount(25);
 			top.Data.First().Title.Should().NotBe("One Piece");
 		}
+		
+		[Fact]
+		public async Task GetTopAnimeAsync_InvalidSearchConfig_ShouldThrowValidationException()
+		{
+			// When
+			var func = _jikan.Awaiting(x => x.GetTopAnimeAsync(null));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Fact]
+		public async Task GetTopAnimeAsync_DefaultSearchConfig_ShouldParseFrieren()
+		{
+			// Given
+			var searchConfig = new AnimeTopSearchConfig();
+
+			// When
+			var result = await _jikan.GetTopAnimeAsync(searchConfig);
+
+			// Then
+			result.Data.First().Titles.Should().Contain(x => x.Title.Equals("Sousou no Frieren"));
+		}
+		
+		[Fact]
+		public async Task GetTopAnimeAsync_SearchConfigWithPopularityFilter_ShouldParseShingeki()
+		{
+			// Given
+			var searchConfig = new AnimeTopSearchConfig
+			{
+				Filter = TopAnimeFilter.ByPopularity
+			};
+
+			// When
+			var result = await _jikan.GetTopAnimeAsync(searchConfig);
+
+			// Then
+			result.Data.First().Titles.Should().Contain(x => x.Title.Equals("Shingeki no Kyojin"));
+		}
+		
+		[Fact]
+		public async Task GetTopAnimeAsync_SearchConfigMovies_ShouldParseGintama()
+		{
+			// Given
+			var searchConfig = new AnimeTopSearchConfig
+			{
+				Type = AnimeType.Movie
+			};
+
+			// When
+			var result = await _jikan.GetTopAnimeAsync(searchConfig);
+
+			// Then
+			result.Data.First().Titles.Should().Contain(x => x.Title.Equals("Gintama: The Final"));
+		}
 	}
 }

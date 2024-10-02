@@ -44,6 +44,18 @@ namespace JikanDotNet
 		Music,
 
 		/// <summary>
+		/// Cm.
+		/// </summary>
+		[Description("Cm")]
+		Cm,
+		
+		/// <summary>
+		/// Pv.
+		/// </summary>
+		[Description("Pv")]
+		Pv,
+
+		/// <summary>
 		/// Allow all types to be displayed in results.
 		/// </summary>
 		[Description("")]

@@ -6,15 +6,15 @@ using System.Text;
 namespace JikanDotNet
 {
     /// <summary>
-	/// Defines filter used in top anime request
+	/// Defines filter used in top manga request
 	/// </summary>
-    public enum TopAnimeFilter
+    public enum TopMangaFilter
     {
         /// <summary>
 		/// Filter by airing
 		/// </summary>
-		[Description("airing")]
-        Airing,
+		[Description("publishing")]
+        Publishing,
 
         /// <summary>
         /// Filter by upcoming

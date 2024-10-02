@@ -126,9 +126,10 @@ Then restore dependencies:
 
 # Changelog
 
-## 17.11.2023 - Version 2.7.0
+## 02.10.2024 - Version 2.8.0
 
-- Add support for .net 8
+- Add new filters options for `GetTopAnimeAsync` and `GetTopMangaAsync`
+- Fix vulnerability dependancy with System.Text.Json in netstandard2.0 package 
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**
 

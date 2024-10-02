@@ -139,7 +139,7 @@ namespace JikanDotNet
 			if (Rating != AnimeAgeRating.EveryRating)
 			{
 				Guard.IsValidEnum(Rating, nameof(Rating));
-				builder.Append($"rated={Rating.GetDescription()}&");
+				builder.Append($"rating={Rating.GetDescription()}&");
 			}
 
 			if (Status != AiringStatus.EveryStatus)
