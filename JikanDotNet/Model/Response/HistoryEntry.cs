@@ -11,7 +11,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Metadata about updated manga/anime.
 		/// </summary>
-		[JsonPropertyName("meta")]
+		[JsonPropertyName("entry")]
 		public MalUrl Metadata { get; set; }
 
 		/// <summary>
