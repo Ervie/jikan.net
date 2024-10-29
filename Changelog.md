@@ -1,3 +1,8 @@
+
+## 29.10.2024 - Version 2.9.1
+
+- Fix vulnerable `System.Text.Json` library reference to 8.0.5
+
 ## 29.10.2024 - Version 2.9.0
 
 - Fix parsing entries metadata for `HistoryEntry`
