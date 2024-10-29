@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Version>2.8.0</Version>
+    <Version>2.9.0</Version>
     <Authors>Bartłomiej Buchała</Authors>
     <Description>A dotnet wrapper for Jikan REST API, fetching data from MyAnimeList.</Description>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
@@ -11,11 +11,11 @@
     <PackageTags>anime, MAL, myanimelist.net, myanimelist, Jikan, REST, manga, API, wrapper, JikanDotNet, Jikan.net</PackageTags>
     <PackageLicense>https://github.com/Ervie/jikan.net/blob/master/LICENSE</PackageLicense>
     <PackageProjectUrl>https://github.com/Ervie/jikan.net</PackageProjectUrl>
-    <FileVersion>2.8.0.0</FileVersion>
+    <FileVersion>2.9.0.0</FileVersion>
     <LangVersion>latest</LangVersion>
-    <AssemblyVersion>2.8.0.0</AssemblyVersion>
+    <AssemblyVersion>2.9.0.0</AssemblyVersion>
     <TargetFrameworks>netcoreapp3.1;netstandard2.0;net6.0;net8.0</TargetFrameworks>
-    <PackageVersion>2.8.0</PackageVersion>
+    <PackageVersion>2.9.0</PackageVersion>
     <PackageLicenseUrl>https://github.com/Ervie/jikan.net/blob/master/LICENSE</PackageLicenseUrl>
     <PackageIcon>jikan-logo.png</PackageIcon>
   </PropertyGroup>

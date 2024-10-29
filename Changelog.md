@@ -1,3 +1,8 @@
+## 29.10.2024 - Version 2.9.0
+
+- Fix parsing entries metadata for `HistoryEntry`
+- Remove no longer supported UserAnimeList and UserMangaList endpoints
+
 ## 02.10.2024 - Version 2.8.0
 
 - Add new filters options for `GetTopAnimeAsync` and `GetTopMangaAsync`

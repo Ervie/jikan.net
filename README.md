@@ -97,8 +97,6 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
     - Reviews
     - Recommendations
     - Clubs
-    - Anime list (will become obsolete soon)
-    - Manga list (will become obsolete soon)
     - Full data
 - Clubs
     - Profile
@@ -126,10 +124,10 @@ Then restore dependencies:
 
 # Changelog
 
-## 02.10.2024 - Version 2.8.0
+## 29.10.2024 - Version 2.9.0
 
-- Add new filters options for `GetTopAnimeAsync` and `GetTopMangaAsync`
-- Fix vulnerability dependancy with System.Text.Json in netstandard2.0 package 
+- Fix parsing entries metadata for `HistoryEntry`
+- Remove no longer supported UserAnimeList and UserMangaList endpoints
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**
 
