@@ -872,40 +872,6 @@ namespace JikanDotNet
         Task<PaginatedJikanResponse<ICollection<Friend>>> GetUserFriendsAsync(string username, int page, CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Returns entries on user's anime list.
-        /// </summary>
-        /// <param name="username">Username.</param>
-        /// <param name="cancellationToken">Cancellation token.</param>
-        /// <returns>Entries on user's anime list.</returns>
-        Task<BaseJikanResponse<ICollection<AnimeListEntry>>> GetUserAnimeListAsync(string username, CancellationToken cancellationToken = default);
-
-        /// <summary>
-        /// Returns entries on user's anime list.
-        /// </summary>
-        /// <param name="username">Username.</param>
-        /// <param name="page">Index of page folding 300 records of top ranging (e.g. 1 will return first 300 records, 2 will return record from 301 to 600 etc.)</param>
-        /// <param name="cancellationToken">Cancellation token.</param>
-        /// <returns>Entries on user's anime list.</returns>
-        Task<BaseJikanResponse<ICollection<AnimeListEntry>>> GetUserAnimeListAsync(string username, int page, CancellationToken cancellationToken = default);
-
-        /// <summary>
-        /// Returns entries on user's manga list.
-        /// </summary>
-        /// <param name="username">Username.</param>
-        /// <param name="cancellationToken">Cancellation token.</param>
-        /// <returns>Entries on user's manga list.</returns>
-        Task<BaseJikanResponse<ICollection<MangaListEntry>>> GetUserMangaListAsync(string username, CancellationToken cancellationToken = default);
-
-        /// <summary>
-        /// Returns entries on user's manga list.
-        /// </summary>
-        /// <param name="username">Username.</param>
-        /// <param name="page">Index of page folding 300 records of top ranging (e.g. 1 will return first 300 records, 2 will return record from 301 to 600 etc.)</param>
-        /// <param name="cancellationToken">Cancellation token.</param>
-        /// <returns>Entries on user's manga list.</returns>
-        Task<BaseJikanResponse<ICollection<MangaListEntry>>> GetUserMangaListAsync(string username, int page, CancellationToken cancellationToken = default);
-
-        /// <summary>
         /// Returns user's reviews.
         /// </summary>
         /// <param name="username">Username.</param>

@@ -974,46 +974,6 @@ namespace JikanDotNet
 		}
 
 		/// <inheritdoc />
-		public async Task<BaseJikanResponse<ICollection<AnimeListEntry>>> GetUserAnimeListAsync(string username, CancellationToken cancellationToken = default)
-		{
-			Guard.IsDefaultEndpoint(_httpClient.BaseAddress.ToString(), nameof(GetUserAnimeListAsync));
-			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
-			var endpointParts = new[] { JikanEndpointConsts.Users, username, JikanEndpointConsts.AnimeList };
-			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<AnimeListEntry>>>(endpointParts, cancellationToken);
-		}
-
-		/// <inheritdoc />
-		public async Task<BaseJikanResponse<ICollection<AnimeListEntry>>> GetUserAnimeListAsync(string username, int page, CancellationToken cancellationToken = default)
-		{
-			Guard.IsDefaultEndpoint(_httpClient.BaseAddress.ToString(), nameof(GetUserAnimeListAsync));
-			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
-			Guard.IsGreaterThanZero(page, nameof(page));
-			var queryParams = $"?page={page}";
-			var endpointParts = new[] { JikanEndpointConsts.Users, username, JikanEndpointConsts.AnimeList + queryParams };
-			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<AnimeListEntry>>>(endpointParts, cancellationToken);
-		}
-
-		/// <inheritdoc />
-		public async Task<BaseJikanResponse<ICollection<MangaListEntry>>> GetUserMangaListAsync(string username, CancellationToken cancellationToken = default)
-		{
-			Guard.IsDefaultEndpoint(_httpClient.BaseAddress.ToString(), nameof(GetUserMangaListAsync));
-			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
-			var endpointParts = new[] { JikanEndpointConsts.Users, username, JikanEndpointConsts.MangaList };
-			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<MangaListEntry>>>(endpointParts, cancellationToken);
-		}
-
-		/// <inheritdoc />
-		public async Task<BaseJikanResponse<ICollection<MangaListEntry>>> GetUserMangaListAsync(string username, int page, CancellationToken cancellationToken = default)
-		{
-			Guard.IsDefaultEndpoint(_httpClient.BaseAddress.ToString(), nameof(GetUserMangaListAsync));
-			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
-			Guard.IsGreaterThanZero(page, nameof(page));
-			var queryParams = $"?page={page}";
-			var endpointParts = new[] { JikanEndpointConsts.Users, username, JikanEndpointConsts.MangaList + queryParams };
-			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<MangaListEntry>>>(endpointParts, cancellationToken);
-		}
-
-		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<Friend>>> GetUserFriendsAsync(string username, CancellationToken cancellationToken = default)
 		{
 			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
