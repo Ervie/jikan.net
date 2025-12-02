@@ -6,11 +6,11 @@ Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) RESTful API for parsi
 
 ### Main attributes
 
-* Written in to work with .Net Standard 2.0, compatible with .Net Framework (4.6.1 or newer), .Net Core (2.0 or newer) and .net (6.0 or newer).
+* Written in to work with .NET Standard 2.0, compatible with .NET Framework (4.6.1 or newer) and .NET (6.0 or newer).
 * Fully asynchromous request fetching (can be forced to synchromous if needed).
 * Light on dependencies 
-    * No dependencies if you are using .Net Core 3.x or net 6.0+
-    * Single dependancy for .Net Framework and .Net Core 2.x (System.Text.Json).
+    * No dependencies if you are using .NET 6.0+
+    * Single dependancy for .NET Framework (System.Text.Json).
 * Usable with Dependency Injection.
 
 # List of features
@@ -124,14 +124,10 @@ Then restore dependencies:
 
 # Changelog
 
-## 29.10.2024 - Version 2.9.1
+## 02.12.2025 - Version 2.10.0
 
-- Fix vulnerable `System.Text.Json` library reference to 8.0.5
-
-## 29.10.2024 - Version 2.9.0
-
-- Fix parsing entries metadata for `HistoryEntry`
-- Remove no longer supported UserAnimeList and UserMangaList endpoints
+- Add support for .NET 10
+- Remove support for .NET Core 3.1
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**
 

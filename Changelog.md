@@ -1,4 +1,9 @@
 
+## 02.12.2025 - Version 2.10.0
+
+- Add support for .NET 10
+- Remove support for .NET Core 3.1
+
 ## 29.10.2024 - Version 2.9.1
 
 - Fix vulnerable `System.Text.Json` library reference to 8.0.5
