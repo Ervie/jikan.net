@@ -199,6 +199,14 @@ namespace JikanDotNet
 		}
 
 		/// <inheritdoc />
+		public async Task<BaseJikanResponse<ICollection<EpisodeVideo>>> GetAnimeVideosEpisodesAsync(long id, CancellationToken cancellationToken = default)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			var endpointParts = new[] { JikanEndpointConsts.Anime, id.ToString(), JikanEndpointConsts.Videos, JikanEndpointConsts.Episodes };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<EpisodeVideo>>>(endpointParts, cancellationToken);
+		}
+
+		/// <inheritdoc />
 		public async Task<BaseJikanResponse<ICollection<ImagesSet>>> GetAnimePicturesAsync(long id, CancellationToken cancellationToken = default)
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
@@ -920,6 +928,14 @@ namespace JikanDotNet
 		{
 			Guard.IsNotNullOrWhiteSpace(username, nameof(username));
 			var endpointParts = new[] { JikanEndpointConsts.Users, username };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<UserProfile>>(endpointParts, cancellationToken);
+		}
+
+		/// <inheritdoc />
+		public async Task<BaseJikanResponse<UserProfile>> GetUserByIdAsync(long id, CancellationToken cancellationToken = default)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			var endpointParts = new[] { JikanEndpointConsts.Users, "userbyid", id.ToString() };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<UserProfile>>(endpointParts, cancellationToken);
 		}
 

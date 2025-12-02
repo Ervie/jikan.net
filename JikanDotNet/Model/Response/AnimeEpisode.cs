@@ -72,6 +72,12 @@ namespace JikanDotNet
 		/// URL to forum discussion
 		/// </summary>
 		[JsonPropertyName("forum_url")]
-		public string ForumUrl{ get; set; }
+		public string ForumUrl { get; set; }
+		
+		/// <summary>
+		/// Average Score of the episode
+		/// </summary>
+		[JsonPropertyName("score")]
+		public double Score { get; set; }
 	}
 }

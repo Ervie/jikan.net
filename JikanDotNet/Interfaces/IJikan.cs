@@ -104,6 +104,14 @@ namespace JikanDotNet
         Task<BaseJikanResponse<AnimeVideos>> GetAnimeVideosAsync(long id, CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Returns collections of video episodes related to anime with given MAL id.
+        /// </summary>
+        /// <param name="id">MAL id of anime.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Collections of video episodes related to anime with given MAL id.</returns>
+        Task<BaseJikanResponse<ICollection<EpisodeVideo>>> GetAnimeVideosEpisodesAsync(long id, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Returns collections of links to pictures related to anime with given MAL id.
         /// </summary>
         /// <param name="id">MAL id of anime.</param>
@@ -151,6 +159,7 @@ namespace JikanDotNet
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Collection of anime user updates.</returns>
         Task<PaginatedJikanResponse<ICollection<AnimeUserUpdate>>> GetAnimeUserUpdatesAsync(long id, int page, CancellationToken cancellationToken = default);
+        
         /// <summary>
         /// Returns collection of anime reviews.
         /// </summary>
@@ -804,6 +813,14 @@ namespace JikanDotNet
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Information about user's profile with given username.</returns>
         Task<BaseJikanResponse<UserProfile>> GetUserProfileAsync(string username, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns user profile by numeric id.
+        /// </summary>
+        /// <param name="id">Numeric MAL user id.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>User profile by id.</returns>
+        Task<BaseJikanResponse<UserProfile>> GetUserByIdAsync(long id, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns information about user's anime and manga statistics
