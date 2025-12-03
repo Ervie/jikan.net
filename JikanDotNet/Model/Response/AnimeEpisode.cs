@@ -78,6 +78,6 @@ namespace JikanDotNet
 		/// Average Score of the episode
 		/// </summary>
 		[JsonPropertyName("score")]
-		public double Score { get; set; }
+		public double? Score { get; set; }
 	}
 }

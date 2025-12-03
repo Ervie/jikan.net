@@ -124,6 +124,10 @@ Then restore dependencies:
 
 # Changelog
 
+## 03.12.2025 - Version 2.10.1
+
+- Fix Score (change to nullable) for AnimeEpisode model
+
 ## 02.12.2025 - Version 2.10.0
 
 - Add support for .NET 10
