@@ -1,3 +1,13 @@
+## 08.03.2026 - Version 2.10.2
+
+- Features
+    - Add `GetMangaForumTopicsAsync` overload with `ForumTopicType` filter
+    - Add `GetAnimeVideosEpisodesAsync` overload with pagination support
+    - Add `GetWatchRecentPromosAsync` overload with pagination support
+- Fixes
+    - Fix `SearchClubAsync` using incorrect endpoint (`/users` instead of `/clubs`)
+    - Fix `GetAnimeVideosEpisodesAsync` return type to `PaginatedJikanResponse` to match paginated API response
+
 ## 03.12.2025 - Version 2.10.1
 
 - Fix Score (change to nullable) for AnimeEpisode model

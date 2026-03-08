@@ -1,38 +1,72 @@
 using FluentAssertions;
 using FluentAssertions.Execution;
+using JikanDotNet.Exceptions;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace JikanDotNet.Test.AnimeTests
+namespace JikanDotNet.Tests.AnimeTests
 {
-    public class GetAnimeVideosEpisodesAsyncTests
-    {
-        private readonly IJikan _jikan;
+	public class GetAnimeVideosEpisodesAsyncTests
+	{
+		private readonly IJikan _jikan;
 
-        public GetAnimeVideosEpisodesAsyncTests()
-        {
-            _jikan = new Jikan();
-        }
+		public GetAnimeVideosEpisodesAsyncTests()
+		{
+			_jikan = new Jikan();
+		}
 
-        [Fact]
-        public async Task GetAnimeVideosEpisodesAsync_Id1_ReturnsEpisodes()
-        {
-            // Arrange
-            long animeId = 1; // Cowboy Bebop
+		[Theory]
+		[InlineData(long.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetAnimeVideosEpisodesAsync_InvalidId_ShouldThrowValidationException(long malId)
+		{
+			// When
+			var func = _jikan.Awaiting(x => x.GetAnimeVideosEpisodesAsync(malId));
 
-            // Act
-            var result = await _jikan.GetAnimeVideosEpisodesAsync(animeId);
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
 
-            // Assert
-            using (new AssertionScope())
-            {
-                result.Should().NotBeNull();
-                result.Data.Should().NotBeNull();
-                result.Data.Should().NotBeEmpty();
-                result.Data.Should().OnlyContain(e => !string.IsNullOrWhiteSpace(e.Title) && !string.IsNullOrWhiteSpace(e.Url));
-                result.Data.Select(e => e.Title).Should().Contain("Asteroid Blues"); // Example episode title
-            }
-        }
-    }
+		[Theory]
+		[InlineData(int.MinValue)]
+		[InlineData(-1)]
+		[InlineData(0)]
+		public async Task GetAnimeVideosEpisodesAsync_InvalidPage_ShouldThrowValidationException(int page)
+		{
+			// When
+			var func = _jikan.Awaiting(x => x.GetAnimeVideosEpisodesAsync(1, page));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
+		[Fact]
+		public async Task GetAnimeVideosEpisodesAsync_BebopId_ShouldParseCowboyBebopEpisodes()
+		{
+			// When
+			var bebop = await _jikan.GetAnimeVideosEpisodesAsync(1);
+
+			// Then
+			using var _ = new AssertionScope();
+			bebop.Data.Should().NotBeEmpty();
+			bebop.Data.Should().OnlyContain(e => !string.IsNullOrWhiteSpace(e.Title) && !string.IsNullOrWhiteSpace(e.Url));
+			bebop.Data.Select(e => e.Title).Should().Contain("Asteroid Blues");
+			bebop.Pagination.Should().NotBeNull();
+		}
+
+		[Fact]
+		public async Task GetAnimeVideosEpisodesAsync_BebopIdWithPage_ShouldParseCowboyBebopEpisodes()
+		{
+			// When
+			var bebop = await _jikan.GetAnimeVideosEpisodesAsync(1, 1);
+
+			// Then
+			using var _ = new AssertionScope();
+			bebop.Data.Should().NotBeEmpty();
+			bebop.Data.Select(e => e.Title).Should().Contain("Asteroid Blues");
+			bebop.Pagination.Should().NotBeNull();
+		}
+	}
 }

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -109,7 +109,16 @@ namespace JikanDotNet
         /// <param name="id">MAL id of anime.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Collections of video episodes related to anime with given MAL id.</returns>
-        Task<BaseJikanResponse<ICollection<EpisodeVideo>>> GetAnimeVideosEpisodesAsync(long id, CancellationToken cancellationToken = default);
+        Task<PaginatedJikanResponse<ICollection<EpisodeVideo>>> GetAnimeVideosEpisodesAsync(long id, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns collections of video episodes related to anime with given MAL id.
+        /// </summary>
+        /// <param name="id">MAL id of anime.</param>
+        /// <param name="page">Index of page folding 100 records of top ranging (e.g. 1 will return first 100 records, 2 will return record from 101 to 200 etc.)</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Collections of video episodes related to anime with given MAL id.</returns>
+        Task<PaginatedJikanResponse<ICollection<EpisodeVideo>>> GetAnimeVideosEpisodesAsync(long id, int page, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns collections of links to pictures related to anime with given MAL id.
@@ -265,6 +274,15 @@ namespace JikanDotNet
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Collections of forum topics related to manga with given MAL id.</returns>
         Task<BaseJikanResponse<ICollection<ForumTopic>>> GetMangaForumTopicsAsync(long id, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns collections of forum topics related to manga with given MAL id.
+        /// </summary>
+        /// <param name="id">MAL id of manga.</param>
+        /// <param name="type">ForumTopicType filter</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Collections of forum topics related to manga with given MAL id.</returns>
+        Task<BaseJikanResponse<ICollection<ForumTopic>>> GetMangaForumTopicsAsync(long id, ForumTopicType type, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns collections of links to pictures related to manga with given MAL id.
@@ -1086,6 +1104,14 @@ namespace JikanDotNet
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Collection of recently released promos details.</returns>
         Task<PaginatedJikanResponse<ICollection<WatchPromoVideo>>> GetWatchRecentPromosAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Return collection of recently released promos details.
+        /// </summary>
+        /// <param name="page">Index of page folding 100 records of top ranging (e.g. 1 will return first 100 records, 2 will return record from 101 to 200 etc.)</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Collection of recently released promos details.</returns>
+        Task<PaginatedJikanResponse<ICollection<WatchPromoVideo>>> GetWatchRecentPromosAsync(int page, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Return collection of popular promos details.

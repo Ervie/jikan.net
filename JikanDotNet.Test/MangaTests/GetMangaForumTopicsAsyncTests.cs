@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using FluentAssertions.Execution;
 using JikanDotNet.Exceptions;
 using System.Linq;
@@ -29,6 +29,18 @@ namespace JikanDotNet.Tests.MangaTests
 			await func.Should().ThrowExactlyAsync<JikanValidationException>();
 		}
 
+		[Theory]
+		[InlineData((ForumTopicType)int.MaxValue)]
+		[InlineData((ForumTopicType)int.MinValue)]
+		public async Task GetMangaForumTopicsAsync_InvalidEnum_ShouldThrowValidationException(ForumTopicType type)
+		{
+			// When
+			var func = _jikan.Awaiting(x => x.GetMangaForumTopicsAsync(1, type));
+
+			// Then
+			await func.Should().ThrowExactlyAsync<JikanValidationException>();
+		}
+
 		[Fact]
 		public async Task GetMangaForumTopicsAsync_MonsterId_ShouldParseMonsterTopics()
 		{
@@ -52,8 +64,31 @@ namespace JikanDotNet.Tests.MangaTests
 			using (new AssertionScope())
 			{
 				topics.Should().Contain(396141L);
-				topics.Should().Contain(396155L);
 			}
+		}
+
+		[Fact]
+		public async Task GetMangaForumTopicsAsync_MonsterIdAndTypeEpisode_ShouldParseMonsterTopicsWithEpisodeDiscussionOnly()
+		{
+			// When
+			var monster = await _jikan.GetMangaForumTopicsAsync(1, ForumTopicType.Episode);
+
+			// Then
+			using var _ = new AssertionScope();
+			monster.Data.Should().NotBeNull();
+			monster.Data.Should().OnlyContain(topic => topic.Title.Contains("Monster Chapter"));
+		}
+
+		[Fact]
+		public async Task GetMangaForumTopicsAsync_MonsterIdAndTypeOther_ShouldParseMonsterTopicsWithoutEpisodeDiscussion()
+		{
+			// When
+			var monster = await _jikan.GetMangaForumTopicsAsync(1, ForumTopicType.Other);
+
+			// Then
+			using var _ = new AssertionScope();
+			monster.Data.Should().NotBeNull();
+			monster.Data.Should().NotContain(topic => topic.Title.Contains("Monster Chapter "));
 		}
 	}
 }

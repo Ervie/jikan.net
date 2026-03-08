@@ -124,14 +124,15 @@ Then restore dependencies:
 
 # Changelog
 
+## 08.03.2026 - Version 2.10.2
+
+- Add missing API method overloads (manga forum topic filter, video episodes pagination, watch promos pagination)
+- Fix `SearchClubAsync` using incorrect endpoint
+- Fix `GetAnimeVideosEpisodesAsync` return type to `PaginatedJikanResponse`
+
 ## 03.12.2025 - Version 2.10.1
 
 - Fix Score (change to nullable) for AnimeEpisode model
-
-## 02.12.2025 - Version 2.10.0
-
-- Add support for .NET 10
-- Remove support for .NET Core 3.1
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**
 

@@ -1,4 +1,4 @@
-﻿using JikanDotNet.Config;
+using JikanDotNet.Config;
 using JikanDotNet.Consts;
 using JikanDotNet.Exceptions;
 using JikanDotNet.Extensions;
@@ -199,11 +199,21 @@ namespace JikanDotNet
 		}
 
 		/// <inheritdoc />
-		public async Task<BaseJikanResponse<ICollection<EpisodeVideo>>> GetAnimeVideosEpisodesAsync(long id, CancellationToken cancellationToken = default)
+		public async Task<PaginatedJikanResponse<ICollection<EpisodeVideo>>> GetAnimeVideosEpisodesAsync(long id, CancellationToken cancellationToken = default)
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
 			var endpointParts = new[] { JikanEndpointConsts.Anime, id.ToString(), JikanEndpointConsts.Videos, JikanEndpointConsts.Episodes };
-			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<EpisodeVideo>>>(endpointParts, cancellationToken);
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<EpisodeVideo>>>(endpointParts, cancellationToken);
+		}
+
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<EpisodeVideo>>> GetAnimeVideosEpisodesAsync(long id, int page, CancellationToken cancellationToken = default)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			Guard.IsGreaterThanZero(page, nameof(page));
+			var queryParams = $"?page={page}";
+			var endpointParts = new[] { JikanEndpointConsts.Anime, id.ToString(), JikanEndpointConsts.Videos, JikanEndpointConsts.Episodes + queryParams };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<EpisodeVideo>>>(endpointParts, cancellationToken);
 		}
 
 		/// <inheritdoc />
@@ -413,6 +423,17 @@ namespace JikanDotNet
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
 			var endpointParts = new[] { JikanEndpointConsts.Manga, id.ToString(), JikanEndpointConsts.Forum };
+			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<ForumTopic>>>(endpointParts, cancellationToken);
+		}
+
+		/// <inheritdoc />
+		public async Task<BaseJikanResponse<ICollection<ForumTopic>>> GetMangaForumTopicsAsync(long id, ForumTopicType type, CancellationToken cancellationToken = default)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			Guard.IsValidEnum(type, nameof(type));
+
+			var queryParams = $"?filter={type.GetDescription()}";
+			var endpointParts = new[] { JikanEndpointConsts.Manga, id.ToString(), JikanEndpointConsts.Forum + queryParams };
 			return await ExecuteGetRequestAsync<BaseJikanResponse<ICollection<ForumTopic>>>(endpointParts, cancellationToken);
 		}
 
@@ -1140,6 +1161,15 @@ namespace JikanDotNet
 			var endpointParts = new[] { JikanEndpointConsts.Watch, JikanEndpointConsts.Promos };
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<WatchPromoVideo>>>(endpointParts, cancellationToken);
 		}
+
+		/// <inheritdoc />
+		public async Task<PaginatedJikanResponse<ICollection<WatchPromoVideo>>> GetWatchRecentPromosAsync(int page, CancellationToken cancellationToken = default)
+		{
+			Guard.IsGreaterThanZero(page, nameof(page));
+			var queryParams = $"?page={page}";
+			var endpointParts = new[] { JikanEndpointConsts.Watch, JikanEndpointConsts.Promos + queryParams };
+			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<WatchPromoVideo>>>(endpointParts, cancellationToken);
+		}
 		
 		/// <inheritdoc />
 		public async Task<PaginatedJikanResponse<ICollection<WatchPromoVideo>>> GetWatchPopularPromosAsync(CancellationToken cancellationToken = default)
@@ -1292,7 +1322,7 @@ namespace JikanDotNet
 		public async Task<PaginatedJikanResponse<ICollection<Club>>> SearchClubAsync(ClubSearchConfig searchConfig, CancellationToken cancellationToken = default)
 		{
 			Guard.IsNotNull(searchConfig, nameof(searchConfig));
-			var endpointParts = new[] {JikanEndpointConsts.Users + searchConfig.ConfigToString()};
+			var endpointParts = new[] {JikanEndpointConsts.Clubs + searchConfig.ConfigToString()};
 			return await ExecuteGetRequestAsync<PaginatedJikanResponse<ICollection<Club>>>(endpointParts, cancellationToken);
 		}
 
