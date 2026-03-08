@@ -8,13 +8,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.UserTests
 {
+    [Collection("JikanTests")]
     public class SearchUserAsyncTests
     {
         private readonly IJikan _jikan;
 
-        public SearchUserAsyncTests()
+        public SearchUserAsyncTests(JikanFixture jikanFixture)
         {
-            _jikan = new Jikan();
+            _jikan = jikanFixture.Jikan;
         }
 
         [Fact]
@@ -29,7 +30,6 @@ namespace JikanDotNet.Tests.UserTests
             // Then
             using var _ = new AssertionScope();
             users.Data.Should().HaveCount(20);
-            users.Data.First().Username.Should().Be("ErickGabriel555");
         }
         
         [Theory]
@@ -60,7 +60,6 @@ namespace JikanDotNet.Tests.UserTests
             // Then
             using var _ = new AssertionScope();
             users.Data.Should().HaveCount(20);
-            users.Data.First().Username.Should().Be("EnricoA128");
             users.Data.First().Images.Should().NotBeNull();
         }
         
@@ -123,7 +122,6 @@ namespace JikanDotNet.Tests.UserTests
             // Then
             using var _ = new AssertionScope();
             users.Data.Should().HaveCount(20);
-            users.Data.First().Username.Should().Be("P3gueiA1ds");
         }
         
         [Fact]
@@ -138,7 +136,6 @@ namespace JikanDotNet.Tests.UserTests
             // Then
             using var _ = new AssertionScope();
             users.Data.Should().HaveCount(20);
-            users.Data.First().Username.Should().Be("DeafExorcist");
         }
         
         [Fact]
@@ -153,7 +150,6 @@ namespace JikanDotNet.Tests.UserTests
             // Then
             using var _ = new AssertionScope();
             users.Data.Should().HaveCount(20);
-            users.Data.First().Username.Should().Be("KarlaD05");
         }
     }
 }

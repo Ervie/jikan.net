@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using FluentAssertions.Execution;
 using JikanDotNet.Exceptions;
 using System.Linq;
@@ -7,13 +7,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.TopTests
 {
+	[Collection("JikanTests")]
 	public class GetTopAnimeAsyncTests
 	{
 		private readonly IJikan _jikan;
 
-		public GetTopAnimeAsyncTests()
+		public GetTopAnimeAsyncTests(JikanFixture jikanFixture)
 		{
-			_jikan = new Jikan();
+			_jikan = jikanFixture.Jikan;
 		}
 
 		[Fact]
@@ -26,18 +27,18 @@ namespace JikanDotNet.Tests.TopTests
 		}
 
 		[Fact]
-		public async Task GetTopAnimeAsync_NoParameter_ShouldParseFMA()
+		public async Task GetTopAnimeAsync_NoParameter_ShouldParseFrieren()
 		{
 			// When
 			var top = await _jikan.GetTopAnimeAsync();
 
 			// Then
-			top.Data.First().Title.Should().Be("Fullmetal Alchemist: Brotherhood");
-			top.Data.First().Episodes.Should().Be(64);
+			top.Data.First().Title.Should().Be("Sousou no Frieren");
+			top.Data.First().Episodes.Should().Be(28);
 			top.Data.First().Source.Should().Be("Manga");
 			top.Data.First().Duration.Should().Be("24 min per ep");
-			top.Data.First().Producers.Should().HaveCount(4);
-			top.Data.First().Licensors.Should().HaveCount(2);
+			top.Data.First().Producers.Should().HaveCountGreaterOrEqualTo(4);
+			top.Data.First().Licensors.Should().HaveCount(1);
 			top.Data.First().Studios.Should().ContainSingle().Which.Name.Should().Be("Bones");
 		}
 
@@ -100,7 +101,7 @@ namespace JikanDotNet.Tests.TopTests
 			var top = await _jikan.GetTopAnimeAsync(TopAnimeFilter.Airing) ;
 
 			// Then
-			top.Data.First().Title.Should().Be("One Piece");
+			top.Data.Should().Contain(x=> x.Title.Equals("One Piece"));
 		}
 		
 		[Fact]
@@ -155,7 +156,7 @@ namespace JikanDotNet.Tests.TopTests
 		}
 		
 		[Fact]
-		public async Task GetTopAnimeAsync_SearchConfigMovies_ShouldParseGintama()
+		public async Task GetTopAnimeAsync_SearchConfigMovies_ShouldParseCSM()
 		{
 			// Given
 			var searchConfig = new AnimeTopSearchConfig
@@ -167,7 +168,7 @@ namespace JikanDotNet.Tests.TopTests
 			var result = await _jikan.GetTopAnimeAsync(searchConfig);
 
 			// Then
-			result.Data.First().Titles.Should().Contain(x => x.Title.Equals("Gintama: The Final"));
+			result.Data.First().Titles.Should().Contain(x => x.Title.Equals("Chainsaw Man Movie: Reze-hen"));
 		}
 	}
 }

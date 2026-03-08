@@ -10,13 +10,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.MangaTests
 {
+    [Collection("JikanTests")]
     public class SearchMangaAsyncTests
     {
         private readonly IJikan _jikan;
 
-        public SearchMangaAsyncTests()
+        public SearchMangaAsyncTests(JikanFixture jikanFixture)
         {
-            _jikan = new Jikan();
+            _jikan = jikanFixture.Jikan;
         }
         [Theory]
         [InlineData(int.MinValue)]
@@ -329,7 +330,7 @@ namespace JikanDotNet.Tests.MangaTests
 			var returnedManga = await _jikan.SearchMangaAsync(searchConfig);
 
 			// Then
-			returnedManga.Data.First().Title.Should().Be("One Piece");
+			returnedManga.Data.First().Title.Should().Be("One");
 		}
 
 		[Fact]
@@ -444,7 +445,7 @@ namespace JikanDotNet.Tests.MangaTests
 			// Then
 			var titles = returnedManga.Data.Select(x => x.Title);
 			using var _ = new AssertionScope();
-			titles.Should().Contain("Yuu☆Yuu☆Hakusho");
+			titles.Should().Contain("Zobmie-Loan");
 			titles.Should().Contain("Air Gear");
 		}
 

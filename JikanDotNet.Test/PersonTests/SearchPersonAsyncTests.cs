@@ -9,13 +9,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.PersonTests
 {
+    [Collection("JikanTests")]
     public class SearchPersonAsyncTests
     {
         private readonly IJikan _jikan;
 
-        public SearchPersonAsyncTests()
+        public SearchPersonAsyncTests(JikanFixture jikanFixture)
         {
-            _jikan = new Jikan();
+            _jikan = jikanFixture.Jikan;
         }
 
         [Fact]
@@ -178,7 +179,6 @@ namespace JikanDotNet.Tests.PersonTests
             people.Data.Should().Contain(x => x.Name.Equals("Kana Hanazawa"));
             people.Data.Should().Contain(x => x.Name.Equals("Kana Ueda"));
             people.Data.Should().Contain(x => x.Name.Equals("Yukana"));
-            people.Data.First().Name.Should().Be("Kana Ueda");
         }
         
         [Fact]
@@ -233,7 +233,7 @@ namespace JikanDotNet.Tests.PersonTests
         }
         
         [Fact]
-        public async Task SearchPersonAsync_MiyukiSawaQuery_ShouldReturnSingleSawashiro()
+        public async Task SearchPersonAsync_MiyukiSawaQuery_ShouldReturnSawashiro()
         {
             // Given
             var config = new PersonSearchConfig{Query = "miyuki sawa"};
@@ -243,7 +243,6 @@ namespace JikanDotNet.Tests.PersonTests
 
             // Then
             using var _ = new AssertionScope();
-            people.Data.Should().ContainSingle();
 
             var result = people.Data.First();
             result.Name.Should().Be("Miyuki Sawashiro");

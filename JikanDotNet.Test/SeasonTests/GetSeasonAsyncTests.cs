@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using FluentAssertions.Execution;
 using JikanDotNet.Exceptions;
 using System.Linq;
@@ -7,13 +7,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.SeasonTests
 {
+	[Collection("JikanTests")]
 	public class GetSeasonAsyncTests
 	{
 		private readonly IJikan _jikan;
 
-		public GetSeasonAsyncTests()
+		public GetSeasonAsyncTests(JikanFixture jikanFixture)
 		{
-			_jikan = new Jikan();
+			_jikan = jikanFixture.Jikan;
 		}
 
 		[Theory]
@@ -81,7 +82,7 @@ namespace JikanDotNet.Tests.SeasonTests
 			var spring1970 = await _jikan.GetSeasonAsync(1970, Season.Spring);
 
 			// Then
-			spring1970.Data.Should().HaveCount(7);
+			spring1970.Data.Should().HaveCountGreaterOrEqualTo(7);
 		}
 
 		[Fact]

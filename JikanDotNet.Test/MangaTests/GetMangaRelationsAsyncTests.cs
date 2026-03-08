@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using FluentAssertions.Execution;
 using JikanDotNet.Exceptions;
 using System.Threading.Tasks;
@@ -6,13 +6,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.MangaTests
 {
+	[Collection("JikanTests")]
 	public class GetMangaRelationsAsyncTests
 	{
 		private readonly IJikan _jikan;
 
-		public GetMangaRelationsAsyncTests()
+		public GetMangaRelationsAsyncTests(JikanFixture jikanFixture)
 		{
-			_jikan = new Jikan();
+			_jikan = jikanFixture.Jikan;
 		}
 
 		[Theory]
@@ -38,7 +39,7 @@ namespace JikanDotNet.Tests.MangaTests
 			using var _ = new AssertionScope();
 			monster.Data.Should().HaveCount(2);
 			monster.Data.Should().ContainSingle(x => x.Relation.Equals("Adaptation") && x.Entry.Count == 1);
-			monster.Data.Should().ContainSingle(x => x.Relation.Equals("Side story") && x.Entry.Count == 1);
+			monster.Data.Should().ContainSingle(x => x.Relation.Equals("Side Story") && x.Entry.Count == 1);
 		}
 	}
 }

@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using FluentAssertions.Execution;
 using JikanDotNet.Exceptions;
 using System;
@@ -8,13 +8,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.AnimeTests
 {
+	[Collection("JikanTests")]
 	public class GetAnimeEpisodesAsyncTests
 	{
 		private readonly IJikan _jikan;
 
-		public GetAnimeEpisodesAsyncTests()
+		public GetAnimeEpisodesAsyncTests(JikanFixture jikanFixture)
 		{
-			_jikan = new Jikan();
+			_jikan = jikanFixture.Jikan;
 		}
 
 		[Theory]

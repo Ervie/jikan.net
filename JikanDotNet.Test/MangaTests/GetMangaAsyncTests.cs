@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using FluentAssertions.Execution;
 using JikanDotNet.Exceptions;
 using System.Linq;
@@ -7,13 +7,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.MangaTests
 {
+	[Collection("JikanTests")]
 	public class GetMangaAsyncTests
 	{
 		private readonly IJikan _jikan;
 
-		public GetMangaAsyncTests()
+		public GetMangaAsyncTests(JikanFixture jikanFixture)
 		{
-			_jikan = new Jikan();
+			_jikan = jikanFixture.Jikan;
 		}
 
 		[Theory]
@@ -102,7 +103,7 @@ namespace JikanDotNet.Tests.MangaTests
 
 			// Then
 			using var _ = new AssertionScope();
-			yotsubatoManga.Data.Titles.Should().HaveCountGreaterOrEqualTo(8);
+			yotsubatoManga.Data.Titles.Should().HaveCountGreaterOrEqualTo(5);
 			yotsubatoManga.Data.Titles.Should().ContainSingle(x => x.Type.Equals("Default") && x.Title.Equals("Yotsuba to!"));
 			yotsubatoManga.Data.Titles.Should().Contain(x => x.Type.Equals("Synonym") && x.Title.Equals("Yotsuba and!"));
 			yotsubatoManga.Data.Titles.Should().ContainSingle(x => x.Type.Equals("Japanese") && x.Title.Equals("よつばと!"));

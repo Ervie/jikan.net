@@ -1,16 +1,17 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace JikanDotNet.Tests.GetRandomTests
 {
+	[Collection("JikanTests")]
 	public class GetRandomCharacterAsyncTests
 	{
 		private readonly IJikan _jikan;
 
-		public GetRandomCharacterAsyncTests()
+		public GetRandomCharacterAsyncTests(JikanFixture jikanFixture)
 		{
-			_jikan = new Jikan();
+			_jikan = jikanFixture.Jikan;
 		}
 
 		[Fact]

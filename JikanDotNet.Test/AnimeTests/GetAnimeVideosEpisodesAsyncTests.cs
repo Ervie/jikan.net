@@ -7,13 +7,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.AnimeTests
 {
+	[Collection("JikanTests")]
 	public class GetAnimeVideosEpisodesAsyncTests
 	{
 		private readonly IJikan _jikan;
 
-		public GetAnimeVideosEpisodesAsyncTests()
+		public GetAnimeVideosEpisodesAsyncTests(JikanFixture jikanFixture)
 		{
-			_jikan = new Jikan();
+			_jikan = jikanFixture.Jikan;
 		}
 
 		[Theory]

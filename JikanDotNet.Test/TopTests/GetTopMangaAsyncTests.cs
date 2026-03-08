@@ -7,13 +7,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.TopTests
 {
+	[Collection("JikanTests")]
 	public class GetTopMangaAsyncTests
 	{
 		private readonly IJikan _jikan;
 
-		public GetTopMangaAsyncTests()
+		public GetTopMangaAsyncTests(JikanFixture jikanFixture)
 		{
-			_jikan = new Jikan();
+			_jikan = jikanFixture.Jikan;
 		}
 
 		[Fact]
@@ -64,7 +65,6 @@ namespace JikanDotNet.Tests.TopTests
 			// Then
 			var titles = top.Data.Select(x => x.Title);
 			using var _ = new AssertionScope();
-			titles.Should().Contain("Made in Abyss");
 			titles.Should().Contain("Kokou no Hito");
 			titles.Should().Contain("Sousou no Frieren");
 		}

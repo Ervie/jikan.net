@@ -6,13 +6,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.ReviewTests;
 
+[Collection("JikanTests")]
 public class GetRecentMangaReviewsAsyncTests
 {
     private readonly IJikan _jikan;
 
-    public GetRecentMangaReviewsAsyncTests()
+    public GetRecentMangaReviewsAsyncTests(JikanFixture jikanFixture)
     {
-        _jikan = new Jikan();
+        _jikan = jikanFixture.Jikan;
     }
 
     [Theory]

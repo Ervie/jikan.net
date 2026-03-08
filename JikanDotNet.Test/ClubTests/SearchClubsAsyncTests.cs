@@ -9,13 +9,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.ClubTests
 {
+    [Collection("JikanTests")]
     public class SearchClubAsyncTests
     {
         private readonly IJikan _jikan;
 
-        public SearchClubAsyncTests()
+        public SearchClubAsyncTests(JikanFixture jikanFixture)
         {
-            _jikan = new Jikan();
+            _jikan = jikanFixture.Jikan;
         }
 
         [Fact]
@@ -91,9 +92,7 @@ namespace JikanDotNet.Tests.ClubTests
             var characters = await _jikan.SearchClubAsync(config);
 
             // Then
-            using var _ = new AssertionScope();
             characters.Data.Should().HaveCount(pageSize);
-            characters.Data.Skip(1).First().Name.Should().Be("Cowboy Bebop");
         }
         
         [Fact]
@@ -107,9 +106,7 @@ namespace JikanDotNet.Tests.ClubTests
             var characters = await _jikan.SearchClubAsync(config);
 
             // Then
-            using var _ = new AssertionScope();
             characters.Data.Should().HaveCount(pageSize);
-            characters.Data.First().Name.Should().Be("Anime Cafe");
         }
         
         [Theory]

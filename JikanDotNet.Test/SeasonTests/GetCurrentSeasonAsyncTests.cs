@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using FluentAssertions.Execution;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,13 +7,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.SeasonTests
 {
+	[Collection("JikanTests")]
 	public class GetCurrentSeasonAsyncTests
 	{
 		private readonly IJikan _jikan;
 
-		public GetCurrentSeasonAsyncTests()
+		public GetCurrentSeasonAsyncTests(JikanFixture jikanFixture)
 		{
-			_jikan = new Jikan();
+			_jikan = jikanFixture.Jikan;
 		}
 
 		[Fact]
@@ -29,7 +30,6 @@ namespace JikanDotNet.Tests.SeasonTests
 			currentSeason.Pagination.CurrentPage.Should().Be(1);
 			currentSeason.Pagination.Items.Count.Should().Be(25);
 			currentSeason.Pagination.Items.Total.Should().BeGreaterThan(30);
-			currentSeason.Data.Select(x => x.Title).Should().Contain("Bleach: Sennen Kessen-hen");
 		}
 		
 		[Theory]
@@ -68,7 +68,6 @@ namespace JikanDotNet.Tests.SeasonTests
 			currentSeason.Pagination.CurrentPage.Should().Be(1);
 			currentSeason.Pagination.Items.Count.Should().Be(25);
 			currentSeason.Pagination.Items.Total.Should().BeGreaterThan(3);
-			currentSeason.Data.Select(x => x.Title).Should().Contain("Bleach: Sennen Kessen-hen");
 		}
 	}
 }

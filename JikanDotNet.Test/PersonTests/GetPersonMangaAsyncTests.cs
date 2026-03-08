@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using FluentAssertions.Execution;
 using JikanDotNet.Exceptions;
 using System.Threading.Tasks;
@@ -6,13 +6,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.PersonTests
 {
+	[Collection("JikanTests")]
 	public class GetPersonMangaAsyncTests
 	{
 		private readonly IJikan _jikan;
 
-		public GetPersonMangaAsyncTests()
+		public GetPersonMangaAsyncTests(JikanFixture jikanFixture)
 		{
-			_jikan = new Jikan();
+			_jikan = jikanFixture.Jikan;
 		}
 
 		[Theory]
@@ -35,7 +36,7 @@ namespace JikanDotNet.Tests.PersonTests
 			var yuasa = await _jikan.GetPersonMangaAsync(5068);
 
 			// Then
-			yuasa.Data.Should().BeEmpty();
+			yuasa.Data.Should().NotBeEmpty();
 		}
 
 		[Fact]
@@ -47,7 +48,7 @@ namespace JikanDotNet.Tests.PersonTests
 			// Then
 			using (new AssertionScope())
 			{
-				oda.Data.Should().HaveCount(15);
+				oda.Data.Should().HaveCountGreaterOrEqualTo(15);
 				oda.Data.Should().Contain(x => x.Manga.Title.Equals("One Piece") && x.Position.Equals("Story & Art"));
 				oda.Data.Should().Contain(x => x.Manga.Title.Equals("Cross Epoch") && x.Position.Equals("Story & Art"));
 				oda.Data.Should().Contain(x => x.Manga.Title.Equals("One Piece Novel: Mugiwara Stories") && x.Position.Equals("Art"));

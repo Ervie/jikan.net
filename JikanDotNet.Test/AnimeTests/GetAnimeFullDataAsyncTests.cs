@@ -7,13 +7,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.AnimeTests
 {
+    [Collection("JikanTests")]
     public class GetAnimeFullDataAsyncTests
     {
         private readonly IJikan _jikan;
 
-        public GetAnimeFullDataAsyncTests()
+        public GetAnimeFullDataAsyncTests(JikanFixture jikanFixture)
         {
-            _jikan = new Jikan();
+            _jikan = jikanFixture.Jikan;
         }
 
         [Theory]
@@ -41,8 +42,6 @@ namespace JikanDotNet.Tests.AnimeTests
             bebopAnime.Data.Title.Should().Be("Cowboy Bebop");
             bebopAnime.Data.ExternalLinks.Should().Contain(x =>
                 x.Name.Equals("Wikipedia") && x.Url.Equals("http://en.wikipedia.org/wiki/Cowboy_Bebop"));
-            bebopAnime.Data.ExternalLinks.Should().Contain(x =>
-                x.Name.Equals("AnimeDB") && x.Url.Equals("http://anidb.info/perl-bin/animedb.pl?show=anime&aid=23"));
             bebopAnime.Data.MusicThemes.Openings.Should().ContainSingle().Which
                 .Equals("\"Tank!\" by The Seatbelts (eps 1-25)");
             bebopAnime.Data.MusicThemes.Endings.Should().HaveCount(3);

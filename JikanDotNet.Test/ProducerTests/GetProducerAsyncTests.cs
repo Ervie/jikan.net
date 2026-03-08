@@ -6,13 +6,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.ProducerTests;
 
+[Collection("JikanTests")]
 public class GetProducerAsyncTests
 {
     private readonly IJikan _jikan;
 
-    public GetProducerAsyncTests()
+    public GetProducerAsyncTests(JikanFixture jikanFixture)
     {
-        _jikan = new Jikan();
+        _jikan = jikanFixture.Jikan;
     }
 
     [Theory]

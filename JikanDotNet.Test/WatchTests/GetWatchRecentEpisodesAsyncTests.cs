@@ -6,13 +6,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.WatchTests
 {
+    [Collection("JikanTests")]
     public class GetWatchRecentEpisodesAsyncTests
     {
         private readonly IJikan _jikan;
 
-        public GetWatchRecentEpisodesAsyncTests()
+        public GetWatchRecentEpisodesAsyncTests(JikanFixture jikanFixture)
         {
-            _jikan = new Jikan();
+            _jikan = jikanFixture.Jikan;
         }
         
         [Fact]

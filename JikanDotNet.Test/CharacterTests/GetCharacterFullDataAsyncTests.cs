@@ -7,13 +7,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.CharacterTests
 {
+    [Collection("JikanTests")]
     public class GetCharacterFullDataAsyncTests
     {
         private readonly IJikan _jikan;
 
-        public GetCharacterFullDataAsyncTests()
+        public GetCharacterFullDataAsyncTests(JikanFixture jikanFixture)
         {
-            _jikan = new Jikan();
+            _jikan = jikanFixture.Jikan;
         }
 
         [Theory]
@@ -39,10 +40,10 @@ namespace JikanDotNet.Tests.CharacterTests
             using var _ = new AssertionScope();
             ichigo.Data.Name.Should().Be("Ichigo Kurosaki");
             ichigo.Data.NameKanji.Should().Be("黒崎 一護");
-            ichigo.Data.Animeography.Should().HaveCount(9);
+            ichigo.Data.Animeography.Should().HaveCountGreaterOrEqualTo(10);
             ichigo.Data.Animeography.Select(x => x.Anime.Title).Should().Contain("Bleach");
-            ichigo.Data.Mangaography.Should().HaveCount(7);
-            ichigo.Data.VoiceActors.Should().HaveCount(14);
+            ichigo.Data.Mangaography.Should().HaveCountGreaterOrEqualTo(5);
+            ichigo.Data.VoiceActors.Should().HaveCountGreaterOrEqualTo(10);
             ichigo.Data.VoiceActors.Should().Contain(x => x.Person.Name.Equals("Morita, Masakazu"));
         }
     }

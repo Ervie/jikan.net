@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using FluentAssertions.Execution;
 using JikanDotNet.Exceptions;
 using System.Threading.Tasks;
@@ -6,13 +6,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.UserTests
 {
+	[Collection("JikanTests")]
 	public class GetUserClubsAsyncTests
 	{
 		private readonly IJikan _jikan;
 
-		public GetUserClubsAsyncTests()
+		public GetUserClubsAsyncTests(JikanFixture jikanFixture)
 		{
-			_jikan = new Jikan();
+			_jikan = jikanFixture.Jikan;
 		}
 
 		[Theory]
@@ -37,7 +38,7 @@ namespace JikanDotNet.Tests.UserTests
 			// Then
 			using (new AssertionScope())
 			{
-				Clubs.Data.Should().HaveCount(19);
+				Clubs.Data.Should().HaveCountGreaterOrEqualTo(19);
 				Clubs.Data.Should().Contain(x => x.Name.Equals("Hatsune Miku - the Goddess ~FanClub~"));
 				Clubs.Data.Should().Contain(x => x.MalId.Equals(65525)); // Manga Sales Rankings
 			}

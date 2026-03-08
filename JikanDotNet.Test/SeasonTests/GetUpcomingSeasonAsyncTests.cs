@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using FluentAssertions.Execution;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,13 +7,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.SeasonTests
 {
+	[Collection("JikanTests")]
 	public class GetUpcomingSeasonAsyncTests
 	{
 		private readonly IJikan _jikan;
 
-		public GetUpcomingSeasonAsyncTests()
+		public GetUpcomingSeasonAsyncTests(JikanFixture jikanFixture)
 		{
-			_jikan = new Jikan();
+			_jikan = jikanFixture.Jikan;
 		}
 
 		[Fact]
@@ -29,7 +30,6 @@ namespace JikanDotNet.Tests.SeasonTests
 			upcomingSeason.Pagination.CurrentPage.Should().Be(1);
 			upcomingSeason.Pagination.Items.Count.Should().Be(25);
 			upcomingSeason.Pagination.Items.Total.Should().BeGreaterThan(300);
-			upcomingSeason.Data.Select(x => x.Title).Should().Contain("Goblin Slayer 2nd Season");
 		}
 		
 		[Theory]

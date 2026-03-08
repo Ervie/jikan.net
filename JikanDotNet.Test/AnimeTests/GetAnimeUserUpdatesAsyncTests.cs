@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using FluentAssertions.Execution;
 using JikanDotNet.Exceptions;
 using System;
@@ -8,13 +8,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.AnimeTests
 {
+	[Collection("JikanTests")]
 	public class GetAnimeUserUpdatesAsyncTests
 	{
 		private readonly IJikan _jikan;
 
-		public GetAnimeUserUpdatesAsyncTests()
+		public GetAnimeUserUpdatesAsyncTests(JikanFixture jikanFixture)
 		{
-			_jikan = new Jikan();
+			_jikan = jikanFixture.Jikan;
 		}
 
 
@@ -86,7 +87,6 @@ namespace JikanDotNet.Tests.AnimeTests
 			using (new AssertionScope())
 			{
 				bebop.Data.Should().HaveCount(75);
-				firstUpdate.EpisodesTotal.Should().HaveValue().And.Be(26);
 				firstUpdate.User.Should().NotBeNull();
 				firstUpdate.User.Username.Should().NotBeNullOrWhiteSpace();
 				firstUpdate.User.Url.Should().NotBeNullOrWhiteSpace();

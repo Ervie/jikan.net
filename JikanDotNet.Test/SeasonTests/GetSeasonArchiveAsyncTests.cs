@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using FluentAssertions.Execution;
 using System;
 using System.Linq;
@@ -7,13 +7,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.SeasonTests
 {
+	[Collection("JikanTests")]
 	public class GetSeasonArchiveAsyncTests
 	{
 		private readonly IJikan _jikan;
 
-		public GetSeasonArchiveAsyncTests()
+		public GetSeasonArchiveAsyncTests(JikanFixture jikanFixture)
 		{
-			_jikan = new Jikan();
+			_jikan = jikanFixture.Jikan;
 		}
 
 		[Fact]

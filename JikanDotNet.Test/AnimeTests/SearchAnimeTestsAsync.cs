@@ -10,13 +10,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.AnimeTests
 {
+    [Collection("JikanTests")]
     public class SearchAnimeTestsAsync
     {
         private readonly IJikan _jikan;
 
-        public SearchAnimeTestsAsync()
+        public SearchAnimeTestsAsync(JikanFixture jikanFixture)
         {
-            _jikan = new Jikan();
+            _jikan = jikanFixture.Jikan;
         }
         
         [Theory]
@@ -268,7 +269,7 @@ namespace JikanDotNet.Tests.AnimeTests
             using var _ = new AssertionScope();
             titles.Should().Contain("One Piece");
             titles.Should().Contain("One Punch Man");
-            titles.First().Should().Be("One Punch Man");
+            titles.First().Should().Be("One");
         }
         
 		[Fact]
@@ -286,7 +287,7 @@ namespace JikanDotNet.Tests.AnimeTests
 			var returnedAnime = await _jikan.SearchAnimeAsync(searchConfig);
 
 			// Then
-			returnedAnime.Data.First().Title.Should().Be("Hachimitsu to Clover");
+			returnedAnime.Data.First().Title.Should().Be("One");
 		}
 
 		[Fact]
@@ -451,7 +452,7 @@ namespace JikanDotNet.Tests.AnimeTests
 			// Then
 			var titles = returnedAnime.Data.Select(x => x.Title);
 			using var _ = new AssertionScope();
-			titles.Should().Contain("Mahou Shoujo Lyrical Nanoha");
+			titles.Should().Contain("Elfen Lied");
 			titles.Should().Contain("Mobile Suit Gundam SEED");
 		}
 

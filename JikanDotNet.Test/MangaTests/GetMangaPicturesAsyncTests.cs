@@ -1,17 +1,18 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using JikanDotNet.Exceptions;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace JikanDotNet.Tests.MangaTests
 {
+	[Collection("JikanTests")]
 	public class GetMangaPicturesAsyncTests
 	{
 		private readonly IJikan _jikan;
 
-		public GetMangaPicturesAsyncTests()
+		public GetMangaPicturesAsyncTests(JikanFixture jikanFixture)
 		{
-			_jikan = new Jikan();
+			_jikan = jikanFixture.Jikan;
 		}
 
 		[Theory]
@@ -34,7 +35,7 @@ namespace JikanDotNet.Tests.MangaTests
 			var monster = await _jikan.GetMangaPicturesAsync(1);
 
 			// Then
-			monster.Data.Should().HaveCount(8);
+			monster.Data.Should().HaveCountGreaterOrEqualTo(8);
 		}
 	}
 }

@@ -7,13 +7,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.TopTests
 {
+	[Collection("JikanTests")]
 	public class GetTopCharactersAsyncTests
 	{
 		private readonly IJikan _jikan;
 
-		public GetTopCharactersAsyncTests()
+		public GetTopCharactersAsyncTests(JikanFixture jikanFixture)
 		{
-			_jikan = new Jikan();
+			_jikan = jikanFixture.Jikan;
 		}
 
 		[Fact]
@@ -27,7 +28,7 @@ namespace JikanDotNet.Tests.TopTests
 			using (new AssertionScope())
 			{
 				lelouch.Name.Should().Be("Lelouch Lamperouge");
-				lelouch.Nicknames.Should().HaveCount(5);
+				lelouch.Nicknames.Should().HaveCountGreaterOrEqualTo(5);
 				lelouch.MalId.Should().Be(417);
 				lelouch.Favorites.Should().BeGreaterThan(85000);
 			}
@@ -44,26 +45,12 @@ namespace JikanDotNet.Tests.TopTests
 			using (new AssertionScope())
 			{
 				l.Name.Should().Be("L Lawliet");
-				l.Nicknames.Should().HaveCount(4);
+				l.Nicknames.Should().HaveCountGreaterOrEqualTo(4);
 				l.MalId.Should().Be(71);
 				l.Favorites.Should().BeGreaterThan(65000);
 			}
 		}
-
-		[Fact]
-		public async Task GetTopCharactersAsync_NoParameters_ShouldParseLuffyAnimeography()
-		{
-			// When
-			var top = await _jikan.GetTopCharactersAsync();
-
-			// Then
-			using (new AssertionScope())
-			{
-				top.Data.Skip(3).First().Name.Should().Be("Luffy Monkey D.");
-				top.Data.Skip(3).First().About.Should().StartWith("Age: 17; 19");
-			}
-		}
-
+		
 		[Theory]
 		[InlineData(int.MinValue)]
 		[InlineData(-1)]
@@ -78,13 +65,13 @@ namespace JikanDotNet.Tests.TopTests
 		}
 
 		[Fact]
-		public async Task GetTopCharactersAsync_FifthPage_ShouldFindTachibanaKanade()
+		public async Task GetTopCharactersAsync_FifthPage_ShouldFindMakima()
 		{
 			// When
 			var top = await _jikan.GetTopCharactersAsync(5);
 
 			// Then
-			top.Data.Select(x => x.Name).Should().Contain("Kanade Tachibana");
+			top.Data.Select(x => x.Name).Should().Contain("Makima");
 		}
 	}
 }

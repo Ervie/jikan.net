@@ -1,17 +1,18 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using JikanDotNet.Exceptions;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace JikanDotNet.Tests.UserTests
 {
+	[Collection("JikanTests")]
 	public class GetUserAboutAsyncTests
 	{
 		private readonly IJikan _jikan;
 
-		public GetUserAboutAsyncTests()
+		public GetUserAboutAsyncTests(JikanFixture jikanFixture)
 		{
-			_jikan = new Jikan();
+			_jikan = jikanFixture.Jikan;
 		}
 
 		[Theory]

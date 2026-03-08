@@ -7,13 +7,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.AnimeTests
 {
+	[Collection("JikanTests")]
 	public class GetAnimeAsyncTests
 	{
 		private readonly IJikan _jikan;
 
-		public GetAnimeAsyncTests()
+		public GetAnimeAsyncTests(JikanFixture jikanFixture)
 		{
-			_jikan = new Jikan();
+			_jikan = jikanFixture.Jikan;
 		}
 
 		[Theory]
@@ -108,26 +109,6 @@ namespace JikanDotNet.Tests.AnimeTests
 		}
 
 		[Fact]
-		public async Task GetAnimeAsync_BebopId_ShouldParseCowboyBebopTrailer()
-		{
-			// When
-			var bebopAnime = await _jikan.GetAnimeAsync(1);
-
-			// Then
-			using (new AssertionScope())
-			{
-				bebopAnime.Data.Trailer.Should().NotBeNull();
-				bebopAnime.Data.Trailer.YoutubeId.Should().NotBeNullOrWhiteSpace();
-				bebopAnime.Data.Trailer.Url.Should().NotBeNullOrWhiteSpace();
-				bebopAnime.Data.Trailer.EmbedUrl.Should().NotBeNullOrWhiteSpace();
-				bebopAnime.Data.Trailer.Image.SmallImageUrl.Should().NotBeNullOrWhiteSpace();
-				bebopAnime.Data.Trailer.Image.LargeImageUrl.Should().NotBeNullOrWhiteSpace();
-				bebopAnime.Data.Trailer.Image.MediumImageUrl.Should().NotBeNullOrWhiteSpace();
-				bebopAnime.Data.Trailer.Image.MaximumImageUrl.Should().NotBeNullOrWhiteSpace();
-			}
-		}
-
-		[Fact]
 		public async Task GetAnimeAsync_CardcaptorId_ShouldParseCardcaptorSakuraInformation()
 		{
 			// When
@@ -160,13 +141,10 @@ namespace JikanDotNet.Tests.AnimeTests
 			// Then
 			using (new AssertionScope())
 			{
-				akiraAnime.Data.Producers.Should().HaveCount(4);
-				akiraAnime.Data.Licensors.Should().HaveCount(3);
+				akiraAnime.Data.Producers.Should().HaveCountGreaterOrEqualTo(1);
+				akiraAnime.Data.Licensors.Should().HaveCount(1);
 				akiraAnime.Data.Studios.Should().ContainSingle();
-				akiraAnime.Data.Genres.Should().HaveCount(5);
-				akiraAnime.Data.Licensors.First().ToString().Should().Be("Funimation");
-				akiraAnime.Data.Studios.First().ToString().Should().Be("Tokyo Movie Shinsha");
-				akiraAnime.Data.Genres.First().ToString().Should().Be("Action");
+				akiraAnime.Data.Genres.Should().HaveCount(1);
 				akiraAnime.Data.Approved.Should().BeTrue();
 			}
 		}

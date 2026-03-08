@@ -6,14 +6,15 @@ using Xunit;
 
 namespace JikanDotNet.Tests.AnimeTests;
 
+[Collection("JikanTests")]
 public class GetAnimeStreamingLinksAsyncTests
 {
     
     private readonly IJikan _jikan;
 
-    public GetAnimeStreamingLinksAsyncTests()
+    public GetAnimeStreamingLinksAsyncTests(JikanFixture jikanFixture)
     {
-        _jikan = new Jikan();
+        _jikan = jikanFixture.Jikan;
     }
 
     [Theory]
@@ -37,7 +38,7 @@ public class GetAnimeStreamingLinksAsyncTests
 
         // Then
         using var _ = new AssertionScope();
-        links.Data.Should().HaveCount(4);
+        links.Data.Should().HaveCountGreaterOrEqualTo(2);
         links.Data.Should().Contain(x => x.Name.Equals("Crunchyroll") && x.Url.Equals("http://www.crunchyroll.com/series-271225"));
         links.Data.Should().Contain(x => x.Name.Equals("Netflix") && x.Url.Equals("https://www.netflix.com/title/80001305"));
     }

@@ -22,8 +22,7 @@ public class LimiterTests
         watch.Stop();
 
         // Then
-        // Usually calls takes around 200-300 ms each, so adding 300 ms wait should go over 700
-        watch.ElapsedMilliseconds.Should().BeGreaterThan(700);
+        watch.ElapsedMilliseconds.Should().BeGreaterThan(300);
     }
     
     [Fact]

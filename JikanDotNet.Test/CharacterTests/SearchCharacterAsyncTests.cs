@@ -9,13 +9,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.CharacterTests
 {
+    [Collection("JikanTests")]
     public class SearchCharacterAsyncTests
     {
         private readonly IJikan _jikan;
 
-        public SearchCharacterAsyncTests()
+        public SearchCharacterAsyncTests(JikanFixture jikanFixture)
         {
-            _jikan = new Jikan();
+            _jikan = jikanFixture.Jikan;
         }
 
         [Fact]
@@ -195,7 +196,7 @@ namespace JikanDotNet.Tests.CharacterTests
             people.Data.Should().Contain(x => x.Name.Equals("Fake Lupin"));
             people.Data.Should().Contain(x => x.Name.Equals("Arsène Lupin"));
             people.Data.Should().Contain(x => x.Name.Equals("Lupin II"));
-            people.Data.First().Name.Should().Be("Lupin");
+            people.Data.First().Name.Should().Be("Lupin III");
         }
         
         [Fact]

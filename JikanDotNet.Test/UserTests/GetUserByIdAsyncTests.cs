@@ -3,15 +3,16 @@ using FluentAssertions;
 using FluentAssertions.Execution;
 using Xunit;
 
-namespace JikanDotNet.Test.UserTests
+namespace JikanDotNet.Tests.UserTests
 {
+    [Collection("JikanTests")]
     public class GetUserByIdAsyncTests
     {
         private readonly IJikan _jikan;
 
-        public GetUserByIdAsyncTests()
+        public GetUserByIdAsyncTests(JikanFixture jikanFixture)
         {
-            _jikan = new Jikan();
+            _jikan = jikanFixture.Jikan;
         }
 
         [Fact]

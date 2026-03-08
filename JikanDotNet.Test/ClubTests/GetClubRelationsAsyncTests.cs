@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using FluentAssertions.Execution;
 using JikanDotNet.Exceptions;
 using System.Threading.Tasks;
@@ -6,13 +6,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.ClubTests
 {
+	[Collection("JikanTests")]
 	public class GetClubRelationsAsyncTests
 	{
 		private readonly IJikan _jikan;
 
-		public GetClubRelationsAsyncTests()
+		public GetClubRelationsAsyncTests(JikanFixture jikanFixture)
 		{
-			_jikan = new Jikan();
+			_jikan = jikanFixture.Jikan;
 		}
 
 		[Theory]

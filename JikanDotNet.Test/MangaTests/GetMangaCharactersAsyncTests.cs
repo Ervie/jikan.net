@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using JikanDotNet.Exceptions;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,13 +6,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.MangaTests
 {
+	[Collection("JikanTests")]
 	public class GetMangaCharactersAsyncTests
 	{
 		private readonly IJikan _jikan;
 
-		public GetMangaCharactersAsyncTests()
+		public GetMangaCharactersAsyncTests(JikanFixture jikanFixture)
 		{
-			_jikan = new Jikan();
+			_jikan = jikanFixture.Jikan;
 		}
 
 		[Theory]
@@ -35,7 +36,7 @@ namespace JikanDotNet.Tests.MangaTests
 			var monster = await _jikan.GetMangaCharactersAsync(1);
 
 			// Then
-			monster.Data.Should().HaveCount(34);
+			monster.Data.Should().HaveCountGreaterOrEqualTo(100);
 		}
 
 		[Fact]

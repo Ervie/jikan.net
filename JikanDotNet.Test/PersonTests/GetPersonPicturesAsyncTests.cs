@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using FluentAssertions.Execution;
 using JikanDotNet.Exceptions;
 using System.Threading.Tasks;
@@ -6,13 +6,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.PersonTests
 {
+	[Collection("JikanTests")]
 	public class GetPersonPicturesAsyncTests
 	{
 		private readonly IJikan _jikan;
 
-		public GetPersonPicturesAsyncTests()
+		public GetPersonPicturesAsyncTests(JikanFixture jikanFixture)
 		{
-			_jikan = new Jikan();
+			_jikan = jikanFixture.Jikan;
 		}
 
 		[Theory]
@@ -35,7 +36,7 @@ namespace JikanDotNet.Tests.PersonTests
 			var norioWakamoto = await _jikan.GetPersonPicturesAsync(84);
 
 			// Then
-			norioWakamoto.Data.Should().HaveCount(4);
+			norioWakamoto.Data.Should().HaveCountGreaterOrEqualTo(4);
 		}
 
 		[Fact]
@@ -45,7 +46,7 @@ namespace JikanDotNet.Tests.PersonTests
 			var norioWakamoto = await _jikan.GetPersonPicturesAsync(2);
 
 			// Then
-			norioWakamoto.Data.Should().HaveCount(8);
+			norioWakamoto.Data.Should().HaveCountGreaterOrEqualTo(8);
 		}
 	}
 }

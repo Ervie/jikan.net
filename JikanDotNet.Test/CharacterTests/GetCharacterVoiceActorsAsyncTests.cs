@@ -6,13 +6,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.CharacterTests
 {
+	[Collection("JikanTests")]
 	public class GetCharacterVoiceActorsAsyncTests
 	{
 		private readonly IJikan _jikan;
 
-		public GetCharacterVoiceActorsAsyncTests()
+		public GetCharacterVoiceActorsAsyncTests(JikanFixture jikanFixture)
 		{
-			_jikan = new Jikan();
+			_jikan = jikanFixture.Jikan;
 		}
 
 		[Theory]
@@ -36,7 +37,7 @@ namespace JikanDotNet.Tests.CharacterTests
 
 			// Then
 			using var _ = new AssertionScope();
-			spike.Data.Should().HaveCount(13);
+			spike.Data.Should().HaveCountGreaterOrEqualTo(13);
 			spike.Data.Should().Contain(x => x.Language.Equals("Japanese") && x.Person.Name.Equals("Yamadera, Kouichi"));
 			spike.Data.Should().Contain(x => x.Language.Equals("English") && x.Person.Name.Equals("Blum, Steven"));
 			spike.Data.Should().Contain(x => x.Language.Equals("German") && x.Person.Name.Equals("Neumann, Viktor"));
@@ -51,7 +52,7 @@ namespace JikanDotNet.Tests.CharacterTests
 			// Then
 			using (new AssertionScope())
 			{
-				faye.Data.Should().HaveCount(12);
+				faye.Data.Should().HaveCountGreaterOrEqualTo(12);
 				faye.Data.Should().Contain(x => x.Language.Equals("Japanese") && x.Person.Name.Equals("Hayashibara, Megumi"));
 				faye.Data.Should().Contain(x => x.Language.Equals("English") && x.Person.Name.Equals("Lee, Wendee"));
 			}

@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using FluentAssertions.Execution;
 using JikanDotNet.Exceptions;
 using System.Linq;
@@ -7,13 +7,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.MangaTests
 {
+	[Collection("JikanTests")]
 	public class GetMangaRecommendationsAsyncTests
 	{
 		private readonly IJikan _jikan;
 
-		public GetMangaRecommendationsAsyncTests()
+		public GetMangaRecommendationsAsyncTests(JikanFixture jikanFixture)
 		{
-			_jikan = new Jikan();
+			_jikan = jikanFixture.Jikan;
 		}
 
 		[Theory]
@@ -38,8 +39,8 @@ namespace JikanDotNet.Tests.MangaTests
 			// Then
 			using (new AssertionScope())
 			{
-				//Claymore
-				berserk.Data.First().Entry.MalId.Should().Be(583);
+				//Vagabond
+				berserk.Data.First().Entry.MalId.Should().Be(656);
 				berserk.Data.First().Votes.Should().BeGreaterThan(25);
 				berserk.Data.Count.Should().BeGreaterThan(90);
 			}

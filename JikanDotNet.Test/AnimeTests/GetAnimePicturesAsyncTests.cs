@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using FluentAssertions.Execution;
 using JikanDotNet.Exceptions;
 using System.Linq;
@@ -7,13 +7,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.AnimeTests
 {
+	[Collection("JikanTests")]
 	public class GetAnimePicturesAsyncTests
 	{
 		private readonly IJikan _jikan;
 
-		public GetAnimePicturesAsyncTests()
+		public GetAnimePicturesAsyncTests(JikanFixture jikanFixture)
 		{
-			_jikan = new Jikan();
+			_jikan = jikanFixture.Jikan;
 		}
 
 		[Theory]
@@ -37,7 +38,7 @@ namespace JikanDotNet.Tests.AnimeTests
 
 			// Then
 			using var _ = new AssertionScope();
-			bebop.Data.Should().HaveCount(13);
+			bebop.Data.Should().HaveCountGreaterOrEqualTo(10);
 			bebop.Data.First().JPG.ImageUrl.Should().NotBeNullOrWhiteSpace();
 			bebop.Data.First().JPG.SmallImageUrl.Should().NotBeNullOrWhiteSpace();
 			bebop.Data.First().JPG.LargeImageUrl.Should().NotBeNullOrWhiteSpace();

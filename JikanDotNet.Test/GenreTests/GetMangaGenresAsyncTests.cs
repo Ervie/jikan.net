@@ -1,24 +1,25 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using JikanDotNet.Exceptions;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace JikanDotNet.Tests.GenreTests
 {
+	[Collection("JikanTests")]
 	public class GetMangaGenresAsyncTests
 	{
 		private readonly IJikan _jikan;
 
-		public GetMangaGenresAsyncTests()
+		public GetMangaGenresAsyncTests(JikanFixture jikanFixture)
 		{
-			_jikan = new Jikan();
+			_jikan = jikanFixture.Jikan;
 		}
 
 		[Fact]
 		public async Task GetMangaGenresAsync_NoParameters_ShouldParseAllAvailableGenres()
 		{
 			// Given
-			const int expectedGenreCount = 91;
+			const int expectedGenreCount = 153;
 
 			// When
 			var result = await _jikan.GetMangaGenresAsync();
@@ -28,10 +29,10 @@ namespace JikanDotNet.Tests.GenreTests
 		}
 
 		[Theory]
-		[InlineData(GenresFilter.Genres, 64)]
-		[InlineData(GenresFilter.ExplicitGenres, 3)]
-		[InlineData(GenresFilter.Themes, 19)]
-		[InlineData(GenresFilter.Demographics, 5)]
+		[InlineData(GenresFilter.Genres, 18)]
+		[InlineData(GenresFilter.ExplicitGenres, 21)]
+		[InlineData(GenresFilter.Themes, 56)]
+		[InlineData(GenresFilter.Demographics, 58)]
 		public async Task GetMangaGenresAsync_WithFilter_ShouldParseFilteredGenres(GenresFilter filter, int expectedGenreCount)
 		{
 			// When

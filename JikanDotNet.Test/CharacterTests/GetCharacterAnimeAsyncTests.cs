@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using FluentAssertions.Execution;
 using JikanDotNet.Exceptions;
 using System.Linq;
@@ -7,13 +7,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.CharacterTests
 {
+	[Collection("JikanTests")]
 	public class GetCharacterAnimeAsyncTests
 	{
 		private readonly IJikan _jikan;
 
-		public GetCharacterAnimeAsyncTests()
+		public GetCharacterAnimeAsyncTests(JikanFixture jikanFixture)
 		{
-			_jikan = new Jikan();
+			_jikan = jikanFixture.Jikan;
 		}
 
 		[Theory]
@@ -57,7 +58,7 @@ namespace JikanDotNet.Tests.CharacterTests
 			// Then
 			using (new AssertionScope())
 			{
-				ichigo.Data.Should().HaveCount(9);
+				ichigo.Data.Should().HaveCountGreaterOrEqualTo(10);
 				ichigo.Data.Select(x => x.Anime.Title).Should().Contain("Bleach");
 			}
 		}

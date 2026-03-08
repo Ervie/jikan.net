@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using FluentAssertions.Execution;
 using JikanDotNet.Exceptions;
 using System.Linq;
@@ -7,13 +7,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.ClubTests
 {
+	[Collection("JikanTests")]
 	public class GetClubStaffAsyncTests
 	{
 		private readonly IJikan _jikan;
 
-		public GetClubStaffAsyncTests()
+		public GetClubStaffAsyncTests(JikanFixture jikanFixture)
 		{
-			_jikan = new Jikan();
+			_jikan = jikanFixture.Jikan;
 		}
 
 		[Theory]
@@ -39,8 +40,8 @@ namespace JikanDotNet.Tests.ClubTests
 			using (new AssertionScope())
 			{
 				club.Data.Should().NotBeEmpty().And.HaveCount(2);
-				club.Data.First().Username.Should().Be("daya");
-				club.Data.Last().Username.Should().Be("Xinil");
+				club.Data.First().Username.Should().Be("Xinil");
+				club.Data.Last().Username.Should().Be("daya");
 			}
 		}
 	}

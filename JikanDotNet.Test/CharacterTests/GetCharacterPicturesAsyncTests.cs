@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using FluentAssertions.Execution;
 using JikanDotNet.Exceptions;
 using System.Threading.Tasks;
@@ -6,13 +6,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.CharacterTests
 {
+	[Collection("JikanTests")]
 	public class GetCharacterPicturesAsyncTests
 	{
 		private readonly IJikan _jikan;
 
-		public GetCharacterPicturesAsyncTests()
+		public GetCharacterPicturesAsyncTests(JikanFixture jikanFixture)
 		{
-			_jikan = new Jikan();
+			_jikan = jikanFixture.Jikan;
 		}
 
 		[Theory]
@@ -36,7 +37,7 @@ namespace JikanDotNet.Tests.CharacterTests
 
 			// Then
 			using var _ = new AssertionScope();
-			spike.Data.Should().HaveCount(15);
+			spike.Data.Should().HaveCountGreaterOrEqualTo(15);
 			spike.Data.Should().OnlyContain(x => !string.IsNullOrWhiteSpace(x.JPG.ImageUrl));
 		}
 

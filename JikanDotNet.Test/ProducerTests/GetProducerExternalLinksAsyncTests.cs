@@ -6,13 +6,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.ProducerTests;
 
+[Collection("JikanTests")]
 public class GetProducerExternalLinksAsyncTests
 {
     private readonly IJikan _jikan;
 
-    public GetProducerExternalLinksAsyncTests()
+    public GetProducerExternalLinksAsyncTests(JikanFixture jikanFixture)
     {
-        _jikan = new Jikan();
+        _jikan = jikanFixture.Jikan;
     }
 
     [Theory]
@@ -37,6 +38,6 @@ public class GetProducerExternalLinksAsyncTests
         // Then
         using var _ = new AssertionScope();
         results.Data.Should().HaveCountGreaterOrEqualTo(5);
-        results.Data.Should().Contain(x => x.Name.Equals("pierrot.jp") && x.Url.Equals("http://pierrot.jp/\r"));
+        results.Data.Should().Contain(x => x.Name.Equals("pierrot.jp") && x.Url.Equals("http://pierrot.jp/"));
     }
 }

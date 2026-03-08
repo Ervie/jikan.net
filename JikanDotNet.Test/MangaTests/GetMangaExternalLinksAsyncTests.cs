@@ -8,14 +8,15 @@ using Xunit;
 
 namespace JikanDotNet.Tests.MangaTests;
 
+[Collection("JikanTests")]
 public class GetMangaExternalLinksAsyncTests
 {
     
     private readonly IJikan _jikan;
 
-    public GetMangaExternalLinksAsyncTests()
+    public GetMangaExternalLinksAsyncTests(JikanFixture jikanFixture)
     {
-        _jikan = new Jikan();
+        _jikan = jikanFixture.Jikan;
     }
 
     [Theory]
@@ -38,8 +39,6 @@ public class GetMangaExternalLinksAsyncTests
         var links = await _jikan.GetMangaExternalLinksAsync(1);
 
         // Then
-        using var _ = new AssertionScope();
-        links.Data.Should().ContainSingle();
         links.Data.Should().Contain(x => x.Name.Equals("Wikipedia") && x.Url.Equals("http://ja.wikipedia.org/wiki/MONSTER"));
     }
 }

@@ -7,13 +7,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.MangaTests
 {
+	[Collection("JikanTests")]
 	public class GetMangaForumTopicsAsyncTests
 	{
 		private readonly IJikan _jikan;
 
-		public GetMangaForumTopicsAsyncTests()
+		public GetMangaForumTopicsAsyncTests(JikanFixture jikanFixture)
 		{
-			_jikan = new Jikan();
+			_jikan = jikanFixture.Jikan;
 		}
 
 		[Theory]

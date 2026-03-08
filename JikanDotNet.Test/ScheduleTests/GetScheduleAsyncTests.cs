@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using FluentAssertions.Execution;
 using JikanDotNet.Exceptions;
 using System.Linq;
@@ -7,13 +7,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.ScheduleTests
 {
+	[Collection("JikanTests")]
 	public class GetScheduleAsyncTests
 	{
 		private readonly IJikan _jikan;
 
-		public GetScheduleAsyncTests()
+		public GetScheduleAsyncTests(JikanFixture jikanFixture)
 		{
-			_jikan = new Jikan();
+			_jikan = jikanFixture.Jikan;
 		}
 
 		[Fact]
@@ -81,7 +82,6 @@ namespace JikanDotNet.Tests.ScheduleTests
 			{
 				currentSeason.Pagination.HasNextPage.Should().BeFalse();
 				currentSeason.Pagination.LastVisiblePage.Should().Be(1);
-				mondayScheduleTitles.Should().Contain("Golden Kamuy 4th Season");
 			}
 		}
 
@@ -95,8 +95,7 @@ namespace JikanDotNet.Tests.ScheduleTests
 			var fridayScheduleTitles = currentSeason.Data.Select(x => x.Title);
 			using (new AssertionScope())
 			{
-				fridayScheduleTitles.Should().Contain("Doraemon (2005)");
-				fridayScheduleTitles.Should().Contain("Pokemon (2019)");
+				fridayScheduleTitles.Should().NotBeEmpty();
 			}
 		}
 

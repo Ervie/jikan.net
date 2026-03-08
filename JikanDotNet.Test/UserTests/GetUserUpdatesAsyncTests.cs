@@ -7,13 +7,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.UserTests;
 
+[Collection("JikanTests")]
 public class GetUserUpdatesAsyncTests
 {
     private readonly IJikan _jikan;
 
-    public GetUserUpdatesAsyncTests()
+    public GetUserUpdatesAsyncTests(JikanFixture jikanFixture)
     {
-        _jikan = new Jikan();
+        _jikan = jikanFixture.Jikan;
     }
 
     [Theory]

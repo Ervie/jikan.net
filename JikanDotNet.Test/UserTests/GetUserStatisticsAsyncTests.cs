@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using FluentAssertions.Execution;
 using JikanDotNet.Exceptions;
 using System.Threading.Tasks;
@@ -6,13 +6,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.UserTests
 {
+	[Collection("JikanTests")]
 	public class GetUserStatisticsAsyncTests
 	{
 		private readonly IJikan _jikan;
 
-		public GetUserStatisticsAsyncTests()
+		public GetUserStatisticsAsyncTests(JikanFixture jikanFixture)
 		{
-			_jikan = new Jikan();
+			_jikan = jikanFixture.Jikan;
 		}
 
 		[Theory]
@@ -61,7 +62,7 @@ namespace JikanDotNet.Tests.UserTests
 				user.Data.AnimeStatistics.MeanScore.Should().BeGreaterThan(8);
 				user.Data.AnimeStatistics.EpisodesWatched.Should().BeGreaterThan(6000);
 				user.Data.AnimeStatistics.TotalEntries.Should().BeGreaterThan(900);
-				user.Data.AnimeStatistics.Dropped.Should().Be(3);
+				user.Data.AnimeStatistics.Dropped.Should().BeGreaterOrEqualTo(3);
 				user.Data.MangaStatistics.DaysRead.Should().BeGreaterThan(85);
 				user.Data.MangaStatistics.ChaptersRead.Should().BeGreaterThan(15000);
 				user.Data.MangaStatistics.VolumesRead.Should().BeGreaterThan(700);

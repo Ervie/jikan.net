@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using FluentAssertions.Execution;
 using JikanDotNet.Exceptions;
 using System.Linq;
@@ -7,13 +7,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.AnimeTests
 {
+	[Collection("JikanTests")]
 	public class GetAnimeStaffAsyncTests
 	{
 		private readonly IJikan _jikan;
 
-		public GetAnimeStaffAsyncTests()
+		public GetAnimeStaffAsyncTests(JikanFixture jikanFixture)
 		{
-			_jikan = new Jikan();
+			_jikan = jikanFixture.Jikan;
 		}
 
 		[Theory]
@@ -36,7 +37,7 @@ namespace JikanDotNet.Tests.AnimeTests
 			var bebop = await _jikan.GetAnimeStaffAsync(1);
 
 			// Then
-			bebop.Data.Should().Contain(x => x.Person.Name.Equals("Watanabe, Shinichiro"));
+			bebop.Data.Should().Contain(x => x.Person.Name.Equals("Watanabe, Shinichirou"));
 		}
 
 		[Fact]
@@ -46,7 +47,7 @@ namespace JikanDotNet.Tests.AnimeTests
 			var bebop = await _jikan.GetAnimeStaffAsync(1);
 
 			// Then
-			var shinichiroWatanabe = bebop.Data.First(x => x.Person.Name.Equals("Watanabe, Shinichiro"));
+			var shinichiroWatanabe = bebop.Data.First(x => x.Person.Name.Equals("Watanabe, Shinichirou"));
 			using (new AssertionScope())
 			{
 				shinichiroWatanabe.Position.Should().HaveCount(4);

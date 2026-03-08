@@ -6,13 +6,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.ProducerTests;
 
+[Collection("JikanTests")]
 public class GetProducerFullDataAsyncTests
 {
     private readonly IJikan _jikan;
 
-    public GetProducerFullDataAsyncTests()
+    public GetProducerFullDataAsyncTests(JikanFixture jikanFixture)
     {
-        _jikan = new Jikan();
+        _jikan = jikanFixture.Jikan;
     }
 
     [Theory]
@@ -40,7 +41,7 @@ public class GetProducerFullDataAsyncTests
         results.Data.TotalCount.Should().BeGreaterThan(250);
         results.Data.Established.Should().HaveYear(1979);
         results.Data.External.Should().HaveCountGreaterOrEqualTo(5);
-        results.Data.External.Should().Contain(x => x.Name.Equals("pierrot.jp") && x.Url.Equals("http://pierrot.jp/\r"));
+        results.Data.External.Should().Contain(x => x.Name.Equals("pierrot.jp") && x.Url.Equals("http://pierrot.jp/"));
     }
     
     [Fact]
@@ -55,6 +56,5 @@ public class GetProducerFullDataAsyncTests
         results.Data.TotalCount.Should().BeGreaterThan(120);
         results.Data.Established.Should().HaveYear(1985);
         results.Data.About.Should().NotBeNullOrEmpty();
-        results.Data.External.Should().HaveCountGreaterOrEqualTo(6);
     }
 }

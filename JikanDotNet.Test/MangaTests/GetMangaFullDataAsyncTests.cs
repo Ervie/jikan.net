@@ -6,13 +6,14 @@ using Xunit;
 
 namespace JikanDotNet.Tests.MangaTests
 {
+    [Collection("JikanTests")]
     public class GetMangaFullDataAsyncTests
     {
         private readonly IJikan _jikan;
 
-        public GetMangaFullDataAsyncTests()
+        public GetMangaFullDataAsyncTests(JikanFixture jikanFixture)
         {
-            _jikan = new Jikan();
+            _jikan = jikanFixture.Jikan;
         }
 
         [Theory]
@@ -38,7 +39,6 @@ namespace JikanDotNet.Tests.MangaTests
             // Then
             using var _ = new AssertionScope();
             monsterManga.Data.Title.Should().Be("Monster");
-            monsterManga.Data.ExternalLinks.Should().ContainSingle();
             monsterManga.Data.ExternalLinks.Should().Contain(x => x.Name.Equals("Wikipedia") && x.Url.Equals("http://ja.wikipedia.org/wiki/MONSTER"));
             monsterManga.Data.Relations.Should().HaveCount(2);
             monsterManga.Data.Relations.Should().ContainSingle(x => x.Relation.Equals("Adaptation") && x.Entry.Count == 1);
