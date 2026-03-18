@@ -136,6 +136,6 @@ Then restore dependencies:
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**
 
-# Documentation &  Usage example
+# Documentation & Usage example
 
-See [project wiki](https://github.com/Ervie/jikan.net/wiki#usage-example).
+See [documentation](docs/README.md) for quick start, API reference, and guides.
