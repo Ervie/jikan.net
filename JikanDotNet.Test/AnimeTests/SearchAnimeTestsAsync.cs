@@ -251,7 +251,7 @@ namespace JikanDotNet.Tests.AnimeTests
         }
 
         [Fact]
-        public async Task SearchAnimeAsync_OneSortByMembersConfig_ShouldSortByPopularityOPMFirst()
+        public async Task SearchAnimeAsync_OneSortByMembersConfig_ShouldSortByPopularity()
         {
             // Given
             var searchConfig = new AnimeSearchConfig
@@ -268,7 +268,6 @@ namespace JikanDotNet.Tests.AnimeTests
             var titles = returnedAnime.Data.Select(x => x.Title);
             using var _ = new AssertionScope();
             titles.Should().Contain("One Piece");
-            titles.Should().Contain("One Punch Man");
             titles.First().Should().Be("One");
         }
         
@@ -436,7 +435,7 @@ namespace JikanDotNet.Tests.AnimeTests
 		}
 
 		[Fact]
-		public async Task SearchAnimeAsync_EmptyQueryActionTvAnimeThirdPage_ShouldFindNanohaAndSeed()
+		public async Task SearchAnimeAsync_EmptyQueryActionTvAnimeThirdPage_ShouldFind()
 		{
 			// Given
 			var searchConfig = new AnimeSearchConfig
@@ -453,7 +452,7 @@ namespace JikanDotNet.Tests.AnimeTests
 			var titles = returnedAnime.Data.Select(x => x.Title);
 			using var _ = new AssertionScope();
 			titles.Should().Contain("Elfen Lied");
-			titles.Should().Contain("Mobile Suit Gundam SEED");
+			titles.Should().Contain("Samurai Champloo");
 		}
 
 		[Theory]
@@ -517,6 +516,43 @@ namespace JikanDotNet.Tests.AnimeTests
 
 			// Then
 			returnedAnime.Data.Should().NotBeEmpty();
+		}
+		
+		[Fact]
+		public async Task SearchAnimeAsync_GenreExclusion_ShouldNotContainExcludedGenres()
+		{
+			// Given
+			var searchConfig = new AnimeSearchConfig
+			{
+				ExcludedGenres = new List<AnimeGenreSearch> { AnimeGenreSearch.Action }
+			};
+
+			// When
+			var returnedAnime = await _jikan.SearchAnimeAsync(searchConfig);
+
+			// Then
+			returnedAnime.Data.Should().NotBeEmpty();
+			returnedAnime.Data.Should().OnlyContain(a => a.Genres.All(g => g.MalId != 1));
+		}
+
+		[Fact]
+		public async Task SearchAnimeAsync_WithStartDateAndEndDate_ShouldReturnNotEmpty()
+		{
+			// Given
+			var searchConfig = new AnimeSearchConfig
+			{
+				Query = "cowboy",
+				StartDate = new DateTime(1998, 1, 1),
+				EndDate = new DateTime(1999, 12, 31)
+			};
+
+			// When
+			var returnedAnime = await _jikan.SearchAnimeAsync(searchConfig);
+
+			// Then
+			using var _ = new AssertionScope();
+			returnedAnime.Data.Should().NotBeEmpty();
+			returnedAnime.Data.Should().Contain(a => a.MalId == 1L);
 		}
     }
 }

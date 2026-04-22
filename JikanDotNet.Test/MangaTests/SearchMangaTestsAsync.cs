@@ -214,7 +214,7 @@ namespace JikanDotNet.Tests.MangaTests
 
             // Then
             using var _ = new AssertionScope();
-            returnedAnime.Data.Select(x => x.Title).Should().Contain("Misty Girl"); 
+            returnedAnime.Data.Select(x => x.Title).Should().Contain("Mimei no Girl"); 
             returnedAnime.Pagination.LastVisiblePage.Should().BeGreaterThan(15);
         }
         
@@ -445,7 +445,7 @@ namespace JikanDotNet.Tests.MangaTests
 			// Then
 			var titles = returnedManga.Data.Select(x => x.Title);
 			using var _ = new AssertionScope();
-			titles.Should().Contain("Zobmie-Loan");
+			titles.Should().Contain("Zombie-Loan");
 			titles.Should().Contain("Air Gear");
 		}
 
@@ -521,6 +521,45 @@ namespace JikanDotNet.Tests.MangaTests
 
 			// Then
 			returnedManga.Data.Should().NotBeNullOrEmpty();
+		}
+
+		[Fact]
+		public async Task SearchMangaAsync_GenreExclusion_ShouldNotContainExcludedGenres()
+		{
+			// Given
+			var searchConfig = new MangaSearchConfig
+			{
+				ExcludedGenres = new List<MangaGenreSearch> { MangaGenreSearch.Action },
+				Type = MangaType.Manga
+			};
+
+			// When
+			var returnedManga = await _jikan.SearchMangaAsync(searchConfig);
+
+			// Then
+			returnedManga.Data.Should().NotBeEmpty();
+			returnedManga.Data.Should().OnlyContain(m => m.Genres.All(g => g.MalId != 1));
+		}
+
+		[Fact]
+		public async Task SearchMangaAsync_WithStartDateAndEndDate_ShouldReturnNotEmpty()
+		{
+			// Given
+			var searchConfig = new MangaSearchConfig
+			{
+				Query = "monster",
+				StartDate = new DateTime(1994, 12, 1),
+				EndDate = new DateTime(2012, 12, 31),
+				Type = MangaType.Manga
+			};
+
+			// When
+			var returnedManga = await _jikan.SearchMangaAsync(searchConfig);
+
+			// Then
+			using var _ = new AssertionScope();
+			returnedManga.Data.Should().NotBeEmpty();
+			returnedManga.Data.Should().Contain(m => m.MalId == 1L);
 		}
     }
 }

@@ -124,15 +124,18 @@ Then restore dependencies:
 
 # Changelog
 
+## 22.04.2026 - Version 2.10.3
+
+- Features
+  - Add `StartDate` and `EndDate` (`DateTime?`) to `AnimeSearchConfig` and `MangaSearchConfig` for Jikan anime/manga search `start_date` and `end_date` filters
+- Fixes
+  - Fix excluded genres parameter in search config for `SearchAnimeAsync` and `SearchMangaAsync`
+
 ## 08.03.2026 - Version 2.10.2
 
 - Add missing API method overloads (manga forum topic filter, video episodes pagination, watch promos pagination)
 - Fix `SearchClubAsync` using incorrect endpoint
 - Fix `GetAnimeVideosEpisodesAsync` return type to `PaginatedJikanResponse`
-
-## 03.12.2025 - Version 2.10.1
-
-- Fix Score (change to nullable) for AnimeEpisode model
 
 **[Read More](https://github.com/Ervie/jikan.net/blob/master/Changelog.md)**
 

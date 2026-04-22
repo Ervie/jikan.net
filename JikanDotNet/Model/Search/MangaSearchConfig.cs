@@ -1,4 +1,4 @@
-﻿using JikanDotNet.Extensions;
+using JikanDotNet.Extensions;
 using JikanDotNet.Helpers;
 using JikanDotNet.Interfaces;
 using System;
@@ -85,6 +85,16 @@ namespace JikanDotNet
 		public bool Sfw { get; set; } = true;
 		
 		/// <summary>
+		/// Filter by starting date.
+		/// </summary>
+		public DateTime? StartDate { get; set; }
+		
+		/// <summary>
+		/// Filter by ending date.
+		/// </summary>
+		public DateTime? EndDate { get; set; }
+		
+		/// <summary>
 		/// Create query from current parameters for search request.
 		/// </summary>
 		/// <returns>Query from current parameters for search request</returns>
@@ -158,7 +168,7 @@ namespace JikanDotNet
 					return genreSearch.GetDescription();
 				}).ToArray();
 
-				builder.Append($"genre_exclude={string.Join(",", genresIds)}&");
+				builder.Append($"genres_exclude={string.Join(",", genresIds)}&");
 			}
 
 			if (OrderBy != MangaSearchOrderBy.NoSorting)
@@ -172,6 +182,16 @@ namespace JikanDotNet
 			if (MagazineIds.Any())
 			{
 				builder.Append($"magazines={string.Join(",", MagazineIds)}&");
+			}
+			
+			if (StartDate.HasValue)
+			{
+				builder.Append($"start_date={StartDate.Value:yyyy-MM-dd}&");
+			}
+
+			if (EndDate.HasValue)
+			{
+				builder.Append($"end_date={EndDate.Value:yyyy-MM-dd}&");
 			}
 
 			if (Sfw)

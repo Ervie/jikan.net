@@ -1,4 +1,5 @@
-﻿using JikanDotNet.Extensions;
+using System;
+using JikanDotNet.Extensions;
 using JikanDotNet.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
@@ -76,7 +77,7 @@ namespace JikanDotNet
 		/// <summary>
 		/// Genres to exclude.
 		/// </summary>
-		public ICollection<MangaGenreSearch> ExcludedGenres { get; set; } = new List<MangaGenreSearch>();
+		public ICollection<AnimeGenreSearch> ExcludedGenres { get; set; } = new List<AnimeGenreSearch>();
 
 		/// <summary>
 		/// Filter by producer id.
@@ -87,6 +88,16 @@ namespace JikanDotNet
 		/// Should only search for sfw title. Filter out adult entries.
 		/// </summary>
 		public bool Sfw { get; set; } = true;
+		
+		/// <summary>
+		/// Filter by starting date.
+		/// </summary>
+		public DateTime? StartDate { get; set; }
+		
+		/// <summary>
+		/// Filter by ending date.
+		/// </summary>
+		public DateTime? EndDate { get; set; }
 
 		/// <summary>
 		/// Create query from current parameters for search request.
@@ -159,7 +170,6 @@ namespace JikanDotNet
 				builder.Append($"genres={string.Join(",", genresIds)}&");
 			}
 			
-			
 			if (ExcludedGenres.Count > 0 )
 			{
 				var genresIds = ExcludedGenres.Select(genreSearch =>
@@ -168,7 +178,7 @@ namespace JikanDotNet
 					return genreSearch.GetDescription();
 				}).ToArray();
 
-				builder.Append($"genre_exclude={string.Join(",", genresIds)}&");
+				builder.Append($"genres_exclude={string.Join(",", genresIds)}&");
 			}
 
 			if (OrderBy != AnimeSearchOrderBy.NoSorting)
@@ -184,6 +194,16 @@ namespace JikanDotNet
 				builder.Append($"producers={string.Join(",", ProducerIds)}&");
 			}
 
+			if (StartDate.HasValue)
+			{
+				builder.Append($"start_date={StartDate.Value:yyyy-MM-dd}&");
+			}
+
+			if (EndDate.HasValue)
+			{
+				builder.Append($"end_date={EndDate.Value:yyyy-MM-dd}&");
+			}
+			
 			if (Sfw)
 			{
 				builder.Append("sfw");
