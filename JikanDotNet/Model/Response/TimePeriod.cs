@@ -9,15 +9,17 @@ namespace JikanDotNet
 	public class TimePeriod
 	{
 		/// <summary>
-		/// Start date.
+		/// Start date. Uses <see cref="DateTimeOffset"/> to preserve the UTC offset returned by the API
+		/// (ISO-8601 timestamps with explicit "+00:00" offset) and avoid local-time conversions.
 		/// </summary>
 		[JsonPropertyName("from")]
-		public DateTime? From { get; set; }
+		public DateTimeOffset? From { get; set; }
 
 		/// <summary>
-		/// End date.
+		/// End date. Uses <see cref="DateTimeOffset"/> to preserve the UTC offset returned by the API
+		/// (ISO-8601 timestamps with explicit "+00:00" offset) and avoid local-time conversions.
 		/// </summary>
 		[JsonPropertyName("to")]
-		public DateTime? To { get; set; }
+		public DateTimeOffset? To { get; set; }
 	}
 }

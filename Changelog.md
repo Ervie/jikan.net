@@ -1,3 +1,10 @@
+## 25.04.2026 - Version 2.10.4
+
+- Fixes
+    - Fix `TimePeriod.From` and `TimePeriod.To` losing UTC offset when deserializing `aired`/`published` dates returned by the Jikan API. Types changed from `DateTime?` to `DateTimeOffset?` so the explicit `+00:00` offset from the API is preserved and values are no longer shifted into local time ([#65](https://github.com/Ervie/jikan.net/issues/65))
+- Breaking changes
+    - `TimePeriod.From` and `TimePeriod.To` are now `DateTimeOffset?` instead of `DateTime?`. Consumers reading `Anime.Aired` or `Manga.Published` may need to update variable types or call `.DateTime` / `.UtcDateTime` on the value
+
 ## 22.04.2026 - Version 2.10.3
 
 - Features

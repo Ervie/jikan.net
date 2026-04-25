@@ -124,12 +124,14 @@ Then restore dependencies:
 
 # Changelog
 
+## 25.04.2026 - Version 2.10.4
+
+- Fix `TimePeriod.From`/`TimePeriod.To` losing UTC offset during deserialization (affects `Anime.Aired` and `Manga.Published`). Types changed from `DateTime?` to `DateTimeOffset?` - **breaking change**
+
 ## 22.04.2026 - Version 2.10.3
 
-- Features
-  - Add `StartDate` and `EndDate` (`DateTime?`) to `AnimeSearchConfig` and `MangaSearchConfig` for Jikan anime/manga search `start_date` and `end_date` filters
-- Fixes
-  - Fix excluded genres parameter in search config for `SearchAnimeAsync` and `SearchMangaAsync`
+- Add `StartDate`/`EndDate` (`DateTime?`) to `AnimeSearchConfig` and `MangaSearchConfig`
+- Fix excluded genres parameter in search config for `SearchAnimeAsync` and `SearchMangaAsync`
 
 ## 08.03.2026 - Version 2.10.2
 

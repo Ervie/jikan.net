@@ -246,8 +246,8 @@ Contains image URLs in various formats (e.g. Jpg, Webp) and sizes (e.g. ImageUrl
 
 | Property | Type | Description |
 |----------|------|-------------|
-| From | DateTime? | Start |
-| To | DateTime? | End |
+| From | DateTimeOffset? | Start (preserves UTC offset returned by API) |
+| To | DateTimeOffset? | End (preserves UTC offset returned by API) |
 
 ### ExternalLink
 
