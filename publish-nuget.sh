@@ -13,11 +13,9 @@ if [[ ! -f "$PROJECT_PATH" ]]; then
   exit 1
 fi
 
-# Extract package version from .csproj (PackageVersion for NuGet, fallback to Version)
-VERSION=$(grep '<PackageVersion>' "$PROJECT_PATH" | sed -n 's/.*<PackageVersion>\([^<]*\)<\/PackageVersion>.*/\1/p' | tr -d ' \t')
-if [[ -z "$VERSION" ]]; then
-  VERSION=$(grep '<Version>' "$PROJECT_PATH" | head -1 | sed -n 's/.*<Version>\([^<]*\)<\/Version>.*/\1/p' | tr -d ' \t')
-fi
+# Extract package version from .csproj. <Version> is the single source of truth;
+# PackageVersion/AssemblyVersion/FileVersion are auto-derived by MSBuild.
+VERSION=$(grep '<Version>' "$PROJECT_PATH" | head -1 | sed -n 's/.*<Version>\([^<]*\)<\/Version>.*/\1/p' | tr -d ' \t')
 if [[ -z "$VERSION" ]]; then
   echo "Error: Could not determine package version from $PROJECT_PATH"
   exit 1

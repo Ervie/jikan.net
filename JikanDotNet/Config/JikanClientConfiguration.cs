@@ -17,6 +17,10 @@ namespace JikanDotNet.Config
 		/// </summary>
 		public List<TaskLimiterConfiguration> LimiterConfigurations { get; set; }
 
+		/// <summary>
+		/// Initializes a new instance of <see cref="JikanClientConfiguration"/> with default settings:
+		/// exceptions are not suppressed and the default task limiter configuration is applied.
+		/// </summary>
 		public JikanClientConfiguration()
 		{
 			SuppressException = false;
