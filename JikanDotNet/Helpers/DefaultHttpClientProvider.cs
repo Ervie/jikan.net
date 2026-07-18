@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace JikanDotNet.Helpers
 {
@@ -23,11 +25,25 @@ namespace JikanDotNet.Helpers
 		{
 			var uriEndpoint = !string.IsNullOrWhiteSpace(endpoint) ? endpoint : DefaultEndpoint;
 			
-			var client = new HttpClient() {BaseAddress = new Uri(uriEndpoint)};
+			var client = new HttpClient(new ForceHttp11Handler(new HttpClientHandler())) {BaseAddress = new Uri(uriEndpoint)};
 			client.DefaultRequestHeaders.Accept.Clear();
 			client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/html"));
-			
-			return client;
+
+            client.DefaultRequestHeaders.AcceptEncoding.Clear();
+            client.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Encoding", "gzip, deflate, br, zstd");
+
+            return client;
 		}
-	}
+
+        internal class ForceHttp11Handler : DelegatingHandler
+        {
+            public ForceHttp11Handler(HttpMessageHandler innerHandler) : base(innerHandler) { }
+
+            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+            {
+                request.Version = new Version(1, 1);
+                return base.SendAsync(request, cancellationToken);
+            }
+        }
+    }
 }
