@@ -100,6 +100,12 @@ namespace JikanDotNet
 			return returnedObject;
 		}
 
+        /// <summary>
+        /// Decompresses a HttpResponseMessage response with gzip, deflate.
+        /// Also supports br if NET6 or greater is used (so not netstandard2.0).
+        /// </summary>
+        /// <param name="response"></param> response to be decompressed
+        /// <returns></returns>
         private static async Task<string> ReadDecompressedStringAsync(HttpResponseMessage response)
         {
             var stream = await response.Content.ReadAsStreamAsync();
