@@ -1,3 +1,17 @@
+## 15.08.2026 - Version 3.1.0
+
+Additive release. No breaking changes.
+
+- Features
+    - Interest Stacks: `GetInterestStacksAsync` (browse), `SearchInterestStacksAsync` (filter by `stack_type`, query, ordering, and sfw via `InterestStackSearchConfig`), and `GetInterestStackAsync` which returns the stack with its entries in the order the author arranged them.
+    - Entity-linked stacks: `GetAnimeInterestStacksAsync` and `GetMangaInterestStacksAsync` return the public stacks containing a given anime or manga, both with a page overload.
+    - `GetStatusAsync` returns the public status snapshot from `https://tenrai.org/status/api/status` - monitored services, their current status, 90 day outage and degradation history, and scheduled maintenance windows.
+    - New models: `InterestStack`, `InterestStackDetails`, `InterestStackEntry`, `TenraiStatus`, `StatusPage`, `StatusChecker`, `StatusService`, `StatusMaintenance`. New enums: `InterestStackType`, `InterestStackSearchOrderBy`.
+- Notes
+    - `GetStatusAsync` targets the status host rather than the API host, so it ignores a custom `HttpClient` base address, is not subject to the client-side rate limiter, and returns `TenraiStatus` directly instead of wrapping it in `BaseTenraiResponse<T>`. Poll no more than once per minute.
+    - `InterestStackSearchOrderBy` offers only `CreatedAt` and `RestackCount`; those are the only two values the API sorts by.
+    - `InterestStackEntry` covers both stack kinds. `Episodes`/`AiredFromYear` are populated only for anime stacks, `Volumes`/`PublishedFromYear` only for manga stacks.
+
 ## 07.07.2026 - Version 3.0.0
 
 Rebrand of the library from `JikanDotNet` to `Tenrai.Net`, targeting the [Tenrai](https://tenrai.org) REST API (`https://api.tenrai.org/v1`), a drop-in successor to the discontinued Jikan v4 API. This is a major, breaking release. Built on and crediting [@Ervie](https://github.com/Ervie)'s [jikan.net](https://github.com/Ervie/jikan.net).

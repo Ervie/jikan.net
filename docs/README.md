@@ -38,7 +38,7 @@ var reviews = await tenrai.GetMangaReviewsAsync(2, new ReviewsSearchConfig
 Console.WriteLine(reviews.Data.First().Tags.First());  // "Recommended"
 ```
 
-All response models contain a `Data` property where the actual response data resides. Paginated endpoints also include pagination metadata.
+All response models contain a `Data` property where the actual response data resides. Paginated endpoints also include pagination metadata. The one exception is `GetStatusAsync`, which returns `TenraiStatus` directly because the status service does not wrap its response.
 
 ---
 

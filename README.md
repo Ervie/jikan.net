@@ -46,7 +46,9 @@ Tenrai.Net is based on, and a huge thank you goes to, [@Ervie](https://github.co
 - Producer: Basic information, External links, Full data
 - Magazines
 - Random: Anime, Manga, Character, Person
+- Interest Stacks: Browse, search, full stack with entries in source order, stacks containing a given anime or manga
 - Bulk MAL IDs: Anime, Manga, Characters, People, Producers *(requires a Server Key)*
+- Service status snapshot
 
 ### Not supported by Tenrai
 
@@ -63,15 +65,20 @@ PM> Install-Package Tenrai.Net
 ### .NET CLI
 
 ```
->dotnet add package Tenrai.Net
+> dotnet add package Tenrai.Net
 ```
 
 Then restore dependencies:
 ```
->dotnet restore
+> dotnet restore
 ```
 
 # Changelog
+
+## 15.08.2026 - Version 3.1.0
+
+- Interest Stacks: browse, search, full stack with entries in source order, and the stacks containing a given anime or manga
+- `GetStatusAsync` returns the public service status snapshot (targets the status host, so it ignores a custom base address and the client rate limiter)
 
 ## 07.07.2026 - Version 3.0.0
 

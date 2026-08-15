@@ -82,14 +82,17 @@ namespace Tenrai
         /// <typeparam name="T">Class type received from GET requests.</typeparam>
         /// <param name="routeSections">Arguments building endpoint.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
+        /// <param name="bypassLimiter">Skip the rate limiter. Only for calls that do not hit the Tenrai API itself.</param>
         /// <returns>Requested object if successful, null otherwise.</returns>
-        private async Task<T> ExecuteGetRequestAsync<T>(ICollection<string> routeSections, CancellationToken cancellationToken = default) where T : class
+        private async Task<T> ExecuteGetRequestAsync<T>(ICollection<string> routeSections, CancellationToken cancellationToken = default, bool bypassLimiter = false) where T : class
 		{
 			T returnedObject = null;
 			var requestUrl = string.Join("/", routeSections);
 			try
 			{
-				using var response = await _limiter.LimitAsync(() => _httpClient.GetAsync(requestUrl, cancellationToken));
+				using var response = bypassLimiter
+					? await _httpClient.GetAsync(requestUrl, cancellationToken)
+					: await _limiter.LimitAsync(() => _httpClient.GetAsync(requestUrl, cancellationToken));
 				if (response.IsSuccessStatusCode)
 				{
 					var json = await response.Content.ReadAsStringAsync();
@@ -1236,6 +1239,87 @@ namespace Tenrai
 			=> throw new NotSupportedException(ErrorMessagesConst.UnsupportedClub);
 
 		#endregion Search methods
+
+		#region Interest stack methods
+
+		/// <inheritdoc />
+		public async Task<PaginatedTenraiResponse<ICollection<InterestStack>>> GetInterestStacksAsync(CancellationToken cancellationToken = default)
+		{
+			var endpointParts = new[] { TenraiEndpointConsts.Stacks };
+			return await ExecuteGetRequestAsync<PaginatedTenraiResponse<ICollection<InterestStack>>>(endpointParts, cancellationToken);
+		}
+
+		/// <inheritdoc />
+		public async Task<PaginatedTenraiResponse<ICollection<InterestStack>>> GetInterestStacksAsync(int page, CancellationToken cancellationToken = default)
+		{
+			Guard.IsGreaterThanZero(page, nameof(page));
+			var endpointParts = new[] { TenraiEndpointConsts.Stacks + $"?page={page}" };
+			return await ExecuteGetRequestAsync<PaginatedTenraiResponse<ICollection<InterestStack>>>(endpointParts, cancellationToken);
+		}
+
+		/// <inheritdoc />
+		public async Task<PaginatedTenraiResponse<ICollection<InterestStack>>> SearchInterestStacksAsync(InterestStackSearchConfig searchConfig, CancellationToken cancellationToken = default)
+		{
+			Guard.IsNotNull(searchConfig, nameof(searchConfig));
+			var endpointParts = new[] { TenraiEndpointConsts.Stacks + searchConfig.ConfigToString() };
+			return await ExecuteGetRequestAsync<PaginatedTenraiResponse<ICollection<InterestStack>>>(endpointParts, cancellationToken);
+		}
+
+		/// <inheritdoc />
+		public async Task<BaseTenraiResponse<InterestStackDetails>> GetInterestStackAsync(long id, CancellationToken cancellationToken = default)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			var endpointParts = new[] { TenraiEndpointConsts.Stacks, id.ToString() };
+			return await ExecuteGetRequestAsync<BaseTenraiResponse<InterestStackDetails>>(endpointParts, cancellationToken);
+		}
+
+		/// <inheritdoc />
+		public async Task<PaginatedTenraiResponse<ICollection<InterestStack>>> GetAnimeInterestStacksAsync(long id, CancellationToken cancellationToken = default)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			var endpointParts = new[] { TenraiEndpointConsts.Anime, id.ToString(), TenraiEndpointConsts.Stacks };
+			return await ExecuteGetRequestAsync<PaginatedTenraiResponse<ICollection<InterestStack>>>(endpointParts, cancellationToken);
+		}
+
+		/// <inheritdoc />
+		public async Task<PaginatedTenraiResponse<ICollection<InterestStack>>> GetAnimeInterestStacksAsync(long id, int page, CancellationToken cancellationToken = default)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			Guard.IsGreaterThanZero(page, nameof(page));
+			var endpointParts = new[] { TenraiEndpointConsts.Anime, id.ToString(), TenraiEndpointConsts.Stacks + $"?page={page}" };
+			return await ExecuteGetRequestAsync<PaginatedTenraiResponse<ICollection<InterestStack>>>(endpointParts, cancellationToken);
+		}
+
+		/// <inheritdoc />
+		public async Task<PaginatedTenraiResponse<ICollection<InterestStack>>> GetMangaInterestStacksAsync(long id, CancellationToken cancellationToken = default)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			var endpointParts = new[] { TenraiEndpointConsts.Manga, id.ToString(), TenraiEndpointConsts.Stacks };
+			return await ExecuteGetRequestAsync<PaginatedTenraiResponse<ICollection<InterestStack>>>(endpointParts, cancellationToken);
+		}
+
+		/// <inheritdoc />
+		public async Task<PaginatedTenraiResponse<ICollection<InterestStack>>> GetMangaInterestStacksAsync(long id, int page, CancellationToken cancellationToken = default)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			Guard.IsGreaterThanZero(page, nameof(page));
+			var endpointParts = new[] { TenraiEndpointConsts.Manga, id.ToString(), TenraiEndpointConsts.Stacks + $"?page={page}" };
+			return await ExecuteGetRequestAsync<PaginatedTenraiResponse<ICollection<InterestStack>>>(endpointParts, cancellationToken);
+		}
+
+		#endregion Interest stack methods
+
+		#region Status methods
+
+		/// <inheritdoc />
+		public async Task<TenraiStatus> GetStatusAsync(CancellationToken cancellationToken = default)
+		{
+			// Absolute URL as a single route section, so string.Join is a no-op and BaseAddress is bypassed
+			var endpointParts = new[] { TenraiEndpointConsts.StatusEndpoint };
+			return await ExecuteGetRequestAsync<TenraiStatus>(endpointParts, cancellationToken, bypassLimiter: true);
+		}
+
+		#endregion Status methods
 
 		#endregion Public Methods
 	}

@@ -1296,5 +1296,91 @@ namespace Tenrai
 		Task<PaginatedTenraiResponse<ICollection<Club>>> SearchClubAsync(ClubSearchConfig searchConfig, CancellationToken cancellationToken = default);
 
 		#endregion Search requests
+
+		#region Interest stack requests
+
+		/// <summary>
+		/// Returns the first page of public interest stacks.
+		/// </summary>
+		/// <param name="cancellationToken">Cancellation token.</param>
+		/// <returns>First page of public interest stacks.</returns>
+		Task<PaginatedTenraiResponse<ICollection<InterestStack>>> GetInterestStacksAsync(CancellationToken cancellationToken = default);
+
+		/// <summary>
+		/// Returns a page of public interest stacks.
+		/// </summary>
+		/// <param name="page">Index of the page.</param>
+		/// <param name="cancellationToken">Cancellation token.</param>
+		/// <returns>Page of public interest stacks.</returns>
+		Task<PaginatedTenraiResponse<ICollection<InterestStack>>> GetInterestStacksAsync(int page, CancellationToken cancellationToken = default);
+
+		/// <summary>
+		/// Returns public interest stacks matching the given search configuration.
+		/// </summary>
+		/// <param name="searchConfig">Additional configuration for advanced search.</param>
+		/// <param name="cancellationToken">Cancellation token.</param>
+		/// <returns>Public interest stacks matching the search configuration.</returns>
+		Task<PaginatedTenraiResponse<ICollection<InterestStack>>> SearchInterestStacksAsync(InterestStackSearchConfig searchConfig, CancellationToken cancellationToken = default);
+
+		/// <summary>
+		/// Returns interest stack with given MAL id, including its entries in the order the author arranged them.
+		/// </summary>
+		/// <param name="id">MAL id of the interest stack.</param>
+		/// <param name="cancellationToken">Cancellation token.</param>
+		/// <returns>Interest stack with given MAL id.</returns>
+		Task<BaseTenraiResponse<InterestStackDetails>> GetInterestStackAsync(long id, CancellationToken cancellationToken = default);
+
+		/// <summary>
+		/// Returns first page of public interest stacks containing the anime with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <param name="cancellationToken">Cancellation token.</param>
+		/// <returns>First page of public interest stacks containing the anime.</returns>
+		Task<PaginatedTenraiResponse<ICollection<InterestStack>>> GetAnimeInterestStacksAsync(long id, CancellationToken cancellationToken = default);
+
+		/// <summary>
+		/// Returns a page of public interest stacks containing the anime with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <param name="page">Index of the page.</param>
+		/// <param name="cancellationToken">Cancellation token.</param>
+		/// <returns>Page of public interest stacks containing the anime.</returns>
+		Task<PaginatedTenraiResponse<ICollection<InterestStack>>> GetAnimeInterestStacksAsync(long id, int page, CancellationToken cancellationToken = default);
+
+		/// <summary>
+		/// Returns first page of public interest stacks containing the manga with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of manga.</param>
+		/// <param name="cancellationToken">Cancellation token.</param>
+		/// <returns>First page of public interest stacks containing the manga.</returns>
+		Task<PaginatedTenraiResponse<ICollection<InterestStack>>> GetMangaInterestStacksAsync(long id, CancellationToken cancellationToken = default);
+
+		/// <summary>
+		/// Returns a page of public interest stacks containing the manga with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of manga.</param>
+		/// <param name="page">Index of the page.</param>
+		/// <param name="cancellationToken">Cancellation token.</param>
+		/// <returns>Page of public interest stacks containing the manga.</returns>
+		Task<PaginatedTenraiResponse<ICollection<InterestStack>>> GetMangaInterestStacksAsync(long id, int page, CancellationToken cancellationToken = default);
+
+		#endregion Interest stack requests
+
+		#region Status requests
+
+		/// <summary>
+		/// Returns the current public status snapshot of the Tenrai services.
+		/// </summary>
+		/// <remarks>
+		/// This call targets the status host (<c>https://tenrai.org</c>) rather than the API host, so it ignores any
+		/// custom base address and is not subject to the client's rate limiter. Poll no more than once per minute;
+		/// the server caches the snapshot for 30 seconds. If a Server Key is configured it is sent on this request too,
+		/// because the underlying <c>HttpClient</c> is shared.
+		/// </remarks>
+		/// <param name="cancellationToken">Cancellation token.</param>
+		/// <returns>Current public status snapshot.</returns>
+		Task<TenraiStatus> GetStatusAsync(CancellationToken cancellationToken = default);
+
+		#endregion Status requests
 	}
 }

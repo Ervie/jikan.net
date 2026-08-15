@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <!-- Single source of truth: PackageVersion, AssemblyVersion and FileVersion are auto-derived from <Version>. -->
-    <Version>3.0.0</Version>
+    <Version>3.1.0</Version>
     <Authors>Bartłomiej Buchała, Joseph Milazzo</Authors>
     <Description>A dotnet wrapper for the Tenrai REST API, fetching data from MyAnimeList. Drop-in compatible with the Jikan v4 schema.</Description>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>

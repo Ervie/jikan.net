@@ -230,6 +230,118 @@ Extends `BaseTenraiResponse<T>` with pagination metadata.
 
 ---
 
+## Interest Stacks
+
+### InterestStack
+
+| Property | Type | Description |
+|----------|------|-------------|
+| MalId | long | MAL id |
+| Url | string | Canonical link |
+| StackType | string | Type of entries the stack holds: "anime" or "manga" |
+| Title | string | Stack title |
+| Description | string | Author's description. Empty string when they did not write one |
+| AuthorUsername | string | MAL username of the author |
+| AuthorUrl | string | Link to the author's profile |
+| IsOfficial | bool | Curated by MyAnimeList staff |
+| IsChallenge | bool | Marked as a challenge |
+| IsSpoiler | bool | Marked as containing spoilers |
+| RestackCount | int | Number of users who restacked it |
+| EntryCount | int | Number of entries in the stack |
+| CreatedAt | DateTime? | Creation date |
+
+### InterestStackDetails
+
+Extends `InterestStack`. Returned by `GetInterestStackAsync`.
+
+| Property | Type | Description |
+|----------|------|-------------|
+| Entries | ICollection&lt;InterestStackEntry&gt; | Entries in the order the author arranged them |
+
+### InterestStackEntry
+
+The entry shape depends on the parent stack's `StackType`, and the entry itself carries no discriminator. `Episodes` and `AiredFromYear` are populated only for `"anime"` stacks; `Volumes` and `PublishedFromYear` only for `"manga"` stacks. The unused pair is always null.
+
+| Property | Type | Description |
+|----------|------|-------------|
+| Position | int | Position within the stack, starting at 1 |
+| MalId | long | MAL id of the anime or manga |
+| Url | string | Canonical link |
+| Images | ImagesSet | Images in various formats |
+| Title | string | Entry title |
+| TitleEnglish | string | English title, null when MAL has none |
+| Type | string | e.g. "TV", "Movie", "Manga" |
+| AuthorScore | int? | Score the stack's author gave, null when unscored |
+| Note | string | Note the author attached, null when none |
+| Episodes | int? | Episode count (anime stacks only) |
+| AiredFromYear | int? | Year it started airing (anime stacks only) |
+| Volumes | int? | Volume count (manga stacks only). 0 is a real value, not a sentinel |
+| PublishedFromYear | int? | Year it started publishing (manga stacks only) |
+
+---
+
+## Status
+
+### TenraiStatus
+
+Returned bare by `GetStatusAsync`, not wrapped in `BaseTenraiResponse<T>`.
+
+| Property | Type | Description |
+|----------|------|-------------|
+| ApiVersion | int | Version of the status API contract |
+| Page | StatusPage | Status page this snapshot belongs to |
+| Checker | StatusChecker | Health of the monitoring process itself |
+| GeneratedAt | DateTime? | When the snapshot was generated |
+| Services | ICollection&lt;StatusService&gt; | Monitored services |
+| ScheduledMaintenances | ICollection&lt;StatusMaintenance&gt; | Scheduled or running maintenance windows |
+
+### StatusPage
+
+| Property | Type | Description |
+|----------|------|-------------|
+| Name | string | Name of the status page |
+| Url | string | Link to the human readable status page |
+
+### StatusChecker
+
+| Property | Type | Description |
+|----------|------|-------------|
+| Healthy | bool | Is the checker running normally. When false, service statuses may be out of date |
+| LastCheckAt | DateTime? | Date of the last completed check |
+| StaleAfterSeconds | int | Seconds after LastCheckAt at which the snapshot is considered stale |
+
+### StatusService
+
+| Property | Type | Description |
+|----------|------|-------------|
+| Id | string | Service identifier, e.g. "tenrai" |
+| Name | string | Display name |
+| Status | string | "operational", "degraded", "down", "unknown", or "maintenance" |
+| HomepageUrl | string | Link to the service homepage |
+| LogoUrl | string | Link to the service logo |
+| LastCheckAt | DateTime? | When this service was last probed |
+| OutageMinutes90d | int | Total minutes down over the last 90 days |
+| DegradedMinutes90d | int | Total minutes degraded over the last 90 days |
+| DailyOutageMinutes90d | IDictionary&lt;string, int&gt; | Minutes down per day, keyed "yyyy-MM-dd". Clean days are omitted |
+| DailyDegradedMinutes90d | IDictionary&lt;string, int&gt; | Minutes degraded per day, keyed "yyyy-MM-dd". Clean days are omitted |
+| ActiveMaintenance | StatusMaintenance | Maintenance window currently affecting this service, null when none |
+
+### StatusMaintenance
+
+| Property | Type | Description |
+|----------|------|-------------|
+| Id | string | Identifier of the maintenance window |
+| ServiceId | string | Affected service id, or the literal "all" |
+| Title | string | Title of the window |
+| StartsAt | DateTime? | Start date |
+| EndsAt | DateTime? | End date |
+| Status | string | Status the affected service reports while the window runs |
+| State | string | "scheduled" or "active" |
+| CreatedAt | DateTime? | Creation date |
+| UpdatedAt | DateTime? | Last update date |
+
+---
+
 ## Common types
 
 ### MalUrl

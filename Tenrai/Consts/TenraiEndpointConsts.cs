@@ -48,5 +48,12 @@ namespace Tenrai.Consts
 		internal const string Full = "full";
 		internal const string Now = "now";
 		internal const string Ids = "ids";
+		internal const string Stacks = "stacks";
+
+		/// <summary>
+		/// Absolute URL. The status service is hosted on tenrai.org, not api.tenrai.org, so this
+		/// must not be resolved against the client's BaseAddress.
+		/// </summary>
+		internal const string StatusEndpoint = "https://tenrai.org/status/api/status";
 	}
 }

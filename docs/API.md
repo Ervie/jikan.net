@@ -1293,6 +1293,148 @@ var results = await tenrai.SearchCharacterAsync("lain");
 
 ---
 
+## Interest Stacks
+
+An interest stack is a user curated, ordered list of anime or manga. Every stack holds one kind of entry, given by its `StackType` (`"anime"` or `"manga"`).
+
+### GetInterestStacksAsync
+
+Returns a page of public interest stacks.
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| page | int | Page index (optional overload) |
+
+**Returns:** `PaginatedTenraiResponse<ICollection<InterestStack>>`
+
+**Example:**
+
+```csharp
+var stacks = await tenrai.GetInterestStacksAsync();
+foreach (var stack in stacks.Data)
+    Console.WriteLine($"{stack.Title} ({stack.StackType}, {stack.EntryCount} entries)");
+```
+
+**Model:** [InterestStack](Models.md#intereststack)
+
+### GetInterestStackAsync
+
+Returns a single interest stack including its entries, in the order the author arranged them.
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| id | long | MAL id of the interest stack |
+
+**Returns:** `BaseTenraiResponse<InterestStackDetails>`
+
+**Example:**
+
+```csharp
+var stack = await tenrai.GetInterestStackAsync(89452);
+foreach (var entry in stack.Data.Entries)
+    Console.WriteLine($"{entry.Position}. {entry.Title}");
+```
+
+**Model:** [InterestStackDetails](Models.md#intereststackdetails)
+
+### GetAnimeInterestStacksAsync
+
+Returns a page of public interest stacks containing the given anime.
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| id | long | MAL id of anime |
+| page | int | Page index (optional overload) |
+
+**Returns:** `PaginatedTenraiResponse<ICollection<InterestStack>>`
+
+**Example:**
+
+```csharp
+var stacks = await tenrai.GetAnimeInterestStacksAsync(1);
+Console.WriteLine($"Cowboy Bebop appears in {stacks.Pagination.Items.Total} stacks");
+```
+
+**Model:** [InterestStack](Models.md#intereststack)
+
+### GetMangaInterestStacksAsync
+
+Returns a page of public interest stacks containing the given manga.
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| id | long | MAL id of manga |
+| page | int | Page index (optional overload) |
+
+**Returns:** `PaginatedTenraiResponse<ICollection<InterestStack>>`
+
+**Example:**
+
+```csharp
+var stacks = await tenrai.GetMangaInterestStacksAsync(2);
+```
+
+**Model:** [InterestStack](Models.md#intereststack)
+
+### SearchInterestStacksAsync
+
+Returns public interest stacks matching an `InterestStackSearchConfig`.
+
+| Property | Type | Description |
+|----------|------|-------------|
+| Page | int? | Page index |
+| PageSize | int? | Entries per page (25 max) |
+| Query | string | Search query, matched against title and description |
+| Type | InterestStackType | `Anime`, `Manga`, or `EveryType` (default) |
+| OrderBy | InterestStackSearchOrderBy | `CreatedAt` or `RestackCount`. `NoSorting` (default) leaves the order to the API |
+| SortDirection | SortDirection | `Ascending` or `Descending`. Only applied when `OrderBy` is set |
+| Sfw | bool | Filter out adult entries. Defaults to `true` |
+
+`OrderBy` accepts only `CreatedAt` and `RestackCount` because those are the only two values the API sorts by. Other fields, including `EntryCount`, return 400.
+
+**Returns:** `PaginatedTenraiResponse<ICollection<InterestStack>>`
+
+**Example:**
+
+```csharp
+var config = new InterestStackSearchConfig
+{
+    Query = "witch",
+    Type = InterestStackType.Manga,
+    OrderBy = InterestStackSearchOrderBy.RestackCount,
+    SortDirection = SortDirection.Descending
+};
+var stacks = await tenrai.SearchInterestStacksAsync(config);
+```
+
+**Model:** [InterestStack](Models.md#intereststack)
+
+---
+
+## Status
+
+### GetStatusAsync
+
+Returns the current public status snapshot of the Tenrai services.
+
+This call targets the status host (`https://tenrai.org/status/api/status`) rather than the API host. Two consequences: it ignores a custom `HttpClient` base address, and it is **not** subject to the client's rate limiter, so a status check is not throttled while the API is saturated. Poll no more than once per minute; the server caches the snapshot for 30 seconds. If a Server Key is configured it is sent on this request too, because the `HttpClient` is shared.
+
+Unlike every other endpoint, the response is **not** wrapped in a `Data` property.
+
+**Returns:** `TenraiStatus`
+
+**Example:**
+
+```csharp
+var status = await tenrai.GetStatusAsync();
+foreach (var service in status.Services)
+    Console.WriteLine($"{service.Name}: {service.Status}");
+```
+
+**Model:** [TenraiStatus](Models.md#tenraistatus)
+
+---
+
 ## Bulk IDs
 
 > These endpoints require a Tenrai Server Key (set `TenraiClientConfiguration.ServerKey`); without one the API returns 401.

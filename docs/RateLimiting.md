@@ -13,6 +13,8 @@ The Tenrai API enforces the following quotas:
 
 Tenrai.Net applies client-side rate limiting by default. Configure it via `TenraiClientConfiguration` and `TaskLimiterConfiguration`. Each configuration defines a rule: max number of calls and the timespan in which they can be made. Each `TenraiClient` instance has its own rate limiter, which does not count towards global calls made from your application.
 
+`GetStatusAsync` is the one exception: it targets the status host rather than the API, so it deliberately bypasses the client limiter and does not consume your API budget. It would otherwise be throttled precisely when the API is saturated, which is the opposite of what a status check is for. Poll it no more than once per minute; the server caches the snapshot for 30 seconds.
+
 ## Server Keys
 
 A Server Key ([Patreon supporters](https://www.patreon.com/TenraiAPI)) raises your limits. Set it on the configuration; it is sent as the `X-Server-Key` header, and — unless you have overridden `LimiterConfigurations` — the client automatically switches to the higher Server Key limiter tier.
