@@ -1,3 +1,13 @@
+## 17.08.2026 - Project status
+
+- The Jikan public API will be discontinued on October 1, 2026. This wrapper is entering dormancy; no new features will be added.
+- Announcement Info
+    - Effective immediately (June 14, 2026): No new features will be added; the public API is in maintenance mode only
+    - September 1, 2026: public API will enter brownout mode
+    - October 1, 2026: public API will be fully discontinued
+- The direct successor to Jikan is [Tenrai.net](https://github.com/Kareadita/tenrai.net)
+- Existing releases remain available on NuGet. After shutdown, the default public endpoint will no longer work; consumers can still target a self-hosted Jikan instance via a custom `HttpClient` `BaseAddress`.
+
 ## 25.04.2026 - Version 2.10.4
 
 - Fixes

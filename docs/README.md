@@ -2,6 +2,8 @@
 
 Jikan.net is a .NET wrapper for [Jikan](https://jikan.moe) REST API, fetching data from [MyAnimeList](https://myanimelist.com).
 
+> **Dormancy:** The Jikan public API will be discontinued on October 1, 2026 (brownout from September 1, 2026). This wrapper is in maintenance/dormancy with no new features. The direct successor is [Tenrai.net](https://github.com/Kareadita/tenrai.net). See the [README announcement](../README.md#important-notice-jikan-public-api-shutdown-and-library-dormancy) and [self-hosted setup](GettingStarted.md#using-own-instance-of-jikan-api).
+
 ## Contents
 
 - [Quick Start](README.md#quick-start)

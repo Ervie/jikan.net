@@ -1,5 +1,7 @@
 # Rate Limiting
 
+The Jikan public API will be discontinued on October 1, 2026. The quota rules below apply to the public instance until shutdown. Self-hosted instances may use different limits.
+
 Jikan v4 API supports the following quota rules for the public instance:
 
 - Cached requests do not count towards the limit

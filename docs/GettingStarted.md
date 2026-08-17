@@ -120,6 +120,8 @@ services.AddSingleton<IJikan>(sp =>
 
 ## Using Own Instance of Jikan API
 
+The Jikan public API will be discontinued on October 1, 2026. Pointing this client at a self-hosted instance is the supported way to keep using JikanDotNet after shutdown. For new work, the direct successor is [Tenrai.net](https://github.com/Kareadita/tenrai.net). See the [README announcement](../README.md#important-notice-jikan-public-api-shutdown-and-library-dormancy).
+
 To use a self-hosted instance of the Jikan REST API instead of the public one, set `HttpClient.BaseAddress` when constructing `Jikan`:
 
 ```csharp
