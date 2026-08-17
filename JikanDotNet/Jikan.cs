@@ -6,6 +6,8 @@ using JikanDotNet.Helpers;
 using JikanDotNet.Limiter;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
@@ -77,13 +79,13 @@ namespace JikanDotNet
 				using var response = await _limiter.LimitAsync(() => _httpClient.GetAsync(requestUrl, cancellationToken));
 				if (response.IsSuccessStatusCode)
 				{
-					var json = await response.Content.ReadAsStringAsync();
+					var json = await ReadDecompressedStringAsync(response);
 
 					returnedObject = JsonSerializer.Deserialize<T>(json);
 				}
 				else if (!_jikanConfiguration.SuppressException)
 				{
-					var json = await response.Content.ReadAsStringAsync();
+					var json = await ReadDecompressedStringAsync(response);
 					var errorData = JsonSerializer.Deserialize<JikanApiError>(json);
 					throw new JikanRequestException(string.Format(ErrorMessagesConst.FailedRequest, response.StatusCode, response.Content), errorData);
 				}
@@ -98,14 +100,51 @@ namespace JikanDotNet
 			return returnedObject;
 		}
 
+        /// <summary>
+        /// Decompresses a HttpResponseMessage response with gzip, deflate.
+        /// Also supports br if NET6 or greater is used (so not netstandard2.0).
+        /// </summary>
+        /// <param name="response"></param> response to be decompressed
+        /// <returns></returns>
+        private static async Task<string> ReadDecompressedStringAsync(HttpResponseMessage response)
+        {
+            var stream = await response.Content.ReadAsStreamAsync();
+            var encoding = response.Content.Headers.ContentEncoding;
+
+            if (encoding.Contains("gzip"))
+            {
+                using var gzip = new GZipStream(stream, CompressionMode.Decompress);
+                using var reader = new StreamReader(gzip);
+                return await reader.ReadToEndAsync();
+            }
+            if (encoding.Contains("deflate"))
+            {
+                using var deflate = new DeflateStream(stream, CompressionMode.Decompress);
+                using var reader = new StreamReader(deflate);
+                return await reader.ReadToEndAsync();
+            }
+#if NET6_0_OR_GREATER
+            if (encoding.Contains("br"))
+            {
+                using var brotli = new BrotliStream(stream, CompressionMode.Decompress);
+                using var reader = new StreamReader(brotli);
+                return await reader.ReadToEndAsync();
+            }
+#endif
+
+            // no encoding, or something unsupported (e.g. br/zstd) — read as-is
+            using var plainReader = new StreamReader(stream);
+            return await plainReader.ReadToEndAsync();
+        }
+
         #endregion Private Methods
 
-		#region Public Methods
+        #region Public Methods
 
-		#region Anime methods
+        #region Anime methods
 
-		/// <inheritdoc />
-		public async Task<BaseJikanResponse<Anime>> GetAnimeAsync(long id, CancellationToken cancellationToken = default)
+        /// <inheritdoc />
+        public async Task<BaseJikanResponse<Anime>> GetAnimeAsync(long id, CancellationToken cancellationToken = default)
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
 			var endpointParts = new[] { JikanEndpointConsts.Anime, id.ToString() };
