@@ -47,6 +47,7 @@ Tenrai.Net is based on, and a huge thank you goes to, [@Ervie](https://github.co
 - Magazines
 - Random: Anime, Manga, Character, Person
 - Interest Stacks: Browse, search, full stack with entries in source order, stacks containing a given anime or manga
+- News and Articles: Search with tag, author and date filters, full text (HTML and Markdown) with related entries, tag lists, articles per anime, manga, character or person
 - Bulk MAL IDs: Anime, Manga, Characters, People, Producers *(requires a Server Key)*
 - Service status snapshot
 

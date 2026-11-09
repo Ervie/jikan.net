@@ -116,6 +116,22 @@ namespace Tenrai
 			return returnedObject;
 		}
 
+		private async Task<PaginatedTenraiResponse<ICollection<News>>> GetEntityNewsAsync(string entity, long id, NewsFilterConfig filterConfig, CancellationToken cancellationToken)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			Guard.IsNotNull(filterConfig, nameof(filterConfig));
+			var endpointParts = new[] { entity, id.ToString(), TenraiEndpointConsts.News + filterConfig.ConfigToString() };
+			return await ExecuteGetRequestAsync<PaginatedTenraiResponse<ICollection<News>>>(endpointParts, cancellationToken);
+		}
+
+		private async Task<PaginatedTenraiResponse<ICollection<Article>>> GetEntityArticlesAsync(string entity, long id, ArticleFilterConfig filterConfig, CancellationToken cancellationToken)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			Guard.IsNotNull(filterConfig, nameof(filterConfig));
+			var endpointParts = new[] { entity, id.ToString(), TenraiEndpointConsts.Articles + filterConfig.ConfigToString() };
+			return await ExecuteGetRequestAsync<PaginatedTenraiResponse<ICollection<Article>>>(endpointParts, cancellationToken);
+		}
+
 		private static void GuardFullDataRequest(long id, FullDataConfig config)
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
@@ -203,6 +219,18 @@ namespace Tenrai
 			var endpointParts = new[] { TenraiEndpointConsts.Anime, id.ToString(), TenraiEndpointConsts.News + $"?page={page}" };
 			return await ExecuteGetRequestAsync<PaginatedTenraiResponse<ICollection<News>>>(endpointParts, cancellationToken);
 		}
+
+		/// <inheritdoc />
+		public Task<PaginatedTenraiResponse<ICollection<News>>> GetAnimeNewsAsync(long id, NewsFilterConfig filterConfig, CancellationToken cancellationToken = default)
+			=> GetEntityNewsAsync(TenraiEndpointConsts.Anime, id, filterConfig, cancellationToken);
+
+		/// <inheritdoc />
+		public Task<PaginatedTenraiResponse<ICollection<Article>>> GetAnimeArticlesAsync(long id, CancellationToken cancellationToken = default)
+			=> GetEntityArticlesAsync(TenraiEndpointConsts.Anime, id, new ArticleFilterConfig(), cancellationToken);
+
+		/// <inheritdoc />
+		public Task<PaginatedTenraiResponse<ICollection<Article>>> GetAnimeArticlesAsync(long id, ArticleFilterConfig filterConfig, CancellationToken cancellationToken = default)
+			=> GetEntityArticlesAsync(TenraiEndpointConsts.Anime, id, filterConfig, cancellationToken);
 
 		/// <inheritdoc />
 		public Task<PaginatedTenraiResponse<ICollection<ForumTopic>>> GetAnimeForumTopicsAsync(long id, CancellationToken cancellationToken = default)
@@ -400,6 +428,14 @@ namespace Tenrai
 			var endpointParts = new[] { TenraiEndpointConsts.Characters, id.ToString(), TenraiEndpointConsts.Pictures };
 			return await ExecuteGetRequestAsync<BaseTenraiResponse<ICollection<ImagesSet>>>(endpointParts, cancellationToken);
 		}
+
+		/// <inheritdoc />
+		public Task<PaginatedTenraiResponse<ICollection<Article>>> GetCharacterArticlesAsync(long id, CancellationToken cancellationToken = default)
+			=> GetEntityArticlesAsync(TenraiEndpointConsts.Characters, id, new ArticleFilterConfig(), cancellationToken);
+
+		/// <inheritdoc />
+		public Task<PaginatedTenraiResponse<ICollection<Article>>> GetCharacterArticlesAsync(long id, ArticleFilterConfig filterConfig, CancellationToken cancellationToken = default)
+			=> GetEntityArticlesAsync(TenraiEndpointConsts.Characters, id, filterConfig, cancellationToken);
 		
 		/// <inheritdoc />
 		public async Task<BaseTenraiResponse<CharacterFull>> GetCharacterFullDataAsync(long id, CancellationToken cancellationToken = default)
@@ -454,6 +490,18 @@ namespace Tenrai
 			var endpointParts = new[] { TenraiEndpointConsts.Manga, id.ToString(), TenraiEndpointConsts.News + queryParams };
 			return await ExecuteGetRequestAsync<PaginatedTenraiResponse<ICollection<News>>>(endpointParts, cancellationToken);
 		}
+
+		/// <inheritdoc />
+		public Task<PaginatedTenraiResponse<ICollection<News>>> GetMangaNewsAsync(long id, NewsFilterConfig filterConfig, CancellationToken cancellationToken = default)
+			=> GetEntityNewsAsync(TenraiEndpointConsts.Manga, id, filterConfig, cancellationToken);
+
+		/// <inheritdoc />
+		public Task<PaginatedTenraiResponse<ICollection<Article>>> GetMangaArticlesAsync(long id, CancellationToken cancellationToken = default)
+			=> GetEntityArticlesAsync(TenraiEndpointConsts.Manga, id, new ArticleFilterConfig(), cancellationToken);
+
+		/// <inheritdoc />
+		public Task<PaginatedTenraiResponse<ICollection<Article>>> GetMangaArticlesAsync(long id, ArticleFilterConfig filterConfig, CancellationToken cancellationToken = default)
+			=> GetEntityArticlesAsync(TenraiEndpointConsts.Manga, id, filterConfig, cancellationToken);
 
 		/// <inheritdoc />
 		public Task<PaginatedTenraiResponse<ICollection<ForumTopic>>> GetMangaForumTopicsAsync(long id, CancellationToken cancellationToken = default)
@@ -609,6 +657,14 @@ namespace Tenrai
 			var endpointParts = new[] { TenraiEndpointConsts.People, id.ToString(), TenraiEndpointConsts.Pictures };
 			return await ExecuteGetRequestAsync<BaseTenraiResponse<ICollection<ImagesSet>>>(endpointParts, cancellationToken);
 		}
+
+		/// <inheritdoc />
+		public Task<PaginatedTenraiResponse<ICollection<Article>>> GetPersonArticlesAsync(long id, CancellationToken cancellationToken = default)
+			=> GetEntityArticlesAsync(TenraiEndpointConsts.People, id, new ArticleFilterConfig(), cancellationToken);
+
+		/// <inheritdoc />
+		public Task<PaginatedTenraiResponse<ICollection<Article>>> GetPersonArticlesAsync(long id, ArticleFilterConfig filterConfig, CancellationToken cancellationToken = default)
+			=> GetEntityArticlesAsync(TenraiEndpointConsts.People, id, filterConfig, cancellationToken);
 		
 		/// <inheritdoc />
 		public async Task<BaseTenraiResponse<PersonFull>> GetPersonFullDataAsync(long id, CancellationToken cancellationToken = default)
@@ -1357,6 +1413,64 @@ namespace Tenrai
 		}
 
 		#endregion Status methods
+
+		#region News and article methods
+
+		/// <inheritdoc />
+		public Task<PaginatedTenraiResponse<ICollection<News>>> GetNewsAsync(CancellationToken cancellationToken = default)
+			=> SearchNewsAsync(new NewsSearchConfig(), cancellationToken);
+
+		/// <inheritdoc />
+		public async Task<PaginatedTenraiResponse<ICollection<News>>> SearchNewsAsync(NewsSearchConfig searchConfig, CancellationToken cancellationToken = default)
+		{
+			Guard.IsNotNull(searchConfig, nameof(searchConfig));
+			var endpointParts = new[] { TenraiEndpointConsts.News + searchConfig.ConfigToString() };
+			return await ExecuteGetRequestAsync<PaginatedTenraiResponse<ICollection<News>>>(endpointParts, cancellationToken);
+		}
+
+		/// <inheritdoc />
+		public async Task<BaseTenraiResponse<NewsDetails>> GetNewsItemAsync(long id, CancellationToken cancellationToken = default)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			var endpointParts = new[] { TenraiEndpointConsts.News, id.ToString() };
+			return await ExecuteGetRequestAsync<BaseTenraiResponse<NewsDetails>>(endpointParts, cancellationToken);
+		}
+
+		/// <inheritdoc />
+		public async Task<BaseTenraiResponse<ICollection<ContentTag>>> GetNewsTagsAsync(CancellationToken cancellationToken = default)
+		{
+			var endpointParts = new[] { TenraiEndpointConsts.News, TenraiEndpointConsts.Tags };
+			return await ExecuteGetRequestAsync<BaseTenraiResponse<ICollection<ContentTag>>>(endpointParts, cancellationToken);
+		}
+
+		/// <inheritdoc />
+		public Task<PaginatedTenraiResponse<ICollection<Article>>> GetArticlesAsync(CancellationToken cancellationToken = default)
+			=> SearchArticlesAsync(new ArticleSearchConfig(), cancellationToken);
+
+		/// <inheritdoc />
+		public async Task<PaginatedTenraiResponse<ICollection<Article>>> SearchArticlesAsync(ArticleSearchConfig searchConfig, CancellationToken cancellationToken = default)
+		{
+			Guard.IsNotNull(searchConfig, nameof(searchConfig));
+			var endpointParts = new[] { TenraiEndpointConsts.Articles + searchConfig.ConfigToString() };
+			return await ExecuteGetRequestAsync<PaginatedTenraiResponse<ICollection<Article>>>(endpointParts, cancellationToken);
+		}
+
+		/// <inheritdoc />
+		public async Task<BaseTenraiResponse<ArticleDetails>> GetArticleAsync(long id, CancellationToken cancellationToken = default)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			var endpointParts = new[] { TenraiEndpointConsts.Articles, id.ToString() };
+			return await ExecuteGetRequestAsync<BaseTenraiResponse<ArticleDetails>>(endpointParts, cancellationToken);
+		}
+
+		/// <inheritdoc />
+		public async Task<BaseTenraiResponse<ICollection<ContentTag>>> GetArticleTagsAsync(CancellationToken cancellationToken = default)
+		{
+			var endpointParts = new[] { TenraiEndpointConsts.Articles, TenraiEndpointConsts.Tags };
+			return await ExecuteGetRequestAsync<BaseTenraiResponse<ICollection<ContentTag>>>(endpointParts, cancellationToken);
+		}
+
+		#endregion News and article methods
 
 		#endregion Public Methods
 	}

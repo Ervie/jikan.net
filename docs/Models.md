@@ -207,6 +207,56 @@ Extends `BaseTenraiResponse<ICollection<long>>` with `Total` (int), the number o
 
 ---
 
+## News and Articles
+
+### News
+
+| Property | Type | Description |
+|----------|------|-------------|
+| MalId | long | News MAL id |
+| Url | string | News URL |
+| Title | string | Title |
+| Date | DateTime? | Publish date |
+| Author | string | Author username |
+| AuthorUrl | string | Author profile URL |
+| ForumUrl | string | Discussion URL |
+| Images | ImagesSet | Header image |
+| Comments | int? | Comment count |
+| Excerpt | string | Opening text |
+
+### NewsDetails
+
+A `News` plus `Content` (ContentBody: `Html`, `Markdown`) and `Relations` (NewsRelations: `Anime`, `Manga`, each `ICollection<MalUrl>`).
+
+### Article
+
+| Property | Type | Description |
+|----------|------|-------------|
+| MalId | long | Article MAL id |
+| Url | string | Article URL |
+| Title | string | Title |
+| Summary | string | Author's summary |
+| PublishedAt | DateTimeOffset? | Publish time |
+| Author | string | Author username |
+| AuthorUrl | string | Author profile URL |
+| Views | int | View count |
+| Tags | ICollection&lt;string&gt; | Tags, e.g. "Spoiler" |
+| Images | ImagesSet | Header image |
+| Excerpt | string | Opening text |
+
+### ArticleDetails
+
+An `Article` plus `Content` (ContentBody) and `Relations` (ArticleRelations: `Anime`, `Manga`, `People`, `Characters`).
+
+### ContentTag
+
+| Property | Type | Description |
+|----------|------|-------------|
+| Name | string | Tag name, as passed to `Tag` on a search config |
+| Count | int | Items with this tag |
+
+---
+
 ## Forum
 
 ### ForumTopic

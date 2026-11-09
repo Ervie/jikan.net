@@ -111,12 +111,13 @@ Console.WriteLine(episode.Data.Synopsis);
 
 ### GetAnimeNewsAsync
 
-Returns news related to anime. Overload: `(long id, int page)`.
+Returns news related to anime. Overloads: `(long id, int page)`, `(long id, NewsFilterConfig filterConfig)`. `GetAnimeArticlesAsync` has the same shape with an [`ArticleFilterConfig`](#articlefilterconfig) and returns articles.
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | id | long | MAL id of anime |
 | page | int | (optional) Page index |
+| filterConfig | [NewsFilterConfig](#newsfilterconfig) | (optional) Author, publish dates, sort, paging, sfw |
 
 **Returns:** `PaginatedTenraiResponse<ICollection<News>>`
 
@@ -1480,6 +1481,61 @@ var stacks = await tenrai.SearchInterestStacksAsync(config);
 ```
 
 **Model:** [InterestStack](Models.md#intereststack)
+
+---
+
+## News and Articles
+
+MyAnimeList news and editorial articles. Per-entity lists: `GetAnimeNewsAsync`, `GetMangaNewsAsync` (news), and `GetAnimeArticlesAsync`, `GetMangaArticlesAsync`, `GetCharacterArticlesAsync`, `GetPersonArticlesAsync` (articles), each with an optional filter config.
+
+| Method | Returns |
+|--------|---------|
+| `GetNewsAsync()` | First page of all news, newest first: `PaginatedTenraiResponse<ICollection<News>>` |
+| `SearchNewsAsync(NewsSearchConfig)` | Matching news |
+| `GetNewsItemAsync(long id)` | `BaseTenraiResponse<NewsDetails>`: the item plus `Content` (HTML and Markdown) and `Relations` (anime, manga) |
+| `GetNewsTagsAsync()` | `BaseTenraiResponse<ICollection<ContentTag>>`: every tag with its count |
+| `GetArticlesAsync()` | First page of all articles: `PaginatedTenraiResponse<ICollection<Article>>` |
+| `SearchArticlesAsync(ArticleSearchConfig)` | Matching articles |
+| `GetArticleAsync(long id)` | `BaseTenraiResponse<ArticleDetails>`: adds `Content` and `Relations` (anime, manga, people, characters) |
+| `GetArticleTagsAsync()` | Every article tag with its count |
+
+The single-item methods send no sfw flag: with one, the API answers 404 for an item that mentions adult entries.
+
+**Example:**
+
+```csharp
+var previews = await tenrai.SearchNewsAsync(new NewsSearchConfig
+{
+    Tag = "Preview",
+    PublishedAfter = new DateTime(2026, 1, 1),
+    OrderBy = NewsOrderBy.Comments,
+    SortDirection = SortDirection.Descending
+});
+
+var item = await tenrai.GetNewsItemAsync(56264086);
+Console.WriteLine(item.Data.Content.Markdown);
+```
+
+### NewsFilterConfig
+
+Used by `GetAnimeNewsAsync`/`GetMangaNewsAsync`. `NewsSearchConfig` extends it with `Query` and `Tag` for `SearchNewsAsync`.
+
+| Property | Type | Description |
+|----------|------|-------------|
+| Page | int? | Page index |
+| Limit | int? | Entries per page, 100 max |
+| AuthorUsername | string | Only items by this MyAnimeList user |
+| PublishedAfter, PublishedBefore | DateTime? | Publish date range, sent as `yyyy-MM-dd` |
+| OrderBy | NewsOrderBy | `PublishedAt` or `Comments`. `NoSorting` (default) leaves newest first |
+| SortDirection | SortDirection | Applied when `OrderBy` is set |
+| Sfw | bool | Filter out items about adult entries. Defaults to `true` |
+| SfwStrict | bool | Also filter out items about ecchi entries |
+
+### ArticleFilterConfig
+
+Same properties as `NewsFilterConfig`, with `OrderBy` of type `ArticleOrderBy` (`PublishedAt` or `Views`). `ArticleSearchConfig` extends it with `Query` and `Tag`.
+
+**Models:** [News](Models.md#news), [NewsDetails](Models.md#newsdetails), [Article](Models.md#article), [ArticleDetails](Models.md#articledetails), [ContentTag](Models.md#contenttag)
 
 ---
 

@@ -81,6 +81,32 @@ namespace Tenrai
         Task<PaginatedTenraiResponse<ICollection<News>>> GetAnimeNewsAsync(long id, int page, CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Returns news related to anime with given MAL id, filtered and sorted.
+        /// </summary>
+        /// <param name="id">MAL id of anime.</param>
+        /// <param name="filterConfig">Author, publish dates, sort order, paging and sfw filtering.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Page of news related to the anime.</returns>
+        Task<PaginatedTenraiResponse<ICollection<News>>> GetAnimeNewsAsync(long id, NewsFilterConfig filterConfig, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns the first page of articles about anime with given MAL id.
+        /// </summary>
+        /// <param name="id">MAL id of anime.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Page of articles about the anime.</returns>
+        Task<PaginatedTenraiResponse<ICollection<Article>>> GetAnimeArticlesAsync(long id, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns articles about anime with given MAL id, filtered and sorted.
+        /// </summary>
+        /// <param name="id">MAL id of anime.</param>
+        /// <param name="filterConfig">Author, publish dates, sort order, paging and sfw filtering.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Page of articles about the anime.</returns>
+        Task<PaginatedTenraiResponse<ICollection<Article>>> GetAnimeArticlesAsync(long id, ArticleFilterConfig filterConfig, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Returns the first page of episode discussion threads for anime with given MAL id. Other forum topics are not available.
         /// </summary>
         /// <param name="id">MAL id of anime.</param>
@@ -285,6 +311,32 @@ namespace Tenrai
         Task<PaginatedTenraiResponse<ICollection<News>>> GetMangaNewsAsync(long id, int page, CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Returns news related to manga with given MAL id, filtered and sorted.
+        /// </summary>
+        /// <param name="id">MAL id of manga.</param>
+        /// <param name="filterConfig">Author, publish dates, sort order, paging and sfw filtering.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Page of news related to the manga.</returns>
+        Task<PaginatedTenraiResponse<ICollection<News>>> GetMangaNewsAsync(long id, NewsFilterConfig filterConfig, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns the first page of articles about manga with given MAL id.
+        /// </summary>
+        /// <param name="id">MAL id of manga.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Page of articles about the manga.</returns>
+        Task<PaginatedTenraiResponse<ICollection<Article>>> GetMangaArticlesAsync(long id, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns articles about manga with given MAL id, filtered and sorted.
+        /// </summary>
+        /// <param name="id">MAL id of manga.</param>
+        /// <param name="filterConfig">Author, publish dates, sort order, paging and sfw filtering.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Page of articles about the manga.</returns>
+        Task<PaginatedTenraiResponse<ICollection<Article>>> GetMangaArticlesAsync(long id, ArticleFilterConfig filterConfig, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Returns the first page of chapter discussion threads for manga with given MAL id. Other forum topics are not available.
         /// </summary>
         /// <param name="id">MAL id of manga.</param>
@@ -455,6 +507,23 @@ namespace Tenrai
         Task<BaseTenraiResponse<ICollection<ImagesSet>>> GetCharacterPicturesAsync(long id, CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Returns the first page of articles about character with given MAL id.
+        /// </summary>
+        /// <param name="id">MAL id of character.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Page of articles about the character.</returns>
+        Task<PaginatedTenraiResponse<ICollection<Article>>> GetCharacterArticlesAsync(long id, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns articles about character with given MAL id, filtered and sorted.
+        /// </summary>
+        /// <param name="id">MAL id of character.</param>
+        /// <param name="filterConfig">Author, publish dates, sort order, paging and sfw filtering.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Page of articles about the character.</returns>
+        Task<PaginatedTenraiResponse<ICollection<Article>>> GetCharacterArticlesAsync(long id, ArticleFilterConfig filterConfig, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Returns character with additional data.
         /// </summary>
         /// <param name="id">MAL id of character.</param>
@@ -513,6 +582,23 @@ namespace Tenrai
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Collections of links to pictures related to person with given MAL id.</returns>
         Task<BaseTenraiResponse<ICollection<ImagesSet>>> GetPersonPicturesAsync(long id, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns the first page of articles about person with given MAL id.
+        /// </summary>
+        /// <param name="id">MAL id of person.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Page of articles about the person.</returns>
+        Task<PaginatedTenraiResponse<ICollection<Article>>> GetPersonArticlesAsync(long id, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns articles about person with given MAL id, filtered and sorted.
+        /// </summary>
+        /// <param name="id">MAL id of person.</param>
+        /// <param name="filterConfig">Author, publish dates, sort order, paging and sfw filtering.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Page of articles about the person.</returns>
+        Task<PaginatedTenraiResponse<ICollection<Article>>> GetPersonArticlesAsync(long id, ArticleFilterConfig filterConfig, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns person with additional data.
@@ -1379,6 +1465,70 @@ namespace Tenrai
 		Task<PaginatedTenraiResponse<ICollection<InterestStack>>> GetMangaInterestStacksAsync(long id, int page, CancellationToken cancellationToken = default);
 
 		#endregion Interest stack requests
+
+		#region News and article requests
+
+		/// <summary>
+		/// Returns the first page of the full news catalogue, newest first.
+		/// </summary>
+		/// <param name="cancellationToken">Cancellation token.</param>
+		/// <returns>Page of news.</returns>
+		Task<PaginatedTenraiResponse<ICollection<News>>> GetNewsAsync(CancellationToken cancellationToken = default);
+
+		/// <summary>
+		/// Searches the full news catalogue.
+		/// </summary>
+		/// <param name="searchConfig">Search text, tag, author, publish dates, sort order, paging and sfw filtering.</param>
+		/// <param name="cancellationToken">Cancellation token.</param>
+		/// <returns>Page of matching news.</returns>
+		Task<PaginatedTenraiResponse<ICollection<News>>> SearchNewsAsync(NewsSearchConfig searchConfig, CancellationToken cancellationToken = default);
+
+		/// <summary>
+		/// Returns a news item with its full text and related anime and manga.
+		/// </summary>
+		/// <param name="id">MAL id of the news item.</param>
+		/// <param name="cancellationToken">Cancellation token.</param>
+		/// <returns>News item with content and relations.</returns>
+		Task<BaseTenraiResponse<NewsDetails>> GetNewsItemAsync(long id, CancellationToken cancellationToken = default);
+
+		/// <summary>
+		/// Returns every news tag with how many news items carry it.
+		/// </summary>
+		/// <param name="cancellationToken">Cancellation token.</param>
+		/// <returns>News tags.</returns>
+		Task<BaseTenraiResponse<ICollection<ContentTag>>> GetNewsTagsAsync(CancellationToken cancellationToken = default);
+
+		/// <summary>
+		/// Returns the first page of the full article catalogue, newest first.
+		/// </summary>
+		/// <param name="cancellationToken">Cancellation token.</param>
+		/// <returns>Page of articles.</returns>
+		Task<PaginatedTenraiResponse<ICollection<Article>>> GetArticlesAsync(CancellationToken cancellationToken = default);
+
+		/// <summary>
+		/// Searches the full article catalogue.
+		/// </summary>
+		/// <param name="searchConfig">Search text, tag, author, publish dates, sort order, paging and sfw filtering.</param>
+		/// <param name="cancellationToken">Cancellation token.</param>
+		/// <returns>Page of matching articles.</returns>
+		Task<PaginatedTenraiResponse<ICollection<Article>>> SearchArticlesAsync(ArticleSearchConfig searchConfig, CancellationToken cancellationToken = default);
+
+		/// <summary>
+		/// Returns an article with its full text and related anime, manga, people and characters.
+		/// </summary>
+		/// <param name="id">MAL id of the article.</param>
+		/// <param name="cancellationToken">Cancellation token.</param>
+		/// <returns>Article with content and relations.</returns>
+		Task<BaseTenraiResponse<ArticleDetails>> GetArticleAsync(long id, CancellationToken cancellationToken = default);
+
+		/// <summary>
+		/// Returns every article tag with how many articles carry it.
+		/// </summary>
+		/// <param name="cancellationToken">Cancellation token.</param>
+		/// <returns>Article tags.</returns>
+		Task<BaseTenraiResponse<ICollection<ContentTag>>> GetArticleTagsAsync(CancellationToken cancellationToken = default);
+
+		#endregion News and article requests
 
 		#region Status requests
 
