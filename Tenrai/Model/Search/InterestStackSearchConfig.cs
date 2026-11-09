@@ -1,6 +1,3 @@
-using System.Text;
-using Tenrai.Consts;
-using Tenrai.Extensions;
 using Tenrai.Helpers;
 using Tenrai.Interfaces;
 
@@ -17,9 +14,9 @@ namespace Tenrai
 		public int? Page { get; set; }
 
 		/// <summary>
-		/// Size of the page (25 is the max).
+		/// Size of the page (100 is the max).
 		/// </summary>
-		public int? PageSize { get; set; }
+		public int? Limit { get; set; }
 
 		/// <summary>
 		/// Search query.
@@ -47,51 +44,28 @@ namespace Tenrai
 		public bool Sfw { get; set; } = true;
 
 		/// <summary>
+		/// Also filter out ecchi entries, on top of <see cref="Sfw"/>.
+		/// </summary>
+		public bool SfwStrict { get; set; }
+
+		/// <summary>
 		/// Create query from current parameters for search request.
 		/// </summary>
 		/// <returns>Query from current parameters for search request</returns>
 		public string ConfigToString()
 		{
-			var builder = new StringBuilder().Append('?');
-
-			if (Page.HasValue)
-			{
-				Guard.IsGreaterThanZero(Page.Value, nameof(Page.Value));
-				builder.Append($"page={Page.Value}&");
-			}
-
-			if (PageSize.HasValue)
-			{
-				Guard.IsGreaterThanZero(PageSize.Value, nameof(PageSize.Value));
-				Guard.IsLesserOrEqualThan(PageSize.Value, ParameterConsts.MaximumPageSize, nameof(PageSize.Value));
-				builder.Append($"limit={PageSize.Value}&");
-			}
-
-			if (!string.IsNullOrWhiteSpace(Query))
-			{
-				builder.Append($"q={Query}&");
-			}
-
-			if (Type != InterestStackType.EveryType)
-			{
-				Guard.IsValidEnum(Type, nameof(Type));
-				builder.Append($"stack_type={Type.GetDescription()}&");
-			}
+			var query = new QueryBuilder()
+				.Page(Page)
+				.Limit(Limit)
+				.Add("q", Query)
+				.Add("stack_type", Type);
 
 			if (OrderBy != InterestStackSearchOrderBy.NoSorting)
 			{
-				Guard.IsValidEnum(OrderBy, nameof(OrderBy));
-				Guard.IsValidEnum(SortDirection, nameof(SortDirection));
-				builder.Append($"order_by={OrderBy.GetDescription()}&");
-				builder.Append($"sort={SortDirection.GetDescription()}&");
+				query.Add("order_by", OrderBy).Add("sort", SortDirection);
 			}
 
-			if (Sfw)
-			{
-				builder.Append("sfw");
-			}
-
-			return builder.ToString().Trim('&');
+			return query.Sfw(Sfw, SfwStrict).ToString();
 		}
 	}
 }

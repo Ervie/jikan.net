@@ -131,5 +131,15 @@ namespace Tenrai.Tests.MangaTests
 				onePieceManga.Data.Themes.Should().BeEmpty();
 			}
 		}
+
+		[Fact]
+		public async Task GetMangaAsync_Berserk_AuthorsHaveRoles()
+		{
+			// When
+			var berserk = await _tenrai.GetMangaAsync(2);
+
+			// Then
+			berserk.Data.Authors.Should().Contain(a => a.Name == "Miura, Kentarou" && a.Role == "Story & Art");
+		}
 	}
 }

@@ -91,6 +91,8 @@ Extends `BaseTenraiResponse<T>` with pagination metadata.
 | Synopsis | string | Synopsis |
 | ForumUrl | string | Forum discussion URL |
 | Score | double? | Average score |
+| Replies | int? | Replies in the forum discussion |
+| Images | ImagesSet | Episode thumbnail |
 
 ---
 
@@ -120,7 +122,7 @@ Extends `BaseTenraiResponse<T>` with pagination metadata.
 | Synopsis | string | Synopsis |
 | Background | string | Background info |
 | Genres | ICollection&lt;MalUrl&gt; | Genres |
-| Authors | ICollection&lt;MalUrl&gt; | Authors |
+| Authors | ICollection&lt;AuthorEntry&gt; | Authors, with their role |
 | Serializations | ICollection&lt;MalUrl&gt; | Serializations |
 | Themes | ICollection&lt;MalUrl&gt; | Themes |
 | Demographics | ICollection&lt;MalUrl&gt; | Demographics |
@@ -132,7 +134,7 @@ Extends `BaseTenraiResponse<T>` with pagination metadata.
 |----------|------|-------------|
 | Character | CharacterEntry | Character details |
 | Role | string | Role in manga |
-| Favorites | int? | Favorites count |
+| Favorites | int | Favorites count |
 
 ---
 
@@ -227,6 +229,7 @@ Extends `BaseTenraiResponse<T>` with pagination metadata.
 | IsSpoiler | bool | Contains spoilers |
 | IsPreliminary | bool | Written before the entry finished airing/publishing |
 | Tags | ICollection&lt;string&gt; | Sentiment tags (e.g. "Recommended", "Mixed Feelings", "Not Recommended") |
+| Entry | MalImageSubItem | Anime or manga reviewed. Set on recent and top reviews, null on an entry's own reviews |
 
 ---
 
@@ -360,8 +363,40 @@ Contains image URLs in various formats (e.g. Jpg, Webp) and sizes (e.g. ImageUrl
 
 | Property | Type | Description |
 |----------|------|-------------|
-| From | DateTimeOffset? | Start (preserves UTC offset returned by API) |
-| To | DateTimeOffset? | End (preserves UTC offset returned by API) |
+| From | DateTimeOffset? | Start (preserves UTC offset returned by API). A partial date such as `"2027-10"` becomes 2027-10-01 |
+| To | DateTimeOffset? | End, same rules as `From` |
+| Parts | TimePeriodParts | `From` and `To` as `DateParts` (`Day`, `Month`, `Year`, each `int?`). A null `Day` means `From`'s day was padded |
+| Text | string | Display text, e.g. "Sep 29, 2023 to Mar 22, 2024" or "Oct 2027 to ?" |
+
+### AnimeTrailer
+
+| Property | Type | Description |
+|----------|------|-------------|
+| YoutubeId | string | YouTube video id |
+| Url | string | Video URL |
+| EmbedUrl | string | Embed URL |
+| Image | Image | Thumbnail in several sizes |
+| Title | string | Video title |
+| Views, Likes, Dislikes, CommentCount | long? | YouTube counts |
+| PublishedAt | DateTimeOffset? | Publish time on YouTube |
+| Duration | TimeSpan? | Video length |
+| PrivacyStatus | string | e.g. "public" |
+| RegionRestriction | RegionRestriction | `Allowed` and `Blocked` country codes. Null when unrestricted |
+| Embeddable | bool? | Can be embedded |
+
+Also used for music videos (`MusicVideo.Video`).
+
+### AuthorEntry
+
+A `MalUrl` plus `Role` (string), e.g. "Story & Art". Used by `Manga.Authors`.
+
+### RelationEntry
+
+A `MalUrl` plus `MediaType` (string, e.g. "Movie") and `Images` (ImagesSet). Used by `RelatedEntry.Entry`.
+
+### PersonEntry
+
+A `MalImageSubItem` plus `Favorites` (int?). Used by `VoiceActorEntry.Person`; `Favorites` is set on anime character lists and null on character voice lists.
 
 ### ExternalLink
 
@@ -383,4 +418,4 @@ Contains image URLs in various formats (e.g. Jpg, Webp) and sizes (e.g. ImageUrl
 | Property | Type | Description |
 |----------|------|-------------|
 | Relation | string | Relation type |
-| Entry | ICollection&lt;MalUrl&gt; | Related entries |
+| Entry | ICollection&lt;RelationEntry&gt; | Related entries |

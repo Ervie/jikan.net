@@ -86,5 +86,11 @@ namespace Tenrai
 		/// </summary>
 		[JsonPropertyName("tags")]
 		public ICollection<string> Tags { get; set; }
+
+		/// <summary>
+		/// Anime or manga the review is about. Set on recent and top reviews, null on an entry's own reviews.
+		/// </summary>
+		[JsonPropertyName("entry")]
+		public MalImageSubItem Entry { get; set; }
 	}
 }

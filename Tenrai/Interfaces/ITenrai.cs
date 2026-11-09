@@ -238,7 +238,7 @@ namespace Tenrai
         /// <remarks>Requires a Tenrai Server Key (set <see cref="Config.TenraiClientConfiguration.ServerKey"/>); otherwise the API responds with 401.</remarks>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Collection of anime MAL IDs.</returns>
-        Task<BaseTenraiResponse<ICollection<long>>> GetAnimeIdsAsync(CancellationToken cancellationToken = default);
+        Task<IdsTenraiResponse> GetAnimeIdsAsync(CancellationToken cancellationToken = default);
 
         #endregion Anime requests
 
@@ -394,7 +394,7 @@ namespace Tenrai
         /// <remarks>Requires a Tenrai Server Key (set <see cref="Config.TenraiClientConfiguration.ServerKey"/>); otherwise the API responds with 401.</remarks>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Collection of manga MAL IDs.</returns>
-        Task<BaseTenraiResponse<ICollection<long>>> GetMangaIdsAsync(CancellationToken cancellationToken = default);
+        Task<IdsTenraiResponse> GetMangaIdsAsync(CancellationToken cancellationToken = default);
 
         #endregion Manga requests
 
@@ -454,7 +454,7 @@ namespace Tenrai
         /// <remarks>Requires a Tenrai Server Key (set <see cref="Config.TenraiClientConfiguration.ServerKey"/>); otherwise the API responds with 401.</remarks>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Collection of character MAL IDs.</returns>
-        Task<BaseTenraiResponse<ICollection<long>>> GetCharacterIdsAsync(CancellationToken cancellationToken = default);
+        Task<IdsTenraiResponse> GetCharacterIdsAsync(CancellationToken cancellationToken = default);
 
         #endregion Character requests
 
@@ -514,7 +514,7 @@ namespace Tenrai
         /// <remarks>Requires a Tenrai Server Key (set <see cref="Config.TenraiClientConfiguration.ServerKey"/>); otherwise the API responds with 401.</remarks>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Collection of person MAL IDs.</returns>
-        Task<BaseTenraiResponse<ICollection<long>>> GetPersonIdsAsync(CancellationToken cancellationToken = default);
+        Task<IdsTenraiResponse> GetPersonIdsAsync(CancellationToken cancellationToken = default);
 
         #endregion Person requests
 
@@ -796,7 +796,7 @@ namespace Tenrai
         /// <remarks>Requires a Tenrai Server Key (set <see cref="Config.TenraiClientConfiguration.ServerKey"/>); otherwise the API responds with 401.</remarks>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Collection of producer MAL IDs.</returns>
-        Task<BaseTenraiResponse<ICollection<long>>> GetProducerIdsAsync(CancellationToken cancellationToken = default);
+        Task<IdsTenraiResponse> GetProducerIdsAsync(CancellationToken cancellationToken = default);
 
         #endregion Producer requests
 

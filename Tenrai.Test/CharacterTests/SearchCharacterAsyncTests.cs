@@ -30,7 +30,7 @@ namespace Tenrai.Tests.CharacterTests
 
             // Then
             using var _ = new AssertionScope();
-            characters.Data.Should().HaveCount(ParameterConsts.MaximumPageSize);
+            characters.Data.Should().HaveCount(ParameterConsts.DefaultPageSize);
             characters.Data.First().Name.Should().Be("Spike Spiegel");
             characters.Data.First().NameKanji.Should().Be("スパイク・スピーゲル");
             characters.Pagination.LastVisiblePage.Should().BeGreaterThan(2350);
@@ -56,12 +56,12 @@ namespace Tenrai.Tests.CharacterTests
         [InlineData(int.MinValue)]
         [InlineData(-1)]
         [InlineData(0)]
-        [InlineData(26)]
+        [InlineData(101)]
         [InlineData(int.MaxValue)]
         public async Task SearchCharacterAsync_InvalidPageSize_ShouldThrowValidationException(int pageSize)
         {
             // Given
-            var config = new CharacterSearchConfig{PageSize = pageSize};
+            var config = new CharacterSearchConfig{Limit = pageSize};
             
             // When
             var func = _tenrai.Awaiting(x => x.SearchCharacterAsync(config));
@@ -81,7 +81,7 @@ namespace Tenrai.Tests.CharacterTests
 
             // Then
             using var _ = new AssertionScope();
-            characters.Data.Should().HaveCount(ParameterConsts.MaximumPageSize);
+            characters.Data.Should().HaveCount(ParameterConsts.DefaultPageSize);
             characters.Data.First().Name.Should().Be("Leorio Paladiknight");
             characters.Data.First().NameKanji.Should().StartWith("レオリオ=パラディナｲﾄ");
             characters.Pagination.LastVisiblePage.Should().BeGreaterThan(2350);
@@ -95,7 +95,7 @@ namespace Tenrai.Tests.CharacterTests
         {
             // Given
             const int pageSize = 5;
-            var config = new CharacterSearchConfig{PageSize = pageSize};
+            var config = new CharacterSearchConfig{Limit = pageSize};
             
             // When
             var characters = await _tenrai.SearchCharacterAsync(config);
@@ -115,7 +115,7 @@ namespace Tenrai.Tests.CharacterTests
         {
             // Given
             const int pageSize = 5;
-            var config = new CharacterSearchConfig{PageSize = pageSize, Page = 2};
+            var config = new CharacterSearchConfig{Limit = pageSize, Page = 2};
             
             // When
             var characters = await _tenrai.SearchCharacterAsync(config);
@@ -161,7 +161,7 @@ namespace Tenrai.Tests.CharacterTests
 
             // Then
             using var _ = new AssertionScope();
-            people.Data.Should().HaveCount(ParameterConsts.MaximumPageSize);
+            people.Data.Should().HaveCount(ParameterConsts.DefaultPageSize);
             people.Data.Should().OnlyContain(x => x.Name.StartsWith(letter));
         }
         
@@ -221,14 +221,14 @@ namespace Tenrai.Tests.CharacterTests
         public async Task SearchCharacterAsync_LupinQueryByMalIdWithLimit2_ShouldReturnThirdAndKaitoKuroba()
         {
             // Given
-            var config = new CharacterSearchConfig{Query = "Lupin", OrderBy = CharacterSearchOrderBy.MalId, PageSize = 2};
+            var config = new CharacterSearchConfig{Query = "Lupin", OrderBy = CharacterSearchOrderBy.MalId, Limit = 2};
             
             // When
             var people = await _tenrai.SearchCharacterAsync(config);
 
             // Then
             using var _ = new AssertionScope();
-            people.Data.Should().HaveCount(config.PageSize.Value);
+            people.Data.Should().HaveCount(config.Limit.Value);
             people.Data.Should().Contain(x => x.Name.Equals("Lupin"));
         }
         

@@ -1,3 +1,24 @@
+## Unreleased - Version 4.0.0
+
+Brings the client up to the Tenrai OpenAPI spec 1.0.30. Major, breaking release.
+
+- Breaking changes
+    - Search configs: `PageSize` is renamed `Limit` (the API's name, already used by `ReviewsSearchConfig`) and its maximum is now 100. `new AnimeSearchConfig { PageSize = 10 }` becomes `new AnimeSearchConfig { Limit = 10 }`.
+    - `AnimeSearchConfig` and `MangaSearchConfig`: `MinimumScore`/`MaximumScore` are `double?` so a score like `7.5` can be sent.
+    - `Manga.Authors` is `ICollection<AuthorEntry>`, `RelatedEntry.Entry` is `ICollection<RelationEntry>`, and `VoiceActorEntry.Person` is `PersonEntry`. Each subtype extends the old type, so code that reads `Name`/`MalId`/`Url` keeps working.
+    - `GetAnimeIdsAsync`, `GetMangaIdsAsync`, `GetCharacterIdsAsync`, `GetPersonIdsAsync`, `GetProducerIdsAsync` return `IdsTenraiResponse` (adds `Total`).
+    - `UserRecommendation.Date` is `DateTime?`; the API marks it nullable.
+- Features
+    - `SfwStrict` on `AnimeSearchConfig`, `MangaSearchConfig`, `AnimeTopSearchConfig` and `InterestStackSearchConfig` also filters out ecchi entries.
+    - Trailers and music videos: `Title`, `Views`, `Likes`, `Dislikes`, `CommentCount`, `PublishedAt`, `Duration`, `PrivacyStatus`, `RegionRestriction`, `Embeddable`.
+    - `TimePeriod` (`Anime.Aired`, `Manga.Published`): `Text` (e.g. "Oct 2027 to ?") and `Parts` (day, month, year, each null when unknown).
+    - `AuthorEntry.Role` (e.g. "Story & Art"), `RelationEntry.MediaType` and `Images`, `Favorites` on `Producer`, `MangaCharacter` and `PersonEntry`, `Replies` and `Images` on `AnimeEpisode`, `Entry` on recent and top `Review`s, `MoreInfo` on `AnimeFull` and `MangaFull`.
+- Fixes
+    - Search values are URL-encoded. A query such as `"C#"` cut off the rest of the query string (including `sfw`), and `"Tom & Jerry"` split into two parameters.
+    - Partial dates on unaired titles (`"2027"`, `"2027-10"`) failed the whole response, which broke `GetUpcomingSeasonAsync` on every call and any search that included an unaired title. They now pad to the first day; `TimePeriod.Parts` says which pieces are known.
+    - `EpisodeVideo.Images` was always null (mapped to `"Images"` instead of `"images"`).
+    - Score filters are sent in invariant culture, so a comma-decimal locale no longer sends `7,5`.
+
 ## 15.08.2026 - Version 3.1.0
 
 Additive release. No breaking changes.

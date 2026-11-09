@@ -44,12 +44,12 @@ namespace Tenrai.Tests.InterestStackTests
 		}
 
 		[Theory]
-		[InlineData(26)]
+		[InlineData(101)]
 		[InlineData(int.MaxValue)]
 		public async Task SearchInterestStacksAsync_PageSizeOverCap_ShouldThrowValidationException(int pageSize)
 		{
 			// Given
-			var searchConfig = new InterestStackSearchConfig { PageSize = pageSize };
+			var searchConfig = new InterestStackSearchConfig { Limit = pageSize };
 
 			// When
 			var func = _tenrai.Awaiting(x => x.SearchInterestStacksAsync(searchConfig));
@@ -81,7 +81,7 @@ namespace Tenrai.Tests.InterestStackTests
 		public async Task SearchInterestStacksAsync_PageSize_ShouldReturnRequestedNumberOfStacks()
 		{
 			// Given
-			var searchConfig = new InterestStackSearchConfig { PageSize = 5 };
+			var searchConfig = new InterestStackSearchConfig { Limit = 5 };
 
 			// When
 			var stacks = await _tenrai.SearchInterestStacksAsync(searchConfig);

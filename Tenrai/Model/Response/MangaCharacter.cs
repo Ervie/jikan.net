@@ -18,5 +18,11 @@ namespace Tenrai
 		/// </summary>
 		[JsonPropertyName("role")]
 		public string Role { get; set; }
+
+		/// <summary>
+		/// Number of users who favorited the character.
+		/// </summary>
+		[JsonPropertyName("favorites")]
+		public int Favorites { get; set; }
 	}
 }

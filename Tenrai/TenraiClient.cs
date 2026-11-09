@@ -325,10 +325,10 @@ namespace Tenrai
 		}
 
 		/// <inheritdoc />
-		public async Task<BaseTenraiResponse<ICollection<long>>> GetAnimeIdsAsync(CancellationToken cancellationToken = default)
+		public async Task<IdsTenraiResponse> GetAnimeIdsAsync(CancellationToken cancellationToken = default)
 		{
 			var endpointParts = new[] { TenraiEndpointConsts.Anime, TenraiEndpointConsts.Ids };
-			return await ExecuteGetRequestAsync<BaseTenraiResponse<ICollection<long>>>(endpointParts, cancellationToken);
+			return await ExecuteGetRequestAsync<IdsTenraiResponse>(endpointParts, cancellationToken);
 		}
 
 		#endregion Anime methods
@@ -384,10 +384,10 @@ namespace Tenrai
 		}
 
 		/// <inheritdoc />
-		public async Task<BaseTenraiResponse<ICollection<long>>> GetCharacterIdsAsync(CancellationToken cancellationToken = default)
+		public async Task<IdsTenraiResponse> GetCharacterIdsAsync(CancellationToken cancellationToken = default)
 		{
 			var endpointParts = new[] { TenraiEndpointConsts.Characters, TenraiEndpointConsts.Ids };
-			return await ExecuteGetRequestAsync<BaseTenraiResponse<ICollection<long>>>(endpointParts, cancellationToken);
+			return await ExecuteGetRequestAsync<IdsTenraiResponse>(endpointParts, cancellationToken);
 		}
 
 		#endregion Character methods
@@ -523,10 +523,10 @@ namespace Tenrai
 		}
 
 		/// <inheritdoc />
-		public async Task<BaseTenraiResponse<ICollection<long>>> GetMangaIdsAsync(CancellationToken cancellationToken = default)
+		public async Task<IdsTenraiResponse> GetMangaIdsAsync(CancellationToken cancellationToken = default)
 		{
 			var endpointParts = new[] { TenraiEndpointConsts.Manga, TenraiEndpointConsts.Ids };
-			return await ExecuteGetRequestAsync<BaseTenraiResponse<ICollection<long>>>(endpointParts, cancellationToken);
+			return await ExecuteGetRequestAsync<IdsTenraiResponse>(endpointParts, cancellationToken);
 		}
 
 		#endregion Manga methods
@@ -582,10 +582,10 @@ namespace Tenrai
 		}
 
 		/// <inheritdoc />
-		public async Task<BaseTenraiResponse<ICollection<long>>> GetPersonIdsAsync(CancellationToken cancellationToken = default)
+		public async Task<IdsTenraiResponse> GetPersonIdsAsync(CancellationToken cancellationToken = default)
 		{
 			var endpointParts = new[] { TenraiEndpointConsts.People, TenraiEndpointConsts.Ids };
-			return await ExecuteGetRequestAsync<BaseTenraiResponse<ICollection<long>>>(endpointParts, cancellationToken);
+			return await ExecuteGetRequestAsync<IdsTenraiResponse>(endpointParts, cancellationToken);
 		}
 
 		#endregion Person methods
@@ -879,10 +879,10 @@ namespace Tenrai
 		}
 
 		/// <inheritdoc />
-		public async Task<BaseTenraiResponse<ICollection<long>>> GetProducerIdsAsync(CancellationToken cancellationToken = default)
+		public async Task<IdsTenraiResponse> GetProducerIdsAsync(CancellationToken cancellationToken = default)
 		{
 			var endpointParts = new[] { TenraiEndpointConsts.Producers, TenraiEndpointConsts.Ids };
-			return await ExecuteGetRequestAsync<BaseTenraiResponse<ICollection<long>>>(endpointParts, cancellationToken);
+			return await ExecuteGetRequestAsync<IdsTenraiResponse>(endpointParts, cancellationToken);
 		}
 
 		#endregion Producer methods

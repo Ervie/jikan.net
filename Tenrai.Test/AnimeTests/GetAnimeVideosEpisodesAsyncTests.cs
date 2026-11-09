@@ -69,5 +69,15 @@ namespace Tenrai.Tests.AnimeTests
 			bebop.Data.Select(e => e.Title).Should().Contain("Asteroid Blues");
 			bebop.Pagination.Should().NotBeNull();
 		}
+
+		[Fact]
+		public async Task GetAnimeVideosEpisodesAsync_Bebop_ShouldHaveImages()
+		{
+			// When
+			var bebop = await _tenrai.GetAnimeVideosEpisodesAsync(1);
+
+			// Then
+			bebop.Data.Should().Contain(e => e.Images != null && e.Images.JPG.ImageUrl != null);
+		}
 	}
 }

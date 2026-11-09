@@ -67,4 +67,14 @@ public class GetRecentAnimeReviewsAsyncTests
         reviews.Data.Should().HaveCount(50);
         reviews.Data.Should().OnlyContain(x => x.Type == "anime");
     }
+
+    [Fact]
+    public async Task GetRecentAnimeReviewsAsync_ReviewsHaveEntry()
+    {
+        // When
+        var reviews = await _tenrai.GetRecentAnimeReviewsAsync();
+
+        // Then
+        reviews.Data.Should().OnlyContain(x => x.Entry != null && x.Entry.MalId > 0 && x.Entry.Title != null);
+    }
 }

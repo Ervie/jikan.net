@@ -18,6 +18,6 @@ namespace Tenrai
 		/// Collection of related anime/manga of given relation type.
 		/// </summary>
 		[JsonPropertyName("entry")]
-		public ICollection<MalUrl> Entry { get; set; }
+		public ICollection<RelationEntry> Entry { get; set; }
 	}
 }

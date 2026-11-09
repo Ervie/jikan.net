@@ -1221,6 +1221,15 @@ var reviews = await tenrai.GetRecentMangaReviewsAsync();
 
 ## Search
 
+Every search config sends its values URL-encoded, so a query like `"C#"` or `"Tom & Jerry"` reaches the API as typed. Shared properties:
+
+| Property | Type | Description |
+|----------|------|-------------|
+| Limit | int? | Entries per page, 100 max. The API returns 25 when unset |
+| Sfw | bool | Filter out adult entries. Defaults to `true` (anime, manga, top anime, interest stacks) |
+| SfwStrict | bool | Also filter out ecchi entries. Defaults to `false` (same configs as `Sfw`) |
+| MinimumScore, MaximumScore | double? | Score range, e.g. `7.5` (anime and manga search) |
+
 ### SearchAnimeAsync
 
 Returns anime search results. Overload: `(AnimeSearchConfig searchConfig)`.
@@ -1383,12 +1392,13 @@ Returns public interest stacks matching an `InterestStackSearchConfig`.
 | Property | Type | Description |
 |----------|------|-------------|
 | Page | int? | Page index |
-| PageSize | int? | Entries per page (25 max) |
+| Limit | int? | Entries per page (100 max, 25 when unset) |
 | Query | string | Search query, matched against title and description |
 | Type | InterestStackType | `Anime`, `Manga`, or `EveryType` (default) |
 | OrderBy | InterestStackSearchOrderBy | `CreatedAt` or `RestackCount`. `NoSorting` (default) leaves the order to the API |
 | SortDirection | SortDirection | `Ascending` or `Descending`. Only applied when `OrderBy` is set |
 | Sfw | bool | Filter out adult entries. Defaults to `true` |
+| SfwStrict | bool | Also filter out ecchi entries. Defaults to `false` |
 
 `OrderBy` accepts only `CreatedAt` and `RestackCount` because those are the only two values the API sorts by. Other fields, including `EntryCount`, return 400.
 
@@ -1443,7 +1453,7 @@ foreach (var service in status.Services)
 
 Returns the complete collection of MAL IDs for the given resource.
 
-**Returns:** `BaseTenraiResponse<ICollection<long>>`
+**Returns:** `IdsTenraiResponse` (`Data` is the ids, `Total` their count)
 
 **Example:**
 
@@ -1464,7 +1474,7 @@ Passed to the review methods (`GetAnimeReviewsAsync`, `GetMangaReviewsAsync`, `G
 | Property | Type | Applies to | Description |
 |----------|------|-----------|-------------|
 | Page | int? | all | Page index |
-| Limit | int? | recent, top | Entries per page |
+| Limit | int? | recent, top | Entries per page (100 max) |
 | Sort | ReviewSortOrder? | per-entity, recent | `MostHelpful` (default), `Newest`, `Oldest` |
 | Preliminary | ReviewFilter? | all | `Include`, `Exclude`, or `Only` preliminary reviews |
 | Spoilers | ReviewFilter? | all | `Include`, `Exclude`, or `Only` spoiler reviews |

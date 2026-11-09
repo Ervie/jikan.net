@@ -30,7 +30,7 @@ namespace Tenrai.Tests.PersonTests
 
             // Then
             using var _ = new AssertionScope();
-            people.Data.Should().HaveCount(ParameterConsts.MaximumPageSize);
+            people.Data.Should().HaveCount(ParameterConsts.DefaultPageSize);
             people.Data.First().Name.Should().Be("Tomokazu Seki");
             people.Pagination.LastVisiblePage.Should().BeGreaterThan(370);
             people.Pagination.CurrentPage.Should().Be(1);
@@ -58,12 +58,12 @@ namespace Tenrai.Tests.PersonTests
         [InlineData(int.MinValue)]
         [InlineData(-1)]
         [InlineData(0)]
-        [InlineData(26)]
+        [InlineData(101)]
         [InlineData(int.MaxValue)]
         public async Task SearchPersonAsync_InvalidPageSize_ShouldThrowValidationException(int pageSize)
         {
             // Given
-            var config = new PersonSearchConfig{PageSize = pageSize};
+            var config = new PersonSearchConfig{Limit = pageSize};
             
             // When
             var func = _tenrai.Awaiting(x => x.SearchPersonAsync(config));
@@ -83,7 +83,7 @@ namespace Tenrai.Tests.PersonTests
 
             // Then
             using var _ = new AssertionScope();
-            people.Data.Should().HaveCount(ParameterConsts.MaximumPageSize);
+            people.Data.Should().HaveCount(ParameterConsts.DefaultPageSize);
             people.Data.First().Name.Should().Be("Travis Willingham");
             people.Pagination.LastVisiblePage.Should().BeGreaterThan(370);
             people.Pagination.CurrentPage.Should().Be(2);
@@ -96,7 +96,7 @@ namespace Tenrai.Tests.PersonTests
         {
             // Given
             const int pageSize = 5;
-            var config = new PersonSearchConfig{PageSize = pageSize};
+            var config = new PersonSearchConfig{Limit = pageSize};
             
             // When
             var people = await _tenrai.SearchPersonAsync(config);
@@ -115,7 +115,7 @@ namespace Tenrai.Tests.PersonTests
         {
             // Given
             const int pageSize = 5;
-            var config = new PersonSearchConfig{PageSize = pageSize, Page = 2};
+            var config = new PersonSearchConfig{Limit = pageSize, Page = 2};
             
             // When
             var people = await _tenrai.SearchPersonAsync(config);
@@ -161,7 +161,7 @@ namespace Tenrai.Tests.PersonTests
 
             // Then
             using var _ = new AssertionScope();
-            people.Data.Should().HaveCount(ParameterConsts.MaximumPageSize);
+            people.Data.Should().HaveCount(ParameterConsts.DefaultPageSize);
             people.Data.Should().OnlyContain(x => x.Name.StartsWith(letter));
         }
         
@@ -220,14 +220,14 @@ namespace Tenrai.Tests.PersonTests
         public async Task SearchPersonAsync_KanaQueryByMalIdWithLimit2_ShouldReturnMikaKanaiAndKanakoSakai()
         {
             // Given
-            var config = new PersonSearchConfig{Query = "Kana", OrderBy = PersonSearchOrderBy.MalId, PageSize = 2};
+            var config = new PersonSearchConfig{Query = "Kana", OrderBy = PersonSearchOrderBy.MalId, Limit = 2};
             
             // When
             var people = await _tenrai.SearchPersonAsync(config);
 
             // Then
             using var _ = new AssertionScope();
-            people.Data.Should().HaveCount(config.PageSize.Value);
+            people.Data.Should().HaveCount(config.Limit.Value);
             people.Data.Should().Contain(x => x.Name.Equals("Mika Kanai"));
             people.Data.Should().Contain(x => x.Name.Equals("Kanako Sakai"));
         }

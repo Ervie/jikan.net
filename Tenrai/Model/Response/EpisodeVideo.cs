@@ -34,7 +34,7 @@ namespace Tenrai
 		/// <summary>
 		/// Episode's images set.
 		/// </summary>
-		[JsonPropertyName("Images")]
+		[JsonPropertyName("images")]
 		public ImagesSet Images { get; set; }
 	}
 }

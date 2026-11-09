@@ -1,6 +1,3 @@
-using System.Text;
-using Tenrai.Consts;
-using Tenrai.Extensions;
 using Tenrai.Helpers;
 using Tenrai.Interfaces;
 
@@ -17,9 +14,9 @@ public class CharacterSearchConfig: ISearchConfig
 	public int? Page { get; set; }
 	
 	/// <summary>
-	/// Size of the page (25 is the max).
+	/// Size of the page (100 is the max).
 	/// </summary>
-	public int? PageSize { get; set; }
+	public int? Limit { get; set; }
 	
 	/// <summary>
 	/// Search query.
@@ -45,42 +42,24 @@ public class CharacterSearchConfig: ISearchConfig
     /// Create query from current parameters for search request.
     /// </summary>
     /// <returns>Query from current parameters for search request</returns>
-    public string ConfigToString()
-    {
-    	var builder = new StringBuilder().Append('?');
+	public string ConfigToString()
+	{
+		if (Letter.HasValue)
+		{
+			Guard.IsLetter(Letter.Value, nameof(Letter));
+		}
 
-        if (Page.HasValue)
-        {
-	        Guard.IsGreaterThanZero(Page.Value, nameof(Page.Value));
-	        builder.Append($"page={Page.Value}&");
-        }
-        
-        if (PageSize.HasValue)
-        {
-	        Guard.IsGreaterThanZero(PageSize.Value, nameof(PageSize.Value));
-	        Guard.IsLesserOrEqualThan(PageSize.Value,ParameterConsts.MaximumPageSize, nameof(PageSize.Value));
-	        builder.Append($"limit={PageSize.Value}&");
-        }
-        
-        if (!string.IsNullOrWhiteSpace(Query))
-        {
-	        builder.Append($"q={Query}&");
-        }
-        
-        if (Letter.HasValue)
-        {
-	        Guard.IsLetter(Letter.Value, nameof(Letter.Value));
-	        builder.Append($"letter={Letter.Value}&");
-        }
-    	
-    	if (OrderBy != CharacterSearchOrderBy.NoSorting)
-    	{
-    		Guard.IsValidEnum(OrderBy, nameof(OrderBy));
-    		Guard.IsValidEnum(SortDirection, nameof(SortDirection));
-    		builder.Append($"order_by={OrderBy.GetDescription()}&");
-    		builder.Append($"sort={SortDirection.GetDescription()}");
-    	}
+		var query = new QueryBuilder()
+			.Page(Page)
+			.Limit(Limit)
+			.Add("q", Query)
+			.Add("letter", Letter?.ToString());
 
-    	return builder.ToString().Trim('&');
-    }
+		if (OrderBy != CharacterSearchOrderBy.NoSorting)
+		{
+			query.Add("order_by", OrderBy).Add("sort", SortDirection);
+		}
+
+		return query.ToString();
+	}
 }

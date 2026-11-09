@@ -1,11 +1,5 @@
-using Tenrai.Extensions;
 using Tenrai.Helpers;
 using Tenrai.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Tenrai.Consts;
 
 namespace Tenrai
 {
@@ -36,27 +30,11 @@ namespace Tenrai
 		/// <returns>Query from current parameters for search request</returns>
 		public string ConfigToString()
 		{
-			var builder = new StringBuilder().Append('?');
-			
-			if (Page.HasValue)
-			{
-				Guard.IsGreaterThanZero(Page.Value, nameof(Page.Value));
-				builder.Append($"page={Page.Value}&");
-			}
-			
-			if (Type != MangaType.EveryType)
-			{
-				Guard.IsValidEnum(Type, nameof(Type));
-				builder.Append($"type={Type.GetDescription()}&");
-			}
-
-			if (Filter != TopMangaFilter.NoFilter)
-			{
-				Guard.IsValidEnum(Filter, nameof(Filter));
-				builder.Append($"filter={Filter.GetDescription()}&");
-			}
-			
-			return builder.ToString().Trim('&');
+			return new QueryBuilder()
+				.Page(Page)
+				.Add("type", Type)
+				.Add("filter", Filter)
+				.ToString();
 		}
 	}
 }

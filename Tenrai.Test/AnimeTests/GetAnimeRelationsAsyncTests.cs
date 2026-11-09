@@ -1,6 +1,7 @@
 using FluentAssertions;
 using FluentAssertions.Execution;
 using Tenrai.Exceptions;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -42,6 +43,19 @@ namespace Tenrai.Tests.AnimeTests
 			bebop.Data.Should().ContainSingle(x => x.Relation.Equals("Adaptation") && x.Entry.Count == 2);
 			bebop.Data.Should().ContainSingle(x => x.Relation.Equals("Side Story") && x.Entry.Count == 2);
 			bebop.Data.Should().ContainSingle(x => x.Relation.Equals("Summary") && x.Entry.Count == 1);
+		}
+
+		[Fact]
+		public async Task GetAnimeRelationsAsync_Bebop_EntriesHaveMediaTypeAndImages()
+		{
+			// When
+			var bebop = await _tenrai.GetAnimeRelationsAsync(1);
+
+			// Then
+			var entries = bebop.Data.SelectMany(r => r.Entry).ToList();
+			using var _ = new AssertionScope();
+			entries.Should().Contain(e => e.MalId == 5 && e.MediaType == "Movie");
+			entries.Should().OnlyContain(e => e.Images != null);
 		}
 	}
 }

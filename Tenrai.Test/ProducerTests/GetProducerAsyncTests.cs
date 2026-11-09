@@ -55,4 +55,14 @@ public class GetProducerAsyncTests
         results.Data.Established.Should().HaveYear(1985);
         results.Data.About.Should().NotBeNullOrEmpty();
     }
+
+    [Fact]
+    public async Task GetProducerAsync_KyotoAnimation_HasFavorites()
+    {
+        // When
+        var results = await _tenrai.GetProducerAsync(2);
+
+        // Then
+        results.Data.Favorites.Should().BeGreaterThan(10_000);
+    }
 }

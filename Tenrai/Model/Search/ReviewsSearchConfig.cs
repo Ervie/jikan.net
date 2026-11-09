@@ -1,7 +1,5 @@
-using Tenrai.Extensions;
 using Tenrai.Helpers;
 using Tenrai.Interfaces;
-using System.Text;
 
 namespace Tenrai
 {
@@ -52,51 +50,15 @@ namespace Tenrai
 		/// <returns>Query from current parameters for the request.</returns>
 		public string ConfigToString()
 		{
-			var builder = new StringBuilder().Append('?');
-
-			if (Page.HasValue)
-			{
-				Guard.IsGreaterThanZero(Page.Value, nameof(Page));
-				builder.Append($"page={Page.Value}&");
-			}
-
-			if (Limit.HasValue)
-			{
-				Guard.IsGreaterThanZero(Limit.Value, nameof(Limit));
-				builder.Append($"limit={Limit.Value}&");
-			}
-
-			if (Sort.HasValue)
-			{
-				Guard.IsValidEnum(Sort.Value, nameof(Sort));
-				builder.Append($"sort={Sort.Value.GetDescription()}&");
-			}
-
-			if (Preliminary.HasValue)
-			{
-				Guard.IsValidEnum(Preliminary.Value, nameof(Preliminary));
-				builder.Append($"preliminary={Preliminary.Value.GetDescription()}&");
-			}
-
-			if (Spoilers.HasValue)
-			{
-				Guard.IsValidEnum(Spoilers.Value, nameof(Spoilers));
-				builder.Append($"spoilers={Spoilers.Value.GetDescription()}&");
-			}
-
-			if (Sentiment.HasValue)
-			{
-				Guard.IsValidEnum(Sentiment.Value, nameof(Sentiment));
-				builder.Append($"sentiment={Sentiment.Value.GetDescription()}&");
-			}
-
-			if (Type.HasValue)
-			{
-				Guard.IsValidEnum(Type.Value, nameof(Type));
-				builder.Append($"type={Type.Value.GetDescription()}&");
-			}
-
-			return builder.ToString().TrimEnd('&', '?');
+			return new QueryBuilder()
+				.Page(Page)
+				.Limit(Limit)
+				.Add("sort", Sort)
+				.Add("preliminary", Preliminary)
+				.Add("spoilers", Spoilers)
+				.Add("sentiment", Sentiment)
+				.Add("type", Type)
+				.ToString();
 		}
 	}
 }

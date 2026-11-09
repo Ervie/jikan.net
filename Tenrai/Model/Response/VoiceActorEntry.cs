@@ -17,6 +17,6 @@ namespace Tenrai
 		/// Voice actor's details.
 		/// </summary>
 		[JsonPropertyName("person")]
-		public MalImageSubItem Person { get; set; }
+		public PersonEntry Person { get; set; }
 	}
 }

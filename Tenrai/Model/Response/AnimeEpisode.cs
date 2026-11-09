@@ -79,5 +79,17 @@ namespace Tenrai
 		/// </summary>
 		[JsonPropertyName("score")]
 		public double? Score { get; set; }
+
+		/// <summary>
+		/// Number of replies in the episode's forum discussion.
+		/// </summary>
+		[JsonPropertyName("replies")]
+		public int? Replies { get; set; }
+
+		/// <summary>
+		/// Episode thumbnail.
+		/// </summary>
+		[JsonPropertyName("images")]
+		public ImagesSet Images { get; set; }
 	}
 }

@@ -39,12 +39,12 @@ namespace Tenrai.Tests.MangaTests
         [InlineData(int.MinValue)]
         [InlineData(-1)]
         [InlineData(0)]
-        [InlineData(26)]
+        [InlineData(101)]
         [InlineData(int.MaxValue)]
         public async Task SearchMangaAsync_InvalidPageSize_ShouldThrowValidationException(int pageSize)
         {
             // Given
-            var config = new MangaSearchConfig {PageSize = pageSize};
+            var config = new MangaSearchConfig {Limit = pageSize};
             
             // When
             var func = _tenrai.Awaiting(x => x.SearchMangaAsync(config));
@@ -64,7 +64,7 @@ namespace Tenrai.Tests.MangaTests
 
             // Then
             using var _ = new AssertionScope();
-            manga.Data.Should().HaveCount(ParameterConsts.MaximumPageSize);
+            manga.Data.Should().HaveCount(ParameterConsts.DefaultPageSize);
             manga.Data.First().Title.Should().Be("Nana");
             manga.Pagination.LastVisiblePage.Should().BeGreaterThan(780);
             manga.Pagination.CurrentPage.Should().Be(2);
@@ -77,7 +77,7 @@ namespace Tenrai.Tests.MangaTests
         {
             // Given
             const int pageSize = 5;
-            var config = new MangaSearchConfig {PageSize = pageSize};
+            var config = new MangaSearchConfig {Limit = pageSize};
             
             // When
             var manga = await _tenrai.SearchMangaAsync(config);
@@ -96,7 +96,7 @@ namespace Tenrai.Tests.MangaTests
         {
             // Given
             const int pageSize = 5;
-            var config = new MangaSearchConfig {Page = 2, PageSize = pageSize};
+            var config = new MangaSearchConfig {Page = 2, Limit = pageSize};
             
             // When
             var manga = await _tenrai.SearchMangaAsync(config);

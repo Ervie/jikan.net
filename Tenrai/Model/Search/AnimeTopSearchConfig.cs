@@ -1,9 +1,4 @@
-using Tenrai.Extensions;
 using Tenrai.Interfaces;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Tenrai.Consts;
 using Tenrai.Helpers;
 
 namespace Tenrai
@@ -39,43 +34,23 @@ namespace Tenrai
 		public bool Sfw { get; set; } = true;
 
 		/// <summary>
+		/// Also filter out ecchi entries, on top of <see cref="Sfw"/>.
+		/// </summary>
+		public bool SfwStrict { get; set; }
+
+		/// <summary>
 		/// Create query from current parameters for search request.
 		/// </summary>
 		/// <returns>Query from current parameters for search request</returns>
 		public string ConfigToString()
 		{
-			var builder = new StringBuilder().Append('?');
-
-			if (Page.HasValue)
-			{
-				Guard.IsGreaterThanZero(Page.Value, nameof(Page.Value));
-				builder.Append($"page={Page.Value}&");
-			}
-			
-			if (Type != AnimeType.EveryType)
-			{
-				Guard.IsValidEnum(Type, nameof(Type));
-				builder.Append($"type={Type.GetDescription()}&");
-			}
-
-			if (Rating != AnimeAgeRating.EveryRating)
-			{
-				Guard.IsValidEnum(Rating, nameof(Rating));
-				builder.Append($"rating={Rating.GetDescription()}&");
-			}
-
-			if (Filter != TopAnimeFilter.NoFilter)
-			{
-				Guard.IsValidEnum(Filter, nameof(Filter));
-				builder.Append($"filter={Filter.GetDescription()}&");
-			}
-
-			if (Sfw)
-			{
-				builder.Append("sfw");
-			}
-
-			return builder.ToString().Trim('&');
+			return new QueryBuilder()
+				.Page(Page)
+				.Add("type", Type)
+				.Add("rating", Rating)
+				.Add("filter", Filter)
+				.Sfw(Sfw, SfwStrict)
+				.ToString();
 		}
 	}
 }

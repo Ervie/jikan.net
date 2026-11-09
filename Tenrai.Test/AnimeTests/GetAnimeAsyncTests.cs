@@ -1,3 +1,4 @@
+using System;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using Tenrai.Exceptions;
@@ -147,6 +148,54 @@ namespace Tenrai.Tests.AnimeTests
 				akiraAnime.Data.Genres.Should().HaveCount(1);
 				akiraAnime.Data.Approved.Should().BeTrue();
 			}
+		}
+
+		[Fact]
+		public async Task GetAnimeAsync_Frieren_TrailerHasStats()
+		{
+			// When
+			var frieren = await _tenrai.GetAnimeAsync(52991);
+
+			// Then
+			var trailer = frieren.Data.Trailer;
+			using var _ = new AssertionScope();
+			trailer.Views.Should().BeGreaterThan(1_000_000);
+			trailer.Likes.Should().BeGreaterThan(0);
+			trailer.PublishedAt.Should().Be(new DateTimeOffset(2024, 2, 9, 14, 45, 3, TimeSpan.Zero));
+			trailer.Duration.Should().Be(TimeSpan.FromSeconds(56));
+			trailer.PrivacyStatus.Should().Be("public");
+			trailer.Embeddable.Should().BeTrue();
+		}
+
+		[Fact]
+		public async Task GetAnimeAsync_Frieren_AiredHasTextAndParts()
+		{
+			// When
+			var frieren = await _tenrai.GetAnimeAsync(52991);
+
+			// Then
+			var aired = frieren.Data.Aired;
+			using var _ = new AssertionScope();
+			aired.Text.Should().Be("Sep 29, 2023 to Mar 22, 2024");
+			aired.Parts.From.Year.Should().Be(2023);
+			aired.Parts.From.Month.Should().Be(9);
+			aired.Parts.From.Day.Should().Be(29);
+			aired.Parts.To.Year.Should().Be(2024);
+		}
+
+		[Fact]
+		public async Task GetAnimeAsync_UnairedSequel_PartialAiredDateIsPadded()
+		{
+			// When
+			var sequel = await _tenrai.GetAnimeAsync(63816);
+
+			// Then
+			var aired = sequel.Data.Aired;
+			using var _ = new AssertionScope();
+			aired.From.Should().Be(new DateTimeOffset(2027, 10, 1, 0, 0, 0, TimeSpan.Zero));
+			aired.Parts.From.Month.Should().Be(10);
+			aired.Parts.From.Day.Should().BeNull();
+			aired.To.Should().BeNull();
 		}
 	}
 }

@@ -38,6 +38,19 @@ namespace Tenrai.Tests.IdsTests
 		}
 
 		[Fact]
+		public void IdsResponse_ShouldDeserializeTotal()
+		{
+			// Given
+			const string json = "{\"total\":7,\"data\":[1,5,6,7,8,15,16]}";
+
+			// When
+			var response = JsonSerializer.Deserialize<IdsTenraiResponse>(json);
+
+			// Then
+			response.Total.Should().Be(7);
+		}
+
+		[Fact]
 		public async Task GetAnimeIdsAsync_WithoutServerKey_ShouldRequireAuthorization()
 		{
 			// When (public tier has no Server Key, so the endpoint is gated)

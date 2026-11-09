@@ -31,7 +31,7 @@ namespace Tenrai
 		/// Date of creation
 		/// </summary>
 		[JsonPropertyName("date")]
-		public DateTime Date { get; set; }
+		public DateTime? Date { get; set; }
 
 		/// <summary>
 		/// Reviewing user.

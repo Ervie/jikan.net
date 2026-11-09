@@ -40,12 +40,12 @@ namespace Tenrai.Tests.AnimeTests
         [InlineData(int.MinValue)]
         [InlineData(-1)]
         [InlineData(0)]
-        [InlineData(26)]
+        [InlineData(101)]
         [InlineData(int.MaxValue)]
         public async Task SearchAnimeAsync_InvalidPageSize_ShouldThrowValidationException(int pageSize)
         {
             // Given
-            var config = new AnimeSearchConfig {PageSize = pageSize};
+            var config = new AnimeSearchConfig {Limit = pageSize};
             
             // When
             var func = _tenrai.Awaiting(x => x.SearchAnimeAsync(config));
@@ -65,7 +65,7 @@ namespace Tenrai.Tests.AnimeTests
 
             // Then
             using var _ = new AssertionScope();
-            anime.Data.Should().HaveCount(ParameterConsts.MaximumPageSize);
+            anime.Data.Should().HaveCount(ParameterConsts.DefaultPageSize);
             anime.Data.First().Title.Should().Be("Rurouni Kenshin: Meiji Kenkaku Romantan - Tsuioku-hen");
             anime.Pagination.LastVisiblePage.Should().BeGreaterThan(780);
             anime.Pagination.CurrentPage.Should().Be(2);
@@ -78,7 +78,7 @@ namespace Tenrai.Tests.AnimeTests
         {
             // Given
             const int pageSize = 5;
-            var config = new AnimeSearchConfig {PageSize = pageSize};
+            var config = new AnimeSearchConfig {Limit = pageSize};
             
             // When
             var anime = await _tenrai.SearchAnimeAsync(config);
@@ -97,7 +97,7 @@ namespace Tenrai.Tests.AnimeTests
         {
             // Given
             const int pageSize = 5;
-            var config = new AnimeSearchConfig {Page = 2, PageSize = pageSize};
+            var config = new AnimeSearchConfig {Page = 2, Limit = pageSize};
             
             // When
             var anime = await _tenrai.SearchAnimeAsync(config);

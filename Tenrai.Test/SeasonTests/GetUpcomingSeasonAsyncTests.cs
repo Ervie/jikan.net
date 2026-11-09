@@ -54,5 +54,15 @@ namespace Tenrai.Tests.SeasonTests
 			// Then
 			upcomingSeason.Data.Should().BeEmpty();
 		}
+
+		[Fact]
+		public async Task GetUpcomingSeasonAsync_PartialAiredDates_ShouldDeserialize()
+		{
+			// When
+			var upcomingSeason = await _tenrai.GetUpcomingSeasonAsync();
+
+			// Then
+			upcomingSeason.Data.Should().Contain(a => a.Aired.From.HasValue && a.Aired.Parts.From.Day == null);
+		}
 	}
 }

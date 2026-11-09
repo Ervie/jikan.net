@@ -50,5 +50,11 @@ namespace Tenrai
 		/// </summary>
 		[JsonPropertyName("about")]
 		public string About { get; set; }
+
+		/// <summary>
+		/// Number of users who favorited the producer.
+		/// </summary>
+		[JsonPropertyName("favorites")]
+		public int Favorites { get; set; }
 	}
 }

@@ -1,10 +1,6 @@
 using System;
-using Tenrai.Extensions;
 using Tenrai.Interfaces;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Tenrai.Consts;
 using Tenrai.Helpers;
 
 namespace Tenrai
@@ -20,9 +16,9 @@ namespace Tenrai
 		public int? Page { get; set; }
 	
 		/// <summary>
-		/// Size of the page (25 is the max).
+		/// Size of the page (100 is the max).
 		/// </summary>
-		public int? PageSize { get; set; }
+		public int? Limit { get; set; }
 	
 		/// <summary>
 		/// Search query.
@@ -42,12 +38,12 @@ namespace Tenrai
 		/// <summary>
 		/// Minimum score results (1-10).
 		/// </summary>
-		public int? MinimumScore { get; set; }
+		public double? MinimumScore { get; set; }
 		
 		/// <summary>
 		/// Maximum score results (1-10).
 		/// </summary>
-		public int? MaximumScore { get; set; }
+		public double? MaximumScore { get; set; }
 
 		/// <summary>
 		/// Age rating.
@@ -88,6 +84,11 @@ namespace Tenrai
 		/// Should only search for sfw title. Filter out adult entries.
 		/// </summary>
 		public bool Sfw { get; set; } = true;
+
+		/// <summary>
+		/// Also filter out ecchi entries, on top of <see cref="Sfw"/>.
+		/// </summary>
+		public bool SfwStrict { get; set; }
 		
 		/// <summary>
 		/// Filter by starting date.
@@ -105,111 +106,35 @@ namespace Tenrai
 		/// <returns>Query from current parameters for search request</returns>
 		public string ConfigToString()
 		{
-			var builder = new StringBuilder().Append('?');
-
-			if (Page.HasValue)
-			{
-				Guard.IsGreaterThanZero(Page.Value, nameof(Page.Value));
-				builder.Append($"page={Page.Value}&");
-			}
-        
-			if (PageSize.HasValue)
-			{
-				Guard.IsGreaterThanZero(PageSize.Value, nameof(PageSize.Value));
-				Guard.IsLesserOrEqualThan(PageSize.Value,ParameterConsts.MaximumPageSize, nameof(PageSize.Value));
-				builder.Append($"limit={PageSize.Value}&");
-			}
-        
-			if (!string.IsNullOrWhiteSpace(Query))
-			{
-				builder.Append($"q={Query}&");
-			}
-        
 			if (Letter.HasValue)
 			{
-				Guard.IsLetter(Letter.Value, nameof(Letter.Value));
-				builder.Append($"letter={Letter.Value}&");
-			}
-			
-			if (Type != AnimeType.EveryType)
-			{
-				Guard.IsValidEnum(Type, nameof(Type));
-				builder.Append($"type={Type.GetDescription()}&");
+				Guard.IsLetter(Letter.Value, nameof(Letter));
 			}
 
-			if (MinimumScore.HasValue)
-			{
-				builder.Append($"min_score={MinimumScore}&");
-			}
-			
-			if (MaximumScore.HasValue)
-			{
-				builder.Append($"max_score={MaximumScore}&");
-			}
-
-			if (Rating != AnimeAgeRating.EveryRating)
-			{
-				Guard.IsValidEnum(Rating, nameof(Rating));
-				builder.Append($"rating={Rating.GetDescription()}&");
-			}
-
-			if (Status != AiringStatus.EveryStatus)
-			{
-				Guard.IsValidEnum(Status, nameof(Status));
-				builder.Append($"status={Status.GetDescription()}&");
-			}
-
-			if (Genres.Count > 0 )
-			{
-				var genresIds = Genres.Select(genreSearch =>
-				{
-					Guard.IsValidEnum(genreSearch, nameof(genreSearch));
-					return genreSearch.GetDescription();
-				}).ToArray();
-
-				builder.Append($"genres={string.Join(",", genresIds)}&");
-			}
-			
-			if (ExcludedGenres.Count > 0 )
-			{
-				var genresIds = ExcludedGenres.Select(genreSearch =>
-				{
-					Guard.IsValidEnum(genreSearch, nameof(genreSearch));
-					return genreSearch.GetDescription();
-				}).ToArray();
-
-				builder.Append($"genres_exclude={string.Join(",", genresIds)}&");
-			}
+			var query = new QueryBuilder()
+				.Page(Page)
+				.Limit(Limit)
+				.Add("q", Query)
+				.Add("letter", Letter?.ToString())
+				.Add("type", Type)
+				.Add("min_score", MinimumScore)
+				.Add("max_score", MaximumScore)
+				.Add("rating", Rating)
+				.Add("status", Status)
+				.AddList("genres", Genres)
+				.AddList("genres_exclude", ExcludedGenres);
 
 			if (OrderBy != AnimeSearchOrderBy.NoSorting)
 			{
-				Guard.IsValidEnum(OrderBy, nameof(OrderBy));
-				Guard.IsValidEnum(SortDirection, nameof(SortDirection));
-				builder.Append($"order_by={OrderBy.GetDescription()}&");
-				builder.Append($"sort={SortDirection.GetDescription()}&");
+				query.Add("order_by", OrderBy).Add("sort", SortDirection);
 			}
 
-			if (ProducerIds.Any())
-			{
-				builder.Append($"producers={string.Join(",", ProducerIds)}&");
-			}
-
-			if (StartDate.HasValue)
-			{
-				builder.Append($"start_date={StartDate.Value:yyyy-MM-dd}&");
-			}
-
-			if (EndDate.HasValue)
-			{
-				builder.Append($"end_date={EndDate.Value:yyyy-MM-dd}&");
-			}
-			
-			if (Sfw)
-			{
-				builder.Append("sfw");
-			}
-
-			return builder.ToString().Trim('&');
+			return query
+				.AddList("producers", ProducerIds)
+				.Add("start_date", StartDate)
+				.Add("end_date", EndDate)
+				.Sfw(Sfw, SfwStrict)
+				.ToString();
 		}
 	}
 }

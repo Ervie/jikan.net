@@ -8,6 +8,11 @@ namespace Tenrai.Consts
         /// <summary>
         /// Maximum page size for general requests
         /// </summary>
-        public const int MaximumPageSize = 25;
+        public const int MaximumPageSize = 100;
+
+        /// <summary>
+        /// Page size the API uses when no limit is sent.
+        /// </summary>
+        public const int DefaultPageSize = 25;
     }
 }
