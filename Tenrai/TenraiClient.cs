@@ -148,6 +148,13 @@ namespace Tenrai
 			return await ExecuteGetRequestAsync<PaginatedTenraiResponse<ICollection<StatisticsHistoryEntry<T>>>>(endpointParts, cancellationToken);
 		}
 
+		private async Task<PaginatedTenraiResponse<ICollection<TopRecommendation>>> GetTopRecommendationsAsync(string type, TopRecommendationsConfig searchConfig, CancellationToken cancellationToken)
+		{
+			Guard.IsNotNull(searchConfig, nameof(searchConfig));
+			var endpointParts = new[] { TenraiEndpointConsts.TopList, TenraiEndpointConsts.Recommendations + searchConfig.ConfigToString(type) };
+			return await ExecuteGetRequestAsync<PaginatedTenraiResponse<ICollection<TopRecommendation>>>(endpointParts, cancellationToken);
+		}
+
 		private static void GuardFullDataRequest(long id, FullDataConfig config)
 		{
 			Guard.IsGreaterThanZero(id, nameof(id));
@@ -832,6 +839,22 @@ namespace Tenrai
 			return await ExecuteGetRequestAsync<PaginatedTenraiResponse<ICollection<Anime>>>(endpointParts, cancellationToken);
 		}
 
+		/// <inheritdoc />
+		public async Task<PaginatedTenraiResponse<ICollection<Anime>>> GetPreviousSeasonAsync(CancellationToken cancellationToken = default)
+		{
+			var endpointParts = new[] { TenraiEndpointConsts.Seasons, TenraiEndpointConsts.Previous };
+			return await ExecuteGetRequestAsync<PaginatedTenraiResponse<ICollection<Anime>>>(endpointParts, cancellationToken);
+		}
+
+		/// <inheritdoc />
+		public async Task<PaginatedTenraiResponse<ICollection<Anime>>> GetPreviousSeasonAsync(int page, CancellationToken cancellationToken = default)
+		{
+			Guard.IsGreaterThanZero(page, nameof(page));
+			var queryParams = $"?page={page}";
+			var endpointParts = new[] { TenraiEndpointConsts.Seasons, TenraiEndpointConsts.Previous + queryParams };
+			return await ExecuteGetRequestAsync<PaginatedTenraiResponse<ICollection<Anime>>>(endpointParts, cancellationToken);
+		}
+
 		#endregion Season methods
 
 		#region Schedule methods
@@ -977,6 +1000,46 @@ namespace Tenrai
 			Guard.IsNotNull(searchConfig, nameof(searchConfig));
 			var endpointParts = new[] { TenraiEndpointConsts.TopList, TenraiEndpointConsts.Reviews + searchConfig.ConfigToString() };
 			return await ExecuteGetRequestAsync<PaginatedTenraiResponse<ICollection<Review>>>(endpointParts, cancellationToken);
+		}
+
+		/// <inheritdoc />
+		public Task<PaginatedTenraiResponse<ICollection<TopRecommendation>>> GetTopAnimeRecommendationsAsync(CancellationToken cancellationToken = default)
+			=> GetTopAnimeRecommendationsAsync(new TopRecommendationsConfig(), cancellationToken);
+
+		/// <inheritdoc />
+		public Task<PaginatedTenraiResponse<ICollection<TopRecommendation>>> GetTopAnimeRecommendationsAsync(TopRecommendationsConfig searchConfig, CancellationToken cancellationToken = default)
+			=> GetTopRecommendationsAsync(TenraiEndpointConsts.Anime, searchConfig, cancellationToken);
+
+		/// <inheritdoc />
+		public Task<PaginatedTenraiResponse<ICollection<TopRecommendation>>> GetTopMangaRecommendationsAsync(CancellationToken cancellationToken = default)
+			=> GetTopMangaRecommendationsAsync(new TopRecommendationsConfig(), cancellationToken);
+
+		/// <inheritdoc />
+		public Task<PaginatedTenraiResponse<ICollection<TopRecommendation>>> GetTopMangaRecommendationsAsync(TopRecommendationsConfig searchConfig, CancellationToken cancellationToken = default)
+			=> GetTopRecommendationsAsync(TenraiEndpointConsts.Manga, searchConfig, cancellationToken);
+
+		/// <inheritdoc />
+		public Task<PaginatedTenraiResponse<ICollection<TopEpisode>>> GetTopEpisodesAsync(CancellationToken cancellationToken = default)
+			=> GetTopEpisodesAsync(new TopEpisodesConfig(), cancellationToken);
+
+		/// <inheritdoc />
+		public async Task<PaginatedTenraiResponse<ICollection<TopEpisode>>> GetTopEpisodesAsync(TopEpisodesConfig searchConfig, CancellationToken cancellationToken = default)
+		{
+			Guard.IsNotNull(searchConfig, nameof(searchConfig));
+			var endpointParts = new[] { TenraiEndpointConsts.TopList, TenraiEndpointConsts.Episodes + searchConfig.ConfigToString() };
+			return await ExecuteGetRequestAsync<PaginatedTenraiResponse<ICollection<TopEpisode>>>(endpointParts, cancellationToken);
+		}
+
+		/// <inheritdoc />
+		public Task<PaginatedTenraiResponse<ICollection<TopVideo>>> GetTopVideosAsync(CancellationToken cancellationToken = default)
+			=> GetTopVideosAsync(new TopVideosConfig(), cancellationToken);
+
+		/// <inheritdoc />
+		public async Task<PaginatedTenraiResponse<ICollection<TopVideo>>> GetTopVideosAsync(TopVideosConfig searchConfig, CancellationToken cancellationToken = default)
+		{
+			Guard.IsNotNull(searchConfig, nameof(searchConfig));
+			var endpointParts = new[] { TenraiEndpointConsts.TopList, TenraiEndpointConsts.Videos + searchConfig.ConfigToString() };
+			return await ExecuteGetRequestAsync<PaginatedTenraiResponse<ICollection<TopVideo>>>(endpointParts, cancellationToken);
 		}
 
 		#endregion Top methods

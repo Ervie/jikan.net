@@ -47,6 +47,7 @@ namespace Tenrai.Consts
 		internal const string Streaming = "streaming";
 		internal const string Full = "full";
 		internal const string Now = "now";
+		internal const string Previous = "previous";
 		internal const string Ids = "ids";
 		internal const string Stacks = "stacks";
 		internal const string Articles = "articles";

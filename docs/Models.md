@@ -481,6 +481,25 @@ A `MalUrl` plus `MediaType` (string, e.g. "Movie") and `Images` (ImagesSet). Use
 
 A `MalImageSubItem` plus `Favorites` (int?). Used by `VoiceActorEntry.Person`; `Favorites` is set on anime character lists and null on character voice lists.
 
+### TopRecommendation
+
+A `UserRecommendation` (`MalIds`, `Entries`, `Content`, `Date`, `User`) plus `Url` (string) and `Votes` (int). Returned by the top recommendations lists.
+
+### TopEpisode
+
+An [`AnimeEpisode`](#animeepisode) plus `Votes` (int?) and `Entry` (`MalImageSubItem`, the anime). `MalId` is the episode number, so two items can share it; `Entry.MalId` names the anime.
+
+### TopVideo
+
+An [`AnimeTrailer`](#animetrailer) plus `Entry` (`ICollection<TopVideoEntry>`), the anime the video was made for.
+
+`TopVideoEntry` is an [`Anime`](#anime) with the list fields only (no synopsis, broadcast, studios or genres) plus:
+
+| Property | Type | Description |
+|----------|------|-------------|
+| VideoTitle | string | MyAnimeList's label, e.g. "PV 1" or "ED 1 (Anime ver.)" |
+| Meta | MusicVideoMetadata | Song `Title` and `Author` (the artist). Null on promos and on some music videos |
+
 ### ExternalLink
 
 | Property | Type | Description |

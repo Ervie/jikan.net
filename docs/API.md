@@ -1032,6 +1032,22 @@ Returns anime with undefined airing (marked "Later" on MAL). Overload: `(int pag
 var upcoming = await tenrai.GetUpcomingSeasonAsync();
 ```
 
+### GetPreviousSeasonAsync
+
+Returns the season before the current one. The list also carries shows still airing from earlier seasons. Overload: `(int page)`.
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| page | int | (optional) Page index |
+
+**Returns:** `PaginatedTenraiResponse<ICollection<Anime>>`
+
+**Example:**
+
+```csharp
+var previous = await tenrai.GetPreviousSeasonAsync();
+```
+
 ---
 
 ## Schedule
@@ -1151,6 +1167,75 @@ var topManga = await tenrai.GetTopReviewsAsync(new ReviewsSearchConfig
 ```
 
 **Model:** [Review](Models.md#review) · **Config:** [ReviewsSearchConfig](#reviewssearchconfig)
+
+### GetTopAnimeRecommendationsAsync, GetTopMangaRecommendationsAsync
+
+Return the user recommendations ("if you liked X, try Y") with the most votes. Each has an overload taking a `TopRecommendationsConfig` (`Page`, `Limit`, `Sfw`, `SfwStrict`).
+
+**Returns:** `PaginatedTenraiResponse<ICollection<TopRecommendation>>`
+
+**Example:**
+
+```csharp
+var top = await tenrai.GetTopAnimeRecommendationsAsync();
+// top.Data.First(): Death Note and Code Geass, Votes 650
+```
+
+**Model:** [TopRecommendation](Models.md#toprecommendation)
+
+### GetTopEpisodesAsync
+
+Returns the top anime episodes, each with the anime it belongs to. Without `OrderBy` the API ranks by score weighed by votes, so a 4.9 with 4341 votes comes before a 4.97 with 260. An overload takes a `TopEpisodesConfig`.
+
+#### TopEpisodesConfig
+
+| Property | Type | Description |
+|----------|------|-------------|
+| OrderBy | TopEpisodesOrderBy | `Score`, `Votes` or `Comments`, always descending |
+| Page | int? | 1-based page index |
+| Limit | int? | Page size, 100 max |
+| Sfw | bool | Filter out adult entries. Defaults to `true` |
+| SfwStrict | bool | Also filter out ecchi entries. Defaults to `false` |
+
+**Returns:** `PaginatedTenraiResponse<ICollection<TopEpisode>>`
+
+**Example:**
+
+```csharp
+var mostVoted = await tenrai.GetTopEpisodesAsync(new TopEpisodesConfig { OrderBy = TopEpisodesOrderBy.Votes });
+```
+
+**Model:** [TopEpisode](Models.md#topepisode)
+
+### GetTopVideosAsync
+
+Returns anime promos and music videos, most viewed on YouTube first. An overload takes a `TopVideosConfig`.
+
+#### TopVideosConfig
+
+| Property | Type | Description |
+|----------|------|-------------|
+| Filter | TopVideosFilter? | `All`, `Airing`, `Upcoming` or `Finished`. Not sent when null |
+| Type | TopVideoType? | `Promo` or `Music`. Both when null |
+| Year | int? | Year published. Cannot be combined with `MinimumYear`/`MaximumYear` (the API returns 400) |
+| MinimumYear, MaximumYear | int? | Year range |
+| OrderBy | TopVideosOrderBy | `Views`, `Likes`, `Dislikes`, `Comments`, `Title` or `PublishedAt` |
+| SortDirection | SortDirection | Direction for `OrderBy` |
+| Page | int? | 1-based page index |
+| Limit | int? | Page size, 100 max |
+| Sfw | bool | Filter out adult entries. Defaults to `true` |
+| SfwStrict | bool | Also filter out ecchi entries. Defaults to `false` |
+
+**Returns:** `PaginatedTenraiResponse<ICollection<TopVideo>>`
+
+**Example:**
+
+```csharp
+var music = await tenrai.GetTopVideosAsync(new TopVideosConfig { Type = TopVideoType.Music });
+var song = music.Data.First().Entry.First().Meta; // Title and Author (the artist)
+```
+
+**Model:** [TopVideo](Models.md#topvideo)
 
 ---
 

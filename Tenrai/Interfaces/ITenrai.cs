@@ -815,6 +815,21 @@ namespace Tenrai
         /// <returns>Season preview for anime with undefined airing date.</returns>
         Task<PaginatedTenraiResponse<ICollection<Anime>>> GetUpcomingSeasonAsync(int page, CancellationToken cancellationToken = default);
 
+        /// <summary>
+        /// Return season preview for the season before the current one.
+        /// </summary>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Season preview for anime in the previous season.</returns>
+        Task<PaginatedTenraiResponse<ICollection<Anime>>> GetPreviousSeasonAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Return season preview for the season before the current one.
+        /// </summary>
+        /// <param name="page">Index of page folding 25 records (e.g. 1 will return first 25 records, 2 will return record from 26 to 50 etc.)</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Season preview for anime in the previous season.</returns>
+        Task<PaginatedTenraiResponse<ICollection<Anime>>> GetPreviousSeasonAsync(int page, CancellationToken cancellationToken = default);
+
         #endregion Season requests
 
         #region Schedule requests
@@ -951,6 +966,66 @@ namespace Tenrai
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>List of most popular reviews.</returns>
         Task<PaginatedTenraiResponse<ICollection<Review>>> GetTopReviewsAsync(ReviewsSearchConfig searchConfig, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns the anime recommendations with the most votes.
+        /// </summary>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Paginated collection of recommendations, most votes first.</returns>
+        Task<PaginatedTenraiResponse<ICollection<TopRecommendation>>> GetTopAnimeRecommendationsAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns the anime recommendations with the most votes, paged.
+        /// </summary>
+        /// <param name="searchConfig">Paging and sfw filtering.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Paginated collection of recommendations, most votes first.</returns>
+        Task<PaginatedTenraiResponse<ICollection<TopRecommendation>>> GetTopAnimeRecommendationsAsync(TopRecommendationsConfig searchConfig, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns the manga recommendations with the most votes.
+        /// </summary>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Paginated collection of recommendations, most votes first.</returns>
+        Task<PaginatedTenraiResponse<ICollection<TopRecommendation>>> GetTopMangaRecommendationsAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns the manga recommendations with the most votes, paged.
+        /// </summary>
+        /// <param name="searchConfig">Paging and sfw filtering.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Paginated collection of recommendations, most votes first.</returns>
+        Task<PaginatedTenraiResponse<ICollection<TopRecommendation>>> GetTopMangaRecommendationsAsync(TopRecommendationsConfig searchConfig, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns the top anime episodes in the API's ranking, which weighs score by votes.
+        /// </summary>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Paginated collection of episodes with the anime each belongs to.</returns>
+        Task<PaginatedTenraiResponse<ICollection<TopEpisode>>> GetTopEpisodesAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns the top anime episodes by score, votes or comments.
+        /// </summary>
+        /// <param name="searchConfig">Sorting and paging.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Paginated collection of episodes with the anime each belongs to.</returns>
+        Task<PaginatedTenraiResponse<ICollection<TopEpisode>>> GetTopEpisodesAsync(TopEpisodesConfig searchConfig, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns the most viewed anime promos and music videos on YouTube.
+        /// </summary>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Paginated collection of videos with the anime each belongs to.</returns>
+        Task<PaginatedTenraiResponse<ICollection<TopVideo>>> GetTopVideosAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns anime promos and music videos, filtered and sorted.
+        /// </summary>
+        /// <param name="searchConfig">Type, airing state, year range, sorting and paging.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Paginated collection of videos with the anime each belongs to.</returns>
+        Task<PaginatedTenraiResponse<ICollection<TopVideo>>> GetTopVideosAsync(TopVideosConfig searchConfig, CancellationToken cancellationToken = default);
 
         #endregion Top requests
 

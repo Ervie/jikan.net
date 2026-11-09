@@ -40,9 +40,9 @@ Tenrai.Net is based on, and a huge thank you goes to, [@Ervie](https://github.co
     - Basic / Full information, Related anime, Related manga, Voice actors, Pictures
 - Reviews (anime, manga, recent, top) with sort, sentiment, and preliminary/spoiler filtering
 - Search: Anime, Manga, People, Characters
-- Seasonal Anime: Current, Upcoming, Archival
+- Seasonal Anime: Current, Previous, Upcoming, Archival
 - Anime scheduling (for current season)
-- Top: Anime, Manga, People, Characters, Reviews
+- Top: Anime, Manga, People, Characters, Reviews, Recommendations, Episodes, Videos (promos and music videos)
 - Genres: Anime genres, Manga genres
 - Producer: Basic information, External links, Full data
 - Magazines
