@@ -56,6 +56,23 @@ var config = new TenraiClientConfiguration
 var tenrai = new TenraiClient(config);
 ```
 
+### Safe-for-work filtering
+
+Adult entries are returned unless you ask for them to be filtered, as the API does. Turn filtering on for every call with the client setting, and override it on any single call through that call's config:
+
+```csharp
+var tenrai = new TenraiClient(new TenraiClientConfiguration
+{
+    Sfw = true,         // leave out adult entries everywhere
+    SfwStrict = false   // true also leaves out ecchi entries
+});
+
+// This one call returns adult entries anyway
+var everything = await tenrai.SearchAnimeAsync(new AnimeSearchConfig { Query = "berserk", Sfw = false });
+```
+
+A config's `Sfw` and `SfwStrict` are `bool?`: `null` (the default) uses the client setting, `true` or `false` overrides it. The setting applies to plain overloads too (`GetCurrentSeasonAsync()`, `GetTopAnimeAsync()`), on every endpoint that takes `sfw`. Single news items and articles never send it, because the API answers 404 for an item that mentions adult entries.
+
 ### Custom HttpClient
 
 To customize the HTTP client (base address, timeout, headers, etc.), pass an `HttpClient` to the constructor:

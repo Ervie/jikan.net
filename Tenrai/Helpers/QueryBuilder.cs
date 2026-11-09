@@ -164,14 +164,14 @@ namespace Tenrai.Helpers
 			return this;
 		}
 
-		internal QueryBuilder Sfw(bool sfw, bool sfwStrict)
+		internal QueryBuilder Sfw(bool? sfw, bool? sfwStrict)
 		{
-			if (sfw)
+			if (sfw == true)
 			{
 				Append("sfw", "true");
 			}
 
-			if (sfwStrict)
+			if (sfwStrict == true)
 			{
 				Append("sfw-strict", "true");
 			}

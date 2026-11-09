@@ -7,7 +7,7 @@ namespace Tenrai
 	/// <summary>
 	/// Filters for the top anime ranking.
 	/// </summary>
-	public class AnimeTopSearchConfig : ISearchConfig
+	public class AnimeTopSearchConfig : ISearchConfig, ISfwConfig
 	{
 		/// <summary>
 		/// Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)
@@ -70,14 +70,14 @@ namespace Tenrai
 		public int? MaximumEpisodes { get; set; }
 
 		/// <summary>
-		/// Should only search for sfw title. Filter out adult entries.
+		/// Should only search for sfw title. Filter out adult entries. Null uses the client setting (<see cref="Config.TenraiClientConfiguration.Sfw"/>).
 		/// </summary>
-		public bool Sfw { get; set; } = true;
+		public bool? Sfw { get; set; }
 
 		/// <summary>
-		/// Also filter out ecchi entries, on top of <see cref="Sfw"/>.
+		/// Also filter out ecchi entries, on top of <see cref="Sfw"/>. Null uses the client setting.
 		/// </summary>
-		public bool SfwStrict { get; set; }
+		public bool? SfwStrict { get; set; }
 
 		/// <summary>
 		/// <see cref="SortDirection.Descending"/> reverses the ranking. Top first when null.

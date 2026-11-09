@@ -12,7 +12,7 @@ namespace Tenrai.Tests.SearchConfigTests
 		{
 			var config = new DeletedSearchConfig { OrderBy = DeletedOrderBy.Members, SortDirection = SortDirection.Descending };
 
-			config.ConfigToString().Should().Be("?order_by=members&sort=desc&sfw=true");
+			config.ConfigToString().Should().Be("?order_by=members&sort=desc");
 		}
 
 		[Fact]
@@ -25,7 +25,7 @@ namespace Tenrai.Tests.SearchConfigTests
 				MinimumScore = 8
 			};
 
-			config.ConfigToString().Should().Be("?filter=airing&type=manga,manhwa&min_score=8&sfw=true");
+			config.ConfigToString().Should().Be("?filter=airing&type=manga,manhwa&min_score=8");
 		}
 
 		[Fact]

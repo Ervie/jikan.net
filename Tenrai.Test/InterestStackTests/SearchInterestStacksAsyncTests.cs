@@ -138,8 +138,8 @@ namespace Tenrai.Tests.InterestStackTests
 		public async Task SearchInterestStacksAsync_SfwDisabled_ShouldReturnMoreStacksThanSfw()
 		{
 			// Given
-			var sfwConfig = new InterestStackSearchConfig();
-			var everythingConfig = new InterestStackSearchConfig { Sfw = false };
+			var sfwConfig = new InterestStackSearchConfig { Sfw = true };
+			var everythingConfig = new InterestStackSearchConfig();
 
 			// When
 			var sfw = await _tenrai.SearchInterestStacksAsync(sfwConfig);

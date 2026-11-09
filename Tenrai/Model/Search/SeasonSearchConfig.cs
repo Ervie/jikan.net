@@ -7,7 +7,7 @@ namespace Tenrai
 	/// <summary>
 	/// Filters for the season lists (a given season, current, previous, upcoming).
 	/// </summary>
-	public class SeasonSearchConfig : ISearchConfig
+	public class SeasonSearchConfig : ISearchConfig, ISfwConfig
 	{
 		/// <summary>
 		/// 1-based page index.
@@ -70,14 +70,14 @@ namespace Tenrai
 		public int? MaximumEpisodes { get; set; }
 
 		/// <summary>
-		/// Filter out adult entries.
+		/// Filter out adult entries. Null uses the client setting (<see cref="Config.TenraiClientConfiguration.Sfw"/>).
 		/// </summary>
-		public bool Sfw { get; set; } = true;
+		public bool? Sfw { get; set; }
 
 		/// <summary>
-		/// Also filter out ecchi entries, on top of <see cref="Sfw"/>.
+		/// Also filter out ecchi entries, on top of <see cref="Sfw"/>. Null uses the client setting.
 		/// </summary>
-		public bool SfwStrict { get; set; }
+		public bool? SfwStrict { get; set; }
 
 		/// <summary>
 		/// Leave out kids titles.

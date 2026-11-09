@@ -7,7 +7,7 @@ namespace Tenrai
 	/// <summary>
 	/// Filters for the broadcast schedule.
 	/// </summary>
-	public class ScheduleSearchConfig : ISearchConfig
+	public class ScheduleSearchConfig : ISearchConfig, ISfwConfig
 	{
 		/// <summary>
 		/// 1-based page index.
@@ -45,14 +45,14 @@ namespace Tenrai
 		public ICollection<AnimeGenreSearch> ExcludedGenres { get; set; } = new List<AnimeGenreSearch>();
 
 		/// <summary>
-		/// Filter out adult entries.
+		/// Filter out adult entries. Null uses the client setting (<see cref="Config.TenraiClientConfiguration.Sfw"/>).
 		/// </summary>
-		public bool Sfw { get; set; } = true;
+		public bool? Sfw { get; set; }
 
 		/// <summary>
-		/// Also filter out ecchi entries, on top of <see cref="Sfw"/>.
+		/// Also filter out ecchi entries, on top of <see cref="Sfw"/>. Null uses the client setting.
 		/// </summary>
-		public bool SfwStrict { get; set; }
+		public bool? SfwStrict { get; set; }
 
 		/// <summary>
 		/// Leave out kids titles.

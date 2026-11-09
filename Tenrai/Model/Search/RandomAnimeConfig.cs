@@ -7,7 +7,7 @@ namespace Tenrai
 	/// <summary>
 	/// Filters for a random anime.
 	/// </summary>
-	public class RandomAnimeConfig : ISearchConfig
+	public class RandomAnimeConfig : ISearchConfig, ISfwConfig
 	{
 		/// <summary>
 		/// Anime types to pick from.
@@ -80,14 +80,14 @@ namespace Tenrai
 		public int? MaximumYear { get; set; }
 
 		/// <summary>
-		/// Filter out adult entries.
+		/// Filter out adult entries. Null uses the client setting (<see cref="Config.TenraiClientConfiguration.Sfw"/>).
 		/// </summary>
-		public bool Sfw { get; set; } = true;
+		public bool? Sfw { get; set; }
 
 		/// <summary>
-		/// Also filter out ecchi entries, on top of <see cref="Sfw"/>.
+		/// Also filter out ecchi entries, on top of <see cref="Sfw"/>. Null uses the client setting.
 		/// </summary>
-		public bool SfwStrict { get; set; }
+		public bool? SfwStrict { get; set; }
 
 		/// <summary>
 		/// Create query from current parameters for the request.

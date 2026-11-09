@@ -9,19 +9,11 @@ namespace Tenrai.Tests.SearchConfigTests
 	public class AnimeSearchConfigTests
 	{
 		[Fact]
-		public void ConfigToString_Default_SendsSfwOnly()
-		{
-			var config = new AnimeSearchConfig();
-
-			config.ConfigToString().Should().Be("?sfw=true");
-		}
-
-		[Fact]
 		public void ConfigToString_QueryWithHash_IsEscaped()
 		{
 			var config = new AnimeSearchConfig { Query = "C#" };
 
-			config.ConfigToString().Should().Be("?q=C%23&sfw=true");
+			config.ConfigToString().Should().Be("?q=C%23");
 		}
 
 		[Fact]
@@ -101,7 +93,7 @@ namespace Tenrai.Tests.SearchConfigTests
 				SeasonYears = new[] { 2025 }
 			};
 
-			config.ConfigToString().Should().Be("?type=TV,tv_special&rating_exclude=rx&voice_language=english&season=fall&season_year=2025&sfw=true");
+			config.ConfigToString().Should().Be("?type=TV,tv_special&rating_exclude=rx&voice_language=english&season=fall&season_year=2025");
 		}
 	}
 }

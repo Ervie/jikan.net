@@ -6,7 +6,7 @@ namespace Tenrai
 	/// <summary>
 	/// Model class of search configuration for interest stack search.
 	/// </summary>
-	public class InterestStackSearchConfig : ISearchConfig
+	public class InterestStackSearchConfig : ISearchConfig, ISfwConfig
 	{
 		/// <summary>
 		/// 1-based page index (e.g. 1 returns the first page, 2 the second).
@@ -39,14 +39,14 @@ namespace Tenrai
 		public SortDirection SortDirection { get; set; }
 
 		/// <summary>
-		/// Should only search for sfw stacks. Filter out adult entries.
+		/// Should only search for sfw stacks. Filter out adult entries. Null uses the client setting (<see cref="Config.TenraiClientConfiguration.Sfw"/>).
 		/// </summary>
-		public bool Sfw { get; set; } = true;
+		public bool? Sfw { get; set; }
 
 		/// <summary>
-		/// Also filter out ecchi entries, on top of <see cref="Sfw"/>.
+		/// Also filter out ecchi entries, on top of <see cref="Sfw"/>. Null uses the client setting.
 		/// </summary>
-		public bool SfwStrict { get; set; }
+		public bool? SfwStrict { get; set; }
 
 		/// <summary>
 		/// Create query from current parameters for search request.

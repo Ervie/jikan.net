@@ -9,7 +9,7 @@ namespace Tenrai
 	/// Model class of search configuration for advanced manga search.
 	/// List filters match any of their values unless noted; the API rejects lists over 25 values (1000 for <see cref="Ids"/> and <see cref="ExcludedIds"/>).
 	/// </summary>
-	public class MangaSearchConfig : ISearchConfig
+	public class MangaSearchConfig : ISearchConfig, ISfwConfig
 	{
 		/// <summary>
 		/// Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)
@@ -222,14 +222,14 @@ namespace Tenrai
 		public DateTime? EndDate { get; set; }
 
 		/// <summary>
-		/// Should only search for sfw title. Filter out adult entries.
+		/// Should only search for sfw title. Filter out adult entries. Null uses the client setting (<see cref="Config.TenraiClientConfiguration.Sfw"/>).
 		/// </summary>
-		public bool Sfw { get; set; } = true;
+		public bool? Sfw { get; set; }
 
 		/// <summary>
-		/// Also filter out ecchi entries, on top of <see cref="Sfw"/>.
+		/// Also filter out ecchi entries, on top of <see cref="Sfw"/>. Null uses the client setting.
 		/// </summary>
-		public bool SfwStrict { get; set; }
+		public bool? SfwStrict { get; set; }
 
 		/// <summary>
 		/// Unapproved entries: <see cref="ReviewFilter.Include"/> adds them, <see cref="ReviewFilter.Only"/> returns only them.

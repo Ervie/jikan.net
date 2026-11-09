@@ -6,7 +6,7 @@ namespace Tenrai
 	/// <summary>
 	/// Search and paging for the unapproved and denied anime and manga lists.
 	/// </summary>
-	public class CatalogueSearchConfig : ISearchConfig
+	public class CatalogueSearchConfig : ISearchConfig, ISfwConfig
 	{
 		/// <summary>
 		/// 1-based page index.
@@ -34,14 +34,14 @@ namespace Tenrai
 		public SortDirection SortDirection { get; set; }
 
 		/// <summary>
-		/// Filter out adult entries.
+		/// Filter out adult entries. Null uses the client setting (<see cref="Config.TenraiClientConfiguration.Sfw"/>).
 		/// </summary>
-		public bool Sfw { get; set; } = true;
+		public bool? Sfw { get; set; }
 
 		/// <summary>
-		/// Also filter out ecchi entries, on top of <see cref="Sfw"/>.
+		/// Also filter out ecchi entries, on top of <see cref="Sfw"/>. Null uses the client setting.
 		/// </summary>
-		public bool SfwStrict { get; set; }
+		public bool? SfwStrict { get; set; }
 
 		/// <summary>
 		/// Create query from current parameters for the request.

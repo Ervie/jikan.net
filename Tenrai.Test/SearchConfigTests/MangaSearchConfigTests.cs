@@ -10,7 +10,7 @@ namespace Tenrai.Tests.SearchConfigTests
 		{
 			var config = new MangaSearchConfig { Genres = new[] { MangaGenreSearch.Seinen } };
 
-			config.ConfigToString().Should().Be("?genres=41&sfw=true");
+			config.ConfigToString().Should().Be("?genres=41");
 		}
 
 		[Fact]
@@ -18,7 +18,7 @@ namespace Tenrai.Tests.SearchConfigTests
 		{
 			var config = new MangaSearchConfig { Types = new[] { MangaType.Novel, MangaType.LightNovel } };
 
-			config.ConfigToString().Should().Be("?type=novel,lightnovel&sfw=true");
+			config.ConfigToString().Should().Be("?type=novel,lightnovel");
 		}
 	}
 }

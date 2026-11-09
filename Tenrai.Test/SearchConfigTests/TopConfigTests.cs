@@ -16,7 +16,7 @@ namespace Tenrai.Tests.SearchConfigTests
 				SortDirection = SortDirection.Descending
 			};
 
-			config.ConfigToString().Should().Be("?type=music&min_year=2020&order_by=likes&sort=desc&sfw=true");
+			config.ConfigToString().Should().Be("?type=music&min_year=2020&order_by=likes&sort=desc");
 		}
 
 		[Fact]
@@ -24,7 +24,7 @@ namespace Tenrai.Tests.SearchConfigTests
 		{
 			var config = new TopEpisodesConfig { OrderBy = TopEpisodesOrderBy.Votes };
 
-			config.ConfigToString().Should().Be("?order_by=votes&sfw=true");
+			config.ConfigToString().Should().Be("?order_by=votes");
 		}
 
 		[Fact]
@@ -32,13 +32,7 @@ namespace Tenrai.Tests.SearchConfigTests
 		{
 			var config = new AnimeTopSearchConfig { Types = { AnimeType.TV, AnimeType.Movie }, Sort = SortDirection.Descending };
 
-			config.ConfigToString().Should().Be("?type=TV,Movie&sfw=true&sort=desc");
-		}
-
-		[Fact]
-		public void MangaTopSearchConfig_Default_SendsSfw()
-		{
-			new MangaTopSearchConfig().ConfigToString().Should().Be("?sfw=true");
+			config.ConfigToString().Should().Be("?type=TV,Movie&sort=desc");
 		}
 	}
 }

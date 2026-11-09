@@ -431,8 +431,8 @@ var deleted = await tenrai.GetAnimeFullDataAsync(2632, new FullDataConfig { Mode
 |----------|------|-------------|
 | Ids | ICollection&lt;long&gt; | Extra MAL ids, returned in `Included`. At most 24: the API allows 25 including the path id, and the client throws `TenraiValidationException` past that. Duplicates and the path id are dropped by the API |
 | Mode | FullDataMode? | `Denied` or `Deleted` searches that archive only; an id not in it returns 404 (path id) or lands in `MissingIds` (extra ids). Null searches the regular catalogue |
-| Sfw | bool | Filter adult entries out of the relations. Defaults to `true`, so the overload can return fewer `Relations` than the plain call, which sends no filter |
-| SfwStrict | bool | Also filter ecchi entries out of the relations. Defaults to `false` |
+| Sfw | bool? | Filter out adult entries. `null` (default) uses the [client setting](GettingStarted.md#safe-for-work-filtering) |
+| SfwStrict | bool? | Also filter out ecchi entries. `null` (default) uses the [client setting](GettingStarted.md#safe-for-work-filtering) |
 
 ### GetUnapprovedAnimeAsync, GetDeniedAnimeAsync, GetDeletedAnimeAsync
 
@@ -459,8 +459,8 @@ var deleted = await tenrai.GetDeletedAnimeAsync(new DeletedSearchConfig
 | SortDirection | SortDirection | Direction for `OrderBy` |
 | Page | int? | 1-based page index |
 | Limit | int? | Page size, 100 max |
-| Sfw | bool | Filter out adult entries. Defaults to `true` |
-| SfwStrict | bool | Also filter out ecchi entries. Defaults to `false` |
+| Sfw | bool? | Filter out adult entries. `null` (default) uses the [client setting](GettingStarted.md#safe-for-work-filtering) |
+| SfwStrict | bool? | Also filter out ecchi entries. `null` (default) uses the [client setting](GettingStarted.md#safe-for-work-filtering) |
 
 #### DeletedSearchConfig
 
@@ -741,8 +741,8 @@ var airing = await tenrai.GetAdaptedMangaAsync(new AdaptedMangaSearchConfig
 | SortDirection | SortDirection | Direction for `OrderBy` |
 | Page | int? | 1-based page index |
 | Limit | int? | Page size, 100 max |
-| Sfw | bool | Filter out adult entries. Defaults to `true` |
-| SfwStrict | bool | Also filter out ecchi entries. Defaults to `false` |
+| Sfw | bool? | Filter out adult entries. `null` (default) uses the [client setting](GettingStarted.md#safe-for-work-filtering) |
+| SfwStrict | bool? | Also filter out ecchi entries. `null` (default) uses the [client setting](GettingStarted.md#safe-for-work-filtering) |
 
 ---
 
@@ -1008,9 +1008,9 @@ var current = await tenrai.GetCurrentSeasonAsync(new SeasonSearchConfig
 | Unapproved | ReviewFilter? | `Include` adds unapproved entries, `Only` returns only them |
 | OrderBy, SortDirection | SeasonOrderBy, SortDirection | Members descending when not set |
 | Page, Limit | int? | Paging, 100 max |
-| Sfw, SfwStrict | bool | Filter out adult (default `true`) and ecchi entries |
+| Sfw, SfwStrict | bool? | Filter out adult and ecchi entries. `null` (default) uses the [client setting](GettingStarted.md#safe-for-work-filtering) |
 
-The plain and `(int page)` overloads send no `sfw`, as before; the config overloads default it to `true`.
+Every overload, plain or config, applies the [client setting](GettingStarted.md#safe-for-work-filtering) unless the config sets `Sfw` itself.
 
 ### GetSeasonArchiveAsync
 
@@ -1086,7 +1086,7 @@ Returns current season schedule. Overloads: `(int page)`, `(ScheduledDay schedul
 |-----------|------|-------------|
 | page | int | (optional) Page index |
 | scheduledDay | ScheduledDay | (optional) Filter by day |
-| searchConfig | ScheduleSearchConfig | (optional) `Day`, `Types`, `Ratings`, `Genres`, `ExcludedGenres`, `ExcludeKids`, `Unapproved`, `Page`, `Limit`, `Sfw` (default `true`), `SfwStrict` |
+| searchConfig | ScheduleSearchConfig | (optional) `Day`, `Types`, `Ratings`, `Genres`, `ExcludedGenres`, `ExcludeKids`, `Unapproved`, `Page`, `Limit`, `Sfw`, `SfwStrict` |
 
 **Returns:** `PaginatedTenraiResponse<ICollection<Anime>>`
 
@@ -1138,7 +1138,7 @@ var topMovies = await tenrai.GetTopAnimeAsync(new AnimeTopSearchConfig { Types =
 | MinimumChapters ... MaximumVolumes | int? | (manga) Chapter and volume ranges |
 | Sort | SortDirection? | `Descending` reverses the ranking |
 | Page, Limit | int? | Paging, 100 max |
-| Sfw, SfwStrict | bool | Filter out adult (default `true`) and ecchi entries |
+| Sfw, SfwStrict | bool? | Filter out adult and ecchi entries. `null` (default) uses the [client setting](GettingStarted.md#safe-for-work-filtering) |
 
 ### GetTopMangaAsync
 
@@ -1239,8 +1239,8 @@ Returns the top anime episodes, each with the anime it belongs to. Without `Orde
 | OrderBy | TopEpisodesOrderBy | `Score`, `Votes` or `Comments`, always descending |
 | Page | int? | 1-based page index |
 | Limit | int? | Page size, 100 max |
-| Sfw | bool | Filter out adult entries. Defaults to `true` |
-| SfwStrict | bool | Also filter out ecchi entries. Defaults to `false` |
+| Sfw | bool? | Filter out adult entries. `null` (default) uses the [client setting](GettingStarted.md#safe-for-work-filtering) |
+| SfwStrict | bool? | Also filter out ecchi entries. `null` (default) uses the [client setting](GettingStarted.md#safe-for-work-filtering) |
 
 **Returns:** `PaginatedTenraiResponse<ICollection<TopEpisode>>`
 
@@ -1268,8 +1268,8 @@ Returns anime promos and music videos, most viewed on YouTube first. An overload
 | SortDirection | SortDirection | Direction for `OrderBy` |
 | Page | int? | 1-based page index |
 | Limit | int? | Page size, 100 max |
-| Sfw | bool | Filter out adult entries. Defaults to `true` |
-| SfwStrict | bool | Also filter out ecchi entries. Defaults to `false` |
+| Sfw | bool? | Filter out adult entries. `null` (default) uses the [client setting](GettingStarted.md#safe-for-work-filtering) |
+| SfwStrict | bool? | Also filter out ecchi entries. `null` (default) uses the [client setting](GettingStarted.md#safe-for-work-filtering) |
 
 **Returns:** `PaginatedTenraiResponse<ICollection<TopVideo>>`
 
@@ -1414,7 +1414,7 @@ var magazines = await tenrai.GetMagazinesAsync();
 
 ### GetRandomAnimeAsync
 
-Gets random anime. Overload: `(RandomAnimeConfig config)` with `Types`, `Status`, `Ratings`, `Sources`, `HasTrailer`, `Genres`, `ExcludedGenres`, `ProducerIds`, `ExcludedIds`, `MinimumScore`/`MaximumScore`, `Year` or `MinimumYear`/`MaximumYear` (not both, the API returns 400), `Sfw` (default `true`), `SfwStrict`.
+Gets random anime. Overload: `(RandomAnimeConfig config)` with `Types`, `Status`, `Ratings`, `Sources`, `HasTrailer`, `Genres`, `ExcludedGenres`, `ProducerIds`, `ExcludedIds`, `MinimumScore`/`MaximumScore`, `Year` or `MinimumYear`/`MaximumYear` (not both, the API returns 400), `Sfw`, `SfwStrict`.
 
 **Returns:** `BaseTenraiResponse<Anime>`
 
@@ -1542,8 +1542,8 @@ Every search config sends its values URL-encoded, so a query like `"C#"` or `"To
 | Property | Type | Description |
 |----------|------|-------------|
 | Limit | int? | Entries per page, 100 max. The API returns 25 when unset |
-| Sfw | bool | Filter out adult entries. Defaults to `true` on every config that has it |
-| SfwStrict | bool | Also filter out ecchi entries. Defaults to `false` (same configs as `Sfw`) |
+| Sfw | bool? | Filter out adult entries. `null` (default) uses the [client setting](GettingStarted.md#safe-for-work-filtering) |
+| SfwStrict | bool? | Also filter out ecchi entries. `null` (default) uses the [client setting](GettingStarted.md#safe-for-work-filtering) |
 | MinimumScore, MaximumScore | double? | Score range, e.g. `7.5` (anime and manga search) |
 
 ### SearchAnimeAsync
@@ -1769,8 +1769,8 @@ Returns public interest stacks matching an `InterestStackSearchConfig`.
 | Type | InterestStackType | `Anime`, `Manga`, or `EveryType` (default) |
 | OrderBy | InterestStackSearchOrderBy | `CreatedAt` or `RestackCount`. `NoSorting` (default) leaves the order to the API |
 | SortDirection | SortDirection | `Ascending` or `Descending`. Only applied when `OrderBy` is set |
-| Sfw | bool | Filter out adult entries. Defaults to `true` |
-| SfwStrict | bool | Also filter out ecchi entries. Defaults to `false` |
+| Sfw | bool? | Filter out adult entries. `null` (default) uses the [client setting](GettingStarted.md#safe-for-work-filtering) |
+| SfwStrict | bool? | Also filter out ecchi entries. `null` (default) uses the [client setting](GettingStarted.md#safe-for-work-filtering) |
 
 `OrderBy` accepts only `CreatedAt` and `RestackCount` because those are the only two values the API sorts by. Other fields, including `EntryCount`, return 400.
 
@@ -1837,8 +1837,8 @@ Used by `GetAnimeNewsAsync`/`GetMangaNewsAsync`. `NewsSearchConfig` extends it w
 | PublishedAfter, PublishedBefore | DateTime? | Publish date range, sent as `yyyy-MM-dd` |
 | OrderBy | NewsOrderBy | `PublishedAt` or `Comments`. `NoSorting` (default) leaves newest first |
 | SortDirection | SortDirection | Applied when `OrderBy` is set |
-| Sfw | bool | Filter out items about adult entries. Defaults to `true` |
-| SfwStrict | bool | Also filter out items about ecchi entries |
+| Sfw | bool? | Filter out adult entries. `null` (default) uses the [client setting](GettingStarted.md#safe-for-work-filtering) |
+| SfwStrict | bool? | Also filter out ecchi entries. `null` (default) uses the [client setting](GettingStarted.md#safe-for-work-filtering) |
 
 ### ArticleFilterConfig
 

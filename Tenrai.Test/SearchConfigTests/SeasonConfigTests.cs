@@ -16,7 +16,7 @@ namespace Tenrai.Tests.SearchConfigTests
 				SortDirection = SortDirection.Descending
 			};
 
-			config.ConfigToString().Should().Be("?filter=TV,ONA&sfw=true&continuing=true&order_by=score&sort=desc");
+			config.ConfigToString().Should().Be("?filter=TV,ONA&continuing=true&order_by=score&sort=desc");
 		}
 	}
 }

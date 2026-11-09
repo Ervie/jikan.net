@@ -25,6 +25,16 @@ namespace Tenrai.Config
 		public List<TaskLimiterConfiguration> LimiterConfigurations { get; set; }
 
 		/// <summary>
+		/// Filter out adult entries on every call to an endpoint that supports it. A config's own <c>Sfw</c> overrides this for that call. Defaults to <c>false</c>, the API's default.
+		/// </summary>
+		public bool Sfw { get; set; }
+
+		/// <summary>
+		/// Also filter out ecchi entries on every call to an endpoint that supports it. A config's own <c>SfwStrict</c> overrides this for that call.
+		/// </summary>
+		public bool SfwStrict { get; set; }
+
+		/// <summary>
 		/// Initializes a new instance of <see cref="TenraiClientConfiguration"/> with default settings:
 		/// exceptions are not suppressed and the default task limiter configuration is applied.
 		/// </summary>

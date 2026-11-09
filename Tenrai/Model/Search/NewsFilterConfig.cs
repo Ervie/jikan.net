@@ -7,7 +7,7 @@ namespace Tenrai
 	/// <summary>
 	/// Filters for news of one anime or manga. <see cref="NewsSearchConfig"/> adds search text and tag for the full news catalogue.
 	/// </summary>
-	public class NewsFilterConfig : ISearchConfig
+	public class NewsFilterConfig : ISearchConfig, ISfwConfig
 	{
 		/// <summary>
 		/// 1-based page index.
@@ -45,14 +45,14 @@ namespace Tenrai
 		public SortDirection SortDirection { get; set; }
 
 		/// <summary>
-		/// Filter out news about adult entries.
+		/// Filter out news about adult entries. Null uses the client setting (<see cref="Config.TenraiClientConfiguration.Sfw"/>).
 		/// </summary>
-		public bool Sfw { get; set; } = true;
+		public bool? Sfw { get; set; }
 
 		/// <summary>
-		/// Also filter out news about ecchi entries, on top of <see cref="Sfw"/>.
+		/// Also filter out news about ecchi entries, on top of <see cref="Sfw"/>. Null uses the client setting.
 		/// </summary>
-		public bool SfwStrict { get; set; }
+		public bool? SfwStrict { get; set; }
 
 		/// <summary>
 		/// Create query from current parameters for the request.

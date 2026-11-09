@@ -18,7 +18,7 @@ namespace Tenrai.Tests.SearchConfigTests
 				SortDirection = SortDirection.Descending
 			};
 
-			config.ConfigToString().Should().Be("?q=One%20Piece&tag=More%20Info&published_after=2025-01-01&order_by=comments&sort=desc&sfw=true");
+			config.ConfigToString().Should().Be("?q=One%20Piece&tag=More%20Info&published_after=2025-01-01&order_by=comments&sort=desc");
 		}
 
 		[Fact]
@@ -26,7 +26,7 @@ namespace Tenrai.Tests.SearchConfigTests
 		{
 			var config = new ArticleFilterConfig { OrderBy = ArticleOrderBy.Views, Limit = 50 };
 
-			config.ConfigToString().Should().Be("?limit=50&order_by=views&sort=asc&sfw=true");
+			config.ConfigToString().Should().Be("?limit=50&order_by=views&sort=asc");
 		}
 	}
 }
