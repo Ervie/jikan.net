@@ -205,14 +205,17 @@ namespace Tenrai
 		}
 
 		/// <inheritdoc />
-		[Obsolete(ErrorMessagesConst.UnsupportedForum)]
-		public Task<BaseTenraiResponse<ICollection<ForumTopic>>> GetAnimeForumTopicsAsync(long id, CancellationToken cancellationToken = default)
-			=> throw new NotSupportedException(ErrorMessagesConst.UnsupportedForum);
+		public Task<PaginatedTenraiResponse<ICollection<ForumTopic>>> GetAnimeForumTopicsAsync(long id, CancellationToken cancellationToken = default)
+			=> GetAnimeForumTopicsAsync(id, new AnimeForumSearchConfig(), cancellationToken);
 
 		/// <inheritdoc />
-		[Obsolete(ErrorMessagesConst.UnsupportedForum)]
-		public Task<BaseTenraiResponse<ICollection<ForumTopic>>> GetAnimeForumTopicsAsync(long id, ForumTopicType type, CancellationToken cancellationToken = default)
-			=> throw new NotSupportedException(ErrorMessagesConst.UnsupportedForum);
+		public async Task<PaginatedTenraiResponse<ICollection<ForumTopic>>> GetAnimeForumTopicsAsync(long id, AnimeForumSearchConfig searchConfig, CancellationToken cancellationToken = default)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			Guard.IsNotNull(searchConfig, nameof(searchConfig));
+			var endpointParts = new[] { TenraiEndpointConsts.Anime, id.ToString(), TenraiEndpointConsts.Forum + searchConfig.ConfigToString() };
+			return await ExecuteGetRequestAsync<PaginatedTenraiResponse<ICollection<ForumTopic>>>(endpointParts, cancellationToken);
+		}
 
 		/// <inheritdoc />
 		public async Task<BaseTenraiResponse<AnimeVideos>> GetAnimeVideosAsync(long id, CancellationToken cancellationToken = default)
@@ -453,14 +456,17 @@ namespace Tenrai
 		}
 
 		/// <inheritdoc />
-		[Obsolete(ErrorMessagesConst.UnsupportedForum)]
-		public Task<BaseTenraiResponse<ICollection<ForumTopic>>> GetMangaForumTopicsAsync(long id, CancellationToken cancellationToken = default)
-			=> throw new NotSupportedException(ErrorMessagesConst.UnsupportedForum);
+		public Task<PaginatedTenraiResponse<ICollection<ForumTopic>>> GetMangaForumTopicsAsync(long id, CancellationToken cancellationToken = default)
+			=> GetMangaForumTopicsAsync(id, new MangaForumSearchConfig(), cancellationToken);
 
 		/// <inheritdoc />
-		[Obsolete(ErrorMessagesConst.UnsupportedForum)]
-		public Task<BaseTenraiResponse<ICollection<ForumTopic>>> GetMangaForumTopicsAsync(long id, ForumTopicType type, CancellationToken cancellationToken = default)
-			=> throw new NotSupportedException(ErrorMessagesConst.UnsupportedForum);
+		public async Task<PaginatedTenraiResponse<ICollection<ForumTopic>>> GetMangaForumTopicsAsync(long id, MangaForumSearchConfig searchConfig, CancellationToken cancellationToken = default)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			Guard.IsNotNull(searchConfig, nameof(searchConfig));
+			var endpointParts = new[] { TenraiEndpointConsts.Manga, id.ToString(), TenraiEndpointConsts.Forum + searchConfig.ConfigToString() };
+			return await ExecuteGetRequestAsync<PaginatedTenraiResponse<ICollection<ForumTopic>>>(endpointParts, cancellationToken);
+		}
 
 		/// <inheritdoc />
 		public async Task<BaseTenraiResponse<ICollection<ImagesSet>>> GetMangaPicturesAsync(long id, CancellationToken cancellationToken = default)

@@ -19,7 +19,7 @@ Tenrai.Net is a .NET wrapper for the Tenrai REST API (`https://api.tenrai.org/v1
 
 - Preserve public API compatibility unless the task explicitly asks for a breaking change.
 - Keep `ITenrai` and `TenraiClient` aligned when adding or changing client methods.
-- Endpoints Tenrai does not implement (users, clubs, watch, forum topics, user updates) are kept but marked `[Obsolete]` and throw `NotSupportedException`; do not re-enable them against Tenrai.
+- Endpoints Tenrai does not implement (users, clubs, watch, user updates) are kept but marked `[Obsolete]` and throw `NotSupportedException`; do not re-enable them against Tenrai.
 - Validate public inputs with `Guard` before building endpoint routes.
 - Prefer `TenraiEndpointConsts` for route segments instead of repeating string literals.
 - Response models should use `System.Text.Json.Serialization.JsonPropertyName` for JSON field mapping.

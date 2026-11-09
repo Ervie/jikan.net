@@ -81,23 +81,21 @@ namespace Tenrai
         Task<PaginatedTenraiResponse<ICollection<News>>> GetAnimeNewsAsync(long id, int page, CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Returns collections of forum topics related to anime with given MAL id.
+        /// Returns the first page of episode discussion threads for anime with given MAL id. Other forum topics are not available.
         /// </summary>
         /// <param name="id">MAL id of anime.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
-        /// <returns>Collections of forum topics related to anime with given MAL id.</returns>
-        [Obsolete(ErrorMessagesConst.UnsupportedForum)]
-        Task<BaseTenraiResponse<ICollection<ForumTopic>>> GetAnimeForumTopicsAsync(long id, CancellationToken cancellationToken = default);
+        /// <returns>Page of episode discussion threads, 30 per page.</returns>
+        Task<PaginatedTenraiResponse<ICollection<ForumTopic>>> GetAnimeForumTopicsAsync(long id, CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Returns collections of forum topics related to anime with given MAL id.
+        /// Returns a page of episode discussion threads for anime with given MAL id, sorted as requested.
         /// </summary>
         /// <param name="id">MAL id of anime.</param>
-        /// <param name="type">ForumTopicType filter</param>
+        /// <param name="searchConfig">Page and sort order.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
-        /// <returns>Collections of forum topics related to anime with given MAL id.</returns>
-        [Obsolete(ErrorMessagesConst.UnsupportedForum)]
-        Task<BaseTenraiResponse<ICollection<ForumTopic>>> GetAnimeForumTopicsAsync(long id, ForumTopicType type, CancellationToken cancellationToken = default);
+        /// <returns>Page of episode discussion threads, 30 per page.</returns>
+        Task<PaginatedTenraiResponse<ICollection<ForumTopic>>> GetAnimeForumTopicsAsync(long id, AnimeForumSearchConfig searchConfig, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns collections of videos related to anime with given MAL id.
@@ -287,23 +285,21 @@ namespace Tenrai
         Task<PaginatedTenraiResponse<ICollection<News>>> GetMangaNewsAsync(long id, int page, CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Returns collections of forum topics related to manga with given MAL id.
+        /// Returns the first page of chapter discussion threads for manga with given MAL id. Other forum topics are not available.
         /// </summary>
         /// <param name="id">MAL id of manga.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
-        /// <returns>Collections of forum topics related to manga with given MAL id.</returns>
-        [Obsolete(ErrorMessagesConst.UnsupportedForum)]
-        Task<BaseTenraiResponse<ICollection<ForumTopic>>> GetMangaForumTopicsAsync(long id, CancellationToken cancellationToken = default);
+        /// <returns>Page of chapter discussion threads, 30 per page.</returns>
+        Task<PaginatedTenraiResponse<ICollection<ForumTopic>>> GetMangaForumTopicsAsync(long id, CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Returns collections of forum topics related to manga with given MAL id.
+        /// Returns a page of chapter discussion threads for manga with given MAL id, sorted as requested.
         /// </summary>
         /// <param name="id">MAL id of manga.</param>
-        /// <param name="type">ForumTopicType filter</param>
+        /// <param name="searchConfig">Page and sort order.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
-        /// <returns>Collections of forum topics related to manga with given MAL id.</returns>
-        [Obsolete(ErrorMessagesConst.UnsupportedForum)]
-        Task<BaseTenraiResponse<ICollection<ForumTopic>>> GetMangaForumTopicsAsync(long id, ForumTopicType type, CancellationToken cancellationToken = default);
+        /// <returns>Page of chapter discussion threads, 30 per page.</returns>
+        Task<PaginatedTenraiResponse<ICollection<ForumTopic>>> GetMangaForumTopicsAsync(long id, MangaForumSearchConfig searchConfig, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns collections of links to pictures related to manga with given MAL id.

@@ -11,7 +11,6 @@ namespace Tenrai.Consts
 		public const string UnsupportedUserData = "Tenrai does not expose user data endpoints." + OfficialApiPointer;
 		public const string UnsupportedClub = "Tenrai does not expose club endpoints." + OfficialApiPointer;
 		public const string UnsupportedWatch = "Tenrai does not expose watch (popular/recent episodes and promos) endpoints.";
-		public const string UnsupportedForum = "Tenrai does not expose forum topic endpoints.";
 		public const string UnsupportedUserUpdates = "Tenrai does not expose user update endpoints." + OfficialApiPointer;
 	}
 }

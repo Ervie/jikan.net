@@ -2,7 +2,7 @@
 
 All methods are asynchronous and return `Task<T>`. Response models wrap data in a `Data` property. Paginated endpoints return `PaginatedTenraiResponse<T>` with pagination metadata. See [Models](Models.md) for response model details.
 
-> **Unsupported endpoints:** Tenrai does not implement user, club, watch, forum-topic, or anime/manga user-update endpoints (plus random user and user/club search). Those methods are retained on `ITenrai` for source compatibility but are marked `[Obsolete]` and throw `NotSupportedException`; they are not listed below. For user-specific data, use the [official MyAnimeList API](https://myanimelist.net/apiconfig/references/api/v2).
+> **Unsupported endpoints:** Tenrai does not implement user, club, watch, or anime/manga user-update endpoints (plus random user and user/club search). Those methods are retained on `ITenrai` for source compatibility but are marked `[Obsolete]` and throw `NotSupportedException`; they are not listed below. For user-specific data, use the [official MyAnimeList API](https://myanimelist.net/apiconfig/references/api/v2).
 
 > **Server Key:** The bulk `Get*IdsAsync` methods require a Tenrai Server Key (set `TenraiClientConfiguration.ServerKey`); without one the API returns 401. See [Rate Limiting](RateLimiting.md).
 
@@ -127,6 +127,29 @@ var news = await tenrai.GetAnimeNewsAsync(1);
 foreach (var n in news.Data)
     Console.WriteLine(n.Title);
 ```
+
+### GetAnimeForumTopicsAsync
+
+Returns episode discussion threads, 30 per page. Other forum topics are not available. Overload: `(long id, AnimeForumSearchConfig searchConfig)`.
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| id | long | MAL id of anime |
+| searchConfig | AnimeForumSearchConfig | (optional) `Page`, `OrderBy` (`EpisodeNumber`, `CreatedOn`, `CommentCount`, `LastPost`), `SortDirection` |
+
+**Returns:** `PaginatedTenraiResponse<ICollection<ForumTopic>>`
+
+**Example:**
+
+```csharp
+var threads = await tenrai.GetAnimeForumTopicsAsync(21, new AnimeForumSearchConfig
+{
+    OrderBy = AnimeForumOrderBy.CommentCount,
+    SortDirection = SortDirection.Descending
+});
+```
+
+**Model:** [ForumTopic](Models.md#forumtopic)
 
 ### GetAnimeVideosAsync
 
@@ -435,6 +458,29 @@ var news = await tenrai.GetMangaNewsAsync(2);
 foreach (var n in news.Data)
     Console.WriteLine(n.Title);
 ```
+
+### GetMangaForumTopicsAsync
+
+Returns chapter discussion threads, 30 per page. Other forum topics are not available. Overload: `(long id, MangaForumSearchConfig searchConfig)`.
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| id | long | MAL id of manga |
+| searchConfig | MangaForumSearchConfig | (optional) `Page`, `OrderBy` (`ChapterNumber`, `CreatedOn`, `CommentCount`, `LastPost`), `SortDirection` |
+
+**Returns:** `PaginatedTenraiResponse<ICollection<ForumTopic>>`
+
+**Example:**
+
+```csharp
+var latest = await tenrai.GetMangaForumTopicsAsync(2, new MangaForumSearchConfig
+{
+    OrderBy = MangaForumOrderBy.ChapterNumber,
+    SortDirection = SortDirection.Descending
+});
+```
+
+**Model:** [ForumTopic](Models.md#forumtopic)
 
 ### GetMangaPicturesAsync
 

@@ -12,7 +12,7 @@ Tenrai.Net is based on, and a huge thank you goes to, [@Ervie](https://github.co
 
 ### Differences from Jikan.NET
 
-- **Not all endpoints are supported by Tenrai.** The methods for users, clubs, watch, forum topics, and anime/manga user updates are retained for source compatibility but are marked `[Obsolete]` and throw `NotSupportedException`. For user-specific data, use the [official MyAnimeList API](https://myanimelist.net/apiconfig/references/api/v2).
+- **Not all endpoints are supported by Tenrai.** The methods for users, clubs, watch, and anime/manga user updates are retained for source compatibility but are marked `[Obsolete]` and throw `NotSupportedException`. For user-specific data, use the [official MyAnimeList API](https://myanimelist.net/apiconfig/references/api/v2).
 - **Richer reviews.** Reviews can be sorted (`newest`/`oldest`/`most_helpful`), filtered by preliminary/spoiler state as a tri-state (`Include`/`Exclude`/`Only`), and filtered by sentiment (`recommended`/`mixed_feelings`/`not_recommended`). See [review filtering](docs/API.md#reviews).
 - **Server Key support.** Supply a Tenrai Server Key to raise rate limits (300/min, 5/sec, unlimited daily). See [Rate Limiting](docs/RateLimiting.md).
 - **Bulk ID endpoints.** Fetch every MAL ID for anime, manga, characters, people, or producers (requires a Server Key).
@@ -30,9 +30,9 @@ Tenrai.Net is based on, and a huge thank you goes to, [@Ervie](https://github.co
 # List of features
 
 - Anime
-    - Basic / Full information, Characters, Staff, Episodes, News, Videos/PV/Episodes, Pictures, Statistics, More Info, Reviews, Recommendations, Related entries, Themes, External links, Streaming links
+    - Basic / Full information (batch up to 25, denied/deleted archives), Characters, Staff, Episodes, Episode discussion threads, News, Videos/PV/Episodes, Pictures, Statistics, More Info, Reviews, Recommendations, Related entries, Themes, External links, Streaming links
 - Manga
-    - Basic / Full information, Characters, News, Pictures, Statistics, More Info, Reviews, Recommendations, Related entries, External links
+    - Basic / Full information (batch up to 25, denied/deleted archives), Characters, Chapter discussion threads, News, Pictures, Statistics, More Info, Reviews, Recommendations, Related entries, External links
 - People
     - Basic / Full information, Related anime, Related manga, Voice acting roles, Pictures
 - Characters
@@ -52,7 +52,7 @@ Tenrai.Net is based on, and a huge thank you goes to, [@Ervie](https://github.co
 
 ### Not supported by Tenrai
 
-The following Jikan.NET endpoint families are retained but throw `NotSupportedException`: **Users**, **Clubs**, **Watch**, **Forum Topics**, and **anime/manga User Updates** (plus random user and user/club search).
+The following Jikan.NET endpoint families are retained but throw `NotSupportedException`: **Users**, **Clubs**, **Watch**, and **anime/manga User Updates** (plus random user and user/club search).
 
 # Installation
 

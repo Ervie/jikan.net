@@ -56,12 +56,10 @@ namespace Tenrai.Tests
 		}
 
 		[Fact]
-		public void ForumAndUserUpdateEndpoints_ShouldThrowNotSupported()
+		public void UserUpdateEndpoints_ShouldThrowNotSupported()
 		{
 			using (new AssertionScope())
 			{
-				FluentActions.Invoking(() => { _ = _tenrai.GetAnimeForumTopicsAsync(1); }).Should().Throw<NotSupportedException>();
-				FluentActions.Invoking(() => { _ = _tenrai.GetMangaForumTopicsAsync(1); }).Should().Throw<NotSupportedException>();
 				FluentActions.Invoking(() => { _ = _tenrai.GetAnimeUserUpdatesAsync(1); }).Should().Throw<NotSupportedException>();
 				FluentActions.Invoking(() => { _ = _tenrai.GetMangaUserUpdatesAsync(1); }).Should().Throw<NotSupportedException>();
 			}
