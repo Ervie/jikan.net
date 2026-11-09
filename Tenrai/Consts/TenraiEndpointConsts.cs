@@ -51,6 +51,10 @@ namespace Tenrai.Consts
 		internal const string Stacks = "stacks";
 		internal const string Articles = "articles";
 		internal const string Tags = "tags";
+		internal const string Unapproved = "unapproved";
+		internal const string Denied = "denied";
+		internal const string Deleted = "deleted";
+		internal const string Adapted = "adapted";
 
 		/// <summary>
 		/// Absolute URL. The status service is hosted on tenrai.org, not api.tenrai.org, so this

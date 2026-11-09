@@ -223,6 +223,43 @@ var stats = await tenrai.GetAnimeStatisticsAsync(1);
 Console.WriteLine($"Score: {stats.Data.Score?.Mean}");
 ```
 
+### GetAnimeStatisticsHistoryAsync
+
+Returns one entry per day with that day's score, rank, popularity, members and favorites, newest first. Overload: `(long id, StatisticsHistoryConfig config)`.
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| id | long | MAL id of anime |
+| config | [StatisticsHistoryConfig](#statisticshistoryconfig) | (optional) Date range, order, paging |
+
+**Returns:** `PaginatedTenraiResponse<ICollection<StatisticsHistoryEntry<AnimeStatistics>>>`
+
+**Example:**
+
+```csharp
+var history = await tenrai.GetAnimeStatisticsHistoryAsync(1, new StatisticsHistoryConfig
+{
+    StartDate = new DateTime(2026, 4, 1),
+    Sort = SortDirection.Ascending
+});
+foreach (var day in history.Data)
+    Console.WriteLine($"{day.Date:yyyy-MM-dd}: {day.Members} members, {day.Statistics?.Completed} completed");
+```
+
+`Statistics` (the watching/completed/score breakdown) is null on days before 2026-04-04 and for titles under 1000 members.
+
+**Model:** [StatisticsHistoryEntry&lt;T&gt;](Models.md#statisticshistoryentryt)
+
+#### StatisticsHistoryConfig
+
+| Property | Type | Description |
+|----------|------|-------------|
+| StartDate | DateTime? | First day to include |
+| EndDate | DateTime? | Last day to include |
+| Sort | SortDirection? | Not sent when null; the API returns newest first |
+| Page | int? | 1-based page index |
+| Limit | int? | Page size, 100 max |
+
 ### GetAnimeMoreInfoAsync
 
 Returns additional information.
@@ -397,6 +434,38 @@ var deleted = await tenrai.GetAnimeFullDataAsync(2632, new FullDataConfig { Mode
 | Sfw | bool | Filter adult entries out of the relations. Defaults to `true`, so the overload can return fewer `Relations` than the plain call, which sends no filter |
 | SfwStrict | bool | Also filter ecchi entries out of the relations. Defaults to `false` |
 
+### GetUnapprovedAnimeAsync, GetDeniedAnimeAsync, GetDeletedAnimeAsync
+
+Return anime still awaiting approval on MyAnimeList (`Approved` is `false`), submissions MyAnimeList denied, and anime deleted from it. Each has an overload taking a search config: [`CatalogueSearchConfig`](#cataloguesearchconfig) for unapproved and denied, [`DeletedSearchConfig`](#deletedsearchconfig) for deleted.
+
+**Returns:** `PaginatedTenraiResponse<ICollection<Anime>>`
+
+**Example:**
+
+```csharp
+var deleted = await tenrai.GetDeletedAnimeAsync(new DeletedSearchConfig
+{
+    OrderBy = DeletedOrderBy.Members,
+    SortDirection = SortDirection.Descending
+});
+```
+
+#### CatalogueSearchConfig
+
+| Property | Type | Description |
+|----------|------|-------------|
+| Query | string | Search text matched against titles |
+| OrderBy | CatalogueOrderBy | `MalId` or `Title`. These lists cannot be sorted by score or members |
+| SortDirection | SortDirection | Direction for `OrderBy` |
+| Page | int? | 1-based page index |
+| Limit | int? | Page size, 100 max |
+| Sfw | bool | Filter out adult entries. Defaults to `true` |
+| SfwStrict | bool | Also filter out ecchi entries. Defaults to `false` |
+
+#### DeletedSearchConfig
+
+The same as `CatalogueSearchConfig`, with `OrderBy` a `DeletedOrderBy`: `MalId`, `Title`, `Score` or `Members`.
+
 ---
 
 ## Manga
@@ -516,6 +585,19 @@ var stats = await tenrai.GetMangaStatisticsAsync(2);
 Console.WriteLine($"Score: {stats.Data.Score?.Mean}");
 ```
 
+### GetMangaStatisticsHistoryAsync
+
+Returns one entry per day for a manga, same as [GetAnimeStatisticsHistoryAsync](#getanimestatisticshistoryasync), with `MangaStatistics` (reading, plan to read, ...) in `Statistics`. Overload: `(long id, StatisticsHistoryConfig config)`.
+
+**Returns:** `PaginatedTenraiResponse<ICollection<StatisticsHistoryEntry<MangaStatistics>>>`
+
+**Example:**
+
+```csharp
+var history = await tenrai.GetMangaStatisticsHistoryAsync(2);
+Console.WriteLine(history.Data.First().Statistics?.Reading);
+```
+
 ### GetMangaMoreInfoAsync
 
 Returns additional information.
@@ -622,6 +704,45 @@ Returns manga with all additional data. Overload: `(long id, FullDataConfig conf
 ```csharp
 var full = await tenrai.GetMangaFullDataAsync(2);
 ```
+
+### GetUnapprovedMangaAsync, GetDeniedMangaAsync, GetDeletedMangaAsync
+
+Same as the [anime lists](#getunapprovedanimeasync-getdeniedanimeasync-getdeletedanimeasync), returning `PaginatedTenraiResponse<ICollection<Manga>>`. Overloads take a [`CatalogueSearchConfig`](#cataloguesearchconfig) or [`DeletedSearchConfig`](#deletedsearchconfig).
+
+### GetAdaptedMangaAsync
+
+Returns manga that have an anime adaptation. Overload: `(AdaptedMangaSearchConfig searchConfig)`.
+
+**Returns:** `PaginatedTenraiResponse<ICollection<Manga>>`
+
+**Example:**
+
+```csharp
+var airing = await tenrai.GetAdaptedMangaAsync(new AdaptedMangaSearchConfig
+{
+    Filter = AdaptedMangaFilter.Airing,
+    Types = new List<MangaType> { MangaType.Manga, MangaType.Manhwa },
+    MinimumScore = 8
+});
+```
+
+#### AdaptedMangaSearchConfig
+
+| Property | Type | Description |
+|----------|------|-------------|
+| Filter | AdaptedMangaFilter? | `All`, `Airing` (adaptation airing now) or `Upcoming`. Not sent when null, which the API treats as `All` |
+| Types | ICollection&lt;MangaType&gt; | Manga types to include. `MangaType.Novel` is rejected by the API here |
+| Status | PublishingStatus | Publishing status of the manga |
+| Genres | ICollection&lt;MangaGenreSearch&gt; | Genres the manga must have |
+| Score | double? | Exact score. The API rejects it combined with `MinimumScore` or `MaximumScore` |
+| MinimumScore, MaximumScore | double? | Score range |
+| StartDate, EndDate | DateTime? | Publishing date range |
+| OrderBy | AdaptedMangaOrderBy | `MalId`, `Title`, `StartDate`, `EndDate`, `Chapters`, `Volumes`, `Score`, `ScoredBy`, `Rank`, `Popularity`, `Members`, `Favorites` |
+| SortDirection | SortDirection | Direction for `OrderBy` |
+| Page | int? | 1-based page index |
+| Limit | int? | Page size, 100 max |
+| Sfw | bool | Filter out adult entries. Defaults to `true` |
+| SfwStrict | bool | Also filter out ecchi entries. Defaults to `false` |
 
 ---
 

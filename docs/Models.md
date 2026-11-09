@@ -152,6 +152,25 @@ Extends `BaseTenraiResponse<ICollection<long>>` with `Total` (int), the number o
 
 ---
 
+## Statistics history
+
+### StatisticsHistoryEntry&lt;T&gt;
+
+One day of an anime's or manga's history. `T` is `AnimeStatistics` or `MangaStatistics`.
+
+| Property | Type | Description |
+|----------|------|-------------|
+| Date | DateTime | Day the numbers were taken |
+| Score | double? | Score that day |
+| ScoredBy | int? | Number of scorers |
+| Rank | int? | Score rank |
+| Popularity | int? | Popularity rank |
+| Members | int? | Members count |
+| Favorites | int? | Favorites count |
+| Statistics | T | List status and score breakdown. Null before 2026-04-04 and for titles under 1000 members |
+
+---
+
 ## Character
 
 ### Character

@@ -30,9 +30,10 @@ Tenrai.Net is based on, and a huge thank you goes to, [@Ervie](https://github.co
 # List of features
 
 - Anime
-    - Basic / Full information (batch up to 25, denied/deleted archives), Characters, Staff, Episodes, Episode discussion threads, News, Videos/PV/Episodes, Pictures, Statistics, More Info, Reviews, Recommendations, Related entries, Themes, External links, Streaming links
+    - Basic / Full information (batch up to 25, denied/deleted archives), Characters, Staff, Episodes, Episode discussion threads, News, Videos/PV/Episodes, Pictures, Statistics, Day-by-day statistics history, More Info, Reviews, Recommendations, Related entries, Themes, External links, Streaming links
 - Manga
-    - Basic / Full information (batch up to 25, denied/deleted archives), Characters, Chapter discussion threads, News, Pictures, Statistics, More Info, Reviews, Recommendations, Related entries, External links
+    - Basic / Full information (batch up to 25, denied/deleted archives), Characters, Chapter discussion threads, News, Pictures, Statistics, Day-by-day statistics history, More Info, Reviews, Recommendations, Related entries, External links
+- Catalogue lists: Unapproved, denied and deleted anime and manga, manga adapted into anime
 - People
     - Basic / Full information, Related anime, Related manga, Voice acting roles, Pictures
 - Characters

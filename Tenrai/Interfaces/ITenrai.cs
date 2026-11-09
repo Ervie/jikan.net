@@ -273,6 +273,68 @@ namespace Tenrai
         /// <returns>Collection of anime MAL IDs.</returns>
         Task<IdsTenraiResponse> GetAnimeIdsAsync(CancellationToken cancellationToken = default);
 
+        /// <summary>
+        /// Returns anime still awaiting approval on MyAnimeList.
+        /// </summary>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Paginated collection of unapproved anime.</returns>
+        Task<PaginatedTenraiResponse<ICollection<Anime>>> GetUnapprovedAnimeAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns anime awaiting approval on MyAnimeList, searched, sorted and paged.
+        /// </summary>
+        /// <param name="searchConfig">Search, sort and paging.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Paginated collection of unapproved anime.</returns>
+        Task<PaginatedTenraiResponse<ICollection<Anime>>> GetUnapprovedAnimeAsync(CatalogueSearchConfig searchConfig, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns anime submissions MyAnimeList denied.
+        /// </summary>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Paginated collection of denied anime.</returns>
+        Task<PaginatedTenraiResponse<ICollection<Anime>>> GetDeniedAnimeAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns anime submissions MyAnimeList denied, searched, sorted and paged.
+        /// </summary>
+        /// <param name="searchConfig">Search, sort and paging.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Paginated collection of denied anime.</returns>
+        Task<PaginatedTenraiResponse<ICollection<Anime>>> GetDeniedAnimeAsync(CatalogueSearchConfig searchConfig, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns anime deleted from MyAnimeList.
+        /// </summary>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Paginated collection of deleted anime.</returns>
+        Task<PaginatedTenraiResponse<ICollection<Anime>>> GetDeletedAnimeAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns anime deleted from MyAnimeList, searched, sorted and paged.
+        /// </summary>
+        /// <param name="searchConfig">Search, sort and paging.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Paginated collection of deleted anime.</returns>
+        Task<PaginatedTenraiResponse<ICollection<Anime>>> GetDeletedAnimeAsync(DeletedSearchConfig searchConfig, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns the day-by-day score, rank, popularity, members and favorites of an anime, newest first.
+        /// </summary>
+        /// <param name="id">MAL id of anime.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Paginated collection of history days.</returns>
+        Task<PaginatedTenraiResponse<ICollection<StatisticsHistoryEntry<AnimeStatistics>>>> GetAnimeStatisticsHistoryAsync(long id, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns the day-by-day statistics of an anime for a date range.
+        /// </summary>
+        /// <param name="id">MAL id of anime.</param>
+        /// <param name="config">Date range, order and paging.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Paginated collection of history days.</returns>
+        Task<PaginatedTenraiResponse<ICollection<StatisticsHistoryEntry<AnimeStatistics>>>> GetAnimeStatisticsHistoryAsync(long id, StatisticsHistoryConfig config, CancellationToken cancellationToken = default);
+
         #endregion Anime requests
 
         #region Manga requests
@@ -461,6 +523,83 @@ namespace Tenrai
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Collection of manga MAL IDs.</returns>
         Task<IdsTenraiResponse> GetMangaIdsAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns manga still awaiting approval on MyAnimeList.
+        /// </summary>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Paginated collection of unapproved manga.</returns>
+        Task<PaginatedTenraiResponse<ICollection<Manga>>> GetUnapprovedMangaAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns manga awaiting approval on MyAnimeList, searched, sorted and paged.
+        /// </summary>
+        /// <param name="searchConfig">Search, sort and paging.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Paginated collection of unapproved manga.</returns>
+        Task<PaginatedTenraiResponse<ICollection<Manga>>> GetUnapprovedMangaAsync(CatalogueSearchConfig searchConfig, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns manga submissions MyAnimeList denied.
+        /// </summary>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Paginated collection of denied manga.</returns>
+        Task<PaginatedTenraiResponse<ICollection<Manga>>> GetDeniedMangaAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns manga submissions MyAnimeList denied, searched, sorted and paged.
+        /// </summary>
+        /// <param name="searchConfig">Search, sort and paging.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Paginated collection of denied manga.</returns>
+        Task<PaginatedTenraiResponse<ICollection<Manga>>> GetDeniedMangaAsync(CatalogueSearchConfig searchConfig, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns manga deleted from MyAnimeList.
+        /// </summary>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Paginated collection of deleted manga.</returns>
+        Task<PaginatedTenraiResponse<ICollection<Manga>>> GetDeletedMangaAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns manga deleted from MyAnimeList, searched, sorted and paged.
+        /// </summary>
+        /// <param name="searchConfig">Search, sort and paging.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Paginated collection of deleted manga.</returns>
+        Task<PaginatedTenraiResponse<ICollection<Manga>>> GetDeletedMangaAsync(DeletedSearchConfig searchConfig, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns manga that have an anime adaptation.
+        /// </summary>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Paginated collection of adapted manga.</returns>
+        Task<PaginatedTenraiResponse<ICollection<Manga>>> GetAdaptedMangaAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns manga that have an anime adaptation, filtered, sorted and paged.
+        /// </summary>
+        /// <param name="searchConfig">Filters, sort and paging.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Paginated collection of adapted manga.</returns>
+        Task<PaginatedTenraiResponse<ICollection<Manga>>> GetAdaptedMangaAsync(AdaptedMangaSearchConfig searchConfig, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns the day-by-day score, rank, popularity, members and favorites of a manga, newest first.
+        /// </summary>
+        /// <param name="id">MAL id of manga.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Paginated collection of history days.</returns>
+        Task<PaginatedTenraiResponse<ICollection<StatisticsHistoryEntry<MangaStatistics>>>> GetMangaStatisticsHistoryAsync(long id, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns the day-by-day statistics of a manga for a date range.
+        /// </summary>
+        /// <param name="id">MAL id of manga.</param>
+        /// <param name="config">Date range, order and paging.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Paginated collection of history days.</returns>
+        Task<PaginatedTenraiResponse<ICollection<StatisticsHistoryEntry<MangaStatistics>>>> GetMangaStatisticsHistoryAsync(long id, StatisticsHistoryConfig config, CancellationToken cancellationToken = default);
 
         #endregion Manga requests
 
