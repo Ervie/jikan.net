@@ -99,12 +99,20 @@ namespace Tenrai.Helpers
 				return this;
 			}
 
-			var descriptions = values.Select(value =>
+			var descriptions = values
+				.Select(value =>
+				{
+					Guard.IsValidEnum(value, key);
+					return value.GetDescription();
+				})
+				.Where(description => !string.IsNullOrEmpty(description))
+				.Select(Uri.EscapeDataString)
+				.ToList();
+
+			if (descriptions.Count > 0)
 			{
-				Guard.IsValidEnum(value, key);
-				return Uri.EscapeDataString(value.GetDescription());
-			});
-			Append(key, string.Join(",", descriptions));
+				Append(key, string.Join(",", descriptions));
+			}
 
 			return this;
 		}
@@ -117,6 +125,38 @@ namespace Tenrai.Helpers
 			}
 
 			Append(key, string.Join(",", values.Select(value => value.ToString(CultureInfo.InvariantCulture))));
+
+			return this;
+		}
+
+		internal QueryBuilder AddList(string key, ICollection<int> values)
+		{
+			return AddList(key, values?.Select(value => (long)value).ToList());
+		}
+
+		internal QueryBuilder AddList(string key, ICollection<string> values)
+		{
+			var encoded = values?
+				.Where(value => !string.IsNullOrWhiteSpace(value))
+				.Select(Uri.EscapeDataString)
+				.ToList();
+
+			if (encoded == null || encoded.Count == 0)
+			{
+				return this;
+			}
+
+			Append(key, string.Join(",", encoded));
+
+			return this;
+		}
+
+		internal QueryBuilder Add(string key, bool? value)
+		{
+			if (value.HasValue)
+			{
+				Append(key, value.Value ? "true" : "false");
+			}
 
 			return this;
 		}

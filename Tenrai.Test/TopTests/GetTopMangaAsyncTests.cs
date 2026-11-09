@@ -114,7 +114,7 @@ namespace Tenrai.Tests.TopTests
 			// Given
 			var searchConfig = new MangaTopSearchConfig
 			{
-				Type = MangaType.Novel
+				Type = MangaType.LightNovel
 			};
 
 			// When

@@ -26,7 +26,7 @@ namespace Tenrai
 		public AdaptedMangaFilter? Filter { get; set; }
 
 		/// <summary>
-		/// Manga types to include. <see cref="MangaType.Novel"/> is not accepted here and the API rejects it.
+		/// Manga types to include. <see cref="MangaType.Novel"/> and <see cref="MangaType.LightNovel"/> are not accepted here and the API rejects them.
 		/// </summary>
 		public ICollection<MangaType> Types { get; set; } = new List<MangaType>();
 

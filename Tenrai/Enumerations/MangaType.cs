@@ -3,7 +3,7 @@ using System.ComponentModel;
 namespace Tenrai
 {
 	/// <summary>
-	/// Enumeration for anime types (search config).
+	/// Enumeration for manga types (search config).
 	/// </summary>
 	public enum MangaType
 	{
@@ -20,10 +20,16 @@ namespace Tenrai
 		Manga,
 
 		/// <summary>
-		/// Light novel
+		/// Novel. Before 4.0 this member sent "lightnovel"; use <see cref="LightNovel"/> for those.
+		/// </summary>
+		[Description("novel")]
+		Novel,
+
+		/// <summary>
+		/// Light novel.
 		/// </summary>
 		[Description("lightnovel")]
-		Novel,
+		LightNovel,
 
 		/// <summary>
 		/// Oneshot

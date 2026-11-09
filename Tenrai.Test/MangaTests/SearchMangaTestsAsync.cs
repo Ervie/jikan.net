@@ -164,7 +164,7 @@ namespace Tenrai.Tests.MangaTests
             var searchConfig = new MangaSearchConfig()
             {
                 Query = "yotsuba",
-                Status = PublishingStatus.Publishing
+                Statuses = new[] { PublishingStatus.Publishing }
             };
 
             // When
@@ -228,7 +228,7 @@ namespace Tenrai.Tests.MangaTests
             var searchConfig = new MangaSearchConfig
             {
 	            Query = query,
-                Type = MangaType.Manga
+                Types = new[] { MangaType.Manga }
             };
 
             // When
@@ -245,7 +245,7 @@ namespace Tenrai.Tests.MangaTests
             var searchConfig = new MangaSearchConfig
             {
                 Query = "danganronpa",
-                Type = MangaType.Manga
+                Types = new[] { MangaType.Manga }
             };
 
             // When
@@ -263,7 +263,7 @@ namespace Tenrai.Tests.MangaTests
 			var searchConfig = new MangaSearchConfig
 			{
 				Query = "danganronpa",
-				Type = MangaType.Manga,
+				Types = new[] { MangaType.Manga },
 				MinimumScore = 7
 			};
 
@@ -280,7 +280,7 @@ namespace Tenrai.Tests.MangaTests
 			var searchConfig = new MangaSearchConfig
 			{
 				Query = "metal",
-				Type = MangaType.Manga,
+				Types = new[] { MangaType.Manga },
 			};
 			searchConfig.Genres.Add(MangaGenreSearch.Game);
 
@@ -376,8 +376,8 @@ namespace Tenrai.Tests.MangaTests
 			// Given
 			var searchConfig = new MangaSearchConfig()
 			{
-				Status = airingStatus.GetValueOrDefault(),
-				Type = mangaType.GetValueOrDefault(),
+				Statuses = new[] { airingStatus.GetValueOrDefault() },
+				Types = new[] { mangaType.GetValueOrDefault() },
 				OrderBy = orderBy.GetValueOrDefault(),
 				SortDirection = sortDirection.GetValueOrDefault(),
 				Genres = genreSearch.HasValue ? new[] { genreSearch.Value } : Array.Empty<MangaGenreSearch>()
@@ -460,7 +460,7 @@ namespace Tenrai.Tests.MangaTests
 			{
 				Query = "ore",
 				Page = page,
-				Status = PublishingStatus.Publishing
+				Statuses = new[] { PublishingStatus.Publishing }
 			};
 
 			// When
@@ -479,7 +479,7 @@ namespace Tenrai.Tests.MangaTests
 				Query = "ore",
 				Page = 2,
 				Genres = new List<MangaGenreSearch> { MangaGenreSearch.Comedy },
-				Type = MangaType.Manga
+				Types = new[] { MangaType.Manga }
 			};
 
 			// When
@@ -496,7 +496,7 @@ namespace Tenrai.Tests.MangaTests
 			var searchConfig = new MangaSearchConfig
 			{
 				Genres = new List<MangaGenreSearch> { MangaGenreSearch.Comedy },
-				Type = MangaType.Manga
+				Types = new[] { MangaType.Manga }
 			};
 
 			// When
@@ -513,7 +513,7 @@ namespace Tenrai.Tests.MangaTests
 			var searchConfig = new MangaSearchConfig
 			{
 				ExcludedGenres = new List<MangaGenreSearch> { MangaGenreSearch.Comedy },
-				Type = MangaType.Manga
+				Types = new[] { MangaType.Manga }
 			};
 
 			// When
@@ -530,7 +530,7 @@ namespace Tenrai.Tests.MangaTests
 			var searchConfig = new MangaSearchConfig
 			{
 				ExcludedGenres = new List<MangaGenreSearch> { MangaGenreSearch.Action },
-				Type = MangaType.Manga
+				Types = new[] { MangaType.Manga }
 			};
 
 			// When
@@ -550,7 +550,7 @@ namespace Tenrai.Tests.MangaTests
 				Query = "monster",
 				StartDate = new DateTime(1994, 12, 1),
 				EndDate = new DateTime(2012, 12, 31),
-				Type = MangaType.Manga
+				Types = new[] { MangaType.Manga }
 			};
 
 			// When
@@ -560,6 +560,18 @@ namespace Tenrai.Tests.MangaTests
 			using var _ = new AssertionScope();
 			returnedManga.Data.Should().NotBeEmpty();
 			returnedManga.Data.Should().Contain(m => m.MalId == 1L);
+		}
+
+		[Fact]
+		public async Task SearchMangaAsync_Seinen_ReturnsSeinenDemographic()
+		{
+			var searchConfig = new MangaSearchConfig { Genres = new[] { MangaGenreSearch.Seinen } };
+
+			var returnedManga = await _tenrai.SearchMangaAsync(searchConfig);
+
+			using var _ = new AssertionScope();
+			returnedManga.Pagination.Items.Total.Should().BeGreaterThan(5000);
+			returnedManga.Data.Should().OnlyContain(m => m.Demographics.Any(d => d.MalId == 41));
 		}
     }
 }

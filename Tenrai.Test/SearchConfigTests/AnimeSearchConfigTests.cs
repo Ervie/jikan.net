@@ -88,5 +88,28 @@ namespace Tenrai.Tests.SearchConfigTests
 
 			config.ConfigToString().Should().Be("?genres=1,8");
 		}
+
+		[Fact]
+		public void ConfigToString_ListFilters_AreSent()
+		{
+			var config = new AnimeSearchConfig
+			{
+				Types = new[] { AnimeType.TV, AnimeType.TvSpecial },
+				ExcludedRatings = new[] { AnimeAgeRating.RX },
+				VoiceLanguages = new[] { VoiceLanguage.English },
+				Seasons = new[] { Season.Fall },
+				SeasonYears = new[] { 2025 }
+			};
+
+			config.ConfigToString().Should().Be("?type=TV,tv_special&rating_exclude=rx&voice_language=english&season=fall&season_year=2025&sfw=true");
+		}
+
+		[Fact]
+		public void ConfigToString_EveryTypeInList_IsSkipped()
+		{
+			var config = new AnimeSearchConfig { Types = new[] { AnimeType.EveryType, AnimeType.TV } };
+
+			config.ConfigToString().Should().Be("?type=TV&sfw=true");
+		}
 	}
 }

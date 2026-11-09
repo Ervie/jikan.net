@@ -731,7 +731,7 @@ var airing = await tenrai.GetAdaptedMangaAsync(new AdaptedMangaSearchConfig
 | Property | Type | Description |
 |----------|------|-------------|
 | Filter | AdaptedMangaFilter? | `All`, `Airing` (adaptation airing now) or `Upcoming`. Not sent when null, which the API treats as `All` |
-| Types | ICollection&lt;MangaType&gt; | Manga types to include. `MangaType.Novel` is rejected by the API here |
+| Types | ICollection&lt;MangaType&gt; | Manga types to include. `MangaType.Novel` and `MangaType.LightNovel` are rejected by the API here |
 | Status | PublishingStatus | Publishing status of the manga |
 | Genres | ICollection&lt;MangaGenreSearch&gt; | Genres the manga must have |
 | Score | double? | Exact score. The API rejects it combined with `MinimumScore` or `MaximumScore` |
@@ -1533,6 +1533,62 @@ Returns manga search results. Overload: `(MangaSearchConfig searchConfig)`.
 
 ```csharp
 var results = await tenrai.SearchMangaAsync("berserk");
+```
+
+#### AnimeSearchConfig and MangaSearchConfig
+
+List filters match any of their values (genres must all match). The API rejects a list over 25 values, 1000 for `Ids`/`ExcludedIds`, and these combinations: `Years` with `MinimumYear`/`MaximumYear`, `Score` with `MinimumScore`/`MaximumScore`, and `CharacterRole` without `CharacterIds`. Each comes back as a `TenraiRequestException`.
+
+| Property | Type | Description |
+|----------|------|-------------|
+| Query, Letter | string, char? | Text search, or titles starting with a letter |
+| Types, ExcludedTypes | ICollection&lt;AnimeType&gt; / &lt;MangaType&gt; | e.g. `{ AnimeType.TV, AnimeType.TvSpecial }`. `MangaType.Novel` is a novel and `MangaType.LightNovel` a light novel |
+| Statuses, ExcludedStatuses | ICollection&lt;AiringStatus&gt; / &lt;PublishingStatus&gt; | Airing or publishing status |
+| Genres, ExcludedGenres | ICollection&lt;AnimeGenreSearch&gt; / &lt;MangaGenreSearch&gt; | Genre, theme and demographic ids |
+| CharacterIds, CharacterRole | ICollection&lt;long&gt;, CharacterRole? | Entries with these characters, optionally only as `Main` or `Supporting` |
+| Ids, ExcludedIds | ICollection&lt;long&gt; | Search only within, or leave out, these MAL ids (e.g. a user's list) |
+| MinimumId, MaximumId | long? | MAL id range |
+| Score | double? | Exact score |
+| MinimumScoredBy ... MaximumFavorites | int? | Ranges for scored-by, reviews, members and favorites |
+| Years, MinimumYear, MaximumYear | ICollection&lt;int&gt;, int? | Calendar start year |
+| StartDate, EndDate | DateTime? | Start and end date range |
+| Unapproved | ReviewFilter? | `Include` adds unapproved entries, `Only` returns only them |
+| OrderBy, SortDirection, Nulls | enum, SortDirection, NullsOrder? | Sort, and where entries without a value go (`First`, `Last`, `Exclude`) |
+
+Anime only:
+
+| Property | Type | Description |
+|----------|------|-------------|
+| Ratings, ExcludedRatings | ICollection&lt;AnimeAgeRating&gt; | Age ratings. Excluding keeps entries without a rating |
+| Sources, ExcludedSources | ICollection&lt;AnimeSource&gt; | Source material, e.g. `LightNovel`, `Original` |
+| HasTrailer | bool? | Whether a main trailer is listed |
+| StreamingServices | ICollection&lt;string&gt; | e.g. `"Crunchyroll"`, `"Netflix"` |
+| HasRelations | ReviewFilter? | `Exclude`: only entries without relations; `Only`: only entries with them |
+| ProducerIds, ExcludedProducerIds | ICollection&lt;long&gt; | Producer, studio or licensor ids |
+| StaffIds, VoiceActorIds | ICollection&lt;long&gt; | Credited people |
+| VoiceLanguages | ICollection&lt;VoiceLanguage&gt; | e.g. `English` for anime with an English dub |
+| MinimumEpisodes, MaximumEpisodes | int? | Episode count range |
+| Seasons, SeasonYears | ICollection&lt;Season&gt;, ICollection&lt;int&gt; | MAL debut season, which can differ from the calendar year |
+| BroadcastDays | ICollection&lt;BroadcastDay&gt; | Day it airs in Japan, including `Today` and `Tomorrow` |
+| AddedAfter, AddedBefore | DateTime? | When it was added to MyAnimeList |
+
+Manga only:
+
+| Property | Type | Description |
+|----------|------|-------------|
+| MagazineIds, ExcludedMagazineIds | ICollection&lt;long&gt; | Magazine or serialization platform ids |
+| AuthorIds, AuthorRole, ExcludedAuthorIds | ICollection&lt;long&gt;, AuthorRole? | Authors, optionally only as `Story` or `Art` |
+| SoloAuthor | bool? | `true` for manga written and drawn by one person |
+| MinimumChapters ... MaximumVolumes | int? | Chapter and volume count ranges |
+
+```csharp
+var dubbed = await tenrai.SearchAnimeAsync(new AnimeSearchConfig
+{
+    Types = { AnimeType.TV },
+    VoiceLanguages = { VoiceLanguage.English },
+    StreamingServices = { "Crunchyroll" },
+    ExcludedIds = myListIds
+});
 ```
 
 ### SearchPersonAsync

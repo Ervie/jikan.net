@@ -134,8 +134,8 @@ namespace Tenrai.Tests.AnimeTests
             var config = new AnimeSearchConfig()
             {
                 Query = "one p",
-                Status = AiringStatus.Airing,
-                Type = AnimeType.TV
+                Statuses = new[] { AiringStatus.Airing },
+                Types = new[] { AnimeType.TV }
             };
 
             // When
@@ -170,7 +170,7 @@ namespace Tenrai.Tests.AnimeTests
             var config = new AnimeSearchConfig
             {
                 Query = query,
-                Type = AnimeType.TV
+                Types = new[] { AnimeType.TV }
             };
 
             // When
@@ -187,7 +187,7 @@ namespace Tenrai.Tests.AnimeTests
             var config = new AnimeSearchConfig
             {
                 Query = "danganronpa",
-                Type = AnimeType.TV
+                Types = new[] { AnimeType.TV }
             };
 
             // When
@@ -204,7 +204,7 @@ namespace Tenrai.Tests.AnimeTests
             var searchConfig = new AnimeSearchConfig
             {
                 Query = "Fairy Tail",
-                Type = AnimeType.TV,
+                Types = new[] { AnimeType.TV },
                 MinimumScore = 7
             };
 
@@ -239,7 +239,7 @@ namespace Tenrai.Tests.AnimeTests
             var searchConfig = new AnimeSearchConfig
             {
                 Query = "Blame",
-                Type = AnimeType.Movie
+                Types = new[] { AnimeType.Movie }
             };
             searchConfig.Genres.Add(AnimeGenreSearch.SciFi);
 
@@ -357,9 +357,9 @@ namespace Tenrai.Tests.AnimeTests
 			// Given
 			var searchConfig = new AnimeSearchConfig()
 			{
-				Status = airingStatus.GetValueOrDefault(),
-				Rating = rating.GetValueOrDefault(),
-				Type = mangaType.GetValueOrDefault(),
+				Statuses = new[] { airingStatus.GetValueOrDefault() },
+				Ratings = new[] { rating.GetValueOrDefault() },
+				Types = new[] { mangaType.GetValueOrDefault() },
 				OrderBy = orderBy.GetValueOrDefault(),
 				SortDirection = sortDirection.GetValueOrDefault(),
 				Genres = genreSearch.HasValue ? new[] { genreSearch.Value } : Array.Empty<AnimeGenreSearch>()
@@ -378,7 +378,7 @@ namespace Tenrai.Tests.AnimeTests
 			// Given
 			var searchConfig = new AnimeSearchConfig
 			{
-				Type = AnimeType.TV,
+				Types = new[] { AnimeType.TV },
 				Genres = new List<AnimeGenreSearch> { AnimeGenreSearch.Action }
 			};
 
@@ -402,7 +402,7 @@ namespace Tenrai.Tests.AnimeTests
 			var searchConfig = new AnimeSearchConfig
 			{
 				Page = page,
-				Type = AnimeType.TV,
+				Types = new[] { AnimeType.TV },
 				Genres = new List<AnimeGenreSearch> { AnimeGenreSearch.Action }
 			};
 
@@ -420,7 +420,7 @@ namespace Tenrai.Tests.AnimeTests
 			var searchConfig = new AnimeSearchConfig
 			{
 				Page = 1,
-				Type = AnimeType.TV,
+				Types = new[] { AnimeType.TV },
 				Genres = new List<AnimeGenreSearch> { AnimeGenreSearch.Action }
 			};
 
@@ -441,7 +441,7 @@ namespace Tenrai.Tests.AnimeTests
 			var searchConfig = new AnimeSearchConfig
 			{
 				Page = 3,
-				Type = AnimeType.TV,
+				Types = new[] { AnimeType.TV },
 				Genres = new List<AnimeGenreSearch> { AnimeGenreSearch.Action }
 			};
 
@@ -466,7 +466,7 @@ namespace Tenrai.Tests.AnimeTests
 			{
 				Page = page,
 				Query = "girl",
-				Status = AiringStatus.Complete,
+				Statuses = new[] { AiringStatus.Complete },
 				Genres = new List<AnimeGenreSearch> { AnimeGenreSearch.Action }
 			};
 
@@ -485,7 +485,7 @@ namespace Tenrai.Tests.AnimeTests
 			{
 				Query = "one",
 				Page = 2,
-				Status = AiringStatus.Complete,
+				Statuses = new[] { AiringStatus.Complete },
 				Genres = new List<AnimeGenreSearch> { AnimeGenreSearch.Action }
 			};
 
@@ -552,6 +552,48 @@ namespace Tenrai.Tests.AnimeTests
 			// Then
 			using var _ = new AssertionScope();
 			returnedAnime.Data.Should().NotBeEmpty();
+			returnedAnime.Data.Should().Contain(a => a.MalId == 1L);
+		}
+
+		[Fact]
+		public async Task SearchAnimeAsync_ExcludedTypes_LeavesThemOut()
+		{
+			var searchConfig = new AnimeSearchConfig
+			{
+				ExcludedTypes = new[] { AnimeType.Music, AnimeType.Cm, AnimeType.Pv },
+				Limit = 100
+			};
+
+			var returnedAnime = await _tenrai.SearchAnimeAsync(searchConfig);
+
+			using var _ = new AssertionScope();
+			returnedAnime.Data.Should().HaveCount(100);
+			returnedAnime.Data.Should().NotContain(a => a.Type == "Music" || a.Type == "CM" || a.Type == "PV");
+		}
+
+		[Fact]
+		public async Task SearchAnimeAsync_OrderByAdded_IsAccepted()
+		{
+			var searchConfig = new AnimeSearchConfig { OrderBy = AnimeSearchOrderBy.Added, SortDirection = SortDirection.Descending };
+
+			var returnedAnime = await _tenrai.SearchAnimeAsync(searchConfig);
+
+			returnedAnime.Data.Should().NotBeEmpty();
+		}
+
+		[Fact]
+		public async Task SearchAnimeAsync_EnglishDubOnCrunchyroll_HasBebop()
+		{
+			var searchConfig = new AnimeSearchConfig
+			{
+				VoiceLanguages = new[] { VoiceLanguage.English },
+				StreamingServices = new[] { "Crunchyroll" }
+			};
+
+			var returnedAnime = await _tenrai.SearchAnimeAsync(searchConfig);
+
+			using var _ = new AssertionScope();
+			returnedAnime.Pagination.Items.Total.Should().BeGreaterThan(100);
 			returnedAnime.Data.Should().Contain(a => a.MalId == 1L);
 		}
     }

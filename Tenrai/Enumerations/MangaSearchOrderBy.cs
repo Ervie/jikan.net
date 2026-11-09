@@ -43,11 +43,6 @@ namespace Tenrai
 		[Description("scored_by")]
 		ScoredBy,
 
-		/// <summary>
-		/// Orders results by anime type.
-		/// </summary>
-		[Description("type")]
-		Type,
 
 		/// <summary>
 		/// Orders results by members.
@@ -89,6 +84,18 @@ namespace Tenrai
 		/// Orders results by favorites.
 		/// </summary>
 		[Description("favorites")]
-		Favorites
+		Favorites,
+
+		/// <summary>
+		/// Orders results by English title.
+		/// </summary>
+		[Description("title_english")]
+		TitleEnglish,
+
+		/// <summary>
+		/// Orders results by Japanese title.
+		/// </summary>
+		[Description("title_japanese")]
+		TitleJapanese
 	}
 }

@@ -25,11 +25,6 @@ namespace Tenrai
 		[Description("score")]
 		Score,
 
-		/// <summary>
-		/// Orders results by anime type.
-		/// </summary>
-		[Description("type")]
-		Type,
 		
 		/// <summary>
 		/// Orders results by count of scores.
@@ -61,11 +56,6 @@ namespace Tenrai
 		[Description("episodes")]
 		Episodes,
 
-		/// <summary>
-		/// Orders results by rating.
-		/// </summary>
-		[Description("rating")]
-		Rating,
 		
 		/// <summary>
 		/// Orders results by start date.
@@ -89,6 +79,24 @@ namespace Tenrai
 		/// Orders results by popularity.
 		/// </summary>
 		[Description("popularity")]
-		Popularity
+		Popularity,
+
+		/// <summary>
+		/// Orders results by English title.
+		/// </summary>
+		[Description("title_english")]
+		TitleEnglish,
+
+		/// <summary>
+		/// Orders results by Japanese title.
+		/// </summary>
+		[Description("title_japanese")]
+		TitleJapanese,
+
+		/// <summary>
+		/// Orders results by when the anime was added to MyAnimeList.
+		/// </summary>
+		[Description("added")]
+		Added
 	}
 }

@@ -232,7 +232,7 @@ namespace Tenrai
 		/// <summary>
 		/// Seinen.
 		/// </summary>
-		[Description("51")]
+		[Description("41")]
 		Seinen,
 
 		/// <summary>
@@ -242,16 +242,10 @@ namespace Tenrai
 		Josei,
 
 		/// <summary>
-		/// Doujinshi.
-		/// </summary>
-		[Description("43")]
-		Doujinshi,
-
-		/// <summary>
-		/// Gender bender.
+		/// Crossdressing.
 		/// </summary>
 		[Description("44")]
-		GenderBender,
+		Crossdressing,
 
 		/// <summary>
 		/// Suspense.
@@ -281,6 +275,210 @@ namespace Tenrai
 		/// Erotica.
 		/// </summary>
 		[Description("49")]
-		Erotica
+		Erotica,
+
+		/// <summary>
+		/// Adult cast.
+		/// </summary>
+		[Description("50")]
+		AdultCast,
+
+		/// <summary>
+		/// Anthropomorphic.
+		/// </summary>
+		[Description("51")]
+		Anthropomorphic,
+
+		/// <summary>
+		/// CGDCT (cute girls doing cute things).
+		/// </summary>
+		[Description("52")]
+		Cgdct,
+
+		/// <summary>
+		/// Childcare.
+		/// </summary>
+		[Description("53")]
+		Childcare,
+
+		/// <summary>
+		/// Combat sports.
+		/// </summary>
+		[Description("54")]
+		CombatSports,
+
+		/// <summary>
+		/// Delinquents.
+		/// </summary>
+		[Description("55")]
+		Delinquents,
+
+		/// <summary>
+		/// Educational.
+		/// </summary>
+		[Description("56")]
+		Educational,
+
+		/// <summary>
+		/// Gag humor.
+		/// </summary>
+		[Description("57")]
+		GagHumor,
+
+		/// <summary>
+		/// Gore.
+		/// </summary>
+		[Description("58")]
+		Gore,
+
+		/// <summary>
+		/// High stakes game.
+		/// </summary>
+		[Description("59")]
+		HighStakesGame,
+
+		/// <summary>
+		/// Idols (female).
+		/// </summary>
+		[Description("60")]
+		IdolsFemale,
+
+		/// <summary>
+		/// Idols (male).
+		/// </summary>
+		[Description("61")]
+		IdolsMale,
+
+		/// <summary>
+		/// Isekai.
+		/// </summary>
+		[Description("62")]
+		Isekai,
+
+		/// <summary>
+		/// Iyashikei.
+		/// </summary>
+		[Description("63")]
+		Iyashikei,
+
+		/// <summary>
+		/// Love polygon.
+		/// </summary>
+		[Description("64")]
+		LovePolygon,
+
+		/// <summary>
+		/// Magical sex shift.
+		/// </summary>
+		[Description("65")]
+		MagicalSexShift,
+
+		/// <summary>
+		/// Mahou shoujo.
+		/// </summary>
+		[Description("66")]
+		MahouShoujo,
+
+		/// <summary>
+		/// Medical.
+		/// </summary>
+		[Description("67")]
+		Medical,
+
+		/// <summary>
+		/// Memoir.
+		/// </summary>
+		[Description("68")]
+		Memoir,
+
+		/// <summary>
+		/// Organized crime.
+		/// </summary>
+		[Description("69")]
+		OrganizedCrime,
+
+		/// <summary>
+		/// Otaku culture.
+		/// </summary>
+		[Description("70")]
+		OtakuCulture,
+
+		/// <summary>
+		/// Performing arts.
+		/// </summary>
+		[Description("71")]
+		PerformingArts,
+
+		/// <summary>
+		/// Pets.
+		/// </summary>
+		[Description("72")]
+		Pets,
+
+		/// <summary>
+		/// Reincarnation.
+		/// </summary>
+		[Description("73")]
+		Reincarnation,
+
+		/// <summary>
+		/// Reverse harem.
+		/// </summary>
+		[Description("74")]
+		ReverseHarem,
+
+		/// <summary>
+		/// Love status quo.
+		/// </summary>
+		[Description("75")]
+		LoveStatusQuo,
+
+		/// <summary>
+		/// Showbiz.
+		/// </summary>
+		[Description("76")]
+		Showbiz,
+
+		/// <summary>
+		/// Survival.
+		/// </summary>
+		[Description("77")]
+		Survival,
+
+		/// <summary>
+		/// Team sports.
+		/// </summary>
+		[Description("78")]
+		TeamSports,
+
+		/// <summary>
+		/// Time travel.
+		/// </summary>
+		[Description("79")]
+		TimeTravel,
+
+		/// <summary>
+		/// Video game.
+		/// </summary>
+		[Description("80")]
+		VideoGame,
+
+		/// <summary>
+		/// Villainess.
+		/// </summary>
+		[Description("81")]
+		Villainess,
+
+		/// <summary>
+		/// Visual arts.
+		/// </summary>
+		[Description("82")]
+		VisualArts,
+
+		/// <summary>
+		/// Urban fantasy.
+		/// </summary>
+		[Description("83")]
+		UrbanFantasy
 	}
 }
