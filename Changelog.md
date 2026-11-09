@@ -9,6 +9,7 @@ Brings the client up to the Tenrai OpenAPI spec 1.0.30. Major, breaking release.
     - `GetAnimeIdsAsync`, `GetMangaIdsAsync`, `GetCharacterIdsAsync`, `GetPersonIdsAsync`, `GetProducerIdsAsync` return `IdsTenraiResponse` (adds `Total`).
     - `UserRecommendation.Date` is `DateTime?`; the API marks it nullable.
 - Features
+    - Batch full data: `GetAnimeFullDataAsync(id, FullDataConfig)` and `GetMangaFullDataAsync(id, FullDataConfig)` fetch up to 24 more entries in one request (`Included`, with ids not found in `MissingIds`), or search the denied/deleted archive with `Mode`. The plain `(long id)` overloads are unchanged.
     - `SfwStrict` on `AnimeSearchConfig`, `MangaSearchConfig`, `AnimeTopSearchConfig` and `InterestStackSearchConfig` also filters out ecchi entries.
     - Trailers and music videos: `Title`, `Views`, `Likes`, `Dislikes`, `CommentCount`, `PublishedAt`, `Duration`, `PrivacyStatus`, `RegionRestriction`, `Embeddable`.
     - `TimePeriod` (`Anime.Aired`, `Manga.Published`): `Text` (e.g. "Oct 2027 to ?") and `Parts` (day, month, year, each null when unknown).

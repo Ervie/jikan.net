@@ -14,5 +14,10 @@ namespace Tenrai.Consts
         /// Page size the API uses when no limit is sent.
         /// </summary>
         public const int DefaultPageSize = 25;
+
+        /// <summary>
+        /// Most unique ids one full-data request may name, the path id included.
+        /// </summary>
+        public const int MaximumFullDataIds = 25;
     }
 }

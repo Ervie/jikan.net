@@ -233,6 +233,15 @@ namespace Tenrai
         Task<BaseTenraiResponse<AnimeFull>> GetAnimeFullDataAsync(long id, CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Returns anime with additional data, plus up to 24 more anime in the same request.
+        /// </summary>
+        /// <param name="id">MAL id of anime.</param>
+        /// <param name="config">Extra ids, archive mode, and sfw filtering of relations.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Anime with additional data, the extra anime in <c>Included</c>, and ids not found in <c>MissingIds</c>.</returns>
+        Task<FullTenraiResponse<AnimeFull>> GetAnimeFullDataAsync(long id, FullDataConfig config, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Returns the complete collection of anime MAL IDs available in the catalogue.
         /// </summary>
         /// <remarks>Requires a Tenrai Server Key (set <see cref="Config.TenraiClientConfiguration.ServerKey"/>); otherwise the API responds with 401.</remarks>
@@ -387,6 +396,15 @@ namespace Tenrai
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Manga with additional data.</returns>
         Task<BaseTenraiResponse<MangaFull>> GetMangaFullDataAsync(long id, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns manga with additional data, plus up to 24 more manga in the same request.
+        /// </summary>
+        /// <param name="id">MAL id of manga.</param>
+        /// <param name="config">Extra ids, archive mode, and sfw filtering of relations.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Manga with additional data, the extra manga in <c>Included</c>, and ids not found in <c>MissingIds</c>.</returns>
+        Task<FullTenraiResponse<MangaFull>> GetMangaFullDataAsync(long id, FullDataConfig config, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns the complete collection of manga MAL IDs available in the catalogue.

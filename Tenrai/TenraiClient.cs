@@ -116,6 +116,21 @@ namespace Tenrai
 			return returnedObject;
 		}
 
+		private static void GuardFullDataRequest(long id, FullDataConfig config)
+		{
+			Guard.IsGreaterThanZero(id, nameof(id));
+			Guard.IsNotNull(config, nameof(config));
+
+			var extraIds = config.Ids ?? new List<long>();
+			foreach (var extraId in extraIds)
+			{
+				Guard.IsGreaterThanZero(extraId, nameof(config.Ids));
+			}
+
+			var uniqueIds = extraIds.Where(extraId => extraId != id).Distinct().Count() + 1;
+			Guard.IsLesserOrEqualThan(uniqueIds, ParameterConsts.MaximumFullDataIds, nameof(config.Ids));
+		}
+
         #endregion Private Methods
 
 		#region Public Methods
@@ -325,6 +340,14 @@ namespace Tenrai
 		}
 
 		/// <inheritdoc />
+		public async Task<FullTenraiResponse<AnimeFull>> GetAnimeFullDataAsync(long id, FullDataConfig config, CancellationToken cancellationToken = default)
+		{
+			GuardFullDataRequest(id, config);
+			var endpointParts = new[] { TenraiEndpointConsts.Anime, id.ToString(), TenraiEndpointConsts.Full + config.ConfigToString() };
+			return await ExecuteGetRequestAsync<FullTenraiResponse<AnimeFull>>(endpointParts, cancellationToken);
+		}
+
+		/// <inheritdoc />
 		public async Task<IdsTenraiResponse> GetAnimeIdsAsync(CancellationToken cancellationToken = default)
 		{
 			var endpointParts = new[] { TenraiEndpointConsts.Anime, TenraiEndpointConsts.Ids };
@@ -520,6 +543,14 @@ namespace Tenrai
 			Guard.IsGreaterThanZero(id, nameof(id));
 			var endpointParts = new[] { TenraiEndpointConsts.Manga, id.ToString(), TenraiEndpointConsts.Full };
 			return await ExecuteGetRequestAsync<BaseTenraiResponse<MangaFull>>(endpointParts, cancellationToken);
+		}
+
+		/// <inheritdoc />
+		public async Task<FullTenraiResponse<MangaFull>> GetMangaFullDataAsync(long id, FullDataConfig config, CancellationToken cancellationToken = default)
+		{
+			GuardFullDataRequest(id, config);
+			var endpointParts = new[] { TenraiEndpointConsts.Manga, id.ToString(), TenraiEndpointConsts.Full + config.ConfigToString() };
+			return await ExecuteGetRequestAsync<FullTenraiResponse<MangaFull>>(endpointParts, cancellationToken);
 		}
 
 		/// <inheritdoc />

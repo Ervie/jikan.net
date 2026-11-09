@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using Tenrai.Exceptions;
@@ -43,6 +44,19 @@ namespace Tenrai.Tests.MangaTests
             monsterManga.Data.Relations.Should().HaveCount(2);
             monsterManga.Data.Relations.Should().ContainSingle(x => x.Relation.Equals("Adaptation") && x.Entry.Count == 1);
             monsterManga.Data.Relations.Should().ContainSingle(x => x.Relation.Equals("Side story") && x.Entry.Count == 1);
+        }
+
+        [Fact]
+        public async Task GetMangaFullDataAsync_BatchIds_ReturnsIncluded()
+        {
+            // When
+            var berserk = await _tenrai.GetMangaFullDataAsync(2, new FullDataConfig { Ids = new List<long> { 1 } });
+
+            // Then
+            using var _ = new AssertionScope();
+            berserk.Data.MalId.Should().Be(2);
+            berserk.Included.Should().ContainSingle(x => x.MalId == 1);
+            berserk.MissingIds.Should().BeEmpty();
         }
     }
 }

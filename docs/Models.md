@@ -19,6 +19,20 @@ Extends `BaseTenraiResponse<T>` with pagination metadata.
 | Data | T | The response data |
 | Pagination | Pagination | Page info (current page, has next, items count, etc.) |
 
+### FullTenraiResponse&lt;T&gt;
+
+Extends `BaseTenraiResponse<T>`. Returned by the `FullDataConfig` overloads of `GetAnimeFullDataAsync` and `GetMangaFullDataAsync`.
+
+| Property | Type | Description |
+|----------|------|-------------|
+| Data | T | The entry from the path id |
+| Included | ICollection&lt;T&gt; | Entries for `FullDataConfig.Ids`, in the requested order. Null when no extra ids were sent |
+| MissingIds | ICollection&lt;long&gt; | Extra ids not found in the searched catalogue or archive. Null when no extra ids were sent |
+
+### IdsTenraiResponse
+
+Extends `BaseTenraiResponse<ICollection<long>>` with `Total` (int), the number of ids. Returned by the bulk id methods.
+
 ---
 
 ## Anime

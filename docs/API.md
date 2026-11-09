@@ -343,20 +343,35 @@ foreach (var l in links.Data)
 
 ### GetAnimeFullDataAsync
 
-Returns anime with all additional data.
+Returns anime with all additional data. Overload: `(long id, FullDataConfig config)` fetches up to 24 more anime in the same request, or searches the denied/deleted archive.
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | id | long | MAL id of anime |
+| config | [FullDataConfig](#fulldataconfig) | (overload) Extra ids, archive mode, sfw filtering of relations |
 
-**Returns:** `BaseTenraiResponse<AnimeFull>`
+**Returns:** `BaseTenraiResponse<AnimeFull>`, or `FullTenraiResponse<AnimeFull>` for the overload
 
 **Example:**
 
 ```csharp
 var full = await tenrai.GetAnimeFullDataAsync(1);
 // full.Data contains anime plus relations, news, etc.
+
+var batch = await tenrai.GetAnimeFullDataAsync(1, new FullDataConfig { Ids = new List<long> { 5, 6, 99999999 } });
+// batch.Data is anime 1, batch.Included holds 5 and 6, batch.MissingIds is [99999999]
+
+var deleted = await tenrai.GetAnimeFullDataAsync(2632, new FullDataConfig { Mode = FullDataMode.Deleted });
 ```
+
+#### FullDataConfig
+
+| Property | Type | Description |
+|----------|------|-------------|
+| Ids | ICollection&lt;long&gt; | Extra MAL ids, returned in `Included`. At most 24: the API allows 25 including the path id, and the client throws `TenraiValidationException` past that. Duplicates and the path id are dropped by the API |
+| Mode | FullDataMode? | `Denied` or `Deleted` searches that archive only; an id not in it returns 404 (path id) or lands in `MissingIds` (extra ids). Null searches the regular catalogue |
+| Sfw | bool | Filter adult entries out of the relations. Defaults to `true`, so the overload can return fewer `Relations` than the plain call, which sends no filter |
+| SfwStrict | bool | Also filter ecchi entries out of the relations. Defaults to `false` |
 
 ---
 
@@ -546,13 +561,14 @@ var links = await tenrai.GetMangaExternalLinksAsync(2);
 
 ### GetMangaFullDataAsync
 
-Returns manga with all additional data.
+Returns manga with all additional data. Overload: `(long id, FullDataConfig config)`, same as [GetAnimeFullDataAsync](#getanimefulldataasync).
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | id | long | MAL id of manga |
+| config | [FullDataConfig](#fulldataconfig) | (overload) Extra ids, archive mode, sfw filtering of relations |
 
-**Returns:** `BaseTenraiResponse<MangaFull>`
+**Returns:** `BaseTenraiResponse<MangaFull>`, or `FullTenraiResponse<MangaFull>` for the overload
 
 **Example:**
 
