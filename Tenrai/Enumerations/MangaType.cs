@@ -8,12 +8,6 @@ namespace Tenrai
 	public enum MangaType
 	{
 		/// <summary>
-		/// Allow all types to be displayed in results.
-		/// </summary>
-		[Description("")]
-		EveryType,
-
-		/// <summary>
 		/// Manga.
 		/// </summary>
 		[Description("manga")]

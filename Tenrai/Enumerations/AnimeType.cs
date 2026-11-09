@@ -59,12 +59,6 @@ namespace Tenrai
 		/// TV special.
 		/// </summary>
 		[Description("tv_special")]
-		TvSpecial,
-
-		/// <summary>
-		/// Allow all types to be displayed in results.
-		/// </summary>
-		[Description("")]
-		EveryType
+		TvSpecial
 	}
 }

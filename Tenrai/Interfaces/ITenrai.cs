@@ -779,6 +779,16 @@ namespace Tenrai
         Task<PaginatedTenraiResponse<ICollection<Anime>>> GetSeasonAsync(int year, Season season, int page, CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Returns anime from the given season, filtered and sorted.
+        /// </summary>
+        /// <param name="year">Year of selected season.</param>
+        /// <param name="season">Selected season.</param>
+        /// <param name="searchConfig">Types, status, ratings, genres, ranges, sorting and paging.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Season preview for anime in the given season.</returns>
+        Task<PaginatedTenraiResponse<ICollection<Anime>>> GetSeasonAsync(int year, Season season, SeasonSearchConfig searchConfig, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Returns list of available season to query with <see cref="GetSeasonAsync(int, Season, CancellationToken)"/>
         /// </summary>
         /// <param name="cancellationToken">Cancellation token.</param>
@@ -801,6 +811,14 @@ namespace Tenrai
         Task<PaginatedTenraiResponse<ICollection<Anime>>> GetCurrentSeasonAsync(int page, CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Return season preview for anime in current airing season, filtered and sorted.
+        /// </summary>
+        /// <param name="searchConfig">Types, status, ratings, genres, ranges, sorting and paging.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Season preview for anime in current airing season.</returns>
+        Task<PaginatedTenraiResponse<ICollection<Anime>>> GetCurrentSeasonAsync(SeasonSearchConfig searchConfig, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Return season preview for anime with undefined airing season (marked as "Later" on MAL).
         /// </summary>
         /// <param name="cancellationToken">Cancellation token.</param>
@@ -816,6 +834,14 @@ namespace Tenrai
         Task<PaginatedTenraiResponse<ICollection<Anime>>> GetUpcomingSeasonAsync(int page, CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Return season preview for anime with undefined airing season, filtered and sorted. The status filter does not apply here.
+        /// </summary>
+        /// <param name="searchConfig">Types, ratings, genres, ranges, sorting and paging.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Season preview for anime with undefined airing date.</returns>
+        Task<PaginatedTenraiResponse<ICollection<Anime>>> GetUpcomingSeasonAsync(SeasonSearchConfig searchConfig, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Return season preview for the season before the current one.
         /// </summary>
         /// <param name="cancellationToken">Cancellation token.</param>
@@ -829,6 +855,14 @@ namespace Tenrai
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Season preview for anime in the previous season.</returns>
         Task<PaginatedTenraiResponse<ICollection<Anime>>> GetPreviousSeasonAsync(int page, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Return season preview for the season before the current one, filtered and sorted.
+        /// </summary>
+        /// <param name="searchConfig">Types, status, ratings, genres, ranges, sorting and paging.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Season preview for anime in the previous season.</returns>
+        Task<PaginatedTenraiResponse<ICollection<Anime>>> GetPreviousSeasonAsync(SeasonSearchConfig searchConfig, CancellationToken cancellationToken = default);
 
         #endregion Season requests
 
@@ -856,6 +890,14 @@ namespace Tenrai
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Current season schedule.</returns>
         Task<PaginatedTenraiResponse<ICollection<Anime>>> GetScheduleAsync(ScheduledDay scheduledDay, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns the broadcast schedule, filtered by day, type, rating and genres.
+        /// </summary>
+        /// <param name="searchConfig">Day, types, ratings, genres and paging.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Current season schedule.</returns>
+        Task<PaginatedTenraiResponse<ICollection<Anime>>> GetScheduleAsync(ScheduleSearchConfig searchConfig, CancellationToken cancellationToken = default);
 
         #endregion Schedule requests
 
@@ -1369,6 +1411,22 @@ namespace Tenrai
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Random manga</returns>
         Task<BaseTenraiResponse<Manga>> GetRandomMangaAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns a random anime matching the filters.
+        /// </summary>
+        /// <param name="config">Types, status, ratings, source, genres, score and year filters.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>A random anime.</returns>
+        Task<BaseTenraiResponse<Anime>> GetRandomAnimeAsync(RandomAnimeConfig config, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns a random manga matching the filters.
+        /// </summary>
+        /// <param name="config">Types, status, genres, authors, score and year filters.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>A random manga.</returns>
+        Task<BaseTenraiResponse<Manga>> GetRandomMangaAsync(RandomMangaConfig config, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Gets random character.

@@ -161,7 +161,7 @@ namespace Tenrai.Tests.TopTests
 			// Given
 			var searchConfig = new AnimeTopSearchConfig
 			{
-				Type = AnimeType.Movie
+				Types = { AnimeType.Movie }
 			};
 
 			// When

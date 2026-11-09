@@ -114,7 +114,7 @@ namespace Tenrai.Tests.TopTests
 			// Given
 			var searchConfig = new MangaTopSearchConfig
 			{
-				Type = MangaType.LightNovel
+				Types = { MangaType.LightNovel }
 			};
 
 			// When
@@ -122,6 +122,14 @@ namespace Tenrai.Tests.TopTests
 
 			// Then
 			result.Data.First().Titles.Should().Contain(x => x.Title.StartsWith("Monogatari"));
+		}
+
+		[Fact]
+		public async Task GetTopMangaAsync_LightNovels_OnlyLightNovels()
+		{
+			var result = await _tenrai.GetTopMangaAsync(new MangaTopSearchConfig { Types = { MangaType.LightNovel }, Limit = 50 });
+
+			result.Data.Should().HaveCount(50).And.OnlyContain(x => x.Type == "Light Novel");
 		}
 	}
 }

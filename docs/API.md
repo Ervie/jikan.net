@@ -732,7 +732,7 @@ var airing = await tenrai.GetAdaptedMangaAsync(new AdaptedMangaSearchConfig
 |----------|------|-------------|
 | Filter | AdaptedMangaFilter? | `All`, `Airing` (adaptation airing now) or `Upcoming`. Not sent when null, which the API treats as `All` |
 | Types | ICollection&lt;MangaType&gt; | Manga types to include. `MangaType.Novel` and `MangaType.LightNovel` are rejected by the API here |
-| Status | PublishingStatus | Publishing status of the manga |
+| Status | PublishingStatus? | Publishing status of the manga |
 | Genres | ICollection&lt;MangaGenreSearch&gt; | Genres the manga must have |
 | Score | double? | Exact score. The API rejects it combined with `MinimumScore` or `MaximumScore` |
 | MinimumScore, MaximumScore | double? | Score range |
@@ -968,7 +968,7 @@ var full = await tenrai.GetPersonFullDataAsync(1870);
 
 ### GetSeasonAsync
 
-Returns season preview. Overload: `(int year, Season season, int page)`.
+Returns season preview. Overloads: `(int year, Season season, int page)`, `(int year, Season season, SeasonSearchConfig searchConfig)`. `GetCurrentSeasonAsync`, `GetPreviousSeasonAsync` and `GetUpcomingSeasonAsync` take the same config.
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
@@ -984,7 +984,33 @@ Returns season preview. Overload: `(int year, Season season, int page)`.
 var season = await tenrai.GetSeasonAsync(2024, Season.Spring);
 foreach (var anime in season.Data)
     Console.WriteLine(anime.Title);
+
+// TV and ONA only, with shows continuing from earlier seasons
+var current = await tenrai.GetCurrentSeasonAsync(new SeasonSearchConfig
+{
+    Types = { AnimeType.TV, AnimeType.ONA },
+    IncludeContinuing = true
+});
 ```
+
+#### SeasonSearchConfig
+
+| Property | Type | Description |
+|----------|------|-------------|
+| Types | ICollection&lt;AnimeType&gt; | Anime types to include |
+| Status | AiringStatus? | Airing status. The upcoming list ignores it |
+| Ratings | ICollection&lt;AnimeAgeRating&gt; | Age ratings to include |
+| Genres, ExcludedGenres | ICollection&lt;AnimeGenreSearch&gt; | Genres to require or leave out |
+| ExcludedIds | ICollection&lt;long&gt; | MAL ids to leave out |
+| MinimumMembers ... MaximumEpisodes | int? | Member and episode count ranges |
+| ExcludeKids | bool | Leave out kids titles |
+| IncludeContinuing | bool | Also return TV series continuing from an earlier season (current season: 140 becomes 184) |
+| Unapproved | ReviewFilter? | `Include` adds unapproved entries, `Only` returns only them |
+| OrderBy, SortDirection | SeasonOrderBy, SortDirection | Members descending when not set |
+| Page, Limit | int? | Paging, 100 max |
+| Sfw, SfwStrict | bool | Filter out adult (default `true`) and ecchi entries |
+
+The plain and `(int page)` overloads send no `sfw`, as before; the config overloads default it to `true`.
 
 ### GetSeasonArchiveAsync
 
@@ -1054,12 +1080,13 @@ var previous = await tenrai.GetPreviousSeasonAsync();
 
 ### GetScheduleAsync
 
-Returns current season schedule. Overloads: `(int page)`, `(ScheduledDay scheduledDay)`.
+Returns current season schedule. Overloads: `(int page)`, `(ScheduledDay scheduledDay)`, `(ScheduleSearchConfig searchConfig)`.
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | page | int | (optional) Page index |
 | scheduledDay | ScheduledDay | (optional) Filter by day |
+| searchConfig | ScheduleSearchConfig | (optional) `Day`, `Types`, `Ratings`, `Genres`, `ExcludedGenres`, `ExcludeKids`, `Unapproved`, `Page`, `Limit`, `Sfw` (default `true`), `SfwStrict` |
 
 **Returns:** `PaginatedTenraiResponse<ICollection<Anime>>`
 
@@ -1093,7 +1120,25 @@ Returns top anime. Overloads: `(int page)`, `(TopAnimeFilter filter)`, `(TopAnim
 var top = await tenrai.GetTopAnimeAsync();
 foreach (var anime in top.Data)
     Console.WriteLine($"{anime.Rank}. {anime.Title}");
+
+var topMovies = await tenrai.GetTopAnimeAsync(new AnimeTopSearchConfig { Types = { AnimeType.Movie } });
 ```
+
+#### AnimeTopSearchConfig and MangaTopSearchConfig
+
+| Property | Type | Description |
+|----------|------|-------------|
+| Filter | TopAnimeFilter / TopMangaFilter | Airing or publishing, upcoming, by popularity, by favorites |
+| Types | ICollection&lt;AnimeType&gt; / &lt;MangaType&gt; | Types to include |
+| Ratings | ICollection&lt;AnimeAgeRating&gt; | (anime) Age ratings to include |
+| Genres, ExcludedGenres | ICollection of the genre enum | Genres to require or leave out |
+| ExcludedIds | ICollection&lt;long&gt; | MAL ids to leave out |
+| MinimumMembers, MaximumMembers | int? | Member range |
+| MinimumEpisodes, MaximumEpisodes | int? | (anime) Episode range |
+| MinimumChapters ... MaximumVolumes | int? | (manga) Chapter and volume ranges |
+| Sort | SortDirection? | `Descending` reverses the ranking |
+| Page, Limit | int? | Paging, 100 max |
+| Sfw, SfwStrict | bool | Filter out adult (default `true`) and ecchi entries |
 
 ### GetTopMangaAsync
 
@@ -1369,7 +1414,7 @@ var magazines = await tenrai.GetMagazinesAsync();
 
 ### GetRandomAnimeAsync
 
-Gets random anime.
+Gets random anime. Overload: `(RandomAnimeConfig config)` with `Types`, `Status`, `Ratings`, `Sources`, `HasTrailer`, `Genres`, `ExcludedGenres`, `ProducerIds`, `ExcludedIds`, `MinimumScore`/`MaximumScore`, `Year` or `MinimumYear`/`MaximumYear` (not both, the API returns 400), `Sfw` (default `true`), `SfwStrict`.
 
 **Returns:** `BaseTenraiResponse<Anime>`
 
@@ -1378,11 +1423,13 @@ Gets random anime.
 ```csharp
 var anime = await tenrai.GetRandomAnimeAsync();
 Console.WriteLine(anime.Data.Title);
+
+var movie = await tenrai.GetRandomAnimeAsync(new RandomAnimeConfig { Types = { AnimeType.Movie }, MinimumScore = 8 });
 ```
 
 ### GetRandomMangaAsync
 
-Gets random manga.
+Gets random manga. Overload: `(RandomMangaConfig config)` with `Types`, `Status`, `Genres`, `ExcludedGenres`, `AuthorIds`, `ExcludedIds`, score and year filters as for anime, `Sfw`, `SfwStrict`.
 
 **Returns:** `BaseTenraiResponse<Manga>`
 
@@ -1495,7 +1542,7 @@ Every search config sends its values URL-encoded, so a query like `"C#"` or `"To
 | Property | Type | Description |
 |----------|------|-------------|
 | Limit | int? | Entries per page, 100 max. The API returns 25 when unset |
-| Sfw | bool | Filter out adult entries. Defaults to `true` (anime, manga, top anime, interest stacks) |
+| Sfw | bool | Filter out adult entries. Defaults to `true` on every config that has it |
 | SfwStrict | bool | Also filter out ecchi entries. Defaults to `false` (same configs as `Sfw`) |
 | MinimumScore, MaximumScore | double? | Score range, e.g. `7.5` (anime and manga search) |
 

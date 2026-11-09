@@ -8,12 +8,6 @@ namespace Tenrai
 	public enum AiringStatus
 	{
 		/// <summary>
-		/// Allow all statuses to be displayed in results.
-		/// </summary>
-		[Description("")]
-		EveryStatus,
-		
-		/// <summary>
 		/// Airing status.
 		/// </summary>
 		[Description("airing")]

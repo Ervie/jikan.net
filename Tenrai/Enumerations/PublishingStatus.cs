@@ -8,12 +8,6 @@ namespace Tenrai
 	public enum PublishingStatus
 	{
 		/// <summary>
-		/// Allow all statuses to be displayed in results.
-		/// </summary>
-		[Description("")]
-		EveryStatus,
-		
-		/// <summary>
 		/// Publishing status.
 		/// </summary>
 		[Description("publishing")]

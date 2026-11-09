@@ -33,7 +33,7 @@ namespace Tenrai
 		/// <summary>
 		/// Publishing status of the manga.
 		/// </summary>
-		public PublishingStatus Status { get; set; }
+		public PublishingStatus? Status { get; set; }
 
 		/// <summary>
 		/// Genres the manga must have.

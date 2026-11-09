@@ -110,5 +110,15 @@ namespace Tenrai.Tests.ScheduleTests
 			// Then
 			await func.Should().ThrowExactlyAsync<TenraiValidationException>();
 		}
+
+		[Fact]
+		public async Task GetScheduleAsync_MondayTv_OnlyTv()
+		{
+			var schedule = await _tenrai.GetScheduleAsync(new ScheduleSearchConfig { Day = ScheduledDay.Monday, Types = { AnimeType.TV } });
+
+			using var _ = new AssertionScope();
+			schedule.Data.Should().NotBeEmpty();
+			schedule.Data.Should().OnlyContain(x => x.Type == "TV" && x.Broadcast.Day == "Mondays");
+		}
 	}
 }

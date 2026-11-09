@@ -41,12 +41,6 @@ namespace Tenrai
 		/// Adult (Hentai).
 		/// </summary>
 		[Description("rx")]
-		RX,
-
-		/// <summary>
-		/// All ages.
-		/// </summary>
-		[Description("")]
-		EveryRating
+		RX
 	}
 }

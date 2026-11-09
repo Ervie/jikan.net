@@ -26,5 +26,19 @@ namespace Tenrai.Tests.SearchConfigTests
 
 			config.ConfigToString().Should().Be("?order_by=votes&sfw=true");
 		}
+
+		[Fact]
+		public void AnimeTopSearchConfig_TypesReversed_BuildsQuery()
+		{
+			var config = new AnimeTopSearchConfig { Types = { AnimeType.TV, AnimeType.Movie }, Sort = SortDirection.Descending };
+
+			config.ConfigToString().Should().Be("?type=TV,Movie&sfw=true&sort=desc");
+		}
+
+		[Fact]
+		public void MangaTopSearchConfig_Default_SendsSfw()
+		{
+			new MangaTopSearchConfig().ConfigToString().Should().Be("?sfw=true");
+		}
 	}
 }

@@ -74,7 +74,7 @@ namespace Tenrai.Helpers
 			return this;
 		}
 
-		// A member with an empty [Description] ("EveryType", "NoSorting") means "do not filter"
+		// A member with an empty [Description] ("NoSorting", "NoFilter") means "do not filter"
 		internal QueryBuilder Add<TEnum>(string key, TEnum value) where TEnum : struct, Enum
 		{
 			Guard.IsValidEnum(value, key);
@@ -99,20 +99,12 @@ namespace Tenrai.Helpers
 				return this;
 			}
 
-			var descriptions = values
-				.Select(value =>
-				{
-					Guard.IsValidEnum(value, key);
-					return value.GetDescription();
-				})
-				.Where(description => !string.IsNullOrEmpty(description))
-				.Select(Uri.EscapeDataString)
-				.ToList();
-
-			if (descriptions.Count > 0)
+			var descriptions = values.Select(value =>
 			{
-				Append(key, string.Join(",", descriptions));
-			}
+				Guard.IsValidEnum(value, key);
+				return Uri.EscapeDataString(value.GetDescription());
+			});
+			Append(key, string.Join(",", descriptions));
 
 			return this;
 		}
@@ -147,6 +139,17 @@ namespace Tenrai.Helpers
 			}
 
 			Append(key, string.Join(",", encoded));
+
+			return this;
+		}
+
+		// The API treats these as flags: "false" means the same as leaving them out
+		internal QueryBuilder Flag(string key, bool value)
+		{
+			if (value)
+			{
+				Append(key, "true");
+			}
 
 			return this;
 		}

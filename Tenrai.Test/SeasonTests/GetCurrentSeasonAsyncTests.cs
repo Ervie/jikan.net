@@ -69,5 +69,14 @@ namespace Tenrai.Tests.SeasonTests
 			currentSeason.Pagination.Items.Count.Should().Be(25);
 			currentSeason.Pagination.Items.Total.Should().BeGreaterThan(3);
 		}
+
+		[Fact]
+		public async Task GetCurrentSeasonAsync_IncludeContinuing_HasMore()
+		{
+			var plain = await _tenrai.GetCurrentSeasonAsync(new SeasonSearchConfig());
+			var withContinuing = await _tenrai.GetCurrentSeasonAsync(new SeasonSearchConfig { IncludeContinuing = true });
+
+			withContinuing.Pagination.Items.Total.Should().BeGreaterThan(plain.Pagination.Items.Total);
+		}
 	}
 }
