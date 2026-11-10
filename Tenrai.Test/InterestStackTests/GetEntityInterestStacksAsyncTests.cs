@@ -115,5 +115,16 @@ namespace Tenrai.Tests.InterestStackTests
 				stacks.Pagination.Items.Total.Should().BeGreaterThan(0);
 			}
 		}
+
+		[Fact]
+		public async Task GetAnimeInterestStacksAsync_SpoilersOnly_AllSpoilers()
+		{
+			// When
+			var stacks = await _tenrai.GetAnimeInterestStacksAsync(1, new InterestStackListConfig { Spoilers = ReviewFilter.Only });
+
+			// Then
+			stacks.Data.Should().NotBeEmpty();
+			stacks.Data.Should().OnlyContain(stack => stack.IsSpoiler);
+		}
 	}
 }

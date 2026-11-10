@@ -77,5 +77,15 @@ namespace Tenrai.Tests.TopTests
 			// Then
 			top.Data.Select(x => x.Name).Should().Contain("Masaaki Yuasa");
 		}
+
+		[Fact]
+		public async Task GetTopPeopleAsync_Limit5_ReturnsFive()
+		{
+			// When
+			var top = await _tenrai.GetTopPeopleAsync(new PagingConfig { Limit = 5 });
+
+			// Then
+			top.Data.Should().HaveCount(5);
+		}
 	}
 }

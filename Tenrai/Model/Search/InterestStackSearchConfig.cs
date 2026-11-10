@@ -29,6 +29,24 @@ namespace Tenrai
 		public InterestStackType Type { get; set; } = InterestStackType.EveryType;
 
 		/// <summary>
+		/// How spoiler stacks are handled (include, exclude, or return only spoiler stacks).
+		/// The API leaves them out unless this or <see cref="Challenges"/> or <see cref="Official"/> is set.
+		/// </summary>
+		public ReviewFilter? Spoilers { get; set; }
+
+		/// <summary>
+		/// How challenge stacks are handled (include, exclude, or return only challenge stacks).
+		/// The API leaves them out unless this or <see cref="Spoilers"/> or <see cref="Official"/> is set.
+		/// </summary>
+		public ReviewFilter? Challenges { get; set; }
+
+		/// <summary>
+		/// How official stacks are handled (include, exclude, or return only official stacks).
+		/// The API leaves them out unless this or <see cref="Spoilers"/> or <see cref="Challenges"/> is set.
+		/// </summary>
+		public ReviewFilter? Official { get; set; }
+
+		/// <summary>
 		/// Select order property.
 		/// </summary>
 		public InterestStackSearchOrderBy OrderBy { get; set; }
@@ -58,7 +76,10 @@ namespace Tenrai
 				.Page(Page)
 				.Limit(Limit)
 				.Add("q", Query)
-				.Add("stack_type", Type);
+				.Add("stack_type", Type)
+				.Add("spoilers", Spoilers)
+				.Add("challenges", Challenges)
+				.Add("official", Official);
 
 			if (OrderBy != InterestStackSearchOrderBy.NoSorting)
 			{

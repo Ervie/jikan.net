@@ -23,7 +23,7 @@ namespace Tenrai.Tests.TopTests
 		public async Task GetTopReviewsAsync_InvalidPage_ShouldThrowValidationException(int page)
 		{
 			// When
-			var func = _tenrai.Awaiting(x => x.GetTopReviewsAsync(new ReviewsSearchConfig { Page = page }));
+			var func = _tenrai.Awaiting(x => x.GetTopReviewsAsync(new TopReviewsConfig { Page = page }));
 
 			// Then
 			await func.Should().ThrowExactlyAsync<TenraiValidationException>();
@@ -45,7 +45,7 @@ namespace Tenrai.Tests.TopTests
 		public async Task GetTopReviewsAsync_sECONDpAGE_ShouldParseTopReviewsSecondPage()
 		{
 			// When
-			var reviews = await _tenrai.GetTopReviewsAsync(new ReviewsSearchConfig { Page = 2 });
+			var reviews = await _tenrai.GetTopReviewsAsync(new TopReviewsConfig { Page = 2 });
 
 			// Then
 			using var _ = new AssertionScope();

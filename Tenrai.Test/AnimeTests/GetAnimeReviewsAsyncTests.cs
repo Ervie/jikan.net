@@ -89,5 +89,19 @@ namespace Tenrai.Tests.AnimeTests
 				firstReview.Score.Should().BeGreaterOrEqualTo(8);
 			}
 		}
+
+		[Fact]
+		public async Task GetAnimeReviewsAsync_Username_AllByUser()
+		{
+			// Given
+			var username = (await _tenrai.GetAnimeReviewsAsync(1)).Data.First().User.Username;
+
+			// When
+			var reviews = await _tenrai.GetAnimeReviewsAsync(1, new ReviewsSearchConfig { Username = username });
+
+			// Then
+			reviews.Data.Should().NotBeEmpty();
+			reviews.Data.Should().OnlyContain(review => review.User.Username == username);
+		}
 	}
 }

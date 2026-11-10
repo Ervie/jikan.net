@@ -70,4 +70,14 @@ public class GetRecentAnimeRecommendationsAsyncTests
         recs.Data.Should().HaveCount(100);
         recs.Data.Should().OnlyContain(x => x.Entries.Count == 2);
     }
+
+    [Fact]
+    public async Task GetRecentAnimeRecommendationsAsync_Limit10_ReturnsTen()
+    {
+        // When
+        var recs = await _tenrai.GetRecentAnimeRecommendationsAsync(new RecentRecommendationsConfig { Limit = 10 });
+
+        // Then
+        recs.Data.Should().HaveCount(10);
+    }
 }

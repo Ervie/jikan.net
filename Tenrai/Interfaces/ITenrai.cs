@@ -181,6 +181,15 @@ namespace Tenrai
         Task<BaseTenraiResponse<ICollection<Recommendation>>> GetAnimeRecommendationsAsync(long id, CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Returns collection of anime recommendation.
+        /// </summary>
+        /// <param name="id">MAL id of anime.</param>
+        /// <param name="searchConfig">Username and safe-for-work filters.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Collection of anime recommendation.</returns>
+        Task<BaseTenraiResponse<ICollection<Recommendation>>> GetAnimeRecommendationsAsync(long id, RecommendationsConfig searchConfig, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Returns collection of anime user updates.
         /// </summary>
         /// <param name="id">MAL id of anime.</param>
@@ -223,6 +232,15 @@ namespace Tenrai
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Collection of anime related entries.</returns>
         Task<PaginatedTenraiResponse<ICollection<RelatedEntry>>> GetAnimeRelationsAsync(long id, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns collection of anime related entries.
+        /// </summary>
+        /// <param name="id">MAL id of anime.</param>
+        /// <param name="searchConfig">Safe-for-work filtering for this call.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Collection of anime related entries.</returns>
+        Task<PaginatedTenraiResponse<ICollection<RelatedEntry>>> GetAnimeRelationsAsync(long id, SfwConfig searchConfig, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns collection of anime openings and endings.
@@ -467,6 +485,15 @@ namespace Tenrai
         Task<BaseTenraiResponse<ICollection<Recommendation>>> GetMangaRecommendationsAsync(long id, CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Returns collection of manga recommendation.
+        /// </summary>
+        /// <param name="id">MAL id of manga.</param>
+        /// <param name="searchConfig">Username and safe-for-work filters.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Collection of manga recomendation.</returns>
+        Task<BaseTenraiResponse<ICollection<Recommendation>>> GetMangaRecommendationsAsync(long id, RecommendationsConfig searchConfig, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Returns collection of manga reviews.
         /// </summary>
         /// <param name="id">MAL id of manga.</param>
@@ -490,6 +517,15 @@ namespace Tenrai
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Collection of manga related entries.</returns>
         Task<PaginatedTenraiResponse<ICollection<RelatedEntry>>> GetMangaRelationsAsync(long id, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns collection of manga related entries.
+        /// </summary>
+        /// <param name="id">MAL id of manga.</param>
+        /// <param name="searchConfig">Safe-for-work filtering for this call.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Collection of manga related entries.</returns>
+        Task<PaginatedTenraiResponse<ICollection<RelatedEntry>>> GetMangaRelationsAsync(long id, SfwConfig searchConfig, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns collection of external services links related to manga.
@@ -622,12 +658,30 @@ namespace Tenrai
         Task<BaseTenraiResponse<ICollection<CharacterAnimeographyEntry>>> GetCharacterAnimeAsync(long id, CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Returns animeography of character with given MAL id.
+        /// </summary>
+        /// <param name="id">MAL id of character.</param>
+        /// <param name="searchConfig">Safe-for-work filtering for this call.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Collection of anime where character has appeared.</returns>
+        Task<BaseTenraiResponse<ICollection<CharacterAnimeographyEntry>>> GetCharacterAnimeAsync(long id, SfwConfig searchConfig, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Returns mangaography of character with given MAL id.
         /// </summary>
         /// <param name="id">MAL id of character.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Collection of manga where character has appeared.</returns>
         Task<BaseTenraiResponse<ICollection<CharacterMangaographyEntry>>> GetCharacterMangaAsync(long id, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns mangaography of character with given MAL id.
+        /// </summary>
+        /// <param name="id">MAL id of character.</param>
+        /// <param name="searchConfig">Safe-for-work filtering for this call.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Collection of manga where character has appeared.</returns>
+        Task<BaseTenraiResponse<ICollection<CharacterMangaographyEntry>>> GetCharacterMangaAsync(long id, SfwConfig searchConfig, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns voice actors of character with given MAL id.
@@ -671,6 +725,15 @@ namespace Tenrai
         Task<BaseTenraiResponse<CharacterFull>> GetCharacterFullDataAsync(long id, CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Returns character with additional data.
+        /// </summary>
+        /// <param name="id">MAL id of character.</param>
+        /// <param name="searchConfig">Safe-for-work filtering for this call.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Character with additional data.</returns>
+        Task<BaseTenraiResponse<CharacterFull>> GetCharacterFullDataAsync(long id, SfwConfig searchConfig, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Returns the complete collection of character MAL IDs available in the catalogue.
         /// </summary>
         /// <remarks>Requires a Tenrai Server Key (set <see cref="Config.TenraiClientConfiguration.ServerKey"/>); otherwise the API responds with 401.</remarks>
@@ -699,6 +762,15 @@ namespace Tenrai
         Task<BaseTenraiResponse<ICollection<PersonAnimeographyEntry>>> GetPersonAnimeAsync(long id, CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Returns animeography of person with given MAL id.
+        /// </summary>
+        /// <param name="id">MAL id of person.</param>
+        /// <param name="searchConfig">Safe-for-work filtering for this call.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Collection of anime the person collaborated on.</returns>
+        Task<BaseTenraiResponse<ICollection<PersonAnimeographyEntry>>> GetPersonAnimeAsync(long id, SfwConfig searchConfig, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Returns mangaography of person with given MAL id.
         /// </summary>
         /// <param name="id">MAL id of person.</param>
@@ -707,12 +779,30 @@ namespace Tenrai
         Task<BaseTenraiResponse<ICollection<PersonMangaographyEntry>>> GetPersonMangaAsync(long id, CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Returns mangaography of person with given MAL id.
+        /// </summary>
+        /// <param name="id">MAL id of person.</param>
+        /// <param name="searchConfig">Safe-for-work filtering for this call.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Collection of manga the person worked on.</returns>
+        Task<BaseTenraiResponse<ICollection<PersonMangaographyEntry>>> GetPersonMangaAsync(long id, SfwConfig searchConfig, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Returns voice acting roles of person with given MAL id.
         /// </summary>
         /// <param name="id">MAL id of person.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Collection of voice acting roles of the person.</returns>
         Task<BaseTenraiResponse<ICollection<VoiceActingRole>>> GetPersonVoiceActingRolesAsync(long id, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns voice acting roles of person with given MAL id.
+        /// </summary>
+        /// <param name="id">MAL id of person.</param>
+        /// <param name="searchConfig">Safe-for-work filtering for this call.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Collection of voice acting roles of the person.</returns>
+        Task<BaseTenraiResponse<ICollection<VoiceActingRole>>> GetPersonVoiceActingRolesAsync(long id, SfwConfig searchConfig, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns collections of links to pictures related to person with given MAL id.
@@ -746,6 +836,15 @@ namespace Tenrai
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Person with additional data.</returns>
         Task<BaseTenraiResponse<PersonFull>> GetPersonFullDataAsync(long id, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns person with additional data.
+        /// </summary>
+        /// <param name="id">MAL id of person.</param>
+        /// <param name="searchConfig">Safe-for-work filtering for this call.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Person with additional data.</returns>
+        Task<BaseTenraiResponse<PersonFull>> GetPersonFullDataAsync(long id, SfwConfig searchConfig, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns the complete collection of person MAL IDs available in the catalogue.
@@ -976,6 +1075,14 @@ namespace Tenrai
         /// <summary>
         /// Returns list of most popular people.
         /// </summary>
+        /// <param name="searchConfig">Page and page size.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>List of most popular people.</returns>
+        Task<PaginatedTenraiResponse<ICollection<Person>>> GetTopPeopleAsync(PagingConfig searchConfig, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns list of most popular people.
+        /// </summary>
         /// <param name="page">Index of page folding 25 records of top ranging (e.g. 1 will return first 25 records, 2 will return record from 26 to 50 etc.)</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>List of most popular people.</returns>
@@ -986,6 +1093,14 @@ namespace Tenrai
 		/// </summary>
 		/// <returns>List of most popular characters.</returns>
 		Task<PaginatedTenraiResponse<ICollection<Character>>> GetTopCharactersAsync(CancellationToken cancellationToken = default);
+
+		/// <summary>
+		/// Returns list of most popular characters.
+		/// </summary>
+		/// <param name="searchConfig">Page and page size.</param>
+		/// <param name="cancellationToken">Cancellation token.</param>
+		/// <returns>List of most popular characters.</returns>
+		Task<PaginatedTenraiResponse<ICollection<Character>>> GetTopCharactersAsync(PagingConfig searchConfig, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns list of most popular characters.
@@ -1007,7 +1122,7 @@ namespace Tenrai
         /// <param name="searchConfig">Query configuration (page, limit, target type, preliminary/spoiler filters).</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>List of most popular reviews.</returns>
-        Task<PaginatedTenraiResponse<ICollection<Review>>> GetTopReviewsAsync(ReviewsSearchConfig searchConfig, CancellationToken cancellationToken = default);
+        Task<PaginatedTenraiResponse<ICollection<Review>>> GetTopReviewsAsync(TopReviewsConfig searchConfig, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns the anime recommendations with the most votes.
@@ -1083,6 +1198,14 @@ namespace Tenrai
         /// <summary>
         /// Returns list of anime genres.
         /// </summary>
+        /// <param name="searchConfig">Genre kind and safe-for-work filters.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>List of anime genres</returns>
+        Task<BaseTenraiResponse<ICollection<Genre>>> GetAnimeGenresAsync(GenresConfig searchConfig, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns list of anime genres.
+        /// </summary>
         /// <param name="filter">Filter for genre types.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>List of anime genres</returns>
@@ -1094,6 +1217,14 @@ namespace Tenrai
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>List of manga genres</returns>
         Task<BaseTenraiResponse<ICollection<Genre>>> GetMangaGenresAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns list of manga genres.
+        /// </summary>
+        /// <param name="searchConfig">Genre kind and safe-for-work filters.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>List of manga genres</returns>
+        Task<BaseTenraiResponse<ICollection<Genre>>> GetMangaGenresAsync(GenresConfig searchConfig, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns list of manga genres.
@@ -1496,6 +1627,14 @@ namespace Tenrai
         /// <summary>
         /// Gets collection of recently added anime recommendations.
         /// </summary>
+        /// <param name="searchConfig">Page, page size, username and safe-for-work filters.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Collection of recently added recommendations.r</returns>
+        Task<PaginatedTenraiResponse<ICollection<UserRecommendation>>> GetRecentAnimeRecommendationsAsync(RecentRecommendationsConfig searchConfig, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Gets collection of recently added anime recommendations.
+        /// </summary>
         /// <param name="page">Index of page folding 100 records of top ranging (e.g. 1 will return first 100 records, 2 will return record from 101 to 200 etc.)</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Collection of recently added recommendations.r</returns>
@@ -1507,6 +1646,14 @@ namespace Tenrai
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Collection of recently added recommendations.r</returns>
         Task<PaginatedTenraiResponse<ICollection<UserRecommendation>>> GetRecentMangaRecommendationsAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Gets collection of recently added manga recommendations.
+        /// </summary>
+        /// <param name="searchConfig">Page, page size, username and safe-for-work filters.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Collection of recently added recommendations.r</returns>
+        Task<PaginatedTenraiResponse<ICollection<UserRecommendation>>> GetRecentMangaRecommendationsAsync(RecentRecommendationsConfig searchConfig, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Gets collection of recently added manga recommendations.
@@ -1533,7 +1680,7 @@ namespace Tenrai
         /// <param name="searchConfig">Query configuration (page, limit, sort order, preliminary/spoiler filters, sentiment).</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Collection of recently added anime reviews</returns>
-        Task<PaginatedTenraiResponse<ICollection<Review>>> GetRecentAnimeReviewsAsync(ReviewsSearchConfig searchConfig, CancellationToken cancellationToken = default);
+        Task<PaginatedTenraiResponse<ICollection<Review>>> GetRecentAnimeReviewsAsync(RecentReviewsConfig searchConfig, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Gets collection of recently added manga reviews.
@@ -1548,7 +1695,7 @@ namespace Tenrai
         /// <param name="searchConfig">Query configuration (page, limit, sort order, preliminary/spoiler filters, sentiment).</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Collection of recently added manga reviews.</returns>
-        Task<PaginatedTenraiResponse<ICollection<Review>>> GetRecentMangaReviewsAsync(ReviewsSearchConfig searchConfig, CancellationToken cancellationToken = default);
+        Task<PaginatedTenraiResponse<ICollection<Review>>> GetRecentMangaReviewsAsync(RecentReviewsConfig searchConfig, CancellationToken cancellationToken = default);
 
         #endregion
 
@@ -1743,6 +1890,15 @@ namespace Tenrai
 		Task<PaginatedTenraiResponse<ICollection<InterestStack>>> GetAnimeInterestStacksAsync(long id, CancellationToken cancellationToken = default);
 
 		/// <summary>
+		/// Returns first page of public interest stacks containing the anime with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of anime.</param>
+		/// <param name="searchConfig">Search text, spoiler/challenge/official filters, sorting, paging and safe-for-work filters.</param>
+		/// <param name="cancellationToken">Cancellation token.</param>
+		/// <returns>First page of public interest stacks containing the anime.</returns>
+		Task<PaginatedTenraiResponse<ICollection<InterestStack>>> GetAnimeInterestStacksAsync(long id, InterestStackListConfig searchConfig, CancellationToken cancellationToken = default);
+
+		/// <summary>
 		/// Returns a page of public interest stacks containing the anime with given MAL id.
 		/// </summary>
 		/// <param name="id">MAL id of anime.</param>
@@ -1758,6 +1914,15 @@ namespace Tenrai
 		/// <param name="cancellationToken">Cancellation token.</param>
 		/// <returns>First page of public interest stacks containing the manga.</returns>
 		Task<PaginatedTenraiResponse<ICollection<InterestStack>>> GetMangaInterestStacksAsync(long id, CancellationToken cancellationToken = default);
+
+		/// <summary>
+		/// Returns first page of public interest stacks containing the manga with given MAL id.
+		/// </summary>
+		/// <param name="id">MAL id of manga.</param>
+		/// <param name="searchConfig">Search text, spoiler/challenge/official filters, sorting, paging and safe-for-work filters.</param>
+		/// <param name="cancellationToken">Cancellation token.</param>
+		/// <returns>First page of public interest stacks containing the manga.</returns>
+		Task<PaginatedTenraiResponse<ICollection<InterestStack>>> GetMangaInterestStacksAsync(long id, InterestStackListConfig searchConfig, CancellationToken cancellationToken = default);
 
 		/// <summary>
 		/// Returns a page of public interest stacks containing the manga with given MAL id.

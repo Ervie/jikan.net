@@ -279,7 +279,7 @@ Console.WriteLine(info.Data.MoreInfo);
 
 ### GetAnimeRecommendationsAsync
 
-Returns anime recommendations.
+Returns anime recommendations. Overload: `(long id, RecommendationsConfig config)` with `Username` (only recommendations by that MyAnimeList user), `Sfw` and `SfwStrict`.
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
@@ -329,7 +329,7 @@ foreach (var r in filtered.Data)
 
 ### GetAnimeRelationsAsync
 
-Returns related entries.
+Returns related entries. Overload: `(long id, SfwConfig config)`, to override the [client SFW setting](GettingStarted.md#safe-for-work-filtering) for this call.
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
@@ -616,7 +616,7 @@ var info = await tenrai.GetMangaMoreInfoAsync(2);
 
 ### GetMangaRecommendationsAsync
 
-Returns manga recommendations.
+Returns manga recommendations. Overload: `(long id, RecommendationsConfig config)` with `Username` (only recommendations by that MyAnimeList user), `Sfw` and `SfwStrict`.
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
@@ -658,7 +658,7 @@ var spoilers = await tenrai.GetMangaReviewsAsync(2, new ReviewsSearchConfig
 
 ### GetMangaRelationsAsync
 
-Returns related entries.
+Returns related entries. Overload: `(long id, SfwConfig config)`, to override the [client SFW setting](GettingStarted.md#safe-for-work-filtering) for this call.
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
@@ -770,7 +770,7 @@ Console.WriteLine(character.Data.About);
 
 ### GetCharacterAnimeAsync
 
-Returns animeography (anime where character appeared).
+Returns animeography (anime where character appeared). Overload: `(long id, SfwConfig config)`, to override the [client SFW setting](GettingStarted.md#safe-for-work-filtering) for this call.
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
@@ -788,7 +788,7 @@ foreach (var entry in anime.Data)
 
 ### GetCharacterMangaAsync
 
-Returns mangaography (manga where character appeared).
+Returns mangaography (manga where character appeared). Overload: `(long id, SfwConfig config)`, to override the [client SFW setting](GettingStarted.md#safe-for-work-filtering) for this call.
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
@@ -840,7 +840,7 @@ var pictures = await tenrai.GetCharacterPicturesAsync(2219);
 
 ### GetCharacterFullDataAsync
 
-Returns character with all additional data.
+Returns character with all additional data. Overload: `(long id, SfwConfig config)`, to override the [client SFW setting](GettingStarted.md#safe-for-work-filtering) for this call.
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
@@ -880,7 +880,7 @@ Console.WriteLine(person.Data.GivenName);
 
 ### GetPersonAnimeAsync
 
-Returns animeography (anime the person collaborated on).
+Returns animeography (anime the person collaborated on). Overload: `(long id, SfwConfig config)`, to override the [client SFW setting](GettingStarted.md#safe-for-work-filtering) for this call.
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
@@ -898,7 +898,7 @@ foreach (var entry in anime.Data)
 
 ### GetPersonMangaAsync
 
-Returns mangaography (manga the person worked on).
+Returns mangaography (manga the person worked on). Overload: `(long id, SfwConfig config)`, to override the [client SFW setting](GettingStarted.md#safe-for-work-filtering) for this call.
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
@@ -914,7 +914,7 @@ var manga = await tenrai.GetPersonMangaAsync(1870);
 
 ### GetPersonVoiceActingRolesAsync
 
-Returns voice acting roles.
+Returns voice acting roles. Overload: `(long id, SfwConfig config)`, to override the [client SFW setting](GettingStarted.md#safe-for-work-filtering) for this call.
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
@@ -948,7 +948,7 @@ var pictures = await tenrai.GetPersonPicturesAsync(1870);
 
 ### GetPersonFullDataAsync
 
-Returns person with all additional data.
+Returns person with all additional data. Overload: `(long id, SfwConfig config)`, to override the [client SFW setting](GettingStarted.md#safe-for-work-filtering) for this call.
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
@@ -1159,7 +1159,7 @@ var top = await tenrai.GetTopMangaAsync();
 
 ### GetTopPeopleAsync
 
-Returns most popular people. Overload: `(int page)`.
+Returns most popular people. Overloads: `(int page)` and `(PagingConfig config)`, which takes `Page` and `Limit` (100 max).
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
@@ -1175,7 +1175,7 @@ var top = await tenrai.GetTopPeopleAsync();
 
 ### GetTopCharactersAsync
 
-Returns most popular characters. Overload: `(int page)`.
+Returns most popular characters. Overloads: `(int page)` and `(PagingConfig config)`, which takes `Page` and `Limit` (100 max).
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
@@ -1191,11 +1191,11 @@ var top = await tenrai.GetTopCharactersAsync();
 
 ### GetTopReviewsAsync
 
-Returns most popular reviews. A parameterless overload returns the first page; a second overload takes a [`ReviewsSearchConfig`](#reviewssearchconfig) (use `Type` to restrict to anime or manga, plus `Page`/`Limit` and preliminary/spoiler filters).
+Returns most popular reviews. A parameterless overload returns the first page; a second overload takes a [`TopReviewsConfig`](#topreviewsconfig) (use `Type` to restrict to anime or manga).
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| searchConfig | ReviewsSearchConfig | (overload) Type, page, limit, preliminary/spoiler filters |
+| searchConfig | TopReviewsConfig | (overload) Type, username, page, limit, preliminary/spoiler, SFW |
 
 **Returns:** `PaginatedTenraiResponse<ICollection<Review>>`
 
@@ -1205,13 +1205,13 @@ Returns most popular reviews. A parameterless overload returns the first page; a
 var top = await tenrai.GetTopReviewsAsync();
 
 // Top manga reviews only
-var topManga = await tenrai.GetTopReviewsAsync(new ReviewsSearchConfig
+var topManga = await tenrai.GetTopReviewsAsync(new TopReviewsConfig
 {
     Type = ReviewTargetType.Manga
 });
 ```
 
-**Model:** [Review](Models.md#review) · **Config:** [ReviewsSearchConfig](#reviewssearchconfig)
+**Model:** [Review](Models.md#review) · **Config:** [TopReviewsConfig](#topreviewsconfig)
 
 ### GetTopAnimeRecommendationsAsync, GetTopMangaRecommendationsAsync
 
@@ -1288,7 +1288,7 @@ var song = music.Data.First().Entry.First().Meta; // Title and Author (the artis
 
 ### GetAnimeGenresAsync
 
-Returns anime genres. Overload: `(GenresFilter filter)`.
+Returns anime genres. Overloads: `(GenresFilter filter)` and `(GenresConfig config)`, which takes `Filter`, `Sfw` and `SfwStrict` (`Sfw` leaves out Hentai and Erotica, `SfwStrict` also Ecchi).
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
@@ -1306,7 +1306,7 @@ foreach (var g in genres.Data)
 
 ### GetMangaGenresAsync
 
-Returns manga genres. Overload: `(GenresFilter filter)`.
+Returns manga genres. Overloads: `(GenresFilter filter)` and `(GenresConfig config)`, which takes `Filter`, `Sfw` and `SfwStrict` (`Sfw` leaves out Hentai and Erotica, `SfwStrict` also Ecchi).
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
@@ -1495,7 +1495,7 @@ var person = await tenrai.GetRandomPersonAsync();
 
 ### GetRecentAnimeRecommendationsAsync
 
-Returns recently added anime recommendations. Overload: `(int page)`.
+Returns recently added anime recommendations. Overloads: `(int page)` and `(RecentRecommendationsConfig config)`, which takes `Page`, `Limit` (100 max and default), `Username`, `Sfw` and `SfwStrict`.
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
@@ -1511,7 +1511,7 @@ var recs = await tenrai.GetRecentAnimeRecommendationsAsync();
 
 ### GetRecentMangaRecommendationsAsync
 
-Returns recently added manga recommendations. Overload: `(int page)`.
+Returns recently added manga recommendations. Overloads: `(int page)` and `(RecentRecommendationsConfig config)`, which takes `Page`, `Limit` (100 max and default), `Username`, `Sfw` and `SfwStrict`.
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
@@ -1531,11 +1531,11 @@ var recs = await tenrai.GetRecentMangaRecommendationsAsync();
 
 ### GetRecentAnimeReviewsAsync
 
-Returns recently added anime reviews. A parameterless overload returns the first page; a second overload takes a [`ReviewsSearchConfig`](#reviewssearchconfig) (page, limit, sort, preliminary/spoiler filters, sentiment).
+Returns recently added anime reviews. A parameterless overload returns the first page; a second overload takes a [`RecentReviewsConfig`](#recentreviewsconfig).
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| searchConfig | ReviewsSearchConfig | (overload) Page, limit, sort, filters, sentiment |
+| searchConfig | RecentReviewsConfig | (overload) Page, limit, username, sort, filters, sentiment, SFW |
 
 **Returns:** `PaginatedTenraiResponse<ICollection<Review>>`
 
@@ -1547,11 +1547,11 @@ var reviews = await tenrai.GetRecentAnimeReviewsAsync();
 
 ### GetRecentMangaReviewsAsync
 
-Returns recently added manga reviews. A parameterless overload returns the first page; a second overload takes a [`ReviewsSearchConfig`](#reviewssearchconfig) (page, limit, sort, preliminary/spoiler filters, sentiment).
+Returns recently added manga reviews. A parameterless overload returns the first page; a second overload takes a [`RecentReviewsConfig`](#recentreviewsconfig).
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| searchConfig | ReviewsSearchConfig | (overload) Page, limit, sort, filters, sentiment |
+| searchConfig | RecentReviewsConfig | (overload) Page, limit, username, sort, filters, sentiment, SFW |
 
 **Returns:** `PaginatedTenraiResponse<ICollection<Review>>`
 
@@ -1774,12 +1774,13 @@ foreach (var entry in stack.Data.Entries)
 
 ### GetAnimeInterestStacksAsync
 
-Returns a page of public interest stacks containing the given anime.
+Returns a page of public interest stacks containing the given anime. A third overload takes an `InterestStackListConfig`: the same properties as [`InterestStackSearchConfig`](#searchintereststacksasync) except `Type`.
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | id | long | MAL id of anime |
 | page | int | Page index (optional overload) |
+| config | InterestStackListConfig | (overload) Search text, spoiler/challenge/official filters, sorting, paging, SFW |
 
 **Returns:** `PaginatedTenraiResponse<ICollection<InterestStack>>`
 
@@ -1794,12 +1795,13 @@ Console.WriteLine($"Cowboy Bebop appears in {stacks.Pagination.Items.Total} stac
 
 ### GetMangaInterestStacksAsync
 
-Returns a page of public interest stacks containing the given manga.
+Returns a page of public interest stacks containing the given manga. A third overload takes an `InterestStackListConfig`: the same properties as [`InterestStackSearchConfig`](#searchintereststacksasync) except `Type`.
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | id | long | MAL id of manga |
 | page | int | Page index (optional overload) |
+| config | InterestStackListConfig | (overload) Search text, spoiler/challenge/official filters, sorting, paging, SFW |
 
 **Returns:** `PaginatedTenraiResponse<ICollection<InterestStack>>`
 
@@ -1821,10 +1823,15 @@ Returns public interest stacks matching an `InterestStackSearchConfig`.
 | Limit | int? | Entries per page (100 max, 25 when unset) |
 | Query | string | Search query, matched against title and description |
 | Type | InterestStackType | `Anime`, `Manga`, or `EveryType` (default) |
+| Spoilers | ReviewFilter? | `Include`, `Exclude`, or `Only` spoiler stacks |
+| Challenges | ReviewFilter? | `Include`, `Exclude`, or `Only` challenge stacks |
+| Official | ReviewFilter? | `Include`, `Exclude`, or `Only` official stacks |
 | OrderBy | InterestStackSearchOrderBy | `CreatedAt` or `RestackCount`. `NoSorting` (default) leaves the order to the API |
 | SortDirection | SortDirection | `Ascending` or `Descending`. Only applied when `OrderBy` is set |
 | Sfw | bool? | Filter out adult entries. `null` (default) uses the [client setting](GettingStarted.md#safe-for-work-filtering) |
 | SfwStrict | bool? | Also filter out ecchi entries. `null` (default) uses the [client setting](GettingStarted.md#safe-for-work-filtering) |
+
+The API leaves out spoiler, challenge and official stacks unless asked: `Include` adds that kind, `Only` returns just that kind. Cowboy Bebop is in 687 stacks by default, 777 with `Spoilers = ReviewFilter.Include`, and 90 with `Spoilers = ReviewFilter.Only`.
 
 `OrderBy` accepts only `CreatedAt` and `RestackCount` because those are the only two values the API sorts by. Other fields, including `EntryCount`, return 400.
 
@@ -1948,19 +1955,47 @@ Console.WriteLine(animeIds.Data.Count);
 
 ## Reviews Configuration
 
+Each review endpoint takes different filters, so each has its own config.
+
 ### ReviewsSearchConfig
 
-Passed to the review methods (`GetAnimeReviewsAsync`, `GetMangaReviewsAsync`, `GetTopReviewsAsync`, `GetRecentAnimeReviewsAsync`, `GetRecentMangaReviewsAsync`) to page, sort, and filter reviews.
+Passed to `GetAnimeReviewsAsync` and `GetMangaReviewsAsync`. These reviews take no `Sfw`.
 
-| Property | Type | Applies to | Description |
-|----------|------|-----------|-------------|
-| Page | int? | all | Page index |
-| Limit | int? | recent, top | Entries per page (100 max) |
-| Sort | ReviewSortOrder? | per-entity, recent | `MostHelpful` (default), `Newest`, `Oldest` |
-| Preliminary | ReviewFilter? | all | `Include`, `Exclude`, or `Only` preliminary reviews |
-| Spoilers | ReviewFilter? | all | `Include`, `Exclude`, or `Only` spoiler reviews |
-| Sentiment | ReviewSentiment? | per-entity, recent | `Recommended`, `MixedFeelings`, `NotRecommended` |
-| Type | ReviewTargetType? | top only | `Anime` or `Manga` |
+| Property | Type | Description |
+|----------|------|-------------|
+| Page | int? | Page index |
+| Username | string | Only reviews by this MyAnimeList user (full username) |
+| Sort | ReviewSortOrder? | `MostHelpful` (API default), `Newest`, `Oldest` |
+| Preliminary | ReviewFilter? | `Include`, `Exclude`, or `Only` preliminary reviews. Left out unless set |
+| Spoilers | ReviewFilter? | `Include`, `Exclude`, or `Only` spoiler reviews. Left out unless set |
+| Sentiment | ReviewSentiment? | `Recommended`, `MixedFeelings`, `NotRecommended` |
+
+### RecentReviewsConfig
+
+Passed to `GetRecentAnimeReviewsAsync` and `GetRecentMangaReviewsAsync`. The same properties as `ReviewsSearchConfig` (`Sort` defaults to `Newest` here), plus:
+
+| Property | Type | Description |
+|----------|------|-------------|
+| Limit | int? | Entries per page (100 max) |
+| Sfw | bool? | Leave out reviews of adult entries. `null` (default) uses the [client setting](GettingStarted.md#safe-for-work-filtering) |
+| SfwStrict | bool? | Also leave out reviews of ecchi entries. `null` (default) uses the client setting |
+
+### TopReviewsConfig
+
+Passed to `GetTopReviewsAsync`.
+
+| Property | Type | Description |
+|----------|------|-------------|
+| Page | int? | Page index |
+| Limit | int? | Entries per page (100 max) |
+| Type | ReviewTargetType? | `Anime` or `Manga` |
+| Username | string | Only reviews by this MyAnimeList user (full username) |
+| Preliminary | bool? | Include preliminary reviews. The API includes them when unset |
+| Spoilers | bool? | Include reviews with spoilers. The API includes them when unset |
+| Sfw | bool? | Leave out reviews of adult entries. `null` (default) uses the client setting |
+| SfwStrict | bool? | Also leave out reviews of ecchi entries. `null` (default) uses the client setting |
+
+`Preliminary` and `Spoilers` are `bool?` here because `/top/reviews` answers 400 to `only`.
 
 **Enums:** `ReviewSortOrder`, `ReviewFilter`, `ReviewSentiment`, `ReviewTargetType`.
 

@@ -71,7 +71,7 @@ var tenrai = new TenraiClient(new TenraiClientConfiguration
 var everything = await tenrai.SearchAnimeAsync(new AnimeSearchConfig { Query = "berserk", Sfw = false });
 ```
 
-A config's `Sfw` and `SfwStrict` are `bool?`: `null` (the default) uses the client setting, `true` or `false` overrides it. The setting applies to plain overloads too (`GetCurrentSeasonAsync()`, `GetTopAnimeAsync()`), on every endpoint that takes `sfw`. Single news items and articles never send it, because the API answers 404 for an item that mentions adult entries.
+A config's `Sfw` and `SfwStrict` are `bool?`: `null` (the default) uses the client setting, `true` or `false` overrides it. The setting applies to plain overloads too (`GetCurrentSeasonAsync()`, `GetTopAnimeAsync()`), on every endpoint that takes `sfw`. Lists that take no filter besides SFW (relations, a character's or person's anime, manga, voice roles and full data) have an overload taking an `SfwConfig` for the per-call override. Single news items and articles never send it, because the API answers 404 for an item that mentions adult entries.
 
 ### Custom HttpClient
 

@@ -62,6 +62,26 @@ namespace Tenrai.Tests.SearchConfigTests
 			handler.LastQuery.Should().Be("?page=2");
 		}
 
+		[Fact]
+		public async Task ClientSfwOn_PlainSubList_SendsSfw()
+		{
+			var (client, handler) = CreateClient(sfw: true);
+
+			await client.GetPersonVoiceActingRolesAsync(1);
+
+			handler.LastQuery.Should().Be("?sfw=true");
+		}
+
+		[Fact]
+		public async Task ClientSfwOn_SubListConfigTurnsItOff_SendsNoSfw()
+		{
+			var (client, handler) = CreateClient(sfw: true);
+
+			await client.GetPersonVoiceActingRolesAsync(1, new SfwConfig { Sfw = false });
+
+			handler.LastQuery.Should().BeEmpty();
+		}
+
 		private static (TenraiClient Client, RecordingHandler Handler) CreateClient(bool sfw)
 		{
 			var handler = new RecordingHandler();

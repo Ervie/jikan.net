@@ -23,7 +23,7 @@ public class GetRecentAnimeReviewsAsyncTests
     public async Task GetRecentAnimeReviewsAsync_InvalidPage_ShouldThrowValidationException(int page)
     {
         // When
-        var func = _tenrai.Awaiting(x => x.GetRecentAnimeReviewsAsync(new ReviewsSearchConfig { Page = page }));
+        var func = _tenrai.Awaiting(x => x.GetRecentAnimeReviewsAsync(new RecentReviewsConfig { Page = page }));
 
         // Then
         await func.Should().ThrowExactlyAsync<TenraiValidationException>();
@@ -46,7 +46,7 @@ public class GetRecentAnimeReviewsAsyncTests
     public async Task GetRecentAnimeReviewsAsync_FirstPage_ShouldParseFirstPageReviews()
     {
         // When
-        var reviews = await _tenrai.GetRecentAnimeReviewsAsync(new ReviewsSearchConfig { Page = 1 });
+        var reviews = await _tenrai.GetRecentAnimeReviewsAsync(new RecentReviewsConfig { Page = 1 });
 
         // Then
         using var _ = new AssertionScope();
@@ -59,7 +59,7 @@ public class GetRecentAnimeReviewsAsyncTests
     public async Task GetRecentAnimeReviewsAsync_SecondPage_ShouldParseSecondPageReviews()
     {
         // When
-        var reviews = await _tenrai.GetRecentAnimeReviewsAsync(new ReviewsSearchConfig { Page = 2 });
+        var reviews = await _tenrai.GetRecentAnimeReviewsAsync(new RecentReviewsConfig { Page = 2 });
 
         // Then
         using var _ = new AssertionScope();

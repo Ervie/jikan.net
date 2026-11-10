@@ -68,5 +68,20 @@ namespace Tenrai.Tests.PersonTests
 				sugita.Data.Should().Contain(x => x.Anime.Title.Equals("Gintama") && x.Character.Name.Equals("Sakata, Gintoki"));
 			}
 		}
+
+		[Fact]
+		public async Task GetPersonVoiceActingRolesAsync_Sfw_HasFewerRoles()
+		{
+			// Given
+			const long voiceActorWithAdultRoles = 12243;
+
+			// When
+			var all = await _tenrai.GetPersonVoiceActingRolesAsync(voiceActorWithAdultRoles, new SfwConfig { Sfw = false });
+			var sfw = await _tenrai.GetPersonVoiceActingRolesAsync(voiceActorWithAdultRoles, new SfwConfig { Sfw = true });
+
+			// Then
+			sfw.Data.Should().NotBeEmpty();
+			sfw.Data.Count.Should().BeLessThan(all.Data.Count);
+		}
 	}
 }

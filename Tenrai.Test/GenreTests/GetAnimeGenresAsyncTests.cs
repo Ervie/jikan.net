@@ -42,6 +42,17 @@ namespace Tenrai.Tests.GenreTests
 			result.Data.Should().HaveCount(expectedGenreCount);
 		}
 
+		[Fact]
+		public async Task GetAnimeGenresAsync_Sfw_NoHentai()
+		{
+			// When
+			var result = await _tenrai.GetAnimeGenresAsync(new GenresConfig { Sfw = true });
+
+			// Then
+			result.Data.Should().NotBeEmpty();
+			result.Data.Should().NotContain(genre => genre.Name == "Hentai");
+		}
+
 		[Theory]
 		[InlineData((GenresFilter)int.MaxValue)]
 		[InlineData((GenresFilter)int.MinValue)]
