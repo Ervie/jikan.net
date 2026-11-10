@@ -42,6 +42,7 @@ Brings the client up to the Tenrai OpenAPI spec 1.0.30. Major, breaking release.
     - Partial dates on unaired titles (`"2027"`, `"2027-10"`) failed the whole response, which broke `GetUpcomingSeasonAsync` on every call and any search that included an unaired title. They now pad to the first day; `TimePeriod.Parts` says which pieces are known.
     - `EpisodeVideo.Images` was always null (mapped to `"Images"` instead of `"images"`).
     - Score filters are sent in invariant culture, so a comma-decimal locale no longer sends `7,5`.
+    - `Title`, `TitleEnglish`, `TitleJapanese` and `TitleSynonyms` on `Anime` and `Manga` are no longer marked `[Obsolete]`. Tenrai still returns and documents these fields, so reading `anime.Title` no longer raises a CS0618 warning.
 
 ## 15.08.2026 - Version 3.1.0
 
@@ -68,7 +69,7 @@ Rebrand of the library from `JikanDotNet` to `Tenrai.Net`, targeting the [Tenrai
     - `JikanClientConfiguration` → `TenraiClientConfiguration`; `JikanApiError` → `TenraiApiError`; `JikanRequestException`/`JikanValidationException` → `TenraiRequestException`/`TenraiValidationException`.
     - Base URL now defaults to `https://api.tenrai.org/v1/`.
     - Review methods (`GetAnimeReviewsAsync`, `GetMangaReviewsAsync`, `GetTopReviewsAsync`, `GetRecent{Anime,Manga}ReviewsAsync`) now take a `ReviewsSearchConfig` instead of `bool includePreliminary`/`bool includeSpoiler` (the old booleans cannot express the new tri-state filters). The simple `long id` overloads are unchanged.
-    - Endpoint families Tenrai does not implement - users, clubs, watch, forum topics, and anime/manga user updates (plus random user and user/club search) — are retained but marked `[Obsolete]` and now throw `NotSupportedException`.
+    - Endpoint families Tenrai does not implement - users, clubs, watch, forum topics, and anime/manga user updates (plus random user and user/club search) - are retained but marked `[Obsolete]` and now throw `NotSupportedException`.
 - Features
     - Reviews: sort by `newest`/`oldest`/`most_helpful`, tri-state `preliminary`/`spoilers` filters (`Include`/`Exclude`/`Only`), and a `sentiment` filter (`recommended`/`mixed_feelings`/`not_recommended`) via `ReviewsSearchConfig`. `Review` now exposes `Tags` and `IsPreliminary`.
     - Server Key support: set `TenraiClientConfiguration.ServerKey` to send `X-Server-Key` and automatically raise the rate limit to the 300/min, 5/sec tier.

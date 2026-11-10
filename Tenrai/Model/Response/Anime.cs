@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
@@ -36,28 +35,24 @@ namespace Tenrai
 		/// <summary>
 		/// Title of the anime.
 		/// </summary>
-		[Obsolete("This will be removed in the future. Use titles property instead.")]
 		[JsonPropertyName("title")]
 		public string Title { get; set; }
 
 		/// <summary>
 		/// Title of the anime in English.
 		/// </summary>
-		[Obsolete("This will be removed in the future. Use titles property instead.")]
 		[JsonPropertyName("title_english")]
 		public string TitleEnglish { get; set; }
 
 		/// <summary>
 		/// Title of the anime in Japanese.
 		/// </summary>
-		[Obsolete("This will be removed in the future. Use titles property instead.")]
 		[JsonPropertyName("title_japanese")]
 		public string TitleJapanese { get; set; }
 
 		/// <summary>
 		/// Anime's multiple titles (if any). Return null if there is none.
 		/// </summary>
-		[Obsolete("This will be removed in the future. Use titles property instead.")]
 		[JsonPropertyName("title_synonyms")]
 		public ICollection<string> TitleSynonyms { get; set; }
 		

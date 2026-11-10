@@ -94,10 +94,7 @@ namespace Tenrai.Helpers
 
 		internal QueryBuilder AddList<TEnum>(string key, ICollection<TEnum> values) where TEnum : struct, Enum
 		{
-			if (values == null || values.Count == 0)
-			{
-				return this;
-			}
+			if (values == null || values.Count == 0) return this;
 
 			var descriptions = values.Select(value =>
 			{
@@ -111,10 +108,7 @@ namespace Tenrai.Helpers
 
 		internal QueryBuilder AddList(string key, ICollection<long> values)
 		{
-			if (values == null || values.Count == 0)
-			{
-				return this;
-			}
+			if (values == null || values.Count == 0) return this;
 
 			Append(key, string.Join(",", values.Select(value => value.ToString(CultureInfo.InvariantCulture))));
 
@@ -133,10 +127,7 @@ namespace Tenrai.Helpers
 				.Select(Uri.EscapeDataString)
 				.ToList();
 
-			if (encoded == null || encoded.Count == 0)
-			{
-				return this;
-			}
+			if (encoded == null || encoded.Count == 0) return this;
 
 			Append(key, string.Join(",", encoded));
 

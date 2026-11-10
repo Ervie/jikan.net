@@ -109,10 +109,7 @@ namespace Tenrai
 			}
 			catch (JsonException ex)
 			{
-				if (!_tenraiConfiguration.SuppressException)
-				{
-					throw new TenraiRequestException(ErrorMessagesConst.SerializationFailed + Environment.NewLine + "Inner exception message: " + ex.Message, ex);
-				}
+				if (!_tenraiConfiguration.SuppressException) throw new TenraiRequestException(ErrorMessagesConst.SerializationFailed + Environment.NewLine + "Inner exception message: " + ex.Message, ex);
 			}
 			return returnedObject;
 		}

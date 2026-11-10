@@ -3,7 +3,7 @@ using FluentAssertions;
 using FluentAssertions.Execution;
 using Xunit;
 
-// The endpoints exercised here are intentionally obsolete: Tenrai v1 does not implement them.
+// The endpoints exercised here are intentionally obsolete: Tenrai v1 does not implement them
 #pragma warning disable CS0618
 
 namespace Tenrai.Tests

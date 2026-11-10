@@ -12,17 +12,11 @@ namespace Tenrai.Helpers
 
 		public override DateTimeOffset? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			if (reader.TokenType != JsonTokenType.String)
-			{
-				return null;
-			}
+			if (reader.TokenType != JsonTokenType.String) return null;
 
 			var text = reader.GetString();
 			const DateTimeStyles styles = DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal;
-			if (DateTimeOffset.TryParseExact(text, PartialFormats, CultureInfo.InvariantCulture, styles, out var partial))
-			{
-				return partial;
-			}
+			if (DateTimeOffset.TryParseExact(text, PartialFormats, CultureInfo.InvariantCulture, styles, out var partial)) return partial;
 
 			return DateTimeOffset.TryParse(text, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out var full) ? full : (DateTimeOffset?)null;
 		}

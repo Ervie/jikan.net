@@ -17,7 +17,7 @@ Tenrai.Net applies client-side rate limiting by default. Configure it via `Tenra
 
 ## Server Keys
 
-A Server Key ([Patreon supporters](https://www.patreon.com/TenraiAPI)) raises your limits. Set it on the configuration; it is sent as the `X-Server-Key` header, and — unless you have overridden `LimiterConfigurations` — the client automatically switches to the higher Server Key limiter tier.
+A Server Key ([Patreon supporters](https://www.patreon.com/TenraiAPI)) raises your limits. Set it on the configuration; it is sent as the `X-Server-Key` header, and unless you have overridden `LimiterConfigurations`, the client automatically switches to the higher Server Key limiter tier.
 
 ```csharp
 var config = new TenraiClientConfiguration

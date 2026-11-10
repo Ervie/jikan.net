@@ -84,7 +84,7 @@ Then restore dependencies:
 
 ## 07.07.2026 - Version 3.0.0
 
-- Rebrand from `JikanDotNet` to `Tenrai.Net` targeting the Tenrai API (`https://api.tenrai.org/v1`) — major, breaking release
+- Rebrand from `JikanDotNet` to `Tenrai.Net` targeting the Tenrai API (`https://api.tenrai.org/v1`), major, breaking release
 - `Jikan` → `TenraiClient`, `IJikan` → `ITenrai`, namespace `JikanDotNet` → `Tenrai`, `*JikanResponse` → `*TenraiResponse`
 - Reviews gain sort, sentiment, and tri-state preliminary/spoiler filtering via `ReviewsSearchConfig`; `Review` adds `Tags` and `IsPreliminary`
 - Server Key support (`X-Server-Key`) with a higher rate-limit tier; new bulk ID endpoints

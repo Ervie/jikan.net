@@ -24,7 +24,7 @@ Tenrai.Net is a .NET wrapper for the Tenrai REST API (`https://api.tenrai.org/v1
 - Prefer `TenraiEndpointConsts` for route segments instead of repeating string literals.
 - Response models should use `System.Text.Json.Serialization.JsonPropertyName` for JSON field mapping.
 - Keep XML documentation on public types and members meaningful because the package emits documentation files.
-- In C# code, use braces for `if` and `else` blocks, including single-line branches.
+- In C# code, an `if` may skip braces only when its body is an immediate exit (`return`, `throw`, `continue`, `break`) on the same line: `if (arg == null) throw new TenraiValidationException(...);`. Every other `if` and `else` body gets braces, even a single statement.
 - Follow the style of the file being edited. This repo currently has a mix of block-scoped and file-scoped namespaces; do not reformat unrelated files.
 
 ## Docs Rule

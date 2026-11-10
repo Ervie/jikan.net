@@ -10,10 +10,7 @@ namespace Tenrai.Helpers
 	{
 		public override TimeSpan? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			if (reader.TokenType != JsonTokenType.String)
-			{
-				return null;
-			}
+			if (reader.TokenType != JsonTokenType.String) return null;
 
 			try
 			{
