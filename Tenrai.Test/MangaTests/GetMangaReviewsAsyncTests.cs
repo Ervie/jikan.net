@@ -50,7 +50,7 @@ namespace Tenrai.Tests.MangaTests
 		public async Task GetMangaReviewsAsync_ExcludePreliminary_ShouldReturnNoPreliminaryReviews()
 		{
 			// When
-			var berserk = await _tenrai.GetMangaReviewsAsync(2, new ReviewsSearchConfig { Preliminary = ReviewFilter.Exclude });
+			var berserk = await _tenrai.GetMangaReviewsAsync(2, new ReviewsSearchConfig { Preliminary = InclusionFilter.Exclude });
 
 			// Then
 			using (new AssertionScope())
@@ -64,7 +64,7 @@ namespace Tenrai.Tests.MangaTests
 		public async Task GetMangaReviewsAsync_OnlyPreliminary_ShouldNeverReturnNonPreliminaryReviews()
 		{
 			// When
-			var berserk = await _tenrai.GetMangaReviewsAsync(2, new ReviewsSearchConfig { Preliminary = ReviewFilter.Only });
+			var berserk = await _tenrai.GetMangaReviewsAsync(2, new ReviewsSearchConfig { Preliminary = InclusionFilter.Only });
 
 			// Then (manga preliminary reviews are rare, so the set may be empty; none may be non-preliminary)
 			berserk.Data.All(x => x.IsPreliminary).Should().BeTrue();
@@ -135,7 +135,7 @@ namespace Tenrai.Tests.MangaTests
 		public async Task GetMangaReviewsAsync_SpoilersOnly_ShouldReturnOnlySpoilerReviews()
 		{
 			// Given
-			var config = new ReviewsSearchConfig { Spoilers = ReviewFilter.Only };
+			var config = new ReviewsSearchConfig { Spoilers = InclusionFilter.Only };
 
 			// When
 			var berserk = await _tenrai.GetMangaReviewsAsync(2, config);

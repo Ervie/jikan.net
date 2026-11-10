@@ -74,7 +74,7 @@ namespace Tenrai.Helpers
 			return this;
 		}
 
-		// A member with an empty [Description] ("NoSorting", "NoFilter") means "do not filter"
+		// A member with an empty [Description] ("NoSorting") means "do not filter"
 		internal QueryBuilder Add<TEnum>(string key, TEnum value) where TEnum : struct, Enum
 		{
 			Guard.IsValidEnum(value, key);

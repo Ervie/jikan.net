@@ -30,7 +30,7 @@ namespace Tenrai.Tests.SearchConfigTests
 		[Fact]
 		public void AnimeTopSearchConfig_TypesReversed_BuildsQuery()
 		{
-			var config = new AnimeTopSearchConfig { Types = { AnimeType.TV, AnimeType.Movie }, Sort = SortDirection.Descending };
+			var config = new AnimeTopSearchConfig { Types = { AnimeType.TV, AnimeType.Movie }, SortDirection = SortDirection.Descending };
 
 			config.ConfigToString().Should().Be("?type=TV,Movie&sort=desc");
 		}

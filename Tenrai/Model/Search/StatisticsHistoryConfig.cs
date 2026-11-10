@@ -32,7 +32,7 @@ namespace Tenrai
 		/// <summary>
 		/// Order of the days. Not sent when null; the API returns newest first.
 		/// </summary>
-		public SortDirection? Sort { get; set; }
+		public SortDirection? SortDirection { get; set; }
 
 		/// <summary>
 		/// Create query from current parameters for the request.
@@ -45,7 +45,7 @@ namespace Tenrai
 				.Limit(Limit)
 				.Add("start_date", StartDate)
 				.Add("end_date", EndDate)
-				.Add("sort", Sort)
+				.Add("sort", SortDirection)
 				.ToString();
 		}
 	}

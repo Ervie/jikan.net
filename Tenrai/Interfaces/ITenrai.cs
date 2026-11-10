@@ -272,7 +272,7 @@ namespace Tenrai
         /// <param name="id">MAL id of anime.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Anime with additional data.</returns>
-        Task<BaseTenraiResponse<AnimeFull>> GetAnimeFullDataAsync(long id, CancellationToken cancellationToken = default);
+        Task<FullTenraiResponse<AnimeFull>> GetAnimeFullDataAsync(long id, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns anime with additional data, plus up to 24 more anime in the same request.
@@ -567,7 +567,7 @@ namespace Tenrai
         /// <param name="id">MAL id of manga.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Manga with additional data.</returns>
-        Task<BaseTenraiResponse<MangaFull>> GetMangaFullDataAsync(long id, CancellationToken cancellationToken = default);
+        Task<FullTenraiResponse<MangaFull>> GetMangaFullDataAsync(long id, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns manga with additional data, plus up to 24 more manga in the same request.
@@ -1311,7 +1311,7 @@ namespace Tenrai
         /// <param name="searchConfig">Text, role, worked-with, genres, year filters, sorting and paging.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Paginated collection of producers.</returns>
-        Task<PaginatedTenraiResponse<ICollection<Producer>>> GetProducersAsync(ProducerSearchConfig searchConfig, CancellationToken cancellationToken = default);
+        Task<PaginatedTenraiResponse<ICollection<Producer>>> SearchProducersAsync(ProducerSearchConfig searchConfig, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns information about producer.
@@ -1370,7 +1370,7 @@ namespace Tenrai
         /// <param name="searchConfig">Text, letter, sorting and paging.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Paginated collection of magazines.</returns>
-        Task<PaginatedTenraiResponse<ICollection<Magazine>>> GetMagazinesAsync(MagazineSearchConfig searchConfig, CancellationToken cancellationToken = default);
+        Task<PaginatedTenraiResponse<ICollection<Magazine>>> SearchMagazinesAsync(MagazineSearchConfig searchConfig, CancellationToken cancellationToken = default);
 
         #endregion Magazine requests
 

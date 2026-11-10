@@ -17,12 +17,6 @@ namespace Tenrai
 		/// Stack of manga entries.
 		/// </summary>
 		[Description("manga")]
-		Manga,
-
-		/// <summary>
-		/// Allow all types to be displayed in results.
-		/// </summary>
-		[Description("")]
-		EveryType
+		Manga
 	}
 }

@@ -31,12 +31,12 @@ namespace Tenrai
 		/// <summary>
 		/// How preliminary reviews are handled (include, exclude, or return only preliminary reviews). Left out by the API unless set.
 		/// </summary>
-		public ReviewFilter? Preliminary { get; set; }
+		public InclusionFilter? Preliminary { get; set; }
 
 		/// <summary>
 		/// How spoiler reviews are handled (include, exclude, or return only spoiler reviews). Left out by the API unless set.
 		/// </summary>
-		public ReviewFilter? Spoilers { get; set; }
+		public InclusionFilter? Spoilers { get; set; }
 
 		/// <summary>
 		/// Filter reviews by sentiment (recommended, mixed feelings, or not recommended).

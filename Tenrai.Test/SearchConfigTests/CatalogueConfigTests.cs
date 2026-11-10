@@ -31,7 +31,7 @@ namespace Tenrai.Tests.SearchConfigTests
 		[Fact]
 		public void StatisticsHistoryConfig_StartDateAscending_BuildsQuery()
 		{
-			var config = new StatisticsHistoryConfig { StartDate = new DateTime(2026, 4, 1), Sort = SortDirection.Ascending };
+			var config = new StatisticsHistoryConfig { StartDate = new DateTime(2026, 4, 1), SortDirection = SortDirection.Ascending };
 
 			config.ConfigToString().Should().Be("?start_date=2026-04-01&sort=asc");
 		}

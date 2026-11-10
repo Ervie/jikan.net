@@ -32,12 +32,6 @@ namespace Tenrai
         /// Filter by favorites
         /// </summary>
         [Description("favorite")]
-        Favorite,
-
-        /// <summary>
-        /// No filter
-        /// </summary>
-        [Description("")]
-        NoFilter
+        Favorite
     }
 }

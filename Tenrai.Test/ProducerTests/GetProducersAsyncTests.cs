@@ -74,7 +74,7 @@ namespace Tenrai.Tests.ProducerTests
 		[Fact]
 		public async Task GetProducersAsync_QueryBones_FindsBones()
 		{
-			var results = await _tenrai.GetProducersAsync(new ProducerSearchConfig { Query = "bones" });
+			var results = await _tenrai.SearchProducersAsync(new ProducerSearchConfig { Query = "bones" });
 
 			results.Data.SelectMany(x => x.Titles).Select(y => y.Title).Should().Contain("Bones");
 		}

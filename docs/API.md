@@ -240,7 +240,7 @@ Returns one entry per day with that day's score, rank, popularity, members and f
 var history = await tenrai.GetAnimeStatisticsHistoryAsync(1, new StatisticsHistoryConfig
 {
     StartDate = new DateTime(2026, 4, 1),
-    Sort = SortDirection.Ascending
+    SortDirection = SortDirection.Ascending
 });
 foreach (var day in history.Data)
     Console.WriteLine($"{day.Date:yyyy-MM-dd}: {day.Members} members, {day.Statistics?.Completed} completed");
@@ -256,7 +256,7 @@ foreach (var day in history.Data)
 |----------|------|-------------|
 | StartDate | DateTime? | First day to include |
 | EndDate | DateTime? | Last day to include |
-| Sort | SortDirection? | Not sent when null; the API returns newest first |
+| SortDirection | SortDirection? | Not sent when null; the API returns newest first |
 | Page | int? | 1-based page index |
 | Limit | int? | Page size, 100 max |
 
@@ -319,7 +319,7 @@ var filtered = await tenrai.GetAnimeReviewsAsync(1, new ReviewsSearchConfig
 {
     Sort = ReviewSortOrder.Newest,
     Sentiment = ReviewSentiment.Recommended,
-    Spoilers = ReviewFilter.Exclude
+    Spoilers = InclusionFilter.Exclude
 });
 foreach (var r in filtered.Data)
     Console.WriteLine($"{r.User?.Username}: {r.Score} [{string.Join(", ", r.Tags)}]");
@@ -411,7 +411,7 @@ Returns anime with all additional data. Overload: `(long id, FullDataConfig conf
 | id | long | MAL id of anime |
 | config | [FullDataConfig](#fulldataconfig) | (overload) Extra ids, archive mode, sfw filtering of relations |
 
-**Returns:** `BaseTenraiResponse<AnimeFull>`, or `FullTenraiResponse<AnimeFull>` for the overload
+**Returns:** `FullTenraiResponse<AnimeFull>` (`Included` and `MissingIds` are only filled by the overload)
 
 **Example:**
 
@@ -649,7 +649,7 @@ var reviews = await tenrai.GetMangaReviewsAsync(2);
 // Only spoiler reviews, oldest first
 var spoilers = await tenrai.GetMangaReviewsAsync(2, new ReviewsSearchConfig
 {
-    Spoilers = ReviewFilter.Only,
+    Spoilers = InclusionFilter.Only,
     Sort = ReviewSortOrder.Oldest
 });
 ```
@@ -697,7 +697,7 @@ Returns manga with all additional data. Overload: `(long id, FullDataConfig conf
 | id | long | MAL id of manga |
 | config | [FullDataConfig](#fulldataconfig) | (overload) Extra ids, archive mode, sfw filtering of relations |
 
-**Returns:** `BaseTenraiResponse<MangaFull>`, or `FullTenraiResponse<MangaFull>` for the overload
+**Returns:** `FullTenraiResponse<MangaFull>` (`Included` and `MissingIds` are only filled by the overload)
 
 **Example:**
 
@@ -1005,7 +1005,7 @@ var current = await tenrai.GetCurrentSeasonAsync(new SeasonSearchConfig
 | MinimumMembers ... MaximumEpisodes | int? | Member and episode count ranges |
 | ExcludeKids | bool | Leave out kids titles |
 | IncludeContinuing | bool | Also return TV series continuing from an earlier season (current season: 140 becomes 184) |
-| Unapproved | ReviewFilter? | `Include` adds unapproved entries, `Only` returns only them |
+| Unapproved | InclusionFilter? | `Include` adds unapproved entries, `Only` returns only them |
 | OrderBy, SortDirection | SeasonOrderBy, SortDirection | Members descending when not set |
 | Page, Limit | int? | Paging, 100 max |
 | Sfw, SfwStrict | bool? | Filter out adult and ecchi entries. `null` (default) uses the [client setting](GettingStarted.md#safe-for-work-filtering) |
@@ -1128,7 +1128,7 @@ var topMovies = await tenrai.GetTopAnimeAsync(new AnimeTopSearchConfig { Types =
 
 | Property | Type | Description |
 |----------|------|-------------|
-| Filter | TopAnimeFilter / TopMangaFilter | Airing or publishing, upcoming, by popularity, by favorites |
+| Filter | TopAnimeFilter? / TopMangaFilter? | Airing or publishing, upcoming, by popularity, by favorites. `null` (default) for the overall ranking |
 | Types | ICollection&lt;AnimeType&gt; / &lt;MangaType&gt; | Types to include |
 | Ratings | ICollection&lt;AnimeAgeRating&gt; | (anime) Age ratings to include |
 | Genres, ExcludedGenres | ICollection of the genre enum | Genres to require or leave out |
@@ -1136,7 +1136,7 @@ var topMovies = await tenrai.GetTopAnimeAsync(new AnimeTopSearchConfig { Types =
 | MinimumMembers, MaximumMembers | int? | Member range |
 | MinimumEpisodes, MaximumEpisodes | int? | (anime) Episode range |
 | MinimumChapters ... MaximumVolumes | int? | (manga) Chapter and volume ranges |
-| Sort | SortDirection? | `Descending` reverses the ranking |
+| SortDirection | SortDirection? | `Descending` reverses the ranking |
 | Page, Limit | int? | Paging, 100 max |
 | Sfw, SfwStrict | bool? | Filter out adult and ecchi entries. `null` (default) uses the [client setting](GettingStarted.md#safe-for-work-filtering) |
 
@@ -1324,14 +1324,14 @@ var genres = await tenrai.GetMangaGenresAsync();
 
 ## Producer
 
-### GetProducersAsync
+### GetProducersAsync, SearchProducersAsync
 
-Returns producers list. Overloads: `(int page)`, `(ProducerSearchConfig searchConfig)`.
+Returns producers list. `GetProducersAsync` has overloads `()` and `(int page)`; `SearchProducersAsync(ProducerSearchConfig searchConfig)` searches, filters and sorts.
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | page | int | (optional) Page index |
-| searchConfig | ProducerSearchConfig | (optional) Search, filters and sorting |
+| searchConfig | ProducerSearchConfig | (`SearchProducersAsync`) Search, filters and sorting |
 
 **Returns:** `PaginatedTenraiResponse<ICollection<Producer>>`
 
@@ -1341,7 +1341,7 @@ Returns producers list. Overloads: `(int page)`, `(ProducerSearchConfig searchCo
 var producers = await tenrai.GetProducersAsync();
 
 // Studios active since 2020, most credits first
-var studios = await tenrai.GetProducersAsync(new ProducerSearchConfig
+var studios = await tenrai.SearchProducersAsync(new ProducerSearchConfig
 {
     Roles = { ProducerRole.Studio },
     ActiveAfter = 2020,
@@ -1419,14 +1419,14 @@ var full = await tenrai.GetProducerFullDataAsync(1);
 
 ## Magazine
 
-### GetMagazinesAsync
+### GetMagazinesAsync, SearchMagazinesAsync
 
-Returns magazines list. Overloads: `(int page)`, `(MagazineSearchConfig searchConfig)` with `Query`, `Letter`, `OrderBy` (`MalId`, `Name`, `Count`), `SortDirection`, `Page`, `Limit`.
+Returns magazines list. `GetMagazinesAsync` has overloads `()` and `(int page)`; `SearchMagazinesAsync(MagazineSearchConfig searchConfig)` takes `Query`, `Letter`, `OrderBy` (`MalId`, `Name`, `Count`), `SortDirection`, `Page`, `Limit`.
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | page | int | (optional) Page index |
-| searchConfig | MagazineSearchConfig | (optional) Search and sorting |
+| searchConfig | MagazineSearchConfig | (`SearchMagazinesAsync`) Search and sorting |
 
 **Returns:** `PaginatedTenraiResponse<ICollection<Magazine>>`
 
@@ -1627,7 +1627,7 @@ List filters match any of their values (genres must all match). The API rejects 
 | MinimumScoredBy ... MaximumFavorites | int? | Ranges for scored-by, reviews, members and favorites |
 | Years, MinimumYear, MaximumYear | ICollection&lt;int&gt;, int? | Calendar start year |
 | StartDate, EndDate | DateTime? | Start and end date range |
-| Unapproved | ReviewFilter? | `Include` adds unapproved entries, `Only` returns only them |
+| Unapproved | InclusionFilter? | `Include` adds unapproved entries, `Only` returns only them |
 | OrderBy, SortDirection, Nulls | enum, SortDirection, NullsOrder? | Sort, and where entries without a value go (`First`, `Last`, `Exclude`) |
 
 Anime only:
@@ -1638,7 +1638,7 @@ Anime only:
 | Sources, ExcludedSources | ICollection&lt;AnimeSource&gt; | Source material, e.g. `LightNovel`, `Original` |
 | HasTrailer | bool? | Whether a main trailer is listed |
 | StreamingServices | ICollection&lt;string&gt; | e.g. `"Crunchyroll"`, `"Netflix"` |
-| HasRelations | ReviewFilter? | `Exclude`: only entries without relations; `Only`: only entries with them |
+| HasRelations | InclusionFilter? | `Exclude`: only entries without relations; `Only`: only entries with them |
 | ProducerIds, ExcludedProducerIds | ICollection&lt;long&gt; | Producer, studio or licensor ids |
 | StaffIds, VoiceActorIds | ICollection&lt;long&gt; | Credited people |
 | VoiceLanguages | ICollection&lt;VoiceLanguage&gt; | e.g. `English` for anime with an English dub |
@@ -1823,16 +1823,16 @@ Returns public interest stacks matching an `InterestStackSearchConfig`.
 | Page | int? | Page index |
 | Limit | int? | Entries per page (100 max, 25 when unset) |
 | Query | string | Search query, matched against title and description |
-| Type | InterestStackType | `Anime`, `Manga`, or `EveryType` (default) |
-| Spoilers | ReviewFilter? | `Include`, `Exclude`, or `Only` spoiler stacks |
-| Challenges | ReviewFilter? | `Include`, `Exclude`, or `Only` challenge stacks |
-| Official | ReviewFilter? | `Include`, `Exclude`, or `Only` official stacks |
+| Type | InterestStackType? | `Anime` or `Manga`. `null` (default) for both |
+| Spoilers | InclusionFilter? | `Include`, `Exclude`, or `Only` spoiler stacks |
+| Challenges | InclusionFilter? | `Include`, `Exclude`, or `Only` challenge stacks |
+| Official | InclusionFilter? | `Include`, `Exclude`, or `Only` official stacks |
 | OrderBy | InterestStackSearchOrderBy | `CreatedAt` or `RestackCount`. `NoSorting` (default) leaves the order to the API |
 | SortDirection | SortDirection | `Ascending` or `Descending`. Only applied when `OrderBy` is set |
 | Sfw | bool? | Filter out adult entries. `null` (default) uses the [client setting](GettingStarted.md#safe-for-work-filtering) |
 | SfwStrict | bool? | Also filter out ecchi entries. `null` (default) uses the [client setting](GettingStarted.md#safe-for-work-filtering) |
 
-The API leaves out spoiler, challenge and official stacks unless asked: `Include` adds that kind, `Only` returns just that kind. Cowboy Bebop is in 687 stacks by default, 777 with `Spoilers = ReviewFilter.Include`, and 90 with `Spoilers = ReviewFilter.Only`.
+The API leaves out spoiler, challenge and official stacks unless asked: `Include` adds that kind, `Only` returns just that kind. Cowboy Bebop is in 687 stacks by default, 777 with `Spoilers = InclusionFilter.Include`, and 90 with `Spoilers = InclusionFilter.Only`.
 
 `OrderBy` accepts only `CreatedAt` and `RestackCount` because those are the only two values the API sorts by. Other fields, including `EntryCount`, return 400.
 
@@ -1987,8 +1987,8 @@ Passed to `GetAnimeReviewsAsync` and `GetMangaReviewsAsync`. These reviews take 
 | Page | int? | Page index |
 | Username | string | Only reviews by this MyAnimeList user (full username) |
 | Sort | ReviewSortOrder? | `MostHelpful` (API default), `Newest`, `Oldest` |
-| Preliminary | ReviewFilter? | `Include`, `Exclude`, or `Only` preliminary reviews. Left out unless set |
-| Spoilers | ReviewFilter? | `Include`, `Exclude`, or `Only` spoiler reviews. Left out unless set |
+| Preliminary | InclusionFilter? | `Include`, `Exclude`, or `Only` preliminary reviews. Left out unless set |
+| Spoilers | InclusionFilter? | `Include`, `Exclude`, or `Only` spoiler reviews. Left out unless set |
 | Sentiment | ReviewSentiment? | `Recommended`, `MixedFeelings`, `NotRecommended` |
 
 ### RecentReviewsConfig
@@ -2018,7 +2018,7 @@ Passed to `GetTopReviewsAsync`.
 
 `Preliminary` and `Spoilers` are `bool?` here because `/top/reviews` answers 400 to `only`.
 
-**Enums:** `ReviewSortOrder`, `ReviewFilter`, `ReviewSentiment`, `ReviewTargetType`.
+**Enums:** `ReviewSortOrder`, `InclusionFilter`, `ReviewSentiment`, `ReviewTargetType`.
 
 **Example:**
 
@@ -2027,8 +2027,8 @@ var config = new ReviewsSearchConfig
 {
     Page = 1,
     Sort = ReviewSortOrder.Newest,
-    Preliminary = ReviewFilter.Exclude,
-    Spoilers = ReviewFilter.Only,
+    Preliminary = InclusionFilter.Exclude,
+    Spoilers = InclusionFilter.Only,
     Sentiment = ReviewSentiment.NotRecommended
 };
 var reviews = await tenrai.GetMangaReviewsAsync(2, config);

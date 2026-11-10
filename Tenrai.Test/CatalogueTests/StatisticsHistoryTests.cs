@@ -40,7 +40,7 @@ namespace Tenrai.Tests.CatalogueTests
 			{
 				StartDate = new DateTime(2026, 4, 1),
 				EndDate = new DateTime(2026, 4, 4),
-				Sort = SortDirection.Ascending
+				SortDirection = SortDirection.Ascending
 			};
 
 			// When

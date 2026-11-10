@@ -22,7 +22,7 @@ namespace Tenrai
 		/// <summary>
 		/// Top items filter types
 		/// </summary>
-		public TopAnimeFilter Filter { get; set; } = TopAnimeFilter.NoFilter;
+		public TopAnimeFilter? Filter { get; set; }
 
 		/// <summary>
 		/// Anime types to include.
@@ -82,7 +82,7 @@ namespace Tenrai
 		/// <summary>
 		/// <see cref="SortDirection.Descending"/> reverses the ranking. Top first when null.
 		/// </summary>
-		public SortDirection? Sort { get; set; }
+		public SortDirection? SortDirection { get; set; }
 
 		/// <summary>
 		/// Create query from current parameters for search request.
@@ -104,7 +104,7 @@ namespace Tenrai
 				.Add("min_episodes", MinimumEpisodes)
 				.Add("max_episodes", MaximumEpisodes)
 				.Sfw(Sfw, SfwStrict)
-				.Add("sort", Sort)
+				.Add("sort", SortDirection)
 				.ToString();
 		}
 	}

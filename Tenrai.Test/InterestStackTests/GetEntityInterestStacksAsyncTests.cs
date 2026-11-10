@@ -120,7 +120,7 @@ namespace Tenrai.Tests.InterestStackTests
 		public async Task GetAnimeInterestStacksAsync_SpoilersOnly_AllSpoilers()
 		{
 			// When
-			var stacks = await _tenrai.GetAnimeInterestStacksAsync(1, new InterestStackListConfig { Spoilers = ReviewFilter.Only });
+			var stacks = await _tenrai.GetAnimeInterestStacksAsync(1, new InterestStackListConfig { Spoilers = InclusionFilter.Only });
 
 			// Then
 			stacks.Data.Should().NotBeEmpty();

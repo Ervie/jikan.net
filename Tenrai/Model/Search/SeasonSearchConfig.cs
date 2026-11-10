@@ -90,9 +90,9 @@ namespace Tenrai
 		public bool IncludeContinuing { get; set; }
 
 		/// <summary>
-		/// Unapproved entries: <see cref="ReviewFilter.Include"/> adds them, <see cref="ReviewFilter.Only"/> returns only them.
+		/// Unapproved entries: <see cref="InclusionFilter.Include"/> adds them, <see cref="InclusionFilter.Only"/> returns only them.
 		/// </summary>
-		public ReviewFilter? Unapproved { get; set; }
+		public InclusionFilter? Unapproved { get; set; }
 
 		/// <summary>
 		/// Select order property.

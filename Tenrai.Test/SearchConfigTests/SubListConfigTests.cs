@@ -18,7 +18,7 @@ namespace Tenrai.Tests.SearchConfigTests
 		{
 			var config = new InterestStackListConfig
 			{
-				Spoilers = ReviewFilter.Only,
+				Spoilers = InclusionFilter.Only,
 				OrderBy = InterestStackSearchOrderBy.RestackCount,
 				SortDirection = SortDirection.Descending
 			};

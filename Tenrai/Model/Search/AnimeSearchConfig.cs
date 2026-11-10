@@ -82,9 +82,9 @@ namespace Tenrai
 		public ICollection<string> StreamingServices { get; set; } = new List<string>();
 
 		/// <summary>
-		/// Recorded MyAnimeList relations: <see cref="ReviewFilter.Include"/> keeps every entry, <see cref="ReviewFilter.Exclude"/> only entries without relations, <see cref="ReviewFilter.Only"/> only entries with them.
+		/// Recorded MyAnimeList relations: <see cref="InclusionFilter.Include"/> keeps every entry, <see cref="InclusionFilter.Exclude"/> only entries without relations, <see cref="InclusionFilter.Only"/> only entries with them.
 		/// </summary>
-		public ReviewFilter? HasRelations { get; set; }
+		public InclusionFilter? HasRelations { get; set; }
 
 		/// <summary>
 		/// Genres to include. Entries must have all of them.
@@ -277,9 +277,9 @@ namespace Tenrai
 		public bool? SfwStrict { get; set; }
 
 		/// <summary>
-		/// Unapproved entries: <see cref="ReviewFilter.Include"/> adds them, <see cref="ReviewFilter.Only"/> returns only them.
+		/// Unapproved entries: <see cref="InclusionFilter.Include"/> adds them, <see cref="InclusionFilter.Only"/> returns only them.
 		/// </summary>
-		public ReviewFilter? Unapproved { get; set; }
+		public InclusionFilter? Unapproved { get; set; }
 
 		/// <summary>
 		/// Select order property.

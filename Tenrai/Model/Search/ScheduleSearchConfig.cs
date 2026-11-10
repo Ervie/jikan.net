@@ -60,9 +60,9 @@ namespace Tenrai
 		public bool ExcludeKids { get; set; }
 
 		/// <summary>
-		/// Unapproved entries: <see cref="ReviewFilter.Include"/> adds them, <see cref="ReviewFilter.Only"/> returns only them.
+		/// Unapproved entries: <see cref="InclusionFilter.Include"/> adds them, <see cref="InclusionFilter.Only"/> returns only them.
 		/// </summary>
-		public ReviewFilter? Unapproved { get; set; }
+		public InclusionFilter? Unapproved { get; set; }
 
 		/// <summary>
 		/// Create query from current parameters for the request.

@@ -27,19 +27,19 @@ namespace Tenrai
 		/// How spoiler stacks are handled (include, exclude, or return only spoiler stacks).
 		/// The API leaves them out unless this or <see cref="Challenges"/> or <see cref="Official"/> is set.
 		/// </summary>
-		public ReviewFilter? Spoilers { get; set; }
+		public InclusionFilter? Spoilers { get; set; }
 
 		/// <summary>
 		/// How challenge stacks are handled (include, exclude, or return only challenge stacks).
 		/// The API leaves them out unless this or <see cref="Spoilers"/> or <see cref="Official"/> is set.
 		/// </summary>
-		public ReviewFilter? Challenges { get; set; }
+		public InclusionFilter? Challenges { get; set; }
 
 		/// <summary>
 		/// How official stacks are handled (include, exclude, or return only official stacks).
 		/// The API leaves them out unless this or <see cref="Spoilers"/> or <see cref="Challenges"/> is set.
 		/// </summary>
-		public ReviewFilter? Official { get; set; }
+		public InclusionFilter? Official { get; set; }
 
 		/// <summary>
 		/// Select order property.

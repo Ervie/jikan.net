@@ -76,7 +76,7 @@ namespace Tenrai.Tests.MagazineTests
 		{
 			var config = new MagazineSearchConfig { Query = "jump", OrderBy = MagazineSearchOrderBy.Count, SortDirection = SortDirection.Descending };
 
-			var results = await _tenrai.GetMagazinesAsync(config);
+			var results = await _tenrai.SearchMagazinesAsync(config);
 
 			using var _ = new AssertionScope();
 			results.Data.Select(x => x.TotalCount).Should().BeInDescendingOrder();
