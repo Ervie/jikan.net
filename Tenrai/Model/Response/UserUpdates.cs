@@ -8,15 +8,15 @@ namespace Tenrai;
 /// </summary>
 public class UserUpdates
 {
-    /// <summary>
-    /// Anime updates.
-    /// </summary>
-    [JsonPropertyName("anime")]
-    public ICollection<AnimeUserUpdate> AnimeUpdates { get; set; }
+	/// <summary>
+	/// Anime updates.
+	/// </summary>
+	[JsonPropertyName("anime")]
+	public ICollection<AnimeUserUpdate> AnimeUpdates { get; set; }
 
-    /// <summary>
-    /// Manga updates.
-    /// </summary>
-    [JsonPropertyName("manga")]
-    public ICollection<MangaUserUpdate> MangaUpdates { get; set; }
+	/// <summary>
+	/// Manga updates.
+	/// </summary>
+	[JsonPropertyName("manga")]
+	public ICollection<MangaUserUpdate> MangaUpdates { get; set; }
 }

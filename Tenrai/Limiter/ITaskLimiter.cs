@@ -8,7 +8,7 @@ namespace Tenrai.Limiter;
 /// </summary>
 internal interface ITaskLimiter
 {
-    Task LimitAsync(Func<Task> taskFactory);
+	Task LimitAsync(Func<Task> taskFactory);
 
-    Task<T> LimitAsync<T>(Func<Task<T>> taskFactory);
+	Task<T> LimitAsync<T>(Func<Task<T>> taskFactory);
 }

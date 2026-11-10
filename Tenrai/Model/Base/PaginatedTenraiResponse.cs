@@ -1,22 +1,21 @@
 using System.Text.Json.Serialization;
 
-namespace Tenrai
+namespace Tenrai;
+
+/// <summary>
+/// Base wrapping class for response with paginated data
+/// </summary>
+public class PaginatedTenraiResponse<TResponse> : BaseTenraiResponse<TResponse>
 {
 	/// <summary>
-	/// Base wrapping class for response with paginated data
+	/// Pagination
 	/// </summary>
-	public class PaginatedTenraiResponse<TResponse> : BaseTenraiResponse<TResponse>
-	{
-		/// <summary>
-		/// Pagination
-		/// </summary>
-		[JsonPropertyName("pagination")]
-		public Pagination Pagination { get; set; }
+	[JsonPropertyName("pagination")]
+	public Pagination Pagination { get; set; }
 
-		/// <summary>
-		/// Parameterless constructor, required for serialization
-		/// </summary>
-		public PaginatedTenraiResponse()
-		{ }
-	}
+	/// <summary>
+	/// Parameterless constructor, required for serialization
+	/// </summary>
+	public PaginatedTenraiResponse()
+	{ }
 }

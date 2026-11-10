@@ -1,29 +1,28 @@
 using System;
 using System.Text.Json.Serialization;
 
-namespace Tenrai
+namespace Tenrai;
+
+/// <summary>
+/// Model class for entry on user's history.
+/// </summary>
+public class Friend
 {
 	/// <summary>
-	/// Model class for entry on user's history.
+	/// Friend's user metadata.
 	/// </summary>
-	public class Friend
-	{
-		/// <summary>
-		/// Friend's user metadata.
-		/// </summary>
-		[JsonPropertyName("user")]
-		public UserMetadata User { get; set; }
+	[JsonPropertyName("user")]
+	public UserMetadata User { get; set; }
 
-		/// <summary>
-		/// Timestamp of friend's last online activity.
-		/// </summary>
-		[JsonPropertyName("last_online")]
-		public DateTime? LastOnline { get; set; }
+	/// <summary>
+	/// Timestamp of friend's last online activity.
+	/// </summary>
+	[JsonPropertyName("last_online")]
+	public DateTime? LastOnline { get; set; }
 
-		/// <summary>
-		/// Timestamp of friend addidition.
-		/// </summary>
-		[JsonPropertyName("friends_since")]
-		public DateTime? FriendsSince { get; set; }
-	}
+	/// <summary>
+	/// Timestamp of friend addidition.
+	/// </summary>
+	[JsonPropertyName("friends_since")]
+	public DateTime? FriendsSince { get; set; }
 }

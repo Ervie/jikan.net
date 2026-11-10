@@ -5,46 +5,45 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Tenrai.Tests.AnimeTests
+namespace Tenrai.Tests.AnimeTests;
+
+[Collection("TenraiTests")]
+public class GetAnimePicturesAsyncTests
 {
-	[Collection("TenraiTests")]
-	public class GetAnimePicturesAsyncTests
+	private readonly ITenrai _tenrai;
+
+	public GetAnimePicturesAsyncTests(TenraiFixture tenraiFixture)
 	{
-		private readonly ITenrai _tenrai;
+		_tenrai = tenraiFixture.TenraiClient;
+	}
 
-		public GetAnimePicturesAsyncTests(TenraiFixture tenraiFixture)
-		{
-			_tenrai = tenraiFixture.TenraiClient;
-		}
+	[Theory]
+	[InlineData(long.MinValue)]
+	[InlineData(-1)]
+	[InlineData(0)]
+	public async Task GetAnimePicturesAsync_InvalidId_ShouldThrowValidationException(long malId)
+	{
+		// When
+		var func = _tenrai.Awaiting(x => x.GetAnimePicturesAsync(malId));
 
-		[Theory]
-		[InlineData(long.MinValue)]
-		[InlineData(-1)]
-		[InlineData(0)]
-		public async Task GetAnimePicturesAsync_InvalidId_ShouldThrowValidationException(long malId)
-		{
-			// When
-			var func = _tenrai.Awaiting(x => x.GetAnimePicturesAsync(malId));
+		// Then
+		await func.Should().ThrowExactlyAsync<TenraiValidationException>();
+	}
 
-			// Then
-			await func.Should().ThrowExactlyAsync<TenraiValidationException>();
-		}
+	[Fact]
+	public async Task GetAnimePicturesAsync_BebopId_ShouldParseCowboyBebopImages()
+	{
+		// When
+		var bebop = await _tenrai.GetAnimePicturesAsync(1);
 
-		[Fact]
-		public async Task GetAnimePicturesAsync_BebopId_ShouldParseCowboyBebopImages()
-		{
-			// When
-			var bebop = await _tenrai.GetAnimePicturesAsync(1);
-
-			// Then
-			using var _ = new AssertionScope();
-			bebop.Data.Should().HaveCountGreaterOrEqualTo(10);
-			bebop.Data.First().JPG.ImageUrl.Should().NotBeNullOrWhiteSpace();
-			bebop.Data.First().JPG.SmallImageUrl.Should().NotBeNullOrWhiteSpace();
-			bebop.Data.First().JPG.LargeImageUrl.Should().NotBeNullOrWhiteSpace();
-			bebop.Data.First().WebP.ImageUrl.Should().NotBeNullOrWhiteSpace();
-			bebop.Data.First().WebP.SmallImageUrl.Should().NotBeNullOrWhiteSpace();
-			bebop.Data.First().WebP.LargeImageUrl.Should().NotBeNullOrWhiteSpace();
-		}
+		// Then
+		using var _ = new AssertionScope();
+		bebop.Data.Should().HaveCountGreaterOrEqualTo(10);
+		bebop.Data.First().JPG.ImageUrl.Should().NotBeNullOrWhiteSpace();
+		bebop.Data.First().JPG.SmallImageUrl.Should().NotBeNullOrWhiteSpace();
+		bebop.Data.First().JPG.LargeImageUrl.Should().NotBeNullOrWhiteSpace();
+		bebop.Data.First().WebP.ImageUrl.Should().NotBeNullOrWhiteSpace();
+		bebop.Data.First().WebP.SmallImageUrl.Should().NotBeNullOrWhiteSpace();
+		bebop.Data.First().WebP.LargeImageUrl.Should().NotBeNullOrWhiteSpace();
 	}
 }

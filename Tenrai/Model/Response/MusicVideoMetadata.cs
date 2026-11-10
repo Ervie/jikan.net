@@ -7,15 +7,15 @@ namespace Tenrai;
 /// </summary>
 public class MusicVideoMetadata
 {
-    /// <summary>
-    /// Title of the music.
-    /// </summary>
-    [JsonPropertyName("title")]
-    public string Title { get; set; }
-    
-    /// <summary>
-    /// Author of the music.
-    /// </summary>
-    [JsonPropertyName("author")]
-    public string Author { get; set; }
+	/// <summary>
+	/// Title of the music.
+	/// </summary>
+	[JsonPropertyName("title")]
+	public string Title { get; set; }
+
+	/// <summary>
+	/// Author of the music.
+	/// </summary>
+	[JsonPropertyName("author")]
+	public string Author { get; set; }
 }

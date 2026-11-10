@@ -1,23 +1,22 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace Tenrai
+namespace Tenrai;
+
+/// <summary>
+/// Seasons archive model class
+/// </summary>
+public class SeasonArchive
 {
 	/// <summary>
-	/// Seasons archive model class
+	/// Available year to query.
 	/// </summary>
-	public class SeasonArchive
-	{
-		/// <summary>
-		/// Available year to query.
-		/// </summary>
-		[JsonPropertyName("year")]
-		public int Year { get; set; }
+	[JsonPropertyName("year")]
+	public int Year { get; set; }
 
-		/// <summary>
-		/// Collection of available seasons in year to query.
-		/// </summary>
-		[JsonPropertyName("seasons")]
-		public ICollection<Season> Season { get; set; }
-	}
+	/// <summary>
+	/// Collection of available seasons in year to query.
+	/// </summary>
+	[JsonPropertyName("seasons")]
+	public ICollection<Season> Season { get; set; }
 }

@@ -1,25 +1,24 @@
 using Tenrai.Helpers;
 
-namespace Tenrai
+namespace Tenrai;
+
+/// <summary>
+/// Search over the full news catalogue: the <see cref="NewsFilterConfig"/> filters plus search text and tag.
+/// </summary>
+public class NewsSearchConfig : NewsFilterConfig
 {
 	/// <summary>
-	/// Search over the full news catalogue: the <see cref="NewsFilterConfig"/> filters plus search text and tag.
+	/// Search text.
 	/// </summary>
-	public class NewsSearchConfig : NewsFilterConfig
+	public string Query { get; set; }
+
+	/// <summary>
+	/// Only news with this tag. <c>GetNewsTagsAsync</c> lists the tags.
+	/// </summary>
+	public string Tag { get; set; }
+
+	private protected override void AddSearchTerms(QueryBuilder query)
 	{
-		/// <summary>
-		/// Search text.
-		/// </summary>
-		public string Query { get; set; }
-
-		/// <summary>
-		/// Only news with this tag. <c>GetNewsTagsAsync</c> lists the tags.
-		/// </summary>
-		public string Tag { get; set; }
-
-		private protected override void AddSearchTerms(QueryBuilder query)
-		{
-			query.Add("q", Query).Add("tag", Tag);
-		}
+		query.Add("q", Query).Add("tag", Tag);
 	}
 }

@@ -1,22 +1,21 @@
 using System.Text.Json.Serialization;
 
-namespace Tenrai
+namespace Tenrai;
+
+/// <summary>
+/// Model for character mangaography
+/// </summary>
+public class CharacterMangaographyEntry
 {
 	/// <summary>
-	/// Model for character mangaography
+	/// Character's animeography entry.
 	/// </summary>
-	public class CharacterMangaographyEntry
-	{
-		/// <summary>
-		/// Character's animeography entry.
-		/// </summary>
-		[JsonPropertyName("manga")]
-		public MalImageSubItem Manga { get; set; }
+	[JsonPropertyName("manga")]
+	public MalImageSubItem Manga { get; set; }
 
-		/// <summary>
-		/// Role of character in sub item (anime or manga). Not available in all requests.
-		/// </summary>
-		[JsonPropertyName("role")]
-		public string Role { get; set; }
-	}
+	/// <summary>
+	/// Role of character in sub item (anime or manga). Not available in all requests.
+	/// </summary>
+	[JsonPropertyName("role")]
+	public string Role { get; set; }
 }

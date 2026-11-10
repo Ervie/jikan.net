@@ -1,28 +1,27 @@
 using System.ComponentModel;
 
-namespace Tenrai
+namespace Tenrai;
+
+/// <summary>
+/// Sort field for news.
+/// </summary>
+public enum NewsOrderBy
 {
 	/// <summary>
-	/// Sort field for news.
+	/// Leave the order to the API (newest first).
 	/// </summary>
-	public enum NewsOrderBy
-	{
-		/// <summary>
-		/// Leave the order to the API (newest first).
-		/// </summary>
-		[Description("")]
-		NoSorting,
+	[Description("")]
+	NoSorting,
 
-		/// <summary>
-		/// Publish date.
-		/// </summary>
-		[Description("published_at")]
-		PublishedAt,
+	/// <summary>
+	/// Publish date.
+	/// </summary>
+	[Description("published_at")]
+	PublishedAt,
 
-		/// <summary>
-		/// Number of comments.
-		/// </summary>
-		[Description("comments")]
-		Comments
-	}
+	/// <summary>
+	/// Number of comments.
+	/// </summary>
+	[Description("comments")]
+	Comments
 }

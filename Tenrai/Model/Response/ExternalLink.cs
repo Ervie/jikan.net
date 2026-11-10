@@ -7,15 +7,15 @@ namespace Tenrai;
 /// </summary>
 public class ExternalLink
 {
-    /// <summary>
-    /// Name of the external service.
-    /// </summary>
-    [JsonPropertyName("name")]
-    public string Name { get; set; }
-    
-    /// <summary>
-    /// Url to external service.
-    /// </summary>
-    [JsonPropertyName("url")]
-    public string Url { get; set; }
+	/// <summary>
+	/// Name of the external service.
+	/// </summary>
+	[JsonPropertyName("name")]
+	public string Name { get; set; }
+
+	/// <summary>
+	/// Url to external service.
+	/// </summary>
+	[JsonPropertyName("url")]
+	public string Url { get; set; }
 }

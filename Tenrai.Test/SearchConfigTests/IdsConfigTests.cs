@@ -2,33 +2,32 @@ using System;
 using FluentAssertions;
 using Xunit;
 
-namespace Tenrai.Tests.SearchConfigTests
+namespace Tenrai.Tests.SearchConfigTests;
+
+public class IdsConfigTests
 {
-	public class IdsConfigTests
+	[Fact]
+	public void AnimeIdsConfig_UpcomingMoviesAndOvasUpdatedSince_BuildsQuery()
 	{
-		[Fact]
-		public void AnimeIdsConfig_UpcomingMoviesAndOvasUpdatedSince_BuildsQuery()
+		var config = new AnimeIdsConfig
 		{
-			var config = new AnimeIdsConfig
-			{
-				Types = { AnimeType.Movie, AnimeType.OVA },
-				Status = AiringStatus.Upcoming,
-				UpdatedAfter = new DateTime(2026, 11, 1)
-			};
+			Types = { AnimeType.Movie, AnimeType.OVA },
+			Status = AiringStatus.Upcoming,
+			UpdatedAfter = new DateTime(2026, 11, 1)
+		};
 
-			config.ConfigToString().Should().Be("?type=Movie,OVA&status=upcoming&updated_at=2026-11-01");
-		}
+		config.ConfigToString().Should().Be("?type=Movie,OVA&status=upcoming&updated_at=2026-11-01");
+	}
 
-		[Fact]
-		public void MangaIdsConfig_LightNovelsOnHiatus_BuildsQuery()
+	[Fact]
+	public void MangaIdsConfig_LightNovelsOnHiatus_BuildsQuery()
+	{
+		var config = new MangaIdsConfig
 		{
-			var config = new MangaIdsConfig
-			{
-				Types = { MangaType.LightNovel },
-				Status = PublishingStatus.Hiatus
-			};
+			Types = { MangaType.LightNovel },
+			Status = PublishingStatus.Hiatus
+		};
 
-			config.ConfigToString().Should().Be("?type=lightnovel&status=hiatus");
-		}
+		config.ConfigToString().Should().Be("?type=lightnovel&status=hiatus");
 	}
 }

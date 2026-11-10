@@ -1,52 +1,51 @@
 using System.ComponentModel;
 
-namespace Tenrai
+namespace Tenrai;
+
+/// <summary>
+/// Sort field for the top videos list.
+/// </summary>
+public enum TopVideosOrderBy
 {
 	/// <summary>
-	/// Sort field for the top videos list.
+	/// Leave the order to the API (by views).
 	/// </summary>
-	public enum TopVideosOrderBy
-	{
-		/// <summary>
-		/// Leave the order to the API (by views).
-		/// </summary>
-		[Description("")]
-		NoSorting,
+	[Description("")]
+	NoSorting,
 
-		/// <summary>
-		/// YouTube view count.
-		/// </summary>
-		[Description("views")]
-		Views,
+	/// <summary>
+	/// YouTube view count.
+	/// </summary>
+	[Description("views")]
+	Views,
 
-		/// <summary>
-		/// YouTube like count.
-		/// </summary>
-		[Description("likes")]
-		Likes,
+	/// <summary>
+	/// YouTube like count.
+	/// </summary>
+	[Description("likes")]
+	Likes,
 
-		/// <summary>
-		/// YouTube dislike count.
-		/// </summary>
-		[Description("dislikes")]
-		Dislikes,
+	/// <summary>
+	/// YouTube dislike count.
+	/// </summary>
+	[Description("dislikes")]
+	Dislikes,
 
-		/// <summary>
-		/// YouTube comment count.
-		/// </summary>
-		[Description("comments")]
-		Comments,
+	/// <summary>
+	/// YouTube comment count.
+	/// </summary>
+	[Description("comments")]
+	Comments,
 
-		/// <summary>
-		/// Video title.
-		/// </summary>
-		[Description("title")]
-		Title,
+	/// <summary>
+	/// Video title.
+	/// </summary>
+	[Description("title")]
+	Title,
 
-		/// <summary>
-		/// When the video was published on YouTube.
-		/// </summary>
-		[Description("published_at")]
-		PublishedAt
-	}
+	/// <summary>
+	/// When the video was published on YouTube.
+	/// </summary>
+	[Description("published_at")]
+	PublishedAt
 }

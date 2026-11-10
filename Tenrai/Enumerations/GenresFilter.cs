@@ -1,34 +1,33 @@
 using System.ComponentModel;
 
-namespace Tenrai
+namespace Tenrai;
+
+/// <summary>
+/// Enumeration for filtering genres
+/// </summary>
+public enum GenresFilter
 {
 	/// <summary>
-	/// Enumeration for filtering genres
+	/// Genres.
 	/// </summary>
-	public enum GenresFilter
-	{
-		/// <summary>
-		/// Genres.
-		/// </summary>
-		[Description("genres")]
-		Genres,
+	[Description("genres")]
+	Genres,
 
-		/// <summary>
-		/// Explicit genres.
-		/// </summary>
-		[Description("explicit_genres")]
-		ExplicitGenres,
+	/// <summary>
+	/// Explicit genres.
+	/// </summary>
+	[Description("explicit_genres")]
+	ExplicitGenres,
 
-		/// <summary>
-		/// Themes.
-		/// </summary>
-		[Description("themes")]
-		Themes,
+	/// <summary>
+	/// Themes.
+	/// </summary>
+	[Description("themes")]
+	Themes,
 
-		/// <summary>
-		/// Themes.
-		/// </summary>
-		[Description("demographics")]
-		Demographics
-	}
+	/// <summary>
+	/// Themes.
+	/// </summary>
+	[Description("demographics")]
+	Demographics
 }

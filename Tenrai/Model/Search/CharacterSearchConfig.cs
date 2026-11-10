@@ -9,7 +9,7 @@ namespace Tenrai;
 /// </summary>
 public class CharacterSearchConfig: ISearchConfig, ISfwConfig
 {
-    /// <summary>
+	/// <summary>
 	/// Index of page folding 50 records of top ranging (e.g. 1 will return first 50 records, 2 will return record from 51 to 100 etc.)
 	/// </summary>
 	public int? Page { get; set; }
@@ -214,10 +214,10 @@ public class CharacterSearchConfig: ISearchConfig, ISfwConfig
 	/// </summary>
 	public SortDirection SortDirection { get; set; }
 
-    /// <summary>
-    /// Create query from current parameters for search request.
-    /// </summary>
-    /// <returns>Query from current parameters for search request</returns>
+	/// <summary>
+	/// Create query from current parameters for search request.
+	/// </summary>
+	/// <returns>Query from current parameters for search request</returns>
 	public string ConfigToString()
 	{
 		if (Letter.HasValue)

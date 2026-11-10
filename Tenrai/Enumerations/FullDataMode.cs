@@ -1,22 +1,21 @@
 using System.ComponentModel;
 
-namespace Tenrai
+namespace Tenrai;
+
+/// <summary>
+/// Archive a full-data request searches instead of the regular catalogue.
+/// </summary>
+public enum FullDataMode
 {
 	/// <summary>
-	/// Archive a full-data request searches instead of the regular catalogue.
+	/// Entries MyAnimeList denied.
 	/// </summary>
-	public enum FullDataMode
-	{
-		/// <summary>
-		/// Entries MyAnimeList denied.
-		/// </summary>
-		[Description("denied")]
-		Denied,
+	[Description("denied")]
+	Denied,
 
-		/// <summary>
-		/// Entries deleted from MyAnimeList.
-		/// </summary>
-		[Description("deleted")]
-		Deleted
-	}
+	/// <summary>
+	/// Entries deleted from MyAnimeList.
+	/// </summary>
+	[Description("deleted")]
+	Deleted
 }

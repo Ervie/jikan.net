@@ -1,52 +1,51 @@
 using System.ComponentModel;
 
-namespace Tenrai
+namespace Tenrai;
+
+/// <summary>
+/// Enumeration for manga types (search config).
+/// </summary>
+public enum MangaType
 {
 	/// <summary>
-	/// Enumeration for manga types (search config).
+	/// Manga.
 	/// </summary>
-	public enum MangaType
-	{
-		/// <summary>
-		/// Manga.
-		/// </summary>
-		[Description("manga")]
-		Manga,
+	[Description("manga")]
+	Manga,
 
-		/// <summary>
-		/// Novel. Before 4.0 this member sent "lightnovel"; use <see cref="LightNovel"/> for those.
-		/// </summary>
-		[Description("novel")]
-		Novel,
+	/// <summary>
+	/// Novel. Before 4.0 this member sent "lightnovel"; use <see cref="LightNovel"/> for those.
+	/// </summary>
+	[Description("novel")]
+	Novel,
 
-		/// <summary>
-		/// Light novel.
-		/// </summary>
-		[Description("lightnovel")]
-		LightNovel,
+	/// <summary>
+	/// Light novel.
+	/// </summary>
+	[Description("lightnovel")]
+	LightNovel,
 
-		/// <summary>
-		/// Oneshot
-		/// </summary>
-		[Description("oneshot")]
-		OneShot,
+	/// <summary>
+	/// Oneshot
+	/// </summary>
+	[Description("oneshot")]
+	OneShot,
 
-		/// <summary>
-		/// Doijinshi
-		/// </summary>
-		[Description("doujin")]
-		Doujinshi,
+	/// <summary>
+	/// Doijinshi
+	/// </summary>
+	[Description("doujin")]
+	Doujinshi,
 
-		/// <summary>
-		/// Manhwa
-		/// </summary>
-		[Description("manhwa")]
-		Manhwa,
+	/// <summary>
+	/// Manhwa
+	/// </summary>
+	[Description("manhwa")]
+	Manhwa,
 
-		/// <summary>
-		/// Manhua
-		/// </summary>
-		[Description("manhua")]
-		Manhua
-	}
+	/// <summary>
+	/// Manhua
+	/// </summary>
+	[Description("manhua")]
+	Manhua
 }

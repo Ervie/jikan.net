@@ -1,28 +1,27 @@
 using System.Text.Json.Serialization;
 
-namespace Tenrai
+namespace Tenrai;
+
+/// <summary>
+/// Model representing basic user metadata
+/// </summary>
+public class UserMetadata
 {
 	/// <summary>
-	/// Model representing basic user metadata
+	/// Username.
 	/// </summary>
-	public class UserMetadata
-	{
-		/// <summary>
-		/// Username.
-		/// </summary>
-		[JsonPropertyName("username")]
-		public string Username { get; set; }
+	[JsonPropertyName("username")]
+	public string Username { get; set; }
 
-		/// <summary>
-		/// User's image URL
-		/// </summary>
-		[JsonPropertyName("images")]
-		public ImagesSet Images { get; set; }
+	/// <summary>
+	/// User's image URL
+	/// </summary>
+	[JsonPropertyName("images")]
+	public ImagesSet Images { get; set; }
 
-		/// <summary>
-		/// User's URL
-		/// </summary>
-		[JsonPropertyName("url")]
-		public string Url { get; set; }
-	}
+	/// <summary>
+	/// User's URL
+	/// </summary>
+	[JsonPropertyName("url")]
+	public string Url { get; set; }
 }

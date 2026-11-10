@@ -1,22 +1,21 @@
 using System.ComponentModel;
 
-namespace Tenrai
+namespace Tenrai;
+
+/// <summary>
+/// Defines sort direction in search requests
+/// </summary>
+public enum SortDirection
 {
 	/// <summary>
-	/// Defines sort direction in search requests
+	/// Sort ascending.
 	/// </summary>
-	public enum SortDirection
-	{
-		/// <summary>
-		/// Sort ascending.
-		/// </summary>
-		[Description("asc")]
-		Ascending,
+	[Description("asc")]
+	Ascending,
 
-		/// <summary>
-		/// Use descending.
-		/// </summary>
-		[Description("desc")]
-		Descending,
-	}
+	/// <summary>
+	/// Use descending.
+	/// </summary>
+	[Description("desc")]
+	Descending,
 }

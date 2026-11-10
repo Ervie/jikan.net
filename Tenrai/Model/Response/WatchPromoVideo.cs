@@ -1,16 +1,15 @@
 using System.Text.Json.Serialization;
 
-namespace Tenrai
+namespace Tenrai;
+
+/// <summary>
+/// Model of entry in recent/popular episodes list.
+/// </summary>
+public class WatchPromoVideo: PromoVideo
 {
-    /// <summary>
-    /// Model of entry in recent/popular episodes list.
-    /// </summary>
-    public class WatchPromoVideo: PromoVideo
-    {
-        /// <summary>
-        /// Related anime entry
-        /// </summary>
-        [JsonPropertyName("entry")]
-        public MalImageSubItem Entry { get; set; }
-    }
+	/// <summary>
+	/// Related anime entry
+	/// </summary>
+	[JsonPropertyName("entry")]
+	public MalImageSubItem Entry { get; set; }
 }

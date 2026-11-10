@@ -1,17 +1,16 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace Tenrai
+namespace Tenrai;
+
+/// <summary>
+/// Response of the bulk MAL id endpoints.
+/// </summary>
+public class IdsTenraiResponse : BaseTenraiResponse<ICollection<long>>
 {
 	/// <summary>
-	/// Response of the bulk MAL id endpoints.
+	/// Number of ids in <see cref="BaseTenraiResponse{TResponse}.Data"/>.
 	/// </summary>
-	public class IdsTenraiResponse : BaseTenraiResponse<ICollection<long>>
-	{
-		/// <summary>
-		/// Number of ids in <see cref="BaseTenraiResponse{TResponse}.Data"/>.
-		/// </summary>
-		[JsonPropertyName("total")]
-		public int Total { get; set; }
-	}
+	[JsonPropertyName("total")]
+	public int Total { get; set; }
 }

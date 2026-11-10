@@ -7,261 +7,260 @@ using System.Threading.Tasks;
 using Tenrai.Consts;
 using Xunit;
 
-namespace Tenrai.Tests.CharacterTests
+namespace Tenrai.Tests.CharacterTests;
+
+[Collection("TenraiTests")]
+public class SearchCharacterAsyncTests
 {
-    [Collection("TenraiTests")]
-    public class SearchCharacterAsyncTests
-    {
-        private readonly ITenrai _tenrai;
+	private readonly ITenrai _tenrai;
 
-        public SearchCharacterAsyncTests(TenraiFixture tenraiFixture)
-        {
-            _tenrai = tenraiFixture.TenraiClient;
-        }
+	public SearchCharacterAsyncTests(TenraiFixture tenraiFixture)
+	{
+		_tenrai = tenraiFixture.TenraiClient;
+	}
 
-        [Fact]
-        public async Task SearchCharacterAsync_EmptyConfig_ShouldReturnFirst25People()
-        {
-            // Given
-            var config = new CharacterSearchConfig();
-            
-            // When
-            var characters = await _tenrai.SearchCharacterAsync(config);
+	[Fact]
+	public async Task SearchCharacterAsync_EmptyConfig_ShouldReturnFirst25People()
+	{
+		// Given
+		var config = new CharacterSearchConfig();
 
-            // Then
-            using var _ = new AssertionScope();
-            characters.Data.Should().HaveCount(ParameterConsts.DefaultPageSize);
-            characters.Data.First().Name.Should().Be("Spike Spiegel");
-            characters.Data.First().NameKanji.Should().Be("スパイク・スピーゲル");
-            characters.Pagination.LastVisiblePage.Should().BeGreaterThan(2350);
-        }
-        
-        [Theory]
-        [InlineData(int.MinValue)]
-        [InlineData(-1)]
-        [InlineData(0)]
-        public async Task SearchCharacterAsync_InvalidPage_ShouldThrowValidationException(int page)
-        {
-            // Given
-            var config = new CharacterSearchConfig{Page = page};
-            
-            // When
-            var func = _tenrai.Awaiting(x => x.SearchCharacterAsync(config));
+		// When
+		var characters = await _tenrai.SearchCharacterAsync(config);
 
-            // Then
-            await func.Should().ThrowExactlyAsync<TenraiValidationException>();
-        }
-        
-        [Theory]
-        [InlineData(int.MinValue)]
-        [InlineData(-1)]
-        [InlineData(0)]
-        [InlineData(101)]
-        [InlineData(int.MaxValue)]
-        public async Task SearchCharacterAsync_InvalidPageSize_ShouldThrowValidationException(int pageSize)
-        {
-            // Given
-            var config = new CharacterSearchConfig{Limit = pageSize};
-            
-            // When
-            var func = _tenrai.Awaiting(x => x.SearchCharacterAsync(config));
+		// Then
+		using var _ = new AssertionScope();
+		characters.Data.Should().HaveCount(ParameterConsts.DefaultPageSize);
+		characters.Data.First().Name.Should().Be("Spike Spiegel");
+		characters.Data.First().NameKanji.Should().Be("スパイク・スピーゲル");
+		characters.Pagination.LastVisiblePage.Should().BeGreaterThan(2350);
+	}
 
-            // Then
-            await func.Should().ThrowExactlyAsync<TenraiValidationException>();
-        }
-        
-        [Fact]
-        public async Task SearchCharacterAsync_GivenSecondPage_ShouldReturnSecondPage()
-        {
-            // Given
-            var config = new CharacterSearchConfig{Page = 2};
-            
-            // When
-            var characters = await _tenrai.SearchCharacterAsync(config);
+	[Theory]
+	[InlineData(int.MinValue)]
+	[InlineData(-1)]
+	[InlineData(0)]
+	public async Task SearchCharacterAsync_InvalidPage_ShouldThrowValidationException(int page)
+	{
+		// Given
+		var config = new CharacterSearchConfig{Page = page};
 
-            // Then
-            using var _ = new AssertionScope();
-            characters.Data.Should().HaveCount(ParameterConsts.DefaultPageSize);
-            characters.Data.First().Name.Should().Be("Leorio Paladiknight");
-            characters.Data.First().NameKanji.Should().StartWith("レオリオ=パラディナｲﾄ");
-            characters.Pagination.LastVisiblePage.Should().BeGreaterThan(2350);
-            characters.Pagination.CurrentPage.Should().Be(2);
-            characters.Pagination.Items.Count.Should().Be(25);
-            characters.Pagination.Items.PerPage.Should().Be(25);
-        }
-        
-        [Fact]
-        public async Task SearchCharacterAsync_GivenValidPageSize_ShouldReturnPageSizeNumberOfRecords()
-        {
-            // Given
-            const int pageSize = 5;
-            var config = new CharacterSearchConfig{Limit = pageSize};
-            
-            // When
-            var characters = await _tenrai.SearchCharacterAsync(config);
+		// When
+		var func = _tenrai.Awaiting(x => x.SearchCharacterAsync(config));
 
-            // Then
-            using var _ = new AssertionScope();
-            characters.Data.Should().HaveCount(pageSize);
-            characters.Data.First().Name.Should().Be("Spike Spiegel");
-            characters.Data.First().NameKanji.Should().Be("スパイク・スピーゲル");
-            characters.Pagination.CurrentPage.Should().Be(1);
-            characters.Pagination.Items.Count.Should().Be(pageSize);
-            characters.Pagination.Items.PerPage.Should().Be(pageSize);
-        }
-        
-        [Fact]
-        public async Task SearchCharacterAsync_GivenValidPageAndPageSize_ShouldReturnPageSizeNumberOfRecordsFromNextPage()
-        {
-            // Given
-            const int pageSize = 5;
-            var config = new CharacterSearchConfig{Limit = pageSize, Page = 2};
-            
-            // When
-            var characters = await _tenrai.SearchCharacterAsync(config);
+		// Then
+		await func.Should().ThrowExactlyAsync<TenraiValidationException>();
+	}
 
-            // Then
-            using var _ = new AssertionScope();
-            characters.Data.Should().HaveCount(pageSize);
-            characters.Data.First().Name.Should().Be("Rukia Kuchiki");
-            characters.Pagination.CurrentPage.Should().Be(2);
-            characters.Pagination.Items.Count.Should().Be(pageSize);
-            characters.Pagination.Items.PerPage.Should().Be(pageSize);
-        }
-        
-        [Theory]
-        [InlineData('1')]
-        [InlineData('0')]
-        [InlineData('[')]
-        [InlineData('\n')]
-        [InlineData('_')]
-        public async Task SearchCharacterAsync_InvalidLetter_ShouldThrowValidationException(char notLetter)
-        {
-            // Given
-            var config = new CharacterSearchConfig{Letter = notLetter};
-            
-            // When
-            var func = _tenrai.Awaiting(x => x.SearchCharacterAsync(config));
+	[Theory]
+	[InlineData(int.MinValue)]
+	[InlineData(-1)]
+	[InlineData(0)]
+	[InlineData(101)]
+	[InlineData(int.MaxValue)]
+	public async Task SearchCharacterAsync_InvalidPageSize_ShouldThrowValidationException(int pageSize)
+	{
+		// Given
+		var config = new CharacterSearchConfig{Limit = pageSize};
 
-            // Then
-            await func.Should().ThrowExactlyAsync<TenraiValidationException>();
-        }
-        
-        [Theory]
-        [InlineData('A')]
-        [InlineData('L')]
-        [InlineData('S')]
-        public async Task SearchCharacterAsync_ValidLetter_ShouldReturnRecordsOnlyStartingOnLetter(char letter)
-        {
-            // Given
-            var config = new CharacterSearchConfig{Letter = letter};
-            
-            // When
-            var people = await _tenrai.SearchCharacterAsync(config);
+		// When
+		var func = _tenrai.Awaiting(x => x.SearchCharacterAsync(config));
 
-            // Then
-            using var _ = new AssertionScope();
-            people.Data.Should().HaveCount(ParameterConsts.DefaultPageSize);
-            people.Data.Should().OnlyContain(x => x.Name.StartsWith(letter));
-        }
-        
-        [Fact]
-        public async Task SearchCharacterAsync_LupinQuery_ShouldReturnLupins()
-        {
-            // Given
-            var config = new CharacterSearchConfig{Query = "Lupin"};
-            
-            // When
-            var people = await _tenrai.SearchCharacterAsync(config);
+		// Then
+		await func.Should().ThrowExactlyAsync<TenraiValidationException>();
+	}
 
-            // Then
-            using var _ = new AssertionScope();
-            people.Data.Should().Contain(x => x.Name.Equals("Fake Lupin"));
-            people.Data.Should().Contain(x => x.Name.Equals("Arsène Lupin"));
-            people.Data.Should().Contain(x => x.Name.Equals("Lupin II"));
-            people.Data.First().Name.Should().Be("Lupin");
-        }
-        
-        [Fact]
-        public async Task SearchCharacterAsync_LupinQueryByPopularity_ShouldReturnLupinsWithKurobaFirst()
-        {
-            // Given
-            var config = new CharacterSearchConfig{Query = "Lupin", OrderBy = CharacterSearchOrderBy.Favorites, SortDirection = SortDirection.Descending};
-            
-            // When
-            var people = await _tenrai.SearchCharacterAsync(config);
+	[Fact]
+	public async Task SearchCharacterAsync_GivenSecondPage_ShouldReturnSecondPage()
+	{
+		// Given
+		var config = new CharacterSearchConfig{Page = 2};
 
-            // Then
-            using var _ = new AssertionScope();
-            people.Data.Should().Contain(x => x.Name.Equals("Fake Lupin"));
-            people.Data.Should().Contain(x => x.Name.Equals("Arsène Lupin"));
-            people.Data.Should().Contain(x => x.Name.Equals("Lupin II"));
-            people.Data.First().Name.Should().Be("Lupin III");
-        }
-        
-        [Fact]
-        public async Task SearchCharacterAsync_LupinQueryByReversePopularity_ShouldReturnLupinsWithKurobaLast()
-        {
-            // Given
-            var config = new CharacterSearchConfig{Query = "Lupin", OrderBy = CharacterSearchOrderBy.Favorites, SortDirection = SortDirection.Ascending};
-            
-            // When
-            var people = await _tenrai.SearchCharacterAsync(config);
+		// When
+		var characters = await _tenrai.SearchCharacterAsync(config);
 
-            // Then
-            using var _ = new AssertionScope();
-            people.Data.Should().Contain(x => x.Name.Equals("Fake Lupin"));
-            people.Data.Should().Contain(x => x.Name.Equals("Arsène Lupin"));
-            people.Data.Should().Contain(x => x.Name.Equals("Lupin II"));
-            people.Data.Last().Name.Should().Be("Arsene Lupin III");
-            people.Data.First().Favorites.Should().BeGreaterOrEqualTo(0);
-        }
-        
-        [Fact]
-        public async Task SearchCharacterAsync_LupinQueryByMalIdWithLimit2_ShouldReturnThirdAndKaitoKuroba()
-        {
-            // Given
-            var config = new CharacterSearchConfig{Query = "Lupin", OrderBy = CharacterSearchOrderBy.MalId, Limit = 2};
-            
-            // When
-            var people = await _tenrai.SearchCharacterAsync(config);
+		// Then
+		using var _ = new AssertionScope();
+		characters.Data.Should().HaveCount(ParameterConsts.DefaultPageSize);
+		characters.Data.First().Name.Should().Be("Leorio Paladiknight");
+		characters.Data.First().NameKanji.Should().StartWith("レオリオ=パラディナｲﾄ");
+		characters.Pagination.LastVisiblePage.Should().BeGreaterThan(2350);
+		characters.Pagination.CurrentPage.Should().Be(2);
+		characters.Pagination.Items.Count.Should().Be(25);
+		characters.Pagination.Items.PerPage.Should().Be(25);
+	}
 
-            // Then
-            using var _ = new AssertionScope();
-            people.Data.Should().HaveCount(config.Limit.Value);
-            people.Data.Should().Contain(x => x.Name.Equals("Lupin"));
-        }
-        
-        [Fact]
-        public async Task SearchCharacterAsync_KirumiQuery_ShouldReturnSingleKirumi()
-        {
-            // Given
-            var config = new CharacterSearchConfig{Query = "kirumi to"};
-            
-            // When
-            var people = await _tenrai.SearchCharacterAsync(config);
+	[Fact]
+	public async Task SearchCharacterAsync_GivenValidPageSize_ShouldReturnPageSizeNumberOfRecords()
+	{
+		// Given
+		const int pageSize = 5;
+		var config = new CharacterSearchConfig{Limit = pageSize};
 
-            // Then
-            using var _ = new AssertionScope();
-            people.Data.Should().ContainSingle();
+		// When
+		var characters = await _tenrai.SearchCharacterAsync(config);
 
-            var result = people.Data.First();
-            result.Name.Should().Be("Kirumi Toujou");
-            result.Nicknames.Should().BeEmpty();
-            result.About.Should().NotBeEmpty();
-            result.MalId.Should().Be(157604);
-        }
+		// Then
+		using var _ = new AssertionScope();
+		characters.Data.Should().HaveCount(pageSize);
+		characters.Data.First().Name.Should().Be("Spike Spiegel");
+		characters.Data.First().NameKanji.Should().Be("スパイク・スピーゲル");
+		characters.Pagination.CurrentPage.Should().Be(1);
+		characters.Pagination.Items.Count.Should().Be(pageSize);
+		characters.Pagination.Items.PerPage.Should().Be(pageSize);
+	}
 
-        [Fact]
-        public async Task SearchCharacterAsync_BebopMainCast_HasSpike()
-        {
-            var config = new CharacterSearchConfig { AnimeIds = { 1 }, Role = CharacterRole.Main };
+	[Fact]
+	public async Task SearchCharacterAsync_GivenValidPageAndPageSize_ShouldReturnPageSizeNumberOfRecordsFromNextPage()
+	{
+		// Given
+		const int pageSize = 5;
+		var config = new CharacterSearchConfig{Limit = pageSize, Page = 2};
 
-            var characters = await _tenrai.SearchCharacterAsync(config);
+		// When
+		var characters = await _tenrai.SearchCharacterAsync(config);
 
-            using var _ = new AssertionScope();
-            characters.Pagination.Items.Total.Should().Be(4);
-            characters.Data.Should().Contain(x => x.MalId == 1);
-        }
-    }
+		// Then
+		using var _ = new AssertionScope();
+		characters.Data.Should().HaveCount(pageSize);
+		characters.Data.First().Name.Should().Be("Rukia Kuchiki");
+		characters.Pagination.CurrentPage.Should().Be(2);
+		characters.Pagination.Items.Count.Should().Be(pageSize);
+		characters.Pagination.Items.PerPage.Should().Be(pageSize);
+	}
+
+	[Theory]
+	[InlineData('1')]
+	[InlineData('0')]
+	[InlineData('[')]
+	[InlineData('\n')]
+	[InlineData('_')]
+	public async Task SearchCharacterAsync_InvalidLetter_ShouldThrowValidationException(char notLetter)
+	{
+		// Given
+		var config = new CharacterSearchConfig{Letter = notLetter};
+
+		// When
+		var func = _tenrai.Awaiting(x => x.SearchCharacterAsync(config));
+
+		// Then
+		await func.Should().ThrowExactlyAsync<TenraiValidationException>();
+	}
+
+	[Theory]
+	[InlineData('A')]
+	[InlineData('L')]
+	[InlineData('S')]
+	public async Task SearchCharacterAsync_ValidLetter_ShouldReturnRecordsOnlyStartingOnLetter(char letter)
+	{
+		// Given
+		var config = new CharacterSearchConfig{Letter = letter};
+
+		// When
+		var people = await _tenrai.SearchCharacterAsync(config);
+
+		// Then
+		using var _ = new AssertionScope();
+		people.Data.Should().HaveCount(ParameterConsts.DefaultPageSize);
+		people.Data.Should().OnlyContain(x => x.Name.StartsWith(letter));
+	}
+
+	[Fact]
+	public async Task SearchCharacterAsync_LupinQuery_ShouldReturnLupins()
+	{
+		// Given
+		var config = new CharacterSearchConfig{Query = "Lupin"};
+
+		// When
+		var people = await _tenrai.SearchCharacterAsync(config);
+
+		// Then
+		using var _ = new AssertionScope();
+		people.Data.Should().Contain(x => x.Name.Equals("Fake Lupin"));
+		people.Data.Should().Contain(x => x.Name.Equals("Arsène Lupin"));
+		people.Data.Should().Contain(x => x.Name.Equals("Lupin II"));
+		people.Data.First().Name.Should().Be("Lupin");
+	}
+
+	[Fact]
+	public async Task SearchCharacterAsync_LupinQueryByPopularity_ShouldReturnLupinsWithKurobaFirst()
+	{
+		// Given
+		var config = new CharacterSearchConfig{Query = "Lupin", OrderBy = CharacterSearchOrderBy.Favorites, SortDirection = SortDirection.Descending};
+
+		// When
+		var people = await _tenrai.SearchCharacterAsync(config);
+
+		// Then
+		using var _ = new AssertionScope();
+		people.Data.Should().Contain(x => x.Name.Equals("Fake Lupin"));
+		people.Data.Should().Contain(x => x.Name.Equals("Arsène Lupin"));
+		people.Data.Should().Contain(x => x.Name.Equals("Lupin II"));
+		people.Data.First().Name.Should().Be("Lupin III");
+	}
+
+	[Fact]
+	public async Task SearchCharacterAsync_LupinQueryByReversePopularity_ShouldReturnLupinsWithKurobaLast()
+	{
+		// Given
+		var config = new CharacterSearchConfig{Query = "Lupin", OrderBy = CharacterSearchOrderBy.Favorites, SortDirection = SortDirection.Ascending};
+
+		// When
+		var people = await _tenrai.SearchCharacterAsync(config);
+
+		// Then
+		using var _ = new AssertionScope();
+		people.Data.Should().Contain(x => x.Name.Equals("Fake Lupin"));
+		people.Data.Should().Contain(x => x.Name.Equals("Arsène Lupin"));
+		people.Data.Should().Contain(x => x.Name.Equals("Lupin II"));
+		people.Data.Last().Name.Should().Be("Arsene Lupin III");
+		people.Data.First().Favorites.Should().BeGreaterOrEqualTo(0);
+	}
+
+	[Fact]
+	public async Task SearchCharacterAsync_LupinQueryByMalIdWithLimit2_ShouldReturnThirdAndKaitoKuroba()
+	{
+		// Given
+		var config = new CharacterSearchConfig{Query = "Lupin", OrderBy = CharacterSearchOrderBy.MalId, Limit = 2};
+
+		// When
+		var people = await _tenrai.SearchCharacterAsync(config);
+
+		// Then
+		using var _ = new AssertionScope();
+		people.Data.Should().HaveCount(config.Limit.Value);
+		people.Data.Should().Contain(x => x.Name.Equals("Lupin"));
+	}
+
+	[Fact]
+	public async Task SearchCharacterAsync_KirumiQuery_ShouldReturnSingleKirumi()
+	{
+		// Given
+		var config = new CharacterSearchConfig{Query = "kirumi to"};
+
+		// When
+		var people = await _tenrai.SearchCharacterAsync(config);
+
+		// Then
+		using var _ = new AssertionScope();
+		people.Data.Should().ContainSingle();
+
+		var result = people.Data.First();
+		result.Name.Should().Be("Kirumi Toujou");
+		result.Nicknames.Should().BeEmpty();
+		result.About.Should().NotBeEmpty();
+		result.MalId.Should().Be(157604);
+	}
+
+	[Fact]
+	public async Task SearchCharacterAsync_BebopMainCast_HasSpike()
+	{
+		var config = new CharacterSearchConfig { AnimeIds = { 1 }, Role = CharacterRole.Main };
+
+		var characters = await _tenrai.SearchCharacterAsync(config);
+
+		using var _ = new AssertionScope();
+		characters.Pagination.Items.Total.Should().Be(4);
+		characters.Data.Should().Contain(x => x.MalId == 1);
+	}
 }

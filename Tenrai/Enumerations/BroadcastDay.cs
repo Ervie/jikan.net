@@ -1,70 +1,69 @@
 using System.ComponentModel;
 
-namespace Tenrai
+namespace Tenrai;
+
+/// <summary>
+/// Day of the week an anime airs in Japan (JST), for the anime search.
+/// </summary>
+public enum BroadcastDay
 {
 	/// <summary>
-	/// Day of the week an anime airs in Japan (JST), for the anime search.
+	/// Monday.
 	/// </summary>
-	public enum BroadcastDay
-	{
-		/// <summary>
-		/// Monday.
-		/// </summary>
-		[Description("monday")]
-		Monday,
+	[Description("monday")]
+	Monday,
 
-		/// <summary>
-		/// Tuesday.
-		/// </summary>
-		[Description("tuesday")]
-		Tuesday,
+	/// <summary>
+	/// Tuesday.
+	/// </summary>
+	[Description("tuesday")]
+	Tuesday,
 
-		/// <summary>
-		/// Wednesday.
-		/// </summary>
-		[Description("wednesday")]
-		Wednesday,
+	/// <summary>
+	/// Wednesday.
+	/// </summary>
+	[Description("wednesday")]
+	Wednesday,
 
-		/// <summary>
-		/// Thursday.
-		/// </summary>
-		[Description("thursday")]
-		Thursday,
+	/// <summary>
+	/// Thursday.
+	/// </summary>
+	[Description("thursday")]
+	Thursday,
 
-		/// <summary>
-		/// Friday.
-		/// </summary>
-		[Description("friday")]
-		Friday,
+	/// <summary>
+	/// Friday.
+	/// </summary>
+	[Description("friday")]
+	Friday,
 
-		/// <summary>
-		/// Saturday.
-		/// </summary>
-		[Description("saturday")]
-		Saturday,
+	/// <summary>
+	/// Saturday.
+	/// </summary>
+	[Description("saturday")]
+	Saturday,
 
-		/// <summary>
-		/// Sunday.
-		/// </summary>
-		[Description("sunday")]
-		Sunday,
+	/// <summary>
+	/// Sunday.
+	/// </summary>
+	[Description("sunday")]
+	Sunday,
 
-		/// <summary>
-		/// Anime MyAnimeList lists with an irregular or unknown broadcast day.
-		/// </summary>
-		[Description("other")]
-		Other,
+	/// <summary>
+	/// Anime MyAnimeList lists with an irregular or unknown broadcast day.
+	/// </summary>
+	[Description("other")]
+	Other,
 
-		/// <summary>
-		/// Today in Japan.
-		/// </summary>
-		[Description("today")]
-		Today,
+	/// <summary>
+	/// Today in Japan.
+	/// </summary>
+	[Description("today")]
+	Today,
 
-		/// <summary>
-		/// Tomorrow in Japan.
-		/// </summary>
-		[Description("tomorrow")]
-		Tomorrow
-	}
+	/// <summary>
+	/// Tomorrow in Japan.
+	/// </summary>
+	[Description("tomorrow")]
+	Tomorrow
 }

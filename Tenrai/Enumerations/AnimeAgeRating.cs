@@ -1,46 +1,45 @@
 using System.ComponentModel;
 
-namespace Tenrai
+namespace Tenrai;
+
+/// <summary>
+/// Age rating for anime/manga (search config).
+/// </summary>
+public enum AnimeAgeRating
 {
 	/// <summary>
-	/// Age rating for anime/manga (search config).
+	/// All ages.
 	/// </summary>
-	public enum AnimeAgeRating
-	{
-		/// <summary>
-		/// All ages.
-		/// </summary>
-		[Description("g")]
-		G,
+	[Description("g")]
+	G,
 
-		/// <summary>
-		/// Parental Guidance (Children).
-		/// </summary>
-		[Description("pg")]
-		PG,
+	/// <summary>
+	/// Parental Guidance (Children).
+	/// </summary>
+	[Description("pg")]
+	PG,
 
-		/// <summary>
-		/// Teens 13 or older.
-		/// </summary>
-		[Description("pg13")]
-		PG13,
+	/// <summary>
+	/// Teens 13 or older.
+	/// </summary>
+	[Description("pg13")]
+	PG13,
 
-		/// <summary>
-		/// Rated 17 and above (Violence and Profanity).
-		/// </summary>
-		[Description("r17")]
-		R17,
+	/// <summary>
+	/// Rated 17 and above (Violence and Profanity).
+	/// </summary>
+	[Description("r17")]
+	R17,
 
-		/// <summary>
-		/// Mild nudity.
-		/// </summary>
-		[Description("r")]
-		R,
+	/// <summary>
+	/// Mild nudity.
+	/// </summary>
+	[Description("r")]
+	R,
 
-		/// <summary>
-		/// Adult (Hentai).
-		/// </summary>
-		[Description("rx")]
-		RX
-	}
+	/// <summary>
+	/// Adult (Hentai).
+	/// </summary>
+	[Description("rx")]
+	RX
 }

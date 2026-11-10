@@ -1,28 +1,27 @@
 using System.ComponentModel;
 
-namespace Tenrai
+namespace Tenrai;
+
+/// <summary>
+/// Job a company is credited with on an anime.
+/// </summary>
+public enum ProducerRole
 {
 	/// <summary>
-	/// Job a company is credited with on an anime.
+	/// Animation studio.
 	/// </summary>
-	public enum ProducerRole
-	{
-		/// <summary>
-		/// Animation studio.
-		/// </summary>
-		[Description("studio")]
-		Studio,
+	[Description("studio")]
+	Studio,
 
-		/// <summary>
-		/// Producer.
-		/// </summary>
-		[Description("producer")]
-		Producer,
+	/// <summary>
+	/// Producer.
+	/// </summary>
+	[Description("producer")]
+	Producer,
 
-		/// <summary>
-		/// Licensor.
-		/// </summary>
-		[Description("licensor")]
-		Licensor
-	}
+	/// <summary>
+	/// Licensor.
+	/// </summary>
+	[Description("licensor")]
+	Licensor
 }

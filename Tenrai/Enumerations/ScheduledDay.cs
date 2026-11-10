@@ -1,64 +1,63 @@
 using System.ComponentModel;
 
-namespace Tenrai
+namespace Tenrai;
+
+/// <summary>
+/// Available options for schedule
+/// </summary>
+public enum ScheduledDay
 {
 	/// <summary>
-	/// Available options for schedule
+	/// Unknown schedule.
 	/// </summary>
-	public enum ScheduledDay
-	{
-		/// <summary>
-		/// Unknown schedule.
-		/// </summary>
-		[Description("unknown")]
-		Unknown,
+	[Description("unknown")]
+	Unknown,
 
-		/// <summary>
-		/// Irregular airing.
-		/// </summary>
-		[Description("other")]
-		Other,
+	/// <summary>
+	/// Irregular airing.
+	/// </summary>
+	[Description("other")]
+	Other,
 
-		/// <summary>
-		/// Monday.
-		/// </summary>
-		[Description("monday")]
-		Monday,
+	/// <summary>
+	/// Monday.
+	/// </summary>
+	[Description("monday")]
+	Monday,
 
-		/// <summary>
-		/// Tuesday.
-		/// </summary>
-		[Description("tuesday")]
-		Tuesday,
+	/// <summary>
+	/// Tuesday.
+	/// </summary>
+	[Description("tuesday")]
+	Tuesday,
 
-		/// <summary>
-		/// Wednesday.
-		/// </summary>
-		[Description("wednesday")]
-		Wednesday,
+	/// <summary>
+	/// Wednesday.
+	/// </summary>
+	[Description("wednesday")]
+	Wednesday,
 
-		/// <summary>
-		/// Thursday.
-		/// </summary>
-		[Description("thursday")]
-		Thursday,
+	/// <summary>
+	/// Thursday.
+	/// </summary>
+	[Description("thursday")]
+	Thursday,
 
-		/// <summary>
-		/// Friday.
-		/// </summary>
-		[Description("friday")]
-		Friday,
+	/// <summary>
+	/// Friday.
+	/// </summary>
+	[Description("friday")]
+	Friday,
 
-		/// <summary>
-		/// Saturday.
-		/// </summary>
-		[Description("saturday")]
-		Saturday,
+	/// <summary>
+	/// Saturday.
+	/// </summary>
+	[Description("saturday")]
+	Saturday,
 
-		/// <summary>
-		/// Sunday.
-		/// </summary>
-		[Description("sunday")]
-		Sunday
-	}
+	/// <summary>
+	/// Sunday.
+	/// </summary>
+	[Description("sunday")]
+	Sunday
 }

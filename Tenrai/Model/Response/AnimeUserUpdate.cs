@@ -1,22 +1,21 @@
 using System.Text.Json.Serialization;
 
-namespace Tenrai
+namespace Tenrai;
+
+/// <summary>
+/// Single anime user update model class.
+/// </summary>
+public class AnimeUserUpdate : UserUpdate
 {
 	/// <summary>
-	/// Single anime user update model class.
+	/// Amount of episodes seen by the user.
 	/// </summary>
-	public class AnimeUserUpdate : UserUpdate
-	{
-		/// <summary>
-		/// Amount of episodes seen by the user.
-		/// </summary>
-		[JsonPropertyName("episodes_seen")]
-		public int? EpisodesSeen { get; set; }
+	[JsonPropertyName("episodes_seen")]
+	public int? EpisodesSeen { get; set; }
 
-		/// <summary>
-		/// Total amount of the episodes.
-		/// </summary>
-		[JsonPropertyName("episodes_total")]
-		public int? EpisodesTotal { get; set; }
-	}
+	/// <summary>
+	/// Total amount of the episodes.
+	/// </summary>
+	[JsonPropertyName("episodes_total")]
+	public int? EpisodesTotal { get; set; }
 }

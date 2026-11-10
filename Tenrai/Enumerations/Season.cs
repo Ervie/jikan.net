@@ -1,36 +1,35 @@
 using System.ComponentModel;
 using System.Text.Json.Serialization;
 
-namespace Tenrai
+namespace Tenrai;
+
+/// <summary>
+/// Enumeration representing seasons of year.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum Season
 {
 	/// <summary>
-	/// Enumeration representing seasons of year.
+	/// Spring season.
 	/// </summary>
-	[JsonConverter(typeof(JsonStringEnumConverter))]
-	public enum Season
-	{
-		/// <summary>
-		/// Spring season.
-		/// </summary>
-		[Description("spring")]
-		Spring,
+	[Description("spring")]
+	Spring,
 
-		/// <summary>
-		/// Summer season.
-		/// </summary>
-		[Description("summer")]
-		Summer,
+	/// <summary>
+	/// Summer season.
+	/// </summary>
+	[Description("summer")]
+	Summer,
 
-		/// <summary>
-		/// Fall season.
-		/// </summary>
-		[Description("fall")]
-		Fall,
+	/// <summary>
+	/// Fall season.
+	/// </summary>
+	[Description("fall")]
+	Fall,
 
-		/// <summary>
-		/// Winter season.
-		/// </summary>
-		[Description("winter")]
-		Winter
-	}
+	/// <summary>
+	/// Winter season.
+	/// </summary>
+	[Description("winter")]
+	Winter
 }

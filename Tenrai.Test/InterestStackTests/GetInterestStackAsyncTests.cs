@@ -5,111 +5,110 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Tenrai.Tests.InterestStackTests
+namespace Tenrai.Tests.InterestStackTests;
+
+[Collection("TenraiTests")]
+public class GetInterestStackAsyncTests
 {
-	[Collection("TenraiTests")]
-	public class GetInterestStackAsyncTests
+	private readonly ITenrai _tenrai;
+
+	public GetInterestStackAsyncTests(TenraiFixture tenraiFixture)
 	{
-		private readonly ITenrai _tenrai;
+		_tenrai = tenraiFixture.TenraiClient;
+	}
 
-		public GetInterestStackAsyncTests(TenraiFixture tenraiFixture)
+	[Theory]
+	[InlineData(long.MinValue)]
+	[InlineData(-1)]
+	[InlineData(0)]
+	public async Task GetInterestStackAsync_InvalidId_ShouldThrowValidationException(long malId)
+	{
+		// When
+		var func = _tenrai.Awaiting(x => x.GetInterestStackAsync(malId));
+
+		// Then
+		await func.Should().ThrowExactlyAsync<TenraiValidationException>();
+	}
+
+	[Fact]
+	public async Task GetInterestStackAsync_FirstBrowsedStack_ShouldParseEntriesInSourceOrder()
+	{
+		// Given
+		var browsed = await _tenrai.GetInterestStacksAsync();
+		var id = browsed.Data.First().MalId;
+
+		// When
+		var stack = await _tenrai.GetInterestStackAsync(id);
+
+		// Then
+		using (new AssertionScope())
 		{
-			_tenrai = tenraiFixture.TenraiClient;
+			stack.Data.MalId.Should().Be(id);
+			stack.Data.Url.Should().NotBeNullOrWhiteSpace();
+			stack.Data.Entries.Should().NotBeNullOrEmpty();
+			stack.Data.Entries.Count.Should().BeLessOrEqualTo(stack.Data.EntryCount);
+			stack.Data.Entries.Select(entry => entry.Position).Should().BeInAscendingOrder();
+			stack.Data.Entries.First().Position.Should().Be(1);
+			stack.Data.Entries.Should().OnlyContain(entry => entry.MalId > 0);
+			stack.Data.Entries.Should().OnlyContain(entry => !string.IsNullOrWhiteSpace(entry.Title));
+			stack.Data.Entries.Should().OnlyContain(entry => !string.IsNullOrWhiteSpace(entry.Url));
+			stack.Data.Entries.Should().OnlyContain(entry => !string.IsNullOrWhiteSpace(entry.Type));
+			stack.Data.Entries.Should().OnlyContain(entry => entry.Images.JPG.ImageUrl != null);
 		}
+	}
 
-		[Theory]
-		[InlineData(long.MinValue)]
-		[InlineData(-1)]
-		[InlineData(0)]
-		public async Task GetInterestStackAsync_InvalidId_ShouldThrowValidationException(long malId)
+	[Fact]
+	public async Task GetInterestStackAsync_AnimeStack_ShouldParseAnimeSpecificEntryFields()
+	{
+		// Given
+		var browsed = await _tenrai.SearchInterestStacksAsync(new InterestStackSearchConfig { Type = InterestStackType.Anime });
+		var id = browsed.Data.First().MalId;
+
+		// When
+		var stack = await _tenrai.GetInterestStackAsync(id);
+
+		// Then
+		using (new AssertionScope())
 		{
-			// When
-			var func = _tenrai.Awaiting(x => x.GetInterestStackAsync(malId));
-
-			// Then
-			await func.Should().ThrowExactlyAsync<TenraiValidationException>();
+			stack.Data.StackType.Should().Be("anime");
+			stack.Data.Entries.Should().Contain(entry => entry.AiredFromYear.HasValue);
+			stack.Data.Entries.Should().OnlyContain(entry => entry.Volumes == null);
+			stack.Data.Entries.Should().OnlyContain(entry => entry.PublishedFromYear == null);
 		}
+	}
 
-		[Fact]
-		public async Task GetInterestStackAsync_FirstBrowsedStack_ShouldParseEntriesInSourceOrder()
+	[Fact]
+	public async Task GetInterestStackAsync_MangaStack_ShouldParseMangaSpecificEntryFields()
+	{
+		// Given
+		var browsed = await _tenrai.SearchInterestStacksAsync(new InterestStackSearchConfig { Type = InterestStackType.Manga });
+		var id = browsed.Data.First().MalId;
+
+		// When
+		var stack = await _tenrai.GetInterestStackAsync(id);
+
+		// Then
+		using (new AssertionScope())
 		{
-			// Given
-			var browsed = await _tenrai.GetInterestStacksAsync();
-			var id = browsed.Data.First().MalId;
-
-			// When
-			var stack = await _tenrai.GetInterestStackAsync(id);
-
-			// Then
-			using (new AssertionScope())
-			{
-				stack.Data.MalId.Should().Be(id);
-				stack.Data.Url.Should().NotBeNullOrWhiteSpace();
-				stack.Data.Entries.Should().NotBeNullOrEmpty();
-				stack.Data.Entries.Count.Should().BeLessOrEqualTo(stack.Data.EntryCount);
-				stack.Data.Entries.Select(entry => entry.Position).Should().BeInAscendingOrder();
-				stack.Data.Entries.First().Position.Should().Be(1);
-				stack.Data.Entries.Should().OnlyContain(entry => entry.MalId > 0);
-				stack.Data.Entries.Should().OnlyContain(entry => !string.IsNullOrWhiteSpace(entry.Title));
-				stack.Data.Entries.Should().OnlyContain(entry => !string.IsNullOrWhiteSpace(entry.Url));
-				stack.Data.Entries.Should().OnlyContain(entry => !string.IsNullOrWhiteSpace(entry.Type));
-				stack.Data.Entries.Should().OnlyContain(entry => entry.Images.JPG.ImageUrl != null);
-			}
+			stack.Data.StackType.Should().Be("manga");
+			stack.Data.Entries.Should().Contain(entry => entry.PublishedFromYear.HasValue);
+			stack.Data.Entries.Should().OnlyContain(entry => entry.Episodes == null);
+			stack.Data.Entries.Should().OnlyContain(entry => entry.AiredFromYear == null);
 		}
+	}
 
-		[Fact]
-		public async Task GetInterestStackAsync_AnimeStack_ShouldParseAnimeSpecificEntryFields()
-		{
-			// Given
-			var browsed = await _tenrai.SearchInterestStacksAsync(new InterestStackSearchConfig { Type = InterestStackType.Anime });
-			var id = browsed.Data.First().MalId;
+	[Fact]
+	public async Task GetInterestStackAsync_Sfw_HasFewerEntries()
+	{
+		// Given
+		const long stackWithAdultEntries = 93518;
 
-			// When
-			var stack = await _tenrai.GetInterestStackAsync(id);
+		// When
+		var all = await _tenrai.GetInterestStackAsync(stackWithAdultEntries, new SfwConfig { Sfw = false });
+		var sfw = await _tenrai.GetInterestStackAsync(stackWithAdultEntries, new SfwConfig { Sfw = true });
 
-			// Then
-			using (new AssertionScope())
-			{
-				stack.Data.StackType.Should().Be("anime");
-				stack.Data.Entries.Should().Contain(entry => entry.AiredFromYear.HasValue);
-				stack.Data.Entries.Should().OnlyContain(entry => entry.Volumes == null);
-				stack.Data.Entries.Should().OnlyContain(entry => entry.PublishedFromYear == null);
-			}
-		}
-
-		[Fact]
-		public async Task GetInterestStackAsync_MangaStack_ShouldParseMangaSpecificEntryFields()
-		{
-			// Given
-			var browsed = await _tenrai.SearchInterestStacksAsync(new InterestStackSearchConfig { Type = InterestStackType.Manga });
-			var id = browsed.Data.First().MalId;
-
-			// When
-			var stack = await _tenrai.GetInterestStackAsync(id);
-
-			// Then
-			using (new AssertionScope())
-			{
-				stack.Data.StackType.Should().Be("manga");
-				stack.Data.Entries.Should().Contain(entry => entry.PublishedFromYear.HasValue);
-				stack.Data.Entries.Should().OnlyContain(entry => entry.Episodes == null);
-				stack.Data.Entries.Should().OnlyContain(entry => entry.AiredFromYear == null);
-			}
-		}
-
-		[Fact]
-		public async Task GetInterestStackAsync_Sfw_HasFewerEntries()
-		{
-			// Given
-			const long stackWithAdultEntries = 93518;
-
-			// When
-			var all = await _tenrai.GetInterestStackAsync(stackWithAdultEntries, new SfwConfig { Sfw = false });
-			var sfw = await _tenrai.GetInterestStackAsync(stackWithAdultEntries, new SfwConfig { Sfw = true });
-
-			// Then
-			sfw.Data.Entries.Should().NotBeEmpty();
-			sfw.Data.Entries.Count.Should().BeLessThan(all.Data.Entries.Count);
-		}
+		// Then
+		sfw.Data.Entries.Should().NotBeEmpty();
+		sfw.Data.Entries.Count.Should().BeLessThan(all.Data.Entries.Count);
 	}
 }

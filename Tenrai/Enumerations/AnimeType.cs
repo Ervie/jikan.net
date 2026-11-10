@@ -1,64 +1,63 @@
 using System.ComponentModel;
 
-namespace Tenrai
+namespace Tenrai;
+
+/// <summary>
+/// Enumeration for anime types (search config).
+/// </summary>
+public enum AnimeType
 {
 	/// <summary>
-	/// Enumeration for anime types (search config).
+	/// TV series.
 	/// </summary>
-	public enum AnimeType
-	{
-		/// <summary>
-		/// TV series.
-		/// </summary>
-		[Description("TV")]
-		TV,
+	[Description("TV")]
+	TV,
 
-		/// <summary>
-		/// Original video animation.
-		/// </summary>
-		[Description("OVA")]
-		OVA,
+	/// <summary>
+	/// Original video animation.
+	/// </summary>
+	[Description("OVA")]
+	OVA,
 
-		/// <summary>
-		/// Feature-lenght movie.
-		/// </summary>
-		[Description("Movie")]
-		Movie,
+	/// <summary>
+	/// Feature-lenght movie.
+	/// </summary>
+	[Description("Movie")]
+	Movie,
 
-		/// <summary>
-		/// A special episode.
-		/// </summary>
-		[Description("Special")]
-		Special,
+	/// <summary>
+	/// A special episode.
+	/// </summary>
+	[Description("Special")]
+	Special,
 
-		/// <summary>
-		/// Original net animation.
-		/// </summary>
-		[Description("ONA")]
-		ONA,
+	/// <summary>
+	/// Original net animation.
+	/// </summary>
+	[Description("ONA")]
+	ONA,
 
-		/// <summary>
-		/// Music video.
-		/// </summary>
-		[Description("Music")]
-		Music,
+	/// <summary>
+	/// Music video.
+	/// </summary>
+	[Description("Music")]
+	Music,
 
-		/// <summary>
-		/// Cm.
-		/// </summary>
-		[Description("Cm")]
-		Cm,
-		
-		/// <summary>
-		/// Pv.
-		/// </summary>
-		[Description("Pv")]
-		Pv,
+	/// <summary>
+	/// Cm.
+	/// </summary>
+	[Description("Cm")]
+	Cm,
 
-		/// <summary>
-		/// TV special.
-		/// </summary>
-		[Description("tv_special")]
-		TvSpecial
-	}
+	/// <summary>
+	/// Pv.
+	/// </summary>
+	[Description("Pv")]
+	Pv,
+
+	/// <summary>
+	/// TV special.
+	/// </summary>
+	[Description("tv_special")]
+	TvSpecial
 }

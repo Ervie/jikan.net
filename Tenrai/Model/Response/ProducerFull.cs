@@ -8,9 +8,9 @@ namespace Tenrai;
 /// </summary>
 public class ProducerFull: Producer
 {
-    /// <summary>
-    /// Producer's external links
-    /// </summary>
-    [JsonPropertyName("external")]
-    public ICollection<ExternalLink> External { get; set; }
+	/// <summary>
+	/// Producer's external links
+	/// </summary>
+	[JsonPropertyName("external")]
+	public ICollection<ExternalLink> External { get; set; }
 }

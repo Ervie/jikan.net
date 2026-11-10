@@ -11,34 +11,34 @@ namespace Tenrai.Tests.AnimeTests;
 [Collection("TenraiTests")]
 public class GetAnimeExternalLinksAsyncTests
 {
-    
-    private readonly ITenrai _tenrai;
 
-    public GetAnimeExternalLinksAsyncTests(TenraiFixture tenraiFixture)
-    {
-        _tenrai = tenraiFixture.TenraiClient;
-    }
+	private readonly ITenrai _tenrai;
 
-    [Theory]
-    [InlineData(long.MinValue)]
-    [InlineData(-1)]
-    [InlineData(0)]
-    public async Task GetAnimeExternalLinksAsync_InvalidId_ShouldThrowValidationException(long malId)
-    {
-        // When
-        var func = _tenrai.Awaiting(x => x.GetAnimeExternalLinksAsync(malId));
+	public GetAnimeExternalLinksAsyncTests(TenraiFixture tenraiFixture)
+	{
+		_tenrai = tenraiFixture.TenraiClient;
+	}
 
-        // Then
-        await func.Should().ThrowExactlyAsync<TenraiValidationException>();
-    }
-    
-    [Fact]
-    public async Task GetAnimeExternalLinksAsync_BebopId_ShouldReturnBebopLinks()
-    {
-        // When
-        var links = await _tenrai.GetAnimeExternalLinksAsync(1);
+	[Theory]
+	[InlineData(long.MinValue)]
+	[InlineData(-1)]
+	[InlineData(0)]
+	public async Task GetAnimeExternalLinksAsync_InvalidId_ShouldThrowValidationException(long malId)
+	{
+		// When
+		var func = _tenrai.Awaiting(x => x.GetAnimeExternalLinksAsync(malId));
 
-        // Then
-        links.Data.Should().Contain(x => x.Name.Equals("Wikipedia") && x.Url.Equals("http://en.wikipedia.org/wiki/Cowboy_Bebop"));
-    }
+		// Then
+		await func.Should().ThrowExactlyAsync<TenraiValidationException>();
+	}
+
+	[Fact]
+	public async Task GetAnimeExternalLinksAsync_BebopId_ShouldReturnBebopLinks()
+	{
+		// When
+		var links = await _tenrai.GetAnimeExternalLinksAsync(1);
+
+		// Then
+		links.Data.Should().Contain(x => x.Name.Equals("Wikipedia") && x.Url.Equals("http://en.wikipedia.org/wiki/Cowboy_Bebop"));
+	}
 }

@@ -1,22 +1,21 @@
 using System.ComponentModel;
 
-namespace Tenrai
+namespace Tenrai;
+
+/// <summary>
+/// Role a character has in an anime or manga.
+/// </summary>
+public enum CharacterRole
 {
 	/// <summary>
-	/// Role a character has in an anime or manga.
+	/// Main character.
 	/// </summary>
-	public enum CharacterRole
-	{
-		/// <summary>
-		/// Main character.
-		/// </summary>
-		[Description("main")]
-		Main,
+	[Description("main")]
+	Main,
 
-		/// <summary>
-		/// Supporting character.
-		/// </summary>
-		[Description("supporting")]
-		Supporting
-	}
+	/// <summary>
+	/// Supporting character.
+	/// </summary>
+	[Description("supporting")]
+	Supporting
 }

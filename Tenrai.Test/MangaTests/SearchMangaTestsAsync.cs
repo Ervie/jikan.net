@@ -8,570 +8,569 @@ using System.Threading.Tasks;
 using Tenrai.Consts;
 using Xunit;
 
-namespace Tenrai.Tests.MangaTests
+namespace Tenrai.Tests.MangaTests;
+
+[Collection("TenraiTests")]
+public class SearchMangaAsyncTests
 {
-    [Collection("TenraiTests")]
-    public class SearchMangaAsyncTests
-    {
-        private readonly ITenrai _tenrai;
+	private readonly ITenrai _tenrai;
 
-        public SearchMangaAsyncTests(TenraiFixture tenraiFixture)
-        {
-            _tenrai = tenraiFixture.TenraiClient;
-        }
-        [Theory]
-        [InlineData(int.MinValue)]
-        [InlineData(-1)]
-        [InlineData(0)]
-        public async Task SearchMangaAsync_InvalidPage_ShouldThrowValidationException(int page)
-        {
-            // Given
-            var config = new MangaSearchConfig {Page = page};
-            
-            // When
-            var func = _tenrai.Awaiting(x => x.SearchMangaAsync(config));
+	public SearchMangaAsyncTests(TenraiFixture tenraiFixture)
+	{
+		_tenrai = tenraiFixture.TenraiClient;
+	}
+	[Theory]
+	[InlineData(int.MinValue)]
+	[InlineData(-1)]
+	[InlineData(0)]
+	public async Task SearchMangaAsync_InvalidPage_ShouldThrowValidationException(int page)
+	{
+		// Given
+		var config = new MangaSearchConfig {Page = page};
 
-            // Then
-            await func.Should().ThrowExactlyAsync<TenraiValidationException>();
-        }
-        
-        [Theory]
-        [InlineData(int.MinValue)]
-        [InlineData(-1)]
-        [InlineData(0)]
-        [InlineData(101)]
-        [InlineData(int.MaxValue)]
-        public async Task SearchMangaAsync_InvalidPageSize_ShouldThrowValidationException(int pageSize)
-        {
-            // Given
-            var config = new MangaSearchConfig {Limit = pageSize};
-            
-            // When
-            var func = _tenrai.Awaiting(x => x.SearchMangaAsync(config));
+		// When
+		var func = _tenrai.Awaiting(x => x.SearchMangaAsync(config));
 
-            // Then
-            await func.Should().ThrowExactlyAsync<TenraiValidationException>();
-        }
-        
-        [Fact]
-        public async Task SearchMangaAsync_GivenSecondPage_ShouldReturnSecondPage()
-        {
-            // Given
-            var config = new MangaSearchConfig {Page = 2};
-            
-            // When
-            var manga = await _tenrai.SearchMangaAsync(config);
+		// Then
+		await func.Should().ThrowExactlyAsync<TenraiValidationException>();
+	}
 
-            // Then
-            using var _ = new AssertionScope();
-            manga.Data.Should().HaveCount(ParameterConsts.DefaultPageSize);
-            manga.Data.First().Title.Should().Be("Nana");
-            manga.Pagination.LastVisiblePage.Should().BeGreaterThan(780);
-            manga.Pagination.CurrentPage.Should().Be(2);
-            manga.Pagination.Items.Count.Should().Be(25);
-            manga.Pagination.Items.PerPage.Should().Be(25);
-        }
-        
-        [Fact]
-        public async Task SearchMangaAsync_GivenValidPageSize_ShouldReturnPageSizeNumberOfRecords()
-        {
-            // Given
-            const int pageSize = 5;
-            var config = new MangaSearchConfig {Limit = pageSize};
-            
-            // When
-            var manga = await _tenrai.SearchMangaAsync(config);
+	[Theory]
+	[InlineData(int.MinValue)]
+	[InlineData(-1)]
+	[InlineData(0)]
+	[InlineData(101)]
+	[InlineData(int.MaxValue)]
+	public async Task SearchMangaAsync_InvalidPageSize_ShouldThrowValidationException(int pageSize)
+	{
+		// Given
+		var config = new MangaSearchConfig {Limit = pageSize};
 
-            // Then
-            using var _ = new AssertionScope();
-            manga.Data.Should().HaveCount(pageSize);
-            manga.Data.First().Title.Should().Be("Monster");
-            manga.Pagination.CurrentPage.Should().Be(1);
-            manga.Pagination.Items.Count.Should().Be(pageSize);
-            manga.Pagination.Items.PerPage.Should().Be(pageSize);
-        }
-        
-        [Fact]
-        public async Task SearchMangaAsync_GivenValidPageAndPageSize_ShouldReturnPageSizeNumberOfRecordsFromNextPage()
-        {
-            // Given
-            const int pageSize = 5;
-            var config = new MangaSearchConfig {Page = 2, Limit = pageSize};
-            
-            // When
-            var manga = await _tenrai.SearchMangaAsync(config);
+		// When
+		var func = _tenrai.Awaiting(x => x.SearchMangaAsync(config));
 
-            // Then
-            using var _ = new AssertionScope();
-            manga.Data.Should().HaveCount(pageSize);
-            manga.Data.First().Title.Should().Be("Full Moon wo Sagashite");
-            manga.Pagination.CurrentPage.Should().Be(2);
-            manga.Pagination.Items.Count.Should().Be(pageSize);
-            manga.Pagination.Items.PerPage.Should().Be(pageSize);
-        }
-        
-        [Theory]
-        [InlineData("berserk")]
-        [InlineData("monster")]
-        [InlineData("death")]
-        public async Task SearchMangaAsync_NonEmptyQuery_ShouldReturnNotNullSearchManga(string query)
-        {
-            // When
-            var returnedManga = await _tenrai.SearchMangaAsync(query);
+		// Then
+		await func.Should().ThrowExactlyAsync<TenraiValidationException>();
+	}
 
-            // Then
-            returnedManga.Data.Should().NotBeEmpty();
-        }
+	[Fact]
+	public async Task SearchMangaAsync_GivenSecondPage_ShouldReturnSecondPage()
+	{
+		// Given
+		var config = new MangaSearchConfig {Page = 2};
 
-        [Fact]
-        public async Task SearchManga_DanganronpaQuery_ShouldReturnDanganronpaManga()
-        {
-            // When
-            var danganronpaManga = await _tenrai.SearchMangaAsync("danganronpa");
+		// When
+		var manga = await _tenrai.SearchMangaAsync(config);
 
-            danganronpaManga.Data.Should().HaveCountGreaterThan(15);
-        }
-        
-        [Fact]
-        public async Task SearchMangaAsync_YotsubaQuery_ShouldReturnYotsubatoManga()
-        {
-            // When
-            var yotsubato = await _tenrai.SearchMangaAsync("yotsuba");
+		// Then
+		using var _ = new AssertionScope();
+		manga.Data.Should().HaveCount(ParameterConsts.DefaultPageSize);
+		manga.Data.First().Title.Should().Be("Nana");
+		manga.Pagination.LastVisiblePage.Should().BeGreaterThan(780);
+		manga.Pagination.CurrentPage.Should().Be(2);
+		manga.Pagination.Items.Count.Should().Be(25);
+		manga.Pagination.Items.PerPage.Should().Be(25);
+	}
 
-            // Then
-            var firstResult = yotsubato.Data.First();
-            using var _ = new AssertionScope();
-            firstResult.Title.Should().Be("Yotsuba to!");
-            firstResult.Type.Should().Be("Manga");
-            firstResult.Volumes.Should().BeNull();
-            firstResult.MalId.Should().Be(104);
-        }
+	[Fact]
+	public async Task SearchMangaAsync_GivenValidPageSize_ShouldReturnPageSizeNumberOfRecords()
+	{
+		// Given
+		const int pageSize = 5;
+		var config = new MangaSearchConfig {Limit = pageSize};
 
-        [Fact]
-        public async Task SearchMangaAsync_YotsubatoQueryNullConfig_ShouldThrowValidationException()
-        {
-            // When
-            var func = _tenrai.Awaiting(x => x.SearchMangaAsync((MangaSearchConfig) null));
+		// When
+		var manga = await _tenrai.SearchMangaAsync(config);
 
-            // Then
-            await func.Should().ThrowExactlyAsync<TenraiValidationException>();
-        }
-        
-        [Fact]
-        public async Task SearchMangaAsync_YotsubaPublishingQuery_ShouldReturnPublishedYotsubatoManga()
-        {
-            // Given
-            var searchConfig = new MangaSearchConfig()
-            {
-                Query = "yotsuba",
-                Statuses = new[] { PublishingStatus.Publishing }
-            };
+		// Then
+		using var _ = new AssertionScope();
+		manga.Data.Should().HaveCount(pageSize);
+		manga.Data.First().Title.Should().Be("Monster");
+		manga.Pagination.CurrentPage.Should().Be(1);
+		manga.Pagination.Items.Count.Should().Be(pageSize);
+		manga.Pagination.Items.PerPage.Should().Be(pageSize);
+	}
 
-            // When
-            var yotsubato = await _tenrai.SearchMangaAsync(searchConfig);
+	[Fact]
+	public async Task SearchMangaAsync_GivenValidPageAndPageSize_ShouldReturnPageSizeNumberOfRecordsFromNextPage()
+	{
+		// Given
+		const int pageSize = 5;
+		var config = new MangaSearchConfig {Page = 2, Limit = pageSize};
 
-            // Then
-            var firstResult = yotsubato.Data.First();
-            using var _ = new AssertionScope();
-            firstResult.Title.Should().Be("Yotsuba to!");
-            firstResult.Type.Should().Be("Manga");
-            firstResult.Volumes.Should().BeNull();
-            firstResult.MalId.Should().Be(104);
-        }
-        
-        [Theory]
-        [InlineData(int.MinValue)]
-        [InlineData(-1)]
-        [InlineData(0)]
-        public async Task SearchMangaAsync_YotsubaQueryInvalidPage_ShouldThrowValidationException(int page)
-        {
-            // Given
-            var searchConfig = new MangaSearchConfig()
-            {
-                Query = "yotsuba",
-                Page = page
-            };
-            
-            // When
-            var func = _tenrai.Awaiting(x => x.SearchMangaAsync(searchConfig));
+		// When
+		var manga = await _tenrai.SearchMangaAsync(config);
 
-            // Then
-            await func.Should().ThrowExactlyAsync<TenraiValidationException>();
-        }
+		// Then
+		using var _ = new AssertionScope();
+		manga.Data.Should().HaveCount(pageSize);
+		manga.Data.First().Title.Should().Be("Full Moon wo Sagashite");
+		manga.Pagination.CurrentPage.Should().Be(2);
+		manga.Pagination.Items.Count.Should().Be(pageSize);
+		manga.Pagination.Items.PerPage.Should().Be(pageSize);
+	}
 
-        [Fact]
-        public async Task SearchMangaAsync_GirlQuerySecondPage_ShouldFindGirlManga()
-        {
-            // Given
-            var searchConfig = new MangaSearchConfig()
-            {
-                Query = "girl",
-                Page = 2
-            };
-            
-            // When
-            var returnedAnime = await _tenrai.SearchMangaAsync(searchConfig);
+	[Theory]
+	[InlineData("berserk")]
+	[InlineData("monster")]
+	[InlineData("death")]
+	public async Task SearchMangaAsync_NonEmptyQuery_ShouldReturnNotNullSearchManga(string query)
+	{
+		// When
+		var returnedManga = await _tenrai.SearchMangaAsync(query);
 
-            // Then
-            using var _ = new AssertionScope();
-            returnedAnime.Data.Select(x => x.Title).Should().Contain("Mimei no Girl"); 
-            returnedAnime.Pagination.LastVisiblePage.Should().BeGreaterThan(15);
-        }
-        
-        [Theory]
-        [InlineData("berserk")]
-        [InlineData("monster")]
-        [InlineData("death")]
-        public async Task SearchMangaAsync_MangaConfig_ShouldReturnNotNullSearchManga(string query)
-        {
-            // Given
-            var searchConfig = new MangaSearchConfig
-            {
-	            Query = query,
-                Types = new[] { MangaType.Manga }
-            };
+		// Then
+		returnedManga.Data.Should().NotBeEmpty();
+	}
 
-            // When
-            var returnedManga = await _tenrai.SearchMangaAsync(searchConfig);
+	[Fact]
+	public async Task SearchManga_DanganronpaQuery_ShouldReturnDanganronpaManga()
+	{
+		// When
+		var danganronpaManga = await _tenrai.SearchMangaAsync("danganronpa");
 
-            // Then
-            returnedManga.Data.Should().NotBeEmpty();
-        }
+		danganronpaManga.Data.Should().HaveCountGreaterThan(15);
+	}
 
-        [Fact]
-        public async Task SearchMangaAsync_DanganronpaMangaConfig_ShouldReturnDanganronpaManga()
-        {
-            // Given
-            var searchConfig = new MangaSearchConfig
-            {
-                Query = "danganronpa",
-                Types = new[] { MangaType.Manga }
-            };
+	[Fact]
+	public async Task SearchMangaAsync_YotsubaQuery_ShouldReturnYotsubatoManga()
+	{
+		// When
+		var yotsubato = await _tenrai.SearchMangaAsync("yotsuba");
 
-            // When
-            var danganronpaManga = await _tenrai.SearchMangaAsync(searchConfig);
+		// Then
+		var firstResult = yotsubato.Data.First();
+		using var _ = new AssertionScope();
+		firstResult.Title.Should().Be("Yotsuba to!");
+		firstResult.Type.Should().Be("Manga");
+		firstResult.Volumes.Should().BeNull();
+		firstResult.MalId.Should().Be(104);
+	}
 
-            // Then
-            danganronpaManga.Data.Should().HaveCountGreaterThan(12);
-        }
-        
-        
-		[Fact]
-		public async Task SearchMangaAsync_DanganronpaMangaAbove7Config_ShouldReturnDanganronpaMangaScore()
+	[Fact]
+	public async Task SearchMangaAsync_YotsubatoQueryNullConfig_ShouldThrowValidationException()
+	{
+		// When
+		var func = _tenrai.Awaiting(x => x.SearchMangaAsync((MangaSearchConfig) null));
+
+		// Then
+		await func.Should().ThrowExactlyAsync<TenraiValidationException>();
+	}
+
+	[Fact]
+	public async Task SearchMangaAsync_YotsubaPublishingQuery_ShouldReturnPublishedYotsubatoManga()
+	{
+		// Given
+		var searchConfig = new MangaSearchConfig()
 		{
-			// Given
-			var searchConfig = new MangaSearchConfig
-			{
-				Query = "danganronpa",
-				Types = new[] { MangaType.Manga },
-				MinimumScore = 7
-			};
+			Query = "yotsuba",
+			Statuses = new[] { PublishingStatus.Publishing }
+		};
 
-			// When
-			var danganronpaManga = await _tenrai.SearchMangaAsync(searchConfig);
+		// When
+		var yotsubato = await _tenrai.SearchMangaAsync(searchConfig);
 
-			danganronpaManga.Data.First().Title.Should().Contain("Dangan");
-		}
+		// Then
+		var firstResult = yotsubato.Data.First();
+		using var _ = new AssertionScope();
+		firstResult.Title.Should().Be("Yotsuba to!");
+		firstResult.Type.Should().Be("Manga");
+		firstResult.Volumes.Should().BeNull();
+		firstResult.MalId.Should().Be(104);
+	}
 
-		[Fact]
-		public async Task SearchMangaAsync_MangaGameGenreConfig_ShouldFilterMetalFightBeyblade()
+	[Theory]
+	[InlineData(int.MinValue)]
+	[InlineData(-1)]
+	[InlineData(0)]
+	public async Task SearchMangaAsync_YotsubaQueryInvalidPage_ShouldThrowValidationException(int page)
+	{
+		// Given
+		var searchConfig = new MangaSearchConfig()
 		{
-			// Given
-			var searchConfig = new MangaSearchConfig
-			{
-				Query = "metal",
-				Types = new[] { MangaType.Manga },
-			};
-			searchConfig.Genres.Add(MangaGenreSearch.Game);
+			Query = "yotsuba",
+			Page = page
+		};
 
-			// When
-			var returnedManga = await _tenrai.SearchMangaAsync(searchConfig);
+		// When
+		var func = _tenrai.Awaiting(x => x.SearchMangaAsync(searchConfig));
 
-			returnedManga.Data.First().Title.Should().Be("Metal Fight Beyblade");
-		}
+		// Then
+		await func.Should().ThrowExactlyAsync<TenraiValidationException>();
+	}
 
-		[Fact]
-		public async Task SearchMangaAsync_MetalSortByMembersConfig_ShouldSortByPopularityFMAFirst()
+	[Fact]
+	public async Task SearchMangaAsync_GirlQuerySecondPage_ShouldFindGirlManga()
+	{
+		// Given
+		var searchConfig = new MangaSearchConfig()
 		{
-			// Given
-			var searchConfig = new MangaSearchConfig
-			{
-				Query = "metal",
-				OrderBy = MangaSearchOrderBy.Members,
-				SortDirection = SortDirection.Descending
-			};
+			Query = "girl",
+			Page = 2
+		};
 
-			// When
-			var returnedManga = await _tenrai.SearchMangaAsync(searchConfig);
+		// When
+		var returnedAnime = await _tenrai.SearchMangaAsync(searchConfig);
 
-			// Then
-			var titles = returnedManga.Data.Select(x => x.Title);
-			using (new AssertionScope())
-			{
-				titles.Should().Contain("Fullmetal Alchemist");
-				titles.Should().Contain("Metallica Metalluca");
-				titles.Should().Contain("Full Metal Panic!");
-				returnedManga.Data.First().Title.Should().Be("Fullmetal Alchemist");
-			}
-		}
+		// Then
+		using var _ = new AssertionScope();
+		returnedAnime.Data.Select(x => x.Title).Should().Contain("Mimei no Girl");
+		returnedAnime.Pagination.LastVisiblePage.Should().BeGreaterThan(15);
+	}
 
-		[Fact]
-		public async Task SearchMangaAsync_OneSortByIdConfig_ShouldSortByIdOnePieceFirst()
+	[Theory]
+	[InlineData("berserk")]
+	[InlineData("monster")]
+	[InlineData("death")]
+	public async Task SearchMangaAsync_MangaConfig_ShouldReturnNotNullSearchManga(string query)
+	{
+		// Given
+		var searchConfig = new MangaSearchConfig
 		{
-			// Given
-			var searchConfig = new MangaSearchConfig
-			{
-				Query = "one",
-				OrderBy = MangaSearchOrderBy.MalId,
-				SortDirection = SortDirection.Ascending
-			};
+			Query = query,
+			Types = new[] { MangaType.Manga }
+		};
 
-			// When
-			var returnedManga = await _tenrai.SearchMangaAsync(searchConfig);
+		// When
+		var returnedManga = await _tenrai.SearchMangaAsync(searchConfig);
 
-			// Then
-			returnedManga.Data.First().Title.Should().Be("One");
-		}
+		// Then
+		returnedManga.Data.Should().NotBeEmpty();
+	}
 
-		[Fact]
-		public async Task SearchMangaAsync_ShonenJumpMagazineConfig_ShouldReturnNarutoAndBleach()
+	[Fact]
+	public async Task SearchMangaAsync_DanganronpaMangaConfig_ShouldReturnDanganronpaManga()
+	{
+		// Given
+		var searchConfig = new MangaSearchConfig
 		{
-			// Given
-			var searchConfig = new MangaSearchConfig
-			{
-				MagazineIds = { 83 }
-			};
+			Query = "danganronpa",
+			Types = new[] { MangaType.Manga }
+		};
 
-			// When
-			var returnedManga = await _tenrai.SearchMangaAsync(searchConfig);
+		// When
+		var danganronpaManga = await _tenrai.SearchMangaAsync(searchConfig);
 
-			// Then
-			using (new AssertionScope())
-			{
-				returnedManga.Data.First().Title.Should().Be("Naruto");
-				returnedManga.Data.Skip(1).First().Title.Should().Be("Bleach");
-				returnedManga.Data.Should().HaveCount(25);
-			}
-		}
+		// Then
+		danganronpaManga.Data.Should().HaveCountGreaterThan(12);
+	}
 
-		[Theory]
-		[InlineData((PublishingStatus)int.MaxValue, null, null, null, null)]
-		[InlineData((PublishingStatus)int.MinValue, null, null, null, null)]
-		[InlineData(null, (MangaType)int.MaxValue, null, null, null)]
-		[InlineData(null, (MangaType)int.MinValue, null, null, null)]
-		[InlineData(null, null, (MangaSearchOrderBy)int.MaxValue, null, null)]
-		[InlineData(null, null, (MangaSearchOrderBy)int.MinValue, null, null)]
-		[InlineData(null, null, MangaSearchOrderBy.Chapters, (SortDirection)int.MaxValue, null)]
-		[InlineData(null, null, MangaSearchOrderBy.Chapters, (SortDirection)int.MinValue, null)]
-		[InlineData(null, null, null, null, (MangaGenreSearch)int.MaxValue)]
-		[InlineData(null, null, null, null, (MangaGenreSearch)int.MinValue)]
-		public async Task SearchMangaAsync_EmptyQueryWithConfigWithInvalidEnums_ShouldThrowValidationException(
-			PublishingStatus? airingStatus,
-			MangaType? mangaType,
-			MangaSearchOrderBy? orderBy,
-			SortDirection? sortDirection,
-			MangaGenreSearch? genreSearch
-		)
+
+	[Fact]
+	public async Task SearchMangaAsync_DanganronpaMangaAbove7Config_ShouldReturnDanganronpaMangaScore()
+	{
+		// Given
+		var searchConfig = new MangaSearchConfig
 		{
-			// Given
-			var searchConfig = new MangaSearchConfig()
-			{
-				Statuses = new[] { airingStatus.GetValueOrDefault() },
-				Types = new[] { mangaType.GetValueOrDefault() },
-				OrderBy = orderBy.GetValueOrDefault(),
-				SortDirection = sortDirection.GetValueOrDefault(),
-				Genres = genreSearch.HasValue ? new[] { genreSearch.Value } : Array.Empty<MangaGenreSearch>()
-			};
+			Query = "danganronpa",
+			Types = new[] { MangaType.Manga },
+			MinimumScore = 7
+		};
 
-			// When
-			var func = _tenrai.Awaiting(x => x.SearchMangaAsync(searchConfig));
+		// When
+		var danganronpaManga = await _tenrai.SearchMangaAsync(searchConfig);
 
-			// Then
-			await func.Should().ThrowExactlyAsync<TenraiValidationException>();
-		}
+		danganronpaManga.Data.First().Title.Should().Contain("Dangan");
+	}
 
-		[Fact]
-		public async Task SearchMangaAsync_EmptyQueryActionManga_ShouldFindBerserkAndBlackCat()
+	[Fact]
+	public async Task SearchMangaAsync_MangaGameGenreConfig_ShouldFilterMetalFightBeyblade()
+	{
+		// Given
+		var searchConfig = new MangaSearchConfig
 		{
-			// Given
-			var searchConfig = new MangaSearchConfig
-			{
-				Genres = new List<MangaGenreSearch> { MangaGenreSearch.Action }
-			};
+			Query = "metal",
+			Types = new[] { MangaType.Manga },
+		};
+		searchConfig.Genres.Add(MangaGenreSearch.Game);
 
-			// When
-			var returnedManga = await _tenrai.SearchMangaAsync(searchConfig);
+		// When
+		var returnedManga = await _tenrai.SearchMangaAsync(searchConfig);
 
-			// Then
-			var titles = returnedManga.Data.Select(x => x.Title);
-			using var _ = new AssertionScope();
-			titles.Should().Contain("Berserk");
-			titles.Should().Contain("Black Cat");
-		}
+		returnedManga.Data.First().Title.Should().Be("Metal Fight Beyblade");
+	}
 
-		[Fact]
-		public async Task SearchMangaAsync_EmptyQueryActionMangaFirstPage_ShouldFindBerserkAndBlackCat()
+	[Fact]
+	public async Task SearchMangaAsync_MetalSortByMembersConfig_ShouldSortByPopularityFMAFirst()
+	{
+		// Given
+		var searchConfig = new MangaSearchConfig
 		{
-			// Given
-			var searchConfig = new MangaSearchConfig
-			{
-				Page = 1,
-				Genres = new List<MangaGenreSearch> { MangaGenreSearch.Action }
-			};
+			Query = "metal",
+			OrderBy = MangaSearchOrderBy.Members,
+			SortDirection = SortDirection.Descending
+		};
 
-			// When
-			var returnedManga = await _tenrai.SearchMangaAsync(searchConfig);
+		// When
+		var returnedManga = await _tenrai.SearchMangaAsync(searchConfig);
 
-			// Then
-			var titles = returnedManga.Data.Select(x => x.Title);
-			using var _ = new AssertionScope();
-			titles.Should().Contain("Berserk");
-			titles.Should().Contain("Black Cat");
-		}
-
-		[Fact]
-		public async Task SearchMangaAsync_EmptyQueryActionMangaSecondPage_ShouldFindHakushoAndAirGear()
+		// Then
+		var titles = returnedManga.Data.Select(x => x.Title);
+		using (new AssertionScope())
 		{
-			// Given
-			var searchConfig = new MangaSearchConfig
-			{
-				Page = 2,
-				Genres = new List<MangaGenreSearch> { MangaGenreSearch.Action }
-			};
-
-			// When
-			var returnedManga = await _tenrai.SearchMangaAsync(searchConfig);
-
-			// Then
-			var titles = returnedManga.Data.Select(x => x.Title);
-			using var _ = new AssertionScope();
-			titles.Should().Contain("Zombie-Loan");
-			titles.Should().Contain("Air Gear");
+			titles.Should().Contain("Fullmetal Alchemist");
+			titles.Should().Contain("Metallica Metalluca");
+			titles.Should().Contain("Full Metal Panic!");
+			returnedManga.Data.First().Title.Should().Be("Fullmetal Alchemist");
 		}
+	}
 
-		[Theory]
-		[InlineData(int.MinValue)]
-		[InlineData(-1)]
-		[InlineData(0)]
-		public async Task SearchMangaAsync_OreQueryWithConfigInvalidPage_ShouldThrowValidationException(int page)
+	[Fact]
+	public async Task SearchMangaAsync_OneSortByIdConfig_ShouldSortByIdOnePieceFirst()
+	{
+		// Given
+		var searchConfig = new MangaSearchConfig
 		{
-			// Given
-			var searchConfig = new MangaSearchConfig()
-			{
-				Query = "ore",
-				Page = page,
-				Statuses = new[] { PublishingStatus.Publishing }
-			};
+			Query = "one",
+			OrderBy = MangaSearchOrderBy.MalId,
+			SortDirection = SortDirection.Ascending
+		};
 
-			// When
-			var func = _tenrai.Awaiting(x => x.SearchMangaAsync(searchConfig));
+		// When
+		var returnedManga = await _tenrai.SearchMangaAsync(searchConfig);
 
-			// Then
-			await func.Should().ThrowExactlyAsync<TenraiValidationException>();
-		}
+		// Then
+		returnedManga.Data.First().Title.Should().Be("One");
+	}
 
-		[Fact]
-		public async Task SearchMangaAsync_OreQueryComedyMangaSecondPage_ShouldReturnNotEmptyCollection()
+	[Fact]
+	public async Task SearchMangaAsync_ShonenJumpMagazineConfig_ShouldReturnNarutoAndBleach()
+	{
+		// Given
+		var searchConfig = new MangaSearchConfig
 		{
-			// Given
-			var searchConfig = new MangaSearchConfig
-			{
-				Query = "ore",
-				Page = 2,
-				Genres = new List<MangaGenreSearch> { MangaGenreSearch.Comedy },
-				Types = new[] { MangaType.Manga }
-			};
+			MagazineIds = { 83 }
+		};
 
-			// When
-			var returnedManga = await _tenrai.SearchMangaAsync(searchConfig);
+		// When
+		var returnedManga = await _tenrai.SearchMangaAsync(searchConfig);
 
-			// Then
-			returnedManga.Data.Should().NotBeNullOrEmpty();
-		}
-
-		[Fact]
-		public async Task SearchMangaAsync_GenreInclusion_ShouldReturnNotEmptyCollection()
+		// Then
+		using (new AssertionScope())
 		{
-			// Given
-			var searchConfig = new MangaSearchConfig
-			{
-				Genres = new List<MangaGenreSearch> { MangaGenreSearch.Comedy },
-				Types = new[] { MangaType.Manga }
-			};
-
-			// When
-			var returnedManga = await _tenrai.SearchMangaAsync(searchConfig);
-
-			// Then
-			returnedManga.Data.Should().NotBeNullOrEmpty();
+			returnedManga.Data.First().Title.Should().Be("Naruto");
+			returnedManga.Data.Skip(1).First().Title.Should().Be("Bleach");
+			returnedManga.Data.Should().HaveCount(25);
 		}
+	}
 
-		[Fact]
-		public async Task SearchMangaAsync_GenreExclusion_ShouldReturnNotEmptyCollection()
+	[Theory]
+	[InlineData((PublishingStatus)int.MaxValue, null, null, null, null)]
+	[InlineData((PublishingStatus)int.MinValue, null, null, null, null)]
+	[InlineData(null, (MangaType)int.MaxValue, null, null, null)]
+	[InlineData(null, (MangaType)int.MinValue, null, null, null)]
+	[InlineData(null, null, (MangaSearchOrderBy)int.MaxValue, null, null)]
+	[InlineData(null, null, (MangaSearchOrderBy)int.MinValue, null, null)]
+	[InlineData(null, null, MangaSearchOrderBy.Chapters, (SortDirection)int.MaxValue, null)]
+	[InlineData(null, null, MangaSearchOrderBy.Chapters, (SortDirection)int.MinValue, null)]
+	[InlineData(null, null, null, null, (MangaGenreSearch)int.MaxValue)]
+	[InlineData(null, null, null, null, (MangaGenreSearch)int.MinValue)]
+	public async Task SearchMangaAsync_EmptyQueryWithConfigWithInvalidEnums_ShouldThrowValidationException(
+		PublishingStatus? airingStatus,
+		MangaType? mangaType,
+		MangaSearchOrderBy? orderBy,
+		SortDirection? sortDirection,
+		MangaGenreSearch? genreSearch
+	)
+	{
+		// Given
+		var searchConfig = new MangaSearchConfig()
 		{
-			// Given
-			var searchConfig = new MangaSearchConfig
-			{
-				ExcludedGenres = new List<MangaGenreSearch> { MangaGenreSearch.Comedy },
-				Types = new[] { MangaType.Manga }
-			};
+			Statuses = new[] { airingStatus.GetValueOrDefault() },
+			Types = new[] { mangaType.GetValueOrDefault() },
+			OrderBy = orderBy.GetValueOrDefault(),
+			SortDirection = sortDirection.GetValueOrDefault(),
+			Genres = genreSearch.HasValue ? new[] { genreSearch.Value } : Array.Empty<MangaGenreSearch>()
+		};
 
-			// When
-			var returnedManga = await _tenrai.SearchMangaAsync(searchConfig);
+		// When
+		var func = _tenrai.Awaiting(x => x.SearchMangaAsync(searchConfig));
 
-			// Then
-			returnedManga.Data.Should().NotBeNullOrEmpty();
-		}
+		// Then
+		await func.Should().ThrowExactlyAsync<TenraiValidationException>();
+	}
 
-		[Fact]
-		public async Task SearchMangaAsync_GenreExclusion_ShouldNotContainExcludedGenres()
+	[Fact]
+	public async Task SearchMangaAsync_EmptyQueryActionManga_ShouldFindBerserkAndBlackCat()
+	{
+		// Given
+		var searchConfig = new MangaSearchConfig
 		{
-			// Given
-			var searchConfig = new MangaSearchConfig
-			{
-				ExcludedGenres = new List<MangaGenreSearch> { MangaGenreSearch.Action },
-				Types = new[] { MangaType.Manga }
-			};
+			Genres = new List<MangaGenreSearch> { MangaGenreSearch.Action }
+		};
 
-			// When
-			var returnedManga = await _tenrai.SearchMangaAsync(searchConfig);
+		// When
+		var returnedManga = await _tenrai.SearchMangaAsync(searchConfig);
 
-			// Then
-			returnedManga.Data.Should().NotBeEmpty();
-			returnedManga.Data.Should().OnlyContain(m => m.Genres.All(g => g.MalId != 1));
-		}
+		// Then
+		var titles = returnedManga.Data.Select(x => x.Title);
+		using var _ = new AssertionScope();
+		titles.Should().Contain("Berserk");
+		titles.Should().Contain("Black Cat");
+	}
 
-		[Fact]
-		public async Task SearchMangaAsync_WithStartDateAndEndDate_ShouldReturnNotEmpty()
+	[Fact]
+	public async Task SearchMangaAsync_EmptyQueryActionMangaFirstPage_ShouldFindBerserkAndBlackCat()
+	{
+		// Given
+		var searchConfig = new MangaSearchConfig
 		{
-			// Given
-			var searchConfig = new MangaSearchConfig
-			{
-				Query = "monster",
-				StartDate = new DateTime(1994, 12, 1),
-				EndDate = new DateTime(2012, 12, 31),
-				Types = new[] { MangaType.Manga }
-			};
+			Page = 1,
+			Genres = new List<MangaGenreSearch> { MangaGenreSearch.Action }
+		};
 
-			// When
-			var returnedManga = await _tenrai.SearchMangaAsync(searchConfig);
+		// When
+		var returnedManga = await _tenrai.SearchMangaAsync(searchConfig);
 
-			// Then
-			using var _ = new AssertionScope();
-			returnedManga.Data.Should().NotBeEmpty();
-			returnedManga.Data.Should().Contain(m => m.MalId == 1L);
-		}
+		// Then
+		var titles = returnedManga.Data.Select(x => x.Title);
+		using var _ = new AssertionScope();
+		titles.Should().Contain("Berserk");
+		titles.Should().Contain("Black Cat");
+	}
 
-		[Fact]
-		public async Task SearchMangaAsync_Seinen_ReturnsSeinenDemographic()
+	[Fact]
+	public async Task SearchMangaAsync_EmptyQueryActionMangaSecondPage_ShouldFindHakushoAndAirGear()
+	{
+		// Given
+		var searchConfig = new MangaSearchConfig
 		{
-			var searchConfig = new MangaSearchConfig { Genres = new[] { MangaGenreSearch.Seinen } };
+			Page = 2,
+			Genres = new List<MangaGenreSearch> { MangaGenreSearch.Action }
+		};
 
-			var returnedManga = await _tenrai.SearchMangaAsync(searchConfig);
+		// When
+		var returnedManga = await _tenrai.SearchMangaAsync(searchConfig);
 
-			using var _ = new AssertionScope();
-			returnedManga.Pagination.Items.Total.Should().BeGreaterThan(5000);
-			returnedManga.Data.Should().OnlyContain(m => m.Demographics.Any(d => d.MalId == 41));
-		}
-    }
+		// Then
+		var titles = returnedManga.Data.Select(x => x.Title);
+		using var _ = new AssertionScope();
+		titles.Should().Contain("Zombie-Loan");
+		titles.Should().Contain("Air Gear");
+	}
+
+	[Theory]
+	[InlineData(int.MinValue)]
+	[InlineData(-1)]
+	[InlineData(0)]
+	public async Task SearchMangaAsync_OreQueryWithConfigInvalidPage_ShouldThrowValidationException(int page)
+	{
+		// Given
+		var searchConfig = new MangaSearchConfig()
+		{
+			Query = "ore",
+			Page = page,
+			Statuses = new[] { PublishingStatus.Publishing }
+		};
+
+		// When
+		var func = _tenrai.Awaiting(x => x.SearchMangaAsync(searchConfig));
+
+		// Then
+		await func.Should().ThrowExactlyAsync<TenraiValidationException>();
+	}
+
+	[Fact]
+	public async Task SearchMangaAsync_OreQueryComedyMangaSecondPage_ShouldReturnNotEmptyCollection()
+	{
+		// Given
+		var searchConfig = new MangaSearchConfig
+		{
+			Query = "ore",
+			Page = 2,
+			Genres = new List<MangaGenreSearch> { MangaGenreSearch.Comedy },
+			Types = new[] { MangaType.Manga }
+		};
+
+		// When
+		var returnedManga = await _tenrai.SearchMangaAsync(searchConfig);
+
+		// Then
+		returnedManga.Data.Should().NotBeNullOrEmpty();
+	}
+
+	[Fact]
+	public async Task SearchMangaAsync_GenreInclusion_ShouldReturnNotEmptyCollection()
+	{
+		// Given
+		var searchConfig = new MangaSearchConfig
+		{
+			Genres = new List<MangaGenreSearch> { MangaGenreSearch.Comedy },
+			Types = new[] { MangaType.Manga }
+		};
+
+		// When
+		var returnedManga = await _tenrai.SearchMangaAsync(searchConfig);
+
+		// Then
+		returnedManga.Data.Should().NotBeNullOrEmpty();
+	}
+
+	[Fact]
+	public async Task SearchMangaAsync_GenreExclusion_ShouldReturnNotEmptyCollection()
+	{
+		// Given
+		var searchConfig = new MangaSearchConfig
+		{
+			ExcludedGenres = new List<MangaGenreSearch> { MangaGenreSearch.Comedy },
+			Types = new[] { MangaType.Manga }
+		};
+
+		// When
+		var returnedManga = await _tenrai.SearchMangaAsync(searchConfig);
+
+		// Then
+		returnedManga.Data.Should().NotBeNullOrEmpty();
+	}
+
+	[Fact]
+	public async Task SearchMangaAsync_GenreExclusion_ShouldNotContainExcludedGenres()
+	{
+		// Given
+		var searchConfig = new MangaSearchConfig
+		{
+			ExcludedGenres = new List<MangaGenreSearch> { MangaGenreSearch.Action },
+			Types = new[] { MangaType.Manga }
+		};
+
+		// When
+		var returnedManga = await _tenrai.SearchMangaAsync(searchConfig);
+
+		// Then
+		returnedManga.Data.Should().NotBeEmpty();
+		returnedManga.Data.Should().OnlyContain(m => m.Genres.All(g => g.MalId != 1));
+	}
+
+	[Fact]
+	public async Task SearchMangaAsync_WithStartDateAndEndDate_ShouldReturnNotEmpty()
+	{
+		// Given
+		var searchConfig = new MangaSearchConfig
+		{
+			Query = "monster",
+			StartDate = new DateTime(1994, 12, 1),
+			EndDate = new DateTime(2012, 12, 31),
+			Types = new[] { MangaType.Manga }
+		};
+
+		// When
+		var returnedManga = await _tenrai.SearchMangaAsync(searchConfig);
+
+		// Then
+		using var _ = new AssertionScope();
+		returnedManga.Data.Should().NotBeEmpty();
+		returnedManga.Data.Should().Contain(m => m.MalId == 1L);
+	}
+
+	[Fact]
+	public async Task SearchMangaAsync_Seinen_ReturnsSeinenDemographic()
+	{
+		var searchConfig = new MangaSearchConfig { Genres = new[] { MangaGenreSearch.Seinen } };
+
+		var returnedManga = await _tenrai.SearchMangaAsync(searchConfig);
+
+		using var _ = new AssertionScope();
+		returnedManga.Pagination.Items.Total.Should().BeGreaterThan(5000);
+		returnedManga.Data.Should().OnlyContain(m => m.Demographics.Any(d => d.MalId == 41));
+	}
 }

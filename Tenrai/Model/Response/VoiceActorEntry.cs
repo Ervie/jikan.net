@@ -1,22 +1,21 @@
 using System.Text.Json.Serialization;
 
-namespace Tenrai
+namespace Tenrai;
+
+/// <summary>
+/// Model class representing voice actor entry on Character's page.
+/// </summary>
+public class VoiceActorEntry
 {
 	/// <summary>
-	/// Model class representing voice actor entry on Character's page.
+	/// Voice actor's language.
 	/// </summary>
-	public class VoiceActorEntry
-	{
-		/// <summary>
-		/// Voice actor's language.
-		/// </summary>
-		[JsonPropertyName("language")]
-		public string Language { get; set; }
+	[JsonPropertyName("language")]
+	public string Language { get; set; }
 
-		/// <summary>
-		/// Voice actor's details.
-		/// </summary>
-		[JsonPropertyName("person")]
-		public PersonEntry Person { get; set; }
-	}
+	/// <summary>
+	/// Voice actor's details.
+	/// </summary>
+	[JsonPropertyName("person")]
+	public PersonEntry Person { get; set; }
 }

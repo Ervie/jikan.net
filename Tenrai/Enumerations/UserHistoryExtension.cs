@@ -1,28 +1,27 @@
 using System.ComponentModel;
 
-namespace Tenrai
+namespace Tenrai;
+
+/// <summary>
+/// Enumeration with possible extensions for User history request.
+/// </summary>
+public enum UserHistoryExtension
 {
 	/// <summary>
-	/// Enumeration with possible extensions for User history request.
+	/// Basic extension, parse data for both anime and manga history.
 	/// </summary>
-	public enum UserHistoryExtension
-	{
-		/// <summary>
-		/// Basic extension, parse data for both anime and manga history.
-		/// </summary>
-		[Description("")]
-		Both,
+	[Description("")]
+	Both,
 
-		/// <summary>
-		/// Anime extension, parses only history about anime.
-		/// </summary>
-		[Description("anime")]
-		Anime,
+	/// <summary>
+	/// Anime extension, parses only history about anime.
+	/// </summary>
+	[Description("anime")]
+	Anime,
 
-		/// <summary>
-		/// Manga extension, parses only history about manga.
-		/// </summary>
-		[Description("manga")]
-		Manga
-	}
+	/// <summary>
+	/// Manga extension, parses only history about manga.
+	/// </summary>
+	[Description("manga")]
+	Manga
 }

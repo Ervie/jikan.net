@@ -1,17 +1,16 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace Tenrai
+namespace Tenrai;
+
+/// <summary>
+/// Interest stack with its entries model class.
+/// </summary>
+public class InterestStackDetails : InterestStack
 {
 	/// <summary>
-	/// Interest stack with its entries model class.
+	/// Entries of the stack, in the order the author arranged them.
 	/// </summary>
-	public class InterestStackDetails : InterestStack
-	{
-		/// <summary>
-		/// Entries of the stack, in the order the author arranged them.
-		/// </summary>
-		[JsonPropertyName("entries")]
-		public ICollection<InterestStackEntry> Entries { get; set; }
-	}
+	[JsonPropertyName("entries")]
+	public ICollection<InterestStackEntry> Entries { get; set; }
 }

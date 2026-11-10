@@ -1,28 +1,27 @@
 using System.Text.Json.Serialization;
 
-namespace Tenrai
+namespace Tenrai;
+
+/// <summary>
+/// Club member model class.
+/// </summary>
+public class ClubMember
 {
 	/// <summary>
-	/// Club member model class.
+	/// Club member's Username.
 	/// </summary>
-	public class ClubMember
-	{
-		/// <summary>
-		/// Club member's Username.
-		/// </summary>
-		[JsonPropertyName("username")]
-		public string Username { get; set; }
+	[JsonPropertyName("username")]
+	public string Username { get; set; }
 
-		/// <summary>
-		/// Club member's image set
-		/// </summary>
-		[JsonPropertyName("images")]
-		public ImagesSet Images { get; set; }
+	/// <summary>
+	/// Club member's image set
+	/// </summary>
+	[JsonPropertyName("images")]
+	public ImagesSet Images { get; set; }
 
-		/// <summary>
-		/// Club member's URL
-		/// </summary>
-		[JsonPropertyName("url")]
-		public string Url { get; set; }
-	}
+	/// <summary>
+	/// Club member's URL
+	/// </summary>
+	[JsonPropertyName("url")]
+	public string Url { get; set; }
 }

@@ -1,16 +1,15 @@
 using System.Text.Json.Serialization;
 
-namespace Tenrai
+namespace Tenrai;
+
+/// <summary>
+/// Extra information about user
+/// </summary>
+public class UserAbout
 {
 	/// <summary>
-	/// Extra information about user
+	/// User self description
 	/// </summary>
-	public class UserAbout
-	{
-		/// <summary>
-		/// User self description
-		/// </summary>
-		[JsonPropertyName("about")]
-		public string About { get; set; }
-	}
+	[JsonPropertyName("about")]
+	public string About { get; set; }
 }

@@ -1,28 +1,27 @@
 using System.Text.Json.Serialization;
 
-namespace Tenrai
+namespace Tenrai;
+
+/// <summary>
+/// Model class for single recommendation.
+/// </summary>
+public class Recommendation
 {
 	/// <summary>
-	/// Model class for single recommendation.
+	/// Url to recommendation.
 	/// </summary>
-	public class Recommendation
-	{
-		/// <summary>
-		/// Url to recommendation.
-		/// </summary>
-		[JsonPropertyName("url")]
-		public string Url { get; set; }
+	[JsonPropertyName("url")]
+	public string Url { get; set; }
 
-		/// <summary>
-		/// Number of users who have recommended this entry.
-		/// </summary>
-		[JsonPropertyName("votes")]
-		public int Votes { get; set; }
+	/// <summary>
+	/// Number of users who have recommended this entry.
+	/// </summary>
+	[JsonPropertyName("votes")]
+	public int Votes { get; set; }
 
-		/// <summary>
-		/// Details about recommendation.
-		/// </summary>
-		[JsonPropertyName("entry")]
-		public RecommendationEntry Entry { get; set; }
-	}
+	/// <summary>
+	/// Details about recommendation.
+	/// </summary>
+	[JsonPropertyName("entry")]
+	public RecommendationEntry Entry { get; set; }
 }
