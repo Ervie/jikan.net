@@ -64,8 +64,6 @@ internal class TaskLimiter : ITaskLimiter, IEquatable<TaskLimiter>, IComparable<
 		return await task;
 	}
 
-	#region Equality methods
-
 	public bool Equals(TaskLimiter other)
 	{
 		if (ReferenceEquals(null, other)) return false;
@@ -95,10 +93,6 @@ internal class TaskLimiter : ITaskLimiter, IEquatable<TaskLimiter>, IComparable<
 	{
 		return !Equals(left, right);
 	}
-
-	#endregion
-
-	#region Comparer methods
 
 	public int CompareTo(TaskLimiter other)
 	{
@@ -133,6 +127,4 @@ internal class TaskLimiter : ITaskLimiter, IEquatable<TaskLimiter>, IComparable<
 	{
 		return Comparer<TaskLimiter>.Default.Compare(left, right) >= 0;
 	}
-
-	#endregion
 }

@@ -10,8 +10,9 @@ Tenrai.Net is a .NET wrapper for the Tenrai REST API (`https://api.tenrai.org/v1
 - `docs/README.md` is the documentation index and contributor guide for public API docs.
 - `docs/Tenrai-Conversion-Plan.md` tracks the Jikan.net → Tenrai.Net conversion (phases, decisions, differences).
 - `Tenrai.slnx` contains the library project and the xUnit test project.
-- `Tenrai/TenraiClient.cs` contains the endpoint implementations.
-- `Tenrai/Interfaces/ITenrai.cs` defines the public client surface.
+- `Tenrai/TenraiClient.cs` holds the client's fields, constructors and shared request helpers; the endpoint implementations are in one partial file per area (`Tenrai/TenraiClient.Anime.cs`, `TenraiClient.Manga.cs`, ...).
+- `Tenrai/Interfaces/ITenrai.*.cs` define the public client surface, one partial file per area matching the client's (`ITenrai.Anime.cs` pairs with `TenraiClient.Anime.cs`). A new method goes in both files of its area.
+- `git config blame.ignoreRevsFile .git-blame-ignore-revs` makes `git blame` skip the whole-repo formatting commits listed there.
 - `Tenrai/Model/Response`, `Tenrai/Model/Base`, `Tenrai/Model/Search`, and `Tenrai/Enumerations` hold public response models, wrappers, search configs, and enums.
 - `Tenrai.Test` contains xUnit tests. Many tests call the live public Tenrai API and may be network-sensitive.
 

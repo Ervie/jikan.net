@@ -45,8 +45,6 @@ public class TaskLimiterConfiguration : IEquatable<TaskLimiterConfiguration>, IC
 		TimeSpan = timeSpan;
 	}
 
-	#region Equality methods
-
 	/// <summary> Indicates whether the current configuration is equal to another configuration. </summary>
 	/// <param name="other"> The configuration to compare with. </param>
 	/// <returns> <c>true</c> if both configurations share the same <see cref="Count"/> and <see cref="TimeSpan"/>; otherwise <c>false</c>. </returns>
@@ -89,10 +87,6 @@ public class TaskLimiterConfiguration : IEquatable<TaskLimiterConfiguration>, IC
 	{
 		return !Equals(left, right);
 	}
-
-	#endregion
-
-	#region Comparator methods
 
 	/// <summary> Compares the current configuration with another configuration using <see cref="MaximumRate"/>. </summary>
 	/// <param name="other"> The configuration to compare with. </param>
@@ -138,6 +132,4 @@ public class TaskLimiterConfiguration : IEquatable<TaskLimiterConfiguration>, IC
 	{
 		return Comparer<TaskLimiterConfiguration>.Default.Compare(left, right) >= 0;
 	}
-
-	#endregion
 }
