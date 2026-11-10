@@ -70,5 +70,13 @@ namespace Tenrai.Tests.ProducerTests
 			names.Should().Contain("Studio Deen");
 			names.Should().Contain("Satelight");
 		}
+
+		[Fact]
+		public async Task GetProducersAsync_QueryBones_FindsBones()
+		{
+			var results = await _tenrai.GetProducersAsync(new ProducerSearchConfig { Query = "bones" });
+
+			results.Data.SelectMany(x => x.Titles).Select(y => y.Title).Should().Contain("Bones");
+		}
 	}
 }

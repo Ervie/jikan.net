@@ -1326,11 +1326,12 @@ var genres = await tenrai.GetMangaGenresAsync();
 
 ### GetProducersAsync
 
-Returns producers list. Overload: `(int page)`.
+Returns producers list. Overloads: `(int page)`, `(ProducerSearchConfig searchConfig)`.
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | page | int | (optional) Page index |
+| searchConfig | ProducerSearchConfig | (optional) Search, filters and sorting |
 
 **Returns:** `PaginatedTenraiResponse<ICollection<Producer>>`
 
@@ -1338,7 +1339,33 @@ Returns producers list. Overload: `(int page)`.
 
 ```csharp
 var producers = await tenrai.GetProducersAsync();
+
+// Studios active since 2020, most credits first
+var studios = await tenrai.GetProducersAsync(new ProducerSearchConfig
+{
+    Roles = { ProducerRole.Studio },
+    ActiveAfter = 2020,
+    OrderBy = ProducerSearchOrderBy.Count,
+    SortDirection = SortDirection.Descending
+});
 ```
+
+#### ProducerSearchConfig
+
+| Property | Type | Description |
+|----------|------|-------------|
+| Query, Letter | string, char? | Name search |
+| Roles | ICollection&lt;ProducerRole&gt; | `Studio`, `Producer`, `Licensor` |
+| AnimeTypes, Sources | ICollection&lt;AnimeType&gt;, &lt;AnimeSource&gt; | Companies credited on anime of these types or sources |
+| Genres, ExcludedGenres | ICollection&lt;AnimeGenreSearch&gt; | Genres of the credited anime |
+| WorkedWithIds | ICollection&lt;long&gt; | Companies that worked on an anime with any of these |
+| HasAbout, HasImage, HasEstablished, Dissolved, Airing, Upcoming | bool? | `true` or `false` filters |
+| MinimumFavorites, MaximumFavorites, MinimumAnime, MaximumAnime | int? | Favorites and credited-anime ranges |
+| Seasons, SeasonYears | ICollection&lt;Season&gt;, &lt;int&gt; | Debut seasons of the credited anime |
+| ActiveAfter, ActiveBefore, DebutAfter, LastCreditBefore, EstablishedAfter, EstablishedBefore | int? | Years, e.g. `2020` |
+| OrderBy, SortDirection | ProducerSearchOrderBy, SortDirection | `MalId`, `Name`, `Count`, `Favorites`, `Established`, `Debut`, `LastCredit` |
+| Page, Limit | int? | Paging, 100 max |
+| Sfw, SfwStrict | bool? | `null` (default) uses the [client setting](GettingStarted.md#safe-for-work-filtering) |
 
 ### GetProducerAsync
 
@@ -1394,11 +1421,12 @@ var full = await tenrai.GetProducerFullDataAsync(1);
 
 ### GetMagazinesAsync
 
-Returns magazines list. Overload: `(int page)`.
+Returns magazines list. Overloads: `(int page)`, `(MagazineSearchConfig searchConfig)` with `Query`, `Letter`, `OrderBy` (`MalId`, `Name`, `Count`), `SortDirection`, `Page`, `Limit`.
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | page | int | (optional) Page index |
+| searchConfig | MagazineSearchConfig | (optional) Search and sorting |
 
 **Returns:** `PaginatedTenraiResponse<ICollection<Magazine>>`
 
@@ -1441,7 +1469,7 @@ var manga = await tenrai.GetRandomMangaAsync();
 
 ### GetRandomCharacterAsync
 
-Gets random character.
+Gets random character. Overload: `(RandomFavoritesConfig config)` with `MinimumFavorites`/`MaximumFavorites`.
 
 **Returns:** `BaseTenraiResponse<Character>`
 
@@ -1453,7 +1481,7 @@ var character = await tenrai.GetRandomCharacterAsync();
 
 ### GetRandomPersonAsync
 
-Gets random person.
+Gets random person. Overload: `(RandomFavoritesConfig config)` with `MinimumFavorites`/`MaximumFavorites`.
 
 **Returns:** `BaseTenraiResponse<Person>`
 
@@ -1653,7 +1681,12 @@ Returns person search results. Overload: `(PersonSearchConfig searchConfig)`.
 
 ```csharp
 var results = await tenrai.SearchPersonAsync("miyazaki");
+
+// The most favorited people
+var popular = await tenrai.SearchPersonAsync(new PersonSearchConfig { MinimumFavorites = 50000 });
 ```
+
+`PersonSearchConfig` takes `Query`, `Letter`, `MinimumFavorites`/`MaximumFavorites`, `OrderBy` (`MalId`, `Name`, `Birthday`, `Favorites`), `SortDirection`, `Page` and `Limit`.
 
 ### SearchCharacterAsync
 
@@ -1670,7 +1703,28 @@ Returns character search results. Overload: `(CharacterSearchConfig searchConfig
 
 ```csharp
 var results = await tenrai.SearchCharacterAsync("lain");
+
+// Cowboy Bebop's main cast
+var bebop = await tenrai.SearchCharacterAsync(new CharacterSearchConfig { AnimeIds = { 1 }, Role = CharacterRole.Main });
 ```
+
+#### CharacterSearchConfig
+
+| Property | Type | Description |
+|----------|------|-------------|
+| Query, Letter, GivenName, FamilyName | string, char? | Name search |
+| HasAbout, HasImage, HasNicknames, HasKanji, HasFamilyName, HasVoiceActor | bool? | `true` or `false` filters on whether the field is set |
+| AnimeIds, MangaIds | ICollection&lt;long&gt; | Characters in any of these titles |
+| Role | CharacterRole? | `Main` or `Supporting`, in `AnimeIds`/`MangaIds` when set, otherwise in any title |
+| RoleOnly | CharacterRole? | Characters only ever listed in this role |
+| AppearsIn | AppearsIn? | `Anime`, `Manga` or `Both` |
+| Airing | bool? | `true` for characters in an anime airing now, `false` for characters in none |
+| VoiceActorIds | ICollection&lt;long&gt; | Voice actor person ids |
+| VoiceLanguages, ExcludedVoiceLanguages | ICollection&lt;VoiceLanguage&gt; | Voiced (or not) in these languages, e.g. English but not Japanese |
+| MinimumFavorites ... MaximumVoiceActors | int? | Ranges for favorites, appearances (all, anime, manga), main and supporting roles, voice languages, voice actors |
+| OrderBy, SortDirection | CharacterSearchOrderBy, SortDirection | Also by kanji name, appearances, roles, voice languages and voice actors |
+| Page, Limit | int? | Paging, 100 max |
+| Sfw, SfwStrict | bool? | Filter out adult and ecchi entries. `null` (default) uses the [client setting](GettingStarted.md#safe-for-work-filtering) |
 
 ---
 

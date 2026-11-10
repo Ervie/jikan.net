@@ -29,6 +29,16 @@ public class PersonSearchConfig: ISearchConfig
 	public char? Letter { get; set; }
 
 	/// <summary>
+	/// Lowest number of favorites.
+	/// </summary>
+	public int? MinimumFavorites { get; set; }
+
+	/// <summary>
+	/// Highest number of favorites.
+	/// </summary>
+	public int? MaximumFavorites { get; set; }
+
+	/// <summary>
 	/// Select order by property.
 	/// </summary>
 	public PersonSearchOrderBy OrderBy { get; set; }
@@ -53,7 +63,9 @@ public class PersonSearchConfig: ISearchConfig
 			.Page(Page)
 			.Limit(Limit)
 			.Add("q", Query)
-			.Add("letter", Letter?.ToString());
+			.Add("letter", Letter?.ToString())
+			.Add("min_favorites", MinimumFavorites)
+			.Add("max_favorites", MaximumFavorites);
 
 		if (OrderBy != PersonSearchOrderBy.NoSorting)
 		{

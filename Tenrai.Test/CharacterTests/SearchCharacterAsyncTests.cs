@@ -251,5 +251,17 @@ namespace Tenrai.Tests.CharacterTests
             result.About.Should().NotBeEmpty();
             result.MalId.Should().Be(157604);
         }
+
+        [Fact]
+        public async Task SearchCharacterAsync_BebopMainCast_HasSpike()
+        {
+            var config = new CharacterSearchConfig { AnimeIds = { 1 }, Role = CharacterRole.Main };
+
+            var characters = await _tenrai.SearchCharacterAsync(config);
+
+            using var _ = new AssertionScope();
+            characters.Pagination.Items.Total.Should().Be(4);
+            characters.Data.Should().Contain(x => x.MalId == 1);
+        }
     }
 }

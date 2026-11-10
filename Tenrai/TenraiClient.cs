@@ -1099,18 +1099,21 @@ namespace Tenrai
 		#region Producer methods
 
 		/// <inheritdoc />
-		public async Task<PaginatedTenraiResponse<ICollection<Producer>>> GetProducersAsync(CancellationToken cancellationToken = default)
+		public Task<PaginatedTenraiResponse<ICollection<Producer>>> GetProducersAsync(CancellationToken cancellationToken = default)
+			=> GetProducersAsync(new ProducerSearchConfig(), cancellationToken);
+
+		/// <inheritdoc />
+		public Task<PaginatedTenraiResponse<ICollection<Producer>>> GetProducersAsync(int page, CancellationToken cancellationToken = default)
 		{
-			var endpointParts = new[] { TenraiEndpointConsts.Producers };
-			return await ExecuteGetRequestAsync<PaginatedTenraiResponse<ICollection<Producer>>>(endpointParts, cancellationToken);
+			Guard.IsGreaterThanZero(page, nameof(page));
+			return GetProducersAsync(new ProducerSearchConfig { Page = page }, cancellationToken);
 		}
 
 		/// <inheritdoc />
-		public async Task<PaginatedTenraiResponse<ICollection<Producer>>> GetProducersAsync(int page, CancellationToken cancellationToken = default)
+		public async Task<PaginatedTenraiResponse<ICollection<Producer>>> GetProducersAsync(ProducerSearchConfig searchConfig, CancellationToken cancellationToken = default)
 		{
-			Guard.IsGreaterThanZero(page, nameof(page));
-			var queryParams = $"?page={page}";
-			var endpointParts = new[] { TenraiEndpointConsts.Producers + queryParams };
+			Guard.IsNotNull(searchConfig, nameof(searchConfig));
+			var endpointParts = new[] { TenraiEndpointConsts.Producers + QueryFor(searchConfig) };
 			return await ExecuteGetRequestAsync<PaginatedTenraiResponse<ICollection<Producer>>>(endpointParts, cancellationToken);
 		}
 		
@@ -1162,6 +1165,14 @@ namespace Tenrai
 			Guard.IsGreaterThanZero(page, nameof(page));
 			var queryParams = $"?page={page}";
 			var endpointParts = new[] { TenraiEndpointConsts.Magazines + queryParams };
+			return await ExecuteGetRequestAsync<PaginatedTenraiResponse<ICollection<Magazine>>>(endpointParts, cancellationToken);
+		}
+
+		/// <inheritdoc />
+		public async Task<PaginatedTenraiResponse<ICollection<Magazine>>> GetMagazinesAsync(MagazineSearchConfig searchConfig, CancellationToken cancellationToken = default)
+		{
+			Guard.IsNotNull(searchConfig, nameof(searchConfig));
+			var endpointParts = new[] { TenraiEndpointConsts.Magazines + QueryFor(searchConfig) };
 			return await ExecuteGetRequestAsync<PaginatedTenraiResponse<ICollection<Magazine>>>(endpointParts, cancellationToken);
 		}
 
@@ -1327,6 +1338,22 @@ namespace Tenrai
 		public async Task<BaseTenraiResponse<Person>> GetRandomPersonAsync(CancellationToken cancellationToken = default)
 		{
 			var endpointParts = new[] { TenraiEndpointConsts.Random, TenraiEndpointConsts.People };
+			return await ExecuteGetRequestAsync<BaseTenraiResponse<Person>>(endpointParts, cancellationToken);
+		}
+
+		/// <inheritdoc/>
+		public async Task<BaseTenraiResponse<Character>> GetRandomCharacterAsync(RandomFavoritesConfig config, CancellationToken cancellationToken = default)
+		{
+			Guard.IsNotNull(config, nameof(config));
+			var endpointParts = new[] { TenraiEndpointConsts.Random, TenraiEndpointConsts.Characters + QueryFor(config) };
+			return await ExecuteGetRequestAsync<BaseTenraiResponse<Character>>(endpointParts, cancellationToken);
+		}
+
+		/// <inheritdoc/>
+		public async Task<BaseTenraiResponse<Person>> GetRandomPersonAsync(RandomFavoritesConfig config, CancellationToken cancellationToken = default)
+		{
+			Guard.IsNotNull(config, nameof(config));
+			var endpointParts = new[] { TenraiEndpointConsts.Random, TenraiEndpointConsts.People + QueryFor(config) };
 			return await ExecuteGetRequestAsync<BaseTenraiResponse<Person>>(endpointParts, cancellationToken);
 		}
 

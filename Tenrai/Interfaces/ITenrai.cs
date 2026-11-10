@@ -1123,6 +1123,14 @@ namespace Tenrai
         Task<PaginatedTenraiResponse<ICollection<Producer>>> GetProducersAsync(int page, CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Returns producers, studios and licensors, searched, filtered and sorted.
+        /// </summary>
+        /// <param name="searchConfig">Text, role, worked-with, genres, year filters, sorting and paging.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Paginated collection of producers.</returns>
+        Task<PaginatedTenraiResponse<ICollection<Producer>>> GetProducersAsync(ProducerSearchConfig searchConfig, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Returns information about producer.
         /// </summary>
         /// <param name="id">MAL id of the producer.</param>
@@ -1172,6 +1180,14 @@ namespace Tenrai
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Basic Information about magazines.</returns>
         Task<PaginatedTenraiResponse<ICollection<Magazine>>> GetMagazinesAsync(int page, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns magazines, searched and sorted.
+        /// </summary>
+        /// <param name="searchConfig">Text, letter, sorting and paging.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Paginated collection of magazines.</returns>
+        Task<PaginatedTenraiResponse<ICollection<Magazine>>> GetMagazinesAsync(MagazineSearchConfig searchConfig, CancellationToken cancellationToken = default);
 
         #endregion Magazine requests
 
@@ -1441,6 +1457,22 @@ namespace Tenrai
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Random person</returns>
         Task<BaseTenraiResponse<Person>> GetRandomPersonAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns a random character within a favorites range.
+        /// </summary>
+        /// <param name="config">Favorites range.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>A random character.</returns>
+        Task<BaseTenraiResponse<Character>> GetRandomCharacterAsync(RandomFavoritesConfig config, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns a random person within a favorites range.
+        /// </summary>
+        /// <param name="config">Favorites range.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>A random person.</returns>
+        Task<BaseTenraiResponse<Person>> GetRandomPersonAsync(RandomFavoritesConfig config, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Gets random user.

@@ -70,5 +70,17 @@ namespace Tenrai.Tests.MagazineTests
 			names.Should().Contain("Shounen Magazine (Monthly)");
 			names.Should().Contain("Betsucomi");
 		}
+
+		[Fact]
+		public async Task GetMagazinesAsync_JumpByCount_HasShounenJumpPlus()
+		{
+			var config = new MagazineSearchConfig { Query = "jump", OrderBy = MagazineSearchOrderBy.Count, SortDirection = SortDirection.Descending };
+
+			var results = await _tenrai.GetMagazinesAsync(config);
+
+			using var _ = new AssertionScope();
+			results.Data.Select(x => x.TotalCount).Should().BeInDescendingOrder();
+			results.Data.Should().Contain(x => x.Name == "Shounen Jump+");
+		}
 	}
 }

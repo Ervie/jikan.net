@@ -252,5 +252,15 @@ namespace Tenrai.Tests.PersonTests
             result.MalId.Should().Be(99);
             result.WebsiteUrl.Should().BeNull();
         }
+
+        [Fact]
+        public async Task SearchPersonAsync_MinFavorites50000_AllAbove()
+        {
+            var people = await _tenrai.SearchPersonAsync(new PersonSearchConfig { MinimumFavorites = 50000 });
+
+            using var _ = new AssertionScope();
+            people.Data.Should().NotBeEmpty();
+            people.Data.Should().OnlyContain(x => x.MemberFavorites >= 50000);
+        }
     }
 }

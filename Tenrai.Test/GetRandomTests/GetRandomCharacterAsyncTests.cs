@@ -23,5 +23,13 @@ namespace Tenrai.Tests.GetRandomTests
 			// Then
 			character.Data.Should().NotBeNull();
 		}
+
+		[Fact]
+		public async Task GetRandomCharacterAsync_MinFavorites10000_IsAbove()
+		{
+			var character = await _tenrai.GetRandomCharacterAsync(new RandomFavoritesConfig { MinimumFavorites = 10000 });
+
+			character.Data.Favorites.Should().BeGreaterThanOrEqualTo(10000);
+		}
 	}
 }
