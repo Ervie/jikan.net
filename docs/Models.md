@@ -33,6 +33,16 @@ Extends `BaseTenraiResponse<T>`. Returned by the `FullDataConfig` overloads of `
 
 Extends `BaseTenraiResponse<ICollection<long>>` with `Total` (int), the number of ids. Returned by the bulk id methods.
 
+### IdEntriesTenraiResponse
+
+Extends `BaseTenraiResponse<ICollection<IdEntry>>` with `Total` (int). Returned by `GetAnimeIdEntriesAsync` and `GetMangaIdEntriesAsync`.
+
+| Property | Type | Description |
+|----------|------|-------------|
+| MalId | long | MAL id |
+| Title | string | Title |
+| Type | string | Type of the entry (e.g. "TV"), can be null |
+
 ---
 
 ## Anime

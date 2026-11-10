@@ -96,5 +96,20 @@ namespace Tenrai.Tests.InterestStackTests
 				stack.Data.Entries.Should().OnlyContain(entry => entry.AiredFromYear == null);
 			}
 		}
+
+		[Fact]
+		public async Task GetInterestStackAsync_Sfw_HasFewerEntries()
+		{
+			// Given
+			const long stackWithAdultEntries = 93518;
+
+			// When
+			var all = await _tenrai.GetInterestStackAsync(stackWithAdultEntries, new SfwConfig { Sfw = false });
+			var sfw = await _tenrai.GetInterestStackAsync(stackWithAdultEntries, new SfwConfig { Sfw = true });
+
+			// Then
+			sfw.Data.Entries.Should().NotBeEmpty();
+			sfw.Data.Entries.Count.Should().BeLessThan(all.Data.Entries.Count);
+		}
 	}
 }

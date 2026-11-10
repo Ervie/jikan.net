@@ -82,6 +82,27 @@ namespace Tenrai.Tests.SearchConfigTests
 			handler.LastQuery.Should().BeEmpty();
 		}
 
+		[Fact]
+		public async Task ClientSfwOn_PlainInterestStack_SendsSfw()
+		{
+			var (client, handler) = CreateClient(sfw: true);
+			handler.Body = "{\"data\":null}";
+
+			await client.GetInterestStackAsync(1);
+
+			handler.LastQuery.Should().Be("?sfw=true");
+		}
+
+		[Fact]
+		public async Task ClientSfwOn_AnimeIdEntries_SendsSfwAndInclude()
+		{
+			var (client, handler) = CreateClient(sfw: true);
+
+			await client.GetAnimeIdEntriesAsync(new AnimeIdsConfig { Types = { AnimeType.Movie } });
+
+			handler.LastQuery.Should().Be("?type=Movie&sfw=true&include=title,type");
+		}
+
 		private static (TenraiClient Client, RecordingHandler Handler) CreateClient(bool sfw)
 		{
 			var handler = new RecordingHandler();
@@ -94,11 +115,12 @@ namespace Tenrai.Tests.SearchConfigTests
 		{
 			public string LastQuery { get; private set; }
 
+			public string Body { get; set; } = "{\"pagination\":{\"last_visible_page\":1,\"has_next_page\":false},\"data\":[]}";
+
 			protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
 			{
 				LastQuery = request.RequestUri.Query;
-				var body = "{\"pagination\":{\"last_visible_page\":1,\"has_next_page\":false},\"data\":[]}";
-				return Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent(body, Encoding.UTF8, "application/json") });
+				return Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent(Body, Encoding.UTF8, "application/json") });
 			}
 		}
 	}

@@ -292,6 +292,32 @@ namespace Tenrai
         Task<IdsTenraiResponse> GetAnimeIdsAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Returns the MAL IDs of the anime matching the filters.
+        /// </summary>
+        /// <remarks>Requires a Tenrai Server Key (set <see cref="Config.TenraiClientConfiguration.ServerKey"/>); otherwise the API responds with 401.</remarks>
+        /// <param name="searchConfig">Types, ratings, status, updated date and safe-for-work filters.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Collection of anime MAL IDs.</returns>
+        Task<IdsTenraiResponse> GetAnimeIdsAsync(AnimeIdsConfig searchConfig, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns the MAL ID, title and type of every anime in the catalogue.
+        /// </summary>
+        /// <remarks>Requires a Tenrai Server Key (set <see cref="Config.TenraiClientConfiguration.ServerKey"/>); otherwise the API responds with 401.</remarks>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Collection of anime ids with their title and type.</returns>
+        Task<IdEntriesTenraiResponse> GetAnimeIdEntriesAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns the MAL ID, title and type of the anime matching the filters.
+        /// </summary>
+        /// <remarks>Requires a Tenrai Server Key (set <see cref="Config.TenraiClientConfiguration.ServerKey"/>); otherwise the API responds with 401.</remarks>
+        /// <param name="searchConfig">Types, ratings, status, updated date and safe-for-work filters.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Collection of anime ids with their title and type.</returns>
+        Task<IdEntriesTenraiResponse> GetAnimeIdEntriesAsync(AnimeIdsConfig searchConfig, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Returns anime still awaiting approval on MyAnimeList.
         /// </summary>
         /// <param name="cancellationToken">Cancellation token.</param>
@@ -559,6 +585,32 @@ namespace Tenrai
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Collection of manga MAL IDs.</returns>
         Task<IdsTenraiResponse> GetMangaIdsAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns the MAL IDs of the manga matching the filters.
+        /// </summary>
+        /// <remarks>Requires a Tenrai Server Key (set <see cref="Config.TenraiClientConfiguration.ServerKey"/>); otherwise the API responds with 401.</remarks>
+        /// <param name="searchConfig">Types, status, updated date and safe-for-work filters.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Collection of manga MAL IDs.</returns>
+        Task<IdsTenraiResponse> GetMangaIdsAsync(MangaIdsConfig searchConfig, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns the MAL ID, title and type of every manga in the catalogue.
+        /// </summary>
+        /// <remarks>Requires a Tenrai Server Key (set <see cref="Config.TenraiClientConfiguration.ServerKey"/>); otherwise the API responds with 401.</remarks>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Collection of manga ids with their title and type.</returns>
+        Task<IdEntriesTenraiResponse> GetMangaIdEntriesAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns the MAL ID, title and type of the manga matching the filters.
+        /// </summary>
+        /// <remarks>Requires a Tenrai Server Key (set <see cref="Config.TenraiClientConfiguration.ServerKey"/>); otherwise the API responds with 401.</remarks>
+        /// <param name="searchConfig">Types, status, updated date and safe-for-work filters.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Collection of manga ids with their title and type.</returns>
+        Task<IdEntriesTenraiResponse> GetMangaIdEntriesAsync(MangaIdsConfig searchConfig, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns manga still awaiting approval on MyAnimeList.
@@ -1880,6 +1932,15 @@ namespace Tenrai
 		/// <param name="cancellationToken">Cancellation token.</param>
 		/// <returns>Interest stack with given MAL id.</returns>
 		Task<BaseTenraiResponse<InterestStackDetails>> GetInterestStackAsync(long id, CancellationToken cancellationToken = default);
+
+		/// <summary>
+		/// Returns interest stack with given MAL id, including its entries in the order the author arranged them.
+		/// </summary>
+		/// <param name="id">MAL id of the interest stack.</param>
+		/// <param name="searchConfig">Safe-for-work filtering for this call; it removes adult entries from the stack.</param>
+		/// <param name="cancellationToken">Cancellation token.</param>
+		/// <returns>Interest stack with given MAL id.</returns>
+		Task<BaseTenraiResponse<InterestStackDetails>> GetInterestStackAsync(long id, SfwConfig searchConfig, CancellationToken cancellationToken = default);
 
 		/// <summary>
 		/// Returns first page of public interest stacks containing the anime with given MAL id.

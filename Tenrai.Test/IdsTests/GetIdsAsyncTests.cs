@@ -51,6 +51,27 @@ namespace Tenrai.Tests.IdsTests
 		}
 
 		[Fact]
+		public void IdEntriesResponse_ShouldDeserializeTitleAndType()
+		{
+			// Given
+			const string json = "{\"total\":2,\"data\":[{\"mal_id\":1,\"title\":\"Cowboy Bebop\",\"type\":\"TV\"},{\"mal_id\":5,\"title\":\"Cowboy Bebop: Tengoku no Tobira\",\"type\":null}]}";
+
+			// When
+			var response = JsonSerializer.Deserialize<IdEntriesTenraiResponse>(json);
+
+			// Then
+			using (new AssertionScope())
+			{
+				response.Total.Should().Be(2);
+				response.Data.Should().HaveCount(2);
+				response.Data.First().MalId.Should().Be(1);
+				response.Data.First().Title.Should().Be("Cowboy Bebop");
+				response.Data.First().Type.Should().Be("TV");
+				response.Data.Last().Type.Should().BeNull();
+			}
+		}
+
+		[Fact]
 		public async Task GetAnimeIdsAsync_WithoutServerKey_ShouldRequireAuthorization()
 		{
 			// When (public tier has no Server Key, so the endpoint is gated)

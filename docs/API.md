@@ -1754,11 +1754,12 @@ foreach (var stack in stacks.Data)
 
 ### GetInterestStackAsync
 
-Returns a single interest stack including its entries, in the order the author arranged them.
+Returns a single interest stack including its entries, in the order the author arranged them. With SFW on (the [client setting](GettingStarted.md#safe-for-work-filtering), or the `SfwConfig` overload) adult entries are removed from the stack.
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | id | long | MAL id of the interest stack |
+| config | SfwConfig | (overload) Safe-for-work filtering for this call |
 
 **Returns:** `BaseTenraiResponse<InterestStackDetails>`
 
@@ -1939,7 +1940,18 @@ foreach (var service in status.Services)
 
 ### GetAnimeIdsAsync / GetMangaIdsAsync / GetCharacterIdsAsync / GetPersonIdsAsync / GetProducerIdsAsync
 
-Returns the complete collection of MAL IDs for the given resource.
+Returns the complete collection of MAL IDs for the given resource. Anime and manga ids follow the [client SFW setting](GettingStarted.md#safe-for-work-filtering) and have an overload taking a filter config:
+
+| Property | Type | Description |
+|----------|------|-------------|
+| Types | ICollection&lt;AnimeType&gt; / ICollection&lt;MangaType&gt; | Only entries of any of these types |
+| Ratings | ICollection&lt;AnimeAgeRating&gt; | (anime only) Only entries with any of these ratings |
+| Status | AiringStatus? / PublishingStatus? | Only entries with this status |
+| UpdatedAfter | DateTime? | Only entries updated on or after this date (sent as `yyyy-MM-dd`) |
+| Sfw | bool? | Leave out adult ids. `null` (default) uses the client setting |
+| SfwStrict | bool? | Also leave out ecchi ids. `null` (default) uses the client setting |
+
+`GetAnimeIdEntriesAsync` and `GetMangaIdEntriesAsync` take the same configs and return each id with its title and type (`IdEntriesTenraiResponse`, `Data` items are `IdEntry` with `MalId`, `Title`, `Type`).
 
 **Returns:** `IdsTenraiResponse` (`Data` is the ids, `Total` their count)
 
@@ -1949,6 +1961,15 @@ Returns the complete collection of MAL IDs for the given resource.
 var tenrai = new TenraiClient(new TenraiClientConfiguration { ServerKey = "your-server-key" });
 var animeIds = await tenrai.GetAnimeIdsAsync();
 Console.WriteLine(animeIds.Data.Count);
+
+// Movies changed since November 1, with their titles
+var movies = await tenrai.GetAnimeIdEntriesAsync(new AnimeIdsConfig
+{
+    Types = { AnimeType.Movie },
+    UpdatedAfter = new DateTime(2026, 11, 1)
+});
+foreach (var entry in movies.Data)
+    Console.WriteLine($"{entry.MalId}: {entry.Title}");
 ```
 
 ---
